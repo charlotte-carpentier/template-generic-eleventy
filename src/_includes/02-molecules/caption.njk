@@ -1,0 +1,120 @@
+{# ===========================================================
+   @MOLECULES - CAPTION
+   - Combines icon with text content and tooltip behavior
+=========================================================== #}
+
+{# Import atoms #}
+{% from "03-atoms/icon.njk" import renderIcon %}
+{% from "03-atoms/tooltip.njk" import renderTooltip %}
+{% from "03-atoms/typography.njk" import renderTypography %}
+
+{% macro renderCaption(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No caption configuration provided</span>
+  {% else %}
+    {# Retrieve caption configuration #}
+    {% set captionsConfig = option.datas %}
+    {% set captionName = option.name %}
+    
+    {# Find the specific caption by name #}
+    {% set captionData = null %}
+    {% for caption in captionsConfig %}
+      {% if caption.name == captionName %}
+        {% set captionData = caption %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if caption not found #}
+    {% if not captionData %}
+      <span class="text-red-500">Caption not found: {{ captionName }}</span>
+    {% else %}
+      {# Get tooltip data for label and description #}
+      {% set tooltipData = null %}
+      {% for tooltip in option.tooltipDatas %}
+        {% if tooltip.name == captionData.tooltipName %}
+          {% set tooltipData = tooltip %}
+        {% endif %}
+      {% endfor %}
+      
+      {# Get typography data for labels #}
+      {% set typographyData = null %}
+      {% for typography in option.typographyDatas %}
+        {% if typography.name == captionData.name %}
+          {% set typographyData = typography %}
+        {% endif %}
+      {% endfor %}
+      
+      {# Generate unique tooltip ID #}
+      {% set tooltipId = "tooltip-" ~ captionData.name ~ "-" ~ loop.index0 if loop.index0 is defined else "tooltip-" ~ captionData.name %}
+      
+      {# Caption container with tooltip logic and ARIA attributes #}
+      <div class="caption-container relative inline-block" 
+           data-tooltip="{{ captionData.name }}" 
+           tabindex="0"
+           aria-describedby="{{ tooltipId }}">
+        
+        {# Desktop version: Icon + Title + Tooltip (tooltip appears below, title hides) #}
+        <div class="caption-desktop">
+          {# Icon (64x64 desktop) with gradient class #}
+          {{ renderIcon({ 
+            name: captionData.iconName,
+            datas: option.iconDatas,
+            class: "caption-icon-desktop caption-gradient-" ~ captionData.gradientColor
+          }) }}
+          
+          {# Title - Typography classes with proper text #}
+          <div class="caption-title-desktop text-small">{{ typographyData.text if typographyData else captionData.name }}</div>
+          
+          {# Tooltip (hidden by default, shown below icon on hover/focus) #}
+          <div class="tooltip-popup" 
+               id="{{ tooltipId }}" 
+               role="tooltip" 
+               aria-hidden="true">
+            {{ renderTooltip({ 
+              name: captionData.tooltipName,
+              datas: option.tooltipDatas
+            }) }}
+          </div>
+        </div>
+
+        {# Mobile version: Icon + Content (side by side) #}
+        <div class="caption-mobile">
+          {# Icon (50x50 mobile) with gradient class #}
+          {{ renderIcon({ 
+            name: captionData.iconName,
+            datas: option.iconDatas,
+            class: "caption-icon-mobile caption-gradient-" ~ captionData.gradientColor
+          }) }}
+          
+          {# Content container (label + description stacked) #}
+          <div class="caption-content-mobile flex flex-col flex-1">
+            {# Label - Typography classes #}
+            <div class="caption-label-mobile text-code">{{ typographyData.text if typographyData else captionData.name }}</div>
+            
+            {# Description - Typography classes #}
+            <div class="caption-description-mobile text-small">{{ tooltipData.description if tooltipData else "Description manquante" }}</div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "02-molecules/caption.njk" import renderCaption %}
+
+2. Call a specific caption by its name
+{{ renderCaption({ 
+    name: "languages_symfony",
+    datas: molecules.caption.captions,
+    iconDatas: atoms.icon.icons,
+    tooltipDatas: atoms.tooltip.tooltips,
+    typographyDatas: atoms.typography.texts
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+=========================================================== #}

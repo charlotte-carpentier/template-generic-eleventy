@@ -1,0 +1,20 @@
+---
+permalink: "/maintenance-page/"
+layout: '00-core/base.njk'
+title: "Maintenance en cours"
+eleventyExcludeFromCollections: true
+hideHeaderFooter: true
+---
+
+{% from "01-organisms/error-layout.njk" import renderErrorLayout %}
+
+{{ renderErrorLayout({ 
+    name: "error_layout_maintenance_partial",
+    datas: organisms["error-layout"]["error-layouts"],
+    errorFragmentGroupDatas: organisms["error-fragment-group"]["error-fragment-groups"],
+    errorFragmentDatas: molecules["error-fragment"]["error-fragments"],
+    iconDatas: atoms.icon.icons,
+    typographyDatas: atoms.typography.texts,
+    buttonDatas: atoms.button.buttons,
+    linkDatas: atoms.link.links
+}) }}

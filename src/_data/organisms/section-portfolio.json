@@ -1,0 +1,17 @@
+{
+  "sections": [
+    {
+      "name": "charlotte_missions",
+      "id": "portfolio",
+      "header": {
+        "title": "missions_title"
+      },
+      "content": {
+        "blocks": [
+          "mission_manautic",
+          "mission_tcsophro"
+        ]
+      }
+    }
+  ]
+}

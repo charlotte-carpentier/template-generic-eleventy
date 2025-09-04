@@ -1,0 +1,53 @@
+{
+  "error-fragment-groups": [
+    {
+      "name": "error_fragment_group_404",
+      "variant": "grid-2x3",
+      "fragmentNames": [
+        "fragment_404_01",
+        "fragment_404_02",
+        "fragment_404_03",
+        "fragment_404_04",
+        "fragment_404_05",
+        "fragment_404_06"
+      ]
+    },
+    {
+      "name": "error_fragment_group_500",
+      "variant": "grid-2x3",
+      "fragmentNames": [
+        "fragment_500_01",
+        "fragment_500_02",
+        "fragment_500_03",
+        "fragment_500_04",
+        "fragment_500_05",
+        "fragment_500_06"
+      ]
+    },
+    {
+      "name": "error_fragment_group_maintenance_total",
+      "variant": "grid-2x3",
+      "disableFragment6Click": true,
+      "fragmentNames": [
+        "fragment_maintenance_total_01",
+        "fragment_maintenance_total_02",
+        "fragment_maintenance_total_03",
+        "fragment_maintenance_total_04",
+        "fragment_maintenance_total_05",
+        "fragment_maintenance_total_06"
+      ]
+    },
+    {
+      "name": "error_fragment_group_maintenance_partial",
+      "variant": "grid-2x3",
+      "fragmentNames": [
+        "fragment_maintenance_partial_01",
+        "fragment_maintenance_partial_02",
+        "fragment_maintenance_partial_03",
+        "fragment_maintenance_partial_04",
+        "fragment_maintenance_partial_05",
+        "fragment_maintenance_partial_06"
+      ]
+    }
+  ]
+}

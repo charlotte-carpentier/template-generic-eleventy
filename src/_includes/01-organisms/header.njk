@@ -1,0 +1,126 @@
+{# ===========================================================
+   @ORGANISMS - HEADER
+   - Manages site header with brand, title and navigation
+=========================================================== #}
+
+{% macro renderHeader(option) %}
+  {# Import required molecules and atoms #}
+  {% from "02-molecules/tab-menu.njk" import renderTabMenu %}
+  {% from "03-atoms/typography.njk" import renderTypography %}
+  {% from "03-atoms/link.njk" import renderLink %}
+  {% from "03-atoms/icon.njk" import renderIcon %}
+
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No header configuration provided</span>
+  {% else %}
+    {# Retrieve header configuration #}
+    {% set headersConfig = option.datas %}
+    {% set headerName = option.name %}
+    
+    {# Find the specific header by name #}
+    {% set headerData = null %}
+    {% for header in headersConfig %}
+      {% if header.name == headerName %}
+        {% set headerData = header %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if header not found #}
+    {% if not headerData %}
+      <span class="text-red-500">Header not found: {{ headerName }}</span>
+    {% else %}
+      {# Build CSS classes from header name #}
+      {% set cssClasses = 'header' %}
+      
+      {# Add any additional classes #}
+      {% if option.class %}
+        {% set cssClasses = cssClasses ~ ' ' ~ option.class %}
+      {% endif %}
+      
+      {# Header container #}
+      <header class="{{ cssClasses }} w-full box-border" id="main-header">
+        <div class="header-container w-full m-0 px-3 py-2 sm:px-4 sm:py-3 lg:px-8 lg:py-4 min-h-[64px] sm:min-h-[64px] lg:min-h-[80px] grid grid-cols-[1fr_auto] gap-3 items-center sm:flex sm:items-center sm:justify-between box-border">
+          
+          {# Brand section - Logo typography #}
+          <div class="header-brand justify-self-start min-w-0 flex-1 sm:flex-none lg:flex-none xl:flex-1 flex items-center justify-start">
+            {{ renderTypography({ 
+                name: headerData.brand.logo,
+                datas: option.typographyDatas
+            }) }}
+          </div>
+          
+          {# Title section - Desktop only #}
+          <div class="header-title flex-1 hidden lg:flex xl:flex-1 justify-center items-center min-w-0">
+            {{ renderTypography({ 
+                name: headerData.title.desktop,
+                datas: option.typographyDatas
+            }) }}
+          </div>
+          
+          {# Navigation section - Desktop link #}
+          <div class="header-navigation flex-1 sm:flex-none lg:flex-none xl:flex-1 hidden sm:flex lg:flex items-center justify-end min-w-0">
+            {{ renderLink({ 
+                name: headerData.navigation.desktop_link,
+                datas: option.linkDatas
+            }) }}
+          </div>
+          
+          {# Mobile burger button - Mobile uniquement #}
+          <button 
+            class="header-burger justify-self-end bg-transparent border-none cursor-pointer w-12 h-12 relative flex sm:hidden items-center justify-center" 
+            id="burger-toggle"
+            aria-label="Toggle mobile menu"
+            aria-expanded="false"
+          >
+            <span class="burger-icon burger-icon-open w-8 h-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300">
+              {{ renderIcon({ 
+                  name: headerData.mobile.burger_open_icon,
+                  datas: option.iconDatas
+              }) }}
+            </span>
+            <span class="burger-icon burger-icon-close w-8 h-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300">
+              {{ renderIcon({ 
+                  name: headerData.mobile.burger_close_icon,
+                  datas: option.iconDatas
+              }) }}
+            </span>
+          </button>
+          
+        </div>
+        
+        {# Mobile overlay menu - Mobile uniquement #}
+        <div class="header-mobile-overlay fixed left-0 w-full opacity-0 invisible transform -translate-y-5 transition-opacity duration-300 ease-linear box-border block sm:hidden" id="mobile-overlay">
+          <div class="mobile-overlay-content w-[313px] mx-auto px-6 py-4">
+            {# Render the tab-menu mobile version inside overlay #}
+            {{ renderTabMenu({ 
+                name: headerData.navigation.mobile_menu,
+                datas: option.tabMenuDatas,
+                linkDatas: option.linkDatas
+            }) }}
+          </div>
+        </div>
+        
+      </header>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "01-organisms/header.njk" import renderHeader %}
+
+2. Call the header
+{{ renderHeader({ 
+    name: "charlotte_header",
+    datas: organisms.header.headers,
+    typographyDatas: atoms.typography.texts,
+    tabMenuDatas: molecules["tab-menu"].tab_menus,
+    linkDatas: atoms.link.links,
+    iconDatas: atoms.icon.icons
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+=========================================================== #}

@@ -1,0 +1,89 @@
+{# ===========================================================
+   @ORGANISMS - ERROR-FRAGMENT-GROUP
+   - Renders error fragments in a 2x3 grid layout
+=========================================================== #}
+
+{# Import molecules #}
+{% from "02-molecules/error-fragment.njk" import renderErrorFragment %}
+
+{% macro renderErrorFragmentGroup(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No error-fragment-group configuration provided</span>
+  {% else %}
+    {# Retrieve error-fragment-group configuration #}
+    {% set errorFragmentGroupsConfig = option.datas %}
+    {% set errorFragmentGroupName = option.name %}
+    
+    {# Find the specific error-fragment-group by name #}
+    {% set errorFragmentGroupData = null %}
+    {% for errorFragmentGroup in errorFragmentGroupsConfig %}
+      {% if errorFragmentGroup.name == errorFragmentGroupName %}
+        {% set errorFragmentGroupData = errorFragmentGroup %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if error-fragment-group not found #}
+    {% if not errorFragmentGroupData %}
+      <span class="text-red-500">Error-fragment-group not found: {{ errorFragmentGroupName }}</span>
+    {% else %}
+      {# Render error-fragment-group organism based on variant #}
+      {% if errorFragmentGroupData.variant == "grid-2x3" %}
+        <div class="error-fragment-group error-fragment-group--{{ errorFragmentGroupData.variant }} grid grid-cols-2 grid-rows-3 gap-4 sm:gap-6">
+          {% for fragmentName in errorFragmentGroupData.fragmentNames %}
+            {% set isLeftColumn = loop.index0 % 2 == 0 %}
+            {% set isFragment6 = loop.index == 6 %}
+            <div class="error-fragment-group-item flex items-center{% if isLeftColumn %} justify-start{% else %} justify-end{% endif %}">
+              {% if isFragment6 %}
+                {% if errorFragmentGroupData.disableFragment6Click %}
+                  {{ renderErrorFragment({ 
+                      name: fragmentName,
+                      datas: option.errorFragmentDatas,
+                      iconDatas: option.iconDatas,
+                      typographyDatas: option.typographyDatas,
+                      isClickable: false
+                  }) }}
+                {% else %}
+                  <div class="error-fragment-clickable" tabindex="0" role="button" aria-label="Retourner à la page précédente ou à l'accueil">
+                    {{ renderErrorFragment({ 
+                        name: fragmentName,
+                        datas: option.errorFragmentDatas,
+                        iconDatas: option.iconDatas,
+                        typographyDatas: option.typographyDatas,
+                        isClickable: true
+                    }) }}
+                  </div>
+                {% endif %}
+              {% else %}
+                {{ renderErrorFragment({ 
+                    name: fragmentName,
+                    datas: option.errorFragmentDatas,
+                    iconDatas: option.iconDatas,
+                    typographyDatas: option.typographyDatas
+                }) }}
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "01-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
+
+2. Call a specific error-fragment-group by its name
+{{ renderErrorFragmentGroup({ 
+    name: "error_fragment_group_404",
+    datas: organisms["error-fragment-group"]["error-fragment-groups"],
+    errorFragmentDatas: molecules["error-fragment"]["error-fragments"],
+    iconDatas: atoms.icon.icons,
+    typographyDatas: atoms.typography.texts
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+=========================================================== #}

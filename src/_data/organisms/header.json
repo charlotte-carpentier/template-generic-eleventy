@@ -1,0 +1,22 @@
+{
+  "headers": [
+    {
+      "name": "charlotte_header",
+      "brand": {
+        "logo": "site_creator"
+      },
+      "title": {
+        "desktop": "site_title"
+      },
+      "navigation": {
+        "desktop_link": "nav_contact",
+        "mobile_menu": "main_navigation"
+      },
+      "mobile": {
+        "burger_open_icon": "burger_list_white",
+        "burger_close_icon": "burger_x_white",
+        "overlay": true
+      }
+    }
+  ]
+}

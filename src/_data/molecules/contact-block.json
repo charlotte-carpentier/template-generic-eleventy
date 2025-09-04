@@ -1,0 +1,24 @@
+{
+    "contact_blocks": [
+      {
+        "name": "main_contact",
+        "items": [
+          {
+            "icon": "contact_mail",
+            "text": "contact_paragraph_mail",
+            "type": "email"
+          },
+          {
+            "icon": "contact_mobile", 
+            "text": "contact_paragraph_phone",
+            "type": "phone"
+          },
+          {
+            "icon": "contact_city",
+            "text": "contact_paragraph_city", 
+            "type": "location"
+          }
+        ]
+      }
+    ]
+  }

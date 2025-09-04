@@ -1,0 +1,96 @@
+{
+  "sections": [
+    {
+      "name": "charlotte_journey",
+      "id": "journey",
+      "header": {
+        "title": "journey_title"
+      },
+      "content": {
+        "blocks": [
+          "journey_freelance",
+          "journey_ehpad",
+          "journey_efs"
+        ],
+        "progress_bar": "level_complete"
+      }
+    },
+    {
+      "name": "charlotte_knowledge",
+      "id": "knowledge",
+      "header": {
+        "title": "knowledge_title"
+      },
+      "content": {
+        "blocks": [
+          "knowledge_dev",
+          "knowledge_master",
+          "knowledge_bachelor",
+          "knowledge_prepa"
+        ],
+        "progress_bar": "learning_loop"
+      }
+    },
+    {
+      "name": "charlotte_profile",
+      "id": "profile",
+      "header": {
+        "title": "profile_title"
+      },
+      "content": {
+        "blocks": [
+          "profile_quote",
+          "profile_past",
+          "profile_transition",
+          "profile_values"
+        ],
+        "foundation_icons": [
+          "foundation_action",
+          "foundation_secu",
+          "foundation_ecolo",
+          "foundation_access"
+        ]
+      }
+    },
+    {
+      "name": "charlotte_legal",
+      "id": "legal",
+      "header": {
+        "title": "legal_title"
+      },
+      "content": {
+        "blocks": [
+          "legal_editor_title",
+          "legal_editor_content",
+          "legal_hosting_title",
+          "legal_hosting_content",
+          "legal_intellectual_property_title",
+          "legal_intellectual_property_content",
+          "legal_privacy_title",
+          "legal_privacy_content",
+          "legal_cookies_title",
+          "legal_cookies_content",
+          "legal_analytics_title",
+          "legal_analytics_content",
+          "legal_consent_title",
+          "legal_consent_content",
+          "legal_credits_title",
+          "legal_credits_content"
+        ]
+      }
+    },
+    {
+      "name": "charlotte_thanks",
+      "id": "message",
+      "header": {
+        "title": "thanks_title"
+      },
+      "content": {
+        "blocks": [
+          "thanks_title_block",
+          "thanks_message_block"
+        ]
+      }
+    }
+  ]
+}

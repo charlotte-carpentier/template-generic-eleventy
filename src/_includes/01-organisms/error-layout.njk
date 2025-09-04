@@ -1,0 +1,218 @@
+{# ===========================================================
+   @ORGANISMS - ERROR-LAYOUT
+   - Cross layout for desktop with centered triptych and fragments
+   - Vertical stack for mobile with scroll-based reveal
+   - Enhanced mobile support with fragment reveal system
+=========================================================== #}
+
+{# Import organisms, molecules and atoms #}
+{% from "01-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
+{% from "03-atoms/typography.njk" import renderTypography %}
+{% from "03-atoms/button.njk" import renderButton %}
+{% from "03-atoms/link.njk" import renderLink %}
+
+{% macro renderErrorLayout(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No error-layout configuration provided</span>
+  {% else %}
+    {# Retrieve error-layout configuration #}
+    {% set errorLayoutsConfig = option.datas %}
+    {% set errorLayoutName = option.name %}
+    
+    {# Find the specific error-layout by name #}
+    {% set errorLayoutData = null %}
+    {% for errorLayout in errorLayoutsConfig %}
+      {% if errorLayout.name == errorLayoutName %}
+        {% set errorLayoutData = errorLayout %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if error-layout not found #}
+    {% if not errorLayoutData %}
+      <span class="text-red-500">Error-layout not found: {{ errorLayoutName }}</span>
+    {% else %}
+      {# Render error-layout organism based on variant #}
+      {% if errorLayoutData.variant == "cross-layout" %}
+        
+        {# Main Error Layout Container #}
+        <div class="error-layout error-layout--{{ errorLayoutData.variant }} absolute inset-0 pt-20 pb-8 lg:pb-32 overflow-hidden">
+          
+          {# Desktop Layout - Cross Formation with Centered Triptych #}
+          <div class="error-layout-desktop hidden lg:block lg:relative lg:h-full lg:w-full">
+            
+            {# Error Fragment Group - Covers entire space #}
+            <div class="error-layout-fragments-container absolute inset-0 p-8">
+              {{ renderErrorFragmentGroup({ 
+                  name: errorLayoutData.errorFragmentGroupName,
+                  datas: option.errorFragmentGroupDatas,
+                  errorFragmentDatas: option.errorFragmentDatas,
+                  iconDatas: option.iconDatas,
+                  typographyDatas: option.typographyDatas
+              }) }}
+            </div>
+            
+            {# Triptych - Centered Absolutely #}
+            <div class="error-layout-triptych absolute inset-0 flex flex-col items-center justify-center gap-6 pointer-events-none translate-y-1/6">
+              <div class="error-layout-title text-center pointer-events-auto">
+                {{ renderTypography({ 
+                    name: errorLayoutData.titleTypographyName,
+                    datas: option.typographyDatas
+                }) }}
+              </div>
+              <div class="error-layout-subtitle text-center pointer-events-auto">
+                {{ renderTypography({ 
+                    name: errorLayoutData.subtitleTypographyName,
+                    datas: option.typographyDatas
+                }) }}
+              </div>
+              <div class="error-layout-cta pointer-events-auto">
+                {% if errorLayoutData.buttonName %}
+                  {{ renderButton({ 
+                      name: errorLayoutData.buttonName,
+                      datas: option.buttonDatas
+                  }) }}
+                {% elif errorLayoutData.linkName %}
+                  {{ renderLink({ 
+                      name: errorLayoutData.linkName,
+                      datas: option.linkDatas
+                  }) }}
+                {% endif %}
+              </div>
+              <div class="error-layout-accessibility flex items-center justify-center gap-4 mt-20 pointer-events-auto">
+                <div class="error-layout-accessibility-text inline-block opacity-70 hover:opacity-100 focus-within:opacity-100 transition-opacity">
+                  {{ renderTypography({ 
+                      name: errorLayoutData.accessibilityTextTypographyName,
+                      datas: option.typographyDatas
+                  }) }}
+                </div>
+                <div class="error-layout-accessibility-button inline-block">
+                  {{ renderButton({ 
+                      name: errorLayoutData.accessibilityButtonName,
+                      datas: option.buttonDatas,
+                      isErrorPage: true
+                  }) }}
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          
+          {# Mobile/Tablet Vertical Stack with Scroll-based Halo (sm, md, lg-) #}
+          <div class="error-layout-mobile block lg:hidden overflow-y-auto h-full w-full p-4 sm:p-6">
+            
+            {# Triptych First - Always visible in mobile halo #}
+            <div class="error-layout-triptych-mobile flex flex-col items-center gap-4 sm:gap-6 mb-8 sm:mb-12">
+              <div class="error-layout-title text-center">
+                {{ renderTypography({ 
+                    name: errorLayoutData.titleTypographyName,
+                    datas: option.typographyDatas
+                }) }}
+              </div>
+              <div class="error-layout-subtitle text-center">
+                {{ renderTypography({ 
+                    name: errorLayoutData.subtitleTypographyName,
+                    datas: option.typographyDatas
+                }) }}
+              </div>
+              <div class="error-layout-cta">
+                {% if errorLayoutData.buttonName %}
+                  {{ renderButton({ 
+                      name: errorLayoutData.buttonName,
+                      datas: option.buttonDatas
+                  }) }}
+                {% elif errorLayoutData.linkName %}
+                  {{ renderLink({ 
+                      name: errorLayoutData.linkName,
+                      datas: option.linkDatas
+                  }) }}
+                {% endif %}
+              </div>
+              
+              {# Accessibility section with proper focus and hover states #}
+              <div class="error-layout-accessibility text-center mt-8">
+                <div class="error-layout-accessibility-text mb-4 opacity-70 hover:opacity-100 focus-within:opacity-100 transition-opacity">
+                  {{ renderTypography({ 
+                      name: errorLayoutData.accessibilityTextTypographyName,
+                      datas: option.typographyDatas
+                  }) }}
+                </div>
+                <div class="error-layout-accessibility-button opacity-70 hover:opacity-100 focus-within:opacity-100 transition-opacity">
+                  {{ renderButton({ 
+                      name: errorLayoutData.accessibilityButtonName,
+                      datas: option.buttonDatas,
+                      isErrorPage: true
+                  }) }}
+                </div>
+              </div>
+            </div>
+            
+            {# Fragments Container - Uses existing error-fragment-group #}
+            <div class="error-layout-fragments-mobile space-y-8 sm:space-y-12">
+              {# Get fragment group data #}
+              {% set fragmentGroupData = null %}
+              {% for group in option.errorFragmentGroupDatas %}
+                {% if group.name == errorLayoutData.errorFragmentGroupName %}
+                  {% set fragmentGroupData = group %}
+                {% endif %}
+              {% endfor %}
+              
+              {# Render fragments if found #}
+              {% if fragmentGroupData and fragmentGroupData.fragmentNames %}
+                {% for fragmentName in fragmentGroupData.fragmentNames %}
+                  <div class="error-layout-fragment-mobile error-layout-fragment-{{ loop.index }} w-full min-h-[120px] flex items-center justify-center">
+                    <div class="error-layout-fragment-placeholder opacity-0 transition-opacity duration-500" data-fragment-index="{{ loop.index }}">
+                      {% from "02-molecules/error-fragment.njk" import renderErrorFragment %}
+                      {% set isFragment6 = loop.index == 6 %}
+                      {% if isFragment6 %}
+                        <div class="error-fragment-clickable" tabindex="0" role="button" aria-label="Retourner à la page précédente ou à l'accueil">
+                          {{ renderErrorFragment({ 
+                              name: fragmentName,
+                              datas: option.errorFragmentDatas,
+                              iconDatas: option.iconDatas,
+                              typographyDatas: option.typographyDatas
+                          }) }}
+                        </div>
+                      {% else %}
+                        {{ renderErrorFragment({ 
+                            name: fragmentName,
+                            datas: option.errorFragmentDatas,
+                            iconDatas: option.iconDatas,
+                            typographyDatas: option.typographyDatas
+                        }) }}
+                      {% endif %}
+                    </div>
+                  </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+            
+          </div>
+          
+        </div>
+        
+      {% endif %}
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "01-organisms/error-layout.njk" import renderErrorLayout %}
+
+2. Call a specific error-layout by its name
+{{ renderErrorLayout({ 
+    name: "error_layout_404",
+    datas: organisms["error-layout"]["error-layouts"],
+    errorFragmentGroupDatas: organisms["error-fragment-group"]["error-fragment-groups"],
+    errorFragmentDatas: molecules["error-fragment"]["error-fragments"],
+    iconDatas: atoms.icon.icons,
+    typographyDatas: atoms.typography.texts,
+    buttonDatas: atoms.button.buttons,
+    linkDatas: atoms.link.links
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+=========================================================== #}

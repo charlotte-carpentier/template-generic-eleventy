@@ -1,0 +1,15 @@
+{
+  "sections": [
+    {
+      "name": "charlotte_contact",
+      "header": {
+        "title": "contact_title"
+      },
+      "content": {
+        "contact_block": "main_contact",
+        "form": "contact_form",
+        "button": "button_default"
+      }
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+{# ============================================================
+   @ORGANISM - TAB-SECTIONS
+   - Main sections container with navigation and CSS :target system
+   - Enhanced accessibility with ARIA roles and live regions
+============================================================ #}
+
+{% macro renderTabSections(option) %}
+  {% from "01-organisms/section-portfolio.njk" import renderSectionPortfolio %}
+  {% from "01-organisms/section-timeline.njk" import renderSectionTimeline %}
+  {% from "01-organisms/section-contact.njk" import renderSectionContact %}
+  {% from "02-molecules/tab-menu.njk" import renderTabMenu %}
+
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No tab-sections configuration provided</span>
+  {% else %}
+    {% set tabSectionsConfig = option.datas %}
+    {% set tabSectionsName = option.name %}
+    
+    {% set tabSectionsData = null %}
+    {% for tabSections in tabSectionsConfig %}
+      {% if tabSections.name == tabSectionsName %}
+        {% set tabSectionsData = tabSections %}
+      {% endif %}
+    {% endfor %}
+
+    {% if not tabSectionsData %}
+      <span class="text-red-source">Tab-sections not found: {{ tabSectionsName }}</span>
+    {% else %}
+      <div class="tab-sections w-full" id="main-tab-sections">
+        
+        {# Desktop/tablet navigation #}
+        <div class="tab-sections-navigation hidden sm:block lg:-ml-8 xl:-ml-8" role="tablist" aria-label="Navigation sections">
+          {{ renderTabMenu({ 
+              name: tabSectionsData.navigation.menu,
+              datas: option.tabMenuDatas,
+              linkDatas: option.linkDatas
+          }) }}
+        </div>
+        
+        {# Main container #}
+        <div class="tab-sections-container relative flex justify-center items-start">
+          
+          {# Content area with borders #}
+          <div class="tab-sections-content border-t-4 border-black sm:border-t-3 lg:border-t-4 relative scrollbar-hide w-[313px] h-auto sm:w-[633px] sm:h-auto lg:w-[488px] lg:h-[653px]" style="overflow-y: auto;">
+            
+            {# Gradient lines #}
+            <div class="tab-sections-gradient-lines">
+              <div class="tab-sections-gradient-left"></div>
+              <div class="tab-sections-gradient-right"></div>
+            </div>
+            
+            {# Sections with :target navigation #}
+            <div class="tab-sections-sections">
+              
+              {# Portfolio - default #}
+              <div class="tab-section-item" id="portfolio" data-default="true" role="tabpanel" tabindex="0" aria-labelledby="tab-portfolio">
+                {{ renderSectionPortfolio({ 
+                    name: "charlotte_missions",
+                    datas: option.portfolioDatas,
+                    typographyDatas: option.typographyDatas,
+                    contentBlockDatas: option.contentBlockDatas,
+                    imageDatas: option.imageDatas,
+                    buttonDatas: option.buttonDatas,
+                    linkDatas: option.linkDatas,
+                    class: "tab-section-content"
+                }) }}
+              </div>
+              
+              {# Profile #}
+              <div class="tab-section-item" id="profile" role="tabpanel" tabindex="0" aria-labelledby="tab-profile">
+                {{ renderSectionTimeline({ 
+                    name: "charlotte_profile",
+                    datas: option.timelineDatas,
+                    typographyDatas: option.typographyDatas,
+                    contentBlockDatas: option.contentBlockDatas,
+                    progressBarDatas: option.progressBarDatas,
+                    imageDatas: option.imageDatas,
+                    buttonDatas: option.buttonDatas,
+                    linkDatas: option.linkDatas,
+                    iconDatas: option.iconDatas,
+                    class: "tab-section-content"
+                }) }}
+              </div>
+              
+              {# Journey #}
+              <div class="tab-section-item" id="journey" role="tabpanel" tabindex="0" aria-labelledby="tab-journey">
+                {{ renderSectionTimeline({ 
+                    name: "charlotte_journey",
+                    datas: option.timelineDatas,
+                    typographyDatas: option.typographyDatas,
+                    contentBlockDatas: option.contentBlockDatas,
+                    progressBarDatas: option.progressBarDatas,
+                    imageDatas: option.imageDatas,
+                    buttonDatas: option.buttonDatas,
+                    linkDatas: option.linkDatas,
+                    iconDatas: option.iconDatas,
+                    class: "tab-section-content"
+                }) }}
+              </div>
+              
+              {# Knowledge #}
+              <div class="tab-section-item" id="knowledge" role="tabpanel" tabindex="0" aria-labelledby="tab-knowledge">
+                {{ renderSectionTimeline({ 
+                    name: "charlotte_knowledge",
+                    datas: option.timelineDatas,
+                    typographyDatas: option.typographyDatas,
+                    contentBlockDatas: option.contentBlockDatas,
+                    progressBarDatas: option.progressBarDatas,
+                    imageDatas: option.imageDatas,
+                    buttonDatas: option.buttonDatas,
+                    linkDatas: option.linkDatas,
+                    iconDatas: option.iconDatas,
+                    class: "tab-section-content"
+                }) }}
+              </div>
+              
+              {# Contact #}
+              <div class="tab-section-item" id="contact" role="tabpanel" tabindex="0" aria-labelledby="tab-contact">
+                {{ renderSectionContact({ 
+                    name: "charlotte_contact",
+                    datas: option.contactDatas,
+                    typographyDatas: option.typographyDatas,
+                    contactBlockDatas: option.contactBlockDatas,
+                    listFormDatas: option.listFormDatas,
+                    iconDatas: option.iconDatas,
+                    radioDatas: option.radioDatas,
+                    inputDatas: option.inputDatas,
+                    buttonDatas: option.buttonDatas,
+                    linkDatas: option.linkDatas,
+                    class: "tab-section-content"
+                }) }}
+              </div>
+              
+              {# Thanks section #}
+              <div class="tab-section-item" id="message" role="tabpanel" tabindex="0" aria-labelledby="tab-message">
+                {{ renderSectionTimeline({ 
+                    name: "charlotte_thanks",
+                    datas: option.timelineDatas,
+                    typographyDatas: option.typographyDatas,
+                    contentBlockDatas: option.contentBlockDatas,
+                    progressBarDatas: option.progressBarDatas,
+                    imageDatas: option.imageDatas,
+                    buttonDatas: option.buttonDatas,
+                    linkDatas: option.linkDatas,
+                    iconDatas: option.iconDatas,
+                    class: "tab-section-content"
+                }) }}
+              </div>
+              
+              {# Legal #}
+              <div class="tab-section-item" id="legal" role="tabpanel" tabindex="0" aria-labelledby="tab-legal">
+                {{ renderSectionTimeline({ 
+                    name: "charlotte_legal",
+                    datas: option.timelineDatas,
+                    typographyDatas: option.typographyDatas,
+                    contentBlockDatas: option.contentBlockDatas,
+                    progressBarDatas: option.progressBarDatas,
+                    imageDatas: option.imageDatas,
+                    buttonDatas: option.buttonDatas,
+                    linkDatas: option.linkDatas,
+                    iconDatas: option.iconDatas,
+                    class: "tab-section-content"
+                }) }}
+              </div>
+              
+            </div>
+          </div>
+          
+          {# Custom scroll cursor - desktop only #}
+          <div class="tab-sections-scroll-cursor hidden lg:block xl:block ml-2 mt-5 flex-shrink-0">
+            <div class="scroll-cursor-track">
+              <div class="scroll-cursor-thumb" id="scroll-cursor-thumb"></div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ============================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "01-organisms/tab-sections.njk" import renderTabSections %}
+
+2. Call the tab-sections
+{{ renderTabSections({ 
+    name: "charlotte_main",
+    datas: organisms["tab-sections"]["tab-sections"],
+    tabMenuDatas: molecules["tab-menu"].tab_menus,
+    linkDatas: atoms.link.links,
+    portfolioDatas: organisms["section-portfolio"].sections,
+    timelineDatas: organisms["section-timeline"].sections,
+    contactDatas: organisms["section-contact"].sections,
+    typographyDatas: atoms.typography.texts,
+    contentBlockDatas: molecules["content-block"]["content-blocks"],
+    contactBlockDatas: molecules["contact-block"].contact_blocks,
+    listFormDatas: molecules["list-form"]["list-forms"],
+    progressBarDatas: molecules["progress-bar"]["progress-bars"],
+    imageDatas: atoms.image.images,
+    iconDatas: atoms.icon.icons,
+    radioDatas: atoms.radio.radios,
+    inputDatas: atoms.input.inputs,
+    buttonDatas: atoms.button.buttons
+}) }}
+
+May your bugs be forever exiled to the shadow realm.
+============================================================ #}

@@ -1,0 +1,120 @@
+{
+  "links": [
+    {
+      "name": "nav_contact",
+      "href": "#contact",
+      "text": "Contact",
+      "variant": "nav-white"
+    },
+    {
+      "name": "tab_missions",
+      "href": "#portfolio",
+      "text": "Missions",
+      "variant": "tab"
+    },
+    {
+      "name": "tab_profile",
+      "href": "#profile",
+      "text": "Profil",
+      "variant": "tab"
+    },
+    {
+      "name": "tab_journey",
+      "href": "#journey",
+      "text": "Parcours",
+      "variant": "tab"
+    },
+    {
+      "name": "tab_knowledge",
+      "href": "#knowledge",
+      "text": "Savoirs",
+      "variant": "tab"
+    },
+    {
+      "name": "tab_contact",
+      "href": "#contact",
+      "text": "Contact",
+      "variant": "tab"
+    },
+    {
+      "name": "portfolio_openmind_site",
+      "href": "https://openmind.example.com",
+      "text": "Voir le site",
+      "variant": "portfolio-external",
+      "target": "_blank",
+      "rel": "noopener noreferrer"
+    },
+    {
+      "name": "portfolio_boat_rental_site",
+      "href": "https://manautic-location-bateau.com/",
+      "text": "Voir le site",
+      "variant": "portfolio-external",
+      "target": "_blank",
+      "rel": "noopener noreferrer"
+    },
+    {
+      "name": "portfolio_sophrologue_site",
+      "href": "https://thomascarpentier-sophrologue.fr/",
+      "text": "Voir le site",
+      "variant": "portfolio-external",
+      "target": "_blank",
+      "rel": "noopener noreferrer"
+    },
+    {
+      "name": "external_github",
+      "href": "https://github.com/charlotte-carpentier",
+      "text": "Mon GitHub",
+      "variant": "external",
+      "target": "_blank",
+      "rel": "noopener noreferrer"
+    },
+    {
+      "name": "external_linkedin",
+      "href": "https://linkedin.com/in/charlottecarpentier",
+      "text": "Mon LinkedIn",
+      "variant": "external",
+      "target": "_blank",
+      "rel": "noopener noreferrer"
+    },
+    {
+      "name": "external_instagram",
+      "href": "#",
+      "text": "Mon Instagram",
+      "variant": "external",
+      "target": "_blank",
+      "rel": "noopener noreferrer"
+    },
+    {
+      "name": "external_email",
+      "href": "mailto:carpentier.dev@gmail.com",
+      "text": "carpentier.dev@gmail.com",
+      "variant": "external"
+    },
+    {
+      "name": "#",
+      "href": "/assets/documents/charlotte-carpentier-cv.pdf",
+      "text": "Télécharger mon CV",
+      "variant": "external",
+      "download": true
+    },
+    {
+      "name": "tab_legal",
+      "href": "#legal",
+      "text": "Mentions légales",
+      "variant": "tab-white"
+    },
+    {
+      "name": "link-cta-404-500-maintenance-partial",
+      "href": "#",
+      "text": "Aller vers les pages disponibles",
+      "variant": "external",
+      "onclick": "goToPreviousPageOrHome()"
+    },
+    {
+      "name": "link-cta-maintenance-total",
+      "href": "mailto:carpentier.dev@gmail.com",
+      "text": "Laisser un message",
+      "variant": "external"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "charlottecarpentier-cv",
+  "version": "1.0.0",
+  "description": "Personal portfolio and resume website for Charlotte Carpentier, showcasing skills, experience, and projects.",
+  "keywords": [
+    "portfolio",
+    "resume",
+    "CV",
+    "web developer",
+    "Eleventy",
+    "TailwindCSS",
+    "Decap CMS"
+  ],
+  "homepage": "https://github.com/charlotte-carpentier/charlottecarpentier-cv",
+  "bugs": {
+    "url": "https://github.com/charlotte-carpentier/charlottecarpentier-cv/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charlotte-carpentier/charlottecarpentier-cv.git"
+  },
+  "license": "MIT",
+  "author": "Charlotte Carpentier <carpentier.dev@gmail.com>",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx concurrently \"npx @tailwindcss/cli -i ./src/input.css -o ./public/css/output.css --watch\" \"eleventy --serve --watch\"",
+    "build": "npm run update-sitemap && eleventy",
+    "update-sitemap": "node src/js/utils/update-sitemap.js",
+    "refresh": "rm -rf .cache ./public/css/output.css"
+  },
+  "dependencies": {
+    "@11ty/eleventy-fetch": "^5.1.0",
+    "dotenv": "^16.5.0",
+    "execa": "^9.5.2"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "@tailwindcss/cli": "^4.0.9",
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.1.2",
+    "gray-matter": "^4.0.3",
+    "json5": "^2.2.3",
+    "netlify-plugin-image-optim": "^0.4.0",
+    "nunjucks": "^3.2.4",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.15"
+  }
+}

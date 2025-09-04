@@ -1,0 +1,36 @@
+{
+  "tab-sections": [
+    {
+      "name": "charlotte_main",
+      "navigation": {
+        "menu": "main_navigation"
+      },
+      "sections": [
+        {
+          "type": "portfolio",
+          "name": "charlotte_missions"
+        },
+        {
+          "type": "timeline", 
+          "name": "charlotte_profile"
+        },
+        {
+          "type": "timeline",
+          "name": "charlotte_journey"
+        },
+        {
+          "type": "timeline",
+          "name": "charlotte_knowledge"
+        },
+        {
+          "type": "contact",
+          "name": "charlotte_contact"
+        },
+        {
+          "type": "timeline",
+          "name": "charlotte_legal"
+        }
+      ]
+    }
+  ]
+}

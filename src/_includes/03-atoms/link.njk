@@ -1,0 +1,82 @@
+{# ===========================================================
+  @ATOM - LINK
+  - Generates navigation links with variant styling
+=========================================================== #}
+
+{% macro renderLink(option) %}
+ {# Check if datas is provided #}
+ {% if not option.datas %}
+   <span class="text-red-500">Error: No link configuration provided</span>
+ {% else %}
+   {# Retrieve link configuration #}
+   {% set linksConfig = option.datas %}
+   {% set linkName = option.name %}
+   
+   {# Find the specific link by name - linksConfig is already the array #}
+   {% set linkData = null %}
+   {% for link in linksConfig %}
+     {% if link.name == linkName %}
+       {% set linkData = link %}
+     {% endif %}
+   {% endfor %}
+
+   {# Fallback if link not found #}
+   {% if not linkData %}
+     <span class="text-red-500">Link not found: {{ linkName }}</span>
+   {% else %}
+     {# Build CSS classes - Using base + variant classes from input.css #}
+     {% set variant = linkData.variant | default('external') %}
+     {% set cssClasses = 'link link--' ~ variant %}
+     
+     {# Add responsive font size classes based on variant #}
+     {% if variant == 'nav' %}
+       {% set cssClasses = cssClasses ~ ' text-h2-mobile sm:text-h2' %}
+     {% elif variant == 'tab' %}
+       {% set cssClasses = cssClasses ~ ' text-code-mobile sm:text-code' %}
+     {% elif variant == 'external' %}
+       {% set cssClasses = cssClasses ~ ' text-p-mobile sm:text-p' %}
+     {% elif variant == 'portfolio-external' %}
+       {% set cssClasses = cssClasses ~ ' text-p-mobile sm:text-p font-bold' %}
+     {% endif %}
+     
+     {# Enhanced accessibility attributes #}
+     {% set ariaLabel = '' %}
+     {% if linkData.href and linkData.href.indexOf('mailto:') == 0 %}
+       {% set ariaLabel = 'aria-label="Envoyer un email à ' ~ linkData.text ~ '"' %}
+     {% elif linkData.target == '_blank' %}
+       {% set ariaLabel = 'aria-label="' ~ linkData.text ~ ' - Ouvre dans un nouvel onglet"' %}
+     {% endif %}
+     
+     {# Render the link #}
+     <a 
+       href="{{ linkData.href }}" 
+       class="{{ cssClasses }} transition-colors duration-200 outline-none cursor-pointer focus-visible:outline-2 focus-visible:outline-cc-green-dark focus-visible:outline-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:pointer-events-none"
+       {% if linkData.target %}target="{{ linkData.target }}"{% endif %}
+       {% if linkData.download %}download{% endif %}
+       {% if linkData.rel %}rel="{{ linkData.rel }}"{% endif %}
+       {% if linkData.onclick %}onclick="{{ linkData.onclick }}"{% endif %}
+       {% if ariaLabel %}{{ ariaLabel | safe }}{% endif %}
+     >
+       {{ linkData.text | safe }}
+       {% if linkData.variant == 'portfolio-external' %}
+         <span class="ml-1" aria-hidden="true">↗</span>
+       {% endif %}
+     </a>
+   {% endif %}
+ {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+  Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "03-atoms/link.njk" import renderLink %}
+
+2. Call a specific link by its name
+{{ renderLink({ 
+   name: "portfolio_link",
+   datas: atoms.link.links
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+=========================================================== #}

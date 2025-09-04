@@ -1,0 +1,14 @@
+{
+  "footer": {
+    "name": "main_footer",
+    "variant": "minimal",
+    "copyright": {
+      "name": "footer_title",
+      "datas": "atoms.typography.texts"
+    },
+    "legal_link": {
+      "name": "tab_legal", 
+      "datas": "atoms.link.links"
+    }
+  }
+}

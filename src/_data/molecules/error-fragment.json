@@ -1,0 +1,124 @@
+{
+  "error-fragments": [
+    {
+      "name": "fragment_404_01",
+      "variant": "icon",
+      "iconName": "fragment-01-404"
+    },
+    {
+      "name": "fragment_404_02",
+      "variant": "text",
+      "textTypographyName": "fragment-02-404"
+    },
+    {
+      "name": "fragment_404_03",
+      "variant": "text",
+      "textTypographyName": "fragment-03-404"
+    },
+    {
+      "name": "fragment_404_04",
+      "variant": "icon",
+      "iconName": "fragment-04-404"
+    },
+    {
+      "name": "fragment_404_05",
+      "variant": "text",
+      "textTypographyName": "fragment-05-404"
+    },
+    {
+      "name": "fragment_404_06",
+      "variant": "icon",
+      "iconName": "fragment-06-404"
+    },
+    {
+      "name": "fragment_500_01",
+      "variant": "icon",
+      "iconName": "fragment-01-500"
+    },
+    {
+      "name": "fragment_500_02",
+      "variant": "text",
+      "textTypographyName": "fragment-02-500"
+    },
+    {
+      "name": "fragment_500_03",
+      "variant": "text",
+      "textTypographyName": "fragment-03-500"
+    },
+    {
+      "name": "fragment_500_04",
+      "variant": "icon",
+      "iconName": "fragment-04-500"
+    },
+    {
+      "name": "fragment_500_05",
+      "variant": "text",
+      "textTypographyName": "fragment-05-500"
+    },
+    {
+      "name": "fragment_500_06",
+      "variant": "icon",
+      "iconName": "fragment-06-500"
+    },
+    {
+      "name": "fragment_maintenance_total_01",
+      "variant": "icon",
+      "iconName": "fragment-01-maintenance-total"
+    },
+    {
+      "name": "fragment_maintenance_total_02",
+      "variant": "text",
+      "textTypographyName": "fragment-02-maintenance-total"
+    },
+    {
+      "name": "fragment_maintenance_total_03",
+      "variant": "text",
+      "textTypographyName": "fragment-03-maintenance-total"
+    },
+    {
+      "name": "fragment_maintenance_total_04",
+      "variant": "icon",
+      "iconName": "fragment-04-maintenance-total"
+    },
+    {
+      "name": "fragment_maintenance_total_05",
+      "variant": "text",
+      "textTypographyName": "fragment-05-maintenance-total"
+    },
+    {
+      "name": "fragment_maintenance_total_06",
+      "variant": "text",
+      "textTypographyName": "fragment-06-maintenance-total"
+    },
+    {
+      "name": "fragment_maintenance_partial_01",
+      "variant": "icon",
+      "iconName": "fragment-01-maintenance-partial"
+    },
+    {
+      "name": "fragment_maintenance_partial_02",
+      "variant": "text",
+      "textTypographyName": "fragment-02-maintenance-partial"
+    },
+    {
+      "name": "fragment_maintenance_partial_03",
+      "variant": "text",
+      "textTypographyName": "fragment-03-maintenance-partial"
+    },
+    {
+      "name": "fragment_maintenance_partial_04",
+      "variant": "icon",
+      "iconName": "fragment-04-maintenance-partial"
+    },
+    {
+      "name": "fragment_maintenance_partial_05",
+      "variant": "text",
+      "textTypographyName": "fragment-05-maintenance-partial"
+    },
+    {
+      "name": "fragment_maintenance_partial_06",
+      "variant": "icon",
+      "iconName": "fragment-06-maintenance-partial"
+    }
+  ]
+}

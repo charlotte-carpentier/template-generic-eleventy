@@ -1,0 +1,53 @@
+{
+  "skills-cards": [
+    {
+      "name": "interests_card",
+      "theme": "interests",
+      "title": "interests_title",
+      "grid_layout": "2x3",
+      "captions": [
+        "hobbies_horror",
+        "hobbies_fencing", 
+        "hobbies_maintenance",
+        "hobbies_korea",
+        "hobbies_comics",
+        "hobbies_painting"
+      ]
+    },
+    {
+      "name": "soft_skills_card", 
+      "theme": "soft_skills",
+      "title": "softskills_title",
+      "grid_layout": "2x2",
+      "captions": [
+        "softskills_empathy",
+        "softskills_creativity",
+        "softskills_patience"
+      ]
+    },
+    {
+      "name": "hard_skills_card",
+      "theme": "hard_skills",
+      "title": "hardskills_title", 
+      "grid_layout": "2x2",
+      "captions": [
+        "hardskills_analysis",
+        "hardskills_team",
+        "hardskills_crisis"
+      ]
+    },
+    {
+      "name": "languages_card",
+      "theme": "languages",
+      "title": "languages_title",
+      "grid_layout": "2x3", 
+      "captions": [
+        "languages_symfony",
+        "languages_eleventy",
+        "languages_tailwind", 
+        "languages_javascript",
+        "languages_english"
+      ]
+    }
+  ]
+}

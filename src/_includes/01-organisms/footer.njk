@@ -1,0 +1,69 @@
+{# ===========================================================
+   @ORGANISMS - FOOTER
+   - Renders site footer with copyright and legal links
+=========================================================== #}
+
+{% macro renderFooter(option) %}
+  {# Import atoms macros #}
+  {% from "03-atoms/typography.njk" import renderTypography %}
+  {% from "03-atoms/link.njk" import renderLink %}
+  
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No footer configuration provided</span>
+  {% else %}
+    {# Retrieve footer configuration #}
+    {% set footerConfig = option.datas %}
+    {% set footerName = option.name %}
+    
+    {# Find the specific footer by name #}
+    {% set footerData = footerConfig.footer %}
+
+    {# Fallback if footer not found #}
+    {% if not footerData %}
+      <span class="text-red-500">Footer not found: {{ footerName }}</span>
+    {% else %}
+      {# Build CSS classes #}
+      {% set variant = footerData.variant | default('minimal') %}
+      {% set cssClasses = 'footer footer--' ~ variant %}
+      
+      {# Render the footer #}
+      <footer class="{{ cssClasses }} w-full bg-white box-border" role="contentinfo">
+        <div class="footer__content p-2 sm:p-2 flex items-center justify-center box-border">
+          {# Copyright text #}
+          <div class="footer__copyright whitespace-nowrap text-center">
+            {{ renderTypography({ 
+                name: footerData.copyright.name,
+                datas: option.typographyDatas
+            }) }}
+          </div>
+          
+          {# Legal link #}
+          <div class="footer__legal whitespace-nowrap text-center">
+            {{ renderLink({ 
+                name: footerData.legal_link.name,
+                datas: option.linkDatas
+            }) }}
+          </div>
+        </div>
+      </footer>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "01-organisms/footer.njk" import renderFooter %}
+
+2. Call the footer with data sources
+{{ renderFooter({ 
+    name: "main_footer",
+    datas: organisms.footer,
+    typographyDatas: atoms.typography.texts,
+    linkDatas: atoms.link.links
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+=========================================================== #}

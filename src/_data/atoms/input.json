@@ -1,0 +1,35 @@
+{
+  "inputs": [
+    {
+      "name": "username",
+      "type": "text",
+      "id": "username",
+      "placeholder": "Votre nom",
+      "required": true,
+      "maxLength": 30,
+      "pattern": "^[a-zA-ZÀ-ÿ0-9_-]{3,30}$",
+      "patternMessage": "3 à 30 caractères, lettres, chiffres, _ et - autorisés",
+      "errorMessage": "Votre nom est requis"
+    },
+    {
+      "name": "email",
+      "type": "email", 
+      "id": "email",
+      "placeholder": "Votre email",
+      "required": true,
+      "maxLength": 100,
+      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      "patternMessage": "Format email invalide",
+      "errorMessage": "Votre email est requis"
+    },
+    {
+      "name": "message",
+      "type": "textarea",
+      "id": "contactMessage",
+      "placeholder": "Votre message",
+      "required": false,
+      "maxLength": 1000,
+      "rows": 2
+    }
+  ]
+}

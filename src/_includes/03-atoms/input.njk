@@ -1,0 +1,105 @@
+{# ===========================================================
+   @ATOM - INPUT
+   - Creates form input fields with validation and states
+=========================================================== #}
+
+{% macro renderInput(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No input configuration provided</span>
+  {% else %}
+    {# Retrieve input configuration #}
+    {% set inputsConfig = option.datas %}
+    {% set inputName = option.name %}
+    
+    {# Find the specific input by name - inputsConfig is already the array #}
+    {% set inputData = null %}
+    {% for input in inputsConfig %}
+      {% if input.name == inputName %}
+        {% set inputData = input %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if input not found #}
+    {% if not inputData %}
+      <span class="text-red-500">Input not found: {{ inputName }}</span>
+    {% else %}
+      {# Input container #}
+      <div class="input-group mb-4">
+        {# Label #}
+        {% if inputData.label %}
+          <label for="{{ inputData.id }}" class="text-p input-label block mb-2">
+            {{ inputData.label }}
+            {% if inputData.required %}<span class="text-red-500 ml-1">*</span>{% endif %}
+          </label>
+        {% endif %}
+        
+        {# Text Input #}
+        {% if inputData.type in ['text', 'email', 'tel', 'password'] %}
+          <input 
+            type="{{ inputData.type }}"
+            id="{{ inputData.id }}"
+            name="{{ inputData.name or inputData.id }}"
+            class="input-base input-default input-hover input-focus w-full sm:w-80 px-2 py-3 border-2 border-solid rounded focus:outline-none transition-colors duration-300 leading-tight"
+            placeholder="{{ inputData.placeholder }}"
+            {% if inputData.required %}required{% endif %}
+            {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
+            {% if inputData.pattern %}pattern="{{ inputData.pattern }}"{% endif %}
+            {% if option.disabled %}disabled class="input-base input-default input-hover input-focus w-full sm:w-80 px-2 py-3 border-2 border-solid rounded focus:outline-none transition-colors duration-300 leading-tight disabled:opacity-60 disabled:cursor-not-allowed input-disabled"{% endif %}
+            aria-describedby="{% if inputData.patternMessage %}{{ inputData.id }}-help{% endif %} {% if inputData.errorMessage %}{{ inputData.id }}-error{% endif %}"
+          />
+        
+        {# Textarea #}
+        {% elif inputData.type === 'textarea' %}
+          <textarea 
+            id="{{ inputData.id }}"
+            name="{{ inputData.name or inputData.id }}"
+            class="input-base input-default input-hover input-focus w-full sm:w-80 px-2 py-3 border-2 border-solid rounded focus:outline-none transition-colors duration-300 leading-snug resize-y min-h-20"
+            placeholder="{{ inputData.placeholder }}"
+            rows="{{ inputData.rows or 3 }}"
+            {% if inputData.required %}required{% endif %}
+            {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
+            {% if option.disabled %}disabled class="input-base input-default input-hover input-focus w-full sm:w-80 px-2 py-3 border-2 border-solid rounded focus:outline-none transition-colors duration-300 leading-snug resize-y min-h-20 disabled:opacity-60 disabled:cursor-not-allowed input-disabled"{% endif %}
+            aria-describedby="{% if inputData.maxLength %}{{ inputData.id }}-count{% endif %} {% if inputData.errorMessage %}{{ inputData.id }}-error{% endif %}"
+          ></textarea>
+          
+          {# Character counter for textarea #}
+          {% if inputData.maxLength %}
+            <div id="{{ inputData.id }}-count" class="text-small input-counter text-right mt-1">
+              0/{{ inputData.maxLength }}
+            </div>
+          {% endif %}
+        {% endif %}
+        
+        {# Help text #}
+        {% if inputData.patternMessage %}
+          <div id="{{ inputData.id }}-help" class="text-small input-help mt-1">
+            {{ inputData.patternMessage }}
+          </div>
+        {% endif %}
+        
+        {# Error message container #}
+        {% if inputData.errorMessage %}
+          <div id="{{ inputData.id }}-error" class="text-small text-red-500 mt-1 hidden" role="alert">
+            {{ inputData.errorMessage }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "03-atoms/input.njk" import renderInput %}
+
+2. Call a specific input by its name
+{{ renderInput({ 
+    name: "username",
+    datas: atoms.input.inputs
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+=========================================================== #}

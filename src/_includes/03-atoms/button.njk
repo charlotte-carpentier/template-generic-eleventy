@@ -1,0 +1,78 @@
+{# ===========================================================
+   @ATOM - BUTTON
+   - Renders interactive button with variants and states
+=========================================================== #}
+
+{% macro renderButton(option) %}
+  {# Validate input data #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No button configuration provided</span>
+  {% else %}
+    {# Retrieve button config and find matching button by name #}
+    {% set buttonsConfig = option.datas %}
+    {% set buttonName = option.name %}
+    {% set buttonData = null %}
+    {% for button in buttonsConfig %}
+      {% if button.name == buttonName %}
+        {% set buttonData = button %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if button not found #}
+    {% if not buttonData %}
+      <span class="text-red-500">Button not found: {{ buttonName }}</span>
+    {% else %}
+      {# Compose CSS classes with variant and disabled state #}
+      {% set variant = buttonData.variant | default('primary') %}
+      {% set cssClasses = 'button button--' ~ variant %}
+      {% if option.disabled or buttonData.disabled %}
+        {% set cssClasses = cssClasses ~ ' button--disabled' %}
+      {% endif %}
+
+      {# Prepare accessibility attributes - auto-use from buttonData #}
+      {% set ariaLabel = option.ariaLabel or buttonData.ariaLabel or null %}
+      {% set ariaDescribedby = option.ariaDescribedby or buttonData.ariaDescribedby or null %}
+      
+      {# Apply error-page-specific opacity and transitions for accessibility focus/hover #}
+      {% if option.isErrorPage %}
+        {% set cssClasses = cssClasses ~ ' opacity-50 hover:opacity-100 focus:opacity-100 transition-opacity' %}
+      {% endif %}
+
+      {# Render the actual button element #}
+      <button 
+        type="{{ option.type | default(buttonData.type) | default('button') }}"
+        class="{{ cssClasses }} font-bold transition-all duration-200 ease-in-out cursor-pointer border-4 border-solid inline-flex items-center justify-center rounded-none px-6 py-1 sm:px-4 sm:py-1 sm:border-[3px] disabled:cursor-not-allowed disabled:opacity-60 focus:outline-none text-xs sm:text-base"
+        data-button="{{ buttonData.name }}"
+        {% if option.disabled or buttonData.disabled %}disabled{% endif %}
+        {% if option.onclick %}onclick="{{ option.onclick | escape }}"{% endif %}
+        {% if option.id %}id="{{ option.id }}"{% endif %}
+        {% if ariaLabel %}aria-label="{{ ariaLabel }}"{% endif %}
+        {% if ariaDescribedby %}aria-describedby="{{ ariaDescribedby }}"{% endif %}
+      >
+        {{ buttonData.text }}
+      </button>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+   {% from "03-atoms/button.njk" import renderButton %}
+
+2. Call a specific button by its name
+   {{ renderButton({ 
+       name: "button_default",
+       datas: atoms.button.buttons
+   }) }}
+
+3. Apply error-page-specific styling (opacity, hover/focus) only for buttons on error pages
+   {{ renderButton({ 
+       name: "button-reveal-all",
+       datas: option.buttonDatas,
+       isErrorPage: true
+   }) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+=========================================================== #}

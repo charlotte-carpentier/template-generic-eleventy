@@ -1,0 +1,73 @@
+{# ===========================================================
+   @ATOM - ICON
+   - Displays SVG icons with size variants and styling
+=========================================================== #}
+
+{% macro renderIcon(option) %}
+  {# Check if option and required data is provided #}
+  {% if not option or not option.datas or not option.name %}
+    <span class="text-red-500">Error: No icon configuration provided</span>
+  {% else %}
+    {# Retrieve icon configuration #}
+    {% set iconsConfig = option.datas %}
+    {% set iconName = option.name %}
+    
+    {# Find the specific icon by name #}
+    {% set iconData = null %}
+    {% for icon in iconsConfig %}
+      {% if icon.name == iconName %}
+        {% set iconData = icon %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if icon not found #}
+    {% if not iconData %}
+      <span class="text-red-500">Icon not found: {{ iconName }}</span>
+    {% else %}
+      {# Build CSS classes - Using base + variant classes from input.css #}
+      {% set variant = iconData.variant | default('interface') %}
+      {% set cssClasses = 'icon-' ~ variant %}
+      
+      {# Add responsive classes based on variant #}
+      {% if variant == 'pillar' %}
+        {% set cssClasses = cssClasses ~ ' w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20' %}
+      {% elif variant == 'avatar' %}
+        {% set cssClasses = cssClasses ~ ' w-16 h-16 lg:w-[64px] lg:h-[64px] relative overflow-hidden' %}
+      {% elif variant == 'interface' %}
+        {% set cssClasses = cssClasses ~ ' w-8 h-8' %}
+      {% endif %}
+      
+      {# Add any additional classes #}
+      {% if option.class %}
+        {% set cssClasses = cssClasses ~ ' ' ~ option.class %}
+      {% endif %}
+      
+      {# Generate sprite ID from name with fallback #}
+      {% set spriteId = iconData.spriteId | default(iconName) %}
+      
+      {# SVG Sprite usage - clean and fast #}
+      <svg 
+        class="{{ cssClasses }}" 
+        aria-label="{{ iconData.alt | default('Icon') }}"
+        role="img"
+      >
+        <use href="/sprites/sprite.svg#{{ spriteId }}"></use>
+      </svg>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "03-atoms/icon.njk" import renderIcon %}
+
+2. Call a specific icon by its name (loads instantly from sprite!)
+{{ renderIcon({ 
+    name: "skills_treasure",
+    datas: atoms.icon.icons
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+=========================================================== #}

@@ -1,0 +1,101 @@
+{# ===========================================================
+   @MOLECULES - LIST-FORM
+   - Organizes form inputs with radio and text fields
+   - Supports Netlify Forms integration
+=========================================================== #}
+
+{# Import atoms #}
+{% from "03-atoms/radio.njk" import renderRadio %}
+{% from "03-atoms/input.njk" import renderInput %}
+
+{% macro renderListForm(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No list-form configuration provided</span>
+  {% else %}
+    {# Retrieve list-form configuration #}
+    {% set listFormsConfig = option.datas %}
+    {% set listFormName = option.name %}
+    
+    {# Find the specific list-form by name #}
+    {% set listFormData = null %}
+    {% for listForm in listFormsConfig %}
+      {% if listForm.name == listFormName %}
+        {% set listFormData = listForm %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if list-form not found #}
+    {% if not listFormData %}
+      <span class="text-red-500">List-form not found: {{ listFormName }}</span>
+    {% else %}
+      {# Render list-form molecule #}
+      <div class="list-form-container flex justify-center w-full">
+        <form class="list-form w-full max-w-sm sm:max-w-md flex flex-col gap-2.5" 
+              method="POST" 
+              {% if option.netlify %}
+              name="contact"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              action="/redirection/"
+              {% else %}
+              action="#"
+              {% endif %}>
+          
+          {% if option.netlify %}
+          {# Hidden honeypot field for spam protection #}
+          <input type="hidden" name="bot-field" />
+          {# Backup redirect field #}
+          <input type="hidden" name="_redirect" value="/redirection/" />
+          {% endif %}
+          
+          {# Radio section #}
+          {% if listFormData.radioName %}
+            <div class="list-form-radio w-full">
+              {{ renderRadio({ 
+                  name: listFormData.radioName,
+                  datas: option.radioDatas
+              }) }}
+            </div>
+          {% endif %}
+          
+          {# Inputs section #}
+          <div class="list-form-inputs w-full flex flex-col gap-2.5">
+            {% for inputItem in listFormData.inputs %}
+              {{ renderInput({ 
+                  name: inputItem.inputName,
+                  datas: option.inputDatas
+              }) }}
+            {% endfor %}
+          </div>
+          
+          {# Submit button INSIDE the form #}
+          {% if option.submitButton %}
+          <div class="list-form-button flex justify-center mt-4">
+            {{ option.submitButton | safe }}
+          </div>
+          {% endif %}
+          
+        </form>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "02-molecules/list-form.njk" import renderListForm %}
+
+2. Call a specific list-form by its name
+{{ renderListForm({ 
+    name: "contact_form",
+    datas: molecules["list-form"]["list-forms"],
+    radioDatas: atoms.radio.radios,
+    inputDatas: atoms.input.inputs,
+    netlify: true
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+=========================================================== #}

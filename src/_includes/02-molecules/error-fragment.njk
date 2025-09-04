@@ -1,0 +1,80 @@
+{# ===========================================================
+   @MOLECULES - ERROR-FRAGMENT
+   - Renders error page fragments with icon or text content
+=========================================================== #}
+
+{# Import atoms #}
+{% from "03-atoms/typography.njk" import renderTypography %}
+{% from "03-atoms/icon.njk" import renderIcon %}
+
+{% macro renderErrorFragment(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No error-fragment configuration provided</span>
+  {% else %}
+    {# Retrieve error-fragment configuration #}
+    {% set errorFragmentsConfig = option.datas %}
+    {% set errorFragmentName = option.name %}
+
+    {# Find the specific error-fragment by name #}
+    {% set errorFragmentData = null %}
+    {% for errorFragment in errorFragmentsConfig %}
+      {% if errorFragment.name == errorFragmentName %}
+        {% set errorFragmentData = errorFragment %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if error-fragment not found #}
+    {% if not errorFragmentData %}
+      <span class="text-red-500">Error-fragment not found:
+        {{ errorFragmentName }}</span>
+    {% else %}
+      {# Render error-fragment molecule based on variant #}
+      {% if option.isClickable %}
+        <a href="{{ errorFragmentData.link | default('#') }}" class="error-fragment-link">
+      {% endif %}
+
+      {% if errorFragmentData.variant == "icon" %}
+        <div class="error-fragment error-fragment--{{ errorFragmentData.variant }}">
+          <div class="error-fragment-icon">
+            {{ renderIcon({ 
+              name: errorFragmentData.iconName,
+              datas: option.iconDatas
+          }) }}
+          </div>
+        </div>
+      {% elif errorFragmentData.variant == "text" %}
+        <div class="error-fragment error-fragment--{{ errorFragmentData.variant }}">
+          <div class="error-fragment-text">
+            {{ renderTypography({ 
+              name: errorFragmentData.textTypographyName,
+              datas: option.typographyDatas
+          }) }}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if option.isClickable %}
+        </a>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "02-molecules/error-fragment.njk" import renderErrorFragment %}
+
+2. Call a specific error-fragment by its name
+{{ renderErrorFragment({ 
+    name: "fragment_404_01",
+    datas: molecules["error-fragment"]["error-fragments"],
+    iconDatas: atoms.icon.icons,
+    typographyDatas: atoms.typography.texts,
+    isClickable: true
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+=========================================================== #}

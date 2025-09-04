@@ -1,0 +1,76 @@
+{# ===========================================================
+   @MOLECULES - PROGRESS-BAR
+   - Shows progress indicator with label and description
+=========================================================== #}
+
+{# Import atoms #}
+{% from "03-atoms/typography.njk" import renderTypography %}
+
+{% macro renderProgressBar(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500" role="alert">Error: No progress-bar configuration provided</span>
+  {% else %}
+    {# Retrieve progress-bar configuration #}
+    {% set progressBarConfig = option.datas %}
+    {% set progressBarName = option.name %}
+    
+    {# Find the specific progress-bar by name #}
+    {% set progressBarData = null %}
+    {% for progressBar in progressBarConfig %}
+      {% if progressBar.name == progressBarName %}
+        {% set progressBarData = progressBar %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if progress-bar not found #}
+    {% if not progressBarData %}
+      <span class="text-red-500" role="alert">Progress-bar not found: {{ progressBarName }}</span>
+    {% else %}
+      {# Render progress-bar molecule #}
+      <div class="progress-bar-container flex flex-col items-center gap-2 sm:gap-2 w-full">
+        {# Progress bar visual with accessibility attributes #}
+        <div class="progress-bar w-full max-w-[150px]">
+          <div class="progress-bar-track" 
+               role="progressbar" 
+               aria-valuenow="{{ progressBarData.value }}" 
+               aria-valuemin="0" 
+               aria-valuemax="100"
+               aria-label="Progress: {{ progressBarData.value }}%">
+            <div class="progress-bar-fill" style="width: {{ progressBarData.value }}%;"></div>
+          </div>
+        </div>
+        
+        {# Typography atoms for label and description #}
+        <div class="progress-bar-text flex flex-col items-center gap-0 text-center">
+          {{ renderTypography({ 
+              name: progressBarData.labelName,
+              datas: option.typographyDatas,
+              tag: "span"
+          }) }}
+          {{ renderTypography({ 
+              name: progressBarData.descriptionName,
+              datas: option.typographyDatas,
+              tag: "span"
+          }) }}
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "02-molecules/progress-bar.njk" import renderProgressBar %}
+
+2. Call a specific progress-bar by its name
+{{ renderProgressBar({ 
+    name: "learning_loop",
+    datas: molecules["progress-bar"]["progress-bars"],
+    typographyDatas: atoms.typography.texts
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+=========================================================== #}

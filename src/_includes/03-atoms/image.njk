@@ -1,0 +1,63 @@
+{# ===========================================================
+   @ATOM - IMAGE
+   - Renders responsive images with variant styling
+=========================================================== #}
+
+{% macro renderImage(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <!-- Fallback silencieux : pas d'affichage d'erreur -->
+  {% else %}
+    {# Retrieve image configuration #}
+    {% set imagesConfig = option.datas %}
+    {% set imageName = option.name %}
+    
+    {# Find the specific image by name - FIXED: stop loop when found #}
+    {% set imageData = null %}
+    {% set found = false %}
+    {% for image in imagesConfig %}
+      {% if image.name == imageName and not found %}
+        {% set imageData = image %}
+        {% set found = true %}
+      {% endif %}
+    {% endfor %}
+
+    {# Render only if image found - FIXED: silent fallback #}
+    {% if imageData %}
+      {# Build CSS classes - FIXED: more flexible variant handling #}
+      {% set variant = imageData.variant | default('mission') %}
+      {% set cssClasses = 'image-' ~ variant %}
+      
+      {# FIXED: variant-specific classes moved to data structure if needed #}
+      {% if variant == 'mission' %}
+        {% set cssClasses = cssClasses ~ ' w-[300px] max-h-[157px] border-[3px] sm:w-[400px] sm:h-[200px] sm:border-[4px] sm:max-h-none' %}
+      {% endif %}
+      
+      {# Render the image #}
+      <img 
+        src="{{ imageData.src }}" 
+        alt="{{ imageData.alt }}" 
+        class="{{ cssClasses }} block"
+        loading="lazy"
+        decoding="async"
+        {% if imageData.width %}width="{{ imageData.width }}"{% endif %}
+        {% if imageData.height %}height="{{ imageData.height }}"{% endif %}
+      />
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "03-atoms/image.njk" import renderImage %}
+
+2. Call a specific image by its name
+{{ renderImage({ 
+    name: "profile_photo",
+    datas: atoms.image.images
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+=========================================================== #}

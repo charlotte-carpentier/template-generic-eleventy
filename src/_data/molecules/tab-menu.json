@@ -1,0 +1,21 @@
+{
+    "tab_menus": [
+      {
+        "name": "main_navigation",
+        "desktop_links": [
+          "tab_missions",
+          "tab_profile", 
+          "tab_journey",
+          "tab_knowledge",
+          "tab_contact"
+        ],
+        "mobile_links": [
+          "tab_missions",
+          "tab_profile",
+          "tab_journey", 
+          "tab_knowledge",
+          "tab_contact"
+        ]
+      }
+    ]
+  }

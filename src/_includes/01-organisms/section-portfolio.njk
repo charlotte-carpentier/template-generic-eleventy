@@ -1,0 +1,133 @@
+{# ===========================================================
+   @ORGANISMS - SECTION-PORTFOLIO
+   - Portfolio section with responsive layout (vertical desktop, carousel mobile/tablet)
+=========================================================== #}
+
+{% macro renderSectionPortfolio(option) %}
+  {# Import required molecules and atoms #}
+  {% from "02-molecules/content-block.njk" import renderContentBlock %}
+  {% from "03-atoms/typography.njk" import renderTypography %}
+
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No section-portfolio configuration provided</span>
+  {% else %}
+    {# Retrieve section-portfolio configuration #}
+    {% set sectionsConfig = option.datas %}
+    {% set sectionName = option.name %}
+    
+    {# Find the specific section by name #}
+    {% set sectionData = null %}
+    {% for section in sectionsConfig %}
+      {% if section.name == sectionName %}
+        {% set sectionData = section %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if section not found #}
+    {% if not sectionData %}
+      <span class="text-red-500">Section-portfolio not found: {{ sectionName }}</span>
+    {% else %}
+      {# Build CSS classes from section name #}
+      {% set cssClasses = 'section-portfolio' %}
+      
+      {# Add any additional classes #}
+      {% if option.class %}
+        {% set cssClasses = cssClasses ~ ' ' ~ option.class %}
+      {% endif %}
+      
+      {# Section container #}
+      <section class="{{ cssClasses }} w-full bg-white" id="{{ sectionData.id | default('portfolio') }}">
+        
+        {# Section content with responsive padding and max-width #}
+        <div class="section-portfolio-content px-6 py-12 lg:px-24 lg:py-16 max-w-prose mx-auto">
+          
+          {# Section header with system gaps #}
+          <div class="section-portfolio-header mb-2 lg:mb-6 pb-4 mb-2 text-center">
+            {{ renderTypography({ 
+                name: sectionData.header.title,
+                datas: option.typographyDatas
+            }) }}
+          </div>
+          
+          {# Section content container with responsive layout #}
+          <div class="section-portfolio-body">
+            
+            {# Desktop layout - vertical stack #}
+            <div class="section-portfolio-desktop hidden lg:flex flex-col gap-8">
+              {% for blockName in sectionData.content.blocks %}
+                <div class="section-portfolio-item">
+                  {{ renderContentBlock({ 
+                      name: blockName,
+                      datas: option.contentBlockDatas,
+                      typographyDatas: option.typographyDatas,
+                      imageDatas: option.imageDatas,
+                      buttonDatas: option.buttonDatas,
+                      linkDatas: option.linkDatas
+                  }) }}
+                </div>
+              {% endfor %}
+            </div>
+            
+            {# Mobile/Tablet layout - horizontal carousel with viewport constraint #}
+            <div class="section-portfolio-mobile lg:hidden">
+              <div class="section-portfolio-carousel flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide px-2" 
+                   id="portfolio-carousel" 
+                   aria-live="polite" 
+                   aria-label="Portfolio carousel">
+                {% for blockName in sectionData.content.blocks %}
+                  <div class="section-portfolio-item flex-shrink-0 w-72 sm:w-80 snap-center">
+                    {{ renderContentBlock({ 
+                        name: blockName,
+                        datas: option.contentBlockDatas,
+                        typographyDatas: option.typographyDatas,
+                        imageDatas: option.imageDatas,
+                        buttonDatas: option.buttonDatas,
+                        linkDatas: option.linkDatas
+                    }) }}
+                  </div>
+                {% endfor %}
+              </div>
+              
+              {# Carousel dots navigation #}
+              <div class="section-portfolio-dots flex justify-center gap-2 mt-4" role="tablist" aria-label="Portfolio navigation">
+                {% for blockName in sectionData.content.blocks %}
+                  <button 
+                    class="portfolio-dot w-4 h-4 rounded-full border-3 border-black bg-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-dark focus:ring-offset-2"
+                    role="tab"
+                    data-index="{{ loop.index0 }}"
+                    aria-label="Go to slide {{ loop.index }}"
+                    aria-selected="{% if loop.first %}true{% else %}false{% endif %}"
+                  ></button>
+                {% endfor %}
+              </div>
+            </div>
+            
+          </div>
+          
+        </div>
+        
+      </section>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "01-organisms/section-portfolio.njk" import renderSectionPortfolio %}
+
+2. Call the section-portfolio
+{{ renderSectionPortfolio({ 
+    name: "charlotte_missions",
+    datas: organisms["section-portfolio"].sections,
+    typographyDatas: atoms.typography.texts,
+    contentBlockDatas: molecules["content-block"]["content-blocks"],
+    imageDatas: atoms.image.images,
+    buttonDatas: atoms.button.buttons,
+    linkDatas: atoms.link.links
+}) }}
+
+May your bugs be forever exiled to the shadow realm.
+=========================================================== #}

@@ -1,0 +1,70 @@
+{# ===========================================================
+   @ATOM - TOOLTIP
+   - Shows contextual information with title and description
+=========================================================== #}
+
+{% macro renderTooltip(option) %}
+  {# Check if datas is provided #}
+  {% if not option.datas %}
+    <span class="text-red-500">Error: No tooltip configuration provided</span>
+  {% else %}
+    {# Retrieve tooltip configuration #}
+    {% set tooltipsConfig = option.datas %}
+    {% set tooltipName = option.name %}
+    
+    {# Find the specific tooltip by name - tooltipsConfig is already the array #}
+    {% set tooltipData = null %}
+    {% for tooltip in tooltipsConfig %}
+      {% if tooltip.name == tooltipName %}
+        {% set tooltipData = tooltip %}
+      {% endif %}
+    {% endfor %}
+
+    {# Fallback if tooltip not found #}
+    {% if not tooltipData %}
+      <span class="text-red-500">Tooltip not found: {{ tooltipName }}</span>
+    {% else %}
+      {# Tooltip - always visible for atom display #}
+      <div class="tooltip-box w-80 p-2 box-border" role="tooltip" aria-live="polite">
+        {# Title #}
+        <div class="tooltip-title text-center mb-1 mt-2 leading-none font-bold" role="heading" aria-level="3">{{ tooltipData.title }}</div>
+        
+        {# Description part 1 (above bar) #}
+        {% if tooltipData.description_part1 %}
+          <div class="tooltip-description text-center leading-none whitespace-pre-line">{{ tooltipData.description_part1 }}</div>
+        {% endif %}
+        
+        {# Decorative bar with diamond #}
+        <div class="flex items-center justify-center mt-4 gap-2" aria-hidden="true">
+          <div class="tooltip-line flex-none w-15 h-0.5"></div>
+          <div class="tooltip-diamond w-2 h-2 rotate-45 flex-shrink-0"></div>
+          <div class="tooltip-line flex-none w-15 h-0.5"></div>
+        </div>
+        
+        {# Description part 2 (below bar) or regular description #}
+        <div class="tooltip-description text-center leading-none whitespace-pre-line">
+          {% if tooltipData.description_part2 %}
+            {{ tooltipData.description_part2 }}
+          {% else %}
+            {{ tooltipData.description }}
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{# ===========================================================
+   Summon HAT Components Wisely
+-----------------------------------------------------------
+1. Import the macro at the top of your page
+{% from "03-atoms/tooltip.njk" import renderTooltip %}
+
+2. Call the specific tooltip somewhere in your page
+{{ renderTooltip({ 
+    name: "escrime",
+    datas: atoms.tooltip.tooltips
+}) }}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+=========================================================== #}

@@ -1,0 +1,190 @@
+{
+  "error_items": [
+    {
+      "name": "title-404",
+      "content": "L’élément recherché est inexistant ou retiré.",
+      "variant": "typography"
+    },
+    {
+      "name": "title-500",
+      "content": "L’élément recherché est bloqué par un problème technique.",
+      "variant": "typography"
+    },
+    {
+      "name": "title-maintenance",
+      "content": "L’élément recherché fait l’objet d’une intervention nécessaire.",
+      "variant": "typography"
+    },
+    {
+      "name": "subtitle-404-500-maintenance-partial",
+      "content": "L’accès au reste du site est préservé.",
+      "variant": "typography"
+    },
+    {
+      "name": "subtitle-maintenance-total",
+      "content": "Un lien vers l’extérieur est préservé.",
+      "variant": "typography"
+    },
+    {
+      "name": "link-cta-404-500-maintenance-partial",
+      "content": "Aller vers les pages disponibles",
+      "variant": "link"
+    },
+    {
+      "name": "link-cta-maintenance-total",
+      "content": "Laisser un message",
+      "variant": "link"
+    },
+    {
+      "name": "fragment-01-404",
+      "spriteId": "fragment-01a-magnifying-glass",
+      "alt": "Loupe",
+      "variant": "icon"
+    },
+    {
+      "name": "fragment-02-404",
+      "content": "Données absentes.",
+      "variant": "typography"
+    },
+    {
+      "name": "fragment-03-404",
+      "content": "Domaine vide.",
+      "variant": "typography"
+    },
+    {
+      "name": "fragment-04-404",
+      "spriteId": "fragment-404-04a-eye-slash",
+      "alt": "Œil barré",
+      "variant": "icon"
+    },
+    {
+      "name": "fragment-05-404",
+      "content": "Impasse.",
+      "variant": "typography"
+    },
+    {
+      "name": "fragment-06-404",
+      "spriteId": "fragment-06a-person-simple-run",
+      "alt": "Personne qui court",
+      "variant": "icon"
+    },
+    {
+      "name": "fragment-01-500",
+      "spriteId": "fragment-01a-magnifying-glass",
+      "alt": "Loupe",
+      "variant": "icon"
+    },
+    {
+      "name": "fragment-02-500",
+      "content": "Chemin interrompu.",
+      "variant": "typography"
+    },
+    {
+      "name": "fragment-03-500",
+      "content": "Erreur interne.",
+      "variant": "typography"
+    },
+    {
+      "name": "fragment-04-500",
+      "spriteId": "fragment-500-04a-bug",
+      "alt": "Icône bug",
+      "variant": "icon"
+    },
+    {
+      "name": "fragment-05-500",
+      "content": "Domaine fermé.",
+      "variant": "typography"
+    },
+    {
+      "name": "fragment-06-500",
+      "spriteId": "fragment-06a-person-simple-run",
+      "alt": "Personne qui court",
+      "variant": "icon"
+    },
+    {
+      "name": "fragment-01-maintenance-total",
+      "spriteId": "fragment-01a-magnifying-glass",
+      "alt": "Loupe",
+      "variant": "icon"
+    },
+    {
+      "name": "fragment-02-maintenance-total",
+      "content": "Chemin interrompu.",
+      "variant": "typography"
+    },
+    {
+      "name": "fragment-03-maintenance-total",
+      "content": "Travaux en cours.",
+      "variant": "typography"
+    },
+    {
+      "name": "fragment-04-maintenance-total",
+      "spriteId": "fragment-maintenance-04a-barricade",
+      "alt": "Barricade",
+      "variant": "icon"
+    },
+    {
+      "name": "fragment-05-maintenance-total",
+      "content": "Domaine fermé.",
+      "variant": "typography"
+    },
+    {
+      "name": "fragment-06-maintenance-total",
+      "content": "Nous reviendrons.",
+      "variant": "typography"
+    },
+    {
+      "name": "fragment-01-maintenance-partial",
+      "spriteId": "fragment-01a-magnifying-glass",
+      "alt": "Loupe",
+      "variant": "icon"
+    },
+    {
+      "name": "fragment-02-maintenance-partial",
+      "content": "Chemin interrompu.",
+      "variant": "typography"
+    },
+    {
+      "name": "fragment-03-maintenance-partial",
+      "content": "Travaux en cours.",
+      "variant": "typography"
+    },
+    {
+      "name": "fragment-04-maintenance-partial",
+      "spriteId": "fragment-maintenance-04a-barricade",
+      "alt": "Barricade",
+      "variant": "icon"
+    },
+    {
+      "name": "fragment-05-maintenance-partial",
+      "content": "Domaine fermé.",
+      "variant": "typography"
+    },
+    {
+      "name": "fragment-06-maintenance-partial",
+      "spriteId": "fragment-06a-person-simple-run",
+      "alt": "Personne qui court",
+      "variant": "icon"
+    },
+    {
+      "name": "footer-info-visible",
+      "content": "Pour rendre visibles les contenus cachés :",
+      "variant": "typography"
+    },
+    {
+      "name": "footer-info-hidden",
+      "content": "Pour invisibiliser les contenus révélés :",
+      "variant": "typography"
+    },
+    {
+      "name": "button-reveal-all",
+      "content": "Afficher tout",
+      "variant": "button"
+    },
+    {
+      "name": "button-hide-all",
+      "content": "Masquer tout",
+      "variant": "button"
+    }
+  ]
+}
