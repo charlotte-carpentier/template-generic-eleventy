@@ -1,6 +1,7 @@
 // ==========================
 // Eleventy Configuration
 // ==========================
+
 export default function(eleventyConfig) {
 
   // --------------------------
@@ -12,7 +13,6 @@ export default function(eleventyConfig) {
     './src/admin',    // Netlify CMS admin files
     './src/docs',     // documentation files
     './src/js',       // custom JS scripts
-    './src/sprites'   // sprite sheets
   ].forEach(path => eleventyConfig.addPassthroughCopy(path));
 
   // Passthrough for single files

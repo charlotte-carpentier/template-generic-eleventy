@@ -13,10 +13,10 @@
     <link rel="canonical" href="{{ site.url }}{{ page.url | url }}">
 
     {# ----- Favicons ----- #}
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ favicon.png16 | default('/assets/ui/favicon/favicon-16x16.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ favicon.png32 | default('/assets/ui/favicon/favicon-32x32.png') }}">
-    <link rel="shortcut icon" href="{{ favicon.ico | default('/assets/ui/favicon/favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ favicon.appleTouch | default('/assets/ui/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ favicon.png16 | default('/assets/icons/favicon/favicon-16x16.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ favicon.png32 | default('/assets/icons/favicon/favicon-32x32.png') }}">
+    <link rel="shortcut icon" href="{{ favicon.ico | default('/assets/icons/favicon/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ favicon.appleTouch | default('/assets/icons/favicon/apple-touch-icon.png') }}">
     {% if favicon.svg %}
       <link rel="icon" href="{{ favicon.svg }}" type="image/svg+xml">
     {% endif %}
@@ -133,17 +133,17 @@
     {% endif %}
 
     {# ----- JavaScript scripts ----- #}
-    <script src="/js/main.js" defer="defer"></script>
-    <script src="/js/atoms/error-link.js" defer="defer"></script>
-    <script src="/js/molecules/caption.js" defer="defer"></script>
-    <script src="/js/molecules/error-footer.js" defer="defer"></script>
-    <script src="/js/organisms/header.js" defer="defer"></script>
-    <script src="/js/organisms/avatar-card.js" defer="defer"></script>
-    <script src="/js/organisms/skills-card.js" defer="defer"></script>
-    <script src="/js/organisms/section-portfolio.js" defer="defer"></script>
-    <script src="/js/organisms/tab-sections.js" defer="defer"></script>
-    <script src="/js/organisms/error-fragment-group.js" defer="defer"></script>
-    <script src="/js/organisms/error-layout.js" defer="defer"></script>
+    <script src="/assets/js/main.js" defer="defer"></script>
+    <script src="/assets/js/components/atoms/error-link.js" defer="defer"></script>
+    <script src="/assets/js/components/molecules/caption.js" defer="defer"></script>
+    <script src="/assets/js/components/molecules/error-footer.js" defer="defer"></script>
+    <script src="/assets/js/components/organisms/header.js" defer="defer"></script>
+    <script src="/assets/js/components/organisms/avatar-card.js" defer="defer"></script>
+    <script src="/assets/js/components/organisms/skills-card.js" defer="defer"></script>
+    <script src="/assets/js/components/organisms/section-portfolio.js" defer="defer"></script>
+    <script src="/assets/js/components/organisms/tab-sections.js" defer="defer"></script>
+    <script src="/assets/js/components/organisms/error-fragment-group.js" defer="defer"></script>
+    <script src="/assets/js/components/organisms/error-layout.js" defer="defer"></script>
 
     {# ----- Netlify CMS redirect (optional) ----- #}
     <script>

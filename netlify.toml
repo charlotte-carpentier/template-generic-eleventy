@@ -1,14 +1,14 @@
-# =========================
+# ==========================
 # Netlify configuration for generic Eleventy template
-# =========================
+# ==========================
 
 [build]
   publish = "public"          # TODO → Update if your output folder is different
   command = "npm run build"   # TODO → Update if your build command changes
 
-# =========================
+# --------------------------
 # Plugins
-# =========================
+# --------------------------
 
 # Example plugin (commented out by default)
 # [[plugins]]

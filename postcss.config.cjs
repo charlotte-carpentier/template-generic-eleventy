@@ -1,4 +1,7 @@
-// postcss.config.cjs
+// ==========================
+// Postcss Configuration
+// ==========================
+
 module.exports = {
   plugins: {
     "@tailwindcss/postcss": {},

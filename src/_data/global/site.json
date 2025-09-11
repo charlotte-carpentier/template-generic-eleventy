@@ -21,10 +21,10 @@
     }
   },
   "favicon": {
-    "png16": "/assets/images/ui/favicon/favicon-16x16.png",
-    "png32": "/assets/images/ui/favicon/favicon-32x32.png",
-    "ico": "/assets/images/ui/favicon/favicon.ico",
-    "appleTouch": "/assets/images/ui/favicon/apple-touch-icon.png"
+    "png16": "/assets/icons/favicon/favicon-16x16.png",
+    "png32": "/assets/icons/favicon/favicon-32x32.png",
+    "ico": "/assets/icons/favicon/favicon.ico",
+    "appleTouch": "/assets/icons/favicon/apple-touch-icon.png"
   },
   "socialImage": "/assets/social-share.jpg",
   "fonts": {

@@ -1,0 +1,24 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/assets/images/uploaded"
+public_folder: "/assets/images/uploaded"
+
+collections:
+  - name: "missions"
+    label: "Missions"
+    folder: "src/collection-missions"
+    create: true
+    delete: true
+    slug: "{{fields.name}}"
+    identifier_field: "name"
+    summary: "{{name}}"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "01-organisms/section-mission.njk" }
+      - { label: "Tags", name: "tags", widget: "hidden", default: "mission" }
+      - { label: "Nom technique", name: "name", widget: "string", pattern: ["^mission_.*", "Doit commencer par mission_"] }
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Description courte", name: "shortDescription", widget: "text" }
+      - { label: "Images", name: "images", widget: "list", allow_add: true, allow_delete: true, field: { label: "Image", name: "image", widget: "image" } }
+      - { label: "Alt des images", name: "imageAlt", widget: "string" }

@@ -2,7 +2,7 @@
 
 # Script pour générer un sprite SVG à partir de tes icônes
 ICONS_DIR="src/assets/icons"
-SPRITE_FILE="src/sprites/sprite.svg"
+SPRITE_FILE="src/assets/icons/sprites/sprite.svg"
 
 echo "🎨 Generating SVG sprite..."
 
