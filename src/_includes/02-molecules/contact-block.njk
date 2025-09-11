@@ -5,8 +5,8 @@
 
 {% macro renderContactBlock(option) %}
   {# Import required atoms #}
-  {% from "03-atoms/icon.njk" import renderIcon %}
-  {% from "03-atoms/typography.njk" import renderTypography %}
+  {% from "01-atoms/icon.njk" import renderIcon %}
+  {% from "01-atoms/typography.njk" import renderTypography %}
 
   {# Check if datas is provided #}
   {% if not option.datas %}
@@ -60,7 +60,7 @@
                 <div class="contact-icon flex-shrink-0 flex items-center">
                   {{ renderIcon({ 
                       name: item.icon,
-                      datas: option.iconDatas
+                      datas: _data["01-atoms"].icon.icons
                   }) }}
                 </div>
                 
@@ -79,7 +79,7 @@
                 <div class="contact-icon flex-shrink-0 flex items-center">
                   {{ renderIcon({ 
                       name: item.icon,
-                      datas: option.iconDatas
+                      datas: _data["01-atoms"].icon.icons
                   }) }}
                 </div>
                 
@@ -109,7 +109,7 @@
 {{ renderContactBlock({ 
     name: "main_contact",
     datas: molecules["contact-block"].contact_blocks,
-    iconDatas: atoms.icon.icons,
+    datas: _data["01-atoms"].icon.icons,
     typographyDatas: atoms.typography.texts
 }) }}
 

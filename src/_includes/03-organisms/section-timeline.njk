@@ -7,8 +7,8 @@
   {# Import required molecules and atoms #}
   {% from "02-molecules/content-block.njk" import renderContentBlock %}
   {% from "02-molecules/progress-bar.njk" import renderProgressBar %}
-  {% from "03-atoms/typography.njk" import renderTypography %}
-  {% from "03-atoms/icon.njk" import renderIcon %}
+  {% from "01-atoms/typography.njk" import renderTypography %}
+  {% from "01-atoms/icon.njk" import renderIcon %}
 
   {# Check if datas is provided #}
   {% if not option.datas %}
@@ -73,7 +73,7 @@
                       datas: option.contentBlockDatas,
                       typographyDatas: option.typographyDatas,
                       imageDatas: option.imageDatas,
-                      buttonDatas: option.buttonDatas,
+                      datas: _data["01-atoms"].button.buttons,
                       linkDatas: option.linkDatas
                   }) }}
                 </div>
@@ -110,7 +110,7 @@ FIN TEMPORAIRE #}
                   <div class="foundation-icon-item">
                     {{ renderIcon({ 
                         name: iconName,
-                        datas: option.iconDatas
+                        datas: _data["01-atoms"].icon.icons
                     }) }}
                   </div>
                 {% endfor %}
@@ -131,7 +131,7 @@ FIN TEMPORAIRE #}
    Summon HAT Components Wisely
 -----------------------------------------------------------
 1. Import the macro at the top of your page
-{% from "01-organisms/section-timeline.njk" import renderSectionTimeline %}
+{% from "03-organisms/section-timeline.njk" import renderSectionTimeline %}
 
 2. Call the section-timeline
 {{ renderSectionTimeline({ 
@@ -141,9 +141,9 @@ FIN TEMPORAIRE #}
     contentBlockDatas: molecules["content-block"]["content-blocks"],
     progressBarDatas: molecules["progress-bar"]["progress-bars"],
     imageDatas: atoms.image.images,
-    buttonDatas: atoms.button.buttons,
+    datas: _data["01-atoms"].button.buttons,
     linkDatas: atoms.link.links,
-    iconDatas: atoms.icon.icons
+    datas: _data["01-atoms"].icon.icons
 }) }}
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨

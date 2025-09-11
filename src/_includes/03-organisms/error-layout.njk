@@ -6,10 +6,10 @@
 =========================================================== #}
 
 {# Import organisms, molecules and atoms #}
-{% from "01-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
-{% from "03-atoms/typography.njk" import renderTypography %}
-{% from "03-atoms/button.njk" import renderButton %}
-{% from "03-atoms/link.njk" import renderLink %}
+{% from "03-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
+{% from "01-atoms/typography.njk" import renderTypography %}
+{% from "01-atoms/button.njk" import renderButton %}
+{% from "01-atoms/link.njk" import renderLink %}
 
 {% macro renderErrorLayout(option) %}
   {# Check if datas is provided #}
@@ -47,7 +47,7 @@
                   name: errorLayoutData.errorFragmentGroupName,
                   datas: option.errorFragmentGroupDatas,
                   errorFragmentDatas: option.errorFragmentDatas,
-                  iconDatas: option.iconDatas,
+                  datas: _data["01-atoms"].icon.icons,
                   typographyDatas: option.typographyDatas
               }) }}
             </div>
@@ -70,7 +70,7 @@
                 {% if errorLayoutData.buttonName %}
                   {{ renderButton({ 
                       name: errorLayoutData.buttonName,
-                      datas: option.buttonDatas
+                      datas: _data["01-atoms"].button.buttons
                   }) }}
                 {% elif errorLayoutData.linkName %}
                   {{ renderLink({ 
@@ -89,7 +89,7 @@
                 <div class="error-layout-accessibility-button inline-block">
                   {{ renderButton({ 
                       name: errorLayoutData.accessibilityButtonName,
-                      datas: option.buttonDatas,
+                      datas: _data["01-atoms"].button.buttons,
                       isErrorPage: true
                   }) }}
                 </div>
@@ -119,7 +119,7 @@
                 {% if errorLayoutData.buttonName %}
                   {{ renderButton({ 
                       name: errorLayoutData.buttonName,
-                      datas: option.buttonDatas
+                      datas: _data["01-atoms"].button.buttons
                   }) }}
                 {% elif errorLayoutData.linkName %}
                   {{ renderLink({ 
@@ -140,7 +140,7 @@
                 <div class="error-layout-accessibility-button opacity-70 hover:opacity-100 focus-within:opacity-100 transition-opacity">
                   {{ renderButton({ 
                       name: errorLayoutData.accessibilityButtonName,
-                      datas: option.buttonDatas,
+                      datas: _data["01-atoms"].button.buttons,
                       isErrorPage: true
                   }) }}
                 </div>
@@ -169,7 +169,7 @@
                           {{ renderErrorFragment({ 
                               name: fragmentName,
                               datas: option.errorFragmentDatas,
-                              iconDatas: option.iconDatas,
+                              datas: _data["01-atoms"].icon.icons,
                               typographyDatas: option.typographyDatas
                           }) }}
                         </div>
@@ -177,7 +177,7 @@
                         {{ renderErrorFragment({ 
                             name: fragmentName,
                             datas: option.errorFragmentDatas,
-                            iconDatas: option.iconDatas,
+                            datas: _data["01-atoms"].icon.icons,
                             typographyDatas: option.typographyDatas
                         }) }}
                       {% endif %}
@@ -200,7 +200,7 @@
    Summon HAT Components Wisely
 -----------------------------------------------------------
 1. Import the macro at the top of your page
-{% from "01-organisms/error-layout.njk" import renderErrorLayout %}
+{% from "03-organisms/error-layout.njk" import renderErrorLayout %}
 
 2. Call a specific error-layout by its name
 {{ renderErrorLayout({ 
@@ -208,9 +208,9 @@
     datas: organisms["error-layout"]["error-layouts"],
     errorFragmentGroupDatas: organisms["error-fragment-group"]["error-fragment-groups"],
     errorFragmentDatas: molecules["error-fragment"]["error-fragments"],
-    iconDatas: atoms.icon.icons,
+    datas: _data["01-atoms"].icon.icons,
     typographyDatas: atoms.typography.texts,
-    buttonDatas: atoms.button.buttons,
+    datas: _data["01-atoms"].button.buttons,
     linkDatas: atoms.link.links
 }) }}
 

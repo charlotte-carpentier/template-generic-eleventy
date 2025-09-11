@@ -5,9 +5,9 @@
 ============================================================ #}
 
 {% macro renderTabSections(option) %}
-  {% from "01-organisms/section-portfolio.njk" import renderSectionPortfolio %}
-  {% from "01-organisms/section-timeline.njk" import renderSectionTimeline %}
-  {% from "01-organisms/section-contact.njk" import renderSectionContact %}
+  {% from "03-organisms/section-portfolio.njk" import renderSectionPortfolio %}
+  {% from "03-organisms/section-timeline.njk" import renderSectionTimeline %}
+  {% from "03-organisms/section-contact.njk" import renderSectionContact %}
   {% from "02-molecules/tab-menu.njk" import renderTabMenu %}
 
   {% if not option.datas %}
@@ -60,7 +60,7 @@
                     typographyDatas: option.typographyDatas,
                     contentBlockDatas: option.contentBlockDatas,
                     imageDatas: option.imageDatas,
-                    buttonDatas: option.buttonDatas,
+                    datas: _data["01-atoms"].button.buttons,
                     linkDatas: option.linkDatas,
                     class: "tab-section-content"
                 }) }}
@@ -75,9 +75,9 @@
                     contentBlockDatas: option.contentBlockDatas,
                     progressBarDatas: option.progressBarDatas,
                     imageDatas: option.imageDatas,
-                    buttonDatas: option.buttonDatas,
+                    datas: _data["01-atoms"].button.buttons,
                     linkDatas: option.linkDatas,
-                    iconDatas: option.iconDatas,
+                    datas: _data["01-atoms"].icon.icons,
                     class: "tab-section-content"
                 }) }}
               </div>
@@ -91,9 +91,9 @@
                     contentBlockDatas: option.contentBlockDatas,
                     progressBarDatas: option.progressBarDatas,
                     imageDatas: option.imageDatas,
-                    buttonDatas: option.buttonDatas,
+                    datas: _data["01-atoms"].button.buttons,
                     linkDatas: option.linkDatas,
-                    iconDatas: option.iconDatas,
+                    datas: _data["01-atoms"].icon.icons,
                     class: "tab-section-content"
                 }) }}
               </div>
@@ -107,9 +107,9 @@
                     contentBlockDatas: option.contentBlockDatas,
                     progressBarDatas: option.progressBarDatas,
                     imageDatas: option.imageDatas,
-                    buttonDatas: option.buttonDatas,
+                    datas: _data["01-atoms"].button.buttons,
                     linkDatas: option.linkDatas,
-                    iconDatas: option.iconDatas,
+                    datas: _data["01-atoms"].icon.icons,
                     class: "tab-section-content"
                 }) }}
               </div>
@@ -122,10 +122,10 @@
                     typographyDatas: option.typographyDatas,
                     contactBlockDatas: option.contactBlockDatas,
                     listFormDatas: option.listFormDatas,
-                    iconDatas: option.iconDatas,
+                    datas: _data["01-atoms"].icon.icons,
                     radioDatas: option.radioDatas,
                     inputDatas: option.inputDatas,
-                    buttonDatas: option.buttonDatas,
+                    datas: _data["01-atoms"].button.buttons,
                     linkDatas: option.linkDatas,
                     class: "tab-section-content"
                 }) }}
@@ -140,9 +140,9 @@
                     contentBlockDatas: option.contentBlockDatas,
                     progressBarDatas: option.progressBarDatas,
                     imageDatas: option.imageDatas,
-                    buttonDatas: option.buttonDatas,
+                    datas: _data["01-atoms"].button.buttons,
                     linkDatas: option.linkDatas,
-                    iconDatas: option.iconDatas,
+                    datas: _data["01-atoms"].icon.icons,
                     class: "tab-section-content"
                 }) }}
               </div>
@@ -156,9 +156,9 @@
                     contentBlockDatas: option.contentBlockDatas,
                     progressBarDatas: option.progressBarDatas,
                     imageDatas: option.imageDatas,
-                    buttonDatas: option.buttonDatas,
+                    datas: _data["01-atoms"].button.buttons,
                     linkDatas: option.linkDatas,
-                    iconDatas: option.iconDatas,
+                    datas: _data["01-atoms"].icon.icons,
                     class: "tab-section-content"
                 }) }}
               </div>
@@ -183,7 +183,7 @@
    Summon HAT Components Wisely
 -----------------------------------------------------------
 1. Import the macro at the top of your page
-{% from "01-organisms/tab-sections.njk" import renderTabSections %}
+{% from "03-organisms/tab-sections.njk" import renderTabSections %}
 
 2. Call the tab-sections
 {{ renderTabSections({ 
@@ -200,10 +200,10 @@
     listFormDatas: molecules["list-form"]["list-forms"],
     progressBarDatas: molecules["progress-bar"]["progress-bars"],
     imageDatas: atoms.image.images,
-    iconDatas: atoms.icon.icons,
+    datas: _data["01-atoms"].icon.icons,
     radioDatas: atoms.radio.radios,
     inputDatas: atoms.input.inputs,
-    buttonDatas: atoms.button.buttons
+    datas: _data["01-atoms"].button.buttons
 }) }}
 
 May your bugs be forever exiled to the shadow realm.

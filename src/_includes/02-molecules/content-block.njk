@@ -4,10 +4,10 @@
 =========================================================== #}
 
 {# Import atoms #}
-{% from "03-atoms/typography.njk" import renderTypography %}
-{% from "03-atoms/image.njk" import renderImage %}
-{% from "03-atoms/button.njk" import renderButton %}
-{% from "03-atoms/link.njk" import renderLink %}
+{% from "01-atoms/typography.njk" import renderTypography %}
+{% from "01-atoms/image.njk" import renderImage %}
+{% from "01-atoms/button.njk" import renderButton %}
+{% from "01-atoms/link.njk" import renderLink %}
 
 {% macro renderContentBlock(option) %}
   {# Check if datas is provided #}
@@ -91,7 +91,7 @@
                   {% elif contentBlockData.buttonName %}
                     {{ renderButton({ 
                         name: contentBlockData.buttonName,
-                        datas: option.buttonDatas
+                        datas: _data["01-atoms"].button.buttons
                     }) }}
                   {% endif %}
                 </div>
@@ -116,7 +116,7 @@
     datas: molecules["content-block"]["content-blocks"],
     typographyDatas: atoms.typography.texts,
     imageDatas: atoms.image.images,
-    buttonDatas: atoms.button.buttons,
+    datas: _data["01-atoms"].button.buttons,
     linkDatas: atoms.link.links
 }) }}
 

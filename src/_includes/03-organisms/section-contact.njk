@@ -7,8 +7,8 @@
   {# Import required molecules and atoms #}
   {% from "02-molecules/contact-block.njk" import renderContactBlock %}
   {% from "02-molecules/list-form.njk" import renderListForm %}
-  {% from "03-atoms/typography.njk" import renderTypography %}
-  {% from "03-atoms/button.njk" import renderButton %}
+  {% from "01-atoms/typography.njk" import renderTypography %}
+  {% from "01-atoms/button.njk" import renderButton %}
 
   {# Check if datas is provided #}
   {% if not option.datas %}
@@ -63,7 +63,7 @@
                 {{ renderContactBlock({ 
                     name: sectionData.content.contact_block,
                     datas: option.contactBlockDatas,
-                    iconDatas: option.iconDatas,
+                    datas: _data["01-atoms"].icon.icons,
                     typographyDatas: option.typographyDatas
                 }) }}
               </div>
@@ -79,7 +79,7 @@
               {% set submitButtonHtml %}
                 {{ renderButton({ 
                     name: sectionData.content.button,
-                    datas: option.buttonDatas,
+                    datas: _data["01-atoms"].button.buttons,
                     type: "submit"
                 }) }}
               {% endset %}
@@ -107,7 +107,7 @@
    Summon HAT Components Wisely
 -----------------------------------------------------------
 1. Import the macro at the top of your page
-{% from "01-organisms/section-contact.njk" import renderSectionContact %}
+{% from "03-organisms/section-contact.njk" import renderSectionContact %}
 
 2. Call the section-contact
 {{ renderSectionContact({ 
@@ -116,10 +116,10 @@
     typographyDatas: atoms.typography.texts,
     contactBlockDatas: molecules["contact-block"].contact_blocks,
     listFormDatas: molecules["list-form"]["list-forms"],
-    iconDatas: atoms.icon.icons,
+    datas: _data["01-atoms"].icon.icons,
     radioDatas: atoms.radio.radios,
     inputDatas: atoms.input.inputs,
-    buttonDatas: atoms.button.buttons
+    datas: _data["01-atoms"].button.buttons
 }) }}
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨

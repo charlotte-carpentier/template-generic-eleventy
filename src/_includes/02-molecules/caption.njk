@@ -4,9 +4,9 @@
 =========================================================== #}
 
 {# Import atoms #}
-{% from "03-atoms/icon.njk" import renderIcon %}
-{% from "03-atoms/tooltip.njk" import renderTooltip %}
-{% from "03-atoms/typography.njk" import renderTypography %}
+{% from "01-atoms/icon.njk" import renderIcon %}
+{% from "01-atoms/tooltip.njk" import renderTooltip %}
+{% from "01-atoms/typography.njk" import renderTypography %}
 
 {% macro renderCaption(option) %}
   {# Check if datas is provided #}
@@ -59,7 +59,7 @@
           {# Icon (64x64 desktop) with gradient class #}
           {{ renderIcon({ 
             name: captionData.iconName,
-            datas: option.iconDatas,
+            datas: _data["01-atoms"].icon.icons,
             class: "caption-icon-desktop caption-gradient-" ~ captionData.gradientColor
           }) }}
           
@@ -83,7 +83,7 @@
           {# Icon (50x50 mobile) with gradient class #}
           {{ renderIcon({ 
             name: captionData.iconName,
-            datas: option.iconDatas,
+            datas: _data["01-atoms"].icon.icons,
             class: "caption-icon-mobile caption-gradient-" ~ captionData.gradientColor
           }) }}
           
@@ -111,7 +111,7 @@
 {{ renderCaption({ 
     name: "languages_symfony",
     datas: molecules.caption.captions,
-    iconDatas: atoms.icon.icons,
+    datas: _data["01-atoms"].icon.icons,
     tooltipDatas: atoms.tooltip.tooltips,
     typographyDatas: atoms.typography.texts
 }) }}

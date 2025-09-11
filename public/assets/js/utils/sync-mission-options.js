@@ -42,8 +42,8 @@ export function syncBoatOptions() {
   console.log("Starting boat options synchronization...");
   
   const boatsDir = './src/collection-boats';
-  const inputsJsonPath = './src/_data/atoms/inputs.json';
-  const headingsJsonPath = './src/_data/atoms/headings.json';
+  const inputsJsonPath = './src/_data/01-atoms/inputs.json';
+  const headingsJsonPath = './src/_data/01-atoms/headings.json';
   
   // Check if directories exist
   if (!fs.existsSync(boatsDir)) {

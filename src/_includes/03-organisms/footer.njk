@@ -5,8 +5,8 @@
 
 {% macro renderFooter(option) %}
   {# Import atoms macros #}
-  {% from "03-atoms/typography.njk" import renderTypography %}
-  {% from "03-atoms/link.njk" import renderLink %}
+  {% from "01-atoms/typography.njk" import renderTypography %}
+  {% from "01-atoms/link.njk" import renderLink %}
   
   {# Check if datas is provided #}
   {% if not option.datas %}
@@ -55,7 +55,7 @@
    Summon HAT Components Wisely
 -----------------------------------------------------------
 1. Import the macro at the top of your page
-{% from "01-organisms/footer.njk" import renderFooter %}
+{% from "03-organisms/footer.njk" import renderFooter %}
 
 2. Call the footer with data sources
 {{ renderFooter({ 

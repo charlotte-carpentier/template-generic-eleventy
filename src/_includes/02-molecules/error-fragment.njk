@@ -4,8 +4,8 @@
 =========================================================== #}
 
 {# Import atoms #}
-{% from "03-atoms/typography.njk" import renderTypography %}
-{% from "03-atoms/icon.njk" import renderIcon %}
+{% from "01-atoms/typography.njk" import renderTypography %}
+{% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderErrorFragment(option) %}
   {# Check if datas is provided #}
@@ -39,7 +39,7 @@
           <div class="error-fragment-icon">
             {{ renderIcon({ 
               name: errorFragmentData.iconName,
-              datas: option.iconDatas
+              datas: _data["01-atoms"].icon.icons
           }) }}
           </div>
         </div>
@@ -71,7 +71,7 @@
 {{ renderErrorFragment({ 
     name: "fragment_404_01",
     datas: molecules["error-fragment"]["error-fragments"],
-    iconDatas: atoms.icon.icons,
+    datas: _data["01-atoms"].icon.icons,
     typographyDatas: atoms.typography.texts,
     isClickable: true
 }) }}

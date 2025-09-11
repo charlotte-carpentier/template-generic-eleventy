@@ -5,9 +5,9 @@
 =========================================================== #}
 
 {# Import organisms #}
-{% from "01-organisms/avatar-card.njk" import renderAvatarCard %}
-{% from "01-organisms/skills-card.njk" import renderSkillsCard %}
-{% from "01-organisms/tab-sections.njk" import renderTabSections %}
+{% from "03-organisms/avatar-card.njk" import renderAvatarCard %}
+{% from "03-organisms/skills-card.njk" import renderSkillsCard %}
+{% from "03-organisms/tab-sections.njk" import renderTabSections %}
 
 {% macro renderHomeLayout(option) %}
   {# Check if required data is provided #}
@@ -91,10 +91,10 @@
             listFormDatas: option.list_form_datas,
             progressBarDatas: option.progress_bar_datas,
             imageDatas: option.image_datas,
-            iconDatas: option.icon_datas,
+            datas: option.icon_datas,
             radioDatas: option.radio_datas,
             inputDatas: option.input_datas,
-            buttonDatas: option.button_datas
+            datas: option.button_datas
           }) }}
         </section>
 
@@ -134,10 +134,10 @@
             listFormDatas: option.list_form_datas,
             progressBarDatas: option.progress_bar_datas,
             imageDatas: option.image_datas,
-            iconDatas: option.icon_datas,
+            datas: option.icon_datas,
             radioDatas: option.radio_datas,
             inputDatas: option.input_datas,
-            buttonDatas: option.button_datas
+            datas: option.button_datas
           }) }}
         </section>
 
@@ -265,10 +265,10 @@
               listFormDatas: option.list_form_datas,
               progressBarDatas: option.progress_bar_datas,
               imageDatas: option.image_datas,
-              iconDatas: option.icon_datas,
+              datas: option.icon_datas,
               radioDatas: option.radio_datas,
               inputDatas: option.input_datas,
-              buttonDatas: option.button_datas
+              datas: option.button_datas
             }) }}
           </div>
         </section>
@@ -297,10 +297,10 @@
             listFormDatas: option.list_form_datas,
             progressBarDatas: option.progress_bar_datas,
             imageDatas: option.image_datas,
-            iconDatas: option.icon_datas,
+            datas: option.icon_datas,
             radioDatas: option.radio_datas,
             inputDatas: option.input_datas,
-            buttonDatas: option.button_datas
+            datas: option.button_datas
           }) }}
         </section>
 
@@ -373,7 +373,7 @@
    Summon HAT Components Wisely
 -----------------------------------------------------------
 1. Import the macro at the top of your page
-{% from "01-organisms/home-layout.njk" import renderHomeLayout %}
+{% from "03-organisms/home-layout.njk" import renderHomeLayout %}
 
 2. Call the home layout
 {{ renderHomeLayout({ 
@@ -385,10 +385,10 @@
     tab_menu_datas: molecules["tab-menu"].tab_menus,
     image_datas: atoms.image.images,
     typography_datas: atoms.typography.texts,
-    button_datas: atoms.button.buttons,
+    button_datas: _data["01-atoms"].button.buttons,
     tooltip_datas: atoms.tooltip.tooltips,
     caption_datas: molecules.caption.captions,
-    icon_datas: atoms.icon.icons,
+    icon_datas: _data["01-atoms"].icon.icons,
     link_datas: atoms.link.links,
     portfolio_datas: organisms.section_portfolio.section_portfolios,
     timeline_datas: organisms.section_timeline.section_timelines,

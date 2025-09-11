@@ -6,9 +6,9 @@
 {% macro renderHeader(option) %}
   {# Import required molecules and atoms #}
   {% from "02-molecules/tab-menu.njk" import renderTabMenu %}
-  {% from "03-atoms/typography.njk" import renderTypography %}
-  {% from "03-atoms/link.njk" import renderLink %}
-  {% from "03-atoms/icon.njk" import renderIcon %}
+  {% from "01-atoms/typography.njk" import renderTypography %}
+  {% from "01-atoms/link.njk" import renderLink %}
+  {% from "01-atoms/icon.njk" import renderIcon %}
 
   {# Check if datas is provided #}
   {% if not option.datas %}
@@ -76,13 +76,13 @@
             <span class="burger-icon burger-icon-open w-8 h-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300">
               {{ renderIcon({ 
                   name: headerData.mobile.burger_open_icon,
-                  datas: option.iconDatas
+                  datas: _data["01-atoms"].icon.icons
               }) }}
             </span>
             <span class="burger-icon burger-icon-close w-8 h-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300">
               {{ renderIcon({ 
                   name: headerData.mobile.burger_close_icon,
-                  datas: option.iconDatas
+                  datas: _data["01-atoms"].icon.icons
               }) }}
             </span>
           </button>
@@ -110,7 +110,7 @@
    Summon HAT Components Wisely
 -----------------------------------------------------------
 1. Import the macro at the top of your page
-{% from "01-organisms/header.njk" import renderHeader %}
+{% from "03-organisms/header.njk" import renderHeader %}
 
 2. Call the header
 {{ renderHeader({ 
@@ -119,7 +119,7 @@
     typographyDatas: atoms.typography.texts,
     tabMenuDatas: molecules["tab-menu"].tab_menus,
     linkDatas: atoms.link.links,
-    iconDatas: atoms.icon.icons
+    datas: _data["01-atoms"].icon.icons
 }) }}
 
 May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨

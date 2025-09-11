@@ -39,7 +39,7 @@
                   {{ renderErrorFragment({ 
                       name: fragmentName,
                       datas: option.errorFragmentDatas,
-                      iconDatas: option.iconDatas,
+                      datas: _data["01-atoms"].icon.icons,
                       typographyDatas: option.typographyDatas,
                       isClickable: false
                   }) }}
@@ -48,7 +48,7 @@
                     {{ renderErrorFragment({ 
                         name: fragmentName,
                         datas: option.errorFragmentDatas,
-                        iconDatas: option.iconDatas,
+                        datas: _data["01-atoms"].icon.icons,
                         typographyDatas: option.typographyDatas,
                         isClickable: true
                     }) }}
@@ -58,7 +58,7 @@
                 {{ renderErrorFragment({ 
                     name: fragmentName,
                     datas: option.errorFragmentDatas,
-                    iconDatas: option.iconDatas,
+                    datas: _data["01-atoms"].icon.icons,
                     typographyDatas: option.typographyDatas
                 }) }}
               {% endif %}
@@ -74,14 +74,14 @@
    Summon HAT Components Wisely
 -----------------------------------------------------------
 1. Import the macro at the top of your page
-{% from "01-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
+{% from "03-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
 
 2. Call a specific error-fragment-group by its name
 {{ renderErrorFragmentGroup({ 
     name: "error_fragment_group_404",
     datas: organisms["error-fragment-group"]["error-fragment-groups"],
     errorFragmentDatas: molecules["error-fragment"]["error-fragments"],
-    iconDatas: atoms.icon.icons,
+    datas: _data["01-atoms"].icon.icons,
     typographyDatas: atoms.typography.texts
 }) }}
 

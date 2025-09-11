@@ -59,18 +59,18 @@
    Summon HAT Components Wisely
 -----------------------------------------------------------
 1. Import the macro at the top of your page
-   {% from "03-atoms/button.njk" import renderButton %}
+   {% from "01-atoms/button.njk" import renderButton %}
 
 2. Call a specific button by its name
    {{ renderButton({ 
        name: "button_default",
-       datas: atoms.button.buttons
+       datas: _data["01-atoms"].button.buttons
    }) }}
 
 3. Apply error-page-specific styling (opacity, hover/focus) only for buttons on error pages
    {{ renderButton({ 
        name: "button-reveal-all",
-       datas: option.buttonDatas,
+       datas: _data["01-atoms"].button.buttons,
        isErrorPage: true
    }) }}
 

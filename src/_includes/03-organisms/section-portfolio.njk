@@ -6,7 +6,7 @@
 {% macro renderSectionPortfolio(option) %}
   {# Import required molecules and atoms #}
   {% from "02-molecules/content-block.njk" import renderContentBlock %}
-  {% from "03-atoms/typography.njk" import renderTypography %}
+  {% from "01-atoms/typography.njk" import renderTypography %}
 
   {# Check if datas is provided #}
   {% if not option.datas %}
@@ -62,7 +62,7 @@
                       datas: option.contentBlockDatas,
                       typographyDatas: option.typographyDatas,
                       imageDatas: option.imageDatas,
-                      buttonDatas: option.buttonDatas,
+                      datas: _data["01-atoms"].button.buttons,
                       linkDatas: option.linkDatas
                   }) }}
                 </div>
@@ -82,7 +82,7 @@
                         datas: option.contentBlockDatas,
                         typographyDatas: option.typographyDatas,
                         imageDatas: option.imageDatas,
-                        buttonDatas: option.buttonDatas,
+                        datas: _data["01-atoms"].button.buttons,
                         linkDatas: option.linkDatas
                     }) }}
                   </div>
@@ -116,7 +116,7 @@
    Summon HAT Components Wisely
 -----------------------------------------------------------
 1. Import the macro at the top of your page
-{% from "01-organisms/section-portfolio.njk" import renderSectionPortfolio %}
+{% from "03-organisms/section-portfolio.njk" import renderSectionPortfolio %}
 
 2. Call the section-portfolio
 {{ renderSectionPortfolio({ 
@@ -125,7 +125,7 @@
     typographyDatas: atoms.typography.texts,
     contentBlockDatas: molecules["content-block"]["content-blocks"],
     imageDatas: atoms.image.images,
-    buttonDatas: atoms.button.buttons,
+    datas: _data["01-atoms"].button.buttons,
     linkDatas: atoms.link.links
 }) }}
 

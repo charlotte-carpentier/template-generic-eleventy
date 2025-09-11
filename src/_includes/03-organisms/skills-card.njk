@@ -6,8 +6,8 @@
 
 {# Import molecules and atoms #}
 {% from "02-molecules/caption.njk" import renderCaption %}
-{% from "03-atoms/typography.njk" import renderTypography %}
-{% from "03-atoms/icon.njk" import renderIcon %}
+{% from "01-atoms/typography.njk" import renderTypography %}
+{% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderSkillsCard(option) %}
   {# Check if datas is provided #}
@@ -68,7 +68,7 @@
                   {{ renderCaption({ 
                     name: captionName,
                     datas: option.caption_datas,
-                    iconDatas: option.icon_datas,
+                    datas: option.icon_datas,
                     tooltipDatas: option.tooltip_datas,
                     typographyDatas: option.typography_datas
                   }) }}
@@ -81,7 +81,7 @@
                   {{ renderCaption({ 
                     name: "skills_treasure",
                     datas: option.caption_datas,
-                    iconDatas: option.icon_datas,
+                    datas: option.icon_datas,
                     tooltipDatas: option.tooltip_datas,
                     typographyDatas: option.typography_datas
                   }) }}
@@ -105,7 +105,7 @@
             {{ renderCaption({ 
               name: captionName,
               datas: option.caption_datas,
-              iconDatas: option.icon_datas,
+              datas: option.icon_datas,
               tooltipDatas: option.tooltip_datas,
               typographyDatas: option.typography_datas
             }) }}
@@ -121,7 +121,7 @@
    Summon HAT Components Wisely
 -----------------------------------------------------------
 1. Import the macro at the top of your page
-{% from "01-organisms/skills-card.njk" import renderSkillsCard %}
+{% from "03-organisms/skills-card.njk" import renderSkillsCard %}
 
 2. Wrap your 4 skills cards in a wrapper div for grid layout
 <div class="skills-wrapper">
@@ -130,7 +130,7 @@
       datas: organisms["skills-card"]["skills-cards"],
       typography_datas: atoms.typography.texts,
       caption_datas: molecules.caption.captions,
-      icon_datas: atoms.icon.icons,
+      icon_datas: _data["01-atoms"].icon.icons,
       tooltip_datas: atoms.tooltip.tooltips
   }) }}
   
@@ -139,7 +139,7 @@
       datas: organisms["skills-card"]["skills-cards"],
       typography_datas: atoms.typography.texts,
       caption_datas: molecules.caption.captions,
-      icon_datas: atoms.icon.icons,
+      icon_datas: _data["01-atoms"].icon.icons,
       tooltip_datas: atoms.tooltip.tooltips
   }) }}
 </div>

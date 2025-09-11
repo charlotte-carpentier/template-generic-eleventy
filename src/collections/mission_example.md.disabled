@@ -1,5 +1,5 @@
 ---
-layout: 01-organisms/section-mission.njk
+layout: 03-organisms/section-mission.njk
 tags: mission
 name: mission_nomcourt
 title: "Nom complet de la mission"

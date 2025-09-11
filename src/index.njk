@@ -1,12 +1,12 @@
 --- 
 permalink: "/" 
-layout: '00-core/base.njk' 
+layout: '04-core/base.njk' 
 ---
 
 <!-- MAINTENANCE: Uncomment to activate -->
 <!-- <script>window.location.replace('/maintenance/');</script> -->
 
-{% from "01-organisms/home-layout.njk" import renderHomeLayout %}
+{% from "03-organisms/home-layout.njk" import renderHomeLayout %}
 
 {{ renderHomeLayout({ 
     avatar_name: "charlotte_main",
@@ -17,10 +17,10 @@ layout: '00-core/base.njk'
     tab_menu_datas: molecules["tab-menu"].tab_menus,
     image_datas: atoms.image.images,
     typography_datas: atoms.typography.texts,
-    button_datas: atoms.button.buttons,
+    button_datas: _data["01-atoms"].button.buttons,
     tooltip_datas: atoms.tooltip.tooltips,
     caption_datas: molecules.caption.captions,
-    icon_datas: atoms.icon.icons,
+    icon_datas: _data["01-atoms"].icon.icons,
     link_datas: atoms.link.links,
     portfolio_datas: organisms["section-portfolio"].sections,
     timeline_datas: organisms["section-timeline"].sections,
@@ -31,5 +31,5 @@ layout: '00-core/base.njk'
     progress_bar_datas: molecules["progress-bar"]["progress-bars"],
     radio_datas: atoms.radio.radios,
     input_datas: atoms.input.inputs,
-    buttonDatas: atoms.button.buttons
+    datas: _data["01-atoms"].button.buttons
 }) }}
