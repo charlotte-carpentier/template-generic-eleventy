@@ -34,7 +34,7 @@ template-generic-eleventy/
 │   │   └── 04-core/          # Layouts and core templates
 │   ├── admin/                # Decap CMS configuration
 │   ├── assets/               # Static assets
-│   │   ├── documents/        # Downloadable files (e.g. CVs)
+│   │   ├── downloads/        # Downloadable files (e.g. CVs)
 │   │   ├── icons/            # Icons and sprites, including favicon
 │   │   ├── images/           # Images
 │   │   ├── js/               # JavaScript files
@@ -44,7 +44,6 @@ template-generic-eleventy/
 │   │   │       ├── 01-atoms/
 │   │   │       ├── 02-molecules/
 │   │   │       └── 03-organisms/
-│   │   └── ui/               # UI-related static files (CSS already in src/input.css)
 │   ├── collections/          # Decap CMS collections (blog, home, contact...)
 │   ├── index.njk             # Main index template
 │   ├── input.css             # TailwindCSS entry point
