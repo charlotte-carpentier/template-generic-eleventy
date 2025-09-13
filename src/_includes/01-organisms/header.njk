@@ -6,9 +6,9 @@
 {% macro renderHeader(option) %}
   {# Import required molecules and atoms #}
   {% from "02-molecules/tab-menu.njk" import renderTabMenu %}
-  {% from "03-atoms/typography.njk" import renderTypography %}
-  {% from "03-atoms/link.njk" import renderLink %}
-  {% from "03-atoms/icon.njk" import renderIcon %}
+  {% from "01-atoms/typography.njk" import renderTypography %}
+  {% from "01-atoms/link.njk" import renderLink %}
+  {% from "01-atoms/icon.njk" import renderIcon %}
 
   {# Check if datas is provided #}
   {% if not option.datas %}
