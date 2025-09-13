@@ -26,7 +26,7 @@ template-generic-eleventy/
 │   │   ├── 01-atoms/
 │   │   ├── 02-molecules/
 │   │   ├── 03-organisms/
-│   │   └── 04-global/        # Global/shared data
+│   │   └── site.json        # Global/shared data
 │   ├── _includes/            # Nunjucks templates
 │   │   ├── 01-atoms/
 │   │   ├── 02-molecules/
