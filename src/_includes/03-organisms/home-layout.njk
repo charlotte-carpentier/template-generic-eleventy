@@ -5,9 +5,9 @@
 =========================================================== #}
 
 {# Import organisms #}
-{% from "01-organisms/avatar-card.njk" import renderAvatarCard %}
-{% from "01-organisms/skills-card.njk" import renderSkillsCard %}
-{% from "01-organisms/tab-sections.njk" import renderTabSections %}
+{% from "03-organisms/avatar-card.njk" import renderAvatarCard %}
+{% from "03-organisms/skills-card.njk" import renderSkillsCard %}
+{% from "03-organisms/tab-sections.njk" import renderTabSections %}
 
 {% macro renderHomeLayout(option) %}
   {# Check if required data is provided #}
@@ -373,7 +373,7 @@
    Summon HAT Components Wisely
 -----------------------------------------------------------
 1. Import the macro at the top of your page
-{% from "01-organisms/home-layout.njk" import renderHomeLayout %}
+{% from "03-organisms/home-layout.njk" import renderHomeLayout %}
 
 2. Call the home layout
 {{ renderHomeLayout({ 

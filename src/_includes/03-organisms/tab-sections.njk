@@ -5,9 +5,9 @@
 ============================================================ #}
 
 {% macro renderTabSections(option) %}
-  {% from "01-organisms/section-portfolio.njk" import renderSectionPortfolio %}
-  {% from "01-organisms/section-timeline.njk" import renderSectionTimeline %}
-  {% from "01-organisms/section-contact.njk" import renderSectionContact %}
+  {% from "03-organisms/section-portfolio.njk" import renderSectionPortfolio %}
+  {% from "03-organisms/section-timeline.njk" import renderSectionTimeline %}
+  {% from "03-organisms/section-contact.njk" import renderSectionContact %}
   {% from "02-molecules/tab-menu.njk" import renderTabMenu %}
 
   {% if not option.datas %}
@@ -183,7 +183,7 @@
    Summon HAT Components Wisely
 -----------------------------------------------------------
 1. Import the macro at the top of your page
-{% from "01-organisms/tab-sections.njk" import renderTabSections %}
+{% from "03-organisms/tab-sections.njk" import renderTabSections %}
 
 2. Call the tab-sections
 {{ renderTabSections({ 
