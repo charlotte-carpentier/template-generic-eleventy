@@ -15,7 +15,7 @@ collections:
     identifier_field: "name"
     summary: "{{name}}"
     fields:
-      - { label: "Layout", name: "layout", widget: "hidden", default: "01-organisms/section-mission.njk" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "03-organisms/section-mission.njk" }
       - { label: "Tags", name: "tags", widget: "hidden", default: "mission" }
       - { label: "Nom technique", name: "name", widget: "string", pattern: ["^mission_.*", "Doit commencer par mission_"] }
       - { label: "Titre", name: "title", widget: "string" }

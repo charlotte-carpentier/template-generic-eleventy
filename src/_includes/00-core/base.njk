@@ -100,7 +100,7 @@
 
     {# ----- Header Organism ----- #}
     {% if not hideHeaderFooter %}
-      {% from "01-organisms/header.njk" import renderHeader %}
+      {% from "03-organisms/header.njk" import renderHeader %}
       {{ renderHeader({ 
           name: "charlotte_header",
           datas: organisms.header.headers,
@@ -123,7 +123,7 @@
 
     {# ----- Footer Organism ----- #}
     {% if not hideHeaderFooter %}
-      {% from "01-organisms/footer.njk" import renderFooter %}
+      {% from "03-organisms/footer.njk" import renderFooter %}
       {{ renderFooter({ 
         name: "main_footer",
         datas: organisms.footer,
