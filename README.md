@@ -23,9 +23,9 @@ template-generic-eleventy/
 ├── scripts/                  # Custom scripts (e.g. sprite generation)
 ├── src/                      # Source files
 │   ├── _data/                # Eleventy data files
-│   │   ├── 01-atoms/
-│   │   ├── 02-molecules/
-│   │   ├── 03-organisms/
+│   │   ├── atoms/
+│   │   ├── molecules/
+│   │   ├── organisms/
 │   │   └── site.json        # Global/shared data
 │   ├── _includes/            # Nunjucks templates
 │   │   ├── 01-atoms/
