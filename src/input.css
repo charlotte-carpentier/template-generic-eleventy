@@ -50,60 +50,157 @@ body {
 @theme {
   /* Color variables - Based on Figma design tokens */
   
-  /* Base colors */
-  --black: #000014;
-  --white: #ffffff;
+  /* --------------------------------------------------------
+     PRIMITIVES - Level 1
+  -------------------------------------------------------- */
   
-  /* Global/Neutral colors */
-  --default: #000614;
-  --sheading: #373C59;
-  --contrast-light-01: #A533FC;
-  --contrast-light-02: #777F80;
-  --contrast-light-03: #EDEDEC;
-  --contrast-light-04: #F2F6FF;
-  --accent: #378493;
-  
-  /* Button colors */
-  --button-primary: #1734EE;
-  --button-primary-hover: #19BD05;
-  --button-primary-contrast-high: #FFFFFF;
-  --button-secondary: #1734EE;
-  --button-secondary-hover: #1734EE;
-  --button-secondary-active: #1734EE;
-  --button-secondary-hover-light: #FF3FFF;
-  --button-secondary-contrast-high: #FFFFFF;
-  --button-tertiary: #004423;
-  --button-tertiary-hover: #06E708;
-  
-  /* Form colors */
-  --form-active: #000614;
-  --form-hover: #222437;
-  --form: #A533FC;
-  --control-checked: #1734EE;
-  
-  /* Disabled states */
-  --disabled: #86809E;
-  --disabled-contrast-light: #EEF0FC;
+  /* Brand Primary */
+  --color-brand-primary-00: #231F15;
+  --color-brand-primary-10: #3F3927;
+  --color-brand-primary-20: #514C3F;
+  --color-brand-primary-30: #6D6755;
+  --color-brand-primary-40: #8C846E;
+  --color-brand-primary-50: #A39D8B;
+  --color-brand-primary-60: #BEB9AC;
+  --color-brand-primary-70: #D6D2CB;
+  --color-brand-primary-100: #F3F0EA;
 
-    /* Semantic colors - Information */
-  --information: #0033AA;
-  --information-contrast-light-01: #00649F;
-  --information-contrast-light-02: #8BF7FF;
-  
-  /* Semantic colors - Success */  
-  --success: #004225;
-  --success-contrast-light-01: #42F5C4;
-  --success-contrast-light-02: #AAEFB7;
-  
-  /* Semantic colors - Warning */
-  --warning: #AA3C00;
-  --warning-contrast-light-01: #FE6D0C;
-  --warning-contrast-light-02: #FFFEE4;
-  
-  /* Semantic colors - Critical */
-  --critical: #D20319;
-  --critical-contrast-light-01: #FFE0E6;
-  --critical-contrast-light-02: #FF54F1;
+  /* Neutral */
+  --color-neutral-black: #000000;
+  --color-neutral-00: #0D0D0D;
+  --color-neutral-10: #1A1A1A;
+  --color-neutral-20: #333333;
+  --color-neutral-30: #4D4D4D;
+  --color-neutral-40: #666666;
+  --color-neutral-50: #808080;
+  --color-neutral-60: #999999;
+  --color-neutral-70: #B2B2B2;
+  --color-neutral-80: #CCCCCC;
+  --color-neutral-85: #E0E0E0;
+  --color-neutral-90: #E5E5E5;
+  --color-neutral-95: #F2F2F2;
+  --color-neutral-white: #FFFFFF;
+
+  /* Semantic Critical */
+  --color-semantic-critical-00: #290004;
+  --color-semantic-critical-10: #3D0006;
+  --color-semantic-critical-20: #72000C;
+  --color-semantic-critical-30: #9C0010;
+  --color-semantic-critical-40: #D20319;
+  --color-semantic-critical-50: #E8132A;
+  --color-semantic-critical-60: #F0384B;
+  --color-semantic-critical-70: #F4717E;
+  --color-semantic-critical-80: #FFB1B9;
+  --color-semantic-critical-90: #FFD6DB;
+  --color-semantic-critical-100: #FFF0F1;
+
+  /* Semantic Warning */
+  --color-semantic-warning-00: #290F00;
+  --color-semantic-warning-10: #331300;
+  --color-semantic-warning-20: #662500;
+  --color-semantic-warning-30: #A43C00;
+  --color-semantic-warning-40: #C74900;
+  --color-semantic-warning-50: #EE5800;
+  --color-semantic-warning-60: #FF711F;
+  --color-semantic-warning-70: #FF995C;
+  --color-semantic-warning-80: #FFCEAE;
+  --color-semantic-warning-90: #FFE0CC;
+  --color-semantic-warning-100: #FFEFE4;
+
+  /* Semantic Success */
+  --color-semantic-success-00: #001C0D;
+  --color-semantic-success-10: #005122;
+  --color-semantic-success-20: #00692A;
+  --color-semantic-success-30: #0D823C;
+  --color-semantic-success-40: #1E9850;
+  --color-semantic-success-50: #16DF67;
+  --color-semantic-success-60: #4FED8F;
+  --color-semantic-success-70: #74F1A7;
+  --color-semantic-success-80: #A2F6C4;
+  --color-semantic-success-90: #DAFBE7;
+  --color-semantic-success-100: #F7FDFA;
+
+  /* Semantic Information */
+  --color-semantic-information-00: #000E29;
+  --color-semantic-information-10: #001133;
+  --color-semantic-information-20: #002266;
+  --color-semantic-information-30: #003AAD;
+  --color-semantic-information-40: #0047D3;
+  --color-semantic-information-50: #0759FF;
+  --color-semantic-information-60: #3377FF;
+  --color-semantic-information-70: #669BFF;
+  --color-semantic-information-80: #99BCFF;
+  --color-semantic-information-90: #D0E2FF;
+  --color-semantic-information-100: #EBF7FF;
+
+  /* --------------------------------------------------------
+     TOKENS - Level 2
+  -------------------------------------------------------- */
+
+  /* Global */
+  --color-global-default: var(--color-neutral-00);
+  --color-global-heading: var(--color-neutral-20);
+  --color-global-contrast-light-01: var(--color-neutral-30);
+  --color-global-contrast-light-02: var(--color-neutral-50);
+  --color-global-contrast-light-03: var(--color-neutral-85);
+  --color-global-contrast-light-04: var(--color-neutral-95);
+  --color-global-white: var(--color-neutral-white);
+  --color-global-accent: var(--color-brand-primary-20);
+
+  /* Button Primary */
+  --color-button-primary: var(--color-brand-primary-40);
+  --color-button-primary-hover: var(--color-brand-primary-30);
+  --color-button-primary-contrast-high: var(--color-neutral-white);
+
+  /* Button Secondary */
+  --color-button-secondary: var(--color-brand-primary-40);
+  --color-button-secondary-hover: var(--color-brand-primary-30);
+  --color-button-secondary-active: var(--color-brand-primary-40);
+  --color-button-secondary-hover-light: var(--color-neutral-95);
+  --color-button-secondary-contrast-high: var(--color-neutral-white);
+
+  /* Button Tertiary */
+  --color-button-tertiary: var(--color-semantic-success-20);
+  --color-button-tertiary-hover: var(--color-semantic-success-10);
+
+  /* Form */
+  --color-form-active: var(--color-neutral-00);
+  --color-form-hover: var(--color-neutral-10);
+  --color-form: var(--color-neutral-30);
+  --color-form-control-checked: var(--color-brand-primary-40);
+
+  /* Semantic Critical */
+  --color-semantic-critical: var(--color-semantic-critical-40);
+  --color-semantic-critical-contrast-light-01: var(--color-semantic-critical-90);
+  --color-semantic-critical-contrast-light-02: var(--color-semantic-critical-100);
+
+  /* Semantic Warning */
+  --color-semantic-warning-contrast-dark: var(--color-semantic-warning-30);
+  --color-semantic-warning: var(--color-semantic-warning-40);
+  --color-semantic-warning-contrast-light-01: var(--color-semantic-warning-90);
+  --color-semantic-warning-contrast-light-02: var(--color-semantic-warning-100);
+
+  /* Semantic Success */
+  --color-semantic-success: var(--color-semantic-success-20);
+  --color-semantic-success-contrast-light-01: var(--color-semantic-success-80);
+  --color-semantic-success-contrast-light-02: var(--color-semantic-success-90);
+
+  /* Semantic Information */
+  --color-semantic-information-focus: var(--color-semantic-information-30);
+  --color-semantic-information: var(--color-semantic-information-40);
+  --color-semantic-information-contrast-light-01: var(--color-semantic-information-90);
+  --color-semantic-information-contrast-light-02: var(--color-semantic-information-100);
+
+  /* --------------------------------------------------------
+     GRADIENTS - Level 3
+  -------------------------------------------------------- */
+
+  /* Gradient Header */
+  --gradient-header: linear-gradient(0deg, var(--color-brand-primary-30), var(--color-brand-primary-10));
+
+  /* Gradient Delete Cell */
+  --gradient-delete-cell: linear-gradient(-90deg, var(--color-semantic-critical-100), rgba(255,240,241,0));
+}
 
   /* Font families - Generic system fonts */
   --font-display: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
