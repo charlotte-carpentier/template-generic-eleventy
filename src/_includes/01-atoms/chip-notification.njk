@@ -1,0 +1,95 @@
+{#
+=========================
+   CHIP NOTIFICATION    
+=========================
+Notification chip component for displaying numeric indicators or status.
+
+IMPORTANT NOTES:
+- Style variants come from the "variants" object in chip-notifications.json
+- Sizes automatically adapt based on content length for better visual balance
+- Uses appropriate ARIA roles for accessibility
+- Supports dismissible chips (with the "dismissible" class)
+- Additional custom classes can be applied through the "classes" property
+
+ACCESSIBILITY:
+- Uses role="status" to indicate informational content to screen readers
+- Maintains sufficient color contrast for all variant styles
+- Text size adjusts appropriately for readability at different size scales
+- Provides aria-label for more descriptive announcements to screen readers
+#}
+
+{% macro renderChipNotification(options) %}
+  {# -- Initialize chipData as null before searching -- #}
+  {% set chipData = null %}
+  
+  {# -- Find chip in data collection -- #}
+  {% for notification in options.datas["chip-notifications"] %}
+    {% if notification.name == options.name %}
+      {% set chipData = notification %}
+    {% endif %}
+  {% endfor %}
+
+  {# -- Get global style that applies to all chips -- #}
+  {% set globalStyle = options.datas.globalStyle %}
+
+  {# -- Render chip if data was found -- #}
+  {% if chipData %}
+    {# -- Get variant-specific style or default to empty string if not found -- #}
+    {% set variantStyle = options.datas.variants[chipData.style] | default('') %}
+    
+    {# -- Determine size class based on content length -- #}
+    {% set contentLength = chipData.text | string | length %}
+    {% set sizeClass = "h-6 w-6 text-xs" %}
+    
+    {% if contentLength > 2 %}
+      {% set sizeClass = "min-h-10 min-w-10 px-2 py-1 text-sm" %}
+    {% elif contentLength > 1 %}
+      {% set sizeClass = "h-8 w-8 text-sm" %}
+    {% endif %}
+    
+    <span 
+      class="inline-flex items-center justify-center rounded-full text-white {{ globalStyle }} {{ variantStyle }} {{ sizeClass }} {{ chipData.classes | default('') }}" 
+      role="status"
+      data-chip-notification="{{ chipData.name }}"
+      {% if chipData.ariaLabel %}aria-label="{{ chipData.ariaLabel }}"{% endif %}
+    >
+      {{ chipData.text }}
+    </span>
+  {% else %}
+    {# -- Error message if chip not found in data collection -- #}
+    <span class="text-red-500">Chip notification not found: {{ options.name }}</span>
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/chip-notification.njk" import renderChipNotification %}
+
+2. Call a specific chip notification by its name
+{{ renderChipNotification({ name: "notification_count", datas: atoms.chipNotifications }) }}
+
+3. Adding a new chip notification to chip-notifications.json
+{
+  "chip-notifications": [
+    {
+      "name": "new_notification_count",
+      "text": "99+",
+      "style": "warning",
+      "ariaLabel": "99 or more unread notifications", // Optional: for accessibility
+      "classes": "animate-pulse" // Optional: add custom classes
+    }
+  ]
+}
+
+4. JavaScript Interaction Options
+- Dismissible chips (add "dismissible" to the classes property)
+- Dynamic updates via JavaScript:
+  window.updateChipNotification("notification_count", "5", true);
+  Parameters: chip name, new value, animate (true/false)
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

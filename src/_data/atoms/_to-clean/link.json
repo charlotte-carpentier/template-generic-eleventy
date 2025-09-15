@@ -1,0 +1,283 @@
+{
+  "globalStyle": "typography-label-l link",
+  "variants": {
+    "default": "text-gray-800 hover:text-gray-600",
+    "primary": "text-blue-600 hover:text-blue-800 underline",
+    "secondary": "text-gray-500 hover:text-gray-700",
+    "navigation": "text-gray-700 relative transition-colors duration-200 ease-in-out hover:text-gray-400 hover:after:content-[''] hover:after:absolute hover:after:left-1/2 hover:after:bottom-[-8px] hover:after:w-1 hover:after:h-1 hover:after:bg-gray-400 hover:after:rounded-full hover:after:transform hover:after:-translate-x-1/2 focus:text-gray-800 focus:outline focus:outline-2 focus:outline-blue-500 focus:outline-offset-2 focus:rounded-md focus:after:hidden",
+    "navigation-secondary": "text-gray-700 relative transition-colors duration-200 ease-in-out hover:text-gray-400 hover:after:content-[''] hover:after:absolute hover:after:left-[-8px] hover:after:top-1/2 hover:after:w-1 hover:after:h-1 hover:after:bg-gray-400 hover:after:rounded-full hover:after:transform hover:after:-translate-y-1/2 focus:text-gray-800 focus:outline focus:outline-2 focus:outline-blue-500 focus:outline-offset-2 focus:rounded-md focus:after:hidden",
+    "footer": "text-gray-500 underline hover:text-gray-700 hover:no-underline"
+  },
+  "links": [
+    {
+      "name": "camp",
+      "href": "/",
+      "text": "Camp",
+      "style": "navigation",
+      "type": "internal",
+      "aria-label": "Page d'accueil",
+      "hreflang": "fr"
+    },
+    {
+      "name": "chronicles",
+      "href": "/blog",
+      "text": "Chronicles",
+      "style": "navigation",
+      "type": "internal",
+      "aria-label": "Blog et actualités",
+      "hreflang": "fr"
+    },
+    {
+      "name": "pigeon",
+      "href": "/contact",
+      "text": "Pigeon",
+      "style": "navigation",
+      "type": "internal",
+      "aria-label": "Page de contact",
+      "hreflang": "fr"
+    },
+    {
+      "name": "dungeon_map",
+      "href": "/map",
+      "text": "Ancient Dungeon Map",
+      "style": "default",
+      "type": "internal",
+      "aria-label": "Carte du donjon",
+      "hreflang": "fr"
+    },
+    {
+      "name": "magic_shop",
+      "href": "/shop",
+      "text": "Enchanted Goods Store",
+      "style": "primary",
+      "type": "internal",
+      "aria-label": "Boutique d'objets enchantés",
+      "hreflang": "fr"
+    },
+    {
+      "name": "guild_hall",
+      "href": "/guild",
+      "text": "Heroes' Guild Hall",
+      "style": "secondary",
+      "type": "internal",
+      "aria-label": "Hall de la guilde des héros",
+      "hreflang": "fr"
+    },
+    {
+      "name": "tavern",
+      "href": "/test",
+      "text": "Tavern",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Taverne des aventuriers",
+      "hreflang": "fr"
+    },
+    {
+      "name": "lore",
+      "href": "/lore",
+      "text": "Lore",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Histoire et légendes",
+      "hreflang": "fr"
+    },
+    {
+      "name": "guild_services",
+      "href": "/guild_services",
+      "text": "Guild services",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Services de la guilde",
+      "hreflang": "fr"
+    },
+    {
+      "name": "hall_of_legends",
+      "href": "/hall_of_legends",
+      "text": "Hall of legends",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Hall des légendes",
+      "hreflang": "fr"
+    },
+    {
+      "name": "bard_tales",
+      "href": "/bard_tales",
+      "text": "Bard tales",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Récits des bardes",
+      "hreflang": "fr"
+    },
+    {
+      "name": "send_a_raven",
+      "href": "/send_a_raven",
+      "text": "Send a raven",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Envoyer un corbeau",
+      "hreflang": "fr"
+    },
+    {
+      "name": "sacred_decrees",
+      "href": "/sacred_decrees",
+      "text": "Sacred decrees",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Décrets sacrés",
+      "hreflang": "fr"
+    },
+    {
+      "name": "laws_of_the_realm",
+      "href": "/laws_of_the_realm",
+      "text": "Laws of the realm",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Lois du royaume",
+      "hreflang": "fr"
+    },
+    {
+      "name": "magic_biscuits",
+      "href": "/magic_biscuits",
+      "text": "Magic biscuits",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Biscuits magiques",
+      "hreflang": "fr"
+    },
+    {
+      "name": "map_of_the_kingdom",
+      "href": "/map_of_the_kingdom",
+      "text": "Map of the kingdom",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Carte du royaume",
+      "hreflang": "fr"
+    },
+    {
+      "name": "guild_recruitment",
+      "href": "/guild_recruitment",
+      "text": "Guild recruitment",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Recrutement de la guilde",
+      "hreflang": "fr"
+    },
+    {
+      "name": "oracle_whispers",
+      "href": "/oracle_whispers",
+      "text": "Oracle whispers",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Murmures de l'oracle",
+      "hreflang": "fr"
+    },
+    {
+      "name": "blacksmith_forge",
+      "href": "/blacksmith_forge",
+      "text": "Blacksmith forge",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Forge du forgeron",
+      "hreflang": "fr"
+    },
+    {
+      "name": "potion_brewing",
+      "href": "/potion_brewing",
+      "text": "Potion brewing",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Brassage de potions",
+      "hreflang": "fr"
+    },
+    {
+      "name": "spell_enchantments",
+      "href": "/spell_enchantments",
+      "text": "Spell enchantments",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Enchantements de sorts",
+      "hreflang": "fr"
+    },
+    {
+      "name": "royal_courier",
+      "href": "/royal_courier",
+      "text": "Royal courier",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Courrier royal",
+      "hreflang": "fr"
+    },
+    {
+      "name": "dragon_rentals",
+      "href": "/dragon_rentals",
+      "text": "Dragon rentals",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Location de dragons",
+      "hreflang": "fr"
+    },
+    {
+      "name": "bard_entertainment",
+      "href": "/bard_entertainment",
+      "text": "Bard entertainment",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Divertissement des bardes",
+      "hreflang": "fr"
+    },
+    {
+      "name": "scroll_of_faces",
+      "href": "https://facebook.com",
+      "text": "Scroll of faces",
+      "style": "navigation-secondary",
+      "type": "external",
+      "aria-label": "Retrouvez-nous sur Facebook",
+      "hreflang": "fr"
+    },
+    {
+      "name": "chirping_birds",
+      "href": "https://twitter.com",
+      "text": "Chirping birds",
+      "style": "navigation-secondary",
+      "type": "external",
+      "aria-label": "Suivez-nous sur Twitter",
+      "hreflang": "fr"
+    },
+    {
+      "name": "illusion_mirror",
+      "href": "https://instagram.com",
+      "text": "Illusion mirror",
+      "style": "navigation-secondary",
+      "type": "external",
+      "aria-label": "Découvrez nos images sur Instagram",
+      "hreflang": "fr"
+    },
+    {
+      "name": "guild_registry",
+      "href": "/guild_registry",
+      "text": "Guild registry",
+      "style": "navigation-secondary",
+      "type": "internal",
+      "aria-label": "Registre de la guilde",
+      "hreflang": "fr"
+    },
+    {
+      "name": "accessibility",
+      "href": "/accessibility",
+      "text": "Accessibility",
+      "style": "footer",
+      "type": "internal",
+      "aria-label": "Informations sur l'accessibilité",
+      "hreflang": "fr"
+    },
+    {
+      "name": "creator",
+      "href": "/creator",
+      "text": "Website by Hat",
+      "style": "footer",
+      "type": "internal",
+      "aria-label": "Site web créé par Hat",
+      "hreflang": "fr"
+    }
+  ]
+}

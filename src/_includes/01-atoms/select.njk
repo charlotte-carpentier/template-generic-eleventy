@@ -1,0 +1,84 @@
+{#
+=========================
+         SELECT          
+=========================
+Component that renders select dropdown elements with consistent styling
+#}
+
+{% macro renderSelect(options) %}
+  {# Initialize selectData as null before searching #}
+  {% set selectData = null %}
+  
+  {# Find the select matching the requested name in the data collection #}
+  {% for select in options.datas.selects %}
+    {% if select.name == options.name %}
+      {% set selectData = select %}
+    {% endif %}
+  {% endfor %}
+
+  {# Get global style that applies to all selects #}
+  {% set globalStyle = options.datas.globalStyle %}
+
+  {# Render select if data was found #}
+  {% if selectData %}
+    {# Get variant-specific style or default to empty string if not found #}
+    {% set variantStyle = options.datas.variants[selectData.variant] | default('') %}
+    
+    <div class="mt-6 mb-6 mx-auto relative">
+      <select 
+        name="{{ selectData.name }}" 
+        class="{{ globalStyle }} {{ variantStyle }} appearance-none pr-10"
+        {% if selectData.variant == 'disabled' %}disabled{% endif %}
+      >
+        {# Render all options from the select data #}
+        {% for opt in selectData.options %}
+          <option 
+            value="{{ opt.value }}"
+            {% if opt.selected %} selected{% endif %}
+          >
+            {{ opt.label }}
+          </option>
+        {% endfor %}
+      </select>
+      {# Add dropdown arrow icon #}
+      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+        </svg>
+      </div>
+    </div>
+  {% else %}
+    {# Display error message if select not found #}
+    <span class="text-red-500">Select not found: {{ options.name }}</span>
+  {% endif %}
+{% endmacro %}
+
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/select.njk" import renderSelect %}
+
+2. Call a specific select by its name
+{{ renderSelect({ name: "categories", datas: atoms.selects }) }}
+
+3. Adding a new select to selects.json
+{
+  "selects": [
+    {
+      "name": "new_select_name",
+      "variant": "default",
+      "options": [
+        { "value": "option1", "label": "Option 1" },
+        { "value": "option2", "label": "Option 2", selected: true }
+      ]
+    }
+  ]
+}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}
