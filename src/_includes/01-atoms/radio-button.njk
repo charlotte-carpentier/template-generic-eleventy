@@ -1,0 +1,132 @@
+{#
+=========================
+      RADIO BUTTON         
+=========================
+Component that renders enhanced radio button inputs with labels and descriptions
+#}
+
+{% macro renderRadioButton(options) %}
+  {# Initialize default values for styling classes #}
+  {% set globalStyle = options.datas.globalStyle | default('') %}
+  {% set fieldsetClasses = options.datas.fieldsetClasses | default('radio-button-group') %}
+  {% set legendClasses = options.datas.legendClasses | default('font-medium text-gray-700 mb-3') %}
+  {% set groupContainerClasses = options.datas.groupContainerClasses | default('space-y-2') %}
+  
+  {# Check if rendering as a group or individual radio button #}
+  {% if options.group %}
+    <fieldset class="{{ fieldsetClasses }}">
+      {% if options.groupLabel %}
+        <legend class="{{ legendClasses }} {% if options.groupSrOnly %}sr-only{% endif %}">
+          {{ options.groupLabel }}
+        </legend>
+      {% endif %}
+      
+      <div class="{{ groupContainerClasses }}">
+        {% for radioButton in options.datas.radioButtons %}
+          {{ renderSingleRadioButton(radioButton, options.datas) }}
+        {% endfor %}
+      </div>
+    </fieldset>
+  {% else %}
+    {# Initialize radioButtonData as null before searching #}
+    {% set radioButtonData = null %}
+    
+    {# Find the radio button matching the requested ID in the data collection #}
+    {% for radioButton in options.datas.radioButtons %}
+      {% if radioButton.id == options.id %}
+        {% set radioButtonData = radioButton %}
+      {% endif %}
+    {% endfor %}
+    
+    {# Render radio button if data was found, otherwise show error #}
+    {% if radioButtonData %}
+      {{ renderSingleRadioButton(radioButtonData, options.datas) }}
+    {% else %}
+      <span class="{{ options.datas.errorClasses | default('text-red-500') }}">Radio button not found: {{ options.id }}</span>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{% macro renderSingleRadioButton(radioButton, datas) %}
+  {# Initialize style classes for the radio button and its components #}
+  {% set labelClasses = datas.labelClasses | default('flex cursor-pointer items-start gap-4') %}
+  {% set radioButtonContainerClasses = datas.radioButtonContainerClasses | default('flex items-center') %}
+  {% set baseClasses = datas.baseClasses | default('size-4 rounded-full') %}
+  {% set labelTextClasses = datas.labelTextClasses | default('font-medium text-gray-900') %}
+  {% set descriptionClasses = datas.descriptionClasses | default('text-sm text-gray-500') %}
+  
+  {# Define state classes for different visual states #}
+  {% set stateClasses = {
+    'default': datas.variants.default | default('border-gray-300'),
+    'hover': datas.variants.hover | default('border-gray-600'),
+    'checked': datas.variants.checked | default('bg-gray-500 border-gray-500 text-white'),
+    'focus': datas.variants.focus | default('border-blue-500 outline-none ring-2 ring-blue-300'),
+    'disabled': datas.variants.disabled | default('bg-gray-100 border-gray-300 cursor-not-allowed'),
+    'disabledChecked': datas.variants.disabledChecked | default('bg-gray-300 border-gray-300 cursor-not-allowed')
+  } %}
+  
+  {# Combine base classes with default state #}
+  {% set inputClasses = baseClasses ~ ' ' ~ stateClasses.default %}
+  
+  <label for="{{ radioButton.id }}" class="{{ labelClasses }}">
+    <div class="{{ radioButtonContainerClasses }}">
+      <input 
+        type="radio" 
+        id="{{ radioButton.id }}" 
+        name="{{ radioButton.name }}"
+        value="{{ radioButton.value }}"
+        class="{{ inputClasses }}"
+        onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
+        onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'"
+        onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
+        onclick="this.checked ? this.className='{{ baseClasses }} {{ stateClasses.checked }}' : this.className='{{ baseClasses }} {{ stateClasses.default }}'"
+        {% if radioButton.disabled %}
+          disabled 
+          class="{{ baseClasses }} {% if radioButton.checked %}{{ stateClasses.disabledChecked }}{% else %}{{ stateClasses.disabled }}{% endif %}"
+        {% endif %}
+        {% if radioButton.checked %}checked{% endif %}
+        {% if radioButton.ariaLabel %}aria-label="{{ radioButton.ariaLabel }}"{% endif %}
+      />
+    </div>
+    <div>
+      <strong class="{{ labelTextClasses }}">
+        {{ radioButton.label }}
+      </strong>
+      {% if radioButton.description %}
+        <p class="{{ descriptionClasses }}">{{ radioButton.description }}</p>
+      {% endif %}
+    </div>
+  </label>
+{% endmacro %}
+
+
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/radio-button.njk" import renderRadioButton %}
+
+2. Call a specific radio button by its name
+{{ renderRadioButton({ id: "option1", datas: atoms.radioButtons }) }}
+
+3. Adding a new radio button to radioButtons.json
+{
+  "radioButtons": [
+    {
+      "id": "unique_id",
+      "name": "group_name",
+      "label": "Radio Label",
+      "value": "submission_value",
+      "checked": true,
+      "disabled": false,
+      "description": "Additional details about the option",
+      "ariaLabel": "Accessible label for screen readers"
+    }
+  ]
+}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

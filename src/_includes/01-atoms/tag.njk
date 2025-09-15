@@ -1,0 +1,109 @@
+{#
+=========================
+          TAG           
+=========================
+Tags atom component leveraging tags.json data structure.
+
+IMPORTANT NOTES:
+- Style variants come from the "variants" object in tags.json
+- Interactive tags are enabled by using isInteractive property or dataActiveTag parameter
+- Hover states are defined in the variants CSS classes
+- active-tag.js script is included in base.njk (no need to add it again)
+
+ACCESSIBILITY:
+- Uses role="status" or role="alert" when specified
+- Supports title attribute for additional context on hover
+- Includes optional visually-hidden text for screen readers
+- Keyboard support (Space/Enter keys) for interactive tags
+#}
+
+{% macro renderTag(options) %}
+  {# -- Initialize tagData as null before searching -- #}
+  {% set tagData = null %}
+  
+  {# -- Find tag in data collection -- #}
+  {% for tag in options.datas.tags %}
+    {% if tag.name == options.name %}
+      {% set tagData = tag %}
+    {% endif %}
+  {% endfor %}
+
+  {# -- Get global style that applies to all tags -- #}
+  {% set globalStyle = options.datas.globalStyle %}
+
+  {# -- Add styles for active tags and screen reader only content -- #}
+  {% if loop.first %}
+    <style>
+      .active-tag { {{ options.datas.activeTagStyle }} }
+      .sr-only { {{ options.datas.srOnlyStyle }} }
+    </style>
+  {% endif %}
+
+  {# -- Render tag if data was found -- #}
+  {% if tagData %}
+    {# -- Get variant-specific style or default to empty string if not found -- #}
+    {% set variantStyle = options.datas.variants[tagData.variant] | default('') %}
+    
+    {# -- Store title and screenReaderText values for easier access -- #}
+    {% set titleAttr = tagData.title %}
+    {% set screenReaderText = tagData.screenReaderText %}
+    
+    {# -- Determine if tag should be interactive -- #}
+    {% set isInteractive = options.dataActiveTag or tagData.isInteractive %}
+    
+    <span 
+      class="{{ globalStyle }} {{ variantStyle }}"
+      {% if isInteractive %}data-active-tag="true"{% endif %}
+      {% if tagData.role %}role="{{ tagData.role }}"{% endif %}
+      {% if titleAttr %}title="{{ titleAttr }}"{% endif %}
+    >
+      {{ tagData.text }}
+      {% if screenReaderText %}
+        <span class="sr-only">{{ screenReaderText }}</span>
+      {% endif %}
+    </span>
+    
+  {% else %}
+    {# -- Error message if tag not found in data collection -- #}
+    <span class="text-red-500">Tag not found: {{ options.name }}</span>
+  {% endif %}
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/tag.njk" import renderTag %}
+
+2. Call a specific tag by its name
+{{ renderTag({ name: "adventure", datas: atoms.tags }) }}
+
+3. Call an interactive tag by adding dataActiveTag parameter
+{{ renderTag({ name: "filter_sword", datas: atoms.tags, dataActiveTag: true }) }}
+
+4. Adding a new tag to tags.json
+{
+  "tags": [
+    {
+      "name": "new_tag_name",      (Required: unique identifier)
+      "text": "Your Tag Text",      (Required: visible text)
+      "variant": "default",         (Required: style variant from variants object)
+      "title": "Tooltip text",      (Optional: tooltip on hover)
+      "role": "status",             (Optional: ARIA role - status, alert, button, etc.)
+      "screenReaderText": "Text for screen readers", (Optional: additional context for accessibility)
+      "isInteractive": true         (Optional: make tag interactive/toggleable)
+    }
+  ]
+}
+
+5. Example: filtering content with interactive tags
+<div class="filters">
+  {{ renderTag({ name: "filter_sword", datas: atoms.tags, dataActiveTag: true }) }}
+  {{ renderTag({ name: "filter_bow", datas: atoms.tags, dataActiveTag: true }) }}
+  {{ renderTag({ name: "filter_staff", datas: atoms.tags, dataActiveTag: true }) }}
+</div>
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

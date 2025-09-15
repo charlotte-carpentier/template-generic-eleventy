@@ -1,0 +1,207 @@
+{#
+=========================
+        CHECKBOX         
+=========================
+Atom component for creating accessible checkbox inputs with labels.
+
+IMPORTANT NOTES:
+- Uses box.njk as its foundation for the actual checkbox visuals
+- Adds labels, descriptions, and group functionality
+- Can be used individually or as fieldset groups
+- Supports disabled states and checked states
+- Shows pointer cursor on hover for better UX on both the box and label
+
+ACCESSIBILITY:
+- Properly associates labels with inputs using for/id
+- Includes fieldset/legend for checkbox groups
+- Supports screen-reader-only group labels and descriptions
+- Provides description text for additional context
+- Includes aria-label support for improved screen reader experience
+- Supports required state and disabled state properties
+#}
+
+{% from "03-atoms/box.njk" import renderSingleBox %}
+
+{% macro renderCheckbox(options) %}
+  {# Flexible data handling #}
+  {% set checkboxData = options.datas %}
+  {% set boxStyles = options.boxStyles %}
+  
+  {# Group rendering logic #}
+  {% if options.group %}
+    {# Support for specifying a group name #}
+    {% if options.groupName %}
+      {# Render a specific group #}
+      {{ renderCheckboxGroup(
+        checkboxData[options.groupName], 
+        boxStyles, 
+        checkboxData[options.groupName].groupLabel or options.groupName, 
+        options.groupSrOnly or false
+      ) }}
+    {% else %}
+      {# Render all groups if no specific group is specified #}
+      {% for groupName, groupConfig in checkboxData %}
+        {% if groupConfig.checkboxes %}
+          {{ renderCheckboxGroup(
+            groupConfig, 
+            boxStyles, 
+            groupConfig.groupLabel or groupName, 
+            groupConfig.groupSrOnly or false
+          ) }}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  
+  {# Single checkbox rendering #}
+  {% else %}
+    {% set targetCheckbox = null %}
+    
+    {# Search across multiple potential group structures #}
+    {% for groupName, groupConfig in checkboxData %}
+      {% for checkbox in groupConfig.checkboxes %}
+        {% if checkbox.id == options.id %}
+          {% set targetCheckbox = checkbox %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+    
+    {# Fallback to legacy single group search #}
+    {% if not targetCheckbox and checkboxData.checkboxes %}
+      {% for checkbox in checkboxData.checkboxes %}
+        {% if checkbox.id == options.id %}
+          {% set targetCheckbox = checkbox %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    
+    {# Render single checkbox or show error #}
+    {% if targetCheckbox %}
+      {{ renderSingleCheckbox(targetCheckbox, checkboxData, boxStyles) }}
+    {% else %}
+      <span class="{{ checkboxData.errorClasses | default('text-red-500') }}">Checkbox not found: {{ options.id }}</span>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{% macro renderCheckboxGroup(groupConfig, boxStyles, groupLabel, groupSrOnly) %}
+  {# Default configuration with fallback values #}
+  {% set fieldsetClasses = groupConfig.fieldsetClasses | default('checkbox-group') %}
+  {% set legendClasses = groupConfig.legendClasses | default('font-medium text-gray-700 mb-3') %}
+  {% set groupContainerClasses = groupConfig.groupContainerClasses | default('space-y-2') %}
+  
+  <fieldset 
+    class="{{ fieldsetClasses }}" 
+    data-checkbox-group
+    {% if groupConfig.ariaGroupLabel %}aria-label="{{ groupConfig.ariaGroupLabel }}"{% endif %}
+  >
+    {% if groupLabel %}
+      <legend class="{{ legendClasses }} {% if groupSrOnly %}sr-only{% endif %}">
+        {{ groupLabel }}
+      </legend>
+    {% endif %}
+    
+    {% if groupConfig.groupDescription %}
+      <p class="text-sm text-gray-500 mb-3">{{ groupConfig.groupDescription }}</p>
+    {% endif %}
+    
+    <div class="{{ groupContainerClasses }}">
+      {% for checkbox in groupConfig.checkboxes %}
+        {{ renderSingleCheckbox(checkbox, groupConfig, boxStyles) }}
+      {% endfor %}
+    </div>
+  </fieldset>
+{% endmacro %}
+
+{% macro renderSingleCheckbox(checkbox, checkboxOptions, boxStyles) %}
+  {# Modified for better vertical alignment and accessibility #}
+  {% set labelClasses = checkboxOptions.labelClasses | default('flex items-center gap-4 cursor-pointer') %}
+  {% set labelTextClasses = checkboxOptions.labelTextClasses | default('font-medium text-gray-900 cursor-pointer') %}
+  {% set descriptionClasses = checkboxOptions.descriptionClasses | default('text-sm text-gray-500 cursor-pointer') %}
+  
+  {% set boxData = {
+    "id": checkbox.id,
+    "value": checkbox.value,
+    "checked": checkbox.checked | default(false),
+    "disabled": checkbox.disabled | default(false),
+    "ariaLabel": checkbox.ariaLabel | default(checkbox.label),
+    "required": checkbox.required | default(false)
+  } %}
+  
+  <label 
+    for="{{ checkbox.id }}" 
+    class="{{ labelClasses }}{% if checkbox.disabled %} cursor-not-allowed opacity-70{% endif %}" 
+    data-checkbox-label 
+    style="cursor: pointer;"
+  >
+    {# Wrapper div to control vertical alignment #}
+    <div class="flex-shrink-0">
+      {{ renderSingleBox(boxData, boxStyles) }}
+    </div>
+    
+    <div class="{% if checkbox.description %}flex flex-col justify-center{% endif %}" {% if not checkbox.disabled %}style="cursor: pointer;"{% endif %}>
+      <strong class="{{ labelTextClasses }}">
+        {{ checkbox.label }}
+        {% if checkbox.required %}
+          <span class="text-red-500 ml-1" aria-hidden="true">*</span>
+          <span class="sr-only">(required)</span>
+        {% endif %}
+      </strong>
+      {% if checkbox.description %}
+        <p class="{{ descriptionClasses }}" id="{{ checkbox.id }}-description">{{ checkbox.description }}</p>
+      {% endif %}
+    </div>
+  </label>
+{% endmacro %}
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+1. Import the macro at the top of your page
+{% from "03-atoms/checkbox.njk" import renderCheckbox %}
+
+2. Call a specific checkbox by its ID
+{{ renderCheckbox({ 
+   id: "charisma", 
+   datas: atoms.checkboxes,
+   boxStyles: atoms.boxes 
+}) }}
+
+3. Render a specific checkbox group
+{{ renderCheckbox({ 
+   group: true, 
+   groupName: "rpgStyles",
+   datas: atoms.checkboxes,
+   boxStyles: atoms.boxes 
+}) }}
+
+4. Render all checkbox groups
+{{ renderCheckbox({ 
+   group: true, 
+   datas: atoms.checkboxes,
+   boxStyles: atoms.boxes 
+}) }}
+
+5. Adding a new checkbox group to checkboxes.json
+{
+  "newGameOptions": {
+    "groupLabel": "New Game Features",
+    "groupDescription": "Optional features to enhance your gameplay",
+    "ariaGroupLabel": "Additional game features options",
+    "checkboxes": [
+      {
+        "id": "difficulty_mode",
+        "label": "Advanced Difficulty Mode",
+        "value": "advanced_difficulty",
+        "description": "Unlock extreme challenge settings",
+        "ariaLabel": "Enable advanced difficulty settings",
+        "required": false,
+        "disabled": false
+      }
+    ]
+  }
+}
+
+May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+#}

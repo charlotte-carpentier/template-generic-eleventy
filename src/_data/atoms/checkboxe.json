@@ -1,0 +1,85 @@
+{
+    "groupLabel": "Your RPG Combat Style",
+    "fieldsetClasses": "checkbox-group",
+    "legendClasses": "font-medium text-gray-700 mb-3",
+    "groupContainerClasses": "space-y-2",
+    "labelClasses": "flex items-start gap-4 cursor-pointer",
+    "labelTextClasses": "font-medium text-gray-900 cursor-pointer", 
+    "descriptionClasses": "text-sm text-gray-500 cursor-pointer",
+    "errorClasses": "text-red-500",
+    "rpgStyles": {
+        "groupLabel": "RPG Combat Styles",
+        "groupDescription": "Select your preferred combat approach for your character",
+        "ariaGroupLabel": "Combat style selection options",
+        "checkboxes": [
+            {
+                "id": "charisma",
+                "label": "I put all my skill points in charisma.",
+                "value": "charisma",
+                "description": "Persuasion is my ultimate weapon",
+                "ariaLabel": "Choose charisma as combat style",
+                "required": false,
+                "disabled": false
+            },
+            {
+                "id": "loot_hoarder", 
+                "label": "I loot everything... even useless junk.",
+                "value": "loot-hoarder", 
+                "description": "You never know when it might be useful",
+                "ariaLabel": "Choose loot hoarder as game style",
+                "required": false,
+                "disabled": false
+            }
+        ]
+    },
+    "gamePreferences": {
+        "groupLabel": "Game Preferences", 
+        "groupDescription": "Configure how you want to experience the game",
+        "ariaGroupLabel": "Game settings and preferences",
+        "checkboxes": [
+            {
+                "id": "hardcore_mode",
+                "label": "Hardcore Mode",
+                "value": "hardcore",
+                "description": "Maximum challenge, one life only",
+                "ariaLabel": "Enable hardcore mode with permadeath",
+                "required": false,
+                "disabled": false
+            },
+            {
+                "id": "auto_save",
+                "label": "Automatic Saving", 
+                "value": "auto_save",
+                "description": "Never lose progress again",
+                "ariaLabel": "Enable automatic game saving",
+                "required": false,
+                "disabled": false
+            }
+        ]
+    },
+    "characterCustomization": {
+        "groupLabel": "Character Customization",
+        "groupDescription": "Personalize your character's appearance and story",
+        "ariaGroupLabel": "Character customization options",
+        "checkboxes": [
+            {
+                "id": "custom_appearance",
+                "label": "Advanced Appearance Customization",
+                "value": "custom_appearance", 
+                "description": "Unlock all character creation options",
+                "ariaLabel": "Enable advanced appearance customization features",
+                "required": false,
+                "disabled": false
+            },
+            {
+                "id": "unique_backstory",
+                "label": "Generate Unique Backstory",
+                "value": "unique_backstory",
+                "description": "Create a personalized character history",
+                "ariaLabel": "Enable unique character backstory generation",
+                "required": false,
+                "disabled": false
+            }
+        ]
+    }
+  }
