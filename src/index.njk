@@ -1,35 +1,9 @@
---- 
-permalink: "/" 
-layout: '04-core/base.njk' 
+---
+title: "Accueil"
+description: "Page d'accueil du site"
+layout: "04-core/base.njk"
+permalink: "/"
 ---
 
 <!-- MAINTENANCE: Uncomment to activate -->
 <!-- <script>window.location.replace('/maintenance/');</script> -->
-
-{% from "03-organisms/home-layout.njk" import renderHomeLayout %}
-
-{{ renderHomeLayout({ 
-    avatar_name: "charlotte_main",
-    tab_sections_name: "charlotte_main",
-    avatar_datas: organisms["avatar-card"]["avatar-cards"],
-    skills_datas: organisms["skills-card"]["skills-cards"],
-    tab_sections_datas: organisms["tab-sections"]["tab-sections"],
-    tab_menu_datas: molecules["tab-menu"].tab_menus,
-    image_datas: atoms.image.images,
-    typography_datas: atoms.typography.texts,
-    button_datas: atoms.button.buttons,
-    tooltip_datas: atoms.tooltip.tooltips,
-    caption_datas: molecules.caption.captions,
-    icon_datas: atoms.icon.icons,
-    link_datas: atoms.link.links,
-    portfolio_datas: organisms["section-portfolio"].sections,
-    timeline_datas: organisms["section-timeline"].sections,
-    contact_datas: organisms["section-contact"].sections,
-    content_block_datas: molecules["content-block"]["content-blocks"],
-    contact_block_datas: molecules["contact-block"].contact_blocks,
-    list_form_datas: molecules["list-form"]["list-forms"],
-    progress_bar_datas: molecules["progress-bar"]["progress-bars"],
-    radio_datas: atoms.radio.radios,
-    input_datas: atoms.input.inputs,
-    buttonDatas: atoms.button.buttons
-}) }}
