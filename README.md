@@ -18,21 +18,21 @@ Built on JavaScript, HTML5, and CSS3.
 
 ```text
 template-generic-eleventy/
-├── docs/                     # Project documentation
-├── public/                   # Build output (CSS, assets, etc.)
-├── scripts/                  # Custom scripts (e.g. sprite generation)
-├── src/                      # Source files
-│   ├── _data/                # Eleventy data files
+├── bin/                          # Custom scripts (e.g. sprite generation)
+├── docs/                         # Project documentation
+├── public/                       # Build output (CSS, assets, etc.)
+├── src/                          # Source files
+│   ├── _data/                    # Eleventy data files
 │   │   ├── atoms/
 │   │   ├── molecules/
 │   │   ├── organisms/
-│   │   └── site.json        # Global/shared data
-│   ├── _includes/            # Nunjucks templates
+│   │   └── site.json             # Global/shared data
+│   ├── _includes/                # Nunjucks templates
 │   │   ├── 01-atoms/
 │   │   ├── 02-molecules/
 │   │   ├── 03-organisms/
-│   │   └── 04-core/          # Layouts and core templates
-│   ├── admin/                # Decap CMS configuration
+│   │   └── 04-core/              # Layouts and core templates
+│   ├── admin/                    # Decap CMS configuration
 │   ├── assets/                   # Static assets served as-is
 │   │   ├── downloads/            # Downloadable files (e.g. PDFs, CVs, whitepapers)
 │   │   ├── fonts/                # Webfonts
@@ -52,15 +52,15 @@ template-generic-eleventy/
 │   │   │   └── main.js           # Global entry point
 │   │   └── styles/               # Global CSS/Tailwind entrypoint
 │   │       └── input.css         # Main stylesheet (imports + @theme + custom)
-│   ├── collections/          # Decap CMS collections (blog, home, contact...)
-│   ├── index.njk             # Main index template
-│   ├── input.css             # TailwindCSS entry point
+│   ├── collections/              # Decap CMS collections (blog, home, contact...)
+│   ├── index.njk                 # Main index template
+│   ├── input.css                 # TailwindCSS entry point
 │   ├── robots.txt
 │   └── sitemap.xml
-├── .eleventy.js              # Eleventy configuration
-├── netlify.toml              # Netlify / Decap deployment configuration
-├── postcss.config.cjs        # PostCSS configuration
-├── package.json              # Dependencies and scripts
+├── .eleventy.js                  # Eleventy configuration
+├── netlify.toml                  # Netlify / Decap deployment configuration
+├── postcss.config.cjs            # PostCSS configuration
+├── package.json                  # Dependencies and scripts
 ├── LICENSE
 └── README.md
 ```
