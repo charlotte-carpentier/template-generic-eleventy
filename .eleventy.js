@@ -9,10 +9,13 @@ export default function(eleventyConfig) {
   // --------------------------
   // Anything here is copied as-is to the output folder
   [
-    './src/assets',   // images, fonts, icons
-    './src/admin',    // Netlify CMS admin files
-    './src/docs',     // documentation files
-    './src/js',       // custom JS scripts
+    './src/assets/fonts',      // Project and vendor fonts
+    './src/assets/icons',      // Favicons, UI icons, sprites
+    './src/assets/images',     // Images (raw)
+    './src/assets/downloads',  // PDFs, CVs, other downloadable files
+    './src/assets/scripts',    // JS files (no bundler yet)
+    './src/admin',             // Netlify CMS admin files
+    './src/docs',              // Documentation files
   ].forEach(path => eleventyConfig.addPassthroughCopy(path));
 
   // Passthrough for single files
