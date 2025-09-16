@@ -33,17 +33,25 @@ template-generic-eleventy/
 │   │   ├── 03-organisms/
 │   │   └── 04-core/          # Layouts and core templates
 │   ├── admin/                # Decap CMS configuration
-│   ├── assets/               # Static assets
-│   │   ├── downloads/        # Downloadable files (e.g. CVs)
-│   │   ├── icons/            # Icons and sprites, including favicon
-│   │   ├── images/           # Images
-│   │   ├── js/               # JavaScript files
-│   │   │   ├── main.js       # Global JS
-│   │   │   ├── utils/        # Reusable helper scripts
-│   │   │   └── components/   # Component-specific JS
-│   │   │       ├── 01-atoms/
-│   │   │       ├── 02-molecules/
-│   │   │       └── 03-organisms/
+│   ├── assets/                   # Static assets served as-is
+│   │   ├── downloads/            # Downloadable files (e.g. PDFs, CVs, whitepapers)
+│   │   ├── fonts/                # Webfonts
+│   │   │   ├── custom/           # Project-specific fonts
+│   │   │   └── vendor/           # Third-party fonts (e.g. Google, Adobe)
+│   │   ├── icons/                # Icons and sprites
+│   │   │   ├── favicon/          # Favicons and app icons (per MDN spec)
+│   │   │   ├── interface/        # UI pictograms
+│   │   │   └── sprites/          # Icon spritesheets (SVG/PNG)
+│   │   ├── images/               # Raster and vector images (not icons)
+│   │   ├── scripts/              # JavaScript
+│   │   │   ├── components/       # Component-specific JS (organized by OMA)
+│   │   │   │   ├── 01-atoms/     # Atomic-level scripts
+│   │   │   │   ├── 02-molecules/ # Molecule-level scripts
+│   │   │   │   └── 03-organisms/ # Organism-level scripts
+│   │   │   ├── utils/            # Reusable helper scripts (aka helpers)
+│   │   │   └── main.js           # Global entry point
+│   │   └── styles/               # Global CSS/Tailwind entrypoint
+│   │       └── input.css         # Main stylesheet (imports + @theme + custom)
 │   ├── collections/          # Decap CMS collections (blog, home, contact...)
 │   ├── index.njk             # Main index template
 │   ├── input.css             # TailwindCSS entry point
@@ -98,7 +106,7 @@ npm run build:css
 npm run watch:css
 ```
 
-Processes `src/input.css` via PostCSS, TailwindCSS, Autoprefixer, and CSSNano.
+Processes `src/assets/styles/input.css` via PostCSS, TailwindCSS, Autoprefixer, and CSSNano.
 
 ### Sprite generation
 

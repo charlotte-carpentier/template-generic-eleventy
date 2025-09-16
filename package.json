@@ -6,8 +6,8 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "build:css": "postcss src/input.css -o public/output.css",
-    "watch:css": "postcss src/input.css -o public/output.css -w",
+    "build:css": "postcss src/assets/styles/input.css -o public/output.css",
+    "watch:css": "postcss src/assets/styles/input.css -o public/output.css -w",
     "start": "npx concurrently \"npm run watch:css\" \"eleventy --serve --watch\"",
     "build": "cross-env NODE_ENV=production npm run build:css && eleventy",
     "sprites": "./scripts/generate-sprite.sh"
