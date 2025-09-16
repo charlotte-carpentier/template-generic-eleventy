@@ -39,16 +39,16 @@ ACCESSIBILITY:
     
     {# -- Determine size class based on content length -- #}
     {% set contentLength = chipData.text | string | length %}
-    {% set sizeClass = "h-6 w-6 text-xs" %}
+    {% set sizeClass = "" %}
     
     {% if contentLength > 2 %}
-      {% set sizeClass = "min-h-10 min-w-10 px-2 py-1 text-sm" %}
+      {% set sizeClass = "" %}
     {% elif contentLength > 1 %}
-      {% set sizeClass = "h-8 w-8 text-sm" %}
+      {% set sizeClass = "" %}
     {% endif %}
     
     <span 
-      class="inline-flex items-center justify-center rounded-full text-white {{ globalStyle }} {{ variantStyle }} {{ sizeClass }} {{ chipData.classes | default('') }}" 
+      class="{{ globalStyle }} {{ variantStyle }} {{ sizeClass }} {{ chipData.classes | default('') }}" 
       role="status"
       data-chip-notification="{{ chipData.name }}"
       {% if chipData.ariaLabel %}aria-label="{{ chipData.ariaLabel }}"{% endif %}
@@ -57,7 +57,7 @@ ACCESSIBILITY:
     </span>
   {% else %}
     {# -- Error message if chip not found in data collection -- #}
-    <span class="text-red-500">Chip notification not found: {{ options.name }}</span>
+    <span>Chip notification not found: {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
 

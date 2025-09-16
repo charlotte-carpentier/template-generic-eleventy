@@ -45,24 +45,24 @@
                       class: lockup.class | default('')
                     }) }}
                   {% else %}
-                    <div class="lockup-placeholder p-2 border border-gray-200 rounded">
+                    <div>
                       {% if availableLockup.type == "label-value" %}
-                        <div class="text-gray-600 text-sm font-semibold">
+                        <div>
                           {{ availableLockup.label.text | default('Label') }}
                         </div>
-                        <div class="text-gray-900">
+                        <div>
                           {{ availableLockup.value.text | default('Value') }}
                         </div>
                       {% elif availableLockup.type == "value-legend" %}
-                        <div class="text-gray-900">
+                        <div>
                           {{ availableLockup.value.text | default('Value') }}
                         </div>
-                        <div class="text-gray-500 text-sm">
+                        <div>
                           {{ availableLockup.legend.text | default('Legend') }}
                         </div>
                       {% elif availableLockup.type == "block-content" %}
-                        <div class="text-gray-800 font-medium">Block content</div>
-                        <div class="text-gray-600">
+                        <div>Block content</div>
+                        <div>
                           {{ availableLockup.content.text | default('Content') }}
                         </div>
                       {% endif %}
@@ -73,14 +73,14 @@
               {% endfor %}
               
               {% if not lockupFound %}
-                <div class="text-red-500">Lockup "{{ lockup.name }}" not found</div>
+                <div>Lockup "{{ lockup.name }}" not found</div>
               {% endif %}
             {% else %}
-              <div class="text-yellow-500">No lockups data provided</div>
+              <div>No lockups data provided</div>
               
               {# Debug placeholder to show what we have instead #}
-              <div class="bg-gray-100 p-2 my-1 rounded text-xs">
-                <pre class="whitespace-pre-wrap">Lockup: {{ lockup | dump(2) }}</pre>
+              <div>
+                <pre>Lockup: {{ lockup | dump(2) }}</pre>
               </div>
             {% endif %}
           </div>
@@ -88,7 +88,7 @@
       </div>
     </div>
   {% else %}
-    <span class="text-red-500">List-value data not found</span>
+    <span>List-value data not found</span>
   {% endif %}
 {% endmacro %}
 

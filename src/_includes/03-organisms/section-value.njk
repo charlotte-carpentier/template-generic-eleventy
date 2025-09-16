@@ -71,14 +71,14 @@
           {% endif %}
           
           {% if sectionData.description %}
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto mt-4">{{ sectionData.description }}</p>
+            <p>{{ sectionData.description }}</p>
           {% endif %}
         </div>
         
         {# Cards container #}
         <div class="{{ cardsContainerStyle }}">
           {% for card in sectionData.cards %}
-            <div class="card-wrapper">
+            <div>
               {{ renderCard({
                 name: card.name,
                 datas: options.cards,
@@ -95,7 +95,7 @@
       </div>
     </section>
   {% else %}
-    <span class="text-red-500">Section value data not found</span>
+    <span>Section value data not found</span>
   {% endif %}
 {% endmacro %}
 

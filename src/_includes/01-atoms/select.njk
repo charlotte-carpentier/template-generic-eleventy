@@ -24,10 +24,10 @@ Component that renders select dropdown elements with consistent styling
     {# Get variant-specific style or default to empty string if not found #}
     {% set variantStyle = options.datas.variants[selectData.variant] | default('') %}
     
-    <div class="mt-6 mb-6 mx-auto relative">
+    <div>
       <select 
         name="{{ selectData.name }}" 
-        class="{{ globalStyle }} {{ variantStyle }} appearance-none pr-10"
+        class="{{ globalStyle }} {{ variantStyle }}"
         {% if selectData.variant == 'disabled' %}disabled{% endif %}
       >
         {# Render all options from the select data #}
@@ -41,15 +41,15 @@ Component that renders select dropdown elements with consistent styling
         {% endfor %}
       </select>
       {# Add dropdown arrow icon #}
-      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
         </svg>
       </div>
     </div>
   {% else %}
     {# Display error message if select not found #}
-    <span class="text-red-500">Select not found: {{ options.name }}</span>
+    <span>Select not found: {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
 

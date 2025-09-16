@@ -11,8 +11,8 @@
     {% set segmentStyle = options.datas.segmentStyle %}
 
     {# Define default icon styles if not provided #}
-    {% set iconBeforeStyle = options.datas.iconBeforeStyle | default('w-4 h-4') %}
-    {% set iconAfterStyle = options.datas.iconAfterStyle | default('w-4 h-4') %}
+    {% set iconBeforeStyle = options.datas.iconBeforeStyle | default('') %}
+    {% set iconAfterStyle = options.datas.iconAfterStyle | default('') %}
 
     {% set segmentedControlData = null %}
     {% if options.name %}
@@ -53,7 +53,7 @@
         {% if segment.isActive %}
           {% set baseStyle = segmentStyle.active %}
           {% set hoverStyle = segmentStyle.active %}
-          {% set focusStyle = segmentStyle['active-focus'] %}
+          {% set focusStyle = segmentStyle[''] %}
         {% else %}
           {% set baseStyle = segmentStyle.default %}
           {% set hoverStyle = segmentStyle.hover %}
@@ -65,37 +65,37 @@
             .buttons
             .sizes[buttonData.size] %}
 
-          <button id="{{ segmentedControlData.name }}-{{ segment.name }}" role="tab" aria-selected="{{ segment.isActive | string }}" class="{{ positionClass }} {{ buttonSize }} {{ baseStyle }} inline-flex items-center justify-center" onmouseover="this.className='{{ positionClass }} {{ buttonSize }} {{ hoverStyle }} inline-flex items-center justify-center'" onmouseout="this.className='{{ positionClass }} {{ buttonSize }} {{ baseStyle }} inline-flex items-center justify-center'" onfocus="this.className='{{ positionClass }} {{ buttonSize }} {{ focusStyle }} inline-flex items-center justify-center'" onblur="this.className='{{ positionClass }} {{ buttonSize }} {{ baseStyle }} inline-flex items-center justify-center'">
+          <button id="{{ segmentedControlData.name }}-{{ segment.name }}" role="tab" aria-selected="{{ segment.isActive | string }}" class="{{ positionClass }} {{ buttonSize }} {{ baseStyle }}" onmouseover="this.className='{{ positionClass }} {{ buttonSize }} {{ hoverStyle }}'" onmouseout="this.className='{{ positionClass }} {{ buttonSize }} {{ baseStyle }}'" onfocus="this.className='{{ positionClass }} {{ buttonSize }} {{ focusStyle }}'" onblur="this.className='{{ positionClass }} {{ buttonSize }} {{ baseStyle }}'">
 
             {% if buttonData.iconBefore %}
-              <span class="icon-before mr-2 inline-flex items-center">
-                <img src="{{ buttonData.iconBefore }}" alt="" aria-hidden="true" class="w-4 h-4" {# Preserve icon size #}/>
+              <span class="">
+                <img src="{{ buttonData.iconBefore }}" alt="" aria-hidden="true"/>
               </span>
             {% endif %}
 
             {% if buttonData.text %}
-              <span class="button-text">{{ buttonData.text }}</span>
+              <span class="">{{ buttonData.text }}</span>
             {% elif buttonData.number %}
-              <span class="button-number">{{ buttonData.number }}</span>
+              <span class="">{{ buttonData.number }}</span>
             {% else %}
-              <span class="button-text">{{ segment.name | replace('_', ' ') }}</span>
+              <span class="">{{ segment.name | replace('_', ' ') }}</span>
             {% endif %}
 
             {% if buttonData.iconAfter %}
-              <span class="icon-after ml-2 inline-flex items-center">
-                <img src="{{ buttonData.iconAfter }}" alt="" aria-hidden="true" class="w-4 h-4" {# Preserve icon size #}/>
+              <span class="">
+                <img src="{{ buttonData.iconAfter }}" alt="" aria-hidden="true"/>
               </span>
             {% endif %}
           </button>
         {% else %}
-          <button id="{{ segmentedControlData.name }}-{{ segment.name }}" role="tab" aria-selected="{{ segment.isActive | string }}" class="{{ positionClass }} {{ baseStyle }} px-4 py-2 inline-flex items-center justify-center" onmouseover="this.className='{{ positionClass }} {{ hoverStyle }} px-4 py-2 inline-flex items-center justify-center'" onmouseout="this.className='{{ positionClass }} {{ baseStyle }} px-4 py-2 inline-flex items-center justify-center'" onfocus="this.className='{{ positionClass }} {{ focusStyle }} px-4 py-2 inline-flex items-center justify-center'" onblur="this.className='{{ positionClass }} {{ baseStyle }} px-4 py-2 inline-flex items-center justify-center'">
-            <span class="button-text">{{ segment.name | replace('_', ' ') }}</span>
+          <button id="{{ segmentedControlData.name }}-{{ segment.name }}" role="tab" aria-selected="{{ segment.isActive | string }}" class="{{ positionClass }} {{ baseStyle }}" onmouseover="this.className='{{ positionClass }} {{ hoverStyle }}'" onmouseout="this.className='{{ positionClass }} {{ baseStyle }}'" onfocus="this.className='{{ positionClass }} {{ focusStyle }}'" onblur="this.className='{{ positionClass }} {{ baseStyle }}'">
+            <span class="">{{ segment.name | replace('_', ' ') }}</span>
           </button>
         {% endif %}
       {% endfor %}
     </div>
   {% else %}
-    <span class="text-red-500">Segmented control data not found</span>
+    <span>Segmented control data not found</span>
   {% endif %}
 {% endmacro %}
 

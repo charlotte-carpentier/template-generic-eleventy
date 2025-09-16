@@ -6,7 +6,7 @@
 {% macro renderTypography(option) %}
   {# Check if datas is provided #}
   {% if not option.datas %}
-    <span class="text-red-500">Error: No typography configuration provided</span>
+    <span>Error: No typography configuration provided</span>
   {% else %}
     {# Retrieve typography configuration #}
     {% set typographyConfig = option.datas %}
@@ -22,12 +22,12 @@
 
     {# Fallback if typography not found #}
     {% if not typographyData %}
-      <span class="text-red-500">Typography not found: {{ typographyName }}</span>
+      <span>Typography not found: {{ typographyName }}</span>
     {% else %}
       {# Build CSS classes - Using existing text classes from input.css #}
-      {% set tag = option.tag | default(typographyData.tag) | default('p') %}
-      {% set variant = typographyData.variant | default('p') %}
-      {% set cssClasses = 'text-' ~ variant ~ ' max-w-prose' %}
+      {% set tag = option.tag | default(typographyData.tag) | default('') %}
+      {% set variant = typographyData.variant | default('') %}
+      {% set cssClasses = 'text-' ~ variant %}
       
       {# Security: Add rel="noopener noreferrer" to external links with target="_blank" #}
       {% set secureContent = typographyData.text %}
@@ -37,23 +37,23 @@
       
       {# Render the typography with specified tag #}
       {% if tag == 'h1' %}
-        <h1 class="{{ cssClasses }} leading-tight">{{ secureContent | safe }}</h1>
+        <h1 class="{{ cssClasses }}">{{ secureContent | safe }}</h1>
       {% elif tag == 'h2' %}
-        <h2 class="{{ cssClasses }} leading-tight">{{ secureContent | safe }}</h2>
+        <h2 class="{{ cssClasses }}">{{ secureContent | safe }}</h2>
       {% elif tag == 'h3' %}
-        <h3 class="{{ cssClasses }} leading-tight">{{ secureContent | safe }}</h3>
+        <h3 class="{{ cssClasses }}">{{ secureContent | safe }}</h3>
       {% elif tag == 'h4' %}
-        <h4 class="{{ cssClasses }} leading-tight">{{ secureContent | safe }}</h4>
+        <h4 class="{{ cssClasses }}">{{ secureContent | safe }}</h4>
       {% elif tag == 'h5' %}
-        <h5 class="{{ cssClasses }} leading-tight">{{ secureContent | safe }}</h5>
+        <h5 class="{{ cssClasses }}">{{ secureContent | safe }}</h5>
       {% elif tag == 'h6' %}
-        <h6 class="{{ cssClasses }} leading-tight">{{ secureContent | safe }}</h6>
+        <h6 class="{{ cssClasses }}">{{ secureContent | safe }}</h6>
       {% elif tag == 'span' %}
         <span class="{{ cssClasses }}">{{ secureContent | safe }}</span>
       {% elif tag == 'small' %}
         <small class="{{ cssClasses }}">{{ secureContent | safe }}</small>
       {% else %}
-        <p class="{{ cssClasses }} leading-relaxed">{{ secureContent | safe }}</p>
+        <p class="{{ cssClasses }}">{{ secureContent | safe }}</p>
       {% endif %}
     {% endif %}
   {% endif %}

@@ -32,7 +32,7 @@ Component that renders vector images with consistent styling
       />
     {% else %}
       {# Display error message if vector not found #}
-      <span class="text-red-500">Vector not found: {{ options.name }}</span>
+      <span>Vector not found: {{ options.name }}</span>
     {% endif %}
   {% else %}
     {# Direct vector creation path when name is not provided #}

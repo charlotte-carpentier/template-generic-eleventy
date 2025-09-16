@@ -56,7 +56,7 @@
           
           {% if imageData %}
             {% set imgSize = options.images.variants[imageData.size] | default('') %}
-            <div class="flex-shrink-0 mr-4">
+            <div>
               <img 
                 src="{{ imageData.src }}" 
                 alt="{{ imageData.alt }}" 
@@ -67,7 +67,7 @@
         {% endif %}
         
         {# Content column #}
-        <div class="flex-grow">
+        <div>
           {# Render heading if present #}
           {% if lockupData.heading and options.headings %}
             {% set headingData = null %}
@@ -94,7 +94,7 @@
       {% endif %}
     </div>
   {% else %}
-    <span class="text-red-500">Lockup data not found</span>
+    <span>Lockup data not found</span>
   {% endif %}
 {% endmacro %}
 

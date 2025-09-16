@@ -17,7 +17,7 @@
     {% endif %}
 
     {% if not dropzoneData %}
-      <span class="text-red-500">Dropzone upload not found:
+      <span>Dropzone upload not found:
         {{ options.name }}</span>
     {% else %}
       {% set globalStyle = options.datas.globalStyle %}
@@ -54,7 +54,7 @@
         {% endfor %}
       {% endif %}
 
-      <div class="dropzone-upload-container {{ globalStyle }}" data-dropzone="{{ options.name }}">
+      <div class="{{ globalStyle }}" data-dropzone="{{ options.name }}">
         {# Render heading based on headingData if available #}
         {% if headingData %}
           {% set headingLevel = headingData.level %}
@@ -84,7 +84,7 @@
           <h4 class="{{ options.datas.defaultHeadingClass|default('') }}">{{ options.datas.defaultHeadingText|default('Upload file') }}</h4>
         {% endif %}
 
-        <div class="dropzone-area {{ options.datas.dropzoneAreaClass }}" tabindex="0" role="button" aria-label="Upload file by dropping it here or by clicking">
+        <div class="{{ options.datas.dropzoneAreaClass }}" tabindex="0" role="button" aria-label="Upload file by dropping it here or by clicking">
           {% if iconData %}
             <span data-svg-src="{{ iconData.path }}" class="{{ iconStyle }}" aria-hidden="true"></span>
           {% endif %}
@@ -93,8 +93,8 @@
           {% if dropzoneData.style == "loading" %}
             <div class="{{ options.datas.spinnerClass }}" aria-hidden="true">
               <svg class="{{ options.datas.spinnerSvgClass }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
             </div>
           {% endif %}
@@ -136,7 +136,7 @@
           } %}
           {% set buttonClasses = baseClasses ~ " " ~ stateClasses.default %}
 
-          <button type="button" class="{{ baseClasses }} {{ stateClasses.disabled }} flex items-center justify-center" onfocus="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center'; this.setAttribute('data-focused', 'true'); }" onblur="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.default }} flex items-center justify-center'; this.removeAttribute('data-focused'); }" onmouseover="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center' : '{{ baseClasses }} {{ stateClasses.hover }} flex items-center justify-center'; }" onmouseout="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center' : '{{ baseClasses }} {{ stateClasses.default }} flex items-center justify-center'; }" onmousedown="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.active }} flex items-center justify-center'; }" onmouseup="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }} flex items-center justify-center' : '{{ baseClasses }} {{ stateClasses.hover }} flex items-center justify-center'; }" {% if dropzoneData.style == "loading" %} disabled="disabled" {% endif %}>
+          <button type="button" class="{{ baseClasses }} {{ stateClasses.disabled }}" onfocus="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.focus }}'; this.setAttribute('data-focused', 'true'); }" onblur="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.default }}'; this.removeAttribute('data-focused'); }" onmouseover="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }}' : '{{ baseClasses }} {{ stateClasses.hover }}'; }" onmouseout="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }}' : '{{ baseClasses }} {{ stateClasses.default }}'; }" onmousedown="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.active }}'; }" onmouseup="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }}' : '{{ baseClasses }} {{ stateClasses.hover }}'; }" {% if dropzoneData.style == "loading" %} disabled="disabled" {% endif %}>
             {{ buttonData.text }}
           </button>
         {% else %}
@@ -166,11 +166,11 @@
         </div>
 
         <!-- Hidden file input -->
-        <input type="file" id="file-{{ dropzoneData.name }}" class="hidden" accept="{{ dropzoneData.supportedFormats|replace(' ', '')|lower }}" aria-hidden="true" tabindex="-1">
+        <input type="file" id="file-{{ dropzoneData.name }}" accept="{{ dropzoneData.supportedFormats|replace(' ', '')|lower }}" aria-hidden="true" tabindex="-1">
       </div>
     {% endif %}
   {% else %}
-    <span class="text-red-500">No dropzone upload data provided</span>
+    <span>No dropzone upload data provided</span>
   {% endif %}
 {% endmacro %}
 

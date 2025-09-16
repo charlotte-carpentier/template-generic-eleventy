@@ -30,7 +30,7 @@
     <section class="{{ globalStyle }} {{ variant }} {{ options.class | default('') }}">
       <div class="{{ sectionStyles.container }}">
         {# Mobile layout (flex column) #}
-        <div class="md:hidden">
+        <div class="">
           {# Heading first in mobile #}
           {% if sectionData.heading and options.headings %}
             {{ renderHeading({
@@ -49,7 +49,7 @@
           
           {# Content #}
           {% if sectionData.content %}
-            <div class="mt-4">
+            <div class="">
               {{ sectionData.content }}
             </div>
           {% endif %}
@@ -61,7 +61,7 @@
                 {{ renderButton({
                   name: sectionData.primaryButton,
                   datas: options.buttons,
-                  class: 'mr-4'
+                  class: ''
                 }) }}
               {% endif %}
               
@@ -76,7 +76,7 @@
         </div>
         
         {# Desktop layout (two columns) #}
-        <div class="hidden md:flex {{ sectionStyles.contentWrapper }}">
+        <div class="{{ sectionStyles.contentWrapper }}">
           {# Left column: Super Heading, content and buttons #}
           <div class="{{ sectionStyles.textContent }}">
             {# Super Heading #}
@@ -89,7 +89,7 @@
             
             {# Content #}
             {% if sectionData.content %}
-              <div class="mt-4">
+              <div class="">
                 {{ sectionData.content }}
               </div>
             {% endif %}
@@ -101,7 +101,7 @@
                   {{ renderButton({
                     name: sectionData.primaryButton,
                     datas: options.buttons,
-                    class: 'mr-4'
+                    class: ''
                   }) }}
                 {% endif %}
                 
@@ -122,7 +122,7 @@
               {{ renderHeading({
                 name: sectionData.heading,
                 datas: options.headings,
-                class: "md:text-5xl"
+                class: ""
               }) }}
             {% endif %}
             
@@ -135,7 +135,7 @@
       </div>
     </section>
   {% else %}
-    <span class="text-red-500">Section About data not found</span>
+    <span class="">Section About data not found</span>
   {% endif %}
 {% endmacro %}
 

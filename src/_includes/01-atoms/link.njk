@@ -6,7 +6,7 @@
 {% macro renderLink(option) %}
  {# Check if datas is provided #}
  {% if not option.datas %}
-   <span class="text-red-500">Error: No link configuration provided</span>
+   <span>Error: No link configuration provided</span>
  {% else %}
    {# Retrieve link configuration #}
    {% set linksConfig = option.datas %}
@@ -22,21 +22,21 @@
 
    {# Fallback if link not found #}
    {% if not linkData %}
-     <span class="text-red-500">Link not found: {{ linkName }}</span>
+     <span>Link not found: {{ linkName }}</span>
    {% else %}
      {# Build CSS classes - Using base + variant classes from input.css #}
-     {% set variant = linkData.variant | default('external') %}
+     {% set variant = linkData.variant | default('') %}
      {% set cssClasses = 'link link--' ~ variant %}
      
      {# Add responsive font size classes based on variant #}
-     {% if variant == 'nav' %}
-       {% set cssClasses = cssClasses ~ ' text-h2-mobile sm:text-h2' %}
-     {% elif variant == 'tab' %}
-       {% set cssClasses = cssClasses ~ ' text-code-mobile sm:text-code' %}
-     {% elif variant == 'external' %}
-       {% set cssClasses = cssClasses ~ ' text-p-mobile sm:text-p' %}
-     {% elif variant == 'portfolio-external' %}
-       {% set cssClasses = cssClasses ~ ' text-p-mobile sm:text-p font-bold' %}
+     {% if variant == '' %}
+       {% set cssClasses = cssClasses ~ '' %}
+     {% elif variant == '' %}
+       {% set cssClasses = cssClasses ~ '' %}
+     {% elif variant == '' %}
+       {% set cssClasses = cssClasses ~ '' %}
+     {% elif variant == '' %}
+       {% set cssClasses = cssClasses ~ '' %}
      {% endif %}
      
      {# Enhanced accessibility attributes #}
@@ -50,7 +50,7 @@
      {# Render the link #}
      <a 
        href="{{ linkData.href }}" 
-       class="{{ cssClasses }} transition-colors duration-200 outline-none cursor-pointer focus-visible:outline-2 focus-visible:outline-cc-green-dark focus-visible:outline-offset-2 disabled:opacity-60 disabled:cursor-not-allowed disabled:pointer-events-none"
+       class="{{ cssClasses }}"
        {% if linkData.target %}target="{{ linkData.target }}"{% endif %}
        {% if linkData.download %}download{% endif %}
        {% if linkData.rel %}rel="{{ linkData.rel }}"{% endif %}
@@ -58,8 +58,8 @@
        {% if ariaLabel %}{{ ariaLabel | safe }}{% endif %}
      >
        {{ linkData.text | safe }}
-       {% if linkData.variant == 'portfolio-external' %}
-         <span class="ml-1" aria-hidden="true">↗</span>
+       {% if linkData.variant == '' %}
+         <span aria-hidden="true">↗</span>
        {% endif %}
      </a>
    {% endif %}

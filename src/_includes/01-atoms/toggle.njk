@@ -8,9 +8,9 @@ Component that renders toggle switches with consistent styling
 {% macro renderToggle(options) %}
   {# Initialize default values for styling classes #}
   {% set globalStyle = options.datas.globalStyle | default('') %}
-  {% set fieldsetClasses = options.datas.fieldsetClasses | default('toggle-group') %}
-  {% set legendClasses = options.datas.legendClasses | default('font-medium text-gray-700 mb-3') %}
-  {% set groupContainerClasses = options.datas.groupContainerClasses | default('space-y-2') %}
+  {% set fieldsetClasses = options.datas.fieldsetClasses | default('') %}
+  {% set legendClasses = options.datas.legendClasses | default('') %}
+  {% set groupContainerClasses = options.datas.groupContainerClasses | default('') %}
   
   {# Check if rendering as a group or individual toggle #}
   {% if options.group %}
@@ -42,15 +42,15 @@ Component that renders toggle switches with consistent styling
     {% if toggleData %}
       {{ renderSingleToggle(toggleData, options.datas) }}
     {% else %}
-      <span class="{{ options.datas.errorClasses | default('text-red-500') }}">Toggle not found: {{ options.id }}</span>
+      <span class="{{ options.datas.errorClasses | default('') }}">Toggle not found: {{ options.id }}</span>
     {% endif %}
   {% endif %}
 {% endmacro %}
 
 {% macro renderSingleToggle(toggle, datas) %}
   {# Initialize style classes for the toggle and its components #}
-  {% set labelTextClasses = datas.labelTextClasses | default('ms-3 text-sm font-medium text-gray-900 dark:text-gray-300') %}
-  {% set descriptionClasses = datas.descriptionClasses | default('text-xs text-gray-500 dark:text-gray-400') %}
+  {% set labelTextClasses = datas.labelTextClasses | default('') %}
+  {% set descriptionClasses = datas.descriptionClasses | default('') %}
   
   {# Determine variant, default to 'default' if not specified #}
   {% set variant = toggle.variant | default('default') %}
@@ -70,10 +70,10 @@ Component that renders toggle switches with consistent styling
   {% set toggleFocusClasses = datas.variants.container[variant].focus %}
   
   {# Retrieve thumb classes for the current variant #}
-  {% set thumbBaseClasses = datas.variants.thumb[variant].base | default('bg-white') %}
-  {% set thumbCheckedClasses = datas.variants.thumb[variant].checked | default('bg-white') %}
+  {% set thumbBaseClasses = datas.variants.thumb[variant].base | default('') %}
+  {% set thumbCheckedClasses = datas.variants.thumb[variant].checked | default('') %}
   
-  <label class="inline-flex items-center cursor-pointer {% if toggle.disabled %}opacity-50 cursor-not-allowed{% endif %}">
+  <label>
     <input 
       type="checkbox" 
       id="{{ toggle.id }}" 
@@ -85,24 +85,19 @@ Component that renders toggle switches with consistent styling
       {% if toggle.ariaLabel %}aria-label="{{ toggle.ariaLabel }}"{% endif %}
     />
     <div 
-      class="relative w-11 h-6 rounded-full transition-all duration-200 
-      {{ toggleBaseClasses }}
+      class="{{ toggleBaseClasses }}
       {% if toggle.checked %}{{ toggleCheckedClasses }}{% endif %}
-      peer-focus:outline-none peer-focus:ring-4 {{ toggleFocusClasses }}"
+      {{ toggleFocusClasses }}"
     >
       <div 
-        class="absolute top-1/2 -translate-y-1/2 rounded-full h-5 w-5 transition-all duration-200
-        {{ thumbBaseClasses }}
+        class="{{ thumbBaseClasses }}
         {% if toggle.checked %}
-          right-[2px] left-auto
           {{ thumbCheckedClasses }}
-        {% else %}
-          left-[2px] right-auto
         {% endif %}"
       ></div>
     </div>
     
-    <div class="ml-3">
+    <div>
       <span class="{{ labelTextClasses }}">
         {{ toggle.label }}
       </span>

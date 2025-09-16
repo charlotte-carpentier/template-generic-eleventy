@@ -20,8 +20,8 @@ ACCESSIBILITY:
 {% macro boxComponent(options) %}
   {# -- Initialize default values for styling classes -- #}
   {% set globalStyle = options.datas.globalStyle | default('') %}
-  {% set fieldsetClasses = options.datas.fieldsetClasses | default('box-group') %}
-  {% set groupContainerClasses = options.datas.groupContainerClasses | default('space-y-2') %}
+  {% set fieldsetClasses = options.datas.fieldsetClasses | default('') %}
+  {% set groupContainerClasses = options.datas.groupContainerClasses | default('') %}
   
   {# -- Create JSON string of styles for JavaScript -- #}
   {% set stylesJson = {
@@ -55,24 +55,24 @@ ACCESSIBILITY:
         {{ renderSingleBox(boxData, options.datas) }}
       </div>
     {% else %}
-      <span class="{{ options.datas.errorClasses | default('text-red-500') }}">Box not found: {{ options.id }}</span>
+      <span class="{{ options.datas.errorClasses | default('') }}">Box not found: {{ options.id }}</span>
     {% endif %}
   {% endif %}
 {% endmacro %}
 
 {% macro renderSingleBox(box, datas) %}
   {# -- Initialize style classes for the box and its components -- #}
-  {% set boxContainerClasses = datas.boxContainerClasses | default('flex items-center') %}
-  {% set baseClasses = datas.baseClasses | default('size-4 rounded-sm cursor-pointer') %}
+  {% set boxContainerClasses = datas.boxContainerClasses | default('') %}
+  {% set baseClasses = datas.baseClasses | default('') %}
   
   {# -- Define state classes for different visual states -- #}
   {% set stateClasses = {
-    'default': datas.variants.default | default('border-gray-300'),
-    'hover': datas.variants.hover | default('border-gray-600'),
-    'checked': datas.variants.checked | default('bg-gray-500 border-gray-500 text-white'),
-    'focus': datas.variants.focus | default('border-blue-500 outline-none ring-2 ring-blue-300'),
-    'disabled': datas.variants.disabled | default('bg-gray-100 border-gray-300 cursor-not-allowed'),
-    'disabledChecked': datas.variants.disabledChecked | default('bg-gray-300 border-gray-300 cursor-not-allowed')
+    'default': datas.variants.default | default(''),
+    'hover': datas.variants.hover | default(''),
+    'checked': datas.variants.checked | default(''),
+    'focus': datas.variants.focus | default(''),
+    'disabled': datas.variants.disabled | default(''),
+    'disabledChecked': datas.variants.disabledChecked | default('')
   } %}
   
   {# -- Combine base classes with default state -- #}

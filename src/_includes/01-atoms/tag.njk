@@ -59,13 +59,13 @@ ACCESSIBILITY:
     >
       {{ tagData.text }}
       {% if screenReaderText %}
-        <span class="sr-only">{{ screenReaderText }}</span>
+        <span class="">{{ screenReaderText }}</span>
       {% endif %}
     </span>
     
   {% else %}
     {# -- Error message if tag not found in data collection -- #}
-    <span class="text-red-500">Tag not found: {{ options.name }}</span>
+    <span>Tag not found: {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
 

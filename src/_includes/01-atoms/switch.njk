@@ -8,9 +8,9 @@ Component that renders switch controls with consistent styling
 {% macro renderSwitch(options) %}
   {# Initialize default values for styling classes #}
   {% set globalStyle = options.datas.globalStyle | default('') %}
-  {% set fieldsetClasses = options.datas.fieldsetClasses | default('switch-group') %}
-  {% set legendClasses = options.datas.legendClasses | default('font-medium text-gray-700 mb-3') %}
-  {% set groupContainerClasses = options.datas.groupContainerClasses | default('flex space-x-4') %}
+  {% set fieldsetClasses = options.datas.fieldsetClasses | default('') %}
+  {% set legendClasses = options.datas.legendClasses | default('') %}
+  {% set groupContainerClasses = options.datas.groupContainerClasses | default('') %}
   
   {# Check if rendering as a group or individual switch #}
   {% if options.group %}
@@ -42,7 +42,7 @@ Component that renders switch controls with consistent styling
     {% if switchData %}
       {{ renderSingleSwitch(switchData, options.datas) }}
     {% else %}
-      <span class="{{ options.datas.errorClasses | default('text-red-500') }}">Switch not found: {{ options.id }}</span>
+      <span class="{{ options.datas.errorClasses | default('') }}">Switch not found: {{ options.id }}</span>
     {% endif %}
   {% endif %}
 {% endmacro %}
@@ -50,7 +50,7 @@ Component that renders switch controls with consistent styling
 {% macro renderSingleSwitch(switch, datas) %}
   {# Determine variant and size, set defaults if not specified #}
   {% set variant = switch.variant | default('default') %}
-  {% set size = switch.size | default('medium') %}
+  {% set size = switch.size | default('') %}
   
   {# Determine additional state classes based on switch state #}
   {% if switch.disabled and switch.checked %}
@@ -66,39 +66,29 @@ Component that renders switch controls with consistent styling
   {% set switchFocusClasses = datas.variants.container[variant].focus %}
   
   {# Retrieve thumb classes for the current variant #}
-  {% set thumbBaseClasses = datas.variants.thumb[variant].base | default('bg-white') %}
+  {% set thumbBaseClasses = datas.variants.thumb[variant].base | default('') %}
   
   {# Get size classes from the data #}
   {% set containerSizeClasses = datas.variants.sizes[size].container %}
   {% set thumbSizeClasses = datas.variants.sizes[size].thumb %}
   
-  <div class="inline-block {% if switch.disabled %}opacity-50{% endif %}">
-    <label class="relative inline-block cursor-pointer {% if switch.disabled %}cursor-not-allowed{% endif %}">
+  <div>
+    <label>
       <input 
         type="checkbox" 
         id="{{ switch.id }}" 
         name="{{ switch.id }}"
         value="{{ switch.value }}"
-        class="sr-only peer"
+        class=""
         {% if switch.checked %}checked{% endif %}
         {% if switch.disabled %}disabled{% endif %}
         {% if switch.ariaLabel %}aria-label="{{ switch.ariaLabel }}"{% endif %}
       />
       <div 
-        class="relative rounded-full transition-all duration-200 
-        {{ containerSizeClasses }}
-        {{ switchBaseClasses }}
-        peer-focus:outline-none peer-focus:ring-2 {{ switchFocusClasses }}"
+        class="{{ containerSizeClasses }} {{ switchBaseClasses }} {{ switchFocusClasses }}"
       >
         <div 
-          class="absolute top-1/2 -translate-y-1/2 rounded-full transition-all duration-200
-          {{ thumbSizeClasses }}
-          {{ thumbBaseClasses }}
-          {% if switch.checked %}
-            right-[2px] left-auto
-          {% else %}
-            left-[2px] right-auto
-          {% endif %}"
+          class="{{ thumbSizeClasses }} {{ thumbBaseClasses }}"
         ></div>
       </div>
     </label>

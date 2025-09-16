@@ -11,7 +11,7 @@
 {% macro renderListForm(option) %}
   {# Check if datas is provided #}
   {% if not option.datas %}
-    <span class="text-red-500">Error: No list-form configuration provided</span>
+    <span>Error: No list-form configuration provided</span>
   {% else %}
     {# Retrieve list-form configuration #}
     {% set listFormsConfig = option.datas %}
@@ -27,11 +27,11 @@
 
     {# Fallback if list-form not found #}
     {% if not listFormData %}
-      <span class="text-red-500">List-form not found: {{ listFormName }}</span>
+      <span>List-form not found: {{ listFormName }}</span>
     {% else %}
       {# Render list-form molecule #}
-      <div class="list-form-container flex justify-center w-full">
-        <form class="list-form w-full max-w-sm sm:max-w-md flex flex-col gap-2.5" 
+      <div>
+        <form 
               method="POST" 
               {% if option.netlify %}
               name="contact"
@@ -51,7 +51,7 @@
           
           {# Radio section #}
           {% if listFormData.radioName %}
-            <div class="list-form-radio w-full">
+            <div>
               {{ renderRadio({ 
                   name: listFormData.radioName,
                   datas: option.radioDatas
@@ -60,7 +60,7 @@
           {% endif %}
           
           {# Inputs section #}
-          <div class="list-form-inputs w-full flex flex-col gap-2.5">
+          <div>
             {% for inputItem in listFormData.inputs %}
               {{ renderInput({ 
                   name: inputItem.inputName,
@@ -71,7 +71,7 @@
           
           {# Submit button INSIDE the form #}
           {% if option.submitButton %}
-          <div class="list-form-button flex justify-center mt-4">
+          <div>
             {{ option.submitButton | safe }}
           </div>
           {% endif %}

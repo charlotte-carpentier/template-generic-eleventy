@@ -25,19 +25,19 @@
     {# Render only if image found - FIXED: silent fallback #}
     {% if imageData %}
       {# Build CSS classes - FIXED: more flexible variant handling #}
-      {% set variant = imageData.variant | default('mission') %}
+      {% set variant = imageData.variant | default('') %}
       {% set cssClasses = 'image-' ~ variant %}
       
       {# FIXED: variant-specific classes moved to data structure if needed #}
-      {% if variant == 'mission' %}
-        {% set cssClasses = cssClasses ~ ' w-[300px] max-h-[157px] border-[3px] sm:w-[400px] sm:h-[200px] sm:border-[4px] sm:max-h-none' %}
+      {% if variant == '' %}
+        {% set cssClasses = cssClasses %}
       {% endif %}
       
       {# Render the image #}
       <img 
         src="{{ imageData.src }}" 
         alt="{{ imageData.alt }}" 
-        class="{{ cssClasses }} block"
+        class="{{ cssClasses }}"
         loading="lazy"
         decoding="async"
         {% if imageData.width %}width="{{ imageData.width }}"{% endif %}

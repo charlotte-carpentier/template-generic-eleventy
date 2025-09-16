@@ -7,9 +7,9 @@
 {% macro renderBreadcrumb(options) %}
   {% if options.datas %}
     {% set globalStyle = options.datas.globalStyle %}
-    {% set separatorStyle = options.datas.separatorStyle | default('mx-2 text-gray-400') %}
+    {% set separatorStyle = options.datas.separatorStyle | default('') %}
     {% set separatorIcon = options.datas.separatorIcon | default('/') %}
-    {% set activeItemStyle = options.datas.activeItemStyle | default('font-bold text-gray-900') %}
+    {% set activeItemStyle = options.datas.activeItemStyle | default('') %}
     
     {% set breadcrumbData = null %}
     {% if options.name %}
@@ -25,16 +25,16 @@
     {% endif %}
     
     {% set stateClasses = {
-      'default': options.datas.variants.default | default('text-gray-800'),
-      'hover': options.datas.variants.hover | default('text-gray-600'),
-      'focus': options.datas.variants.focus | default('text-gray-800 outline-2 outline-blue-500 outline-offset-2'),
-      'disabled': options.datas.variants.disabled | default('text-gray-400 cursor-not-allowed')
+      'default': options.datas.variants.default | default(''),
+      'hover': options.datas.variants.hover | default(''),
+      'focus': options.datas.variants.focus | default(''),
+      'disabled': options.datas.variants.disabled | default('')
     } %}
     
     <nav aria-label="Breadcrumb" class="{{ globalStyle }} {{ options.class | default('') }}">
-      <ol class="flex flex-wrap items-center">
+      <ol>
         {% for crumb in breadcrumbData.links %}
-          <li class="flex items-center">
+          <li>
             {% if loop.index > 1 %}
               <span class="{{ separatorStyle }}" aria-hidden="true">{{ separatorIcon }}</span>
             {% endif %}
@@ -71,7 +71,7 @@
       </ol>
     </nav>
   {% else %}
-    <span class="text-red-500">Breadcrumb data not found</span>
+    <span>Breadcrumb data not found</span>
   {% endif %}
 {% endmacro %}
 

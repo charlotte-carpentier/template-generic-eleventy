@@ -12,7 +12,7 @@
 
   {# Check if datas is provided #}
   {% if not option.datas %}
-    <span class="text-red-500">Error: No section-contact configuration provided</span>
+    <span>Error: No section-contact configuration provided</span>
   {% else %}
     {# Retrieve section-contact configuration #}
     {% set sectionsConfig = option.datas %}
@@ -28,10 +28,10 @@
 
     {# Fallback if section not found #}
     {% if not sectionData %}
-      <span class="text-red-500">Section-contact not found: {{ sectionName }}</span>
+      <span>Section-contact not found: {{ sectionName }}</span>
     {% else %}
       {# Build CSS classes from section name #}
-      {% set cssClasses = 'section-contact' %}
+      {% set cssClasses = '' %}
       
       {# Add any additional classes #}
       {% if option.class %}
@@ -39,13 +39,13 @@
       {% endif %}
       
       {# Section container with semantic structure and accessibility #}
-      <section class="{{ cssClasses }} w-full bg-white" id="contact" role="region" aria-labelledby="contact-heading">
+      <section class="{{ cssClasses }}" id="contact" role="region" aria-labelledby="contact-heading">
         
         {# Section content with responsive padding and max-width #}
-        <div class="section-contact-content px-6 py-12 lg:px-24 lg:py-16 max-w-prose mx-auto">
+        <div>
           
           {# Section header with system gaps and proper heading hierarchy #}
-          <header class="section-contact-header mb-2 lg:mb-6 pb-4 mb-2 text-center">
+          <header>
             <div id="contact-heading">
               {{ renderTypography({ 
                   name: sectionData.header.title,
@@ -55,11 +55,11 @@
           </header>
           
           {# Section content container with reduced gaps #}
-          <div class="section-contact-body flex flex-col gap-3 lg:gap-6">
+          <div>
             
             {# Contact information block - centered container with left-aligned text #}
-            <div class="section-contact-info flex justify-center">
-              <div class="text-left">
+            <div>
+              <div>
                 {{ renderContactBlock({ 
                     name: sectionData.content.contact_block,
                     datas: option.contactBlockDatas,
@@ -70,12 +70,12 @@
             </div>
             
             {# Horizontal separator with gradient #}
-            <div class="section-contact-separator flex justify-center" role="separator" aria-hidden="true">
-              <div class="section-contact-separator-line"></div>
+            <div role="separator" aria-hidden="true">
+              <div></div>
             </div>
             
             {# Contact form with Netlify integration - Button included in form #}
-            <div class="section-contact-form">
+            <div>
               {% set submitButtonHtml %}
                 {{ renderButton({ 
                     name: sectionData.content.button,
