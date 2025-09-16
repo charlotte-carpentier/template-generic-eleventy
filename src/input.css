@@ -48,7 +48,68 @@ body {
 ============================================================ */
 
 @theme {
-  /* Color variables - Based on Figma design tokens */
+  /* --------------------------------------------------------
+     TYPOGRAPHY - Web standards & accessibility
+  -------------------------------------------------------- */
+
+  /* Font families */
+  --font-family-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Font sizes - Accessible scale (1.250 ratio) */
+  --font-size-xs: 0.75rem;      /* 12px */
+  --font-size-sm: 0.875rem;     /* 14px */
+  --font-size-base: 1rem;       /* 16px - base accessible size */
+  --font-size-lg: 1.125rem;     /* 18px */
+  --font-size-xl: 1.25rem;      /* 20px */
+  --font-size-2xl: 1.5rem;      /* 24px */
+  --font-size-3xl: 1.875rem;    /* 30px */
+  --font-size-4xl: 2.25rem;     /* 36px */
+  --font-size-5xl: 3rem;        /* 48px */
+  --font-size-6xl: 3.75rem;     /* 60px */
+
+  /* Font weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Line heights - Accessibility standards */
+  --line-height-none: 1;
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;     /* WCAG recommended minimum */
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+
+  /* Letter spacing - Readability standards */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0em;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+
+  /* Typography tokens - Semantic usage */
+  --typography-display-large: var(--font-weight-bold) var(--font-size-6xl) / var(--line-height-tight) var(--font-family-sans);
+  --typography-display-small: var(--font-weight-bold) var(--font-size-5xl) / var(--line-height-tight) var(--font-family-sans);
+  --typography-heading-h1: var(--font-weight-bold) var(--font-size-4xl) / var(--line-height-tight) var(--font-family-sans);
+  --typography-heading-h2: var(--font-weight-semibold) var(--font-size-3xl) / var(--line-height-snug) var(--font-family-sans);
+  --typography-heading-h3: var(--font-weight-semibold) var(--font-size-2xl) / var(--line-height-snug) var(--font-family-sans);
+  --typography-heading-h4: var(--font-weight-medium) var(--font-size-xl) / var(--line-height-normal) var(--font-family-sans);
+  --typography-heading-h5: var(--font-weight-medium) var(--font-size-lg) / var(--line-height-normal) var(--font-family-sans);
+  --typography-heading-h6: var(--font-weight-medium) var(--font-size-base) / var(--line-height-normal) var(--font-family-sans);
+  --typography-body-large: var(--font-weight-normal) var(--font-size-lg) / var(--line-height-normal) var(--font-family-sans);
+  --typography-body-regular: var(--font-weight-normal) var(--font-size-base) / var(--line-height-normal) var(--font-family-sans);
+  --typography-body-small: var(--font-weight-normal) var(--font-size-sm) / var(--line-height-normal) var(--font-family-sans);
+  --typography-label-large: var(--font-weight-medium) var(--font-size-base) / var(--line-height-normal) var(--font-family-sans);
+  --typography-label-small: var(--font-weight-medium) var(--font-size-sm) / var(--line-height-normal) var(--font-family-sans);
+  --typography-label-small-caps: var(--font-weight-medium) var(--font-size-xs) / var(--line-height-normal) var(--font-family-sans);
+  --typography-placeholder: var(--font-weight-normal) var(--font-size-base) / var(--line-height-normal) var(--font-family-sans);
+  --typography-component-small-tag: var(--font-weight-medium) var(--font-size-xs) / var(--line-height-tight) var(--font-family-sans);
+
+   /* Color variables - Based on Figma design tokens */
   
   /* --------------------------------------------------------
      PRIMITIVES - Level 1
@@ -200,49 +261,115 @@ body {
 
   /* Gradient Delete Cell */
   --gradient-delete-cell: linear-gradient(-90deg, var(--color-semantic-critical-100), rgba(255,240,241,0));
-}
 
-  /* Font families - Generic system fonts */
-  --font-display: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  /* --------------------------------------------------------
+     ELEVATION - Shadow properties
+  -------------------------------------------------------- */
 
-  /* Font sizes (using rem for scalability) */
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-4xl: 2.25rem;
-  --text-5xl: 3rem;
+  /* Shadow primitives - Industry standards */
+  --shadow-short: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.15);
+  --shadow-tall: 0 10px 25px rgba(0, 0, 0, 0.2);
 
-  /* Mobile font sizes */
-  --text-xs-mobile: 0.75rem;
-  --text-sm-mobile: 0.875rem;
-  --text-base-mobile: 1rem;
-  --text-lg-mobile: 1.125rem;
-  --text-xl-mobile: 1.25rem;
-  --text-2xl-mobile: 1.5rem;
-  --text-3xl-mobile: 1.875rem;
+  /* Elevation tokens - Semantic usage */
+  --elevation-card: var(--shadow-short);
+  --elevation-dropdown: var(--shadow-medium);
+  --elevation-modal: var(--shadow-tall);
+  --elevation-button-hover: var(--shadow-short);
+  --elevation-tooltip: var(--shadow-medium);
 
-  /* Letter spacing */
-  --tracking-tight: -0.025em;
-  --tracking-normal: 0em;
-  --tracking-wide: 0.025em;
+  /* --------------------------------------------------------
+     BORDER RADIUS - Corner properties
+  -------------------------------------------------------- */
 
-  /* Z-index layers */
-  --z-base: 1;
-  --z-dropdown: 10;
-  --z-sticky: 20;
-  --z-banner: 30;
-  --z-overlay: 40;
-  --z-modal: 50;
-  --z-popover: 60;
-  --z-skip-link: 70;
-  --z-toast: 80;
-  --z-tooltip: 90;
+  /* Radius primitives */
+  --radius-3: 3px;
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-24: 24px;
+  --radius-32: 32px;
+
+  /* Radius tokens - Semantic usage */
+  --radius-button: var(--radius-8);
+  --radius-card: var(--radius-12);
+  --radius-input: var(--radius-6);
+  --radius-badge: var(--radius-16);
+  --radius-modal: var(--radius-16);
+  --radius-pill: var(--radius-32);
+
+  /* --------------------------------------------------------
+     SPACING - Margin and padding properties
+  -------------------------------------------------------- */
+
+  /* Spacing primitives */
+  --spacing-0-5: 2px;
+  --spacing-1: 4px;
+  --spacing-1-5: 6px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-7: 28px;
+  --spacing-8: 32px;
+  --spacing-9: 36px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-14: 56px;
+  --spacing-16: 64px;
+  --spacing-18: 72px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+
+  /* Spacing tokens - Semantic usage */
+  --spacing-component-padding: var(--spacing-4);
+  --spacing-section-margin: var(--spacing-8);
+  --spacing-page-margin: var(--spacing-6);
+  --spacing-element-gap: var(--spacing-3);
+  --spacing-content-padding: var(--spacing-6);
+
+  /* --------------------------------------------------------
+     Z-INDEX - Layer stacking order
+  -------------------------------------------------------- */
+
+  /* Z-index scale */
+  --z-base: 0;
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-notification: 1080;
+
+  /* --------------------------------------------------------
+     LAYOUT - Grid and breakpoints
+  -------------------------------------------------------- */
+
+  /* Container widths */
+  --container-desktop: 1440px;
+  --container-mobile: 320px;
+  
+  /* Grid columns */
+  --grid-columns-12: 12;
+  --grid-columns-6: 6;
+  --grid-columns-4: 4;
+  --grid-columns-3: 3;
+  --grid-columns-2: 2;
+  --grid-columns-1: 1;
+  
+  /* Column widths - Based on Figma grid */
+  --column-width-840: 840px;
+  --column-width-640: 640px;
+  --column-width-416: 416px;
+  --column-width-304: 304px;
+  --column-width-192: 192px;
+  --column-width-80: 80px;
+
 }
 
 /* ============================================================
