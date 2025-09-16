@@ -6,7 +6,7 @@
 {% macro renderInput(option) %}
   {# Check if datas is provided #}
   {% if not option.datas %}
-    <span class="text-red-500">Error: No input configuration provided</span>
+    <span>Error: No input configuration provided</span>
   {% else %}
     {# Retrieve input configuration #}
     {% set inputsConfig = option.datas %}
@@ -22,15 +22,15 @@
 
     {# Fallback if input not found #}
     {% if not inputData %}
-      <span class="text-red-500">Input not found: {{ inputName }}</span>
+      <span>Input not found: {{ inputName }}</span>
     {% else %}
       {# Input container #}
-      <div class="input-group mb-4">
+      <div class="">
         {# Label #}
         {% if inputData.label %}
-          <label for="{{ inputData.id }}" class="text-p input-label block mb-2">
+          <label for="{{ inputData.id }}" class="">
             {{ inputData.label }}
-            {% if inputData.required %}<span class="text-red-500 ml-1">*</span>{% endif %}
+            {% if inputData.required %}<span>*</span>{% endif %}
           </label>
         {% endif %}
         
@@ -40,12 +40,12 @@
             type="{{ inputData.type }}"
             id="{{ inputData.id }}"
             name="{{ inputData.name or inputData.id }}"
-            class="input-base input-default input-hover input-focus w-full sm:w-80 px-2 py-3 border-2 border-solid rounded focus:outline-none transition-colors duration-300 leading-tight"
+            class=""
             placeholder="{{ inputData.placeholder }}"
             {% if inputData.required %}required{% endif %}
             {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
             {% if inputData.pattern %}pattern="{{ inputData.pattern }}"{% endif %}
-            {% if option.disabled %}disabled class="input-base input-default input-hover input-focus w-full sm:w-80 px-2 py-3 border-2 border-solid rounded focus:outline-none transition-colors duration-300 leading-tight disabled:opacity-60 disabled:cursor-not-allowed input-disabled"{% endif %}
+            {% if option.disabled %}disabled{% endif %}
             aria-describedby="{% if inputData.patternMessage %}{{ inputData.id }}-help{% endif %} {% if inputData.errorMessage %}{{ inputData.id }}-error{% endif %}"
           />
         
@@ -54,18 +54,18 @@
           <textarea 
             id="{{ inputData.id }}"
             name="{{ inputData.name or inputData.id }}"
-            class="input-base input-default input-hover input-focus w-full sm:w-80 px-2 py-3 border-2 border-solid rounded focus:outline-none transition-colors duration-300 leading-snug resize-y min-h-20"
+            class="input-base"
             placeholder="{{ inputData.placeholder }}"
             rows="{{ inputData.rows or 3 }}"
             {% if inputData.required %}required{% endif %}
             {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
-            {% if option.disabled %}disabled class="input-base input-default input-hover input-focus w-full sm:w-80 px-2 py-3 border-2 border-solid rounded focus:outline-none transition-colors duration-300 leading-snug resize-y min-h-20 disabled:opacity-60 disabled:cursor-not-allowed input-disabled"{% endif %}
+            {% if option.disabled %}disabled{% endif %}
             aria-describedby="{% if inputData.maxLength %}{{ inputData.id }}-count{% endif %} {% if inputData.errorMessage %}{{ inputData.id }}-error{% endif %}"
           ></textarea>
           
           {# Character counter for textarea #}
           {% if inputData.maxLength %}
-            <div id="{{ inputData.id }}-count" class="text-small input-counter text-right mt-1">
+            <div id="{{ inputData.id }}-count" class="">
               0/{{ inputData.maxLength }}
             </div>
           {% endif %}
@@ -73,14 +73,14 @@
         
         {# Help text #}
         {% if inputData.patternMessage %}
-          <div id="{{ inputData.id }}-help" class="text-small input-help mt-1">
+          <div id="{{ inputData.id }}-help" class="">
             {{ inputData.patternMessage }}
           </div>
         {% endif %}
         
         {# Error message container #}
         {% if inputData.errorMessage %}
-          <div id="{{ inputData.id }}-error" class="text-small text-red-500 mt-1 hidden" role="alert">
+          <div id="{{ inputData.id }}-error" role="alert">
             {{ inputData.errorMessage }}
           </div>
         {% endif %}

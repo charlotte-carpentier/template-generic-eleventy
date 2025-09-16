@@ -13,8 +13,8 @@
     {% set containerStyle = options.datas.containerStyle %}
     {% set contentLayoutStyle = options.datas.contentLayoutStyle %}
     {% set textContainerStyle = options.datas.textContainerStyle %}
-    {% set buttonsContainerStyle = options.datas.buttonsContainerStyle ~ " flex-row justify-center md:justify-start" %}
-    {% set imageContainerStyle = options.datas.imageContainerStyle ~ " flex justify-center md:justify-start" %}
+    {% set buttonsContainerStyle = options.datas.buttonsContainerStyle ~ "" %}
+    {% set imageContainerStyle = options.datas.imageContainerStyle ~ "" %}
     
     <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}">
       <div class="{{ containerStyle }}">
@@ -109,7 +109,7 @@
       </div>
     </section>
   {% else %}
-    <span class="text-red-500">Section Hero data not found</span>
+    <span class="">Section Hero data not found</span>
   {% endif %}
 {% endmacro %}
 

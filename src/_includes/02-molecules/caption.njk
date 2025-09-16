@@ -11,7 +11,7 @@
 {% macro renderCaption(option) %}
   {# Check if datas is provided #}
   {% if not option.datas %}
-    <span class="text-red-500">Error: No caption configuration provided</span>
+    <span>Error: No caption configuration provided</span>
   {% else %}
     {# Retrieve caption configuration #}
     {% set captionsConfig = option.datas %}
@@ -27,7 +27,7 @@
 
     {# Fallback if caption not found #}
     {% if not captionData %}
-      <span class="text-red-500">Caption not found: {{ captionName }}</span>
+      <span>Caption not found: {{ captionName }}</span>
     {% else %}
       {# Get tooltip data for label and description #}
       {% set tooltipData = null %}
@@ -49,25 +49,25 @@
       {% set tooltipId = "tooltip-" ~ captionData.name ~ "-" ~ loop.index0 if loop.index0 is defined else "tooltip-" ~ captionData.name %}
       
       {# Caption container with tooltip logic and ARIA attributes #}
-      <div class="caption-container relative inline-block" 
+      <div class="" 
            data-tooltip="{{ captionData.name }}" 
            tabindex="0"
            aria-describedby="{{ tooltipId }}">
         
         {# Desktop version: Icon + Title + Tooltip (tooltip appears below, title hides) #}
-        <div class="caption-desktop">
+        <div class="">
           {# Icon (64x64 desktop) with gradient class #}
           {{ renderIcon({ 
             name: captionData.iconName,
             datas: option.iconDatas,
-            class: "caption-icon-desktop caption-gradient-" ~ captionData.gradientColor
+            class: "" ~ captionData.gradientColor
           }) }}
           
           {# Title - Typography classes with proper text #}
-          <div class="caption-title-desktop text-small">{{ typographyData.text if typographyData else captionData.name }}</div>
+          <div class="">{{ typographyData.text if typographyData else captionData.name }}</div>
           
           {# Tooltip (hidden by default, shown below icon on hover/focus) #}
-          <div class="tooltip-popup" 
+          <div class="" 
                id="{{ tooltipId }}" 
                role="tooltip" 
                aria-hidden="true">
@@ -79,21 +79,21 @@
         </div>
 
         {# Mobile version: Icon + Content (side by side) #}
-        <div class="caption-mobile">
+        <div class="">
           {# Icon (50x50 mobile) with gradient class #}
           {{ renderIcon({ 
             name: captionData.iconName,
             datas: option.iconDatas,
-            class: "caption-icon-mobile caption-gradient-" ~ captionData.gradientColor
+            class: "" ~ captionData.gradientColor
           }) }}
           
           {# Content container (label + description stacked) #}
-          <div class="caption-content-mobile flex flex-col flex-1">
+          <div class="">
             {# Label - Typography classes #}
-            <div class="caption-label-mobile text-code">{{ typographyData.text if typographyData else captionData.name }}</div>
+            <div class="">{{ typographyData.text if typographyData else captionData.name }}</div>
             
             {# Description - Typography classes #}
-            <div class="caption-description-mobile text-small">{{ tooltipData.description if tooltipData else "Description manquante" }}</div>
+            <div class="">{{ tooltipData.description if tooltipData else "Description manquante" }}</div>
           </div>
         </div>
       </div>

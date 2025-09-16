@@ -28,10 +28,10 @@
 /* Custom focus outlines for accessibility */
 :focus {
   outline: none;
-}
+}--primary
 
 :focus-visible {
-  outline: 2px solid theme(--primary);
+  outline: 2px solid theme();
   outline-offset: 2px;
 }
 

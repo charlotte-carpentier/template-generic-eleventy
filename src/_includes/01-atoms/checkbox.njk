@@ -78,16 +78,16 @@ ACCESSIBILITY:
     {% if targetCheckbox %}
       {{ renderSingleCheckbox(targetCheckbox, checkboxData, boxStyles) }}
     {% else %}
-      <span class="{{ checkboxData.errorClasses | default('text-red-500') }}">Checkbox not found: {{ options.id }}</span>
+      <span class="{{ checkboxData.errorClasses | default('') }}">Checkbox not found: {{ options.id }}</span>
     {% endif %}
   {% endif %}
 {% endmacro %}
 
 {% macro renderCheckboxGroup(groupConfig, boxStyles, groupLabel, groupSrOnly) %}
   {# Default configuration with fallback values #}
-  {% set fieldsetClasses = groupConfig.fieldsetClasses | default('checkbox-group') %}
-  {% set legendClasses = groupConfig.legendClasses | default('font-medium text-gray-700 mb-3') %}
-  {% set groupContainerClasses = groupConfig.groupContainerClasses | default('space-y-2') %}
+  {% set fieldsetClasses = groupConfig.fieldsetClasses | default('') %}
+  {% set legendClasses = groupConfig.legendClasses | default('') %}
+  {% set groupContainerClasses = groupConfig.groupContainerClasses | default('') %}
   
   <fieldset 
     class="{{ fieldsetClasses }}" 
@@ -101,7 +101,7 @@ ACCESSIBILITY:
     {% endif %}
     
     {% if groupConfig.groupDescription %}
-      <p class="text-sm text-gray-500 mb-3">{{ groupConfig.groupDescription }}</p>
+      <p>{{ groupConfig.groupDescription }}</p>
     {% endif %}
     
     <div class="{{ groupContainerClasses }}">
@@ -114,9 +114,9 @@ ACCESSIBILITY:
 
 {% macro renderSingleCheckbox(checkbox, checkboxOptions, boxStyles) %}
   {# Modified for better vertical alignment and accessibility #}
-  {% set labelClasses = checkboxOptions.labelClasses | default('flex items-center gap-4 cursor-pointer') %}
-  {% set labelTextClasses = checkboxOptions.labelTextClasses | default('font-medium text-gray-900 cursor-pointer') %}
-  {% set descriptionClasses = checkboxOptions.descriptionClasses | default('text-sm text-gray-500 cursor-pointer') %}
+  {% set labelClasses = checkboxOptions.labelClasses | default('') %}
+  {% set labelTextClasses = checkboxOptions.labelTextClasses | default('') %}
+  {% set descriptionClasses = checkboxOptions.descriptionClasses | default('') %}
   
   {% set boxData = {
     "id": checkbox.id,
@@ -129,20 +129,19 @@ ACCESSIBILITY:
   
   <label 
     for="{{ checkbox.id }}" 
-    class="{{ labelClasses }}{% if checkbox.disabled %} cursor-not-allowed opacity-70{% endif %}" 
-    data-checkbox-label 
-    style="cursor: pointer;"
+    class="{{ labelClasses }}" 
+    data-checkbox-label
   >
     {# Wrapper div to control vertical alignment #}
-    <div class="flex-shrink-0">
+    <div>
       {{ renderSingleBox(boxData, boxStyles) }}
     </div>
     
-    <div class="{% if checkbox.description %}flex flex-col justify-center{% endif %}" {% if not checkbox.disabled %}style="cursor: pointer;"{% endif %}>
+    <div>
       <strong class="{{ labelTextClasses }}">
         {{ checkbox.label }}
         {% if checkbox.required %}
-          <span class="text-red-500 ml-1" aria-hidden="true">*</span>
+          <span aria-hidden="true">*</span>
           <span class="sr-only">(required)</span>
         {% endif %}
       </strong>

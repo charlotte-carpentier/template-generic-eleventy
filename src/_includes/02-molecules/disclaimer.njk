@@ -17,7 +17,7 @@
     {% endif %}
 
     {% if not disclaimerData %}
-      <span class="text-red-500">Disclaimer not found: {{ options.name }}</span>
+      <span>Disclaimer not found: {{ options.name }}</span>
     {% else %}
       {% set globalStyle = options.datas.globalStyle %}
       {% set variantStyle = options.datas.variants[disclaimerData.style] %}
@@ -33,7 +33,6 @@
       {% endif %}
 
       <div 
-        class="disclaimer-container"
         aria-live="polite" 
         role="alert"
         data-disclaimer="{{ options.name }}"
@@ -41,8 +40,8 @@
         <div 
           class="{{ globalStyle }} {{ variantStyle }}"
         >
-          <div class="flex items-center justify-between space-x-4">
-            <div class="flex items-center space-x-2">
+          <div>
+            <div>
               {% if iconData %}
                 <span 
                   data-svg-src="{{ iconData.path }}" 
@@ -54,7 +53,6 @@
             </div>
             
             <button 
-              class="ml-4 text-current hover:opacity-75" 
               data-dismiss
               aria-label="Dismiss disclaimer"
             >
@@ -65,7 +63,7 @@
       </div>
     {% endif %}
   {% else %}
-    <span class="text-red-500">No disclaimer data provided</span>
+    <span>No disclaimer data provided</span>
   {% endif %}
 {% endmacro %}
 

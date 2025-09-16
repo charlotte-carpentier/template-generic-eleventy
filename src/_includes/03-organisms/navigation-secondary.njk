@@ -23,13 +23,13 @@
       {% set navigationData = options.datas["navigation-secondarys"][0] %}
     {% endif %}
     
-    <nav class="{{ globalStyle }} navigation-secondary {{ options.class | default('') }}" data-nav-container data-nav-secondary>
+    <nav class="{{ globalStyle }} {{ options.class | default('') }}" data-nav-container data-nav-secondary>
       {% for linkName in navigationData.links %}
         {{ linkComponent({ name: linkName, datas: options.links, dataNavLink: true }) }}
       {% endfor %}
     </nav>
   {% else %}
-    <span class="text-red-500">Navigation data not found</span>
+    <span class="">Navigation data not found</span>
   {% endif %}
 {% endmacro %}
 

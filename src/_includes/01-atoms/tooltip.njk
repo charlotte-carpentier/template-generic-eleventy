@@ -6,7 +6,7 @@
 {% macro renderTooltip(option) %}
   {# Check if datas is provided #}
   {% if not option.datas %}
-    <span class="text-red-500">Error: No tooltip configuration provided</span>
+    <span>Error: No tooltip configuration provided</span>
   {% else %}
     {# Retrieve tooltip configuration #}
     {% set tooltipsConfig = option.datas %}
@@ -22,27 +22,27 @@
 
     {# Fallback if tooltip not found #}
     {% if not tooltipData %}
-      <span class="text-red-500">Tooltip not found: {{ tooltipName }}</span>
+      <span>Tooltip not found: {{ tooltipName }}</span>
     {% else %}
       {# Tooltip - always visible for atom display #}
-      <div class="tooltip-box w-80 p-2 box-border" role="tooltip" aria-live="polite">
+      <div class="" role="tooltip" aria-live="polite">
         {# Title #}
-        <div class="tooltip-title text-center mb-1 mt-2 leading-none font-bold" role="heading" aria-level="3">{{ tooltipData.title }}</div>
+        <div class="" role="heading" aria-level="3">{{ tooltipData.title }}</div>
         
         {# Description part 1 (above bar) #}
         {% if tooltipData.description_part1 %}
-          <div class="tooltip-description text-center leading-none whitespace-pre-line">{{ tooltipData.description_part1 }}</div>
+          <div class="">{{ tooltipData.description_part1 }}</div>
         {% endif %}
         
         {# Decorative bar with diamond #}
-        <div class="flex items-center justify-center mt-4 gap-2" aria-hidden="true">
-          <div class="tooltip-line flex-none w-15 h-0.5"></div>
-          <div class="tooltip-diamond w-2 h-2 rotate-45 flex-shrink-0"></div>
-          <div class="tooltip-line flex-none w-15 h-0.5"></div>
+        <div aria-hidden="true">
+          <div class=""></div>
+          <div class=""></div>
+          <div class=""></div>
         </div>
         
         {# Description part 2 (below bar) or regular description #}
-        <div class="tooltip-description text-center leading-none whitespace-pre-line">
+        <div class="">
           {% if tooltipData.description_part2 %}
             {{ tooltipData.description_part2 }}
           {% else %}

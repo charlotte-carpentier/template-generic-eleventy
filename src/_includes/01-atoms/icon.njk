@@ -6,7 +6,7 @@
 {% macro renderIcon(option) %}
   {# Check if option and required data is provided #}
   {% if not option or not option.datas or not option.name %}
-    <span class="text-red-500">Error: No icon configuration provided</span>
+    <span>Error: No icon configuration provided</span>
   {% else %}
     {# Retrieve icon configuration #}
     {% set iconsConfig = option.datas %}
@@ -22,19 +22,19 @@
 
     {# Fallback if icon not found #}
     {% if not iconData %}
-      <span class="text-red-500">Icon not found: {{ iconName }}</span>
+      <span>Icon not found: {{ iconName }}</span>
     {% else %}
       {# Build CSS classes - Using base + variant classes from input.css #}
-      {% set variant = iconData.variant | default('interface') %}
+      {% set variant = iconData.variant | default('') %}
       {% set cssClasses = 'icon-' ~ variant %}
       
       {# Add responsive classes based on variant #}
-      {% if variant == 'pillar' %}
-        {% set cssClasses = cssClasses ~ ' w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20' %}
-      {% elif variant == 'avatar' %}
-        {% set cssClasses = cssClasses ~ ' w-16 h-16 lg:w-[64px] lg:h-[64px] relative overflow-hidden' %}
-      {% elif variant == 'interface' %}
-        {% set cssClasses = cssClasses ~ ' w-8 h-8' %}
+      {% if variant == '' %}
+        {% set cssClasses = cssClasses %}
+      {% elif variant == '' %}
+        {% set cssClasses = cssClasses %}
+      {% elif variant == '' %}
+        {% set cssClasses = cssClasses %}
       {% endif %}
       
       {# Add any additional classes #}

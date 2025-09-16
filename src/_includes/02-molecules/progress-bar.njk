@@ -9,7 +9,7 @@
 {% macro renderProgressBar(option) %}
   {# Check if datas is provided #}
   {% if not option.datas %}
-    <span class="text-red-500" role="alert">Error: No progress-bar configuration provided</span>
+    <span role="alert">Error: No progress-bar configuration provided</span>
   {% else %}
     {# Retrieve progress-bar configuration #}
     {% set progressBarConfig = option.datas %}
@@ -25,24 +25,24 @@
 
     {# Fallback if progress-bar not found #}
     {% if not progressBarData %}
-      <span class="text-red-500" role="alert">Progress-bar not found: {{ progressBarName }}</span>
+      <span role="alert">Progress-bar not found: {{ progressBarName }}</span>
     {% else %}
       {# Render progress-bar molecule #}
-      <div class="progress-bar-container flex flex-col items-center gap-2 sm:gap-2 w-full">
+      <div class="">
         {# Progress bar visual with accessibility attributes #}
-        <div class="progress-bar w-full max-w-[150px]">
-          <div class="progress-bar-track" 
+        <div class="">
+          <div class="" 
                role="progressbar" 
                aria-valuenow="{{ progressBarData.value }}" 
                aria-valuemin="0" 
                aria-valuemax="100"
                aria-label="Progress: {{ progressBarData.value }}%">
-            <div class="progress-bar-fill" style="width: {{ progressBarData.value }}%;"></div>
+            <div class="" style="width: {{ progressBarData.value }}%;"></div>
           </div>
         </div>
         
         {# Typography atoms for label and description #}
-        <div class="progress-bar-text flex flex-col items-center gap-0 text-center">
+        <div class="">
           {{ renderTypography({ 
               name: progressBarData.labelName,
               datas: option.typographyDatas,

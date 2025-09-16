@@ -10,7 +10,7 @@
   
   {# Check if datas is provided #}
   {% if not option.datas %}
-    <span class="text-red-500">Error: No footer configuration provided</span>
+    <span>Error: No footer configuration provided</span>
   {% else %}
     {# Retrieve footer configuration #}
     {% set footerConfig = option.datas %}
@@ -21,17 +21,17 @@
 
     {# Fallback if footer not found #}
     {% if not footerData %}
-      <span class="text-red-500">Footer not found: {{ footerName }}</span>
+      <span>Footer not found: {{ footerName }}</span>
     {% else %}
       {# Build CSS classes #}
-      {% set variant = footerData.variant | default('minimal') %}
+      {% set variant = footerData.variant | default('') %}
       {% set cssClasses = 'footer footer--' ~ variant %}
       
       {# Render the footer #}
-      <footer class="{{ cssClasses }} w-full bg-white box-border" role="contentinfo">
-        <div class="footer__content p-2 sm:p-2 flex items-center justify-center box-border">
+      <footer class="{{ cssClasses }}" role="contentinfo">
+        <div>
           {# Copyright text #}
-          <div class="footer__copyright whitespace-nowrap text-center">
+          <div>
             {{ renderTypography({ 
                 name: footerData.copyright.name,
                 datas: option.typographyDatas
@@ -39,7 +39,7 @@
           </div>
           
           {# Legal link #}
-          <div class="footer__legal whitespace-nowrap text-center">
+          <div>
             {{ renderLink({ 
                 name: footerData.legal_link.name,
                 datas: option.linkDatas

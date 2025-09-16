@@ -11,7 +11,7 @@
   {% from "02-molecules/tab-menu.njk" import renderTabMenu %}
 
   {% if not option.datas %}
-    <span class="text-red-500">Error: No tab-sections configuration provided</span>
+    <span>Error: No tab-sections configuration provided</span>
   {% else %}
     {% set tabSectionsConfig = option.datas %}
     {% set tabSectionsName = option.name %}
@@ -24,12 +24,12 @@
     {% endfor %}
 
     {% if not tabSectionsData %}
-      <span class="text-red-source">Tab-sections not found: {{ tabSectionsName }}</span>
+      <span>Tab-sections not found: {{ tabSectionsName }}</span>
     {% else %}
-      <div class="tab-sections w-full" id="main-tab-sections">
+      <div id="main-tab-sections">
         
         {# Desktop/tablet navigation #}
-        <div class="tab-sections-navigation hidden sm:block lg:-ml-8 xl:-ml-8" role="tablist" aria-label="Navigation sections">
+        <div role="tablist" aria-label="Navigation sections">
           {{ renderTabMenu({ 
               name: tabSectionsData.navigation.menu,
               datas: option.tabMenuDatas,
@@ -38,22 +38,22 @@
         </div>
         
         {# Main container #}
-        <div class="tab-sections-container relative flex justify-center items-start">
+        <div>
           
           {# Content area with borders #}
-          <div class="tab-sections-content border-t-4 border-black sm:border-t-3 lg:border-t-4 relative scrollbar-hide w-[313px] h-auto sm:w-[633px] sm:h-auto lg:w-[488px] lg:h-[653px]" style="overflow-y: auto;">
+          <div style="overflow-y: auto;">
             
             {# Gradient lines #}
-            <div class="tab-sections-gradient-lines">
-              <div class="tab-sections-gradient-left"></div>
-              <div class="tab-sections-gradient-right"></div>
+            <div>
+              <div></div>
+              <div></div>
             </div>
             
             {# Sections with :target navigation #}
-            <div class="tab-sections-sections">
+            <div>
               
               {# Portfolio - default #}
-              <div class="tab-section-item" id="portfolio" data-default="true" role="tabpanel" tabindex="0" aria-labelledby="tab-portfolio">
+              <div id="portfolio" data-default="true" role="tabpanel" tabindex="0" aria-labelledby="tab-portfolio">
                 {{ renderSectionPortfolio({ 
                     name: "charlotte_missions",
                     datas: option.portfolioDatas,
@@ -67,7 +67,7 @@
               </div>
               
               {# Profile #}
-              <div class="tab-section-item" id="profile" role="tabpanel" tabindex="0" aria-labelledby="tab-profile">
+              <div id="profile" role="tabpanel" tabindex="0" aria-labelledby="tab-profile">
                 {{ renderSectionTimeline({ 
                     name: "charlotte_profile",
                     datas: option.timelineDatas,
@@ -83,7 +83,7 @@
               </div>
               
               {# Journey #}
-              <div class="tab-section-item" id="journey" role="tabpanel" tabindex="0" aria-labelledby="tab-journey">
+              <div id="journey" role="tabpanel" tabindex="0" aria-labelledby="tab-journey">
                 {{ renderSectionTimeline({ 
                     name: "charlotte_journey",
                     datas: option.timelineDatas,
@@ -99,7 +99,7 @@
               </div>
               
               {# Knowledge #}
-              <div class="tab-section-item" id="knowledge" role="tabpanel" tabindex="0" aria-labelledby="tab-knowledge">
+              <div id="knowledge" role="tabpanel" tabindex="0" aria-labelledby="tab-knowledge">
                 {{ renderSectionTimeline({ 
                     name: "charlotte_knowledge",
                     datas: option.timelineDatas,
@@ -115,7 +115,7 @@
               </div>
               
               {# Contact #}
-              <div class="tab-section-item" id="contact" role="tabpanel" tabindex="0" aria-labelledby="tab-contact">
+              <div id="contact" role="tabpanel" tabindex="0" aria-labelledby="tab-contact">
                 {{ renderSectionContact({ 
                     name: "charlotte_contact",
                     datas: option.contactDatas,
@@ -132,7 +132,7 @@
               </div>
               
               {# Thanks section #}
-              <div class="tab-section-item" id="message" role="tabpanel" tabindex="0" aria-labelledby="tab-message">
+              <div id="message" role="tabpanel" tabindex="0" aria-labelledby="tab-message">
                 {{ renderSectionTimeline({ 
                     name: "charlotte_thanks",
                     datas: option.timelineDatas,
@@ -148,9 +148,9 @@
               </div>
               
               {# Legal #}
-              <div class="tab-section-item" id="legal" role="tabpanel" tabindex="0" aria-labelledby="tab-legal">
+              <div id="legal" role="tabpanel" tabindex="0" aria-labelledby="tab-legal">
                 {{ renderSectionTimeline({ 
-                    name: "charlotte_legal",
+                    name: "",
                     datas: option.timelineDatas,
                     typographyDatas: option.typographyDatas,
                     contentBlockDatas: option.contentBlockDatas,
@@ -159,7 +159,7 @@
                     buttonDatas: option.buttonDatas,
                     linkDatas: option.linkDatas,
                     iconDatas: option.iconDatas,
-                    class: "tab-section-content"
+                    class: ""
                 }) }}
               </div>
               
@@ -167,9 +167,9 @@
           </div>
           
           {# Custom scroll cursor - desktop only #}
-          <div class="tab-sections-scroll-cursor hidden lg:block xl:block ml-2 mt-5 flex-shrink-0">
-            <div class="scroll-cursor-track">
-              <div class="scroll-cursor-thumb" id="scroll-cursor-thumb"></div>
+          <div>
+            <div>
+              <div id="scroll-cursor-thumb"></div>
             </div>
           </div>
           

@@ -33,7 +33,7 @@
     {% set desktopPaginationStyle = options.datas.desktopPaginationStyle.default %}
     
     <section class="{{ globalStyle }} {{ variant }} {{ options.class | default('') }}">
-      <div class="container mx-auto px-4">
+      <div class="">
         <!-- Title Section -->
         {% if sectionListingData.heading %}
           <div class="{{ titleContainerStyle }}">
@@ -77,7 +77,7 @@
             </div>
             
             <!-- Desktop Pagination (complete - with select, navigation, counter) -->
-            <div class="{{ desktopPaginationStyle }} justify-center">
+            <div class="{{ desktopPaginationStyle }}">
               {{ renderPagination({ 
                 name: "pager",
                 datas: options.paginations,
@@ -95,7 +95,7 @@
       </div>
     </section>
   {% else %}
-    <span class="text-red-500">Section listing data not found</span>
+    <span class="">Section listing data not found</span>
   {% endif %}
 {% endmacro %}
 

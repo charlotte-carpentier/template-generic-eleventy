@@ -6,9 +6,9 @@
 
 {% macro renderRatingGauge(options) %}
   {% if not options or not options.datas %}
-    <p class="text-red-500">Error: Missing required data for rating gauge</p>
+    <p>Error: Missing required data for rating gauge</p>
   {% else %}
-    {% set globalStyle = options.datas.globalStyle | default('rating-gauge flex items-center space-x-1') %}
+    {% set globalStyle = options.datas.globalStyle | default('') %}
     {% set ratingData = null %}
     
     {# Find the specific rating by name if provided #}
@@ -24,7 +24,7 @@
     {% endif %}
     
     {% if not ratingData %}
-      <p class="text-red-500">Error: Rating "{{ options.name }}" not found</p>
+      <p>Error: Rating "{{ options.name }}" not found</p>
     {% else %}
       <div class="{{ globalStyle }} {{ options.class | default('') }}">
         {% for star in ratingData.stars %}
@@ -41,7 +41,7 @@
           
           {# Apply the appropriate style based on the star type #}
           {% set starStyle = options.datas.variants[ratingData.style] | default('') %}
-          {% set iconStyle = options.datas.iconStyles.default | default('w-6 h-6') %}
+          {% set iconStyle = options.datas.iconStyles.default | default('') %}
           
           <span class="{{ starStyle }}">
             {% if iconData and iconData.path %}
@@ -62,7 +62,7 @@
               {% endif %}
             {% else %}
               {# Fallback for missing icons - simple text representation #}
-              <span class="{{ iconStyle }} inline-flex items-center justify-center">
+              <span class="{{ iconStyle }}">
                 {% if star == 'star-filled' %}★{% else %}☆{% endif %}
               </span>
             {% endif %}
@@ -71,7 +71,7 @@
         
         {# Optional: Show numeric value if requested #}
         {% if options.showValue and ratingData.value %}
-          <span class="ml-2 text-sm text-gray-600">
+          <span>
             {{ ratingData.value }}
           </span>
         {% endif %}
