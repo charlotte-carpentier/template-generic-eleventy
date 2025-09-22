@@ -1,46 +1,10 @@
 {
   "buttons": [
     {
-      "name": "button_default",
-      "text": "Envoyer",
+      "name": "button_name",
+      "text": "Button Text",
       "variant": "primary",
-      "ariaLabel": "Envoyer le formulaire de contact"
-    },
-    {
-      "name": "button_languages",
-      "text": "Langages",
-      "variant": "primary",
-      "ariaLabel": "Afficher mes compétences en langages de programmation"
-    },
-    {
-      "name": "button_hard_skills",
-      "text": "Hard skills",
-      "variant": "primary",
-      "ariaLabel": "Afficher mes compétences techniques"
-    },
-    {
-      "name": "button_soft_skills",
-      "text": "Soft skills",
-      "variant": "primary",
-      "ariaLabel": "Afficher mes compétences interpersonnelles"
-    },
-    {
-      "name": "button_interests",
-      "text": "Intérêts",
-      "variant": "primary",
-      "ariaLabel": "Afficher mes centres d'intérêt"
-    },
-    {
-      "name": "button-reveal-all",
-      "text": "Afficher tout",
-      "variant": "primary",
-      "ariaLabel": "Afficher tous les contenus cachés"
-    },
-    {
-      "name": "button-hide-all",
-      "text": "Masquer tout",
-      "variant": "primary",
-      "ariaLabel": "Masquer tous les contenus révélés"
+      "ariaLabel": "Button description for accessibility"
     }
   ]
 }

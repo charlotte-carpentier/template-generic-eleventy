@@ -1,100 +1,11 @@
 {
-    "tooltips": [
-      {
-        "name": "hardskills_analysis",
-        "title": "CAPACITES D'ANALYSE", 
-        "description": "Regard affûté – lecture rapide de situations et ajustements mesurés."
-      },
-      {
-        "name": "hardskills_management",
-        "title": "MANAGEMENT D'EQUIPES", 
-        "description": "Sens du collectif – coordination et soutien des alliés."
-      },
-      {
-        "name": "hardskills_crisis",
-        "title": "GESTION DE CRISE", 
-        "description": "Sang-froid acquis – priorisation sous pression."
-      },
-      {
-        "name": "softskills_empathie",
-        "title": "EMPATHIE", 
-        "description": "Écoute sincère – compréhension des besoins et communication posée."
-      },
-      {
-        "name": "softskills_creativity",
-        "title": "CREATIVITE", 
-        "description": "Imagination structurée – idées concrètes et solutions réalistes."
-      },
-      {
-        "name": "softskills_patience",
-        "title": "PATIENCE", 
-        "description": "Temps maîtrisé – constance dans l’effort et vision long terme."
-      },
-      {
-        "name": "languages_symfony",
-        "title": "SYMFONY", 
-        "description": "Backend fiable – fondations solides pour un code durable."
-      },
-      {
-        "name": "languages_eleventy",
-        "title": "ELEVENTY", 
-        "description": "Pages rapides - minimalistes et économes en énergie."
-      },
-      {
-        "name": "languages_tailwind",
-        "title": "TAILWIND", 
-        "description": "Interfaces flexibles - nettes, précises et accessibles."
-      },
-      {
-        "name": "languages_javascript",
-        "title": "JAVASCRIPT", 
-        "description": "Actions ciblées - justes au bon moment."
-      },
-      {
-        "name": "languages_english",
-        "title": "ANGLAIS", 
-        "description": "Clé universelle - accès aux savoirs techniques et aux alliances internationales."
-      },
-      {
-        "name": "hobbies_horror",
-        "title": "CINEMA D'HORREUR", 
-        "description": "Suspense géré - sang-froid dans les ténèbres."
-      },
-      {
-        "name": "hobbies_maintenance",
-        "title": "MAINTENANCE INFORMATIQUE", 
-        "description": "Machines soignées – stabilité et performance garanties."
-      },
-      {
-        "name": "hobbies_korea",
-        "title": "CULTURE COREENNE", 
-        "description": "Influences transtemporelles – équilibre entre héritage et innovation."
-      },
-      {
-        "name": "hobbies_comics",
-        "title": "BANDE DESSINEE", 
-        "description": "Narration hybride – fusion des images et des mots."
-      },
-      {
-        "name": "hobbies_painting",
-        "title": "PEINTURE", 
-        "description": "Techniques en poche - instinct aux commandes."
-      },
-      {
-        "name": "hobbies_fencing",
-        "title": "ESCRIME", 
-        "description": "Art du duel – agilité et stratégie."
-      },
-      {
-        "name": "skills_treasure",
-        "title": "???", 
-        "description": "Non débloqué. Missions, temps et bonne connexion nécessaires."
-      },
-      {
-        "name": "avatar_desktop",
-        "description_part1": "Classe : sentinelle du web open-source\nSpécialité : action & sécurité\nAlignement : éco-numérique et accessibilité",
-        "description_part2": "Illustration © Diane C. Yoon",
-        "gradientColor": ""
-      }
-    ]
-  }
+  "tooltips": [
+    {
+      "name": "tooltip_name",
+      "title": "Tooltip title",
+      "description": "Tooltip description text",
+      "description_part1": "First part of description",
+      "description_part2": "Second part of description"
+    }
+  ]
+}

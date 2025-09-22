@@ -1,69 +1,10 @@
 {
-  "globalStyle": "typography-label-l chip-notification",
-  "variants": {
-    "default": "bg-red-500",
-    "success": "bg-green-500",
-    "warning": "bg-yellow-500",
-    "info": "bg-blue-500",
-    "dismissible": "bg-purple-500 cursor-pointer hover:bg-purple-600",
-    "transient": "bg-blue-400"
-  },
   "chip-notifications": [
     {
-      "name": "notification_count",
-      "text": "3",
-      "style": "default",
-      "ariaLabel": "3 notifications non lues",
-      "classes": ""
-    },
-    {
-      "name": "unread_messages",
-      "text": "12",
-      "style": "info",
-      "ariaLabel": "12 messages non lus",
-      "classes": ""
-    },
-    {
-      "name": "completed_tasks",
-      "text": "8",
-      "style": "success",
-      "ariaLabel": "8 tâches complétées",
-      "classes": ""
-    },
-    {
-      "name": "overflowed",
-      "text": "99+",
-      "style": "warning",
-      "ariaLabel": "Plus de 99 éléments",
-      "classes": ""
-    },
-    {
-      "name": "dismissible_alert",
-      "text": "1",
-      "style": "dismissible",
-      "ariaLabel": "1 nouvelle alerte, cliquez pour fermer",
-      "classes": "dismissible"
-    },
-    {
-      "name": "temporary_notice",
-      "text": "Nouveau",
-      "style": "transient",
-      "ariaLabel": "Nouvel élément ajouté",
-      "classes": "min-w-[75px]"
-    },
-    {
-      "name": "animated_counter",
-      "text": "5",
-      "style": "info",
-      "ariaLabel": "5 éléments en attente",
-      "classes": "animate-pulse"
-    },
-    {
-      "name": "urgent_notification",
-      "text": "!",
-      "style": "default",
-      "ariaLabel": "Notification urgente",
-      "classes": "ring-2 ring-white ring-offset-2 ring-offset-red-300"
+      "name": "notification_name",
+      "text": "Text",
+      "variant": "default",
+      "ariaLabel": "Aria label for accessibility"
     }
   ]
 }

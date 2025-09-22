@@ -1,0 +1,13 @@
+{
+  "checkboxes": [
+    {
+      "id": "checkbox_id",
+      "label": "Checkbox Label",
+      "value": "checkbox_value",
+      "description": "Description of this checkbox option",
+      "ariaLabel": "Aria label for this checkbox",
+      "required": false,
+      "disabled": false
+    }
+  ]
+}
