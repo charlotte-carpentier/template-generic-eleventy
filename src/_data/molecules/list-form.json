@@ -1,11 +1,11 @@
 {
-  "list-forms": [
+  "listForms": [
     {
-      "name": "form_name",
-      "radioName": "radio_reference",
+      "name": "formName",
+      "radioName": "radioReference",
       "inputs": [
         {
-          "inputName": "input_reference",
+          "inputName": "inputReference",
           "order": 1
         }
       ]

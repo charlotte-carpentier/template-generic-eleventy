@@ -1,10 +1,10 @@
 {
   "disclaimers": [
     {
-      "name": "disclaimer_name",
+      "name": "disclaimerName",
       "message": "Disclaimer message text",
       "variant": "info",
-      "icon": "icon_reference",
+      "icon": "iconReference",
       "actionLabel": "Action button text",
       "dismissLabel": "Dismiss button text"
     }

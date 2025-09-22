@@ -1,7 +1,7 @@
 {
-  "chip-notifications": [
+  "chipNotifications": [
     {
-      "name": "notification_name",
+      "name": "notificationName",
       "text": "Text",
       "variant": "default",
       "ariaLabel": "Aria label for accessibility"

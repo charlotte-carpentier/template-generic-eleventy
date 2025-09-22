@@ -1,7 +1,7 @@
 {
-  "rating-gauges": [
+  "ratingGauges": [
     {
-      "name": "rating_gauge_name",
+      "name": "ratingGaugeName",
       "stars": ["star-outline", "star-filled", "star-half", "star-outline", "star-outline"],
       "variant": "default"
     }

@@ -1,8 +1,8 @@
 {
   "boxes": [
     {
-      "id": "example_id",
-      "value": "example_value",
+      "id": "exampleId",
+      "value": "exampleValue",
       "checked": false,
       "disabled": false
     }

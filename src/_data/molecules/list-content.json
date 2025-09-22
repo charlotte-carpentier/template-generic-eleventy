@@ -1,12 +1,12 @@
 {
-  "list-contents": [
+  "listContents": [
     {
-      "name": "list_content_name",
+      "name": "listContentName",
       "variant": "default",
       "itemVariant": "default",
       "items": [
         {
-          "lockupName": "lockup_reference"
+          "lockupName": "lockupReference"
         }
       ]
     }

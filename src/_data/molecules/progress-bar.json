@@ -1,9 +1,9 @@
 {
-  "progress-bars": [
+  "progressBars": [
     {
-      "name": "progress_bar_name",
-      "labelName": "label_reference",
-      "descriptionName": "description_reference", 
+      "name": "progressBarName",
+      "labelName": "labelReference",
+      "descriptionName": "descriptionReference", 
       "value": 50
     }
   ]

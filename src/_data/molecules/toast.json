@@ -1,10 +1,10 @@
 {
   "toasts": [
     {
-      "name": "toast_name",
+      "name": "toastName",
       "message": "Toast message text",
       "variant": "info",
-      "icon": "icon_reference",
+      "icon": "iconReference",
       "duration": 5000,
       "dismissible": true
     }

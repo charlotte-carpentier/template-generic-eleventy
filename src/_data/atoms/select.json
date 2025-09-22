@@ -1,12 +1,12 @@
 {
   "selects": [
     {
-      "name": "select_name",
+      "name": "selectName",
       "variant": "default",
       "label": "Select label",
       "options": [
         {
-          "value": "option_value",
+          "value": "optionValue",
           "label": "Option label",
           "selected": false
         }

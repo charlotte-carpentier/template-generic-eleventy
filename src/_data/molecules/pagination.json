@@ -2,26 +2,26 @@
   "paginations": [
     {
       "pager": {
-        "name": "pager_name",
+        "name": "pagerName",
         "text": "Pager text",
         "variant": "default",
         "select": {
           "itemsPerPage": {
-            "ref": "select_reference"
+            "ref": "selectReference"
           }
         },
         "showTotalCount": true
       },
       "navigationPager": {
-        "name": "navigation_pager_name",
+        "name": "navigationPagerName",
         "text": "Navigation pager text",
         "children": [
           {
-            "icon": "icon_reference",
+            "icon": "iconReference",
             "label": "Button label",
             "url": "/url",
             "current": false,
-            "ref": "button_reference"
+            "ref": "buttonReference"
           }
         ]
       }

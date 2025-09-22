@@ -1,10 +1,10 @@
 {
   "captions": [
     {
-      "name": "caption_name",
-      "iconName": "icon_reference",
-      "tooltipName": "tooltip_reference",
-      "gradientColor": "color_variant"
+      "name": "captionName",
+      "iconName": "iconReference",
+      "tooltipName": "tooltipReference",
+      "gradientColor": "colorVariant"
     }
   ]
 }

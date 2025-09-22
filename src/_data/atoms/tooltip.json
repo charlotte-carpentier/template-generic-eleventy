@@ -1,11 +1,11 @@
 {
   "tooltips": [
     {
-      "name": "tooltip_name",
+      "name": "tooltipName",
       "title": "Tooltip title",
       "description": "Tooltip description text",
-      "description_part1": "First part of description",
-      "description_part2": "Second part of description"
+      "descriptionPart1": "First part of description",
+      "descriptionPart2": "Second part of description"
     }
   ]
 }

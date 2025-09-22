@@ -1,9 +1,9 @@
 {
   "toggles": [
     {
-      "id": "toggle_id",
+      "id": "toggleId",
       "label": "Toggle label",
-      "value": "toggle_value",
+      "value": "toggleValue",
       "description": "Toggle description",
       "variant": "default",
       "checked": false,

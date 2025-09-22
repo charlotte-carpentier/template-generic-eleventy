@@ -1,14 +1,14 @@
 {
   "cards": [
     {
-      "name": "card_name",
+      "name": "cardName",
       "type": "default",
       "variant": "default",
       "image": {
-        "name": "image_reference"
+        "name": "imageReference"
       },
       "heading": {
-        "name": "heading_reference"
+        "name": "headingReference"
       },
       "content": {
         "text": "Card content text",
@@ -16,7 +16,7 @@
         "maxLines": 2
       },
       "button": {
-        "name": "button_reference"
+        "name": "buttonReference"
       }
     }
   ]

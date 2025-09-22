@@ -1,7 +1,7 @@
 {
-  "chip-multiselects": [
+  "chipMultiselects": [
     {
-      "name": "chip_name",
+      "name": "chipName",
       "text": "Chip Text"
     }
   ]

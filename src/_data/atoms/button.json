@@ -1,7 +1,7 @@
 {
   "buttons": [
     {
-      "name": "button_name",
+      "name": "buttonName",
       "text": "Button Text",
       "variant": "primary",
       "ariaLabel": "Button description for accessibility"

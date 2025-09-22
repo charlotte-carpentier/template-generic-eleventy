@@ -1,9 +1,9 @@
 {
   "checkboxes": [
     {
-      "id": "checkbox_id",
+      "id": "checkboxId",
       "label": "Checkbox Label",
-      "value": "checkbox_value",
+      "value": "checkboxValue",
       "description": "Description of this checkbox option",
       "ariaLabel": "Aria label for this checkbox",
       "required": false,

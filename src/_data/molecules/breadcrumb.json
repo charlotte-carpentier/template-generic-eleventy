@@ -1,11 +1,11 @@
 {
   "breadcrumbs": [
     {
-      "name": "breadcrumb_name",
+      "name": "breadcrumbName",
       "links": [
         {
-          "name": "link_reference",
-          "link": "link_href",
+          "name": "linkReference",
+          "link": "linkHref",
           "variant": "primary"
         }
       ]

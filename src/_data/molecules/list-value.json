@@ -1,14 +1,14 @@
 {
-  "list-values": [
+  "listValues": [
     {
-      "name": "list_value_name",
+      "name": "listValueName",
       "variant": "default",
-      "containerVariant": "container_variant",
-      "itemVariant": "item_variant",
+      "containerVariant": "containerVariant",
+      "itemVariant": "itemVariant",
       "lockups": [
         {
-          "name": "lockup_reference",
-          "type": "lockup_type"
+          "name": "lockupReference",
+          "type": "lockupType"
         }
       ]
     }

@@ -1,12 +1,12 @@
 {
-  "block-drag-and-drops": [
+  "blockDragAndDrops": [
     {
-      "name": "dropzone_name",
-      "heading": "dropzone_reference",
+      "name": "dropzoneName",
+      "heading": "dropzoneReference",
       "dropzoneText": "Drag and drop text",
-      "icon": "icon_reference",
+      "icon": "iconReference",
       "separator": "Or",
-      "button": "button_reference",
+      "button": "buttonReference",
       "buttonText": "Button text",
       "supportedFormats": "File formats",
       "maxFileSize": "File size limit",

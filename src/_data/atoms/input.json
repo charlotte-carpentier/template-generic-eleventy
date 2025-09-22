@@ -1,9 +1,9 @@
 {
   "inputs": [
     {
-      "name": "input_name",
+      "name": "inputName",
       "type": "text",
-      "id": "input_id",
+      "id": "inputId",
       "placeholder": "Placeholder text",
       "required": false,
       "maxLength": 100,

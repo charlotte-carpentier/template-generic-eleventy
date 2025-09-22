@@ -1,10 +1,10 @@
 {
   "images": [
     {
-      "name": "image_name",
+      "name": "imageName",
       "src": "/assets/images/example.png",
       "alt": "Image description",
-      "variant": "variant_name"
+      "variant": "variantName"
     }
   ]
 }

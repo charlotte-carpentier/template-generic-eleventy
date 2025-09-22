@@ -1,10 +1,10 @@
 {
   "icons": [
     {
-      "name": "icon_name",
-      "spriteId": "sprite-id",
+      "name": "iconName",
+      "spriteId": "spriteId",
       "alt": "Icon description",
-      "variant": "variant_name"
+      "variant": "variantName"
     }
   ]
 }

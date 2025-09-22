@@ -1,11 +1,11 @@
 {
-  "segmented-controls": [
+  "segmentedControls": [
     {
-      "name": "segmented_control_name",
+      "name": "segmentedControlName",
       "segments": [
         {
-          "name": "segment_name",
-          "buttonRef": "button_reference",
+          "name": "segmentName",
+          "buttonRef": "buttonReference",
           "isActive": false
         }
       ]

@@ -1,7 +1,7 @@
 {
   "lockups": [
     {
-      "name": "lockup_name",
+      "name": "lockupName",
       "type": "label-value",
       "label": {
         "text": "Label text",
@@ -16,10 +16,10 @@
         "variant": "default"
       },
       "image": {
-        "name": "image_reference"
+        "name": "imageReference"
       },
       "heading": {
-        "name": "heading_reference"
+        "name": "headingReference"
       },
       "content": {
         "text": "Content text",

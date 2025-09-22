@@ -1,11 +1,11 @@
 {
   "vectors": [
     {
-      "name": "vector_name",
+      "name": "vectorName",
       "logoPath": "/assets/images/logo/example.svg",
       "logoAlt": "Logo description",
       "text": "Vector text content",
-      "variant": "variant_name"
+      "variant": "variantName"
     }
   ]
 }

@@ -1,13 +1,13 @@
 {
   "radios": [
     {
-      "name": "radio_name",
+      "name": "radioName",
       "label": "Radio group label",
       "required": false,
       "options": [
         {
-          "id": "option_id",
-          "value": "option_value",
+          "id": "optionId",
+          "value": "optionValue",
           "text": "Option text",
           "selected": false
         }
