@@ -1,44 +1,44 @@
 {
-  "error-layouts": [
+  "errorLayouts": [
     {
-      "name": "error_layout_404",
-      "variant": "cross-layout",
-      "titleTypographyName": "title-404",
-      "subtitleTypographyName": "subtitle-404-500-maintenance-partial",
-      "linkName": "link-cta-404-500-maintenance-partial",
-      "errorFragmentGroupName": "error_fragment_group_404",
-      "accessibilityTextTypographyName": "footer-info-visible",
-      "accessibilityButtonName": "button-reveal-all"
+      "name": "layout404",
+      "variant": "crossLayout",
+      "titleTypographyName": "title404",
+      "subtitleTypographyName": "subtitlePart",
+      "linkName": "ctaPartial",
+      "groupName": "errGroup404",
+      "a11yTextName": "a11yShowTxt",
+      "a11yBtnName": "a11yShowBtn"
     },
     {
-      "name": "error_layout_500",
-      "variant": "cross-layout",
-      "titleTypographyName": "title-500",
-      "subtitleTypographyName": "subtitle-404-500-maintenance-partial",
-      "linkName": "link-cta-404-500-maintenance-partial",
-      "errorFragmentGroupName": "error_fragment_group_500",
-      "accessibilityTextTypographyName": "footer-info-visible",
-      "accessibilityButtonName": "button-reveal-all"
+      "name": "layout500",
+      "variant": "crossLayout",
+      "titleTypographyName": "title500",
+      "subtitleTypographyName": "subtitlePart",
+      "linkName": "ctaPartial",
+      "groupName": "errGroup500",
+      "a11yTextName": "a11yShowTxt",
+      "a11yBtnName": "a11yShowBtn"
     },
     {
-      "name": "error_layout_maintenance_total",
-      "variant": "cross-layout",
-      "titleTypographyName": "title-maintenance",
-      "subtitleTypographyName": "subtitle-maintenance-total",
-      "linkName": "link-cta-maintenance-total",
-      "errorFragmentGroupName": "error_fragment_group_maintenance_total",
-      "accessibilityTextTypographyName": "footer-info-visible",
-      "accessibilityButtonName": "button-reveal-all"
+      "name": "layoutMntT",
+      "variant": "crossLayout",
+      "titleTypographyName": "titleMaint",
+      "subtitleTypographyName": "subtitleTot",
+      "linkName": "ctaTotal",
+      "groupName": "errGroupMntT",
+      "a11yTextName": "a11yShowTxt",
+      "a11yBtnName": "a11yShowBtn"
     },
     {
-      "name": "error_layout_maintenance_partial",
-      "variant": "cross-layout",
-      "titleTypographyName": "title-maintenance",
-      "subtitleTypographyName": "subtitle-404-500-maintenance-partial",
-      "linkName": "link-cta-404-500-maintenance-partial",
-      "errorFragmentGroupName": "error_fragment_group_maintenance_partial",
-      "accessibilityTextTypographyName": "footer-info-visible",
-      "accessibilityButtonName": "button-reveal-all"
+      "name": "layoutMntP",
+      "variant": "crossLayout",
+      "titleTypographyName": "titleMaint",
+      "subtitleTypographyName": "subtitlePart",
+      "linkName": "ctaPartial",
+      "groupName": "errGroupMntP",
+      "a11yTextName": "a11yShowTxt",
+      "a11yBtnName": "a11yShowBtn"
     }
   ]
 }

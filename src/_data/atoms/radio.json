@@ -1,32 +1,17 @@
 {
-    "radios": [
-      {
-        "name": "nature_request",
-        "label": "Quelle est la nature de votre requête ?",
-        "required": false,
-        "options": [
-          {
-            "id": "mission_freelance",
-            "value": "mission_freelance", 
-            "text": "Mission freelance"
-          },
-          {
-            "id": "collab_creative",
-            "value": "collab_creative",
-            "text": "Collab. créative",
-            "selected": true
-          },
-          {
-            "id": "just_curious",
-            "value": "juste_curieux",
-            "text": "Juste curieux.se"
-          },
-          {
-            "id": "other",
-            "value": "autre",
-            "text": "Autre"
-          }
-        ]
-      }
-    ]
-  }
+  "radios": [
+    {
+      "name": "radioName",
+      "label": "Radio group label",
+      "required": false,
+      "options": [
+        {
+          "id": "optionId",
+          "value": "optionValue",
+          "text": "Option text",
+          "selected": false
+        }
+      ]
+    }
+  ]
+}

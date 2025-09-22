@@ -1,124 +1,124 @@
 {
-  "error-fragments": [
+  "errorFragments": [
     {
-      "name": "fragment_404_01",
+      "name": "frag4041",
       "variant": "icon",
-      "iconName": "fragment-01-404"
+      "iconName": "err404Icon1"
     },
     {
-      "name": "fragment_404_02",
+      "name": "frag4042",
       "variant": "text",
-      "textTypographyName": "fragment-02-404"
+      "textTypographyName": "err404Text1"
     },
     {
-      "name": "fragment_404_03",
+      "name": "frag4043",
       "variant": "text",
-      "textTypographyName": "fragment-03-404"
+      "textTypographyName": "err404Text2"
     },
     {
-      "name": "fragment_404_04",
+      "name": "frag4044",
       "variant": "icon",
-      "iconName": "fragment-04-404"
+      "iconName": "err404Icon2"
     },
     {
-      "name": "fragment_404_05",
+      "name": "frag4045",
       "variant": "text",
-      "textTypographyName": "fragment-05-404"
+      "textTypographyName": "err404Text3"
     },
     {
-      "name": "fragment_404_06",
+      "name": "frag4046",
       "variant": "icon",
-      "iconName": "fragment-06-404"
+      "iconName": "err404Icon3"
     },
     {
-      "name": "fragment_500_01",
+      "name": "frag5001",
       "variant": "icon",
-      "iconName": "fragment-01-500"
+      "iconName": "err500Icon1"
     },
     {
-      "name": "fragment_500_02",
+      "name": "frag5002",
       "variant": "text",
-      "textTypographyName": "fragment-02-500"
+      "textTypographyName": "err500Text1"
     },
     {
-      "name": "fragment_500_03",
+      "name": "frag5003",
       "variant": "text",
-      "textTypographyName": "fragment-03-500"
+      "textTypographyName": "err500Text2"
     },
     {
-      "name": "fragment_500_04",
+      "name": "frag5004",
       "variant": "icon",
-      "iconName": "fragment-04-500"
+      "iconName": "err500Icon2"
     },
     {
-      "name": "fragment_500_05",
+      "name": "frag5005",
       "variant": "text",
-      "textTypographyName": "fragment-05-500"
+      "textTypographyName": "err500Text3"
     },
     {
-      "name": "fragment_500_06",
+      "name": "frag5006",
       "variant": "icon",
-      "iconName": "fragment-06-500"
+      "iconName": "err500Icon3"
     },
     {
-      "name": "fragment_maintenance_total_01",
+      "name": "fragMaintT1",
       "variant": "icon",
-      "iconName": "fragment-01-maintenance-total"
+      "iconName": "errMaintIcon1"
     },
     {
-      "name": "fragment_maintenance_total_02",
+      "name": "fragMaintT2",
       "variant": "text",
-      "textTypographyName": "fragment-02-maintenance-total"
+      "textTypographyName": "errMaintText1"
     },
     {
-      "name": "fragment_maintenance_total_03",
+      "name": "fragMaintT3",
       "variant": "text",
-      "textTypographyName": "fragment-03-maintenance-total"
+      "textTypographyName": "errMaintText2"
     },
     {
-      "name": "fragment_maintenance_total_04",
+      "name": "fragMaintT4",
       "variant": "icon",
-      "iconName": "fragment-04-maintenance-total"
+      "iconName": "errMaintIcon2"
     },
     {
-      "name": "fragment_maintenance_total_05",
+      "name": "fragMaintT5",
       "variant": "text",
-      "textTypographyName": "fragment-05-maintenance-total"
+      "textTypographyName": "errMaintText3"
     },
     {
-      "name": "fragment_maintenance_total_06",
+      "name": "fragMaintT6",
       "variant": "text",
-      "textTypographyName": "fragment-06-maintenance-total"
+      "textTypographyName": "errMaintText4"
     },
     {
-      "name": "fragment_maintenance_partial_01",
+      "name": "fragMaintP1",
       "variant": "icon",
-      "iconName": "fragment-01-maintenance-partial"
+      "iconName": "errMaintIcon1"
     },
     {
-      "name": "fragment_maintenance_partial_02",
+      "name": "fragMaintP2",
       "variant": "text",
-      "textTypographyName": "fragment-02-maintenance-partial"
+      "textTypographyName": "errMaintText1"
     },
     {
-      "name": "fragment_maintenance_partial_03",
+      "name": "fragMaintP3",
       "variant": "text",
-      "textTypographyName": "fragment-03-maintenance-partial"
+      "textTypographyName": "errMaintText2"
     },
     {
-      "name": "fragment_maintenance_partial_04",
+      "name": "fragMaintP4",
       "variant": "icon",
-      "iconName": "fragment-04-maintenance-partial"
+      "iconName": "errMaintIcon2"
     },
     {
-      "name": "fragment_maintenance_partial_05",
+      "name": "fragMaintP5",
       "variant": "text",
-      "textTypographyName": "fragment-05-maintenance-partial"
+      "textTypographyName": "errMaintText3"
     },
     {
-      "name": "fragment_maintenance_partial_06",
+      "name": "fragMaintP6",
       "variant": "icon",
-      "iconName": "fragment-06-maintenance-partial"
+      "iconName": "errMaintIcon3"
     }
   ]
 }

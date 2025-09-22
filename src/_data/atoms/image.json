@@ -1,34 +1,10 @@
 {
   "images": [
     {
-      "name": "avatar_desktop",
-      "src": "/assets/images/avatar/avatar_charlotte_desktop.png",
-      "alt": "Portrait de Charlotte Carpentier",
-      "variant": "avatar-desktop"
-    },
-    {
-      "name": "avatar_tablet", 
-      "src": "/assets/images/avatar/avatar_charlotte_tablet.png",
-      "alt": "Portrait de Charlotte Carpentier",
-      "variant": "avatar-tablet"
-    },
-    {
-      "name": "avatar_mobile",
-      "src": "/assets/images/avatar/avatar_charlotte_mobile.png", 
-      "alt": "Portrait de Charlotte Carpentier",
-      "variant": "avatar-mobile"
-    },
-    {
-      "name": "mission_manautic",
-      "src": "/assets/images/missions/cap_manautic.png", 
-      "alt": "Capture d'écran du projet web M.A Nautic développé avec Eleventy et Decap CMS",
-      "variant": "mission"
-    },
-    {
-      "name": "mission_tcsophro",
-      "src": "/assets/images/missions/cap_tcsophro.png",
-      "alt": "Capture d'écran du projet web Thomas C. Sophrologue développé avec Eleventy et Decap CMS",
-      "variant": "mission"
+      "name": "imageName",
+      "src": "/assets/images/example.png",
+      "alt": "Image description",
+      "variant": "variantName"
     }
   ]
 }

@@ -1,0 +1,10 @@
+{
+  "boxes": [
+    {
+      "id": "exampleId",
+      "value": "exampleValue",
+      "checked": false,
+      "disabled": false
+    }
+  ]
+}

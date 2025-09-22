@@ -1,16 +1,10 @@
 {
-  "progress-bars": [
+  "progressBars": [
     {
-      "name": "learning_loop",
-      "labelName": "knowledge_progressbar_title",
-      "descriptionName": "knowledge_progressbar_paragraph",
-      "value": 40
-    },
-    {
-      "name": "level_complete",
-      "labelName": "journey_progressbar_title",
-      "descriptionName": "journey_progressbar_paragraph",
-      "value": 90
+      "name": "progressBarName",
+      "labelName": "labelReference",
+      "descriptionName": "descriptionReference", 
+      "value": 50
     }
   ]
 }

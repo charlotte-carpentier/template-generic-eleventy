@@ -1,23 +1,11 @@
 {
-  "title": "Charlotte Carpentier – Développeuse Web",
-  "description": "Ce site suit une ligne tranquille : aller à l'essentiel, bâtir du code durable et respecter les utilisateurs. D'autres projets pourraient suivre le même chemin.",
-  "url": "https://charlottecarpentier.com",
+  "title": "Site Title",
+  "description": "Site description",
+  "url": "https://example.com",
   "views": {
     "/": {
-      "title": "Charlotte Carpentier – Développeuse Web",
-      "description": "Ce site suit une ligne tranquille : aller à l'essentiel, bâtir du code durable et respecter les utilisateurs. D'autres projets pourraient suivre le même chemin."
-    },
-    "/faq/": {
-      "title": "FAQ – Charlotte Carpentier",
-      "description": "Mon parcours, mes choix techniques et les valeurs qui me tiennent à cœur."
-    },
-    "/legal/": {
-      "title": "Mentions légales – Charlotte Carpentier",
-      "description": "Mentions légales et conditions d’utilisation du site."
-    },
-    "/thank-you/": {
-      "title": "Message bien reçu – Merci !",
-      "description": "Votre message a été transmis. Je répondrai dès que possible."
+      "title": "Page Title",
+      "description": "Page description"
     }
   },
   "favicon": {
@@ -28,12 +16,12 @@
   },
   "socialImage": "/assets/social-share.jpg",
   "fonts": {
-    "primary": "Orbitron",
-    "secondary": "Manjari"
+    "primary": "FontName",
+    "secondary": "FontName"
   },
   "axeptio": {
-    "clientId": "6880d00ff0b041d2ff94a7f8",
-    "cookiesVersion": "charlottecarpentier-fr-EU"
+    "clientId": "clientId",
+    "cookiesVersion": "versionName"
   },
   "preloadImages": []
 }

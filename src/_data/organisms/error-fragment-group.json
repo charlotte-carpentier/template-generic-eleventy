@@ -1,52 +1,52 @@
 {
-  "error-fragment-groups": [
+  "errorFragmentGroups": [
     {
-      "name": "error_fragment_group_404",
-      "variant": "grid-2x3",
+      "name": "errGroup404",
+      "variant": "grid2x3",
       "fragmentNames": [
-        "fragment_404_01",
-        "fragment_404_02",
-        "fragment_404_03",
-        "fragment_404_04",
-        "fragment_404_05",
-        "fragment_404_06"
+        "frag4041",
+        "frag4042",
+        "frag4043",
+        "frag4044",
+        "frag4045",
+        "frag4046"
       ]
     },
     {
-      "name": "error_fragment_group_500",
-      "variant": "grid-2x3",
+      "name": "errGroup500",
+      "variant": "grid2x3",
       "fragmentNames": [
-        "fragment_500_01",
-        "fragment_500_02",
-        "fragment_500_03",
-        "fragment_500_04",
-        "fragment_500_05",
-        "fragment_500_06"
+        "frag5001",
+        "frag5002",
+        "frag5003",
+        "frag5004",
+        "frag5005",
+        "frag5006"
       ]
     },
     {
-      "name": "error_fragment_group_maintenance_total",
-      "variant": "grid-2x3",
+      "name": "errGroupMntT",
+      "variant": "grid2x3",
       "disableFragment6Click": true,
       "fragmentNames": [
-        "fragment_maintenance_total_01",
-        "fragment_maintenance_total_02",
-        "fragment_maintenance_total_03",
-        "fragment_maintenance_total_04",
-        "fragment_maintenance_total_05",
-        "fragment_maintenance_total_06"
+        "fragMaintT1",
+        "fragMaintT2",
+        "fragMaintT3",
+        "fragMaintT4",
+        "fragMaintT5",
+        "fragMaintT6"
       ]
     },
     {
-      "name": "error_fragment_group_maintenance_partial",
-      "variant": "grid-2x3",
+      "name": "errGroupMntP",
+      "variant": "grid2x3",
       "fragmentNames": [
-        "fragment_maintenance_partial_01",
-        "fragment_maintenance_partial_02",
-        "fragment_maintenance_partial_03",
-        "fragment_maintenance_partial_04",
-        "fragment_maintenance_partial_05",
-        "fragment_maintenance_partial_06"
+        "fragMaintP1",
+        "fragMaintP2",
+        "fragMaintP3",
+        "fragMaintP4",
+        "fragMaintP5",
+        "fragMaintP6"
       ]
     }
   ]

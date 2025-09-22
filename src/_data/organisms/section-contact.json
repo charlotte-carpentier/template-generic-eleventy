@@ -1,14 +1,14 @@
 {
-  "sections": [
+  "sectionContacts": [
     {
-      "name": "charlotte_contact",
+      "name": "sectionName",
       "header": {
-        "title": "contact_title"
+        "title": "titleReference"
       },
       "content": {
-        "contact_block": "main_contact",
-        "form": "contact_form",
-        "button": "button_default"
+        "contactBlock": "contactReference",
+        "form": "formReference",
+        "button": "buttonReference"
       }
     }
   ]
