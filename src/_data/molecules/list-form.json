@@ -1,20 +1,12 @@
 {
   "list-forms": [
     {
-      "name": "contact_form",
-      "radioName": "nature_request",
+      "name": "form_name",
+      "radioName": "radio_reference",
       "inputs": [
         {
-          "inputName": "username",
+          "inputName": "input_reference",
           "order": 1
-        },
-        {
-          "inputName": "email", 
-          "order": 2
-        },
-        {
-          "inputName": "message",
-          "order": 3
         }
       ]
     }
