@@ -1,34 +1,14 @@
 {
-  "tab-sections": [
+  "tabBars": [
     {
-      "name": "charlotte_main",
+      "name": "tabBarName",
       "navigation": {
-        "menu": "main_navigation"
+        "menu": "menuReference"
       },
       "sections": [
         {
-          "type": "portfolio",
-          "name": "charlotte_missions"
-        },
-        {
-          "type": "timeline", 
-          "name": "charlotte_profile"
-        },
-        {
-          "type": "timeline",
-          "name": "charlotte_journey"
-        },
-        {
-          "type": "timeline",
-          "name": "charlotte_knowledge"
-        },
-        {
-          "type": "contact",
-          "name": "charlotte_contact"
-        },
-        {
-          "type": "timeline",
-          "name": "charlotte_legal"
+          "type": "sectionType",
+          "name": "sectionReference"
         }
       ]
     }
