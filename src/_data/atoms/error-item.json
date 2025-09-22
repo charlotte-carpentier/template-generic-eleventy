@@ -1,188 +1,161 @@
 {
-  "error_items": [
+  "errorItems": [
     {
-      "name": "title-404",
-      "content": "L’élément recherché est inexistant ou retiré.",
+      "name": "title404",
+      "content": "L'élément recherché est inexistant ou retiré.",
       "variant": "typography"
     },
     {
-      "name": "title-500",
-      "content": "L’élément recherché est bloqué par un problème technique.",
+      "name": "title500",
+      "content": "L'élément recherché est bloqué par un problème technique.",
       "variant": "typography"
     },
     {
-      "name": "title-maintenance",
-      "content": "L’élément recherché fait l’objet d’une intervention nécessaire.",
+      "name": "titleMaint",
+      "content": "L'élément recherché fait l'objet d'une intervention nécessaire.",
       "variant": "typography"
     },
     {
-      "name": "subtitle-404-500-maintenance-partial",
-      "content": "L’accès au reste du site est préservé.",
+      "name": "subtitlePart",
+      "content": "L'accès au reste du site est préservé.",
       "variant": "typography"
     },
     {
-      "name": "subtitle-maintenance-total",
-      "content": "Un lien vers l’extérieur est préservé.",
+      "name": "subtitleTot",
+      "content": "Un lien vers l'extérieur est préservé.",
       "variant": "typography"
     },
     {
-      "name": "link-cta-404-500-maintenance-partial",
+      "name": "ctaPartial",
       "content": "Aller vers les pages disponibles",
       "variant": "link"
     },
     {
-      "name": "link-cta-maintenance-total",
+      "name": "ctaTotal",
       "content": "Laisser un message",
       "variant": "link"
     },
     {
-      "name": "fragment-01-404",
-      "spriteId": "fragment-01a-magnifying-glass",
+      "name": "err404Icon1",
+      "spriteId": "fragment01aMagnifyingGlass",
       "alt": "Loupe",
       "variant": "icon"
     },
     {
-      "name": "fragment-02-404",
+      "name": "err404Text1",
       "content": "Données absentes.",
       "variant": "typography"
     },
     {
-      "name": "fragment-03-404",
+      "name": "err404Text2",
       "content": "Domaine vide.",
       "variant": "typography"
     },
     {
-      "name": "fragment-04-404",
-      "spriteId": "fragment-404-04a-eye-slash",
+      "name": "err404Icon2",
+      "spriteId": "fragment40404aEyeSlash",
       "alt": "Œil barré",
       "variant": "icon"
     },
     {
-      "name": "fragment-05-404",
+      "name": "err404Text3",
       "content": "Impasse.",
       "variant": "typography"
     },
     {
-      "name": "fragment-06-404",
-      "spriteId": "fragment-06a-person-simple-run",
+      "name": "err404Icon3",
+      "spriteId": "fragment06aPersonSimpleRun",
       "alt": "Personne qui court",
       "variant": "icon"
     },
     {
-      "name": "fragment-01-500",
-      "spriteId": "fragment-01a-magnifying-glass",
+      "name": "err500Icon1",
+      "spriteId": "fragment01aMagnifyingGlass",
       "alt": "Loupe",
       "variant": "icon"
     },
     {
-      "name": "fragment-02-500",
+      "name": "err500Text1",
       "content": "Chemin interrompu.",
       "variant": "typography"
     },
     {
-      "name": "fragment-03-500",
+      "name": "err500Text2",
       "content": "Erreur interne.",
       "variant": "typography"
     },
     {
-      "name": "fragment-04-500",
-      "spriteId": "fragment-500-04a-bug",
+      "name": "err500Icon2",
+      "spriteId": "fragment50004aBug",
       "alt": "Icône bug",
       "variant": "icon"
     },
     {
-      "name": "fragment-05-500",
+      "name": "err500Text3",
       "content": "Domaine fermé.",
       "variant": "typography"
     },
     {
-      "name": "fragment-06-500",
-      "spriteId": "fragment-06a-person-simple-run",
+      "name": "err500Icon3",
+      "spriteId": "fragment06aPersonSimpleRun",
       "alt": "Personne qui court",
       "variant": "icon"
     },
     {
-      "name": "fragment-01-maintenance-total",
-      "spriteId": "fragment-01a-magnifying-glass",
+      "name": "errMaintIcon1",
+      "spriteId": "fragment01aMagnifyingGlass",
       "alt": "Loupe",
       "variant": "icon"
     },
     {
-      "name": "fragment-02-maintenance-total",
+      "name": "errMaintText1",
       "content": "Chemin interrompu.",
       "variant": "typography"
     },
     {
-      "name": "fragment-03-maintenance-total",
+      "name": "errMaintText2",
       "content": "Travaux en cours.",
       "variant": "typography"
     },
     {
-      "name": "fragment-04-maintenance-total",
-      "spriteId": "fragment-maintenance-04a-barricade",
+      "name": "errMaintIcon2",
+      "spriteId": "fragmentMaintenance04aBarricade",
       "alt": "Barricade",
       "variant": "icon"
     },
     {
-      "name": "fragment-05-maintenance-total",
+      "name": "errMaintText3",
       "content": "Domaine fermé.",
       "variant": "typography"
     },
     {
-      "name": "fragment-06-maintenance-total",
+      "name": "errMaintText4",
       "content": "Nous reviendrons.",
       "variant": "typography"
     },
     {
-      "name": "fragment-01-maintenance-partial",
-      "spriteId": "fragment-01a-magnifying-glass",
-      "alt": "Loupe",
-      "variant": "icon"
-    },
-    {
-      "name": "fragment-02-maintenance-partial",
-      "content": "Chemin interrompu.",
-      "variant": "typography"
-    },
-    {
-      "name": "fragment-03-maintenance-partial",
-      "content": "Travaux en cours.",
-      "variant": "typography"
-    },
-    {
-      "name": "fragment-04-maintenance-partial",
-      "spriteId": "fragment-maintenance-04a-barricade",
-      "alt": "Barricade",
-      "variant": "icon"
-    },
-    {
-      "name": "fragment-05-maintenance-partial",
-      "content": "Domaine fermé.",
-      "variant": "typography"
-    },
-    {
-      "name": "fragment-06-maintenance-partial",
-      "spriteId": "fragment-06a-person-simple-run",
+      "name": "errMaintIcon3",
+      "spriteId": "fragment06aPersonSimpleRun",
       "alt": "Personne qui court",
       "variant": "icon"
     },
     {
-      "name": "footer-info-visible",
+      "name": "a11yShowTxt",
       "content": "Pour rendre visibles les contenus cachés :",
       "variant": "typography"
     },
     {
-      "name": "footer-info-hidden",
+      "name": "a11yHideTxt",
       "content": "Pour invisibiliser les contenus révélés :",
       "variant": "typography"
     },
     {
-      "name": "button-reveal-all",
+      "name": "a11yShowBtn",
       "content": "Afficher tout",
       "variant": "button"
     },
     {
-      "name": "button-hide-all",
+      "name": "a11yHideBtn",
       "content": "Masquer tout",
       "variant": "button"
     }
