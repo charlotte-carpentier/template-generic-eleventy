@@ -1,44 +1,44 @@
 {
   "errorLayouts": [
     {
-      "name": "errLayout404",
+      "name": "layout404",
       "variant": "crossLayout",
       "titleTypographyName": "title404",
       "subtitleTypographyName": "subtitlePart",
       "linkName": "ctaPartial",
-      "errorFragmentGroupName": "errGroup404",
-      "accessibilityTextTypographyName": "a11yShowTxt",
-      "accessibilityButtonName": "a11yShowBtn"
+      "groupName": "errGroup404",
+      "a11yTextName": "a11yShowTxt",
+      "a11yBtnName": "a11yShowBtn"
     },
     {
-      "name": "errLayout500",
+      "name": "layout500",
       "variant": "crossLayout",
       "titleTypographyName": "title500",
       "subtitleTypographyName": "subtitlePart",
       "linkName": "ctaPartial",
-      "errorFragmentGroupName": "errGroup500",
-      "accessibilityTextTypographyName": "a11yShowTxt",
-      "accessibilityButtonName": "a11yShowBtn"
+      "groupName": "errGroup500",
+      "a11yTextName": "a11yShowTxt",
+      "a11yBtnName": "a11yShowBtn"
     },
     {
-      "name": "errLayoutMntT",
+      "name": "layoutMntT",
       "variant": "crossLayout",
       "titleTypographyName": "titleMaint",
       "subtitleTypographyName": "subtitleTot",
       "linkName": "ctaTotal",
-      "errorFragmentGroupName": "errGroupMntT",
-      "accessibilityTextTypographyName": "a11yShowTxt",
-      "accessibilityButtonName": "a11yShowBtn"
+      "groupName": "errGroupMntT",
+      "a11yTextName": "a11yShowTxt",
+      "a11yBtnName": "a11yShowBtn"
     },
     {
-      "name": "errLayoutMntP",
+      "name": "layoutMntP",
       "variant": "crossLayout",
       "titleTypographyName": "titleMaint",
       "subtitleTypographyName": "subtitlePart",
       "linkName": "ctaPartial",
-      "errorFragmentGroupName": "errGroupMntP",
-      "accessibilityTextTypographyName": "a11yShowTxt",
-      "accessibilityButtonName": "a11yShowBtn"
+      "groupName": "errGroupMntP",
+      "a11yTextName": "a11yShowTxt",
+      "a11yBtnName": "a11yShowBtn"
     }
   ]
 }
