@@ -1,10 +1,38 @@
 {
   "disclaimers": [
     {
-      "name": "disclaimerName",
-      "message": "Disclaimer message text",
+      "name": "demoDiscla1",
+      "message": "This is the longest label in the world",
       "variant": "info",
-      "icon": "iconReference",
+      "iconName": "demoInfo1",
+      "closeIconName": "demoClose1",
+      "actionLabel": "Action button text",
+      "dismissLabel": "Dismiss button text"
+    },
+    {
+      "name": "demoDiscla2",
+      "message": "This is the longest label in the world",
+      "variant": "success",
+      "iconName": "demoCheck1",
+      "closeIconName": "demoClose1",
+      "actionLabel": "Action button text", 
+      "dismissLabel": "Dismiss button text"
+    },
+    {
+      "name": "demoDiscla3",
+      "message": "This is the longest label in the world",
+      "variant": "warning",
+      "iconName": "demoWarn1",
+      "closeIconName": "demoClose1",
+      "actionLabel": "Action button text",
+      "dismissLabel": "Dismiss button text"
+    },
+    {
+      "name": "demoDiscla4",
+      "message": "This is the longest label in the world",
+      "variant": "error",
+      "iconName": "demoWarnCir1",
+      "closeIconName": "demoClose1",
       "actionLabel": "Action button text",
       "dismissLabel": "Dismiss button text"
     }

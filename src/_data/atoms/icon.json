@@ -111,6 +111,82 @@
         "alt": "Flag icon",
         "variant": "xxl"
       }
+    ],
+    "navigation": [
+      {
+        "name": "demoBack1",
+        "spriteId": "backward-fast-solid-full",
+        "alt": "First page",
+        "variant": "md"
+      },
+      {
+        "name": "demoLeft1",
+        "spriteId": "caret-left-solid-full", 
+        "alt": "Previous page",
+        "variant": "md"
+      },
+      {
+        "name": "demoDots1",
+        "spriteId": "dots-three",
+        "alt": "More pages",
+        "variant": "md"
+      },
+      {
+        "name": "demoRight1",
+        "spriteId": "caret-right-solid-full",
+        "alt": "Next page", 
+        "variant": "md"
+      },
+      {
+        "name": "demoForward1",
+        "spriteId": "forward-fast-solid-full",
+        "alt": "Last page",
+        "variant": "md"
+      }
+    ],
+    "status": [
+      {
+        "name": "demoInfo1",
+        "spriteId": "info",
+        "alt": "Information",
+        "variant": "md"
+      },
+      {
+        "name": "demoCheck1",
+        "spriteId": "check-circle",
+        "alt": "Success",
+        "variant": "md"
+      },
+      {
+        "name": "demoWarn1",
+        "spriteId": "warning",
+        "alt": "Warning",
+        "variant": "md"
+      },
+      {
+        "name": "demoWarnCir1",
+        "spriteId": "warning-circle",
+        "alt": "Error",
+        "variant": "md"
+      },
+      {
+        "name": "demoClose1",
+        "spriteId": "x",
+        "alt": "Close",
+        "variant": "md"
+      },
+      {
+        "name": "demoFileUp1",
+        "spriteId": "file-arrow-up",
+        "alt": "Upload file",
+        "variant": "md"
+      },
+      {
+        "name": "demoStar1",
+        "spriteId": "star",
+        "alt": "Star rating",
+        "variant": "md"
+      }
     ]
   }
 }

@@ -1,29 +1,23 @@
 {
   "paginations": [
     {
-      "pager": {
-        "name": "pagerName",
-        "text": "Pager text",
-        "variant": "default",
-        "select": {
-          "itemsPerPage": {
-            "ref": "selectReference"
-          }
-        },
-        "showTotalCount": true
+      "name": "demoPager1",
+      "itemsPerPage": {
+        "selectName": "demoSelect1"
       },
       "navigationPager": {
-        "name": "navigationPagerName",
-        "text": "Navigation pager text",
-        "children": [
-          {
-            "icon": "iconReference",
-            "label": "Button label",
-            "url": "/url",
-            "current": false,
-            "ref": "buttonReference"
-          }
-        ]
+        "name": "demoNavPager1",
+        "siblingCount": 2,
+        "icons": {
+          "first": "demoBack1",
+          "prev": "demoLeft1",
+          "dots": "demoDots1", 
+          "next": "demoRight1",
+          "last": "demoForward1"
+        }
+      },
+      "totalCount": {
+        "show": true
       }
     }
   ]

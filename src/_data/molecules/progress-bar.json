@@ -1,10 +1,40 @@
 {
   "progressBars": [
     {
-      "name": "progressBarName",
-      "labelName": "labelReference",
-      "descriptionName": "descriptionReference", 
-      "value": 50
+      "name": "demoProgr1",
+      "label": "Label",
+      "value": 25,
+      "min": 0,
+      "max": 100,
+      "showLabels": true,
+      "showPercentage": true
+    },
+    {
+      "name": "demoProgr2", 
+      "label": "Label",
+      "value": 50,
+      "min": 0,
+      "max": 100,
+      "showLabels": true,
+      "showPercentage": true
+    },
+    {
+      "name": "demoProgr3",
+      "label": "Label", 
+      "value": 75,
+      "min": 0,
+      "max": 100,
+      "showLabels": true,
+      "showPercentage": true
+    },
+    {
+      "name": "demoProgr4",
+      "label": "Label",
+      "value": 100,
+      "min": 0,
+      "max": 100,
+      "showLabels": true,
+      "showPercentage": true
     }
   ]
 }

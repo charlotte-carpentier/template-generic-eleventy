@@ -48,6 +48,12 @@
       "variant": "secondary",
       "size": "small",
       "ariaLabel": "Button description for accessibility"
+    },
+    {
+      "name": "demoBrowse1",
+      "text": "Browse files",
+      "variant": "primary",
+      "ariaLabel": "Browse files to upload"
     }
   ]
 }
