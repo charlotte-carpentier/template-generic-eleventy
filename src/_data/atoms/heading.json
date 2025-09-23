@@ -1,10 +1,40 @@
 {
   "headings": [
     {
-      "name": "headingName",
-      "text": "Heading text",
+      "name": "demoHead1",
+      "text": "Heading",
       "tag": "h1",
       "variant": "h1"
+    },
+    {
+      "name": "demoHead2", 
+      "text": "Heading",
+      "tag": "h2",
+      "variant": "h2"
+    },
+    {
+      "name": "demoHead3",
+      "text": "Heading", 
+      "tag": "h3",
+      "variant": "h3"
+    },
+    {
+      "name": "demoHead4",
+      "text": "Heading",
+      "tag": "h4", 
+      "variant": "h4"
+    },
+    {
+      "name": "demoHead5",
+      "text": "Heading",
+      "tag": "h5",
+      "variant": "h5"
+    },
+    {
+      "name": "demoHead6",
+      "text": "Heading",
+      "tag": "h6",
+      "variant": "h6"
     }
   ]
 }

@@ -1,8 +1,8 @@
 {
   "switchs": [
     {
-      "id": "switchId",
-      "value": "switchValue",
+      "id": "demoSwitch1",
+      "value": "demoValue1",
       "variant": "default",
       "size": "medium",
       "ariaLabel": "Switch description",

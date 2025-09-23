@@ -1,10 +1,116 @@
 {
-  "icons": [
-    {
-      "name": "iconName",
-      "spriteId": "spriteId",
-      "alt": "Icon description",
-      "variant": "variantName"
-    }
-  ]
+  "icons": {
+    "smiles": [
+      {
+        "name": "demoSmile1",
+        "spriteId": "smile",
+        "alt": "Smile icon",
+        "variant": "xs-filled"
+      },
+      {
+        "name": "demoSmile2", 
+        "spriteId": "smile",
+        "alt": "Smile icon",
+        "variant": "sm-filled"
+      },
+      {
+        "name": "demoSmile3",
+        "spriteId": "smile", 
+        "alt": "Smile icon",
+        "variant": "md-filled"
+      },
+      {
+        "name": "demoSmile4",
+        "spriteId": "smile",
+        "alt": "Smile icon",
+        "variant": "lg-filled"
+      },
+      {
+        "name": "demoSmile5",
+        "spriteId": "smile",
+        "alt": "Smile icon",
+        "variant": "xl-filled"
+      },
+      {
+        "name": "demoSmile6",
+        "spriteId": "smile",
+        "alt": "Smile icon", 
+        "variant": "xxl-filled"
+      },
+      {
+        "name": "demoSmile7",
+        "spriteId": "smile",
+        "alt": "Smile icon",
+        "variant": "xs-outline"
+      },
+      {
+        "name": "demoSmile8",
+        "spriteId": "smile",
+        "alt": "Smile icon",
+        "variant": "sm-outline"
+      },
+      {
+        "name": "demoSmile9",
+        "spriteId": "smile",
+        "alt": "Smile icon",
+        "variant": "md-outline"
+      },
+      {
+        "name": "demoSmile10",
+        "spriteId": "smile",
+        "alt": "Smile icon",
+        "variant": "lg-outline"
+      },
+      {
+        "name": "demoSmile11",
+        "spriteId": "smile",
+        "alt": "Smile icon",
+        "variant": "xl-outline"
+      },
+      {
+        "name": "demoSmile12",
+        "spriteId": "smile",
+        "alt": "Smile icon",
+        "variant": "xxl-outline"
+      }
+    ],
+    "flags": [
+      {
+        "name": "demoFlag1",
+        "spriteId": "flag",
+        "alt": "Flag icon",
+        "variant": "xs"
+      },
+      {
+        "name": "demoFlag2",
+        "spriteId": "flag",
+        "alt": "Flag icon", 
+        "variant": "sm"
+      },
+      {
+        "name": "demoFlag3",
+        "spriteId": "flag",
+        "alt": "Flag icon",
+        "variant": "md"
+      },
+      {
+        "name": "demoFlag4",
+        "spriteId": "flag",
+        "alt": "Flag icon",
+        "variant": "lg"
+      },
+      {
+        "name": "demoFlag5",
+        "spriteId": "flag",
+        "alt": "Flag icon",
+        "variant": "xl"
+      },
+      {
+        "name": "demoFlag6",
+        "spriteId": "flag",
+        "alt": "Flag icon",
+        "variant": "xxl"
+      }
+    ]
+  }
 }

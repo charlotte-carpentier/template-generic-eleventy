@@ -1,16 +1,73 @@
 {
   "inputs": [
     {
-      "name": "inputName",
+      "name": "demoInput1",
       "type": "text",
-      "id": "inputId",
-      "placeholder": "Placeholder text",
+      "id": "demoInput1",
+      "label": "Label",
+      "placeholder": "Placeholder",
       "required": false,
       "maxLength": 100,
       "pattern": "^[a-zA-Z0-9]*$",
       "patternMessage": "Pattern validation message",
-      "errorMessage": "Error message",
-      "rows": 2
+      "errorMessage": "Label"
+    },
+    {
+      "name": "demoInput2",
+      "type": "select",
+      "id": "demoInput2",
+      "label": "Label",
+      "selectName": "demoSelect1",
+      "required": false,
+      "errorMessage": "Label"
+    },
+    {
+      "name": "demoInput3",
+      "type": "multiselect",
+      "id": "demoInput3",
+      "label": "Label",
+      "chipMultiName": "demoChipMs1",
+      "required": false,
+      "errorMessage": "Label"
+    },
+    {
+      "name": "demoInput4",
+      "type": "date",
+      "id": "demoInput4",
+      "label": "Label",
+      "placeholder": "dd/mm/yyyy",
+      "required": false,
+      "errorMessage": "Label"
+    },
+    {
+      "name": "demoInput5",
+      "type": "phone",
+      "id": "demoInput5",
+      "label": "Label",
+      "placeholder": "Placeholder",
+      "required": false,
+      "maxLength": 15,
+      "errorMessage": "Label"
+    },
+    {
+      "name": "demoInput6",
+      "type": "panel",
+      "id": "demoInput6",
+      "label": "Label",
+      "placeholder": "Placeholder",
+      "required": false,
+      "errorMessage": "Label"
+    },
+    {
+      "name": "demoInput7",
+      "type": "textarea",
+      "id": "demoInput7",
+      "label": "Label",
+      "placeholder": "Placeholder",
+      "required": false,
+      "maxLength": 500,
+      "rows": 4,
+      "errorMessage": "Label"
     }
   ]
 }

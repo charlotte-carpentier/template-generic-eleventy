@@ -1,17 +1,11 @@
 {
   "radios": [
     {
-      "name": "radioName",
-      "label": "Radio group label",
-      "required": false,
-      "options": [
-        {
-          "id": "optionId",
-          "value": "optionValue",
-          "text": "Option text",
-          "selected": false
-        }
-      ]
+      "id": "demoRadio1",
+      "name": "demoRadio1",
+      "value": "demoValue1",
+      "checked": false,
+      "disabled": false
     }
   ]
 }

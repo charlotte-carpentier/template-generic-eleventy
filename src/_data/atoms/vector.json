@@ -1,11 +1,18 @@
 {
   "vectors": [
     {
-      "name": "vectorName",
-      "logoPath": "/assets/images/logo/example.svg",
-      "logoAlt": "Logo description",
-      "text": "Vector text content",
-      "variant": "variantName"
+      "name": "demoVector1",
+      "logoPath": "/assets/images/logos/demo-logo.svg",
+      "logoAlt": "Demo logo",
+      "text": "Starter kit",
+      "variant": "horizontal"
+    },
+    {
+      "name": "demoVector2",
+      "logoPath": "/assets/images/logos/demo-logo.svg",
+      "logoAlt": "Demo logo",
+      "text": "",
+      "variant": "logo-only"
     }
   ]
 }

@@ -1,10 +1,9 @@
 {
   "radioButtons": [
     {
-      "id": "radioButtonId",
-      "name": "radioButtonName",
-      "label": "Radio button label",
-      "value": "radioButtonValue"
+      "id": "demoRadioBt1",
+      "radioName": "demoRadio1",
+      "label": "Label"
     }
   ]
 }

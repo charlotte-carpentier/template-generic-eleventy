@@ -1,13 +1,10 @@
 {
   "toggles": [
     {
-      "id": "toggleId",
-      "label": "Toggle label",
-      "value": "toggleValue",
-      "description": "Toggle description",
-      "variant": "default",
-      "checked": false,
-      "disabled": false
+      "id": "demoToggle1",
+      "switchName": "demoSwitch1",
+      "label": "Label",
+      "description": "Toggle description"
     }
   ]
 }
