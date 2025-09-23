@@ -1,9 +1,45 @@
 {
   "tags": [
     {
-      "name": "tagName",
-      "text": "Tag text",
+      "name": "demoTag1",
+      "text": "LABEL",
       "variant": "default",
+      "title": "Tag tooltip",
+      "role": "status",
+      "isInteractive": false,
+      "screenReaderText": "Screen reader description"
+    },
+    {
+      "name": "demoTag2",
+      "text": "LABEL",
+      "variant": "primary",
+      "title": "Tag tooltip",
+      "role": "status",
+      "isInteractive": false,
+      "screenReaderText": "Screen reader description"
+    },
+    {
+      "name": "demoTag3",
+      "text": "LABEL",
+      "variant": "success",
+      "title": "Tag tooltip",
+      "role": "status",
+      "isInteractive": false,
+      "screenReaderText": "Screen reader description"
+    },
+    {
+      "name": "demoTag4",
+      "text": "LABEL",
+      "variant": "warning",
+      "title": "Tag tooltip",
+      "role": "status",
+      "isInteractive": false,
+      "screenReaderText": "Screen reader description"
+    },
+    {
+      "name": "demoTag5",
+      "text": "LABEL",
+      "variant": "danger",
       "title": "Tag tooltip",
       "role": "status",
       "isInteractive": false,

@@ -40,9 +40,12 @@ template-generic-eleventy/
 │   │   │   └── vendor/           # Third-party fonts (e.g. Google, Adobe)
 │   │   ├── icons/                # Icons and sprites
 │   │   │   ├── favicon/          # Favicons and app icons (per MDN spec)
-│   │   │   ├── interface/        # UI pictograms
 │   │   │   └── sprites/          # Icon spritesheets (SVG/PNG)
 │   │   ├── images/               # Raster and vector images (not icons)
+│   │   │   ├── backgrounds/      # Project background images
+│   │   │   ├── illustrations/    # Project illustrations  
+│   │   │   ├── logos/            # Project logos
+│   │   │   └── placeholders/     # Template demo images only
 │   │   ├── scripts/              # JavaScript
 │   │   │   ├── components/       # Component-specific JS (organized by OMA)
 │   │   │   │   ├── 01-atoms/     # Atomic-level scripts

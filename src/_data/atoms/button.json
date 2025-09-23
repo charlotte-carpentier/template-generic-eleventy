@@ -1,9 +1,52 @@
 {
   "buttons": [
     {
-      "name": "buttonName",
-      "text": "Button Text",
+      "name": "demoButton1",
+      "text": "Label",
+      "iconName": "demoSmile3",
+      "iconPosition": "both",
       "variant": "primary",
+      "ariaLabel": "Button description for accessibility"
+    },
+    {
+      "name": "demoButton2",
+      "text": "Label",
+      "iconName": "demoSmile3",
+      "iconPosition": "both",
+      "variant": "secondary",
+      "ariaLabel": "Button description for accessibility"
+    },
+    {
+      "name": "demoButton3",
+      "text": "1",
+      "variant": "fixed",
+      "size": "small",
+      "ariaLabel": "Button description for accessibility"
+    },
+    {
+      "name": "demoButton4",
+      "iconName": "demoSmile3",
+      "iconPosition": "center",
+      "variant": "icon",
+      "size": "small",
+      "ariaLabel": "Button description for accessibility"
+    },
+    {
+      "name": "demoButton5",
+      "text": "Label",
+      "iconName": "demoSmile3",
+      "iconPosition": "both",
+      "variant": "ghost",
+      "size": "small",
+      "ariaLabel": "Button description for accessibility"
+    },
+    {
+      "name": "demoButton6",
+      "text": "Label",
+      "iconName": "demoSmile3",
+      "iconPosition": "both",
+      "variant": "secondary",
+      "size": "small",
       "ariaLabel": "Button description for accessibility"
     }
   ]

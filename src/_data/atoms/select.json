@@ -1,13 +1,45 @@
 {
   "selects": [
     {
-      "name": "selectName",
+      "name": "demoSelect1",
       "variant": "default",
-      "label": "Select label",
+      "label": "Label",
       "options": [
         {
-          "value": "optionValue",
-          "label": "Option label",
+          "value": "10",
+          "label": "10",
+          "selected": true
+        },
+        {
+          "value": "option2",
+          "label": "Option 2",
+          "selected": false
+        },
+        {
+          "value": "option3",
+          "label": "Option 3",
+          "selected": false
+        }
+      ]
+    },
+    {
+      "name": "demoSelect2",
+      "variant": "small",
+      "label": "Label",
+      "options": [
+        {
+          "value": "10",
+          "label": "10",
+          "selected": true
+        },
+        {
+          "value": "option2",
+          "label": "Option 2",
+          "selected": false
+        },
+        {
+          "value": "option3",
+          "label": "Option 3",
           "selected": false
         }
       ]

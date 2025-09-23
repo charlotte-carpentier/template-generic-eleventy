@@ -1,8 +1,8 @@
 {
   "tooltips": [
     {
-      "name": "tooltipName",
-      "title": "Tooltip title",
+      "name": "demoTooltip1",
+      "title": "This is a long label",
       "description": "Tooltip description text",
       "descriptionPart1": "First part of description",
       "descriptionPart2": "Second part of description"

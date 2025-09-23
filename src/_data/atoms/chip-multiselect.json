@@ -1,8 +1,12 @@
 {
-  "chipMultiselects": [
+  "chipMultis": [
     {
-      "name": "chipName",
-      "text": "Chip Text"
+      "name": "demoChipMs1",
+      "text": "Label",
+      "variant": "default",
+      "selected": true,
+      "removable": true,
+      "ariaLabel": "Remove Label"
     }
   ]
 }
