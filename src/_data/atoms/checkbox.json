@@ -10,6 +10,15 @@
       "label": "Label",
       "description": "Description of this checkbox option",
       "ariaLabel": "Aria label for this checkbox"
+    },
+    {
+      "id": "demoCheck2",
+      "box": {
+        "value": "demoValue1",
+        "checked": false,
+        "disabled": false
+      },
+      "ariaLabel": "Checkbox for list item"
     }
   ]
 }

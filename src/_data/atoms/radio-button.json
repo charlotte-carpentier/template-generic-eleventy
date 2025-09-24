@@ -8,6 +8,15 @@
         "disabled": false
       },
       "label": "Label"
+    },
+    {
+      "id": "demoRadio2",
+      "radio": {
+        "value": "demoValue1",
+        "checked": false,
+        "disabled": false
+      },
+      "ariaLabel": "Radio button for list item"
     }
   ]
 }

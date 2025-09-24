@@ -4,17 +4,7 @@
       "name": "demoLink1",
       "href": "#",
       "text": "Label",
-      "variant": "default",
-      "target": "_blank",
-      "rel": "noopener noreferrer",
-      "download": false,
-      "onclick": ""
-    },
-    {
-      "name": "demoLink2",
-      "href": "#",
-      "text": "Label",
-      "variant": "small",
+      "variants": ["default", "small"],
       "target": "_blank",
       "rel": "noopener noreferrer",
       "download": false,

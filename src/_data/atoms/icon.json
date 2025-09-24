@@ -5,73 +5,13 @@
         "name": "demoSmile1",
         "spriteId": "smile",
         "alt": "Smile icon",
-        "variant": "xs-filled"
+        "variants": ["xs-filled", "sm-filled", "md-filled", "lg-filled", "xl-filled", "xxl-filled"]
       },
       {
-        "name": "demoSmile2", 
+        "name": "demoSmile2",
         "spriteId": "smile",
         "alt": "Smile icon",
-        "variant": "sm-filled"
-      },
-      {
-        "name": "demoSmile3",
-        "spriteId": "smile", 
-        "alt": "Smile icon",
-        "variant": "md-filled"
-      },
-      {
-        "name": "demoSmile4",
-        "spriteId": "smile",
-        "alt": "Smile icon",
-        "variant": "lg-filled"
-      },
-      {
-        "name": "demoSmile5",
-        "spriteId": "smile",
-        "alt": "Smile icon",
-        "variant": "xl-filled"
-      },
-      {
-        "name": "demoSmile6",
-        "spriteId": "smile",
-        "alt": "Smile icon", 
-        "variant": "xxl-filled"
-      },
-      {
-        "name": "demoSmile7",
-        "spriteId": "smile",
-        "alt": "Smile icon",
-        "variant": "xs-outline"
-      },
-      {
-        "name": "demoSmile8",
-        "spriteId": "smile",
-        "alt": "Smile icon",
-        "variant": "sm-outline"
-      },
-      {
-        "name": "demoSmile9",
-        "spriteId": "smile",
-        "alt": "Smile icon",
-        "variant": "md-outline"
-      },
-      {
-        "name": "demoSmile10",
-        "spriteId": "smile",
-        "alt": "Smile icon",
-        "variant": "lg-outline"
-      },
-      {
-        "name": "demoSmile11",
-        "spriteId": "smile",
-        "alt": "Smile icon",
-        "variant": "xl-outline"
-      },
-      {
-        "name": "demoSmile12",
-        "spriteId": "smile",
-        "alt": "Smile icon",
-        "variant": "xxl-outline"
+        "variants": ["xs-outline", "sm-outline", "md-outline", "lg-outline", "xl-outline", "xxl-outline"]
       }
     ],
     "flags": [
@@ -79,37 +19,43 @@
         "name": "demoFlag1",
         "spriteId": "flag",
         "alt": "Flag icon",
-        "variant": "xs"
+        "variants": ["xs", "sm", "md", "lg", "xl", "xxl"]
       },
       {
-        "name": "demoFlag2",
-        "spriteId": "flag",
-        "alt": "Flag icon", 
-        "variant": "sm"
-      },
-      {
-        "name": "demoFlag3",
-        "spriteId": "flag",
-        "alt": "Flag icon",
+        "name": "demoFlagUs1",
+        "spriteId": "flag-us",
+        "alt": "United States flag",
         "variant": "md"
       },
       {
-        "name": "demoFlag4",
-        "spriteId": "flag",
-        "alt": "Flag icon",
-        "variant": "lg"
+        "name": "demoFlagCn1",
+        "spriteId": "flag-cn",
+        "alt": "China flag",
+        "variant": "md"
       },
       {
-        "name": "demoFlag5",
-        "spriteId": "flag",
-        "alt": "Flag icon",
-        "variant": "xl"
+        "name": "demoFlagAf1",
+        "spriteId": "flag-af",
+        "alt": "Afghanistan flag",
+        "variant": "md"
       },
       {
-        "name": "demoFlag6",
-        "spriteId": "flag",
-        "alt": "Flag icon",
-        "variant": "xxl"
+        "name": "demoFlagAl1",
+        "spriteId": "flag-al",
+        "alt": "Albania flag",
+        "variant": "md"
+      },
+      {
+        "name": "demoFlagDz1",
+        "spriteId": "flag-dz",
+        "alt": "Algeria flag",
+        "variant": "md"
+      },
+      {
+        "name": "demoFlagIm1",
+        "spriteId": "flag-im",
+        "alt": "Isle of Man flag",
+        "variant": "md"
       }
     ],
     "navigation": [
@@ -185,6 +131,12 @@
         "name": "demoStar1",
         "spriteId": "star",
         "alt": "Star rating",
+        "variant": "md"
+      },
+      {
+        "name": "demoSlider1", 
+        "spriteId": "sliders-horizontal",
+        "alt": "Settings",
         "variant": "md"
       }
     ]

@@ -1,11 +1,29 @@
 {
   "listForms": [
     {
-      "name": "formName",
-      "radioName": "radioReference",
-      "inputs": [
+      "id": "demoForm1",
+      "type": "input-list",
+      "items": [
         {
-          "inputName": "inputReference",
+          "inputName": "demoInput1",
+          "order": 1
+        },
+        {
+          "inputName": "demoInput1", 
+          "order": 2
+        },
+        {
+          "inputName": "demoInput1",
+          "order": 3
+        }
+      ]
+    },
+    {
+      "id": "demoForm2",
+      "type": "row-form",
+      "items": [
+        {
+          "inputName": "demoInput1",
           "order": 1
         }
       ]

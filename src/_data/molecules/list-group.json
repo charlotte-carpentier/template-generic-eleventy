@@ -1,0 +1,214 @@
+{
+  "listGroups": [
+    {
+      "id": "demoGroup1",
+      "type": "default",
+      "items": [
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label"
+        }
+      ]
+    },
+    {
+      "id": "demoGroup2", 
+      "type": "closable",
+      "items": [
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "iconClose": "demoClose1"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "iconClose": "demoClose1"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "iconClose": "demoClose1"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "iconClose": "demoClose1"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "iconClose": "demoClose1"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "iconClose": "demoClose1"
+        }
+      ]
+    },
+    {
+      "id": "demoGroup3",
+      "type": "link", 
+      "items": [
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "linkName": "demoLink1"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "linkName": "demoLink1"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "linkName": "demoLink1"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "linkName": "demoLink1"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "linkName": "demoLink1"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "linkName": "demoLink1"
+        }
+      ]
+    },
+    {
+      "id": "demoGroup4",
+      "type": "radio",
+      "items": [
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label", 
+          "radioName": "demoRadio2"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "radioName": "demoRadio2"
+        },
+        {
+          "iconName": "demoSlider1", 
+          "text": "This is a long label",
+          "radioName": "demoRadio2"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "radioName": "demoRadio2"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "radioName": "demoRadio2"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "radioName": "demoRadio2"
+        }
+      ]
+    },
+    {
+      "id": "demoGroup5",
+      "type": "checkbox",
+      "items": [
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "checkboxName": "demoCheck2"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "checkboxName": "demoCheck2"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "checkboxName": "demoCheck2"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "checkboxName": "demoCheck2"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "checkboxName": "demoCheck2"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "checkboxName": "demoCheck2"
+        }
+      ]
+    },
+    {
+      "id": "demoGroup6",
+      "type": "toggle",
+      "items": [
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "toggleName": "demoToggle2"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "toggleName": "demoToggle2"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "toggleName": "demoToggle2"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "toggleName": "demoToggle2"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "toggleName": "demoToggle2"
+        },
+        {
+          "iconName": "demoSlider1",
+          "text": "This is a long label",
+          "toggleName": "demoToggle2"
+        }
+      ]
+    }
+  ]
+}
