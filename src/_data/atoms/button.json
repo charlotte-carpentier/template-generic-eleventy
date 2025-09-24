@@ -43,6 +43,24 @@
       "text": "Label",
       "variant": "segmented",
       "ariaLabel": "Segment button"
+    },
+    {
+      "name": "demoCont1",
+      "text": "Continue",
+      "variant": "primary",
+      "ariaLabel": "Continue action"
+    },
+    {
+      "name": "demoClose1",
+      "text": "Close",
+      "variant": "secondary", 
+      "ariaLabel": "Close modal"
+    },
+    {
+      "name": "demoSubmit1",
+      "text": "Submit",
+      "variant": "primary",
+      "ariaLabel": "Submit form"
     }
   ]
 }

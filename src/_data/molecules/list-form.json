@@ -27,6 +27,24 @@
           "order": 1
         }
       ]
+    },
+    {
+      "id": "demoForm3",
+      "type": "input-list",
+      "items": [
+        {
+          "inputName": "demoInput1",
+          "order": 1
+        },
+        {
+          "inputName": "demoInput1", 
+          "order": 2
+        },
+        {
+          "inputName": "demoInput7",
+          "order": 3
+        }
+      ]
     }
   ]
 }
