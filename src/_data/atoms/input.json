@@ -26,9 +26,15 @@
       "type": "multiselect",
       "id": "demoInput3",
       "label": "Label",
-      "chipMultiName": "demoChipMs1",
       "required": false,
-      "errorMessage": "Label"
+      "errorMessage": "Label",
+      "chipMulti": {
+        "text": "Label",
+        "variant": "default",
+        "selected": true,
+        "removable": true,
+        "ariaLabel": "Remove Label"
+      }
     },
     {
       "name": "demoInput4",

@@ -1,0 +1,32 @@
+{
+  "sliders": [
+    {
+      "name": "demoSlider1",
+      "type": "single",
+      "label": "Experience",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "values": [8],
+      "disabled": false,
+      "handleIndicator": {
+        "show": true,
+        "variant": "outline"
+      }
+    },
+    {
+      "name": "demoRange1", 
+      "type": "range",
+      "label": "Range",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "values": [8, 18],
+      "disabled": false,
+      "handleIndicator": {
+        "show": true,
+        "variant": "solid"
+      }
+    }
+  ]
+}
