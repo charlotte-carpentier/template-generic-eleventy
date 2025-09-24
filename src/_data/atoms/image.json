@@ -3,58 +3,18 @@
     {
       "name": "demoImage1",
       "src": "/assets/images/placeholders/placeholder-large.png",
-      "alt": "Large image description",
-      "variant": "large"
+      "alt": "Image description",
+      "variants": ["large", "medium", "small"]
     },
     {
-      "name": "demoImage2", 
-      "src": "/assets/images/placeholders/placeholder-medium.png",
-      "alt": "Medium image description",
-      "variant": "medium"
+      "name": "demoImage2",
+      "iconName": "demoSmile3",
+      "alt": "Avatar with smile icon",
+      "variant": "avatar",
+      "backgroundColors": ["black", "blue", "green", "orange", "red"]
     },
     {
       "name": "demoImage3",
-      "src": "/assets/images/placeholders/placeholder-small.png", 
-      "alt": "Small image description",
-      "variant": "small"
-    },
-    {
-      "name": "demoImage4",
-      "iconName": "demoSmile3",
-      "alt": "Avatar with smile icon",
-      "variant": "avatar",
-      "backgroundColor": "black"
-    },
-    {
-      "name": "demoImage5",
-      "iconName": "demoSmile3",
-      "alt": "Avatar with smile icon",
-      "variant": "avatar",
-      "backgroundColor": "blue"
-    },
-    {
-      "name": "demoImage6",
-      "iconName": "demoSmile3",
-      "alt": "Avatar with smile icon",
-      "variant": "avatar", 
-      "backgroundColor": "green"
-    },
-    {
-      "name": "demoImage7",
-      "iconName": "demoSmile3",
-      "alt": "Avatar with smile icon",
-      "variant": "avatar",
-      "backgroundColor": "orange"
-    },
-    {
-      "name": "demoImage8",
-      "iconName": "demoSmile3",
-      "alt": "Avatar with smile icon",
-      "variant": "avatar",
-      "backgroundColor": "red"
-    },
-    {
-      "name": "demoImage9",
       "src": "/assets/images/placeholders/avatar-photo.png",
       "alt": "Avatar photo",
       "variant": "avatar"

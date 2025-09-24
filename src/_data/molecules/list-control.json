@@ -1,0 +1,58 @@
+{
+  "listControls": [
+    {
+      "id": "demoList1",
+      "type": "radio",
+      "items": [
+        {
+          "radioName": "demoRadio1",
+          "checked": true
+        },
+        {
+          "radioName": "demoRadio1", 
+          "checked": false
+        },
+        {
+          "radioName": "demoRadio1",
+          "checked": false
+        }
+      ]
+    },
+    {
+      "id": "demoList2", 
+      "type": "checkbox",
+      "items": [
+        {
+          "checkboxName": "demoCheck1",
+          "checked": false
+        },
+        {
+          "checkboxName": "demoCheck1",
+          "checked": false
+        },
+        {
+          "checkboxName": "demoCheck1", 
+          "checked": false
+        }
+      ]
+    },
+    {
+      "id": "demoList3",
+      "type": "toggle", 
+      "items": [
+        {
+          "toggleName": "demoToggle1",
+          "checked": false
+        },
+        {
+          "toggleName": "demoToggle1",
+          "checked": false
+        },
+        {
+          "toggleName": "demoToggle1",
+          "checked": false
+        }
+      ]
+    }
+  ]
+}

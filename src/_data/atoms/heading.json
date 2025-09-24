@@ -35,6 +35,12 @@
       "text": "Heading",
       "tag": "h6",
       "variant": "h6"
+    },
+    {
+      "name": "demoHeadUp1",
+      "text": "Upload file",
+      "tag": "h3",
+      "variant": "h3"
     }
   ]
 }

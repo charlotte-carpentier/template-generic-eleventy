@@ -1,12 +1,16 @@
 {
   "listContents": [
     {
-      "name": "listContentName",
-      "variant": "default",
-      "itemVariant": "default",
+      "id": "demoList1",
       "items": [
         {
-          "lockupName": "lockupReference"
+          "lockupName": "demoLock3"
+        },
+        {
+          "lockupName": "demoLock3"
+        },
+        {
+          "lockupName": "demoLock3"
         }
       ]
     }

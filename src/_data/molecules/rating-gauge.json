@@ -1,8 +1,45 @@
 {
   "ratingGauges": [
     {
-      "name": "ratingGaugeName",
-      "stars": ["star-outline", "star-filled", "star-half", "star-outline", "star-outline"],
+      "name": "demoRating1",
+      "rating": 0,
+      "maxRating": 5,
+      "iconName": "demoStar1",
+      "variant": "default"
+    },
+    {
+      "name": "demoRating2", 
+      "rating": 1,
+      "maxRating": 5,
+      "iconName": "demoStar1",
+      "variant": "default"
+    },
+    {
+      "name": "demoRating3",
+      "rating": 2,
+      "maxRating": 5,
+      "iconName": "demoStar1", 
+      "variant": "default"
+    },
+    {
+      "name": "demoRating4",
+      "rating": 3,
+      "maxRating": 5,
+      "iconName": "demoStar1",
+      "variant": "default"
+    },
+    {
+      "name": "demoRating5",
+      "rating": 4,
+      "maxRating": 5,
+      "iconName": "demoStar1",
+      "variant": "default"
+    },
+    {
+      "name": "demoRating6",
+      "rating": 5,
+      "maxRating": 5,
+      "iconName": "demoStar1",
       "variant": "default"
     }
   ]

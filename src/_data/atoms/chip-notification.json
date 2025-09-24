@@ -2,9 +2,13 @@
   "chipNotifs": [
     {
       "name": "demoChip1",
-      "text": "0",
       "variant": "default",
       "ariaLabel": "Aria label for accessibility"
+    },
+    {
+      "name": "demoStep1",
+      "variant": "stepper",
+      "ariaLabel": "Step number"
     }
   ]
 }

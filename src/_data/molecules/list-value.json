@@ -1,14 +1,17 @@
 {
   "listValues": [
     {
-      "name": "listValueName",
-      "variant": "default",
-      "containerVariant": "containerVariant",
-      "itemVariant": "itemVariant",
-      "lockups": [
+      "id": "demoList1",
+      "variants": ["default", "horizontal"],
+      "items": [
         {
-          "name": "lockupReference",
-          "type": "lockupType"
+          "lockupName": "demoLock1"
+        },
+        {
+          "lockupName": "demoLock1"
+        },
+        {
+          "lockupName": "demoLock1"
         }
       ]
     }

@@ -1,23 +1,14 @@
 {
   "cards": [
     {
-      "name": "cardName",
-      "type": "default",
-      "variant": "default",
-      "image": {
-        "name": "imageReference"
-      },
-      "heading": {
-        "name": "headingReference"
-      },
-      "content": {
-        "text": "Card content text",
-        "variant": "default",
-        "maxLines": 2
-      },
-      "button": {
-        "name": "buttonReference"
-      }
+      "id": "demoCard1",
+      "lockupName": "demoLock3",
+      "buttonName": "demoButton1"
+    },
+    {
+      "id": "demoCard1",
+      "lockupName": "demoLock3",
+      "buttonName": "demoButton1"
     }
   ]
 }

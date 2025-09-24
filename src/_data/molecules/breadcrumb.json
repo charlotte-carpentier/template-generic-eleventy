@@ -1,12 +1,19 @@
 {
   "breadcrumbs": [
     {
-      "name": "breadcrumbName",
-      "links": [
+      "name": "demoBreadcrm1",
+      "breadcrumbLinks": [
         {
-          "name": "linkReference",
-          "link": "linkHref",
-          "variant": "primary"
+          "type": "link",
+          "linkName": "demoLink1"
+        },
+        {
+          "type": "link", 
+          "linkName": "demoLink1"
+        },
+        {
+          "type": "current",
+          "text": "Label"
         }
       ]
     }

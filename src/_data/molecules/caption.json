@@ -1,10 +1,28 @@
 {
   "captions": [
     {
-      "name": "captionName",
-      "iconName": "iconReference",
-      "tooltipName": "tooltipReference",
-      "gradientColor": "colorVariant"
+      "name": "demoCaption1",
+      "iconName": "demoInfo1",
+      "text": "Label",
+      "variant": "info"
+    },
+    {
+      "name": "demoCaption2", 
+      "iconName": "demoCheck1",
+      "text": "Label",
+      "variant": "success"
+    },
+    {
+      "name": "demoCaption3",
+      "iconName": "demoWarn1", 
+      "text": "Label",
+      "variant": "warning"
+    },
+    {
+      "name": "demoCaption4",
+      "iconName": "demoWarnCir1",
+      "text": "Label",
+      "variant": "error"
     }
   ]
 }

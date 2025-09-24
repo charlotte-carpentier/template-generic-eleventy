@@ -1,15 +1,14 @@
 {
   "blockDragAndDrops": [
     {
-      "name": "dropzoneName",
-      "heading": "dropzoneReference",
-      "dropzoneText": "Drag and drop text",
-      "icon": "iconReference",
+      "name": "demoDragDrop1",
+      "headingName": "demoHeadUp1",
+      "dropzoneText": "Drag and drop file here",
+      "iconName": "demoFileUp1",
       "separator": "Or",
-      "button": "buttonReference",
-      "buttonText": "Button text",
-      "supportedFormats": "File formats",
-      "maxFileSize": "File size limit",
+      "buttonName": "demoBrowse1",
+      "supportedFormats": "Supported formats: JPG, PNG, PDF",
+      "maxFileSize": "Maximum file size: 10 MB",
       "variant": "default",
       "dismissible": false,
       "errorMessage": "Error message text"

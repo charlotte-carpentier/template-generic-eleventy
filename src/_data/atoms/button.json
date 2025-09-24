@@ -5,26 +5,18 @@
       "text": "Label",
       "iconName": "demoSmile3",
       "iconPosition": "both",
-      "variant": "primary",
+      "variants": ["primary", "secondary"],
       "ariaLabel": "Button description for accessibility"
     },
     {
       "name": "demoButton2",
-      "text": "Label",
-      "iconName": "demoSmile3",
-      "iconPosition": "both",
-      "variant": "secondary",
-      "ariaLabel": "Button description for accessibility"
-    },
-    {
-      "name": "demoButton3",
       "text": "1",
       "variant": "fixed",
       "size": "small",
       "ariaLabel": "Button description for accessibility"
     },
     {
-      "name": "demoButton4",
+      "name": "demoButton3",
       "iconName": "demoSmile3",
       "iconPosition": "center",
       "variant": "icon",
@@ -32,22 +24,25 @@
       "ariaLabel": "Button description for accessibility"
     },
     {
-      "name": "demoButton5",
+      "name": "demoButton4",
       "text": "Label",
       "iconName": "demoSmile3",
       "iconPosition": "both",
-      "variant": "ghost",
+      "variants": ["ghost", "secondary"],
       "size": "small",
       "ariaLabel": "Button description for accessibility"
     },
     {
-      "name": "demoButton6",
+      "name": "demoBrowse1",
+      "text": "Browse files",
+      "variant": "primary",
+      "ariaLabel": "Browse files to upload"
+    },
+    {
+      "name": "demoSeg1",
       "text": "Label",
-      "iconName": "demoSmile3",
-      "iconPosition": "both",
-      "variant": "secondary",
-      "size": "small",
-      "ariaLabel": "Button description for accessibility"
+      "variant": "segmented",
+      "ariaLabel": "Segment button"
     }
   ]
 }

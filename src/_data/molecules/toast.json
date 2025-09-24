@@ -1,10 +1,38 @@
 {
   "toasts": [
     {
-      "name": "toastName",
-      "message": "Toast message text",
+      "name": "demoToast1",
+      "message": "This is the longest label in the world",
       "variant": "info",
-      "icon": "iconReference",
+      "iconName": "demoInfo1",
+      "closeIconName": "demoClose1",
+      "duration": 5000,
+      "dismissible": true
+    },
+    {
+      "name": "demoToast2",
+      "message": "This is the longest label in the world",
+      "variant": "success", 
+      "iconName": "demoCheck1",
+      "closeIconName": "demoClose1",
+      "duration": 5000,
+      "dismissible": true
+    },
+    {
+      "name": "demoToast3",
+      "message": "This is the longest label in the world",
+      "variant": "warning",
+      "iconName": "demoWarn1",
+      "closeIconName": "demoClose1", 
+      "duration": 5000,
+      "dismissible": true
+    },
+    {
+      "name": "demoToast4",
+      "message": "This is the longest label in the world",
+      "variant": "error",
+      "iconName": "demoWarnCir1",
+      "closeIconName": "demoClose1",
       "duration": 5000,
       "dismissible": true
     }

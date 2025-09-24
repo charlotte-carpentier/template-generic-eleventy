@@ -2,9 +2,27 @@
   "toggles": [
     {
       "id": "demoToggle1",
-      "switchName": "demoSwitch1",
+      "switch": {
+        "value": "demoValue1",
+        "variant": "default",
+        "size": "medium",
+        "checked": false,
+        "disabled": false,
+        "ariaLabel": "Switch description"
+      },
       "label": "Label",
       "description": "Toggle description"
+    },
+    {
+      "id": "demoToggle2",
+      "switch": {
+        "value": "demoValue1", 
+        "variant": "default",
+        "size": "medium",
+        "checked": false,
+        "disabled": false,
+        "ariaLabel": "Toggle for list item"
+      }
     }
   ]
 }

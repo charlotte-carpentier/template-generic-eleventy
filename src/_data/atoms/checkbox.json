@@ -1,11 +1,24 @@
 {
   "checkboxes": [
     {
-      "id": "demoCheckbox1",
-      "boxName": "demoBox1",
+      "id": "demoCheck1", 
+      "box": {
+        "value": "demoValue1",
+        "checked": false,
+        "disabled": false
+      },
       "label": "Label",
       "description": "Description of this checkbox option",
       "ariaLabel": "Aria label for this checkbox"
+    },
+    {
+      "id": "demoCheck2",
+      "box": {
+        "value": "demoValue1",
+        "checked": false,
+        "disabled": false
+      },
+      "ariaLabel": "Checkbox for list item"
     }
   ]
 }

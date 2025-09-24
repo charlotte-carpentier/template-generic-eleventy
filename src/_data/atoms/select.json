@@ -2,45 +2,12 @@
   "selects": [
     {
       "name": "demoSelect1",
-      "variant": "default",
-      "label": "Label",
+      "variants": ["default", "small"],
       "options": [
         {
           "value": "10",
-          "label": "10",
+          "label": "Label 10",
           "selected": true
-        },
-        {
-          "value": "option2",
-          "label": "Option 2",
-          "selected": false
-        },
-        {
-          "value": "option3",
-          "label": "Option 3",
-          "selected": false
-        }
-      ]
-    },
-    {
-      "name": "demoSelect2",
-      "variant": "small",
-      "label": "Label",
-      "options": [
-        {
-          "value": "10",
-          "label": "10",
-          "selected": true
-        },
-        {
-          "value": "option2",
-          "label": "Option 2",
-          "selected": false
-        },
-        {
-          "value": "option3",
-          "label": "Option 3",
-          "selected": false
         }
       ]
     }
