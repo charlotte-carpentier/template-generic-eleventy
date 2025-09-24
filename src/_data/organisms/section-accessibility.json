@@ -1,0 +1,12 @@
+{
+  "sectionsA11y": [
+    {
+      "name": "demoSectA1",
+      "variant": "default",
+      "headingName": "demoLong1",
+      "content": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
+      "ariaLabel": "Accessibility section",
+      "role": "region"
+    }
+  ]
+}

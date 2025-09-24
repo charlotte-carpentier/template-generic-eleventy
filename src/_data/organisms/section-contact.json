@@ -1,15 +1,11 @@
 {
-  "sectionContacts": [
+  "sectContacts": [
     {
-      "name": "sectionName",
-      "header": {
-        "title": "titleReference"
-      },
-      "content": {
-        "contactBlock": "contactReference",
-        "form": "formReference",
-        "button": "buttonReference"
-      }
+      "name": "demoSectC1",
+      "leftForm": "demoForm1",
+      "rightSection": "demoSectA1",
+      "buttonName": "demoSubmit1",
+      "ariaLabel": "Contact section"
     }
   ]
 }

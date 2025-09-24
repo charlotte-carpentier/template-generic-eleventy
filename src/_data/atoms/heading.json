@@ -41,6 +41,12 @@
       "text": "Upload file",
       "tag": "h3",
       "variant": "h3"
+    },
+    {
+      "name": "demoLong1",
+      "text": "This is the longest label in the world",
+      "tag": "h2",
+      "variant": "h2"
     }
   ]
 }
