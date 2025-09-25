@@ -1,13 +1,10 @@
 {
-  "sectionAbouts": [
+  "sectArtHero": [
     {
-      "name": "sectionName",
-      "variant": "default",
-      "superHeading": "headingReference",
-      "heading": "headingReference",
-      "content": "Section content text",
-      "primaryButton": "buttonReference",
-      "secondaryButton": "buttonReference"
+      "name": "demoSectAH1",
+      "imageName": "demoImage1",
+      "headingName": "demoLong1",
+      "ariaLabel": "Article hero section"
     }
   ]
 }

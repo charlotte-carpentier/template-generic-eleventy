@@ -1,13 +1,13 @@
 {
-  "sectionAbouts": [
+  "sectAbouts": [
     {
-      "name": "sectionName",
-      "variant": "default",
-      "superHeading": "headingReference",
-      "heading": "headingReference",
-      "content": "Section content text",
-      "primaryButton": "buttonReference",
-      "secondaryButton": "buttonReference"
+      "name": "demoSectAb1",
+      "superHeadingName": "demoHead3",
+      "headingName": "demoLong1",  
+      "content": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
+      "primaryButtonName": "demoLabel1",
+      "secondaryButtonName": "demoLabel2",
+      "ariaLabel": "About section"
     }
   ]
 }
