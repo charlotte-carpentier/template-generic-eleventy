@@ -1,12 +1,154 @@
 {
-  "navigationSecondarys": [
+  "navSecondary": [
     {
-      "name": "navigationName",
-      "links": [
-        "linkReference1",
-        "linkReference2",
-        "linkReference3"
-      ]
+      "name": "demoNavSec1",
+      "items": [
+        {
+          "name": "demoNavS1",
+          "linkName": "demoLink1",
+          "active": true,
+          "disabled": false
+        },
+        {
+          "name": "demoNavS2",
+          "linkName": "demoLink1",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoNavS3",
+          "linkName": "demoLink1",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoNavS4",
+          "linkName": "demoLink1",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoNavS5",
+          "linkName": "demoLink1",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoNavS6",
+          "linkName": "demoLink1",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoNavS7",
+          "linkName": "demoLink1",
+          "active": false,
+          "disabled": false
+        }
+      ],
+      "ariaLabel": "Secondary navigation menu"
+    },
+    {
+      "name": "demoNavSec2",
+      "items": [
+        {
+          "name": "demoNavF1",
+          "linkName": "demoLink1",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoNavF2",
+          "linkName": "demoLink1",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoNavF3",
+          "linkName": "demoLink1",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoNavF4",
+          "linkName": "demoLink1",
+          "active": false,
+          "disabled": false
+        }
+      ],
+      "ariaLabel": "Footer navigation"
+    },
+    {
+      "name": "demoNavSocial",
+      "items": [
+        {
+          "name": "demoSocFB",
+          "linkName": "demoFacebook",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoSocLI",
+          "linkName": "demoLinkedin",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoSocTW",
+          "linkName": "demoTwitter",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoSocIG",
+          "linkName": "demoInstagram",
+          "active": false,
+          "disabled": false
+        }
+      ],
+      "ariaLabel": "Social media links"
+    },
+    {
+      "name": "demoNavMenu1",
+      "items": [
+        {
+          "name": "demoMenuL1",
+          "linkName": "demoLinkM1",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoMenuL2",
+          "linkName": "demoLinkM1",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoMenuL3",
+          "linkName": "demoLinkM1",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoMenuL4",
+          "linkName": "demoLinkM1",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoMenuL5",
+          "linkName": "demoLinkM1",
+          "active": false,
+          "disabled": false
+        },
+        {
+          "name": "demoMenuL6",
+          "linkName": "demoLinkM1",
+          "active": false,
+          "disabled": false
+        }
+      ],
+      "ariaLabel": "Menu navigation"
     }
   ]
 }

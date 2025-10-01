@@ -1,22 +1,18 @@
 {
   "headers": [
     {
-      "name": "headerName",
-      "brand": {
-        "logo": "logoReference"
-      },
-      "title": {
-        "desktop": "titleReference"
-      },
-      "navigation": {
-        "desktopLink": "linkReference",
-        "mobileMenu": "menuReference"
+      "name": "demoHeader1",
+      "desktop": {
+        "vectorName": "demoVector1",
+        "tabBarName": "demoTabBar2"
       },
       "mobile": {
-        "burgerOpenIcon": "iconReference",
-        "burgerCloseIcon": "iconReference",
+        "vectorName": "demoVector2",
+        "burgerOpenIcon": "demoBurger1",
+        "burgerCloseIcon": "demoClose1",
         "overlay": true
-      }
+      },
+      "ariaLabel": "Site header"
     }
   ]
 }

@@ -1,22 +1,12 @@
 {
-  "sectionListings": [
+  "sectListings": [
     {
-      "name": "listingName",
-      "variant": "default",
-      "titleContainer": "default",
-      "heading": {
-        "name": "headingReference",
-        "text": "Section heading text"
-      },
-      "cards": [
-        {
-          "name": "cardReference"
-        }
-      ],
-      "pagination": {
-        "mobile": "paginationReference",
-        "desktop": "paginationReference"
-      }
+      "name": "demoSectL1", 
+      "headingName": "demoHead2",
+      "cardTags": ["demo"],
+      "itemsPerPage": 8,
+      "paginationName": "demoPager1",
+      "ariaLabel": "Listing section"
     }
   ]
 }

@@ -1,27 +1,22 @@
 {
-  "sectionValues": [
+  "sectValues": [
     {
-      "name": "sectionName",
-      "variant": "default",
-      "superHeading": "headingReference",
-      "heading": "headingReference",
-      "cards": [
-        {
-          "name": "cardName",
-          "heading": {
-            "name": "headingReference",
-            "text": "Card heading text",
-            "variant": "primary"
-          },
-          "content": {
-            "text": "Card content text",
-            "variant": "default"
-          },
-          "button": {
-            "name": "buttonReference"
-          }
-        }
-      ]
+      "name": "demoSectV1",
+      "type": "simple",
+      "superHeadingName": "demoHead3",
+      "headingName": "demoLong1",
+      "content": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
+      "primaryButtonName": "demoLabel1",
+      "secondaryButtonName": "demoLabel2",
+      "ariaLabel": "Value section simple"
+    },
+    {
+      "name": "demoSectV2", 
+      "type": "cards",
+      "superHeadingName": "demoHead3",
+      "headingName": "demoLong1",
+      "cardTags": ["value"],
+      "ariaLabel": "Value section with cards"
     }
   ]
 }

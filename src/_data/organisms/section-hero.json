@@ -1,14 +1,12 @@
 {
-  "sectionHeros": [
+  "sectHeroes": [
     {
-      "name": "heroName",
-      "variant": "default",
-      "superHeading": "headingReference",
-      "heading": "headingReference",
-      "description": "Hero description text",
-      "primaryButton": "buttonReference",
-      "secondaryButton": "buttonReference",
-      "image": "imageReference"
+      "name": "demoSectH1",
+      "superHeadingName": "demoHead3",
+      "lockupName": "demoLock3",
+      "primaryButtonName": "demoLabel1",
+      "secondaryButtonName": "demoLabel2",
+      "ariaLabel": "Hero section"
     }
   ]
 }

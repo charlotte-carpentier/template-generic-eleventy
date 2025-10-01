@@ -61,6 +61,22 @@
       "text": "Submit",
       "variant": "primary",
       "ariaLabel": "Submit form"
+    },
+    {
+      "name": "demoLabel1",
+      "text": "Label",
+      "iconName": "demoSmile3",
+      "iconPosition": "left",
+      "variant": "primary",
+      "ariaLabel": "Primary label action"
+    },
+    {
+      "name": "demoLabel2", 
+      "text": "Label",
+      "iconName": "demoSmile3",
+      "iconPosition": "left",
+      "variant": "secondary",
+      "ariaLabel": "Secondary label action"
     }
   ]
 }

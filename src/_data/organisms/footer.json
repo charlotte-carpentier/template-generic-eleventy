@@ -1,16 +1,32 @@
 {
   "footers": [
     {
-      "name": "footerName",
-      "variant": "minimal",
+      "name": "demoFooter1",
+      "vectorName": "demoVector1",
+      "items": [
+        {
+          "headingName": "demoHead6",
+          "navSecondaryName": "demoNavSec1"
+        },
+        {
+          "headingName": "demoHead6",
+          "navSecondaryName": "demoNavSec1"
+        },
+        {
+          "headingName": "demoHead6",
+          "navSecondaryName": "demoNavSec1"
+        },
+        {
+          "headingName": "demoSocial1",
+          "navSecondaryName": "demoNavSocial"
+        }
+      ],
       "copyright": {
-        "name": "copyrightReference",
-        "datas": "dataSource"
+        "text": "© 2025 Starter kit tous droits réservés",
+        "version": "v1.0.0",
+        "links": ["demoAccess1", "demoWebsite1"]
       },
-      "legalLink": {
-        "name": "linkReference", 
-        "datas": "dataSource"
-      }
+      "ariaLabel": "Site footer"
     }
   ]
 }
