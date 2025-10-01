@@ -88,6 +88,12 @@
         "spriteId": "forward-fast-solid-full",
         "alt": "Last page",
         "variant": "md"
+      },
+      {
+        "name": "demoBurger1",
+        "spriteId": "hamburger",
+        "alt": "Open menu",
+        "variant": "md"
       }
     ],
     "status": [
@@ -137,6 +143,32 @@
         "name": "demoSlider1", 
         "spriteId": "sliders-horizontal",
         "alt": "Settings",
+        "variant": "md"
+      }
+    ],
+    "socials": [
+      {
+        "name": "demoIconFB",
+        "spriteId": "facebook",
+        "alt": "Facebook icon",
+        "variant": "md"
+      },
+      {
+        "name": "demoIconLI",
+        "spriteId": "linkedin",
+        "alt": "LinkedIn icon",
+        "variant": "md"
+      },
+      {
+        "name": "demoIconTW",
+        "spriteId": "twitter",
+        "alt": "Twitter icon",
+        "variant": "md"
+      },
+      {
+        "name": "demoIconIG",
+        "spriteId": "instagram",
+        "alt": "Instagram icon",
         "variant": "md"
       }
     ]

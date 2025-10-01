@@ -4,11 +4,109 @@
       "name": "demoLink1",
       "href": "#",
       "text": "Label",
-      "variants": ["default", "small"],
+      "variant": "default",
+      "iconName": "",
       "target": "_blank",
       "rel": "noopener noreferrer",
       "download": false,
-      "onclick": ""
+      "onclick": "",
+      "ariaLabel": ""
+    },
+    {
+      "name": "demoLinkTab",
+      "href": "#",
+      "text": "Label",
+      "variant": "tab",
+      "iconName": "",
+      "target": "_self",
+      "rel": "",
+      "download": false,
+      "onclick": "",
+      "ariaLabel": "Tab navigation link"
+    },
+    {
+      "name": "demoLinkM1",
+      "href": "#",
+      "text": "Label",
+      "variant": "menu-link",
+      "iconName": "",
+      "target": "_self",
+      "rel": "",
+      "download": false,
+      "onclick": "",
+      "ariaLabel": "Menu navigation link"
+    },
+    {
+      "name": "demoFacebook",
+      "href": "https://facebook.com",
+      "text": "facebook",
+      "variant": "social",
+      "iconName": "demoIconFB",
+      "target": "_blank",
+      "rel": "noopener noreferrer",
+      "download": false,
+      "onclick": "",
+      "ariaLabel": "Visit our Facebook page"
+    },
+    {
+      "name": "demoLinkedin",
+      "href": "https://linkedin.com",
+      "text": "LinkedIn",
+      "variant": "social",
+      "iconName": "demoIconLI",
+      "target": "_blank",
+      "rel": "noopener noreferrer",
+      "download": false,
+      "onclick": "",
+      "ariaLabel": "Visit our LinkedIn page"
+    },
+    {
+      "name": "demoTwitter",
+      "href": "https://twitter.com",
+      "text": "twitter",
+      "variant": "social",
+      "iconName": "demoIconTW",
+      "target": "_blank",
+      "rel": "noopener noreferrer",
+      "download": false,
+      "onclick": "",
+      "ariaLabel": "Visit our Twitter page"
+    },
+    {
+      "name": "demoInstagram",
+      "href": "https://instagram.com",
+      "text": "Instagram",
+      "variant": "social",
+      "iconName": "demoIconIG",
+      "target": "_blank",
+      "rel": "noopener noreferrer",
+      "download": false,
+      "onclick": "",
+      "ariaLabel": "Visit our Instagram page"
+    },
+    {
+      "name": "demoAccess1",
+      "href": "/accessibilite",
+      "text": "Accessibilité",
+      "variant": "footer",
+      "iconName": "",
+      "target": "_self",
+      "rel": "",
+      "download": false,
+      "onclick": "",
+      "ariaLabel": "Accessibility statement"
+    },
+    {
+      "name": "demoWebsite1",
+      "href": "https://hat.com",
+      "text": "Website by hat",
+      "variant": "footer",
+      "iconName": "",
+      "target": "_blank",
+      "rel": "noopener noreferrer",
+      "download": false,
+      "onclick": "",
+      "ariaLabel": "Website created by hat"
     }
   ]
 }

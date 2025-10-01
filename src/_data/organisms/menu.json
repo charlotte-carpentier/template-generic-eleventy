@@ -1,9 +1,42 @@
 {
   "menus": [
     {
-      "name": "menuName",
-      "heading": "headingReference",
-      "navigationSecondarys": "navigationReference"
+      "name": "demoMenu1",
+      "items": [
+        {
+          "headingName": "demoListT1",
+          "navSecondaryName": "demoNavMenu1"
+        },
+        {
+          "headingName": "demoListT1",
+          "navSecondaryName": "demoNavMenu1"
+        },
+        {
+          "headingName": "demoListT1",
+          "navSecondaryName": "demoNavMenu1"
+        },
+        {
+          "headingName": "demoListT1",
+          "navSecondaryName": "demoNavMenu1"
+        },
+        {
+          "headingName": "demoListT1",
+          "navSecondaryName": "demoNavMenu1"
+        },
+        {
+          "headingName": "demoListT1",
+          "navSecondaryName": "demoNavMenu1"
+        },
+        {
+          "headingName": "demoListT1",
+          "navSecondaryName": "demoNavMenu1"
+        },
+        {
+          "headingName": "demoListT1",
+          "navSecondaryName": "demoNavMenu1"
+        }
+      ],
+      "ariaLabel": "Main navigation menu"
     }
   ]
 }

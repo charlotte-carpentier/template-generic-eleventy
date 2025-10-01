@@ -1,16 +1,56 @@
 {
   "tabBars": [
     {
-      "name": "tabBarName",
-      "navigation": {
-        "menu": "menuReference"
-      },
-      "sections": [
+      "name": "demoTabBar1",
+      "items": [
         {
-          "type": "sectionType",
-          "name": "sectionReference"
+          "name": "demoTab1",
+          "linkName": "demoLinkTab",
+          "active": true
+        },
+        {
+          "name": "demoTab2", 
+          "linkName": "demoLinkTab",
+          "active": false
+        },
+        {
+          "name": "demoTab3",
+          "linkName": "demoLinkTab",
+          "active": false
+        },
+        {
+          "name": "demoTab4",
+          "linkName": "demoLinkTab",
+          "active": false
+        },
+        {
+          "name": "demoTab5",
+          "linkName": "demoLinkTab",
+          "active": false
         }
-      ]
+      ],
+      "ariaLabel": "Main navigation tabs"
+    },
+    {
+      "name": "demoTabBar2",
+      "items": [
+        {
+          "name": "demoTabH1",
+          "linkName": "demoLinkTab",
+          "active": false
+        },
+        {
+          "name": "demoTabH2",
+          "linkName": "demoLinkTab",
+          "active": false
+        },
+        {
+          "name": "demoTabH3",
+          "linkName": "demoLinkTab",
+          "active": false
+        }
+      ],
+      "ariaLabel": "Header navigation tabs"
     }
   ]
 }

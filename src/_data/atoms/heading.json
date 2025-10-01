@@ -47,6 +47,18 @@
       "text": "This is the longest label in the world",
       "tag": "h2",
       "variant": "h2"
+    },
+    {
+      "name": "demoSocial1",
+      "text": "Socials",
+      "tag": "h6",
+      "variant": "h6"
+    },
+    {
+      "name": "demoListT1",
+      "text": "List title",
+      "tag": "h6",
+      "variant": "h6"
     }
   ]
 }
