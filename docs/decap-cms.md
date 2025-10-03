@@ -295,6 +295,45 @@ echo '{}' > src/_data/molecules/hero.json
 mkdir -p src/collections/blog
 ```
 
+## Example Collection
+
+This template includes a sample blog collection in `src/collections/blog/` to demonstrate the structure of repeatable collections:
+
+**Files:**
+
+- `blog.json` - Collection configuration (defines shared layout and tags)
+- `example-blog-post.md` - Example markdown file showing front matter structure
+
+**What this example demonstrates:**
+
+- Basic front matter structure (title, description, date, author, tags)
+- Markdown content organization
+- Layout inheritance via `blog.json` configuration
+- How Eleventy processes collection items
+
+**Using this example:**
+
+1. **To create a similar collection:**
+
+   ```bash
+   mkdir -p src/collections/your-collection
+   cp src/collections/blog/blog.json src/collections/your-collection/your-collection.json
+   # Edit configuration to match your needs
+   ```
+
+2. **To customize the blog collection:**
+   - Add custom front matter fields in your markdown files
+   - Create a dedicated layout in `_includes/` if needed
+   - Configure Decap CMS in `src/admin/config.yml` to manage posts via the admin interface
+
+3. **To remove the example:**
+
+   ```bash
+   rm -rf src/collections/blog
+   ```
+
+The example uses the base layout (`04-core/base.njk`) intentionally to keep the template minimal. Most projects will want to create a dedicated blog post layout that extends the base layout.
+
 ## Resources
 
 - [Official Decap CMS documentation](https://decapcms.org/docs/)

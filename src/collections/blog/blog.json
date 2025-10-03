@@ -1,0 +1,4 @@
+{
+  "layout": "04-core/base.njk",
+  "tags": ["blog"]
+}

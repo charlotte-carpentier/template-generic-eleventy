@@ -1,18 +1,31 @@
 #!/bin/bash
 
-# Script to generate SVG sprite from individual icon files
+# SVG Sprite Generator
+# 
+# Generates a single SVG sprite file from individual icon files.
+# All icons are normalized to use currentColor for easy theming.
+#
+# Usage: npm run sprites
+# Input: src/assets/icons/sprites/*.svg (individual icons)
+# Output: src/assets/icons/sprites/sprite.svg (combined sprite)
+#
+# References:
+# - https://css-tricks.com/svg-sprites-use-better-icon-fonts/
+# - https://github.com/svg/svgo
+
 ICONS_DIR="src/assets/icons/sprites"
 SPRITE_FILE="$ICONS_DIR/sprite.svg"
 
 echo "Generating SVG sprite..."
 
-# Function to normalize SVG colors to currentColor
+# Normalize SVG colors to currentColor for theme compatibility
+# This allows icons to inherit text color from parent elements
 normalize_svg_colors() {
     local file="$1"
-    # Create temporary file
     local temp_file=$(mktemp)
     
     # Replace various color formats with currentColor
+    # Supports: hex colors (#RRGGBB, #RGB), named colors (black), stroke/fill attributes
     sed 's/fill="#[0-9a-fA-F]\{6\}"/fill="currentColor"/g' "$file" | \
     sed 's/fill="#[0-9a-fA-F]\{3\}"/fill="currentColor"/g' | \
     sed 's/stroke="#[0-9a-fA-F]\{6\}"/stroke="currentColor"/g' | \
@@ -27,13 +40,13 @@ normalize_svg_colors() {
     echo "$temp_file"
 }
 
-# Create sprite header
+# Create sprite header with hidden container
 cat > "$SPRITE_FILE" << 'EOF'
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <defs>
 EOF
 
-# Function to process SVG files
+# Process individual SVG file and wrap in <symbol>
 process_svg() {
     local file="$1"
     local id="$2"
@@ -41,10 +54,11 @@ process_svg() {
     # Normalize colors first
     local normalized_file=$(normalize_svg_colors "$file")
     
-    # Extract everything between <svg> and </svg>, remove svg tags, wrap in symbol
+    # Extract SVG content and wrap in symbol with viewBox
+    # Default viewBox is 0 0 256 256 - adjust if your icons use different dimensions
     echo "    <symbol id=\"$id\" viewBox=\"0 0 256 256\">"
     
-    # Extract content more reliably
+    # Extract content between <svg> tags, remove svg wrapper, indent properly
     sed -n '/<svg/,/<\/svg>/p' "$normalized_file" | \
     sed '1s/<svg[^>]*>//' | \
     sed '$s/<\/svg>//' | \

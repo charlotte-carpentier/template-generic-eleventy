@@ -93,6 +93,7 @@ template-generic-eleventy/
 │   │   └── styles/               # Global CSS/Tailwind entrypoint
 │   │       └── input.css         # Main stylesheet (imports + @theme + custom)
 │   ├── collections/              # Decap CMS collections (blog, etc.)
+│   ├── pages /                   # Utility pages (error pages, maintenance, redirects)
 │   ├── index.njk                 # Homepage template
 │   ├── robots.txt
 │   └── sitemap.xml
