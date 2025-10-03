@@ -1,27 +1,47 @@
 {
   "title": "Site Title",
-  "description": "Site description",
+  "description": "Site description for SEO and social sharing",
   "url": "https://example.com",
+  "language": "en",
+  "themeColor": "#ffffff",
+  "socialImage": "/assets/images/social-share.jpg",
   "views": {
     "/": {
-      "title": "Page Title",
-      "description": "Page description"
+      "title": "Home Page Title",
+      "description": "Home page description"
+    },
+    "/about/": {
+      "title": "About Page Title",
+      "description": "About page description"
+    },
+    "/contact/": {
+      "title": "Contact Page Title",
+      "description": "Contact page description"
     }
   },
   "favicon": {
     "png16": "/assets/icons/favicon/favicon-16x16.png",
     "png32": "/assets/icons/favicon/favicon-32x32.png",
     "ico": "/assets/icons/favicon/favicon.ico",
-    "appleTouch": "/assets/icons/favicon/apple-touch-icon.png"
+    "appleTouch": "/assets/icons/favicon/apple-touch-icon.png",
+    "svg": ""
   },
-  "socialImage": "/assets/social-share.jpg",
   "fonts": {
-    "primary": "FontName",
-    "secondary": "FontName"
+    "primary": "Inter",
+    "secondary": "Merriweather",
+    "preconnect": false,
+    "google": ""
   },
-  "axeptio": {
-    "clientId": "clientId",
-    "cookiesVersion": "versionName"
+  "iconLibrary": {
+    "fontAwesome": false
   },
-  "preloadImages": []
+  "preloadImages": [],
+  "cookieConsent": {
+    "provider": "",
+    "clientId": "",
+    "cookiesVersion": ""
+  },
+  "analytics": {
+    "ga4": ""
+  }
 }

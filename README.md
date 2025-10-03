@@ -10,11 +10,48 @@ Built on JavaScript, HTML5, and CSS3.
 
 - Generate static sites using Eleventy
 - Modular templates with Nunjucks (atoms, molecules, organisms)
-- Utility-first responsive CSS with TailwindCSS
+- Utility-first responsive CSS with TailwindCSS v4
 - Headless CMS integration via Decap CMS
+- Optional integrations: Google Analytics, Axeptio, Font Awesome
 - Automated asset scripts using Bash scripts
 
-## Project structure
+## Quick Start
+
+### 1. Clone and install
+
+```bash
+# Option A: Test the template directly
+git clone https://github.com/charlotte-carpentier/template-generic-eleventy.git
+cd template-generic-eleventy
+npm install
+
+# Option B: Start a new project from the template
+git clone https://github.com/charlotte-carpentier/template-generic-eleventy.git my-new-project
+cd my-new-project
+npm install
+```
+
+### 2. Configure your site
+
+Edit `src/_data/site.json` to customize:
+
+- Site title, description, and URL
+- Language and theme color
+- Google Fonts (optional)
+- Analytics and cookie consent (optional)
+- Social sharing image
+
+See [`docs/configuration.md`](./docs/configuration.md) for detailed configuration options.
+
+### 3. Start developing
+
+```bash
+npm start
+```
+
+Your site will be available at `http://localhost:8080`
+
+## Project Structure
 
 ```text
 template-generic-eleventy/
@@ -26,7 +63,7 @@ template-generic-eleventy/
 │   │   ├── atoms/
 │   │   ├── molecules/
 │   │   ├── organisms/
-│   │   └── site.json             # Global/shared data
+│   │   └── site.json             # Global site configuration
 │   ├── _includes/                # Nunjucks templates
 │   │   ├── 01-atoms/
 │   │   ├── 02-molecules/
@@ -42,22 +79,21 @@ template-generic-eleventy/
 │   │   │   ├── favicon/          # Favicons and app icons (per MDN spec)
 │   │   │   └── sprites/          # Icon spritesheets (SVG/PNG)
 │   │   ├── images/               # Raster and vector images (not icons)
-│   │   │   ├── backgrounds/      # Project background images
-│   │   │   ├── illustrations/    # Project illustrations  
-│   │   │   ├── logos/            # Project logos
+│   │   │   ├── backgrounds/      # Background images
+│   │   │   ├── illustrations/    # Illustrations  
+│   │   │   ├── logos/            # Logos
 │   │   │   └── placeholders/     # Template demo images only
 │   │   ├── scripts/              # JavaScript
 │   │   │   ├── components/       # Component-specific JS (organized by OMA)
 │   │   │   │   ├── 01-atoms/     # Atomic-level scripts
 │   │   │   │   ├── 02-molecules/ # Molecule-level scripts
 │   │   │   │   └── 03-organisms/ # Organism-level scripts
-│   │   │   ├── utils/            # Reusable helper scripts (aka helpers)
+│   │   │   ├── utils/            # Reusable helper scripts
 │   │   │   └── main.js           # Global entry point
 │   │   └── styles/               # Global CSS/Tailwind entrypoint
 │   │       └── input.css         # Main stylesheet (imports + @theme + custom)
-│   ├── collections/              # Decap CMS collections (blog, home, contact...)
-│   ├── index.njk                 # Main index template
-│   ├── input.css                 # TailwindCSS entry point
+│   ├── collections/              # Decap CMS collections (blog, etc.)
+│   ├── index.njk                 # Homepage template
 │   ├── robots.txt
 │   └── sitemap.xml
 ├── .eleventy.js                  # Eleventy configuration
@@ -68,22 +104,6 @@ template-generic-eleventy/
 └── README.md
 ```
 
-## Installation
-
-### Option 1: Test or use the template directly
-
-git clone <https://github.com/charlotte-carpentier/template-generic-eleventy.git>
-cd template-generic-eleventy
-npm install
-
-### Option 2: Start a new project from the template
-
-git clone <https://github.com/charlotte-carpentier/template-generic-eleventy.git> my-new-project
-cd my-new-project
-npm install
-
-### Optional: update package.json, Decap CMS config, etc
-
 ## Usage
 
 ### Development
@@ -92,7 +112,8 @@ npm install
 npm start
 ```
 
-Runs Eleventy in watch mode and starts PostCSS in parallel.
+Runs Eleventy in watch mode and starts PostCSS in parallel.  
+Access your site at `http://localhost:8080`
 
 ### Build
 
@@ -100,50 +121,80 @@ Runs Eleventy in watch mode and starts PostCSS in parallel.
 npm run build
 ```
 
-Creates an optimized production build (`public/`).
+Creates an optimized production build in `public/`
 
-### CSS
+### CSS Processing
 
 ```bash
-npm run build:css
-npm run watch:css
+npm run build:css    # Build CSS once
+npm run watch:css    # Watch and rebuild CSS on changes
 ```
 
-Processes `src/assets/styles/input.css` via PostCSS, TailwindCSS, Autoprefixer, and CSSNano.
+Processes `src/assets/styles/input.css` via PostCSS, TailwindCSS v4, Autoprefixer, and CSSNano.
 
-### Sprite generation
+### Sprite Generation
 
 ```bash
 npm run sprites
 ```
 
-Runs the `scripts/generate-sprite.sh` script to build SVG sprites from `src/sprites/`.
+Generates SVG sprites from `src/assets/icons/sprites/` using the custom Bash script.
 
-## Content management with Decap CMS
+## Content Management with Decap CMS
 
 This template uses Decap CMS for content management. The CMS interface is accessible at `/admin` once deployed.
 
-### Data architecture
+### Data Architecture
 
 - **`src/_data/atoms|molecules|organisms/`**: Editable component data (unique instances)
-- **`src/collections/`**: Repeatable collections (multiple instances)
+- **`src/collections/`**: Repeatable collections (blog posts, portfolio items, etc.)
 
 For detailed Decap CMS configuration and usage, see [`docs/decap-cms.md`](./docs/decap-cms.md).
 
 ## Documentation
 
-Detailed documentation is available in the [`/docs`](./docs) folder:
+Comprehensive documentation is available in the [`/docs`](./docs) folder:
 
-- [Eleventy config](./docs/eleventy.md)  
-- [TailwindCSS setup](./docs/tailwind.md)  
-- [Nunjucks templates](./docs/nunjucks.md)  
-- [Decap CMS](./docs/decap-cms.md)  
-- [Project structure](./docs/structure.md)  
+- **[Configuration Guide](./docs/configuration.md)** - Site configuration, fonts, analytics, cookies
+- **[Decap CMS Guide](./docs/decap-cms.md)** - Content management setup and usage
+- **[Conventions](./docs/conventions.md)** - Naming conventions and design system rules
+- **[Eleventy Setup](./docs/eleventy.md)** - Eleventy configuration details
+- **[TailwindCSS Setup](./docs/tailwind.md)** - Tailwind v4 configuration and customization
+- **[Nunjucks Templates](./docs/nunjucks.md)** - Template structure and macro usage
+- **[Project Structure](./docs/structure.md)** - Detailed folder and file organization
+
+## Optional Integrations
+
+This template supports optional third-party integrations:
+
+- **Google Fonts** - Custom typography via Google Fonts API
+- **Font Awesome** - Icon library (v6.7.2 with SRI)
+- **Axeptio** - Cookie consent management with Google Consent Mode v2
+- **Google Analytics 4** - Web analytics with consent integration
+
+All integrations are **disabled by default** and configured via `src/_data/site.json`.  
+See [`docs/configuration.md`](./docs/configuration.md) for setup instructions.
 
 ## Troubleshooting
 
 Common issues and fixes are tracked in [`TROUBLESHOOTING.md`](./TROUBLESHOOTING.md).
 
+## Contributing
+
+Contributions are welcome! Please ensure:
+
+- Code follows the naming conventions in [`docs/conventions.md`](./docs/conventions.md)
+- New components include proper documentation
+- All changes are tested locally before submitting
+
 ## License
 
 MIT © Charlotte Carpentier
+
+## Resources
+
+- [Eleventy Documentation](https://www.11ty.dev/docs/)
+- [TailwindCSS v4 Documentation](https://tailwindcss.com/docs)
+- [Nunjucks Documentation](https://mozilla.github.io/nunjucks/)
+- [Decap CMS Documentation](https://decapcms.org/docs/)
+  
