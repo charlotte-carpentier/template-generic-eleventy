@@ -119,6 +119,17 @@ npm run sprites
 
 Runs the `scripts/generate-sprite.sh` script to build SVG sprites from `src/sprites/`.
 
+## Content management with Decap CMS
+
+This template uses Decap CMS for content management. The CMS interface is accessible at `/admin` once deployed.
+
+### Data architecture
+
+- **`src/_data/atoms|molecules|organisms/`**: Editable component data (unique instances)
+- **`src/collections/`**: Repeatable collections (multiple instances)
+
+For detailed Decap CMS configuration and usage, see [`docs/decap-cms.md`](./docs/decap-cms.md).
+
 ## Documentation
 
 Detailed documentation is available in the [`/docs`](./docs) folder:
