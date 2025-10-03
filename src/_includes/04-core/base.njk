@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ site.language | default('en') }}">
   <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -26,74 +26,104 @@
     <meta property="og:url" content="{{ site.url }}{{ page.url }}">
     <meta property="og:title" content="{{ title | default(site.views[page.url].title | default(site.title)) }}">
     <meta property="og:description" content="{{ description | default(site.views[page.url].description | default(site.description)) }}">
-    <meta property="og:image" content="{{ site.url }}/assets/social-share.jpg">
+    <meta property="og:image" content="{{ site.url }}{{ site.socialImage | default('/assets/images/social-share.jpg') }}">
 
     {# ----- Twitter Card ----- #}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
     <meta name="twitter:title" content="{{ title | default(site.views[page.url].title | default(site.title)) }}">
     <meta name="twitter:description" content="{{ description | default(site.views[page.url].description | default(site.description)) }}">
-    <meta name="twitter:image" content="{{ site.url }}/assets/social-share.jpg">
+    <meta name="twitter:image" content="{{ site.url }}{{ site.socialImage | default('/assets/images/social-share.jpg') }}">
 
     {# ----- Fonts ----- #}
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Manjari&display=swap" rel="stylesheet"/>
+    {# TODO: Configure your Google Fonts in src/_data/site.json
+       Example: "fonts": { "google": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" }
+       See: https://fonts.google.com/ #}
+    {% if site.fonts.preconnect %}
+      <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous"/>
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+    {% endif %}
+    {% if site.fonts.google %}
+      <link href="{{ site.fonts.google }}" rel="stylesheet"/>
+    {% endif %}
 
     {# ----- Image preload (optional) ----- #}
-    {# TODO: Add specific images to preload for Charlotte's site #}
-    <link rel="preload" as="image" href="/assets/images/TODO">
-    <link rel="preload" as="image" href="/assets/images/TODO">
+    {# TODO: Add critical images to preload for better LCP (Largest Contentful Paint)
+       Configure in src/_data/site.json under "preloadImages": ["path/to/hero.jpg", ...]
+       See: https://web.dev/preload-critical-assets/ #}
+    {% if site.preloadImages %}
+      {% for image in site.preloadImages %}
+        <link rel="preload" as="image" href="{{ image }}">
+      {% endfor %}
+    {% endif %}
 
     {# ----- Icon sprite preload for instant display ----- #}
     <link rel="preload" href="/assets/icons/sprite.svg" as="image" type="image/svg+xml">
 
     {# ----- Stylesheets ----- #}
     <link rel="stylesheet" href="/output.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    
+    {# TODO: Configure icon library in src/_data/site.json if needed
+       Example: "iconLibrary": { "fontAwesome": true }
+       Note: Consider using SVG sprites instead for better performance #}
+    {% if site.iconLibrary.fontAwesome %}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    {% endif %}
 
     {# ----- Manifest and theme color ----- #}
     <link rel="manifest" href="/site.webmanifest"/>
-    <meta name="theme-color" content="#ffffff"/>
+    <meta name="theme-color" content="{{ site.themeColor | default('#ffffff') }}"/>
 
-    {# ----- Axeptio Cookie Consent + Google Consent Mode ----- #}
-    <script>
-      window.axeptioSettings = {
-        clientId: "6880d00ff0b041d2ff94a7f8",
-        cookiesVersion: "charlottecarpentier-fr-EU",
-        googleConsentMode: {
-          default: {
-            analytics_storage: "denied",
-            ad_storage: "denied",
-            ad_user_data: "denied",
-            ad_personalization: "denied",
-            wait_for_update: 500
+    {# ----- Cookie Consent (Axeptio integration) ----- #}
+    {# TODO: Configure cookie consent in src/_data/site.json
+       Example: "cookieConsent": { "provider": "axeptio", "clientId": "YOUR_CLIENT_ID", "cookiesVersion": "YOUR_DOMAIN-REGION" }
+       Get your credentials at: https://admin.axeptio.eu/
+       Note: This setup includes Google Consent Mode v2 compliance #}
+    {% if site.cookieConsent.provider === "axeptio" and site.cookieConsent.clientId %}
+      <script>
+        window.axeptioSettings = {
+          clientId: "{{ site.cookieConsent.clientId }}",
+          cookiesVersion: "{{ site.cookieConsent.cookiesVersion }}",
+          googleConsentMode: {
+            default: {
+              analytics_storage: "denied",
+              ad_storage: "denied",
+              ad_user_data: "denied",
+              ad_personalization: "denied",
+              wait_for_update: 500
+            }
           }
-        }
-      };
+        };
 
-      (function (d, s) {
-        var t = d.getElementsByTagName(s)[0],
-          e = d.createElement(s);
-        e.async = true;
-        e.src = "//static.axept.io/sdk.js";
-        t.parentNode.insertBefore(e, t);
-      })(document, "script");
-    </script>
+        (function (d, s) {
+          var t = d.getElementsByTagName(s)[0],
+            e = d.createElement(s);
+          e.async = true;
+          e.src = "//static.axept.io/sdk.js";
+          t.parentNode.insertBefore(e, t);
+        })(document, "script");
+      </script>
+    {% endif %}
 
-    {# ----- Google Analytics 4 (avec consent mode) ----- #}
-    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-ET74WRBGJM"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
+    {# ----- Google Analytics 4 (with Consent Mode v2) ----- #}
+    {# TODO: Configure Google Analytics in src/_data/site.json
+       Example: "analytics": { "ga4": "G-XXXXXXXXXX" }
+       Get your measurement ID at: https://analytics.google.com/
+       See: https://developers.google.com/tag-platform/devguides/consent #}
+    {% if site.analytics.ga4 %}
+      <script async="async" src="https://www.googletagmanager.com/gtag/js?id={{ site.analytics.ga4 }}"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
 
-      // Initialize GA4 (consent will be managed by Axeptio)
-      gtag('js', new Date());
-      gtag('config', 'G-ET74WRBGJM', {
-        anonymize_ip: true,
-        cookie_flags: 'SameSite=None;Secure'
-      });
-    </script>
+        // Initialize GA4 (consent managed by cookie consent provider)
+        gtag('js', new Date());
+        gtag('config', '{{ site.analytics.ga4 }}', {
+          anonymize_ip: true,
+          cookie_flags: 'SameSite=None;Secure'
+        });
+      </script>
+    {% endif %}
   </head>
 
   <body class="min-h-screen flex flex-col">
@@ -102,7 +132,7 @@
     {% if not hideHeaderFooter %}
       {% from "03-organisms/header.njk" import renderHeader %}
       {{ renderHeader({ 
-          name: "charlotte_header",
+          name: "main_header",
           datas: organisms.header.headers,
           typographyDatas: atoms.typography.texts,
           tabMenuDatas: molecules["tab-menu"].tab_menus,
@@ -113,6 +143,7 @@
 
     {# ----- Main content ----- #}
     <main class="flex-1 flex items-center justify-center">
+        {# Add hidden site description on homepage for SEO #}
         {% if page.url === '/' %}
           <section class="sr-only">
             <p>{{ site.description }}</p>
@@ -140,7 +171,9 @@
     <script src="/assets/js/components/03-organisms/error-layout.js" defer="defer"></script>
     <script src="/assets/js/components/03-organisms/header.js" defer="defer"></script>
 
-    {# ----- Netlify CMS redirect (optional) ----- #}
+    {# ----- Netlify Identity redirect (for Decap CMS login) ----- #}
+    {# This script redirects users to /admin/ after login via Netlify Identity
+       See: https://decapcms.org/docs/add-to-your-site/#enable-identity-and-git-gateway #}
     <script>
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", (user) => {
