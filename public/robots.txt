@@ -1,11 +1,15 @@
+# Robots.txt - Search Engine Crawling Rules
+# Configure your site URL in src/_data/site.json
+
 User-agent: *
 Allow: /
 
-# Sitemap declaration
-Sitemap: https://charlottecarpentier.com/sitemap.xml
+# TODO: Update sitemap URL with your domain
+# Replace example.com with your actual domain from site.json
+Sitemap: https://example.com/sitemap.xml
 
-# Block admin panel only
+# Block admin panel (Decap CMS)
 Disallow: /admin/
 
-# Allow assets (images, CSS needed for SEO)
+# Allow assets (images, CSS, JS needed for SEO and rendering)
 Allow: /assets/

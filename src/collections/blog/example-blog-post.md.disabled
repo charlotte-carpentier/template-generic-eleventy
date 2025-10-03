@@ -1,4 +1,5 @@
 ---
+layout: 04-core/base.njk
 title: "Example Blog Post Title"
 description: "Brief description of this blog post for SEO and social sharing"
 date: 2025-01-15
