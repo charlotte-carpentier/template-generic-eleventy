@@ -1,23 +1,57 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Checkbox                                         │
+   │ Accessible checkbox inputs with labels                  │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-        CHECKBOX         
-=========================
-Atom component for creating accessible checkbox inputs with labels.
-
-IMPORTANT NOTES:
-- Uses box.njk as its foundation for the actual checkbox visuals
-- Adds labels, descriptions, and group functionality
-- Can be used individually or as fieldset groups
-- Supports disabled states and checked states
-- Shows pointer cursor on hover for better UX on both the box and label
-
-ACCESSIBILITY:
-- Properly associates labels with inputs using for/id
-- Includes fieldset/legend for checkbox groups
-- Supports screen-reader-only group labels and descriptions
-- Provides description text for additional context
-- Includes aria-label support for improved screen reader experience
-- Supports required state and disabled state properties
+  Props:
+    - options.id (string): Checkbox identifier for single rendering
+    - options.group (boolean): Render as group if true
+    - options.groupName (string): Specific group name to render
+    - options.groupSrOnly (boolean): Hide group label visually
+    - options.datas (object): Checkbox configuration data
+    - options.boxStyles (object): Box styling configuration
+  
+  Usage:
+    {% from "01-atoms/checkbox.njk" import renderCheckbox %}
+    
+    Single checkbox:
+    {{ renderCheckbox({ 
+       id: "charisma", 
+       datas: atoms.checkboxes,
+       boxStyles: atoms.boxes 
+    }) }}
+    
+    Specific group:
+    {{ renderCheckbox({ 
+       group: true, 
+       groupName: "rpgStyles",
+       datas: atoms.checkboxes,
+       boxStyles: atoms.boxes 
+    }) }}
+    
+    All groups:
+    {{ renderCheckbox({ 
+       group: true, 
+       datas: atoms.checkboxes,
+       boxStyles: atoms.boxes 
+    }) }}
+  
+  Notes:
+    - Uses box.njk as foundation for checkbox visuals
+    - Adds labels, descriptions, and group functionality
+    - Supports disabled and checked states
+    - Shows pointer cursor on hover for box and label
+  
+  Accessibility:
+    - Properly associates labels with inputs using for/id
+    - Includes fieldset/legend for checkbox groups
+    - Supports screen-reader-only group labels
+    - Provides description text for additional context
+    - Includes aria-label support
+    - Supports required and disabled state properties
+  
+  @created 2025-01-15
 #}
 
 {% from "03-atoms/box.njk" import renderSingleBox %}
@@ -157,32 +191,7 @@ ACCESSIBILITY:
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "03-atoms/checkbox.njk" import renderCheckbox %}
-
-2. Call a specific checkbox by its ID
-{{ renderCheckbox({ 
-   id: "charisma", 
-   datas: atoms.checkboxes,
-   boxStyles: atoms.boxes 
-}) }}
-
-3. Render a specific checkbox group
-{{ renderCheckbox({ 
-   group: true, 
-   groupName: "rpgStyles",
-   datas: atoms.checkboxes,
-   boxStyles: atoms.boxes 
-}) }}
-
-4. Render all checkbox groups
-{{ renderCheckbox({ 
-   group: true, 
-   datas: atoms.checkboxes,
-   boxStyles: atoms.boxes 
-}) }}
-
-5. Adding a new checkbox group to checkboxes.json
+Adding a new checkbox group to checkboxes.json:
 {
   "newGameOptions": {
     "groupLabel": "New Game Features",
@@ -202,5 +211,5 @@ Summon HAT Components Wisely
   }
 }
 
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+May your bugs be forever exiled to the shadow realm. ✦
 #}

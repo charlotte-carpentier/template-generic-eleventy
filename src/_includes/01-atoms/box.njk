@@ -1,36 +1,50 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Box                                              │
+   │ Checkbox visual foundation component                    │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-          BOX           
-=========================
-
-Micro atom component for creating checkbox visuals.
-
-IMPORTANT NOTES:
-- Used as a foundation for the checkbox.njk component
-- Can be used independently for simple checkbox inputs
-- Handles various states: default, hover, focus, checked, disabled
-- All styles are defined in boxes.json
-- Shows pointer cursor on hover for better UX
-
-ACCESSIBILITY:
-- Supports aria-label attribute for screen readers
-- Maintains proper focus states with visual indicators
-- Includes proper disabled state handling
+  Props:
+    - options.id (string): Unique identifier for single box
+    - options.group (boolean): Render as group if true
+    - options.datas (object): Box configuration data
+  
+  Usage:
+    {% from "01-atoms/box.njk" import boxComponent %}
+    
+    Single box:
+    {{ boxComponent({ id: "box1", datas: atoms.boxes }) }}
+    
+    Group of boxes:
+    {{ boxComponent({ group: true, datas: atoms.boxes }) }}
+  
+  Notes:
+    - Foundation component for checkbox.njk
+    - Handles states: default, hover, focus, checked, disabled
+    - All styles defined in boxes.json
+    - Shows pointer cursor on hover for better UX
+  
+  Accessibility:
+    - Supports aria-label for screen readers
+    - Maintains proper focus states with visual indicators
+    - Includes proper disabled state handling
+  
+  @created 2025-01-15
 #}
 
 {% macro boxComponent(options) %}
-  {# -- Initialize default values for styling classes -- #}
+  {# Initialize default values for styling classes #}
   {% set globalStyle = options.datas.globalStyle | default('') %}
   {% set fieldsetClasses = options.datas.fieldsetClasses | default('') %}
   {% set groupContainerClasses = options.datas.groupContainerClasses | default('') %}
   
-  {# -- Create JSON string of styles for JavaScript -- #}
+  {# Create JSON string of styles for JavaScript #}
   {% set stylesJson = {
     "baseClasses": options.datas.baseClasses,
     "variants": options.datas.variants
   } | dump | safe %}
   
-  {# -- Check if rendering as a group or individual box -- #}
+  {# Check if rendering as a group or individual box #}
   {% if options.group %}
     <fieldset class="{{ fieldsetClasses }}" data-box-styles='{{ stylesJson }}'>
       <div class="{{ groupContainerClasses }}">
@@ -40,17 +54,17 @@ ACCESSIBILITY:
       </div>
     </fieldset>
   {% else %}
-    {# -- Initialize boxData as null before searching -- #}
+    {# Initialize boxData as null before searching #}
     {% set boxData = null %}
     
-    {# -- Find the box matching the requested ID in the data collection -- #}
+    {# Find the box matching the requested ID in the data collection #}
     {% for box in options.datas.boxes %}
       {% if box.id == options.id %}
         {% set boxData = box %}
       {% endif %}
     {% endfor %}
     
-    {# -- Render box if data was found, otherwise show error -- #}
+    {# Render box if data was found, otherwise show error #}
     {% if boxData %}
       <div data-box-styles='{{ stylesJson }}'>
         {{ renderSingleBox(boxData, options.datas) }}
@@ -62,11 +76,11 @@ ACCESSIBILITY:
 {% endmacro %}
 
 {% macro renderSingleBox(box, datas) %}
-  {# -- Initialize style classes for the box and its components -- #}
+  {# Initialize style classes for the box and its components #}
   {% set boxContainerClasses = datas.boxContainerClasses | default('') %}
   {% set baseClasses = datas.baseClasses | default('') %}
   
-  {# -- Define state classes for different visual states -- #}
+  {# Define state classes for different visual states #}
   {% set stateClasses = {
     'default': datas.variants.default | default(''),
     'hover': datas.variants.hover | default(''),
@@ -76,7 +90,7 @@ ACCESSIBILITY:
     'disabledChecked': datas.variants.disabledChecked | default('')
   } %}
   
-  {# -- Combine base classes with default state -- #}
+  {# Combine base classes with default state #}
   {% set inputClasses = baseClasses ~ ' ' ~ stateClasses.default %}
   
   <div class="{{ boxContainerClasses }}">
@@ -102,16 +116,7 @@ ACCESSIBILITY:
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "03-atoms/box.njk" import boxComponent %}
-
-2. Call a specific box by its ID
-{{ boxComponent({ id: "box1", datas: atoms.boxes }) }}
-
-3. Or render a group of boxes
-{{ boxComponent({ group: true, datas: atoms.boxes }) }}
-
-4. Add a new box in boxes.json
+Add a new box in boxes.json:
 {
   "boxes": [
     {
@@ -124,5 +129,5 @@ Summon HAT Components Wisely
   ]
 }
 
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+May your bugs be forever exiled to the shadow realm. ✦
 #}

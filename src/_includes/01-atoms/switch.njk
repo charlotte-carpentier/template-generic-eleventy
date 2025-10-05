@@ -1,8 +1,42 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Switch                                           │
+   │ Toggle controls with consistent styling                 │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-         SWITCH          
-=========================
-Component that renders switch controls with consistent styling
+  Props:
+    - options.id (string): Switch identifier for single rendering
+    - options.group (boolean): Render as group if true
+    - options.groupLabel (string): Group label text
+    - options.groupSrOnly (boolean): Hide group label visually
+    - options.datas (object): Switch configuration data
+  
+  Usage:
+    {% from "01-atoms/switch.njk" import renderSwitch %}
+    
+    Single switch:
+    {{ renderSwitch({ id: "torch", datas: atoms.switchs }) }}
+    
+    Group of switches:
+    {{ renderSwitch({ 
+        group: true, 
+        groupLabel: "Settings",
+        datas: atoms.switchs 
+    }) }}
+  
+  Features:
+    - Supports single or group rendering
+    - Size variants (from data configuration)
+    - State-based styling (default, checked, disabled, disabledChecked)
+    - Fieldset/legend for semantic grouping
+  
+  Accessibility:
+    - Checkbox input type for native toggle behavior
+    - aria-label support for screen readers
+    - Screen-reader-only labels option
+    - Proper disabled state handling
+  
+  @created 2025-01-15
 #}
 
 {% macro renderSwitch(options) %}
@@ -100,13 +134,7 @@ Component that renders switch controls with consistent styling
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "03-atoms/switch.njk" import renderSwitch %}
-
-2. Call a specific switch by its name
-{{ renderSwitch({ id: "torch", datas: atoms.switchs }) }}
-
-3. Adding a new switch to switchs.json
+Adding a new switch to switchs.json:
 {
   "switchs": [
     {
@@ -121,5 +149,5 @@ Summon HAT Components Wisely
   ]
 }
 
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+May your bugs be forever exiled to the shadow realm. ✦
 #}

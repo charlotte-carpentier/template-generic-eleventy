@@ -1,43 +1,60 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Chip Notification                                │
+   │ Numeric indicators and status badges                    │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-   CHIP NOTIFICATION    
-=========================
-Notification chip component for displaying numeric indicators or status.
-
-IMPORTANT NOTES:
-- Style variants come from the "variants" object in chip-notifications.json
-- Sizes automatically adapt based on content length for better visual balance
-- Uses appropriate ARIA roles for accessibility
-- Supports dismissible chips (with the "dismissible" class)
-- Additional custom classes can be applied through the "classes" property
-
-ACCESSIBILITY:
-- Uses role="status" to indicate informational content to screen readers
-- Maintains sufficient color contrast for all variant styles
-- Text size adjusts appropriately for readability at different size scales
-- Provides aria-label for more descriptive announcements to screen readers
+  Props:
+    - options.name (string): Chip identifier
+    - options.datas (object): Chip notification configuration
+  
+  Usage:
+    {% from "01-atoms/chip-notification.njk" import renderChipNotification %}
+    
+    {{ renderChipNotification({ 
+        name: "notification_count", 
+        datas: atoms.chipNotifications 
+    }) }}
+  
+  Notes:
+    - Style variants from "variants" object in chip-notifications.json
+    - Sizes auto-adapt based on content length
+    - Supports dismissible chips (add "dismissible" class)
+    - Additional custom classes via "classes" property
+  
+  Accessibility:
+    - Uses role="status" for screen reader announcements
+    - Maintains sufficient color contrast for all variants
+    - Text size adjusts for readability at different scales
+    - Provides aria-label for descriptive announcements
+  
+  JavaScript Interaction:
+    window.updateChipNotification("notification_count", "5", true);
+    Parameters: chip name, new value, animate (true/false)
+  
+  @created 2025-01-15
 #}
 
 {% macro renderChipNotification(options) %}
-  {# -- Initialize chipData as null before searching -- #}
+  {# Initialize chipData as null before searching #}
   {% set chipData = null %}
   
-  {# -- Find chip in data collection -- #}
+  {# Find chip in data collection #}
   {% for notification in options.datas["chip-notifications"] %}
     {% if notification.name == options.name %}
       {% set chipData = notification %}
     {% endif %}
   {% endfor %}
 
-  {# -- Get global style that applies to all chips -- #}
+  {# Get global style that applies to all chips #}
   {% set globalStyle = options.datas.globalStyle %}
 
-  {# -- Render chip if data was found -- #}
+  {# Render chip if data was found #}
   {% if chipData %}
-    {# -- Get variant-specific style or default to empty string if not found -- #}
+    {# Get variant-specific style or default to empty string if not found #}
     {% set variantStyle = options.datas.variants[chipData.style] | default('') %}
     
-    {# -- Determine size class based on content length -- #}
+    {# Determine size class based on content length #}
     {% set contentLength = chipData.text | string | length %}
     {% set sizeClass = "" %}
     
@@ -56,7 +73,7 @@ ACCESSIBILITY:
       {{ chipData.text }}
     </span>
   {% else %}
-    {# -- Error message if chip not found in data collection -- #}
+    {# Error message if chip not found in data collection #}
     <span>Chip notification not found: {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
@@ -66,30 +83,18 @@ ACCESSIBILITY:
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "03-atoms/chip-notification.njk" import renderChipNotification %}
-
-2. Call a specific chip notification by its name
-{{ renderChipNotification({ name: "notification_count", datas: atoms.chipNotifications }) }}
-
-3. Adding a new chip notification to chip-notifications.json
+Adding a new chip notification to chip-notifications.json:
 {
   "chip-notifications": [
     {
       "name": "new_notification_count",
       "text": "99+",
       "style": "warning",
-      "ariaLabel": "99 or more unread notifications", // Optional: for accessibility
-      "classes": "animate-pulse" // Optional: add custom classes
+      "ariaLabel": "99 or more unread notifications",
+      "classes": "animate-pulse"
     }
   ]
 }
 
-4. JavaScript Interaction Options
-- Dismissible chips (add "dismissible" to the classes property)
-- Dynamic updates via JavaScript:
-  window.updateChipNotification("notification_count", "5", true);
-  Parameters: chip name, new value, animate (true/false)
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+May your bugs be forever exiled to the shadow realm. ✦
 #}
