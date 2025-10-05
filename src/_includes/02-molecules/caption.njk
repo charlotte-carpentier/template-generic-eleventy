@@ -1,7 +1,40 @@
-{# ===========================================================
-   @MOLECULES - CAPTION
-   - Combines icon with text content and tooltip behavior
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Caption                                      │
+   │ Icon with text content and tooltip behavior             │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Caption identifier
+    - option.datas (array): Caption configuration
+    - option.iconDatas (array): Icons atom data
+    - option.tooltipDatas (array): Tooltips atom data
+    - option.typographyDatas (array): Typography atom data
+  
+  Usage:
+    {% from "02-molecules/caption.njk" import renderCaption %}
+    
+    {{ renderCaption({ 
+        name: "languages_symfony",
+        datas: molecules.caption.captions,
+        iconDatas: atoms.icon.icons,
+        tooltipDatas: atoms.tooltip.tooltips,
+        typographyDatas: atoms.typography.texts
+    }) }}
+  
+  Features:
+    - Desktop: Icon + Title (hides on hover) + Tooltip (appears below)
+    - Mobile: Icon + Content side-by-side (label + description stacked)
+    - Gradient color support on icons
+    - Unique tooltip IDs for accessibility
+  
+  Accessibility:
+    - Keyboard accessible (tabindex="0")
+    - aria-describedby links to tooltip
+    - Tooltip has role="tooltip" and aria-hidden states
+  
+  @created 2025-01-15
+#}
 
 {# Import atoms #}
 {% from "01-atoms/icon.njk" import renderIcon %}
@@ -101,20 +134,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "02-molecules/caption.njk" import renderCaption %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call a specific caption by its name
-{{ renderCaption({ 
-    name: "languages_symfony",
-    datas: molecules.caption.captions,
-    iconDatas: atoms.icon.icons,
-    tooltipDatas: atoms.tooltip.tooltips,
-    typographyDatas: atoms.typography.texts
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}

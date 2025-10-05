@@ -1,7 +1,52 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Card                                         │
+   │ Flexible card component with image, heading and CTA     │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-          CARD           
-=========================
+  Props:
+    - options.name (string): Card identifier
+    - options.variant (string): Card style variant
+    - options.datas (object): Card configuration
+    - options.images (object): Images atom data
+    - options.headings (object): Headings atom data
+    - options.buttons (object): Buttons atom data
+    - options.post (object): Post data for blog cards (optional)
+    - options.class (string): Additional CSS classes
+  
+  Usage:
+    {% from "02-molecules/card.njk" import renderCard %}
+    
+    Regular card:
+    {{ renderCard({ 
+        name: "goblin_menace",
+        variant: "default",
+        datas: molecules.cards,
+        images: atoms.images,
+        headings: atoms.headings,
+        buttons: atoms.buttons
+    }) }}
+    
+    Post card:
+    {{ renderCard({ 
+        name: "post_template", 
+        datas: molecules.cards,
+        buttons: atoms.buttons,
+        post: post
+    }) }}
+  
+  Card Types:
+    - Regular: Image + Heading + Content + Button
+    - Post: Blog post with author, date, and read more link
+  
+  Features:
+    - Responsive image support
+    - Heading levels (h1-h6)
+    - Content text with line clamping
+    - Button with hover/focus states
+    - Post metadata (author, date)
+  
+  @created 2025-01-15
 #}
 
 {% macro renderCard(options) %}
@@ -179,23 +224,16 @@
                       {% endif %}
                     </a>
                   {% else %}
-                    {# Fallback for button if no matching button found #}
-                    <a href="{{ post.url }}">
-                      Read more
-                    </a>
+                    <a href="{{ post.url }}">Read more</a>
                   {% endif %}
                 {% else %}
-                  {# Simple button fallback if no buttons object provided #}
-                  <a href="{{ post.url }}">
-                    Read more
-                  </a>
+                  <a href="{{ post.url }}">Read more</a>
                 {% endif %}
               </div>
             </div>
           </article>
         </li>
       {% else %}
-        {# Placeholder for when post card type is requested but no post data is provided #}
         <span>Post data not provided for post card type</span>
       {% endif %}
     {% endif %}
@@ -204,86 +242,10 @@
   {% endif %}
 {% endmacro %}
 
-
 {#
 ============================
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "02-molecules/card.njk" import renderCard %}
-
-2. Call the card component with a specific name
-{{ renderCard({ 
-    name: "goblin_menace",
-    variant: "default",
-    datas: molecules.cards,
-    images: atoms.images,
-    headings: atoms.headings,
-    buttons: atoms.buttons
-}) }}
-
-3. Using custom styles or specific width
-{{ renderCard({ 
-    name: "lost_wizard_hat",
-    variant: "featured",
-    datas: molecules.cards,
-    images: atoms.images,
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    class: "my-custom-card-class w-64"
-}) }}
-
-4. Creating a grid of cards with responsive layout
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  {{ renderCard({ name: "goblin_menace", variant: "default", datas: molecules.cards, images: atoms.images, headings: atoms.headings, buttons: atoms.buttons }) }}
-  {{ renderCard({ name: "lost_wizard_hat", variant: "featured", datas: molecules.cards, images: atoms.images, headings: atoms.headings, buttons: atoms.buttons }) }}
-</div>
-
-5. For post cards
-<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  {% for post in collections.posts %}
-    {{ renderCard({ 
-        name: "post_template", 
-        datas: molecules.cards,
-        buttons: atoms.buttons,
-        post: post
-    }) }}
-  {% endfor %}
-</ul>
-
-6. Structure of cards.json
-{
-  "cards": [
-    {
-      "name": "goblin_menace",
-      "image": {
-        "name": "placeholder_small"
-      },
-      "heading": {
-        "name": "goblin_menace"
-      },
-      "content": {
-        "text": "A band of mischievous goblins is causing chaos...",
-        "style": "default",
-        "maxLines": 2
-      },
-      "button": {
-        "name": "card"
-      }
-    },
-    {
-      "name": "post_template",
-      "type": "post",
-      "imageStyle": "min-h-[256px] w-full",
-      "titleStyle": "text-gray-800 text-xl font-bold",
-      "metaStyle": "snippet__meta",
-      "descriptionStyle": "my-4 text-sm text-gray-500 leading-relaxed",
-      "buttonContainerStyle": "flex justify-center",
-      "buttonName": "read_more"
-    }
-  ]
-}
-
-Adventure awaits behind every card! 🗝️🎴
+May your bugs be forever exiled to the shadow realm. ✦
 #}

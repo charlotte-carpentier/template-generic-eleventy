@@ -1,7 +1,43 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Breadcrumb                                   │
+   │ Navigation breadcrumb trail with link states            │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-       BREADCRUMB        
-=========================
+  Props:
+    - options.name (string): Breadcrumb set identifier (optional)
+    - options.datas (object): Breadcrumb configuration
+    - options.links (object): Links atom data
+    - options.class (string): Additional CSS classes
+  
+  Usage:
+    {% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
+    
+    {{ renderBreadcrumb({ 
+        name: "adventure",
+        datas: molecules.breadcrumbs,
+        links: atoms.links 
+    }) }}
+    
+    With custom styles:
+    {{ renderBreadcrumb({ 
+        datas: molecules.breadcrumbs,
+        links: atoms.links,
+        class: "my-custom-breadcrumb-class"
+    }) }}
+  
+  Features:
+    - Separator icon between items (default: /)
+    - Active item styling for current page
+    - Hover/focus states for clickable links
+    - Falls back to first breadcrumb set if name not found
+  
+  Accessibility:
+    - Semantic <nav> with aria-label="Breadcrumb"
+    - Ordered list structure
+    - aria-hidden for separator icons
+  
+  @created 2025-01-15
 #}
 
 {% macro renderBreadcrumb(options) %}
@@ -75,30 +111,12 @@
   {% endif %}
 {% endmacro %}
 
-
 {#
 ============================
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
-
-2. Call the breadcrumb component with a specific name
-{{ renderBreadcrumb({ 
-    name: "adventure",
-    datas: molecules.breadcrumbs,
-    links: atoms.links 
-}) }}
-
-3. Using custom styles
-{{ renderBreadcrumb({ 
-    datas: molecules.breadcrumbs,
-    links: atoms.links,
-    class: "my-custom-breadcrumb-class"
-}) }}
-
-4. Structure of breadcrumbs.json
+Structure of breadcrumbs.json:
 {
   "breadcrumbs": [
     {
@@ -119,5 +137,5 @@ Summon HAT Components Wisely
   ]
 }
 
-No wrong turns, only side quests! 🗺️🎭
+May your bugs be forever exiled to the shadow realm. ✦
 #}
