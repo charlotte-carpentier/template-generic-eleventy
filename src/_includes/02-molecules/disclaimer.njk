@@ -1,7 +1,36 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Disclaimer                                   │
+   │ Dismissible alert messages with icon support            │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-       DISCLAIMER        
-=========================
+  Props:
+    - options.name (string): Disclaimer identifier
+    - options.datas (object): Disclaimer configuration
+    - options.icons (object): Icons atom data
+  
+  Usage:
+    {% from "02-molecules/disclaimer.njk" import renderDisclaimer %}
+    
+    {{ renderDisclaimer({ 
+        name: "gdpr_consent", 
+        datas: molecules.disclaimers,
+        icons: atoms.icons 
+    }) }}
+  
+  Features:
+    - Style variants (info, warning, error, success)
+    - Optional icon display
+    - Dismissible with close button
+    - Message content from configuration
+  
+  Accessibility:
+    - role="alert" for screen readers
+    - aria-live="polite" for dynamic updates
+    - aria-label on dismiss button
+    - aria-hidden for decorative icons
+  
+  @created 2025-01-15
 #}
 
 {% macro renderDisclaimer(options) %}
@@ -72,15 +101,5 @@
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "02-molecules/disclaimer.njk" import renderDisclaimer %}
-
-2. Call a specific disclaimer by name
-{{ renderDisclaimer({ 
-    name: "gdpr_consent", 
-    datas: molecules.disclaimers,
-    icons: atoms.icons 
-}) }}
-
-May your disclaimers guide users wisely 🛡️📜
+May your bugs be forever exiled to the shadow realm. ✦
 #}

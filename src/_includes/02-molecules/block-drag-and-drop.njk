@@ -1,7 +1,46 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Dropzone Upload                              │
+   │ Drag-and-drop file upload with status variants          │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-    DROPZONE UPLOAD        
-=========================
+  Props:
+    - options.name (string): Dropzone identifier
+    - options.datas (object): Dropzone configuration
+    - options.headings (object): Headings atom data
+    - options.icons (object): Icons atom data
+    - options.buttons (object): Buttons atom data
+  
+  Usage:
+    {% from "02-molecules/block-drag-and-drop.njk" import renderDropzoneUpload %}
+    
+    {{ renderDropzoneUpload({ 
+        name: "standard_upload", 
+        datas: molecules["dropzone-uploads"],
+        headings: atoms.headings,
+        icons: atoms.icons,
+        buttons: atoms.buttons
+    }) }}
+  
+  Variants:
+    - standard_upload: Default style
+    - error_upload: Shows error message
+    - loading_upload: Displays loading state with spinner
+  
+  Features:
+    - Drag-and-drop area with click-to-browse
+    - Loading spinner for upload progress
+    - Error message display with dismissible option
+    - File format and size information
+    - Keyboard accessible (tabindex, aria-label)
+  
+  Accessibility:
+    - role="button" on dropzone area
+    - aria-label for upload interaction
+    - aria-hidden for decorative elements
+    - Proper heading structure
+  
+  @created 2025-01-15
 #}
 
 {% macro renderDropzoneUpload(options) %}
@@ -17,13 +56,10 @@
     {% endif %}
 
     {% if not dropzoneData %}
-      <span>Dropzone upload not found:
-        {{ options.name }}</span>
+      <span>Dropzone upload not found: {{ options.name }}</span>
     {% else %}
       {% set globalStyle = options.datas.globalStyle %}
-      {% set variantStyle = options
-        .datas
-        .variants[dropzoneData.style] %}
+      {% set variantStyle = options.datas.variants[dropzoneData.style] %}
       {% set iconStyle = options.datas.iconStyles.default %}
 
       {# Find heading data if headings are provided #}
@@ -59,12 +95,8 @@
         {% if headingData %}
           {% set headingLevel = headingData.level %}
           {% set headingText = headingData.text %}
-          {% set headingStyle = options
-            .headings
-            .variants[headingData.style] %}
-          {% set headingSizeStyle = options
-            .headings
-            .sizeStyles["h" + headingLevel] %}
+          {% set headingStyle = options.headings.variants[headingData.style] %}
+          {% set headingSizeStyle = options.headings.sizeStyles["h" + headingLevel] %}
           {% set headingGlobalStyle = options.headings.globalStyle %}
 
           {% if headingLevel == 1 %}
@@ -120,12 +152,8 @@
         </div>
 
         {% if buttonData and options.buttons %}
-          {% set buttonVariant = options
-            .buttons
-            .variants[buttonData.style] %}
-          {% set buttonSize = options
-            .buttons
-            .sizes[buttonData.size | default('button')] %}
+          {% set buttonVariant = options.buttons.variants[buttonData.style] %}
+          {% set buttonSize = options.buttons.sizes[buttonData.size | default('button')] %}
           {% set baseClasses = options.buttons.globalStyle ~ " " ~ buttonSize %}
           {% set stateClasses = {
             'default': buttonVariant.default,
@@ -179,22 +207,5 @@
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "02-molecules/dropzone-upload.njk" import renderDropzoneUpload %}
-
-2. Call a specific dropzone upload by name
-{{ renderDropzoneUpload({ 
-            name: "standard_upload", 
-            datas: molecules["dropzone-uploads"],
-            headings: atoms.headings,
-            icons: atoms.icons,
-            buttons: atoms.buttons
-        }) }}
-
-3. Different variants available
-- standard_upload: Default style
-- error_upload: Shows error message
-- loading_upload: Displays loading state with spinner
-
-A mystical portal has taken your file into the unknown 🌀📂
+May your bugs be forever exiled to the shadow realm. ✦
 #}
