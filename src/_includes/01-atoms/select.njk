@@ -1,8 +1,25 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Select                                           │
+   │ Dropdown elements with consistent styling               │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-         SELECT          
-=========================
-Component that renders select dropdown elements with consistent styling
+  Props:
+    - options.name (string): Select identifier
+    - options.datas (object): Select configuration data
+  
+  Usage:
+    {% from "01-atoms/select.njk" import renderSelect %}
+    
+    {{ renderSelect({ name: "categories", datas: atoms.selects }) }}
+  
+  Features:
+    - Variant-based styling
+    - Custom dropdown arrow icon
+    - Selected option support
+    - Disabled state handling
+  
+  @created 2025-01-15
 #}
 
 {% macro renderSelect(options) %}
@@ -53,20 +70,12 @@ Component that renders select dropdown elements with consistent styling
   {% endif %}
 {% endmacro %}
 
-
-
 {#
 ============================
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "03-atoms/select.njk" import renderSelect %}
-
-2. Call a specific select by its name
-{{ renderSelect({ name: "categories", datas: atoms.selects }) }}
-
-3. Adding a new select to selects.json
+Adding a new select to selects.json:
 {
   "selects": [
     {
@@ -74,11 +83,11 @@ Summon HAT Components Wisely
       "variant": "default",
       "options": [
         { "value": "option1", "label": "Option 1" },
-        { "value": "option2", "label": "Option 2", selected: true }
+        { "value": "option2", "label": "Option 2", "selected": true }
       ]
     }
   ]
 }
 
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+May your bugs be forever exiled to the shadow realm. ✦
 #}

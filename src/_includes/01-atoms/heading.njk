@@ -1,7 +1,32 @@
-{# ===========================================================
-   @ATOM - TYPOGRAPHY
-   - Renders semantic text content with variant styling
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Heading                                          │
+   │ Semantic text content with variant styling              │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Heading identifier
+    - option.datas (array): Heading configuration data
+    - option.tag (string): Override HTML tag (h1-h6, p, span, small)
+  
+  Usage:
+    {% from "01-atoms/heading.njk" import renderHeading %}
+    
+    {{ renderHeading({ 
+        name: "page_title",
+        datas: atoms.heading.texts
+    }) }}
+  
+  Notes:
+    - Uses existing text classes from input.css
+    - Automatically adds security attributes to external links
+    - Supports inline HTML content with safe filter
+  
+  Security:
+    - Adds rel="noopener noreferrer" to external links with target="_blank"
+  
+  @created 2025-01-15
+#}
 
 {% macro renderTypography(option) %}
   {# Check if datas is provided #}
@@ -12,7 +37,7 @@
     {% set typographyConfig = option.datas %}
     {% set typographyName = option.name %}
     
-    {# Find the specific typography by name - typographyConfig is already the array #}
+    {# Find the specific typography by name #}
     {% set typographyData = null %}
     {% for typography in typographyConfig %}
       {% if typography.name == typographyName %}
@@ -24,7 +49,7 @@
     {% if not typographyData %}
       <span>Typography not found: {{ typographyName }}</span>
     {% else %}
-      {# Build CSS classes - Using existing text classes from input.css #}
+      {# Build CSS classes #}
       {% set tag = option.tag | default(typographyData.tag) | default('') %}
       {% set variant = typographyData.variant | default('') %}
       {% set cssClasses = 'text-' ~ variant %}
@@ -59,17 +84,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "01-atoms/heading.njk" import renderTypography %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call a specific typography by its name
-{{ renderTypography({ 
-    name: "page_title",
-    datas: atoms.typography.texts
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}

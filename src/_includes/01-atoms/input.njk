@@ -1,7 +1,41 @@
-{# ===========================================================
-   @ATOM - INPUT
-   - Creates form input fields with validation and states
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Input                                            │
+   │ Form input fields with validation and states            │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Input identifier
+    - option.datas (array): Input configuration data
+    - option.disabled (boolean): Override disabled state
+  
+  Usage:
+    {% from "01-atoms/input.njk" import renderInput %}
+    
+    {{ renderInput({ 
+        name: "username",
+        datas: atoms.input.inputs
+    }) }}
+  
+  Supported Types:
+    - text, email, tel, password (standard inputs)
+    - textarea (multi-line text with character counter)
+  
+  Features:
+    - Label with required indicator
+    - Pattern validation with help text
+    - Error message containers with ARIA
+    - Character counter for textarea
+    - Accessible disabled states
+  
+  Accessibility:
+    - Proper label/input association
+    - aria-describedby for help text and errors
+    - role="alert" for error messages
+    - Required field indicators
+  
+  @created 2025-01-15
+#}
 
 {% macro renderInput(option) %}
   {# Check if datas is provided #}
@@ -12,7 +46,7 @@
     {% set inputsConfig = option.datas %}
     {% set inputName = option.name %}
     
-    {# Find the specific input by name - inputsConfig is already the array #}
+    {# Find the specific input by name #}
     {% set inputData = null %}
     {% for input in inputsConfig %}
       {% if input.name == inputName %}
@@ -89,17 +123,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "01-atoms/input.njk" import renderInput %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call a specific input by its name
-{{ renderInput({ 
-    name: "username",
-    datas: atoms.input.inputs
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}

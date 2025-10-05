@@ -1,7 +1,35 @@
-{# ===========================================================
-  @ATOM - LINK
-  - Generates navigation links with variant styling
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Link                                             │
+   │ Navigation links with variant styling                   │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Link identifier
+    - option.datas (array): Link configuration data
+  
+  Usage:
+    {% from "01-atoms/link.njk" import renderLink %}
+    
+    {{ renderLink({ 
+       name: "portfolio_link",
+       datas: atoms.link.links
+    }) }}
+  
+  Features:
+    - Base + variant classes from input.css
+    - Responsive font sizing based on variant
+    - External link indicator (↗ symbol)
+    - Download attribute support
+    - Custom onclick handlers
+  
+  Accessibility:
+    - Enhanced aria-label for mailto links
+    - Indicates external links opening in new tab
+    - Proper rel attributes for security
+  
+  @created 2025-01-15
+#}
 
 {% macro renderLink(option) %}
  {# Check if datas is provided #}
@@ -12,7 +40,7 @@
    {% set linksConfig = option.datas %}
    {% set linkName = option.name %}
    
-   {# Find the specific link by name - linksConfig is already the array #}
+   {# Find the specific link by name #}
    {% set linkData = null %}
    {% for link in linksConfig %}
      {% if link.name == linkName %}
@@ -24,7 +52,7 @@
    {% if not linkData %}
      <span>Link not found: {{ linkName }}</span>
    {% else %}
-     {# Build CSS classes - Using base + variant classes from input.css #}
+     {# Build CSS classes #}
      {% set variant = linkData.variant | default('') %}
      {% set cssClasses = 'link link--' ~ variant %}
      
@@ -66,17 +94,10 @@
  {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-  Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "01-atoms/link.njk" import renderLink %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call a specific link by its name
-{{ renderLink({ 
-   name: "portfolio_link",
-   datas: atoms.link.links
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}

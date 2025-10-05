@@ -1,7 +1,29 @@
-{# ===========================================================
-   @ATOM - IMAGE
-   - Renders responsive images with variant styling
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Image                                            │
+   │ Responsive images with variant styling                  │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Image identifier
+    - option.datas (array): Image configuration data
+  
+  Usage:
+    {% from "01-atoms/image.njk" import renderImage %}
+    
+    {{ renderImage({ 
+        name: "profile_photo",
+        datas: atoms.image.images
+    }) }}
+  
+  Notes:
+    - Silent fallback if image not found (no error display)
+    - Supports lazy loading and async decoding
+    - Flexible variant handling from data structure
+    - Includes width/height attributes for better performance
+  
+  @created 2025-01-15
+#}
 
 {% macro renderImage(option) %}
   {# Check if datas is provided #}
@@ -12,7 +34,7 @@
     {% set imagesConfig = option.datas %}
     {% set imageName = option.name %}
     
-    {# Find the specific image by name - FIXED: stop loop when found #}
+    {# Find the specific image by name - stop loop when found #}
     {% set imageData = null %}
     {% set found = false %}
     {% for image in imagesConfig %}
@@ -22,13 +44,13 @@
       {% endif %}
     {% endfor %}
 
-    {# Render only if image found - FIXED: silent fallback #}
+    {# Render only if image found - silent fallback #}
     {% if imageData %}
-      {# Build CSS classes - FIXED: more flexible variant handling #}
+      {# Build CSS classes #}
       {% set variant = imageData.variant | default('') %}
       {% set cssClasses = 'image-' ~ variant %}
       
-      {# FIXED: variant-specific classes moved to data structure if needed #}
+      {# Variant-specific classes moved to data structure if needed #}
       {% if variant == '' %}
         {% set cssClasses = cssClasses %}
       {% endif %}
@@ -47,17 +69,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "01-atoms/image.njk" import renderImage %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call a specific image by its name
-{{ renderImage({ 
-    name: "profile_photo",
-    datas: atoms.image.images
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}

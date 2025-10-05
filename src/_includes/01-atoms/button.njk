@@ -1,7 +1,38 @@
-{# ===========================================================
-   @ATOM - BUTTON
-   - Renders interactive button with variants and states
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Button                                           │
+   │ Interactive button with variants and states             │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Button identifier
+    - option.datas (array): Button configuration data
+    - option.type (string): Button type (default: "button")
+    - option.disabled (boolean): Override disabled state
+    - option.onclick (string): Inline click handler
+    - option.id (string): Button ID attribute
+    - option.ariaLabel (string): ARIA label for accessibility
+    - option.ariaDescribedby (string): ARIA described-by reference
+    - option.isErrorPage (boolean): Apply error-page-specific styling
+  
+  Usage:
+    {% from "01-atoms/button.njk" import renderButton %}
+    
+    Basic button:
+    {{ renderButton({ 
+        name: "button_default",
+        datas: atoms.button.buttons
+    }) }}
+    
+    Error page button with specific styling:
+    {{ renderButton({ 
+        name: "button-reveal-all",
+        datas: option.buttonDatas,
+        isErrorPage: true
+    }) }}
+  
+  @created 2025-01-15
+#}
 
 {% macro renderButton(option) %}
   {# Validate input data #}
@@ -55,24 +86,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-   {% from "01-atoms/button.njk" import renderButton %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call a specific button by its name
-   {{ renderButton({ 
-       name: "button_default",
-       datas: atoms.button.buttons
-   }) }}
-
-3. Apply error-page-specific styling (opacity, hover/focus) only for buttons on error pages
-   {{ renderButton({ 
-       name: "button-reveal-all",
-       datas: option.buttonDatas,
-       isErrorPage: true
-   }) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}

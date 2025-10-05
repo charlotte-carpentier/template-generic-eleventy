@@ -1,7 +1,35 @@
-{# ===========================================================
-   @ATOM - TOOLTIP
-   - Shows contextual information with title and description
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Tooltip                                          │
+   │ Contextual information with title and description       │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Tooltip identifier
+    - option.datas (array): Tooltip configuration data
+  
+  Usage:
+    {% from "01-atoms/tooltip.njk" import renderTooltip %}
+    
+    {{ renderTooltip({ 
+        name: "escrime",
+        datas: atoms.tooltip.tooltips
+    }) }}
+  
+  Features:
+    - Title with heading role
+    - Split description (optional part1 and part2)
+    - Decorative bar with diamond separator
+    - Always visible for atom display
+  
+  Accessibility:
+    - role="tooltip" for semantic meaning
+    - aria-live="polite" for dynamic updates
+    - role="heading" with aria-level for title
+    - aria-hidden for decorative elements
+  
+  @created 2025-01-15
+#}
 
 {% macro renderTooltip(option) %}
   {# Check if datas is provided #}
@@ -12,7 +40,7 @@
     {% set tooltipsConfig = option.datas %}
     {% set tooltipName = option.name %}
     
-    {# Find the specific tooltip by name - tooltipsConfig is already the array #}
+    {# Find the specific tooltip by name #}
     {% set tooltipData = null %}
     {% for tooltip in tooltipsConfig %}
       {% if tooltip.name == tooltipName %}
@@ -54,17 +82,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "01-atoms/tooltip.njk" import renderTooltip %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call the specific tooltip somewhere in your page
-{{ renderTooltip({ 
-    name: "escrime",
-    datas: atoms.tooltip.tooltips
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}

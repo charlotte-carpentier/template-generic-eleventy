@@ -1,8 +1,42 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Radio Button                                     │
+   │ Enhanced radio inputs with labels and descriptions      │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-      RADIO BUTTON         
-=========================
-Component that renders enhanced radio button inputs with labels and descriptions
+  Props:
+    - options.id (string): Radio button identifier for single rendering
+    - options.group (boolean): Render as group if true
+    - options.groupLabel (string): Group label text
+    - options.groupSrOnly (boolean): Hide group label visually
+    - options.datas (object): Radio button configuration
+  
+  Usage:
+    {% from "01-atoms/radio-button.njk" import renderRadioButton %}
+    
+    Single radio button:
+    {{ renderRadioButton({ id: "option1", datas: atoms.radioButtons }) }}
+    
+    Group of radio buttons:
+    {{ renderRadioButton({ 
+        group: true, 
+        groupLabel: "Choose an option",
+        datas: atoms.radioButtons 
+    }) }}
+  
+  Features:
+    - Supports single or group rendering
+    - Label with description support
+    - State management (default, hover, focus, checked, disabled)
+    - Inline event handlers for state transitions
+  
+  Accessibility:
+    - Proper fieldset/legend for groups
+    - aria-label support for screen readers
+    - Screen-reader-only labels option
+    - Disabled state handling
+  
+  @created 2025-01-15
 #}
 
 {% macro renderRadioButton(options) %}
@@ -99,20 +133,12 @@ Component that renders enhanced radio button inputs with labels and descriptions
   </label>
 {% endmacro %}
 
-
-
 {#
 ============================
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "03-atoms/radio-button.njk" import renderRadioButton %}
-
-2. Call a specific radio button by its name
-{{ renderRadioButton({ id: "option1", datas: atoms.radioButtons }) }}
-
-3. Adding a new radio button to radioButtons.json
+Adding a new radio button to radioButtons.json:
 {
   "radioButtons": [
     {
@@ -128,5 +154,5 @@ Summon HAT Components Wisely
   ]
 }
 
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+May your bugs be forever exiled to the shadow realm. ✦
 #}

@@ -1,7 +1,36 @@
-{# ===========================================================
-   @ATOM - RADIO
-   - Creates radio button groups with grid layout
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Radio                                            │
+   │ Radio button groups with grid layout                    │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Radio group identifier
+    - option.datas (array): Radio configuration data
+    - option.disabled (boolean): Override disabled state
+  
+  Usage:
+    {% from "01-atoms/radio.njk" import renderRadio %}
+    
+    {{ renderRadio({ 
+        name: "nature_request",
+        datas: atoms.radio.radios
+    }) }}
+  
+  Features:
+    - Fieldset/legend for semantic grouping
+    - Grid layout for options
+    - Required field indicator
+    - Individual option selection state
+  
+  Accessibility:
+    - Proper fieldset/legend structure
+    - Required attribute support
+    - Disabled state handling
+    - Label association with inputs
+  
+  @created 2025-01-15
+#}
 
 {% macro renderRadio(option) %}
   {# Check if datas is provided #}
@@ -58,17 +87,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "01-atoms/radio.njk" import renderRadio %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call a specific radio group by its name
-{{ renderRadio({ 
-    name: "nature_request",
-    datas: atoms.radio.radios
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}

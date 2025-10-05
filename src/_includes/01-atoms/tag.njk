@@ -1,37 +1,62 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Tag                                              │
+   │ Labels and badges with interactive support              │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-          TAG           
-=========================
-Tags atom component leveraging tags.json data structure.
-
-IMPORTANT NOTES:
-- Style variants come from the "variants" object in tags.json
-- Interactive tags are enabled by using isInteractive property or dataActiveTag parameter
-- Hover states are defined in the variants CSS classes
-- active-tag.js script is included in base.njk (no need to add it again)
-
-ACCESSIBILITY:
-- Uses role="status" or role="alert" when specified
-- Supports title attribute for additional context on hover
-- Includes optional visually-hidden text for screen readers
-- Keyboard support (Space/Enter keys) for interactive tags
+  Props:
+    - options.name (string): Tag identifier
+    - options.datas (object): Tag configuration data
+    - options.dataActiveTag (boolean): Enable interactive behavior
+  
+  Usage:
+    {% from "01-atoms/tag.njk" import renderTag %}
+    
+    Static tag:
+    {{ renderTag({ name: "adventure", datas: atoms.tags }) }}
+    
+    Interactive tag:
+    {{ renderTag({ 
+        name: "filter_sword", 
+        datas: atoms.tags, 
+        dataActiveTag: true 
+    }) }}
+  
+  Notes:
+    - Style variants from "variants" object in tags.json
+    - Interactive tags enabled via isInteractive or dataActiveTag
+    - Hover states defined in variant CSS classes
+    - active-tag.js script required for interactivity (included in base.njk)
+  
+  Accessibility:
+    - Supports role="status" or role="alert" when specified
+    - Title attribute for hover context
+    - Optional visually-hidden text for screen readers
+    - Keyboard support (Space/Enter) for interactive tags
+  
+  Features:
+    - Adds inline styles for active-tag and sr-only (first instance only)
+    - Screen reader text support
+    - Toggle functionality for filtering content
+  
+  @created 2025-01-15
 #}
 
 {% macro renderTag(options) %}
-  {# -- Initialize tagData as null before searching -- #}
+  {# Initialize tagData as null before searching #}
   {% set tagData = null %}
   
-  {# -- Find tag in data collection -- #}
+  {# Find tag in data collection #}
   {% for tag in options.datas.tags %}
     {% if tag.name == options.name %}
       {% set tagData = tag %}
     {% endif %}
   {% endfor %}
 
-  {# -- Get global style that applies to all tags -- #}
+  {# Get global style that applies to all tags #}
   {% set globalStyle = options.datas.globalStyle %}
 
-  {# -- Add styles for active tags and screen reader only content -- #}
+  {# Add styles for active tags and screen reader only content #}
   {% if loop.first %}
     <style>
       .active-tag { {{ options.datas.activeTagStyle }} }
@@ -39,16 +64,16 @@ ACCESSIBILITY:
     </style>
   {% endif %}
 
-  {# -- Render tag if data was found -- #}
+  {# Render tag if data was found #}
   {% if tagData %}
-    {# -- Get variant-specific style or default to empty string if not found -- #}
+    {# Get variant-specific style or default to empty string if not found #}
     {% set variantStyle = options.datas.variants[tagData.variant] | default('') %}
     
-    {# -- Store title and screenReaderText values for easier access -- #}
+    {# Store title and screenReaderText values for easier access #}
     {% set titleAttr = tagData.title %}
     {% set screenReaderText = tagData.screenReaderText %}
     
-    {# -- Determine if tag should be interactive -- #}
+    {# Determine if tag should be interactive #}
     {% set isInteractive = options.dataActiveTag or tagData.isInteractive %}
     
     <span 
@@ -64,7 +89,7 @@ ACCESSIBILITY:
     </span>
     
   {% else %}
-    {# -- Error message if tag not found in data collection -- #}
+    {# Error message if tag not found in data collection #}
     <span>Tag not found: {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
@@ -74,36 +99,27 @@ ACCESSIBILITY:
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "03-atoms/tag.njk" import renderTag %}
-
-2. Call a specific tag by its name
-{{ renderTag({ name: "adventure", datas: atoms.tags }) }}
-
-3. Call an interactive tag by adding dataActiveTag parameter
-{{ renderTag({ name: "filter_sword", datas: atoms.tags, dataActiveTag: true }) }}
-
-4. Adding a new tag to tags.json
+Adding a new tag to tags.json:
 {
   "tags": [
     {
-      "name": "new_tag_name",      (Required: unique identifier)
-      "text": "Your Tag Text",      (Required: visible text)
-      "variant": "default",         (Required: style variant from variants object)
-      "title": "Tooltip text",      (Optional: tooltip on hover)
-      "role": "status",             (Optional: ARIA role - status, alert, button, etc.)
-      "screenReaderText": "Text for screen readers", (Optional: additional context for accessibility)
-      "isInteractive": true         (Optional: make tag interactive/toggleable)
+      "name": "new_tag_name",
+      "text": "Your Tag Text",
+      "variant": "default",
+      "title": "Tooltip text",
+      "role": "status",
+      "screenReaderText": "Text for screen readers",
+      "isInteractive": true
     }
   ]
 }
 
-5. Example: filtering content with interactive tags
+Example: filtering content with interactive tags
 <div class="filters">
   {{ renderTag({ name: "filter_sword", datas: atoms.tags, dataActiveTag: true }) }}
   {{ renderTag({ name: "filter_bow", datas: atoms.tags, dataActiveTag: true }) }}
   {{ renderTag({ name: "filter_staff", datas: atoms.tags, dataActiveTag: true }) }}
 </div>
 
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+May your bugs be forever exiled to the shadow realm. ✦
 #}

@@ -1,8 +1,22 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Chip Multiselect                                 │
+   │ Selectable/removable chips with consistent styling     │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-    CHIP MULTISELECT
-=========================
-Component that renders selectable/removable chips with consistent styling
+  Props:
+    - options.name (string): Chip identifier
+    - options.datas (object): Chip configuration data
+  
+  Usage:
+    {% from "01-atoms/chip-multiselect.njk" import renderChipMultiselect %}
+    
+    {{ renderChipMultiselect({ 
+        name: "fire", 
+        datas: atoms["chip-multiselects"] 
+    }) }}
+  
+  @created 2025-01-15
 #}
 
 {% macro renderChipMultiselect(options) %}
@@ -62,13 +76,7 @@ Component that renders selectable/removable chips with consistent styling
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "03-atoms/chip-multiselect.njk" import renderChipMultiselect %}
-
-2. Call a specific chip multiselect by its name
-{{ renderChipMultiselect({ name: "fire", datas: atoms["chip-multiselects"] }) }}
-
-3. Adding a new chip multiselect to chip-multiselects.json
+Adding a new chip multiselect to chip-multiselects.json:
 {
   "chip-multiselects": [
     {
@@ -79,5 +87,5 @@ Summon HAT Components Wisely
   ]
 }
 
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
+May your bugs be forever exiled to the shadow realm. ✦
 #}
