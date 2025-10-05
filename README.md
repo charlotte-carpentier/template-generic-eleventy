@@ -158,7 +158,8 @@ Comprehensive documentation is available in the [`/docs`](./docs) folder:
 
 - **[Configuration Guide](./docs/configuration.md)** - Site configuration, fonts, analytics, cookies
 - **[Decap CMS Guide](./docs/decap-cms.md)** - Content management setup and usage
-- **[Conventions](./docs/conventions.md)** - Naming conventions and design system rules
+- **[Coding Style](./docs/coding-style.md)** - Naming conventions and code standards
+- **[Code Examples](./docs/examples.md)** - Complete code samples for all file types
 - **[Eleventy Setup](./docs/eleventy.md)** - Eleventy configuration details
 - **[TailwindCSS Setup](./docs/tailwind.md)** - Tailwind v4 configuration and customization
 - **[Nunjucks Templates](./docs/nunjucks.md)** - Template structure and macro usage

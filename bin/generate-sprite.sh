@@ -1,31 +1,39 @@
 #!/bin/bash
 
-# SVG Sprite Generator
-# 
-# Generates a single SVG sprite file from individual icon files.
-# All icons are normalized to use currentColor for easy theming.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# UTILITY › SVG Sprite Generator
+# Combines individual icons into a single sprite file
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #
 # Usage: npm run sprites
-# Input: src/assets/icons/sprites/*.svg (individual icons)
-# Output: src/assets/icons/sprites/sprite.svg (combined sprite)
+# Input:  src/assets/icons/sprites/*.svg
+# Output: src/assets/icons/sprites/sprite.svg
 #
-# References:
-# - https://css-tricks.com/svg-sprites-use-better-icon-fonts/
-# - https://github.com/svg/svgo
+# Features:
+# - Normalizes colors to currentColor for theming
+# - Wraps icons in <symbol> tags with unique IDs
+# - Validates output with symbol and path counts
+#
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Configuration
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ICONS_DIR="src/assets/icons/sprites"
 SPRITE_FILE="$ICONS_DIR/sprite.svg"
 
 echo "Generating SVG sprite..."
 
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Helper Functions
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 # Normalize SVG colors to currentColor for theme compatibility
-# This allows icons to inherit text color from parent elements
 normalize_svg_colors() {
     local file="$1"
     local temp_file=$(mktemp)
     
     # Replace various color formats with currentColor
-    # Supports: hex colors (#RRGGBB, #RGB), named colors (black), stroke/fill attributes
     sed 's/fill="#[0-9a-fA-F]\{6\}"/fill="currentColor"/g' "$file" | \
     sed 's/fill="#[0-9a-fA-F]\{3\}"/fill="currentColor"/g' | \
     sed 's/stroke="#[0-9a-fA-F]\{6\}"/stroke="currentColor"/g' | \
@@ -40,12 +48,6 @@ normalize_svg_colors() {
     echo "$temp_file"
 }
 
-# Create sprite header with hidden container
-cat > "$SPRITE_FILE" << 'EOF'
-<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-  <defs>
-EOF
-
 # Process individual SVG file and wrap in <symbol>
 process_svg() {
     local file="$1"
@@ -54,11 +56,10 @@ process_svg() {
     # Normalize colors first
     local normalized_file=$(normalize_svg_colors "$file")
     
-    # Extract SVG content and wrap in symbol with viewBox
-    # Default viewBox is 0 0 256 256 - adjust if your icons use different dimensions
+    # Extract SVG content and wrap in symbol
     echo "    <symbol id=\"$id\" viewBox=\"0 0 256 256\">"
     
-    # Extract content between <svg> tags, remove svg wrapper, indent properly
+    # Extract content between <svg> tags, remove wrapper, indent properly
     sed -n '/<svg/,/<\/svg>/p' "$normalized_file" | \
     sed '1s/<svg[^>]*>//' | \
     sed '$s/<\/svg>//' | \
@@ -71,7 +72,18 @@ process_svg() {
     rm "$normalized_file"
 }
 
-# Process all SVG files in sprites directory
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Sprite Generation
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Create sprite header
+cat > "$SPRITE_FILE" << 'EOF'
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <defs>
+EOF
+
+# Process all SVG files
 echo "Processing icons..."
 for file in "$ICONS_DIR"/*.svg; do
     if [ -f "$file" ] && [[ "$file" != *"sprite.svg" ]]; then
@@ -89,10 +101,16 @@ cat >> "$SPRITE_FILE" << 'EOF'
 EOF
 
 echo "Sprite generated at: $SPRITE_FILE"
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# Verification
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+echo ""
 echo "Icons included:"
 grep -o 'id="[^"]*"' "$SPRITE_FILE" | sed 's/id="//g; s/"//g' | sort
 
-# Verification
 echo ""
 echo "Checking sprite content..."
 total_symbols=$(grep -c "<symbol" "$SPRITE_FILE")
