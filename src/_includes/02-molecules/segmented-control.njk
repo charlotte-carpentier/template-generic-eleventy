@@ -1,7 +1,45 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Segmented Control                            │
+   │ Tab-style button group with active state                │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-    SEGMENTED CONTROL    
-=========================
+  Props:
+    - options.name (string): Segmented control identifier
+    - options.datas (object): Segmented control configuration
+    - options.buttons (object): Buttons atom data
+    - options.class (string): Additional CSS classes
+  
+  Usage:
+    {% from "02-molecules/segmented-control.njk" import renderSegmentedControl %}
+    
+    {{ renderSegmentedControl({ 
+        name: "tab_navigation",
+        datas: molecules.segmentedControls,
+        buttons: atoms.buttons 
+    }) }}
+    
+    With custom styles:
+    {{ renderSegmentedControl({ 
+        datas: molecules.segmentedControls,
+        buttons: atoms.buttons,
+        class: "my-custom-segmented-class"
+    }) }}
+  
+  Features:
+    - First/middle/last position styling
+    - Active segment highlighting
+    - Button size support
+    - Icon before/after support
+    - Hover/focus states
+  
+  Accessibility:
+    - role="tablist" on container
+    - role="tab" on segments
+    - aria-selected for active state
+    - aria-label on container
+  
+  @created 2025-01-15
 #}
 
 {% macro renderSegmentedControl(options) %}
@@ -10,7 +48,7 @@
     {% set variants = options.datas.variants %}
     {% set segmentStyle = options.datas.segmentStyle %}
 
-    {# Define default icon styles if not provided #}
+    {# Define default icon styles #}
     {% set iconBeforeStyle = options.datas.iconBeforeStyle | default('') %}
     {% set iconAfterStyle = options.datas.iconAfterStyle | default('') %}
 
@@ -24,9 +62,7 @@
     {% endif %}
 
     {% if not segmentedControlData %}
-      {% set segmentedControlData = options
-        .datas
-        .segmentedControls[0] %}
+      {% set segmentedControlData = options.datas.segmentedControls[0] %}
     {% endif %}
 
     <div class="{{ globalStyle }} {{ variants.default }} {{ options.class | default('') }}" role="tablist" aria-label="{{ segmentedControlData.name | replace('_', ' ') }}" onfocus="this.className='{{ globalStyle }} {{ variants.focus }} {{ options.class | default('') }}'" onblur="this.className='{{ globalStyle }} {{ variants.default }} {{ options.class | default('') }}'" data-segmented-control="{{ segmentedControlData.name }}">
@@ -61,9 +97,7 @@
         {% endif %}
 
         {% if buttonData %}
-          {% set buttonSize = options
-            .buttons
-            .sizes[buttonData.size] %}
+          {% set buttonSize = options.buttons.sizes[buttonData.size] %}
 
           <button id="{{ segmentedControlData.name }}-{{ segment.name }}" role="tab" aria-selected="{{ segment.isActive | string }}" class="{{ positionClass }} {{ buttonSize }} {{ baseStyle }}" onmouseover="this.className='{{ positionClass }} {{ buttonSize }} {{ hoverStyle }}'" onmouseout="this.className='{{ positionClass }} {{ buttonSize }} {{ baseStyle }}'" onfocus="this.className='{{ positionClass }} {{ buttonSize }} {{ focusStyle }}'" onblur="this.className='{{ positionClass }} {{ buttonSize }} {{ baseStyle }}'">
 
@@ -104,22 +138,5 @@
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "02-molecules/segmented-control.njk" import renderSegmentedControl %}
-
-2. Call the segmented control component with a specific name
-{{ renderSegmentedControl({ 
-    name: "tab_navigation",
-    datas: molecules.segmentedControls,
-    buttons: atoms.buttons 
-}) }}
-
-3. Using custom styles
-{{ renderSegmentedControl({ 
-    datas: molecules.segmentedControls,
-    buttons: atoms.buttons,
-    class: "my-custom-segmented-class"
-}) }}
-
-Choose wisely or roll for luck!
+May your bugs be forever exiled to the shadow realm. ✦
 #}

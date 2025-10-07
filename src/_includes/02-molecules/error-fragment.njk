@@ -1,7 +1,38 @@
-{# ===========================================================
-   @MOLECULES - ERROR-FRAGMENT
-   - Renders error page fragments with icon or text content
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Error Fragment                               │
+   │ Error page fragments with icon or text content         │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Error fragment identifier
+    - option.datas (array): Error fragment configuration
+    - option.iconDatas (array): Icons atom data
+    - option.typographyDatas (array): Typography atom data
+    - option.isClickable (boolean): Make fragment clickable
+  
+  Usage:
+    {% from "02-molecules/error-fragment.njk" import renderErrorFragment %}
+    
+    {{ renderErrorFragment({ 
+        name: "fragment_404_01",
+        datas: molecules["error-fragment"]["error-fragments"],
+        iconDatas: atoms.icon.icons,
+        typographyDatas: atoms.typography.texts,
+        isClickable: true
+    }) }}
+  
+  Variants:
+    - icon: Displays an icon from atoms
+    - text: Displays typography from atoms
+  
+  Features:
+    - Optional clickable wrapper (link)
+    - Icon or text content variants
+    - Integration with atoms (icon, typography)
+  
+  @created 2025-01-15
+#}
 
 {# Import atoms #}
 {% from "01-atoms/heading.njk" import renderTypography %}
@@ -26,8 +57,7 @@
 
     {# Fallback if error-fragment not found #}
     {% if not errorFragmentData %}
-      <span class="text-red-500">Error-fragment not found:
-        {{ errorFragmentName }}</span>
+      <span class="text-red-500">Error-fragment not found: {{ errorFragmentName }}</span>
     {% else %}
       {# Render error-fragment molecule based on variant #}
       {% if option.isClickable %}
@@ -61,20 +91,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "02-molecules/error-fragment.njk" import renderErrorFragment %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call a specific error-fragment by its name
-{{ renderErrorFragment({ 
-    name: "fragment_404_01",
-    datas: molecules["error-fragment"]["error-fragments"],
-    iconDatas: atoms.icon.icons,
-    typographyDatas: atoms.typography.texts,
-    isClickable: true
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}
