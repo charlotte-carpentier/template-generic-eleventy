@@ -1,3 +1,14 @@
+/* ┌─────────────────────────────────────────────────────────┐
+   │ STYLESHEET › Input                                      │
+   │ Main stylesheet with TailwindCSS v4 and design tokens   │
+   └─────────────────────────────────────────────────────────┘ */
+
+/*
+ * @fileoverview Main stylesheet integrating TailwindCSS v4
+ * @dependencies TailwindCSS v4.x
+ * @created 2025-01-15
+ */
+
 /* ============================================================
    @IMPORTS
    - TailwindCSS core
@@ -28,7 +39,7 @@
 /* Custom focus outlines for accessibility */
 :focus {
   outline: none;
-}--primary
+}
 
 :focus-visible {
   outline: 2px solid var(--color-semantic-information-focus);
@@ -531,3 +542,8 @@ body {
    @ACCESSIBILITY - MOBILE FOCUS MANAGEMENT
    - Focus visible only for keyboard navigation on mobile elements
 ============================================================ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   May your bugs be forever exiled to the shadow realm ✦
+   Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
