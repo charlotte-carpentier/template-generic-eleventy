@@ -1,10 +1,16 @@
-# Coding Style Guide
+---
+title: Coding Style Guide
+description: Rules and conventions for code formatting and structure
+type: documentation
+created: 2025-01-15
+tags: [coding-style, conventions, guidelines]
+---
 
 **Version**: 3.0.0  
 **Last Updated**: October 2025  
 **Maintained by**: Charlotte Carpentier
 
-## 📚 Documentation
+## Documentation
 
 - **[Coding Style](./coding-style.md)** - Rules & conventions
 - **[Examples](./examples.md)** - Complete code samples
@@ -52,7 +58,7 @@
 
 ## Abbreviations
 
-| Abbr | Full | Usage | ❌ Avoid |
+| Abbr | Full | Usage | Avoid |
 |------|------|-------|----------|
 | `a11y` | Accessibility | W3C standard | `access`, `acc` |
 | `Btn` | Button | Component refs | `But`, `Bouton` |
@@ -75,10 +81,10 @@
 **Utility** (61 chars):
 
 ```javascript
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    [TYPE] › Name
    Description
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 ```
 
 **Section** (45 chars):

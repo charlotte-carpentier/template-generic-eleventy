@@ -1,36 +1,41 @@
-# Configuration Guide
+---
+title: Configuration Guide
+description: Guide for configuring site settings using site.json and base template
+type: documentation
+created: 2025-01-15
+tags: [configuration, site-settings, setup]
+---
 
 This guide explains how to configure your site using `src/_data/site.json` and the base template (`src/_includes/04-core/base.njk`).
 
 ## Table of Contents
 
-- [Configuration Guide](#configuration-guide)
-  - [Table of Contents](#table-of-contents)
-  - [Basic Configuration](#basic-configuration)
-    - [Minimum Required Fields](#minimum-required-fields)
-  - [SEO and Metadata](#seo-and-metadata)
-    - [Page-Specific Metadata](#page-specific-metadata)
-    - [Social Sharing Image](#social-sharing-image)
-    - [Theme Color](#theme-color)
-  - [Favicons](#favicons)
-  - [Typography](#typography)
-    - [Font Configuration](#font-configuration)
-    - [Using Google Fonts](#using-google-fonts)
-    - [Using Custom Fonts](#using-custom-fonts)
-  - [Optional Integrations](#optional-integrations)
-    - [Google Fonts](#google-fonts)
-    - [Font Awesome](#font-awesome)
-    - [Google Analytics](#google-analytics)
-    - [Cookie Consent (Axeptio)](#cookie-consent-axeptio)
-  - [Performance Optimization](#performance-optimization)
-    - [Image Preloading](#image-preloading)
-    - [Icon Sprite Preloading](#icon-sprite-preloading)
-  - [Complete Configuration Example](#complete-configuration-example)
-  - [Troubleshooting](#troubleshooting)
-    - [Fonts not loading](#fonts-not-loading)
-    - [Analytics not tracking](#analytics-not-tracking)
-    - [Cookie consent not appearing](#cookie-consent-not-appearing)
-  - [Next Steps](#next-steps)
+- [Table of Contents](#table-of-contents)
+- [Basic Configuration](#basic-configuration)
+  - [Minimum Required Fields](#minimum-required-fields)
+- [SEO and Metadata](#seo-and-metadata)
+  - [Page-Specific Metadata](#page-specific-metadata)
+  - [Social Sharing Image](#social-sharing-image)
+  - [Theme Color](#theme-color)
+- [Favicons](#favicons)
+- [Typography](#typography)
+  - [Font Configuration](#font-configuration)
+  - [Using Google Fonts](#using-google-fonts)
+  - [Using Custom Fonts](#using-custom-fonts)
+- [Optional Integrations](#optional-integrations)
+  - [Google Fonts](#google-fonts)
+  - [Font Awesome](#font-awesome)
+  - [Google Analytics](#google-analytics)
+  - [Cookie Consent (Axeptio)](#cookie-consent-axeptio)
+- [Performance Optimization](#performance-optimization)
+  - [Image Preloading](#image-preloading)
+  - [Icon Sprite Preloading](#icon-sprite-preloading)
+- [Complete Configuration Example](#complete-configuration-example)
+- [Troubleshooting](#troubleshooting)
+  - [Fonts not loading](#fonts-not-loading)
+  - [Analytics not tracking](#analytics-not-tracking)
+  - [Cookie consent not appearing](#cookie-consent-not-appearing)
+- [Next Steps](#next-steps)
 
 ---
 
