@@ -1,7 +1,45 @@
-{# ===========================================================
-   @ORGANISMS - HEADER
-   - Manages site header with brand, title and navigation
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Header                                       │
+   │ Site header with brand, title and navigation            │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Header identifier
+    - option.datas (array): Header configuration
+    - option.typographyDatas (array): Typography atom data
+    - option.tabMenuDatas (object): Tab menu molecule data
+    - option.linkDatas (array): Links atom data
+    - option.iconDatas (array): Icons atom data
+    - option.class (string): Additional CSS classes
+  
+  Usage:
+    {% from "03-organisms/header.njk" import renderHeader %}
+    
+    {{ renderHeader({ 
+        name: "charlotte_header",
+        datas: organisms.header.headers,
+        typographyDatas: atoms.typography.texts,
+        tabMenuDatas: molecules["tab-menu"].tab_menus,
+        linkDatas: atoms.link.links,
+        iconDatas: atoms.icon.icons
+    }) }}
+  
+  Features:
+    - Brand logo using typography
+    - Desktop title (hidden on mobile)
+    - Desktop navigation link
+    - Mobile burger menu with overlay
+    - Tab menu in mobile overlay
+  
+  Accessibility:
+    - Semantic <header> element
+    - aria-label on burger button
+    - aria-expanded state management
+    - Keyboard accessible navigation
+  
+  @created 2025-01-15
+#}
 
 {% macro renderHeader(option) %}
   {# Import required molecules and atoms #}
@@ -30,7 +68,7 @@
     {% if not headerData %}
       <span>Header not found: {{ headerName }}</span>
     {% else %}
-      {# Build CSS classes from header name #}
+      {# Build CSS classes #}
       {% set cssClasses = 'header' %}
       
       {# Add any additional classes #}
@@ -66,7 +104,7 @@
             }) }}
           </div>
           
-          {# Mobile burger button - Mobile uniquement #}
+          {# Mobile burger button #}
           <button 
             id="burger-toggle"
             aria-label="Toggle mobile menu"
@@ -88,7 +126,7 @@
           
         </div>
         
-        {# Mobile overlay menu - Mobile uniquement #}
+        {# Mobile overlay menu #}
         <div id="mobile-overlay">
           <div>
             {# Render the tab-menu mobile version inside overlay #}
@@ -105,21 +143,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "03-organisms/header.njk" import renderHeader %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call the header
-{{ renderHeader({ 
-    name: "charlotte_header",
-    datas: organisms.header.headers,
-    typographyDatas: atoms.typography.texts,
-    tabMenuDatas: molecules["tab-menu"].tab_menus,
-    linkDatas: atoms.link.links,
-    iconDatas: atoms.icon.icons
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}

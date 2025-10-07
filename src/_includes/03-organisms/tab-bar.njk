@@ -1,8 +1,67 @@
-{# ============================================================
-   @ORGANISM - TAB-SECTIONS
-   - Main sections container with navigation and CSS :target system
-   - Enhanced accessibility with ARIA roles and live regions
-============================================================ #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Tab Bar                                      │
+   │ Tab sections container with CSS :target navigation      │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Tab sections identifier
+    - option.datas (array): Tab sections configurations
+    - option.tabMenuDatas (object): Tab menu data source
+    - option.linkDatas (object): Links data source
+    - option.portfolioDatas (object): Portfolio section data
+    - option.timelineDatas (object): Timeline section data
+    - option.contactDatas (object): Contact section data
+    - option.typographyDatas (object): Typography data source
+    - option.contentBlockDatas (object): Content blocks data
+    - option.contactBlockDatas (object): Contact blocks data
+    - option.listFormDatas (object): Forms data source
+    - option.progressBarDatas (object): Progress bars data
+    - option.imageDatas (object): Images data source
+    - option.iconDatas (object): Icons data source
+    - option.radioDatas (object): Radio buttons data
+    - option.inputDatas (object): Input fields data
+    - option.buttonDatas (object): Buttons data source
+  
+  Usage:
+    {% from "03-organisms/tab-bar.njk" import renderTabSections %}
+    
+    {{ renderTabSections({ 
+      name: "charlotte_main",
+      datas: organisms["tab-sections"]["tab-sections"],
+      tabMenuDatas: molecules["tab-menu"].tab_menus,
+      linkDatas: atoms.link.links,
+      portfolioDatas: organisms["section-portfolio"].sections,
+      timelineDatas: organisms["section-timeline"].sections,
+      contactDatas: organisms["section-contact"].sections,
+      typographyDatas: atoms.typography.texts,
+      contentBlockDatas: molecules["content-block"]["content-blocks"],
+      contactBlockDatas: molecules["contact-block"].contact_blocks,
+      listFormDatas: molecules["list-form"]["list-forms"],
+      progressBarDatas: molecules["progress-bar"]["progress-bars"],
+      imageDatas: atoms.image.images,
+      iconDatas: atoms.icon.icons,
+      radioDatas: atoms.radio.radios,
+      inputDatas: atoms.input.inputs,
+      buttonDatas: atoms.button.buttons
+    }) }}
+  
+  Features:
+    - CSS :target-based navigation system
+    - Desktop/tablet tab menu navigation
+    - Multiple section types (portfolio, timeline, contact)
+    - Custom scroll cursor for desktop
+    - Default section marked with data attribute
+    - Gradient decorative lines
+  
+  Accessibility:
+    - ARIA tablist/tabpanel roles
+    - Proper labelledby references
+    - Keyboard navigation support via tabindex
+    - Semantic region landmarks
+  
+  @created 2025-01-15
+#}
 
 {% macro renderTabSections(option) %}
   {% from "03-organisms/section-portfolio.njk" import renderSectionPortfolio %}
@@ -179,32 +238,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ============================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "03-organisms/tab-sections.njk" import renderTabSections %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call the tab-sections
-{{ renderTabSections({ 
-    name: "charlotte_main",
-    datas: organisms["tab-sections"]["tab-sections"],
-    tabMenuDatas: molecules["tab-menu"].tab_menus,
-    linkDatas: atoms.link.links,
-    portfolioDatas: organisms["section-portfolio"].sections,
-    timelineDatas: organisms["section-timeline"].sections,
-    contactDatas: organisms["section-contact"].sections,
-    typographyDatas: atoms.typography.texts,
-    contentBlockDatas: molecules["content-block"]["content-blocks"],
-    contactBlockDatas: molecules["contact-block"].contact_blocks,
-    listFormDatas: molecules["list-form"]["list-forms"],
-    progressBarDatas: molecules["progress-bar"]["progress-bars"],
-    imageDatas: atoms.image.images,
-    iconDatas: atoms.icon.icons,
-    radioDatas: atoms.radio.radios,
-    inputDatas: atoms.input.inputs,
-    buttonDatas: atoms.button.buttons
-}) }}
-
-May your bugs be forever exiled to the shadow realm.
-============================================================ #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}

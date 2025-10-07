@@ -1,11 +1,39 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Section About                               │
+   │ Responsive about section with dual layout              │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-      SECTION ABOUT        
-=========================
+  Props:
+    - options.name (string): Section identifier
+    - options.datas (object): Section configurations
+    - options.headings (object): Headings data source
+    - options.buttons (object): Buttons data source
+    - options.class (string): Additional CSS classes
+  
+  Usage:
+    {% from "03-organisms/section-about.njk" import renderSectionAbout %}
+    
+    {{ renderSectionAbout({ 
+      name: "about_us", 
+      datas: organisms["section-abouts"], 
+      headings: atoms.headings, 
+      buttons: atoms.buttons 
+    }) }}
+  
+  Features:
+    - Responsive layout (mobile column, desktop two-column)
+    - Variant-based styling system
+    - Heading hierarchy (super heading + main heading)
+    - Primary and secondary button support
+    - Optional image content
+    - Auto-selects first section if name not found
+  
+  @created 2025-01-15
 #}
 
-{% from "03-atoms/heading.njk" import renderHeading %}
-{% from "03-atoms/button.njk" import renderButton %}
+{% from "01-atoms/heading.njk" import renderHeading %}
+{% from "01-atoms/button.njk" import renderButton %}
 
 {% macro renderSectionAbout(options) %}
   {% if options.datas %}
@@ -139,31 +167,10 @@
   {% endif %}
 {% endmacro %}
 
-
 {#
 ============================
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "01-organisms/section-about.njk" import renderSectionAbout %}
-
-2. Call the component with the required data
-{{ renderSectionAbout({ 
-    name: "about_us", 
-    datas: organisms["section-abouts"], 
-    headings: atoms.headings, 
-    buttons: atoms.buttons 
-}) }}
-
-3. Using custom styles
-{{ renderSectionAbout({ 
-    name: "about_us", 
-    datas: organisms["section-abouts"], 
-    headings: atoms.headings, 
-    buttons: atoms.buttons,
-    class: "my-custom-section-class" 
-}) }}
-
-Saving kingdoms and collecting trinkets since forever 🏰⚔️
+May your bugs be forever exiled to the shadow realm. ✦
 #}

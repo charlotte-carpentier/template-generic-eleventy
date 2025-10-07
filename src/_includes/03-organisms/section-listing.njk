@@ -1,10 +1,51 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Section Listing                              │
+   │ Content listing with cards and responsive pagination    │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-    SECTION LISTING        
-=========================
+  Props:
+    - options.name (string): Section identifier
+    - options.datas (object): Section configurations
+    - options.headings (object): Headings data source
+    - options.cards (object): Cards data source
+    - options.paginations (object): Paginations data source
+    - options.buttons (object): Buttons data source
+    - options.icons (object): Icons data source
+    - options.selects (object): Selects data source
+    - options.images (object): Images data source
+    - options.currentPage (number): Current page number
+    - options.totalPages (number): Total pages count
+    - options.itemsPerPage (number): Items per page
+    - options.totalItems (number): Total items count
+    - options.class (string): Additional CSS classes
+  
+  Usage:
+    {% from "03-organisms/section-listing.njk" import renderSectionListing %}
+    
+    {{ renderSectionListing({ 
+      name: "adventure_quests",
+      datas: organisms["section-listings"],
+      headings: atoms.headings,
+      cards: molecules.cards,
+      paginations: molecules.paginations,
+      buttons: atoms.buttons,
+      icons: atoms.icons,
+      selects: atoms.selects,
+      images: atoms.images
+    }) }}
+  
+  Features:
+    - Variant-based styling system
+    - Optional section heading
+    - Dynamic card grid rendering
+    - Responsive pagination (mobile navigation-only, desktop full)
+    - Auto-selects first listing if name not found
+  
+  @created 2025-01-15
 #}
 
-{% from "03-atoms/heading.njk" import renderHeading %}
+{% from "01-atoms/heading.njk" import renderHeading %}
 {% from "02-molecules/card.njk" import renderCard %}
 {% from "02-molecules/pagination.njk" import renderPagination %}
 
@@ -99,41 +140,10 @@
   {% endif %}
 {% endmacro %}
 
-
 {#
 ============================
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "01-organisms/section-listing.njk" import renderSectionListing %}
-
-2. Call the section listing component with a specific name
-{{ renderSectionListing({ 
-    name: "adventure_quests",
-    datas: organisms["section-listings"],
-    headings: atoms.headings,
-    cards: molecules.cards,
-    paginations: molecules.paginations,
-    buttons: atoms.buttons,
-    icons: atoms.icons,
-    selects: atoms.selects,
-    images: atoms.images
-}) }}
-
-3. Using custom styles
-{{ renderSectionListing({ 
-    name: "adventure_quests",
-    datas: organisms["section-listings"],
-    headings: atoms.headings,
-    cards: molecules.cards,
-    paginations: molecules.paginations,
-    buttons: atoms.buttons,
-    icons: atoms.icons,
-    selects: atoms.selects,
-    images: atoms.images,
-    class: "my-custom-section-class"
-}) }}
-
-Turn pages of adventure and display your quests with style! 📜✨
+May your bugs be forever exiled to the shadow realm. ✦
 #}

@@ -1,7 +1,35 @@
-{# ===========================================================
-   @ORGANISMS - FOOTER
-   - Renders site footer with copyright and legal links
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Footer                                       │
+   │ Site footer with copyright and legal links             │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Footer identifier
+    - option.datas (object): Footer configuration
+    - option.typographyDatas (array): Typography atom data
+    - option.linkDatas (array): Links atom data
+  
+  Usage:
+    {% from "03-organisms/footer.njk" import renderFooter %}
+    
+    {{ renderFooter({ 
+        name: "main_footer",
+        datas: organisms.footer,
+        typographyDatas: atoms.typography.texts,
+        linkDatas: atoms.link.links
+    }) }}
+  
+  Features:
+    - Copyright text using typography atom
+    - Legal link using link atom
+    - Variant-based styling
+  
+  Accessibility:
+    - role="contentinfo" for semantic footer
+  
+  @created 2025-01-15
+#}
 
 {% macro renderFooter(option) %}
   {# Import atoms macros #}
@@ -51,19 +79,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "03-organisms/footer.njk" import renderFooter %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call the footer with data sources
-{{ renderFooter({ 
-    name: "main_footer",
-    datas: organisms.footer,
-    typographyDatas: atoms.typography.texts,
-    linkDatas: atoms.link.links
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}
