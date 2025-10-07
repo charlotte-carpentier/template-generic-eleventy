@@ -4,14 +4,7 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Vector identifier (optional)
-    - options.datas (object): Vector configuration data
-    - options.src (string): Direct src path (when name not provided)
-    - options.alt (string): Alt text (when name not provided)
-    - options.size (string): Size variant (when name not provided)
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "01-atoms/vector.njk" import renderVector %}
     
     By name (from vectors.json):
@@ -24,6 +17,13 @@
         size: "large",
         datas: atoms.vectors 
     }) }}
+  
+  Props:
+    - options.name (string): Vector identifier (optional)
+    - options.datas (object): Vector configuration data
+    - options.src (string): Direct src path (when name not provided)
+    - options.alt (string): Alt text (when name not provided)
+    - options.size (string): Size variant (when name not provided)
   
   Features:
     - Two rendering modes: named (from data) or direct (custom)
@@ -76,22 +76,10 @@
   {% endif %}
 {% endmacro %}
 
+
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-Adding a new vector to vectors.json:
-{
-  "vectors": [
-    {
-      "name": "new_vector_name",
-      "src": "/assets/logos/your-logo.svg",
-      "alt": "Your Logo Description",
-      "size": "large"
-    }
-  ]
-}
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

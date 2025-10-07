@@ -4,12 +4,7 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Tag identifier
-    - options.datas (object): Tag configuration data
-    - options.dataActiveTag (boolean): Enable interactive behavior
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "01-atoms/tag.njk" import renderTag %}
     
     Static tag:
@@ -21,6 +16,11 @@
         datas: atoms.tags, 
         dataActiveTag: true 
     }) }}
+  
+  Props:
+    - options.name (string): Tag identifier
+    - options.datas (object): Tag configuration data
+    - options.dataActiveTag (boolean): Enable interactive behavior
   
   Notes:
     - Style variants from "variants" object in tags.json
@@ -94,32 +94,10 @@
   {% endif %}
 {% endmacro %}
 
+
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-Adding a new tag to tags.json:
-{
-  "tags": [
-    {
-      "name": "new_tag_name",
-      "text": "Your Tag Text",
-      "variant": "default",
-      "title": "Tooltip text",
-      "role": "status",
-      "screenReaderText": "Text for screen readers",
-      "isInteractive": true
-    }
-  ]
-}
-
-Example: filtering content with interactive tags
-<div class="filters">
-  {{ renderTag({ name: "filter_sword", datas: atoms.tags, dataActiveTag: true }) }}
-  {{ renderTag({ name: "filter_bow", datas: atoms.tags, dataActiveTag: true }) }}
-  {{ renderTag({ name: "filter_staff", datas: atoms.tags, dataActiveTag: true }) }}
-</div>
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

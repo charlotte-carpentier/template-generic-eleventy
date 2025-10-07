@@ -4,17 +4,17 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - option.name (string): Tooltip identifier
-    - option.datas (array): Tooltip configuration data
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "01-atoms/tooltip.njk" import renderTooltip %}
     
     {{ renderTooltip({ 
         name: "escrime",
         datas: atoms.tooltip.tooltips
     }) }}
+  
+  Props:
+    - option.name (string): Tooltip identifier
+    - option.datas (array): Tooltip configuration data
   
   Features:
     - Title with heading role
@@ -82,10 +82,10 @@
   {% endif %}
 {% endmacro %}
 
-{#
-============================
-Summon HAT Components Wisely
-============================
 
-May your bugs be forever exiled to the shadow realm. ✦
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}
