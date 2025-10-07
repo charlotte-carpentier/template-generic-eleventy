@@ -4,14 +4,14 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Select identifier
-    - options.datas (object): Select configuration data
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "01-atoms/select.njk" import renderSelect %}
     
     {{ renderSelect({ name: "categories", datas: atoms.selects }) }}
+  
+  Props:
+    - options.name (string): Select identifier
+    - options.datas (object): Select configuration data
   
   Features:
     - Variant-based styling
@@ -70,24 +70,10 @@
   {% endif %}
 {% endmacro %}
 
+
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-Adding a new select to selects.json:
-{
-  "selects": [
-    {
-      "name": "new_select_name",
-      "variant": "default",
-      "options": [
-        { "value": "option1", "label": "Option 1" },
-        { "value": "option2", "label": "Option 2", "selected": true }
-      ]
-    }
-  ]
-}
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

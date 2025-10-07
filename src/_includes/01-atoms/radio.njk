@@ -4,18 +4,18 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - option.name (string): Radio group identifier
-    - option.datas (array): Radio configuration data
-    - option.disabled (boolean): Override disabled state
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "01-atoms/radio.njk" import renderRadio %}
     
     {{ renderRadio({ 
         name: "nature_request",
         datas: atoms.radio.radios
     }) }}
+  
+  Props:
+    - option.name (string): Radio group identifier
+    - option.datas (array): Radio configuration data
+    - option.disabled (boolean): Override disabled state
   
   Features:
     - Fieldset/legend for semantic grouping
@@ -87,10 +87,10 @@
   {% endif %}
 {% endmacro %}
 
-{#
-============================
-Summon HAT Components Wisely
-============================
 
-May your bugs be forever exiled to the shadow realm. ✦
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}
