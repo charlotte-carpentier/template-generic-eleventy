@@ -458,3 +458,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   console.log('Tab navigation with enhanced accessibility ready');
 });
+
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// May your bugs be forever exiled to the shadow realm ✦
+// Charlotte Carpentier · 2025
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
