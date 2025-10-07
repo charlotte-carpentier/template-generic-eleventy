@@ -1,10 +1,33 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Navigation Page                             │
+   │ Main navigation component with link integration        │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-       NAVIGATION        
-=========================
+  Props:
+    - options.name (string): Navigation identifier
+    - options.datas (object): Navigation configurations
+    - options.links (object): Links data source
+    - options.class (string): Additional CSS classes
+  
+  Usage:
+    {% from "03-organisms/navigation-page.njk" import renderNavigation %}
+    
+    {{ renderNavigation({ 
+      name: "main",
+      datas: organisms.navigations,
+      links: atoms.links
+    }) }}
+  
+  Features:
+    - Auto-selects first navigation if name not found
+    - Applies global styles from configuration
+    - Integrates link components via data-nav-link attribute
+  
+  @created 2025-01-15
 #}
 
-{% from "03-atoms/link.njk" import linkComponent %}
+{% from "01-atoms/link.njk" import linkComponent %}
 
 {% macro renderNavigation(options) %}
   {% if options.datas %}
@@ -38,22 +61,5 @@
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "01-organisms/navigation.njk" import renderNavigation %}
-
-2. Call the navigation component with a specific name
-{{ renderNavigation({ 
-    name: "main",
-    datas: organisms.navigations,
-    links: atoms.links
-}) }}
-
-3. Using custom styles
-{{ renderNavigation({ 
-    name: "main",
-    datas: organisms.navigations,
-    links: atoms.links,
-    class: "my-custom-navigation-class"
-}) }}
-
+May your bugs be forever exiled to the shadow realm. ✦
 #}

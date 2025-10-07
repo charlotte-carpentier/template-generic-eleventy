@@ -1,3 +1,55 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ LAYOUT › Base                                           │
+   │ Main HTML layout with SEO, analytics and integrations   │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - title (string): Page title override
+    - description (string): Page description override
+    - favicon (object): Custom favicon paths
+    - hideHeaderFooter (boolean): Hide header/footer for special pages
+  
+  Usage:
+    ---
+    layout: base.njk
+    title: "My Page Title"
+    description: "My page description"
+    ---
+  
+  Features:
+    - Complete SEO metadata (Open Graph, Twitter Cards)
+    - Favicon support (PNG, ICO, SVG, Apple Touch)
+    - Google Fonts integration with preconnect
+    - Critical images preload for LCP optimization
+    - Icon sprite preload
+    - Cookie consent (Axeptio) with Google Consent Mode v2
+    - Google Analytics 4 integration
+    - Netlify Identity redirect for Decap CMS
+    - Conditional header/footer rendering
+    - Semantic HTML5 structure
+    - Screen reader optimizations
+  
+  Configuration:
+    Configure in src/_data/site.json:
+    - site.language: HTML lang attribute
+    - site.title: Default site title
+    - site.description: Default description
+    - site.url: Canonical URL base
+    - site.socialImage: OG/Twitter card image
+    - site.fonts.google: Google Fonts URL
+    - site.fonts.preconnect: Enable fonts preconnect
+    - site.preloadImages: Array of critical images
+    - site.iconLibrary.fontAwesome: Enable Font Awesome
+    - site.themeColor: Browser theme color
+    - site.cookieConsent.provider: "axeptio"
+    - site.cookieConsent.clientId: Axeptio client ID
+    - site.cookieConsent.cookiesVersion: Axeptio version
+    - site.analytics.ga4: GA4 measurement ID
+  
+  @created 2025-01-15
+#}
+
 <!DOCTYPE html>
 <html lang="{{ site.language | default('en') }}">
   <head>
@@ -188,3 +240,11 @@
 
   </body>
 </html>
+
+{#
+============================
+Summon HAT Components Wisely
+============================
+
+May your bugs be forever exiled to the shadow realm. ✦
+#}

@@ -1,7 +1,38 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Section Hero                                 │
+   │ Hero section with heading hierarchy and dual layout     │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-      SECTION HERO        
-=========================
+  Props:
+    - options.name (string): Hero identifier
+    - options.datas (object): Hero configurations
+    - options.headings (object): Headings data source
+    - options.buttons (object): Buttons data source
+    - options.images (object): Images data source
+    - options.class (string): Additional CSS classes
+  
+  Usage:
+    {% from "03-organisms/section-hero.njk" import renderSectionHero %}
+    
+    {{ renderSectionHero({ 
+      name: "default_hero",
+      datas: organisms["section-hero"],
+      headings: atoms.headings,
+      buttons: atoms.buttons,
+      images: atoms.images
+    }) }}
+  
+  Features:
+    - Variant-based styling system
+    - Responsive layout (mobile column, desktop two-column)
+    - Heading hierarchy (super heading + main heading)
+    - Primary and secondary button support
+    - Optional hero image with variants
+    - Auto-selects first hero if name not found
+    - Uses Jinja2 selectattr filter for efficient data lookup
+  
+  @created 2025-01-15
 #}
 
 {% macro renderSectionHero(options) %}
@@ -67,7 +98,7 @@
             {# Buttons Container #}
             <div class="{{ buttonsContainerStyle }}">
               {# Import button rendering macro #}
-              {% from "03-atoms/button.njk" import renderButton %}
+              {% from "01-atoms/button.njk" import renderButton %}
               
               {# Primary Button #}
               {% if variant.primaryButton %}
@@ -113,37 +144,10 @@
   {% endif %}
 {% endmacro %}
 
-
 {#
 ============================
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "01-organisms/section-hero.njk" import renderSectionHero %}
-
-2. Call the section-hero component with a specific name
-{{ renderSectionHero({ 
-    name: "default_hero",
-    datas: organisms["section-hero"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    images: atoms.images
-}) }}
-
-3. Using custom styles
-{{ renderSectionHero({ 
-    name: "product_hero",
-    datas: organisms["section-hero"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    images: atoms.images,
-    class: "my-custom-hero-class"
-}) }}
-
-4. Note about button rendering
-The section-hero component uses the renderButton macro from "03-atoms/button.njk".
-This ensures consistent button styling and behavior across all components.
-
-Every journey begins with a hero section! 🏰🛡️
+May your bugs be forever exiled to the shadow realm. ✦
 #}

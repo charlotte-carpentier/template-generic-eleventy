@@ -1,7 +1,43 @@
-{# ===========================================================
-   @ORGANISMS - ERROR-FRAGMENT-GROUP
-   - Renders error fragments in a 2x3 grid layout
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Error Fragment Group                         │
+   │ Error fragments in 2x3 grid layout                      │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Error fragment group identifier
+    - option.datas (array): Error fragment group configuration
+    - option.errorFragmentDatas (array): Error fragments data
+    - option.iconDatas (array): Icons atom data
+    - option.typographyDatas (array): Typography atom data
+  
+  Usage:
+    {% from "03-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
+    
+    {{ renderErrorFragmentGroup({ 
+        name: "error_fragment_group_404",
+        datas: organisms["error-fragment-group"]["error-fragment-groups"],
+        errorFragmentDatas: molecules["error-fragment"]["error-fragments"],
+        iconDatas: atoms.icon.icons,
+        typographyDatas: atoms.typography.texts
+    }) }}
+  
+  Variants:
+    - grid-2x3: 2 columns × 3 rows layout
+  
+  Features:
+    - Fragment 6 with optional click behavior
+    - Left/right alignment based on column
+    - Keyboard accessible clickable fragment
+    - Integration with error-fragment molecule
+  
+  Accessibility:
+    - role="button" on clickable fragment
+    - tabindex="0" for keyboard navigation
+    - aria-label on interactive elements
+  
+  @created 2025-01-15
+#}
 
 {# Import molecules #}
 {% from "02-molecules/error-fragment.njk" import renderErrorFragment %}
@@ -70,20 +106,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "03-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call a specific error-fragment-group by its name
-{{ renderErrorFragmentGroup({ 
-    name: "error_fragment_group_404",
-    datas: organisms["error-fragment-group"]["error-fragment-groups"],
-    errorFragmentDatas: molecules["error-fragment"]["error-fragments"],
-    iconDatas: atoms.icon.icons,
-    typographyDatas: atoms.typography.texts
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}

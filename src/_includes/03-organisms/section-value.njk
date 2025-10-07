@@ -1,10 +1,40 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Section Value                                │
+   │ Value proposition section with heading and cards        │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-    SECTION-VALUE        
-=========================
+  Props:
+    - options.name (string): Section identifier
+    - options.datas (object): Section configurations
+    - options.headings (object): Headings data source
+    - options.buttons (object): Buttons data source
+    - options.cards (object): Cards data source
+    - options.class (string): Additional CSS classes
+  
+  Usage:
+    {% from "03-organisms/section-value.njk" import renderSectionValue %}
+    
+    {{ renderSectionValue({ 
+      name: "core_values",
+      datas: organisms["section-values"],
+      headings: atoms.headings,
+      buttons: atoms.buttons,
+      cards: molecules.cards
+    }) }}
+  
+  Features:
+    - Variant-based styling system
+    - Heading hierarchy (super heading + main heading)
+    - Optional description text
+    - Dynamic cards grid with per-card customization
+    - Auto-selects first section if name not found
+    - Supports both heading objects and direct text fallback
+  
+  @created 2025-01-15
 #}
 
-{% from "03-atoms/heading.njk" import renderHeading %}
+{% from "01-atoms/heading.njk" import renderHeading %}
 {% from "02-molecules/card.njk" import renderCard %}
 
 {% macro renderSectionValue(options) %}
@@ -99,41 +129,10 @@
   {% endif %}
 {% endmacro %}
 
-
 {#
 ============================
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "03-organisms/section-value.njk" import renderSectionValue %}
-
-2. Call the section-value component with a specific name
-{{ renderSectionValue({ 
-    name: "core_values",
-    datas: organisms["section-values"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    cards: molecules.cards
-}) }}
-
-3. Using custom styles
-{{ renderSectionValue({ 
-    name: "user_benefits",
-    datas: organisms["section-values"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    cards: molecules.cards,
-    class: "bg-gray-100"
-}) }}
-
-4. Default usage (will use the first section in the JSON)
-{{ renderSectionValue({ 
-    datas: organisms["section-values"],
-    headings: atoms.headings,
-    buttons: atoms.buttons,
-    cards: molecules.cards
-}) }}
-
-Values that inspire, cards that engage! 🛡️✨
+May your bugs be forever exiled to the shadow realm. ✦
 #}

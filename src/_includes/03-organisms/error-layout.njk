@@ -1,9 +1,53 @@
-{# ===========================================================
-   @ORGANISMS - ERROR-LAYOUT
-   - Cross layout for desktop with centered triptych and fragments
-   - Vertical stack for mobile with scroll-based reveal
-   - Enhanced mobile support with fragment reveal system
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Error Layout                                 │
+   │ Cross layout with desktop/mobile responsive variants   │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Error layout identifier
+    - option.datas (array): Error layout configuration
+    - option.errorFragmentGroupDatas (array): Fragment groups data
+    - option.errorFragmentDatas (array): Error fragments data
+    - option.iconDatas (array): Icons atom data
+    - option.typographyDatas (array): Typography atom data
+    - option.buttonDatas (array): Buttons atom data
+    - option.linkDatas (array): Links atom data
+  
+  Usage:
+    {% from "03-organisms/error-layout.njk" import renderErrorLayout %}
+    
+    {{ renderErrorLayout({ 
+        name: "error_layout_404",
+        datas: organisms["error-layout"]["error-layouts"],
+        errorFragmentGroupDatas: organisms["error-fragment-group"]["error-fragment-groups"],
+        errorFragmentDatas: molecules["error-fragment"]["error-fragments"],
+        iconDatas: atoms.icon.icons,
+        typographyDatas: atoms.typography.texts,
+        buttonDatas: atoms.button.buttons,
+        linkDatas: atoms.link.links
+    }) }}
+  
+  Variants:
+    - cross-layout: Desktop cross formation with centered triptych, mobile vertical stack
+  
+  Features Desktop:
+    - Cross formation with fragments covering entire space
+    - Centered triptych (title, subtitle, CTA)
+    - Accessibility toggle button
+  
+  Features Mobile:
+    - Vertical scrollable stack
+    - Scroll-based fragment reveal
+    - Triptych always visible in halo
+  
+  Accessibility:
+    - Proper focus states on interactive elements
+    - Opacity transitions for accessibility controls
+    - role="button" on clickable elements
+  
+  @created 2025-01-15
+#}
 
 {# Import organisms, molecules and atoms #}
 {% from "03-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
@@ -98,7 +142,7 @@
             
           </div>
           
-          {# Mobile/Tablet Vertical Stack with Scroll-based Halo (sm, md, lg-) #}
+          {# Mobile/Tablet Vertical Stack with Scroll-based Halo #}
           <div class="error-layout-mobile block lg:hidden overflow-y-auto h-full w-full p-4 sm:p-6">
             
             {# Triptych First - Always visible in mobile halo #}
@@ -129,7 +173,7 @@
                 {% endif %}
               </div>
               
-              {# Accessibility section with proper focus and hover states #}
+              {# Accessibility section #}
               <div class="error-layout-accessibility text-center mt-8">
                 <div class="error-layout-accessibility-text mb-4 opacity-70 hover:opacity-100 focus-within:opacity-100 transition-opacity">
                   {{ renderTypography({ 
@@ -147,7 +191,7 @@
               </div>
             </div>
             
-            {# Fragments Container - Uses existing error-fragment-group #}
+            {# Fragments Container #}
             <div class="error-layout-fragments-mobile space-y-8 sm:space-y-12">
               {# Get fragment group data #}
               {% set fragmentGroupData = null %}
@@ -196,23 +240,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "03-organisms/error-layout.njk" import renderErrorLayout %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call a specific error-layout by its name
-{{ renderErrorLayout({ 
-    name: "error_layout_404",
-    datas: organisms["error-layout"]["error-layouts"],
-    errorFragmentGroupDatas: organisms["error-fragment-group"]["error-fragment-groups"],
-    errorFragmentDatas: molecules["error-fragment"]["error-fragments"],
-    iconDatas: atoms.icon.icons,
-    typographyDatas: atoms.typography.texts,
-    buttonDatas: atoms.button.buttons,
-    linkDatas: atoms.link.links
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}

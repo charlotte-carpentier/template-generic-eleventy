@@ -1,10 +1,36 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Section Article Hero                         │
+   │ Hero section for article pages with image and title     │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-   SECTION ARTICLE HERO        
-=========================
+  Props:
+    - options.name (string): Hero section identifier
+    - options.datas (object): Hero section configurations
+    - options.images (object): Images data source
+    - options.headings (object): Headings data source
+    - options.class (string): Additional CSS classes
+  
+  Usage:
+    {% from "03-organisms/section-article-hero.njk" import renderSectionArticleHero %}
+    
+    {{ renderSectionArticleHero({ 
+      name: "article_hero_default", 
+      datas: organisms["section-article-hero"],
+      images: atoms.images,
+      headings: atoms.headings
+    }) }}
+  
+  Features:
+    - Variant-based styling system
+    - Centered image and title layout
+    - Responsive sizing via image variants
+    - Auto-selects first hero if name not found
+  
+  @created 2025-01-15
 #}
 
-{% from "03-atoms/heading.njk" import renderHeading %}
+{% from "01-atoms/heading.njk" import renderHeading %}
 
 {% macro renderSectionArticleHero(options) %}
   {% if options.datas %}
@@ -69,31 +95,10 @@
   {% endif %}
 {% endmacro %}
 
-
 {#
 ============================
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "01-organisms/section-article-hero.njk" import renderSectionArticleHero %}
-
-2. Call the section article hero component with a specific name
-{{ renderSectionArticleHero({ 
-    name: "article_hero_default", 
-    datas: organisms["section-article-hero"],
-    images: atoms.images,
-    headings: atoms.headings
-}) }}
-
-3. Using custom styles
-{{ renderSectionArticleHero({ 
-    name: "article_hero_default",
-    datas: organisms["section-article-hero"],
-    images: atoms.images,
-    headings: atoms.headings,
-    class: "my-custom-section-class"
-}) }}
-
-Grab your quill, roll for inspiration, and start your journey 🛡️📜
+May your bugs be forever exiled to the shadow realm. ✦
 #}

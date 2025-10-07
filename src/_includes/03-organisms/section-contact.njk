@@ -1,7 +1,51 @@
-{# ===========================================================
-   @ORGANISMS - SECTION-CONTACT
-   - Contact section with title, contact info and form
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Section Contact                              │
+   │ Contact section with info block and Netlify form        │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Section identifier
+    - option.datas (array): Section configurations
+    - option.typographyDatas (object): Typography data source
+    - option.contactBlockDatas (object): Contact block data source
+    - option.listFormDatas (object): Form data source
+    - option.iconDatas (object): Icons data source
+    - option.radioDatas (object): Radio buttons data source
+    - option.inputDatas (object): Input fields data source
+    - option.buttonDatas (object): Buttons data source
+    - option.class (string): Additional CSS classes
+  
+  Usage:
+    {% from "03-organisms/section-contact.njk" import renderSectionContact %}
+    
+    {{ renderSectionContact({ 
+      name: "charlotte_contact",
+      datas: organisms["section-contact"].sections,
+      typographyDatas: atoms.typography.texts,
+      contactBlockDatas: molecules["contact-block"].contact_blocks,
+      listFormDatas: molecules["list-form"]["list-forms"],
+      iconDatas: atoms.icon.icons,
+      radioDatas: atoms.radio.radios,
+      inputDatas: atoms.input.inputs,
+      buttonDatas: atoms.button.buttons
+    }) }}
+  
+  Features:
+    - Semantic HTML with ARIA landmarks
+    - Contact information display via contact-block molecule
+    - Netlify form integration with submit button
+    - Horizontal separator with gradient
+    - Responsive centered layout
+  
+  Accessibility:
+    - Region role with labelledby reference
+    - Proper heading hierarchy
+    - Form accessibility via list-form molecule
+    - Decorative separator marked as aria-hidden
+  
+  @created 2025-01-15
+#}
 
 {% macro renderSectionContact(option) %}
   {# Import required molecules and atoms #}
@@ -103,24 +147,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "03-organisms/section-contact.njk" import renderSectionContact %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call the section-contact
-{{ renderSectionContact({ 
-    name: "charlotte_contact",
-    datas: organisms["section-contact"].sections,
-    typographyDatas: atoms.typography.texts,
-    contactBlockDatas: molecules["contact-block"].contact_blocks,
-    listFormDatas: molecules["list-form"]["list-forms"],
-    iconDatas: atoms.icon.icons,
-    radioDatas: atoms.radio.radios,
-    inputDatas: atoms.input.inputs,
-    buttonDatas: atoms.button.buttons
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}
