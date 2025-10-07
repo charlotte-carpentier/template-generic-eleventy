@@ -1,20 +1,20 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ATOM › Chip Multiselect                                 │
-   │ Selectable/removable chips with consistent styling     │
+   │ Selectable/removable chips with consistent styling      │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Chip identifier
-    - options.datas (object): Chip configuration data
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "01-atoms/chip-multiselect.njk" import renderChipMultiselect %}
     
     {{ renderChipMultiselect({ 
         name: "fire", 
         datas: atoms["chip-multiselects"] 
     }) }}
+  
+  Props:
+    - options.name (string): Chip identifier
+    - options.datas (object): Chip configuration data
   
   @created 2025-01-15
 #}
@@ -71,21 +71,10 @@
   {% endif %}
 {% endmacro %}
 
+
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-Adding a new chip multiselect to chip-multiselects.json:
-{
-  "chip-multiselects": [
-    {
-      "name": "new_chip",
-      "text": "New Chip Text",
-      "variant": "default"
-    }
-  ]
-}
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

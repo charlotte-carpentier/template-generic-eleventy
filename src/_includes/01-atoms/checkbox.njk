@@ -4,15 +4,7 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.id (string): Checkbox identifier for single rendering
-    - options.group (boolean): Render as group if true
-    - options.groupName (string): Specific group name to render
-    - options.groupSrOnly (boolean): Hide group label visually
-    - options.datas (object): Checkbox configuration data
-    - options.boxStyles (object): Box styling configuration
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "01-atoms/checkbox.njk" import renderCheckbox %}
     
     Single checkbox:
@@ -36,6 +28,14 @@
        datas: atoms.checkboxes,
        boxStyles: atoms.boxes 
     }) }}
+  
+  Props:
+    - options.id (string): Checkbox identifier for single rendering
+    - options.group (boolean): Render as group if true
+    - options.groupName (string): Specific group name to render
+    - options.groupSrOnly (boolean): Hide group label visually
+    - options.datas (object): Checkbox configuration data
+    - options.boxStyles (object): Box styling configuration
   
   Notes:
     - Uses box.njk as foundation for checkbox visuals
@@ -186,30 +186,10 @@
   </label>
 {% endmacro %}
 
+
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-Adding a new checkbox group to checkboxes.json:
-{
-  "newGameOptions": {
-    "groupLabel": "New Game Features",
-    "groupDescription": "Optional features to enhance your gameplay",
-    "ariaGroupLabel": "Additional game features options",
-    "checkboxes": [
-      {
-        "id": "difficulty_mode",
-        "label": "Advanced Difficulty Mode",
-        "value": "advanced_difficulty",
-        "description": "Unlock extreme challenge settings",
-        "ariaLabel": "Enable advanced difficulty settings",
-        "required": false,
-        "disabled": false
-      }
-    ]
-  }
-}
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

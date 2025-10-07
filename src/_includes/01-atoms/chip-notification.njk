@@ -4,17 +4,17 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Chip identifier
-    - options.datas (object): Chip notification configuration
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "01-atoms/chip-notification.njk" import renderChipNotification %}
     
     {{ renderChipNotification({ 
         name: "notification_count", 
         datas: atoms.chipNotifications 
     }) }}
+  
+  Props:
+    - options.name (string): Chip identifier
+    - options.datas (object): Chip notification configuration
   
   Notes:
     - Style variants from "variants" object in chip-notifications.json
@@ -78,23 +78,10 @@
   {% endif %}
 {% endmacro %}
 
+
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-Adding a new chip notification to chip-notifications.json:
-{
-  "chip-notifications": [
-    {
-      "name": "new_notification_count",
-      "text": "99+",
-      "style": "warning",
-      "ariaLabel": "99 or more unread notifications",
-      "classes": "animate-pulse"
-    }
-  ]
-}
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

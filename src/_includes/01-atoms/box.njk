@@ -4,19 +4,19 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Usage — Summon HAT Components Wisely:
+    {% from "01-atoms/box.njk" import renderBox %}
+    
+    Single box:
+    {{ renderBox({ id: "box1", datas: atoms.boxes }) }}
+    
+    Group of boxes:
+    {{ renderBox({ group: true, datas: atoms.boxes }) }}
+  
   Props:
     - options.id (string): Unique identifier for single box
     - options.group (boolean): Render as group if true
     - options.datas (object): Box configuration data
-  
-  Usage:
-    {% from "01-atoms/box.njk" import boxComponent %}
-    
-    Single box:
-    {{ boxComponent({ id: "box1", datas: atoms.boxes }) }}
-    
-    Group of boxes:
-    {{ boxComponent({ group: true, datas: atoms.boxes }) }}
   
   Notes:
     - Foundation component for checkbox.njk
@@ -32,7 +32,7 @@
   @created 2025-01-15
 #}
 
-{% macro boxComponent(options) %}
+{% macro renderBox(options) %}
   {# Initialize default values for styling classes #}
   {% set globalStyle = options.datas.globalStyle | default('') %}
   {% set fieldsetClasses = options.datas.fieldsetClasses | default('') %}
@@ -111,23 +111,10 @@
   </div>
 {% endmacro %}
 
+
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-Add a new box in boxes.json:
-{
-  "boxes": [
-    {
-      "id": "unique_id",
-      "value": "submission_value",
-      "checked": true,
-      "disabled": false,
-      "ariaLabel": "Accessible label for screen readers"
-    }
-  ]
-}
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

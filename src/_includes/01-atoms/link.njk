@@ -4,17 +4,17 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - option.name (string): Link identifier
-    - option.datas (array): Link configuration data
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "01-atoms/link.njk" import renderLink %}
     
     {{ renderLink({ 
        name: "portfolio_link",
        datas: atoms.link.links
     }) }}
+  
+  Props:
+    - option.name (string): Link identifier
+    - option.datas (array): Link configuration data
   
   Features:
     - Base + variant classes from input.css
@@ -69,7 +69,7 @@
      
      {# Enhanced accessibility attributes #}
      {% set ariaLabel = '' %}
-     {% if linkData.href and linkData.href.indexOf('mailto:') == 0 %}
+     {% if linkData.href and 'mailto:' in linkData.href %}
        {% set ariaLabel = 'aria-label="Envoyer un email à ' ~ linkData.text ~ '"' %}
      {% elif linkData.target == '_blank' %}
        {% set ariaLabel = 'aria-label="' ~ linkData.text ~ ' - Ouvre dans un nouvel onglet"' %}
@@ -94,10 +94,10 @@
  {% endif %}
 {% endmacro %}
 
-{#
-============================
-Summon HAT Components Wisely
-============================
 
-May your bugs be forever exiled to the shadow realm. ✦
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}
