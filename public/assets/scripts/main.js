@@ -1,29 +1,40 @@
+/* ┌─────────────────────────────────────────────────────────┐
+   │ CORE › Main Entry Point                                 │
+   │ Global initialization and site-wide functionality       │
+   └─────────────────────────────────────────────────────────┘ */
+
 /**
- * Main JavaScript Entry Point
- * 
- * This is the global entry point for site-wide JavaScript.
- * Component-specific scripts are loaded separately from their respective files.
- * 
- * Add your global initialization code here:
- * - Analytics tracking
- * - Global event listeners
- * - Third-party library initialization
- * - Feature detection
- * 
- * Component scripts are organized by atomic design structure:
- * - src/assets/scripts/components/01-atoms/
- * - src/assets/scripts/components/02-molecules/
- * - src/assets/scripts/components/03-organisms/
- * 
- * @version 1.0
+ * @fileoverview Main JavaScript entry point for site-wide functionality
+ * @module core/main
+ * @created 2025-01-15
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Configuration
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// Component scripts are organized by atomic design structure:
+// - src/assets/scripts/components/01-atoms/
+// - src/assets/scripts/components/02-molecules/
+// - src/assets/scripts/components/03-organisms/
+
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Initialization
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Initialize site-wide functionality
+ * @returns {void}
+ */
+function initSite() {
   console.log('Site initialized');
   
-  // TODO: Add your global initialization code here
-  // Example:
-  // - Initialize analytics
-  // - Setup global event listeners
-  // - Initialize third-party libraries
-});
+  // TODO: Add global initialization code
+  // - Analytics tracking
+  // - Global event listeners
+  // - Third-party library initialization
+  // - Feature detection
+}
+
+document.addEventListener('DOMContentLoaded', initSite);

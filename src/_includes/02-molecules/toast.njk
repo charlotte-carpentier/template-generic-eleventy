@@ -1,7 +1,37 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Toast                                        │
+   │ Temporary notification messages with auto-dismiss       │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-          TOAST          
-=========================
+  Props:
+    - options.name (string): Toast identifier
+    - options.datas (object): Toast configuration
+    - options.icons (object): Icons atom data
+  
+  Usage:
+    {% from "02-molecules/toast.njk" import renderToast %}
+    
+    {{ renderToast({ 
+        name: "success_notification", 
+        datas: molecules.toasts,
+        icons: atoms.icons 
+    }) }}
+  
+  Features:
+    - Style variants (success, error, warning, info)
+    - Optional icon display
+    - Dismissible with close button
+    - Auto-dismiss duration support (data attribute)
+    - Message content from configuration
+  
+  Accessibility:
+    - aria-live="polite" for screen reader announcements
+    - role="status" for notification semantics
+    - aria-label on dismiss button
+    - aria-hidden for decorative icons
+  
+  @created 2025-01-15
 #}
 
 {% macro renderToast(options) %}
@@ -76,15 +106,5 @@
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "02-molecules/toast.njk" import renderToast %}
-
-2. Call a specific toast by name
-{{ renderToast({ 
-    name: "success_notification", 
-    datas: molecules.toasts,
-    icons: atoms.icons 
-}) }}
-
-May your notifications be legendary drops 🔔💎
+May your bugs be forever exiled to the shadow realm. ✦
 #}

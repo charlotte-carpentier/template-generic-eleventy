@@ -1,16 +1,24 @@
-/* ===========================================================
-   @ATOM - ERROR-LINK
-   - Navigation functionality for error page links
-   - Intelligent routing: previous page or home fallback
-   - ARIA accessibility and keyboard navigation support
-=========================================================== */
+/* ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Error Link                                       │
+   │ Navigation for error page links with fallback           │
+   └─────────────────────────────────────────────────────────┘ */
+
+/**
+ * @fileoverview Intelligent routing for error page navigation
+ * @module atoms/error-link
+ * @created 2025-01-15
+ */
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Core Functions
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
  * Navigate to previous page or home as fallback
  * Used by error page CTA links with onclick handlers
+ * @returns {void}
  */
 function goToPreviousPageOrHome() {
-  // Try to go back to previous page
   if (canGoToPreviousPage()) {
     goToPreviousPage();
   } else {
@@ -20,24 +28,19 @@ function goToPreviousPageOrHome() {
 
 /**
  * Check if we can safely go to previous page
+ * @returns {boolean} True if safe to navigate back
  */
 function canGoToPreviousPage() {
-  // Check if referrer exists and is not the current error page
-  if (!document.referrer) {
-    return false;
-  }
+  // Check if referrer exists and is not current error page
+  if (!document.referrer) return false;
   
-  // Don't go back to the same error page (avoid loops)
-  if (document.referrer === window.location.href) {
-    return false;
-  }
+  // Avoid navigation loops
+  if (document.referrer === window.location.href) return false;
   
-  // Don't go back to another error page (basic check)
-  const currentPath = window.location.pathname;
+  // Avoid going back to other error pages
   const referrerUrl = new URL(document.referrer);
   const referrerPath = referrerUrl.pathname;
   
-  // Avoid going back to common error pages
   const errorPages = ['/404', '/500', '/maintenance'];
   if (errorPages.some(errorPage => referrerPath.includes(errorPage))) {
     return false;
@@ -48,18 +51,16 @@ function canGoToPreviousPage() {
 
 /**
  * Navigate to previous page
+ * @returns {void}
  */
 function goToPreviousPage() {
   try {
-    // Use history.back() for better browser compatibility
     if (window.history.length > 1) {
       window.history.back();
     } else {
-      // Fallback if history is empty
       window.location.href = document.referrer;
     }
   } catch (error) {
-    // Fallback to home if navigation fails
     console.warn('Failed to navigate back:', error);
     goToHomePage();
   }
@@ -67,19 +68,18 @@ function goToPreviousPage() {
 
 /**
  * Navigate to home page
+ * @returns {void}
  */
 function goToHomePage() {
   window.location.href = '/';
 }
 
-// =========================
-// INITIALIZATION
-// =========================
 
-// Note: This script provides global functions for onclick handlers
-// No DOM initialization needed as functions are called directly from HTML
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Export
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-// Export for potential external use or testing
+// Export for external use or testing
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { 
     goToPreviousPageOrHome, 

@@ -1,7 +1,45 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › List Content                                 │
+   │ Organized list of lockup components                     │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-      LIST CONTENT        
-=========================
+  Props:
+    - options.name (string): List content identifier
+    - options.datas (object): List content configuration
+    - options.lockups (object): Lockups molecule data
+    - options.images (object): Images atom data
+    - options.headings (object): Headings atom data
+    - options.class (string): Additional CSS classes
+  
+  Usage:
+    {% from "02-molecules/list-content.njk" import renderListContent %}
+    
+    {{ renderListContent({ 
+        name: "forgotten_legends",
+        datas: molecules.list_contents,
+        lockups: molecules.lockups,
+        images: atoms.images,
+        headings: atoms.headings
+    }) }}
+    
+    With custom styles:
+    {{ renderListContent({ 
+        name: "mystical_artifacts",
+        datas: molecules.list_contents,
+        lockups: molecules.lockups,
+        images: atoms.images,
+        headings: atoms.headings,
+        class: "my-custom-list-class"
+    }) }}
+  
+  Features:
+    - Style variants for list appearance
+    - Item-specific styling
+    - Integrates with lockup molecule
+    - Falls back to first list if name not found
+  
+  @created 2025-01-15
 #}
 
 {% macro renderListContent(options) %}
@@ -55,35 +93,12 @@
   {% endif %}
 {% endmacro %}
 
-
 {#
 ============================
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "02-molecules/list-content.njk" import renderListContent %}
-
-2. Call the list-content component with a specific name
-{{ renderListContent({ 
-    name: "forgotten_legends",
-    datas: molecules.list_contents,
-    lockups: molecules.lockups,
-    images: atoms.images,
-    headings: atoms.headings
-}) }}
-
-3. Using custom styles
-{{ renderListContent({ 
-    name: "mystical_artifacts",
-    datas: molecules.list_contents,
-    lockups: molecules.lockups,
-    images: atoms.images,
-    headings: atoms.headings,
-    class: "my-custom-list-class"
-}) }}
-
-4. Structure of list-contents.json
+Structure of list-contents.json:
 {
   "list_contents": [
     {
@@ -102,5 +117,5 @@ Summon HAT Components Wisely
   ]
 }
 
-Only fools stack their gold on shaky ground! ⚔️💎
+May your bugs be forever exiled to the shadow realm. ✦
 #}

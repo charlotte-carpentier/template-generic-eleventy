@@ -1,11 +1,69 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Pagination                                   │
+   │ Complete pagination with select, navigation and count   │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-       PAGINATION         
-=========================
+  Props:
+    - options.name (string): Pagination identifier
+    - options.datas (object): Pagination configuration
+    - options.buttonData (object): Buttons atom data
+    - options.selectData (object): Select atom data
+    - options.icons (object): Icons atom data
+    - options.currentPage (number): Current active page
+    - options.totalPages (number): Total number of pages
+    - options.itemsPerPage (number): Items per page
+    - options.totalItems (number): Total count of items
+    - options.label (string): Label for select
+    - options.labelSuffix (string): Text after number (default: "per page")
+  
+  Usage:
+    {% from "02-molecules/pagination.njk" import renderPagination %}
+    
+    Full pagination:
+    {{ renderPagination({ 
+        name: "pager", 
+        currentPage: 1,
+        totalPages: 10,
+        itemsPerPage: 10,
+        totalItems: 98,
+        label: "Show",
+        labelSuffix: "items",
+        buttonData: atoms.buttons,
+        selectData: atoms.selects,
+        icons: atoms.icons,
+        datas: molecules.paginations 
+    }) }}
+    
+    Navigation only:
+    {{ renderPagination({ 
+        name: "navigation-pager", 
+        currentPage: 1,
+        totalPages: 10,
+        buttonData: atoms.buttons,
+        icons: atoms.icons, 
+        datas: molecules.paginations 
+    }) }}
+  
+  Features:
+    - Items per page selector (dropdown)
+    - Page navigation buttons with icons
+    - Current page indicator
+    - Items counter (e.g., "1-10 of 98")
+    - Button state management (hover, focus, active)
+    - Fallback SVG icons if not found in data
+  
+  Accessibility:
+    - role="navigation" with aria-label
+    - aria-current="page" for current page
+    - aria-label on controls
+    - rel="nofollow" on pagination links
+  
+  @created 2025-01-15
 #}
 
 {% macro renderPagination(options) %}
-  {# Check if required data is provided, show error if not #}
+  {# Check if required data is provided #}
   {% if not options or not options.datas or (not options.datas.pager and not options.datas.navigationPager) %}
     <span>Error: No pagination data provided</span>
   {% else %}
@@ -27,17 +85,17 @@
       {% endif %}
     {% endif %}
 
-    {# Get global style from data or use default empty string #}
+    {# Get global style from data #}
     {% set globalStyle = options.datas.globalStyle | default('') %}
 
     <div>
-      {# Items per page selector - Only rendered if itemsPerPage and selectData are provided #}
+      {# Items per page selector #}
       {% if options.itemsPerPage and options.selectData %}
         <div>
           {% set selectRef = "" %}
           {% set selectVariant = "default" %}
           
-          {# Get select reference if available in paginationData #}
+          {# Get select reference if available #}
           {% if paginationData.select and paginationData.select.itemsPerPage and paginationData.select.itemsPerPage.ref %}
             {% set selectRef = paginationData.select.itemsPerPage.ref %}
             {% set refParts = selectRef.split('.') %}
@@ -60,7 +118,7 @@
             {% endif %}
           {% endif %}
           
-          {# Apply select styling based on found variant or default #}
+          {# Apply select styling #}
           {% set selectGlobalStyle = options.selectData.globalStyle | default('') %}
           {% set selectVariantStyle = options.selectData.variants[selectVariant] | default('') %}
           
@@ -99,7 +157,7 @@
             {% endfor %}
           </select>
           
-          {# Add dropdown arrow indicator #}
+          {# Dropdown arrow indicator #}
           <div>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
@@ -108,7 +166,7 @@
         </div>
       {% endif %}
 
-      {# Pagination navigation - Only rendered if children array exists and has items #}
+      {# Pagination navigation #}
       {% if children and children | length > 0 %}
         <nav role="navigation" aria-label="Pagination">
           <ul>
@@ -118,34 +176,30 @@
               {% set buttonClasses = "" %}
               {% set buttonStateClasses = {} %}
               
-              {# Resolve button reference if it exists and buttonData is provided #}
+              {# Resolve button reference if it exists #}
               {% if page.ref and options.buttonData %}
                 {% set buttonParts = page.ref.split('.') %}
                 {% if buttonParts | length == 2 %}
                   {% set buttonName = buttonParts[1] %}
                   {% set matchingButton = null %}
                   
-                  {# Find the matching button - we'll use a variable instead of break #}
+                  {# Find the matching button #}
                   {% for button in options.buttonData.buttons %}
                     {% if button.name == buttonName and not matchingButton %}
                       {% set matchingButton = button %}
                     {% endif %}
                   {% endfor %}
                   
-                  {# Apply styles if we found a matching button #}
+                  {# Apply styles if button found #}
                   {% if matchingButton %}
-                    {# Get button variant style #}
                     {% set buttonVariant = matchingButton.style | default('default') %}
                     {% set variantConfig = options.buttonData.variants[buttonVariant] %}
                     
-                    {# Get button size style #}
                     {% set buttonSizeKey = matchingButton.size | default('button') %}
                     {% set buttonSize = options.buttonData.sizes[buttonSizeKey] | default('') %}
                     
-                    {# Combine all styles #}
                     {% set baseClasses = options.buttonData.globalStyle ~ " " ~ buttonSize %}
                     
-                    {# Set button state classes #}
                     {% set buttonStateClasses = {
                       'default': variantConfig.default,
                       'hover': variantConfig.hover,
@@ -154,10 +208,9 @@
                       'disabled': variantConfig.disabled
                     } %}
                     
-                    {# Default initial class #}
                     {% set buttonClasses = baseClasses ~ " " ~ buttonStateClasses.default %}
                     
-                    {# Add current state style if page is current #}
+                    {# Add current state style #}
                     {% if page.current and options.buttonData.states and options.buttonData.states.current %}
                       {% set buttonClasses = buttonClasses ~ " " ~ options.buttonData.states.current %}
                     {% endif %}
@@ -183,7 +236,7 @@
                 >
                   
                   {% if page.icon %}
-                    {# Find the corresponding icon in icons.json #}
+                    {# Find icon in data #}
                     {% set iconData = null %}
                     {% if options.icons %}
                       {% for icon in options.icons.icons %}
@@ -194,12 +247,11 @@
                     {% endif %}
                     
                     {% if iconData %}
-                      {# Use data-svg-src for SVG loader, similar to button.njk #}
                       <span data-svg-src="{{ iconData.path }}">
                         <!-- SVG will be loaded here -->
                       </span>
                     {% else %}
-                      {# Fallback - Use predefined SVG icon with currentColor to inherit styles #}
+                      {# Fallback SVG icons #}
                       <span>
                         {% if page.icon == 'first' %}
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
@@ -226,14 +278,11 @@
         <span>No pages available</span>
       {% endif %}
 
-      {# Items counter - Shows range of items being displayed (e.g., "1-10 of 98") #}
+      {# Items counter #}
       {% if options.totalItems and options.currentPage and options.itemsPerPage and paginationData.showTotalCount %}
-        {# Calculate first item number on current page #}
         {% set firstItem = (options.currentPage - 1) * options.itemsPerPage + 1 %}
-        {# Calculate last item number (might exceed total) #}
         {% set lastItemTemp = options.currentPage * options.itemsPerPage %}
         {% set lastItem = lastItemTemp %}
-        {# Adjust last item if it exceeds total #}
         {% if lastItemTemp > options.totalItems %}
           {% set lastItem = options.totalItems %}
         {% endif %}
@@ -248,50 +297,10 @@
   {% endif %}
 {% endmacro %}
 
-
 {#
 ============================
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "02-molecules/pagination.njk" import renderPagination %}
-
-2. Full pagination component with select, navigation and count
-{{ renderPagination({ 
-    name: "pager", 
-    currentPage: 1,
-    totalPages: 10,
-    itemsPerPage: 10,
-    totalItems: 98,
-    label: "Show",
-    labelSuffix: "items",
-    buttonData: atoms.buttons,
-    selectData: atoms.selects,
-    icons: atoms.icons,
-    datas: molecules.paginations 
-}) }}
-
-3. Navigation pager only (just the page numbers and navigation buttons)
-{{ renderPagination({ 
-    name: "navigation-pager", 
-    currentPage: 1,
-    totalPages: 10,
-    buttonData: atoms.buttons,
-    icons: atoms.icons, 
-    datas: molecules.paginations 
-}) }}
-
-4. Custom configuration options
-- currentPage: Current active page (number)
-- totalPages: Total number of pages (number)
-- itemsPerPage: Number of items displayed per page (number)
-- totalItems: Total count of items (number)
-- label: Label text for select (string)
-- labelSuffix: Text to display after the number (default: "per page")
-- buttonData: Button component data from atoms.buttons 
-- selectData: Select component data from atoms.selects
-- icons: Icon component data from atoms.icons
-
-May the winds favor your sails and not your enemies'! ⛵🌬️
+May your bugs be forever exiled to the shadow realm. ✦
 #}

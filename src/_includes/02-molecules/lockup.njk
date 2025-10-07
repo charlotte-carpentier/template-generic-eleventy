@@ -1,7 +1,48 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Lockup                                       │
+   │ Flexible content pairing (label-value, value-legend)    │
+   └─────────────────────────────────────────────────────────┘ #}
+
 {#
-=========================
-         LOCKUP          
-=========================
+  Props:
+    - options.name (string): Lockup identifier
+    - options.datas (object): Lockup configuration
+    - options.images (object): Images atom data (for block-content)
+    - options.headings (object): Headings atom data (for block-content)
+    - options.class (string): Additional CSS classes
+  
+  Usage:
+    {% from "02-molecules/lockup.njk" import renderLockup %}
+    
+    Label-Value type:
+    {{ renderLockup({ 
+        name: "price_info",
+        datas: molecules.lockups,
+        images: atoms.images,
+        headings: atoms.headings
+    }) }}
+    
+    With custom styles:
+    {{ renderLockup({ 
+        name: "feature_block",
+        datas: molecules.lockups,
+        images: atoms.images,
+        headings: atoms.headings,
+        class: "my-custom-lockup-class"
+    }) }}
+  
+  Lockup Types:
+    - label-value: Label + Value (e.g., "Prix : 200€")
+    - value-legend: Value + Legend (e.g., "42 / Réponse universelle")
+    - block-content: Image + Heading + Content (horizontal layout)
+  
+  Features:
+    - Type-specific styling
+    - Label, value, legend style variants
+    - Image and heading support for block-content
+    - Falls back to first lockup if name not found
+  
+  @created 2025-01-15
 #}
 
 {% macro renderLockup(options) %}
@@ -98,33 +139,12 @@
   {% endif %}
 {% endmacro %}
 
-
 {#
 ============================
 Summon HAT Components Wisely
 ============================
 
-1. Import the macro at the top of your page
-{% from "02-molecules/lockup.njk" import renderLockup %}
-
-2. Call the lockup component with a specific name
-{{ renderLockup({ 
-    name: "price_info",
-    datas: molecules.lockups,
-    images: atoms.images,
-    headings: atoms.headings
-}) }}
-
-3. Using custom styles
-{{ renderLockup({ 
-    name: "feature_block",
-    datas: molecules.lockups,
-    images: atoms.images,
-    headings: atoms.headings,
-    class: "my-custom-lockup-class"
-}) }}
-
-4. Structure of lockups.json
+Structure of lockups.json:
 {
   "lockups": [
     {
@@ -142,5 +162,5 @@ Summon HAT Components Wisely
   ]
 }
 
-Build not just walls, but a legacy 🏯🔥
+May your bugs be forever exiled to the shadow realm. ✦
 #}

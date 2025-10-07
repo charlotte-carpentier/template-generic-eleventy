@@ -1,7 +1,36 @@
-{# ===========================================================
-   @MOLECULES - PROGRESS-BAR
-   - Shows progress indicator with label and description
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Progress Bar                                 │
+   │ Progress indicator with label and description           │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): Progress bar identifier
+    - option.datas (array): Progress bar configuration
+    - option.typographyDatas (array): Typography atom data
+  
+  Usage:
+    {% from "02-molecules/progress-bar.njk" import renderProgressBar %}
+    
+    {{ renderProgressBar({ 
+        name: "learning_loop",
+        datas: molecules["progress-bar"]["progress-bars"],
+        typographyDatas: atoms.typography.texts
+    }) }}
+  
+  Features:
+    - Visual progress bar with percentage width
+    - Label and description using typography atoms
+    - Progress value display
+  
+  Accessibility:
+    - role="progressbar" with ARIA attributes
+    - aria-valuenow, aria-valuemin, aria-valuemax
+    - aria-label for screen reader context
+    - role="alert" for error states
+  
+  @created 2025-01-15
+#}
 
 {# Import atoms #}
 {% from "01-atoms/heading.njk" import renderTypography %}
@@ -59,18 +88,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "02-molecules/progress-bar.njk" import renderProgressBar %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call a specific progress-bar by its name
-{{ renderProgressBar({ 
-    name: "learning_loop",
-    datas: molecules["progress-bar"]["progress-bars"],
-    typographyDatas: atoms.typography.texts
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}

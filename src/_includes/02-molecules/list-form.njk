@@ -1,8 +1,43 @@
-{# ===========================================================
-   @MOLECULES - LIST-FORM
-   - Organizes form inputs with radio and text fields
-   - Supports Netlify Forms integration
-=========================================================== #}
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › List Form                                    │
+   │ Form with radio and text inputs, Netlify support        │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - option.name (string): List form identifier
+    - option.datas (array): List form configuration
+    - option.radioDatas (array): Radio atoms data
+    - option.inputDatas (array): Input atoms data
+    - option.netlify (boolean): Enable Netlify Forms integration
+    - option.submitButton (string): Submit button HTML (safe)
+  
+  Usage:
+    {% from "02-molecules/list-form.njk" import renderListForm %}
+    
+    {{ renderListForm({ 
+        name: "contact_form",
+        datas: molecules["list-form"]["list-forms"],
+        radioDatas: atoms.radio.radios,
+        inputDatas: atoms.input.inputs,
+        netlify: true,
+        submitButton: '<button type="submit">Send</button>'
+    }) }}
+  
+  Features:
+    - Radio button section (optional)
+    - Multiple text inputs
+    - Netlify Forms integration with honeypot
+    - Submit button placement inside form
+    - Hidden redirect field for Netlify
+  
+  Netlify Integration:
+    - data-netlify="true" attribute
+    - netlify-honeypot for spam protection
+    - Hidden bot-field and _redirect fields
+  
+  @created 2025-01-15
+#}
 
 {# Import atoms #}
 {% from "01-atoms/radio.njk" import renderRadio %}
@@ -82,20 +117,10 @@
   {% endif %}
 {% endmacro %}
 
-{# ===========================================================
-   Summon HAT Components Wisely
------------------------------------------------------------
-1. Import the macro at the top of your page
-{% from "02-molecules/list-form.njk" import renderListForm %}
+{#
+============================
+Summon HAT Components Wisely
+============================
 
-2. Call a specific list-form by its name
-{{ renderListForm({ 
-    name: "contact_form",
-    datas: molecules["list-form"]["list-forms"],
-    radioDatas: atoms.radio.radios,
-    inputDatas: atoms.input.inputs,
-    netlify: true
-}) }}
-
-May your bugs be forever exiled to the shadow realm. 🧙‍♂️✨
-=========================================================== #}
+May your bugs be forever exiled to the shadow realm. ✦
+#}
