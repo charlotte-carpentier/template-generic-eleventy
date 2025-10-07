@@ -1,4 +1,13 @@
 {
+  "// Component": "Tab Bar - Navigation tab bars with active state management",
+  
+  "_meta": {
+    "component": "tab-bar",
+    "type": "organism",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "tabBars": [
     {
       "name": "demoTabBar1",

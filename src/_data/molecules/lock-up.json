@@ -1,4 +1,13 @@
 {
+  "// Component": "Lock Up - Label-value pairs with multiple layout types",
+  
+  "_meta": {
+    "component": "lock-up",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "lockUps": [
     {
       "id": "demoLock1",

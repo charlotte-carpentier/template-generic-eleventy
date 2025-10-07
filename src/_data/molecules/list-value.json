@@ -1,4 +1,13 @@
 {
+  "// Component": "List Value - Value lists with lockup items and layout variants",
+  
+  "_meta": {
+    "component": "list-value",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "listValues": [
     {
       "id": "demoList1",

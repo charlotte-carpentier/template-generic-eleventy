@@ -1,4 +1,13 @@
 {
+  "// Component": "Error Layout - Complete error page layout with fragments and accessibility",
+  
+  "_meta": {
+    "component": "error-layout",
+    "type": "organism",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "errorLayouts": [
     {
       "name": "layout404",

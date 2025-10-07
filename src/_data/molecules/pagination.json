@@ -1,4 +1,13 @@
 {
+  "// Component": "Pagination - Page navigation with items per page and total count",
+  
+  "_meta": {
+    "component": "pagination",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "paginations": [
     {
       "name": "demoPager1",

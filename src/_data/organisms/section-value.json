@@ -1,4 +1,13 @@
 {
+  "// Component": "Section Value - Value proposition section with simple or cards layout",
+  
+  "_meta": {
+    "component": "section-value",
+    "type": "organism",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "sectValues": [
     {
       "name": "demoSectV1",

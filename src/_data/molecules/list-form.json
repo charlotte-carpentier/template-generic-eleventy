@@ -1,4 +1,13 @@
 {
+  "// Component": "List Form - Form input lists with ordered items",
+  
+  "_meta": {
+    "component": "list-form",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "listForms": [
     {
       "id": "demoForm1",

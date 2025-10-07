@@ -1,4 +1,13 @@
 {
+  "// Component": "Header - Site header with responsive desktop/mobile navigation",
+  
+  "_meta": {
+    "component": "header",
+    "type": "organism",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "headers": [
     {
       "name": "demoHeader1",

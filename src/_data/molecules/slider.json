@@ -1,4 +1,13 @@
 {
+  "// Component": "Slider - Single value and range sliders with handle indicators",
+  
+  "_meta": {
+    "component": "slider",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "sliders": [
     {
       "name": "demoSlider1",

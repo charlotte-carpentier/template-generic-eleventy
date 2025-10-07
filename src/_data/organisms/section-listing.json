@@ -1,4 +1,13 @@
 {
+  "// Component": "Section Listing - Content listing section with cards and pagination",
+  
+  "_meta": {
+    "component": "section-listing",
+    "type": "organism",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "sectListings": [
     {
       "name": "demoSectL1", 

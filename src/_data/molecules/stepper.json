@@ -1,4 +1,13 @@
 {
+  "// Component": "Stepper - Multi-step progress indicator with status tracking",
+  
+  "_meta": {
+    "component": "stepper",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "steppers": [
     {
       "id": "demoStep1",

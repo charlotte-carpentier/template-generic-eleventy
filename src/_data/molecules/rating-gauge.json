@@ -1,4 +1,13 @@
 {
+  "// Component": "Rating Gauge - Star rating display with customizable max rating",
+  
+  "_meta": {
+    "component": "rating-gauge",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "ratingGauges": [
     {
       "name": "demoRating1",

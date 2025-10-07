@@ -1,4 +1,13 @@
 {
+  "// Component": "List Control - Lists with radio, checkbox, and toggle controls",
+  
+  "_meta": {
+    "component": "list-control",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "listControls": [
     {
       "id": "demoList1",

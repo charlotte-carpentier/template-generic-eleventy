@@ -1,4 +1,13 @@
 {
+  "// Component": "Error Fragment Group - Grouped error page fragments (404, 500, maintenance)",
+  
+  "_meta": {
+    "component": "error-fragment-group",
+    "type": "organism",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "errorFragmentGroups": [
     {
       "name": "errGroup404",

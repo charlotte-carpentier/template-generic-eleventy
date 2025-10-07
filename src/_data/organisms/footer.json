@@ -1,4 +1,13 @@
 {
+  "// Component": "Footer - Site footer with branding, navigation, and copyright",
+  
+  "_meta": {
+    "component": "footer",
+    "type": "organism",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "footers": [
     {
       "name": "demoFooter1",

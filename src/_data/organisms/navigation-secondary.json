@@ -1,4 +1,13 @@
 {
+  "// Component": "Navigation Secondary - Secondary navigation menus for footer, social, and menu",
+  
+  "_meta": {
+    "component": "navigation-secondary",
+    "type": "organism",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "navSecondary": [
     {
       "name": "demoNavSec1",

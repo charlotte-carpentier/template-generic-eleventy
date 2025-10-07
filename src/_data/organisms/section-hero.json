@@ -1,4 +1,13 @@
 {
+  "// Component": "Section Hero - Hero section with lockup content and call-to-action buttons",
+  
+  "_meta": {
+    "component": "section-hero",
+    "type": "organism",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "sectHeroes": [
     {
       "name": "demoSectH1",

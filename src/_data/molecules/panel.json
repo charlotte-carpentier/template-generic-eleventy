@@ -1,4 +1,13 @@
 {
+  "// Component": "Panel - Dropdown panels with default, date, and list variants",
+  
+  "_meta": {
+    "component": "panel",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "panels": [
     {
       "name": "demoPanel1",

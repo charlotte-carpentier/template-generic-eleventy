@@ -1,4 +1,13 @@
 {
+  "// Component": "Image - Responsive images with variants and avatar support",
+  
+  "_meta": {
+    "component": "image",
+    "type": "atom",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "images": [
     {
       "name": "demoImage1",

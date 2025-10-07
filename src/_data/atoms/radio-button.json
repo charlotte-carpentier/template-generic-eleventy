@@ -1,4 +1,13 @@
 {
+  "// Component": "Radio Button - Radio inputs with label and accessibility support",
+  
+  "_meta": {
+    "component": "radio-button",
+    "type": "atom",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "radioButtons": [
     {
       "id": "demoRadio1",
