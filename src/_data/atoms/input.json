@@ -1,4 +1,13 @@
 {
+  "// Component": "Input - Form inputs with validation and multiple types",
+  
+  "_meta": {
+    "component": "input",
+    "type": "atom",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "inputs": [
     {
       "name": "demoInput1",

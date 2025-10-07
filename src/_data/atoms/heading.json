@@ -1,4 +1,13 @@
 {
+  "// Component": "Heading - Semantic headings H1-H6 with variant styles",
+  
+  "_meta": {
+    "component": "heading",
+    "type": "atom",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "headings": [
     {
       "name": "demoHead1",

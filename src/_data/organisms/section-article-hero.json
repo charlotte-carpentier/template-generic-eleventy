@@ -1,4 +1,13 @@
 {
+  "// Component": "Section Article Hero - Article hero section with image and heading",
+  
+  "_meta": {
+    "component": "section-article-hero",
+    "type": "organism",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "sectArtHero": [
     {
       "name": "demoSectAH1",

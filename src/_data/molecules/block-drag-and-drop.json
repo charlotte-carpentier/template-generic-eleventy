@@ -1,4 +1,13 @@
 {
+  "// Component": "Block Drag and Drop - File upload with drag and drop support",
+  
+  "_meta": {
+    "component": "block-drag-and-drop",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "blockDragAndDrops": [
     {
       "name": "demoDragDrop1",

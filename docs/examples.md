@@ -1,14 +1,13 @@
-# Code Examples
+---
+title: Code Examples
+description: Complete code examples following the coding style guide
+type: documentation
+created: 2025-01-15
+tags: [examples, style-guide, conventions]
+---
 
 **Companion to**: [coding-style.md](./coding-style.md)  
 **Version**: 3.0.0
-
-## 📚 Documentation
-
-- **[Coding Style](./coding-style.md)** - Rules & conventions
-- **[Examples](./examples.md)** - Complete code samples
-
----
 
 Complete code examples following the coding style guide.
 
@@ -110,7 +109,7 @@ export { initTooltips };
    │ Interactive button styles                               │
    └─────────────────────────────────────────────────────────┘ */
 
-/**
+/*
  * Component: button
  * Type: atom
  * Dependencies: TailwindCSS v4.x
@@ -148,10 +147,7 @@ export { initTooltips };
 
 ```json
 {
-  "_banner": "┌─────────────────────────────────────────────────────────┐",
-  "_title": "│ ATOM › Button                                           │",
-  "_desc": "│ Interactive button with variants and states             │",
-  "_banner_end": "└─────────────────────────────────────────────────────────┘",
+  "// Component": "Button - Interactive button with variants and states",
   
   "_meta": {
     "component": "button",
@@ -184,8 +180,6 @@ type: documentation
 created: 2025-01-15
 tags: [component, atom]
 ---
-
-# Button Component
 
 Interactive element following WCAG 2.2 AA guidelines.
 ```

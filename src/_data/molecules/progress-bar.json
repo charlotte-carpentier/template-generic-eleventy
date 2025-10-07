@@ -1,4 +1,13 @@
 {
+  "// Component": "Progress Bar - Visual progress indicators with labels and percentage",
+  
+  "_meta": {
+    "component": "progress-bar",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "progressBars": [
     {
       "name": "demoProgr1",

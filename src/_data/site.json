@@ -1,4 +1,13 @@
 {
+  "// Component": "Site - Global site configuration for SEO, analytics, and assets",
+  
+  "_meta": {
+    "component": "site",
+    "type": "config",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "title": "Site Title",
   "description": "Site description for SEO and social sharing",
   "url": "https://example.com",

@@ -1,4 +1,10 @@
-# Integration of `error-item.json` Elements into a New Project
+---
+title: Error Item Integration Guide
+description: Guide for integrating error-item.json elements into new projects
+type: documentation
+created: 2025-01-15
+tags: [error, integration, atom, workflow]
+---
 
 ## Purpose
 
@@ -7,7 +13,7 @@ Import these elements into UI components (`button.json`, `typography.json`, `lin
 
 ## Manual Steps to Integrate `error-item.json` into a New Project
 
-1. Copy the `error-item.json` file into the project’s `_data` folder or a shared location.
+1. Copy the `error-item.json` file into the project's `_data` folder or a shared location.
 
 2. For each component type (`button`, `typography`, `link`, `icon`), open the corresponding JSON file (`button.json`, `typography.json`, etc.) in the components folder.
 
@@ -35,15 +41,15 @@ Import these elements into UI components (`button.json`, `typography.json`, `lin
 ```text
 Tu vas travailler sur un projet web structuré avec des composants UI gérés par des fichiers JSON distincts selon le type : button.json, typography.json, link.json, icon.json.
 
-Je te fournis un fichier principal error-item.json qui contient une liste d’éléments à intégrer dans l’interface, chacun ayant un champ variant qui précise à quel fichier JSON ils appartiennent (button, typography, link, icon).
+Je te fournis un fichier principal error-item.json qui contient une liste d'éléments à intégrer dans l'interface, chacun ayant un champ variant qui précise à quel fichier JSON ils appartiennent (button, typography, link, icon).
 
-Ta tâche est d’ajouter uniquement dans chaque fichier JSON composants la ou les nouvelles entrées correspondant aux éléments de error-item.json selon leur variant.
+Ta tâche est d'ajouter uniquement dans chaque fichier JSON composants la ou les nouvelles entrées correspondant aux éléments de error-item.json selon leur variant.
 
-- Ne modifie rien d’autre dans ces fichiers, ne supprime rien, ne touche pas aux entrées existantes.
+- Ne modifie rien d'autre dans ces fichiers, ne supprime rien, ne touche pas aux entrées existantes.
 - Ajoute une seule fois chaque élément, en préservant la cohérence et la structure JSON.
 - Si une entrée existe déjà dans un fichier, ne la duplique pas.
 - Ensuite, si nécessaire, ajoute dans les fichiers .njk correspondants un appel à ces nouveaux composants, mais uniquement pour les nouveaux, sans modifier ni casser le reste.
-- Ne touche à rien d’autre dans le projet.
+- Ne touche à rien d'autre dans le projet.
 - Respecte strictement la structure et la syntaxe JSON et Nunjucks existantes.
 - Ta priorité : ne rien casser, rester très conservateur dans les modifications.
 
@@ -55,5 +61,3 @@ Si tu comprends cette tâche, réponds simplement "Prêt à importer les composa
 ## Conclusion
 
 This method ensures a clean, modular, and reproducible integration of error elements into your web projects, maintaining a single source of truth (`error-item.json`) and a clear separation of components.
-
----

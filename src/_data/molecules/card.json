@@ -1,4 +1,13 @@
 {
+  "// Component": "Card - Content cards with lockup, heading, and action support",
+  
+  "_meta": {
+    "component": "card",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "cards": [
     {
       "id": "demoCard1",

@@ -1,4 +1,13 @@
 {
+  "// Component": "Disclaimer - Alert messages with semantic variants and actions",
+  
+  "_meta": {
+    "component": "disclaimer",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "disclaimers": [
     {
       "name": "demoDiscla1",

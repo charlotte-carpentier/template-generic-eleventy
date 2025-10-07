@@ -1,4 +1,13 @@
 {
+  "// Component": "Caption - Contextual labels with semantic icon variants",
+  
+  "_meta": {
+    "component": "caption",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "captions": [
     {
       "name": "demoCaption1",

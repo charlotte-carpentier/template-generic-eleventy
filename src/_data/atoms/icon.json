@@ -1,4 +1,13 @@
 {
+  "// Component": "Icon - SVG sprite icons organized by category",
+  
+  "_meta": {
+    "component": "icon",
+    "type": "atom",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "icons": {
     "smiles": [
       {

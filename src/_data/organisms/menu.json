@@ -1,4 +1,13 @@
 {
+  "// Component": "Menu - Main navigation menu with grouped secondary navigation",
+  
+  "_meta": {
+    "component": "menu",
+    "type": "organism",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "menus": [
     {
       "name": "demoMenu1",

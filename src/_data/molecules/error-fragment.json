@@ -1,4 +1,13 @@
 {
+  "// Component": "Error Fragment - Error page animated fragments (404, 500, maintenance)",
+  
+  "_meta": {
+    "component": "error-fragment",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "errorFragments": [
     {
       "name": "frag4041",

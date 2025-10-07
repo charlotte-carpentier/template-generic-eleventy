@@ -1,4 +1,13 @@
 {
+  "// Component": "Error Item - Error content elements (404, 500, maintenance)",
+  
+  "_meta": {
+    "component": "error-item",
+    "type": "atom",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "errorItems": [
     {
       "name": "title404",

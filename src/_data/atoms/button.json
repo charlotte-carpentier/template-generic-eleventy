@@ -1,4 +1,13 @@
 {
+  "// Component": "Button - Interactive button with variants and states",
+  
+  "_meta": {
+    "component": "button",
+    "type": "atom",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "buttons": [
     {
       "name": "demoButton1",

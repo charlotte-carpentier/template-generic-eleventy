@@ -1,4 +1,13 @@
 {
+  "// Component": "Toggle - Switch toggles with label and description support",
+  
+  "_meta": {
+    "component": "toggle",
+    "type": "atom",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "toggles": [
     {
       "id": "demoToggle1",

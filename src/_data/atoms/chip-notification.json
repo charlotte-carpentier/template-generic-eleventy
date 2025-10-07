@@ -1,4 +1,13 @@
 {
+  "// Component": "Chip Notification - Notification chips with default and stepper variants",
+  
+  "_meta": {
+    "component": "chip-notification",
+    "type": "atom",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "chipNotifs": [
     {
       "name": "demoChip1",

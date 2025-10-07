@@ -1,4 +1,13 @@
 {
+  "// Component": "Select - Dropdown select inputs with variants",
+  
+  "_meta": {
+    "component": "select",
+    "type": "atom",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "selects": [
     {
       "name": "demoSelect1",

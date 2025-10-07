@@ -1,4 +1,13 @@
 {
+  "// Component": "Toast - Notification toasts with semantic variants and auto-dismiss",
+  
+  "_meta": {
+    "component": "toast",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "toasts": [
     {
       "name": "demoToast1",

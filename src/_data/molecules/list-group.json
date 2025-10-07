@@ -1,4 +1,13 @@
 {
+  "// Component": "List Group - Grouped lists with multiple interaction types",
+  
+  "_meta": {
+    "component": "list-group",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15"
+  },
+  
   "listGroups": [
     {
       "id": "demoGroup1",
