@@ -4,18 +4,7 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - option.name (string): Button identifier
-    - option.datas (array): Button configuration data
-    - option.type (string): Button type (default: "button")
-    - option.disabled (boolean): Override disabled state
-    - option.onclick (string): Inline click handler
-    - option.id (string): Button ID attribute
-    - option.ariaLabel (string): ARIA label for accessibility
-    - option.ariaDescribedby (string): ARIA described-by reference
-    - option.isErrorPage (boolean): Apply error-page-specific styling
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "01-atoms/button.njk" import renderButton %}
     
     Basic button:
@@ -30,6 +19,17 @@
         datas: option.buttonDatas,
         isErrorPage: true
     }) }}
+  
+  Props:
+    - option.name (string): Button identifier
+    - option.datas (array): Button configuration data
+    - option.type (string): Button type (default: "button")
+    - option.disabled (boolean): Override disabled state
+    - option.onclick (string): Inline click handler
+    - option.id (string): Button ID attribute
+    - option.ariaLabel (string): ARIA label for accessibility
+    - option.ariaDescribedby (string): ARIA described-by reference
+    - option.isErrorPage (boolean): Apply error-page-specific styling
   
   @created 2025-01-15
 #}
@@ -86,10 +86,10 @@
   {% endif %}
 {% endmacro %}
 
-{#
-============================
-Summon HAT Components Wisely
-============================
 
-May your bugs be forever exiled to the shadow realm. ✦
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

@@ -4,17 +4,17 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - option.name (string): Image identifier
-    - option.datas (array): Image configuration data
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "01-atoms/image.njk" import renderImage %}
     
     {{ renderImage({ 
         name: "profile_photo",
         datas: atoms.image.images
     }) }}
+  
+  Props:
+    - option.name (string): Image identifier
+    - option.datas (array): Image configuration data
   
   Notes:
     - Silent fallback if image not found (no error display)
@@ -69,10 +69,10 @@
   {% endif %}
 {% endmacro %}
 
-{#
-============================
-Summon HAT Components Wisely
-============================
 
-May your bugs be forever exiled to the shadow realm. ✦
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}
