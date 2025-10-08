@@ -32,7 +32,7 @@
 #}
 
 {# Import atoms #}
-{% from "01-atoms/heading.njk" import renderTypography %}
+{% from "01-atoms/heading.njk" import renderHeading %}
 
 {% macro renderProgressBar(option) %}
   {# Check if datas is provided #}
@@ -71,12 +71,12 @@
         
         {# Typography atoms for label and description #}
         <div class="">
-          {{ renderTypography({ 
+          {{ renderHeading({ 
               name: progressBarData.labelName,
               datas: option.typographyDatas,
               tag: "span"
           }) }}
-          {{ renderTypography({ 
+          {{ renderHeading({ 
               name: progressBarData.descriptionName,
               datas: option.typographyDatas,
               tag: "span"

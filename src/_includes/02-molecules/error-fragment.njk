@@ -35,7 +35,7 @@
 #}
 
 {# Import atoms #}
-{% from "01-atoms/heading.njk" import renderTypography %}
+{% from "01-atoms/heading.njk" import renderHeading %}
 {% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderErrorFragment(option) %}
@@ -76,7 +76,7 @@
       {% elif errorFragmentData.variant == "text" %}
         <div class="error-fragment error-fragment--{{ errorFragmentData.variant }}">
           <div class="error-fragment-text">
-            {{ renderTypography({ 
+            {{ renderHeading({ 
               name: errorFragmentData.textTypographyName,
               datas: option.typographyDatas
           }) }}

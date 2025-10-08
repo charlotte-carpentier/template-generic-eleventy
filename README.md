@@ -91,7 +91,10 @@ template-generic-eleventy/
 │   │   │   ├── utils/            # Reusable helper scripts
 │   │   │   └── main.js           # Global entry point
 │   │   └── styles/               # Global CSS/Tailwind entrypoint
-│   │       └── input.css         # Main stylesheet (imports + @theme + custom)
+│   │   │   ├── input.css         # Main stylesheet (imports all components)
+│   │   │   ├── 01-atoms/         # Custom styles for atom-level components
+│   │   │   ├── 02-molecules/     # Custom styles for molecule-level components
+│   │   │   └── 03-organisms/     # Custom styles for organism-level components
 │   ├── collections/              # Decap CMS collections (blog, etc.)
 │   ├── pages /                   # Utility pages (error pages, maintenance, redirects)
 │   ├── index.njk                 # Homepage template
@@ -104,6 +107,15 @@ template-generic-eleventy/
 ├── LICENSE
 └── README.md
 ```
+
+## CSS Strategy
+
+This template uses TailwindCSS v4 with a **utility-first approach**.
+
+- **90% Tailwind utilities** - Applied directly in Nunjucks templates
+- **10% Custom CSS** - Only for animations, `:target`, pseudo-elements
+
+**See [`docs/tailwind.md`](./docs/tailwind.md) for complete styling guide.**
 
 ## Usage
 

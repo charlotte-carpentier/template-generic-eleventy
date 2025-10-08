@@ -50,7 +50,7 @@
   {# Import required molecules and atoms #}
   {% from "02-molecules/contact-block.njk" import renderContactBlock %}
   {% from "02-molecules/list-form.njk" import renderListForm %}
-  {% from "01-atoms/heading.njk" import renderTypography %}
+  {% from "01-atoms/heading.njk" import renderHeading %}
   {% from "01-atoms/button.njk" import renderButton %}
 
   {# Check if datas is provided #}
@@ -90,7 +90,7 @@
           {# Section header with system gaps and proper heading hierarchy #}
           <header>
             <div id="contact-heading">
-              {{ renderTypography({ 
+              {{ renderHeading({ 
                   name: sectionData.header.title,
                   datas: option.typographyDatas
               }) }}

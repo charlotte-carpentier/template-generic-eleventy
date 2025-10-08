@@ -283,3 +283,9 @@ document.addEventListener('DOMContentLoaded', function() {
   initContactActiveState();
   console.log('Header organism initialized successfully');
 });
+
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// May your bugs be forever exiled to the shadow realm ✦
+// Charlotte Carpentier · 2025
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
