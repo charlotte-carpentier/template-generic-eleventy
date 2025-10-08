@@ -32,7 +32,7 @@
 
 {% macro renderFooter(option) %}
   {# Import atoms macros #}
-  {% from "01-atoms/heading.njk" import renderTypography %}
+  {% from "01-atoms/heading.njk" import renderHeading %}
   {% from "01-atoms/link.njk" import renderLink %}
   
   {# Check if datas is provided #}
@@ -59,7 +59,7 @@
         <div>
           {# Copyright text #}
           <div>
-            {{ renderTypography({ 
+            {{ renderHeading({ 
                 name: footerData.copyright.name,
                 datas: option.typographyDatas
             }) }}

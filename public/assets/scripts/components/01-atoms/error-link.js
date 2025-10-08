@@ -88,3 +88,9 @@ if (typeof module !== 'undefined' && module.exports) {
     goToHomePage
   };
 }
+
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// May your bugs be forever exiled to the shadow realm ✦
+// Charlotte Carpentier · 2025
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

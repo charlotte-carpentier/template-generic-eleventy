@@ -50,7 +50,7 @@
 
 {# Import organisms, molecules and atoms #}
 {% from "03-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
-{% from "01-atoms/heading.njk" import renderTypography %}
+{% from "01-atoms/heading.njk" import renderHeading %}
 {% from "01-atoms/button.njk" import renderButton %}
 {% from "01-atoms/link.njk" import renderLink %}
 
@@ -98,13 +98,13 @@
             {# Triptych - Centered Absolutely #}
             <div class="error-layout-triptych absolute inset-0 flex flex-col items-center justify-center gap-6 pointer-events-none translate-y-1/6">
               <div class="error-layout-title text-center pointer-events-auto">
-                {{ renderTypography({ 
+                {{ renderHeading({ 
                     name: errorLayoutData.titleTypographyName,
                     datas: option.typographyDatas
                 }) }}
               </div>
               <div class="error-layout-subtitle text-center pointer-events-auto">
-                {{ renderTypography({ 
+                {{ renderHeading({ 
                     name: errorLayoutData.subtitleTypographyName,
                     datas: option.typographyDatas
                 }) }}
@@ -124,7 +124,7 @@
               </div>
               <div class="error-layout-accessibility flex items-center justify-center gap-4 mt-20 pointer-events-auto">
                 <div class="error-layout-accessibility-text inline-block opacity-70 hover:opacity-100 focus-within:opacity-100 transition-opacity">
-                  {{ renderTypography({ 
+                  {{ renderHeading({ 
                       name: errorLayoutData.accessibilityTextTypographyName,
                       datas: option.typographyDatas
                   }) }}
@@ -147,13 +147,13 @@
             {# Triptych First - Always visible in mobile halo #}
             <div class="error-layout-triptych-mobile flex flex-col items-center gap-4 sm:gap-6 mb-8 sm:mb-12">
               <div class="error-layout-title text-center">
-                {{ renderTypography({ 
+                {{ renderHeading({ 
                     name: errorLayoutData.titleTypographyName,
                     datas: option.typographyDatas
                 }) }}
               </div>
               <div class="error-layout-subtitle text-center">
-                {{ renderTypography({ 
+                {{ renderHeading({ 
                     name: errorLayoutData.subtitleTypographyName,
                     datas: option.typographyDatas
                 }) }}
@@ -175,7 +175,7 @@
               {# Accessibility section #}
               <div class="error-layout-accessibility text-center mt-8">
                 <div class="error-layout-accessibility-text mb-4 opacity-70 hover:opacity-100 focus-within:opacity-100 transition-opacity">
-                  {{ renderTypography({ 
+                  {{ renderHeading({ 
                       name: errorLayoutData.accessibilityTextTypographyName,
                       datas: option.typographyDatas
                   }) }}

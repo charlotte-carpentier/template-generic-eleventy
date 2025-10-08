@@ -43,7 +43,7 @@
 {% macro renderHeader(option) %}
   {# Import required molecules and atoms #}
   {% from "02-molecules/tab-menu.njk" import renderTabMenu %}
-  {% from "01-atoms/heading.njk" import renderTypography %}
+  {% from "01-atoms/heading.njk" import renderHeading %}
   {% from "01-atoms/link.njk" import renderLink %}
   {% from "01-atoms/icon.njk" import renderIcon %}
 
@@ -81,7 +81,7 @@
           
           {# Brand section - Logo typography #}
           <div>
-            {{ renderTypography({ 
+            {{ renderHeading({ 
                 name: headerData.brand.logo,
                 datas: option.typographyDatas
             }) }}
@@ -89,7 +89,7 @@
           
           {# Title section - Desktop only #}
           <div>
-            {{ renderTypography({ 
+            {{ renderHeading({ 
                 name: headerData.title.desktop,
                 datas: option.typographyDatas
             }) }}

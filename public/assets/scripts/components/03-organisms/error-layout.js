@@ -211,3 +211,9 @@ if (typeof module !== 'undefined' && module.exports) {
     handleResize
   };
 }
+
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// May your bugs be forever exiled to the shadow realm ✦
+// Charlotte Carpentier · 2025
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

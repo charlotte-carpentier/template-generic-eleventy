@@ -1,0 +1,64 @@
+/* ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Error Layout                                 │
+   │ Custom styles for error pages layout                    │
+   └─────────────────────────────────────────────────────────┘ */
+
+/*
+ * @fileoverview Custom CSS for error layout organism
+ * @usage Import in input.css when CSS :target navigation or complex animations needed
+ * @dependencies TailwindCSS v4
+ * @created 2025-10-08
+ * 
+ * Note: Use this file ONLY for styles impossible with Tailwind utilities
+ * Example use cases: CSS :target navigation, complex keyframe animations, 
+ * custom pseudo-elements like ::-webkit-scrollbar
+ */
+
+/* BEM Block: error-layout */
+.error-layout {
+  @apply flex flex-col min-h-screen items-center justify-center bg-black text-white;
+}
+
+/* BEM Elements: error-layout__header, error-layout__footer */
+.error-layout__header,
+.error-layout__footer {
+  @apply w-full px-6 py-4 text-gray-400;
+}
+
+/* BEM Element: error-layout__main */
+.error-layout__main {
+  @apply flex flex-col items-center justify-center gap-6;
+}
+
+/* CSS :target navigation (impossible with Tailwind) */
+.error-layout__section {
+  display: none;
+}
+
+.error-layout__section:target {
+  display: block;
+}
+
+/* Halo reveal animation (complex keyframes with vendor prefixes) */
+@keyframes halo-reveal {
+  from {
+    -webkit-mask-position: 0% 50%;
+    mask-position: 0% 50%;
+  }
+  to {
+    -webkit-mask-position: 100% 50%;
+    mask-position: 100% 50%;
+  }
+}
+
+.error-layout__halo {
+  /* Vendor prefixes for mask properties (browser compatibility) */
+  -webkit-mask-position: 0% 50%;
+  mask-position: 0% 50%;
+  animation: halo-reveal 2s ease-in-out;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   May your bugs be forever exiled to the shadow realm ✦
+   Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
