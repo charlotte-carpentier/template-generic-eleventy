@@ -1,5 +1,5 @@
 {
-  "// Component": "Segmented Control - Multi-step progress indicator with status chips",
+  "// Component": "Segmented Control - Button groups with left/center/right segments",
   
   "_meta": {
     "component": "segmented-control",
@@ -8,25 +8,25 @@
     "created": "2025-01-15"
   },
   
-  "steppers": [
+  "segmentedControls": [
     {
-      "id": "demoStep1",
-      "variants": ["default", "vertical"],
+      "id": "demoSeg1",
+      "variants": ["default", "false", "large"],
       "items": [
         {
-          "chipName": "demoStep1",
-          "label": "Personal information",
-          "status": "active"
+          "buttonName": "demoSeg1",
+          "variant": "left",
+          "isActive": true
         },
         {
-          "chipName": "demoStep1",
-          "label": "Company information", 
-          "status": "upcoming"
+          "buttonName": "demoSeg1",
+          "variant": "center",
+          "isActive": false
         },
         {
-          "chipName": "demoStep1",
-          "label": "Shipping information",
-          "status": "upcoming"
+          "buttonName": "demoSeg1",
+          "variant": "right",
+          "isActive": false
         }
       ]
     }
