@@ -1,24 +1,23 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ORGANISM › Footer                                       │
-   │ Site footer with copyright and legal links             │
+   │ Site footer with copyright and legal links              │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - option.name (string): Footer identifier
-    - option.datas (object): Footer configuration
-    - option.typographyDatas (array): Typography atom data
-    - option.linkDatas (array): Links atom data
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "03-organisms/footer.njk" import renderFooter %}
-    
     {{ renderFooter({ 
         name: "main_footer",
         datas: organisms.footer,
         typographyDatas: atoms.typography.texts,
         linkDatas: atoms.link.links
     }) }}
+  
+  Props:
+    - option.name (string): Footer identifier
+    - option.datas (object): Footer configuration
+    - option.typographyDatas (array): Typography atom data
+    - option.linkDatas (array): Links atom data
   
   Features:
     - Copyright text using typography atom
@@ -80,9 +79,8 @@
 {% endmacro %}
 
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

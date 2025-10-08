@@ -4,14 +4,7 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Dropzone identifier
-    - options.datas (object): Dropzone configuration
-    - options.headings (object): Headings atom data
-    - options.icons (object): Icons atom data
-    - options.buttons (object): Buttons atom data
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "02-molecules/block-drag-and-drop.njk" import renderDropzoneUpload %}
     
     {{ renderDropzoneUpload({ 
@@ -21,6 +14,13 @@
         icons: atoms.icons,
         buttons: atoms.buttons
     }) }}
+  
+  Props:
+    - options.name (string): Dropzone identifier
+    - options.datas (object): Dropzone configuration
+    - options.headings (object): Headings atom data
+    - options.icons (object): Icons atom data
+    - options.buttons (object): Buttons atom data
   
   Variants:
     - standard_upload: Default style
@@ -202,10 +202,10 @@
   {% endif %}
 {% endmacro %}
 
-{#
-============================
-Summon HAT Components Wisely
-============================
 
-May your bugs be forever exiled to the shadow realm. ✦
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

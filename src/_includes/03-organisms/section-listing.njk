@@ -4,6 +4,20 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Usage — Summon HAT Components Wisely:
+    {% from "03-organisms/section-listing.njk" import renderSectionListing %}
+    {{ renderSectionListing({ 
+      name: "adventure_quests",
+      datas: organisms["section-listings"],
+      headings: atoms.headings,
+      cards: molecules.cards,
+      paginations: molecules.paginations,
+      buttons: atoms.buttons,
+      icons: atoms.icons,
+      selects: atoms.selects,
+      images: atoms.images
+    }) }}
+  
   Props:
     - options.name (string): Section identifier
     - options.datas (object): Section configurations
@@ -19,21 +33,6 @@
     - options.itemsPerPage (number): Items per page
     - options.totalItems (number): Total items count
     - options.class (string): Additional CSS classes
-  
-  Usage:
-    {% from "03-organisms/section-listing.njk" import renderSectionListing %}
-    
-    {{ renderSectionListing({ 
-      name: "adventure_quests",
-      datas: organisms["section-listings"],
-      headings: atoms.headings,
-      cards: molecules.cards,
-      paginations: molecules.paginations,
-      buttons: atoms.buttons,
-      icons: atoms.icons,
-      selects: atoms.selects,
-      images: atoms.images
-    }) }}
   
   Features:
     - Variant-based styling system
@@ -141,9 +140,8 @@
 {% endmacro %}
 
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

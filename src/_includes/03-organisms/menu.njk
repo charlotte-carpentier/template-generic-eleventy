@@ -1,20 +1,11 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ORGANISM › Menu                                         │
-   │ Navigation menu with heading and secondary nav         │
+   │ Navigation menu with heading and secondary nav          │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Menu identifier
-    - options.datas (object): Menu configuration
-    - options.navigation-secondarys (object): Secondary navigation data
-    - options.links (object): Links atom data
-    - options.headings (object): Headings atom data
-    - options.class (string): Additional CSS classes
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "03-organisms/menu.njk" import renderMenu %}
-    
     {{ renderMenu({ 
         name: "main_navigation",
         datas: organisms.menus,
@@ -32,6 +23,14 @@
         headings: atoms.headings,
         class: "my-custom-menu-class"
     }) }}
+  
+  Props:
+    - options.name (string): Menu identifier
+    - options.datas (object): Menu configuration
+    - options.navigation-secondarys (object): Secondary navigation data
+    - options.links (object): Links atom data
+    - options.headings (object): Headings atom data
+    - options.class (string): Additional CSS classes
   
   Features:
     - Dynamic heading with level and styling
@@ -92,23 +91,8 @@
 {% endmacro %}
 
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-Structure of navigation-secondarys.json:
-{
-  "navigation-secondarys": [
-    {
-      "name": "sidebar",
-      "links": [
-        "tavern",
-        "lore",
-        "guild_services"
-      ]
-    }
-  ]
-}
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

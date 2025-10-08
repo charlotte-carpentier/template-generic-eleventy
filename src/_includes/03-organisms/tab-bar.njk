@@ -4,28 +4,8 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - option.name (string): Tab sections identifier
-    - option.datas (array): Tab sections configurations
-    - option.tabMenuDatas (object): Tab menu data source
-    - option.linkDatas (object): Links data source
-    - option.portfolioDatas (object): Portfolio section data
-    - option.timelineDatas (object): Timeline section data
-    - option.contactDatas (object): Contact section data
-    - option.typographyDatas (object): Typography data source
-    - option.contentBlockDatas (object): Content blocks data
-    - option.contactBlockDatas (object): Contact blocks data
-    - option.listFormDatas (object): Forms data source
-    - option.progressBarDatas (object): Progress bars data
-    - option.imageDatas (object): Images data source
-    - option.iconDatas (object): Icons data source
-    - option.radioDatas (object): Radio buttons data
-    - option.inputDatas (object): Input fields data
-    - option.buttonDatas (object): Buttons data source
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "03-organisms/tab-bar.njk" import renderTabSections %}
-    
     {{ renderTabSections({ 
       name: "charlotte_main",
       datas: organisms["tab-sections"]["tab-sections"],
@@ -45,6 +25,25 @@
       inputDatas: atoms.input.inputs,
       buttonDatas: atoms.button.buttons
     }) }}
+  
+  Props:
+    - option.name (string): Tab sections identifier
+    - option.datas (array): Tab sections configurations
+    - option.tabMenuDatas (object): Tab menu data source
+    - option.linkDatas (object): Links data source
+    - option.portfolioDatas (object): Portfolio section data
+    - option.timelineDatas (object): Timeline section data
+    - option.contactDatas (object): Contact section data
+    - option.typographyDatas (object): Typography data source
+    - option.contentBlockDatas (object): Content blocks data
+    - option.contactBlockDatas (object): Contact blocks data
+    - option.listFormDatas (object): Forms data source
+    - option.progressBarDatas (object): Progress bars data
+    - option.imageDatas (object): Images data source
+    - option.iconDatas (object): Icons data source
+    - option.radioDatas (object): Radio buttons data
+    - option.inputDatas (object): Input fields data
+    - option.buttonDatas (object): Buttons data source
   
   Features:
     - CSS :target-based navigation system
@@ -239,9 +238,7 @@
 {% endmacro %}
 
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-May your bugs be forever exiled to the shadow realm. ✦
-#}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

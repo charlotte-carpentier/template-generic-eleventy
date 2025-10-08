@@ -4,15 +4,7 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): List content identifier
-    - options.datas (object): List content configuration
-    - options.lockups (object): Lockups molecule data
-    - options.images (object): Images atom data
-    - options.headings (object): Headings atom data
-    - options.class (string): Additional CSS classes
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "02-molecules/list-content.njk" import renderListContent %}
     
     {{ renderListContent({ 
@@ -32,6 +24,14 @@
         headings: atoms.headings,
         class: "my-custom-list-class"
     }) }}
+  
+  Props:
+    - options.name (string): List content identifier
+    - options.datas (object): List content configuration
+    - options.lockups (object): Lockups molecule data
+    - options.images (object): Images atom data
+    - options.headings (object): Headings atom data
+    - options.class (string): Additional CSS classes
   
   Features:
     - Style variants for list appearance
@@ -93,29 +93,10 @@
   {% endif %}
 {% endmacro %}
 
+
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-Structure of list-contents.json:
-{
-  "list_contents": [
-    {
-      "name": "forgotten_legends",
-      "style": "default",
-      "itemStyle": "default",
-      "items": [
-        {
-          "lockupName": "forgotten_prophecy"
-        },
-        {
-          "lockupName": "forbidden_tome"
-        }
-      ]
-    }
-  ]
-}
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

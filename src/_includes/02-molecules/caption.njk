@@ -4,14 +4,7 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - option.name (string): Caption identifier
-    - option.datas (array): Caption configuration
-    - option.iconDatas (array): Icons atom data
-    - option.tooltipDatas (array): Tooltips atom data
-    - option.typographyDatas (array): Typography atom data
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "02-molecules/caption.njk" import renderCaption %}
     
     {{ renderCaption({ 
@@ -21,6 +14,13 @@
         tooltipDatas: atoms.tooltip.tooltips,
         typographyDatas: atoms.typography.texts
     }) }}
+  
+  Props:
+    - option.name (string): Caption identifier
+    - option.datas (array): Caption configuration
+    - option.iconDatas (array): Icons atom data
+    - option.tooltipDatas (array): Tooltips atom data
+    - option.typographyDatas (array): Typography atom data
   
   Features:
     - Desktop: Icon + Title (hides on hover) + Tooltip (appears below)
@@ -134,10 +134,10 @@
   {% endif %}
 {% endmacro %}
 
-{#
-============================
-Summon HAT Components Wisely
-============================
 
-May your bugs be forever exiled to the shadow realm. ✦
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

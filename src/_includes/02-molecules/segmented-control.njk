@@ -4,15 +4,8 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Segmented control identifier
-    - options.datas (object): Segmented control configuration
-    - options.buttons (object): Buttons atom data
-    - options.class (string): Additional CSS classes
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "02-molecules/segmented-control.njk" import renderSegmentedControl %}
-    
     {{ renderSegmentedControl({ 
         name: "tab_navigation",
         datas: molecules.segmentedControls,
@@ -25,6 +18,12 @@
         buttons: atoms.buttons,
         class: "my-custom-segmented-class"
     }) }}
+  
+  Props:
+    - options.name (string): Segmented control identifier
+    - options.datas (object): Segmented control configuration
+    - options.buttons (object): Buttons atom data
+    - options.class (string): Additional CSS classes
   
   Features:
     - First/middle/last position styling
@@ -134,9 +133,8 @@
 {% endmacro %}
 
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

@@ -4,17 +4,8 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Hero identifier
-    - options.datas (object): Hero configurations
-    - options.headings (object): Headings data source
-    - options.buttons (object): Buttons data source
-    - options.images (object): Images data source
-    - options.class (string): Additional CSS classes
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "03-organisms/section-hero.njk" import renderSectionHero %}
-    
     {{ renderSectionHero({ 
       name: "default_hero",
       datas: organisms["section-hero"],
@@ -22,6 +13,14 @@
       buttons: atoms.buttons,
       images: atoms.images
     }) }}
+  
+  Props:
+    - options.name (string): Hero identifier
+    - options.datas (object): Hero configurations
+    - options.headings (object): Headings data source
+    - options.buttons (object): Buttons data source
+    - options.images (object): Images data source
+    - options.class (string): Additional CSS classes
   
   Features:
     - Variant-based styling system
@@ -145,9 +144,8 @@
 {% endmacro %}
 
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}
