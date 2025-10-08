@@ -4,20 +4,7 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Pagination identifier
-    - options.datas (object): Pagination configuration
-    - options.buttonData (object): Buttons atom data
-    - options.selectData (object): Select atom data
-    - options.icons (object): Icons atom data
-    - options.currentPage (number): Current active page
-    - options.totalPages (number): Total number of pages
-    - options.itemsPerPage (number): Items per page
-    - options.totalItems (number): Total count of items
-    - options.label (string): Label for select
-    - options.labelSuffix (string): Text after number (default: "per page")
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "02-molecules/pagination.njk" import renderPagination %}
     
     Full pagination:
@@ -45,6 +32,19 @@
         datas: molecules.paginations 
     }) }}
   
+  Props:
+    - option.name (string): Pagination identifier
+    - option.datas (object): Pagination configuration
+    - option.buttonData (object): Buttons atom data
+    - option.selectData (object): Select atom data
+    - option.icons (object): Icons atom data
+    - option.currentPage (number): Current active page
+    - option.totalPages (number): Total number of pages
+    - option.itemsPerPage (number): Items per page
+    - option.totalItems (number): Total count of items
+    - option.label (string): Label for select
+    - option.labelSuffix (string): Text after number (default: "per page")
+  
   Features:
     - Items per page selector (dropdown)
     - Page navigation buttons with icons
@@ -62,35 +62,35 @@
   @created 2025-01-15
 #}
 
-{% macro renderPagination(options) %}
+{% macro renderPagination(option) %}
   {# Check if required data is provided #}
-  {% if not options or not options.datas or (not options.datas.pager and not options.datas.navigationPager) %}
+  {% if not option or not option.datas or (not option.datas.pager and not option.datas.navigationPager) %}
     <span>Error: No pagination data provided</span>
   {% else %}
     {# Initialize pagination data based on provided structure #}
-    {% if options.datas.navigationPager %}
-      {% set paginationData = options.datas.navigationPager %}
+    {% if option.datas.navigationPager %}
+      {% set paginationData = option.datas.navigationPager %}
       {% set children = paginationData.children | default([]) %}
     {% else %}
-      {% set paginationData = options.datas.pager %}
+      {% set paginationData = option.datas.pager %}
     {% endif %}
 
     {# Select specific paginator by name if provided #}
-    {% if options.name %}
-      {% if options.datas.pager.name == options.name %}
-        {% set paginationData = options.datas.pager %}
-      {% elif options.datas.navigationPager and options.datas.navigationPager.name == options.name %}
-        {% set paginationData = options.datas.navigationPager %}
+    {% if option.name %}
+      {% if option.datas.pager.name == option.name %}
+        {% set paginationData = option.datas.pager %}
+      {% elif option.datas.navigationPager and option.datas.navigationPager.name == option.name %}
+        {% set paginationData = option.datas.navigationPager %}
         {% set children = paginationData.children | default([]) %}
       {% endif %}
     {% endif %}
 
     {# Get global style from data #}
-    {% set globalStyle = options.datas.globalStyle | default('') %}
+    {% set globalStyle = option.datas.globalStyle | default('') %}
 
     <div>
       {# Items per page selector #}
-      {% if options.itemsPerPage and options.selectData %}
+      {% if option.itemsPerPage and option.selectData %}
         <div>
           {% set selectRef = "" %}
           {% set selectVariant = "default" %}
@@ -105,7 +105,7 @@
               {% set matchingSelect = null %}
               
               {# Find the matching select in selectData #}
-              {% for select in options.selectData.selects %}
+              {% for select in option.selectData.selects %}
                 {% if select.name == selectName and not matchingSelect %}
                   {% set matchingSelect = select %}
                 {% endif %}
@@ -119,37 +119,37 @@
           {% endif %}
           
           {# Apply select styling #}
-          {% set selectGlobalStyle = options.selectData.globalStyle | default('') %}
-          {% set selectVariantStyle = options.selectData.variants[selectVariant] | default('') %}
+          {% set selectGlobalStyle = option.selectData.globalStyle | default('') %}
+          {% set selectVariantStyle = option.selectData.variants[selectVariant] | default('') %}
           
           <select 
             class="{{ selectGlobalStyle }} {{ selectVariantStyle }}"
-            aria-label="{{ options.label | default('Items per page') }}"
+            aria-label="{{ option.label | default('Items per page') }}"
             onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-url')"
           >
             {% set optionValues = [10, 20, 50, 100] %}
             {% if matchingSelect and matchingSelect.options %}
               {% set optionValues = [] %}
-              {% for option in matchingSelect.options %}
-                {% set optionValues = (optionValues.push(option.value | int), optionValues) %}
+              {% for opt in matchingSelect.options %}
+                {% set optionValues = (optionValues.push(opt.value | int), optionValues) %}
               {% endfor %}
             {% endif %}
             
             {% for count in optionValues %}
               {% set optionLabel = count %}
               {% if matchingSelect and matchingSelect.options %}
-                {% for option in matchingSelect.options %}
-                  {% if option.value | int == count %}
-                    {% set optionLabel = option.label %}
+                {% for opt in matchingSelect.options %}
+                  {% if opt.value | int == count %}
+                    {% set optionLabel = opt.label %}
                   {% endif %}
                 {% endfor %}
               {% else %}
-                {% set optionLabel = count ~ ' ' ~ (options.labelSuffix | default('per page')) %}
+                {% set optionLabel = count ~ ' ' ~ (option.labelSuffix | default('per page')) %}
               {% endif %}
               
               <option 
                 value="{{ count }}" 
-                {% if count == options.itemsPerPage %} selected{% endif %} 
+                {% if count == option.itemsPerPage %} selected{% endif %} 
                 data-url="?items={{ count }}"
               >
                 {{ optionLabel }}
@@ -177,14 +177,14 @@
               {% set buttonStateClasses = {} %}
               
               {# Resolve button reference if it exists #}
-              {% if page.ref and options.buttonData %}
+              {% if page.ref and option.buttonData %}
                 {% set buttonParts = page.ref.split('.') %}
                 {% if buttonParts | length == 2 %}
                   {% set buttonName = buttonParts[1] %}
                   {% set matchingButton = null %}
                   
                   {# Find the matching button #}
-                  {% for button in options.buttonData.buttons %}
+                  {% for button in option.buttonData.buttons %}
                     {% if button.name == buttonName and not matchingButton %}
                       {% set matchingButton = button %}
                     {% endif %}
@@ -193,12 +193,12 @@
                   {# Apply styles if button found #}
                   {% if matchingButton %}
                     {% set buttonVariant = matchingButton.style | default('default') %}
-                    {% set variantConfig = options.buttonData.variants[buttonVariant] %}
+                    {% set variantConfig = option.buttonData.variants[buttonVariant] %}
                     
                     {% set buttonSizeKey = matchingButton.size | default('button') %}
-                    {% set buttonSize = options.buttonData.sizes[buttonSizeKey] | default('') %}
+                    {% set buttonSize = option.buttonData.sizes[buttonSizeKey] | default('') %}
                     
-                    {% set baseClasses = options.buttonData.globalStyle ~ " " ~ buttonSize %}
+                    {% set baseClasses = option.buttonData.globalStyle ~ " " ~ buttonSize %}
                     
                     {% set buttonStateClasses = {
                       'default': variantConfig.default,
@@ -211,8 +211,8 @@
                     {% set buttonClasses = baseClasses ~ " " ~ buttonStateClasses.default %}
                     
                     {# Add current state style #}
-                    {% if page.current and options.buttonData.states and options.buttonData.states.current %}
-                      {% set buttonClasses = buttonClasses ~ " " ~ options.buttonData.states.current %}
+                    {% if page.current and option.buttonData.states and option.buttonData.states.current %}
+                      {% set buttonClasses = buttonClasses ~ " " ~ option.buttonData.states.current %}
                     {% endif %}
                   {% endif %}
                 {% endif %}
@@ -238,8 +238,8 @@
                   {% if page.icon %}
                     {# Find icon in data #}
                     {% set iconData = null %}
-                    {% if options.icons %}
-                      {% for icon in options.icons.icons %}
+                    {% if option.icons %}
+                      {% for icon in option.icons.icons %}
                         {% if icon.name == page.icon %}
                           {% set iconData = icon %}
                         {% endif %}
@@ -279,17 +279,17 @@
       {% endif %}
 
       {# Items counter #}
-      {% if options.totalItems and options.currentPage and options.itemsPerPage and paginationData.showTotalCount %}
-        {% set firstItem = (options.currentPage - 1) * options.itemsPerPage + 1 %}
-        {% set lastItemTemp = options.currentPage * options.itemsPerPage %}
+      {% if option.totalItems and option.currentPage and option.itemsPerPage and paginationData.showTotalCount %}
+        {% set firstItem = (option.currentPage - 1) * option.itemsPerPage + 1 %}
+        {% set lastItemTemp = option.currentPage * option.itemsPerPage %}
         {% set lastItem = lastItemTemp %}
-        {% if lastItemTemp > options.totalItems %}
-          {% set lastItem = options.totalItems %}
+        {% if lastItemTemp > option.totalItems %}
+          {% set lastItem = option.totalItems %}
         {% endif %}
 
         <div>
           <span>
-            {{ firstItem }} - {{ lastItem }} of {{ options.totalItems }}
+            {{ firstItem }} - {{ lastItem }} of {{ option.totalItems }}
           </span>
         </div>
       {% endif %}
@@ -298,9 +298,8 @@
 {% endmacro %}
 
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

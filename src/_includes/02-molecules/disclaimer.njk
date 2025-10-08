@@ -4,12 +4,7 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Disclaimer identifier
-    - options.datas (object): Disclaimer configuration
-    - options.icons (object): Icons atom data
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "02-molecules/disclaimer.njk" import renderDisclaimer %}
     
     {{ renderDisclaimer({ 
@@ -17,6 +12,11 @@
         datas: molecules.disclaimers,
         icons: atoms.icons 
     }) }}
+  
+  Props:
+    - options.name (string): Disclaimer identifier
+    - options.datas (object): Disclaimer configuration
+    - options.icons (object): Icons atom data
   
   Features:
     - Style variants (info, warning, error, success)
@@ -96,10 +96,10 @@
   {% endif %}
 {% endmacro %}
 
-{#
-============================
-Summon HAT Components Wisely
-============================
 
-May your bugs be forever exiled to the shadow realm. ✦
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

@@ -1,28 +1,32 @@
 {# ┌─────────────────────────────────────────────────────────┐
-   │ ORGANISM › Navigation Page                             │
-   │ Main navigation component with link integration        │
+   │ ORGANISM › Navigation Page                              │
+   │ Main navigation component with link integration         │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Navigation identifier
-    - options.datas (object): Navigation configurations
-    - options.links (object): Links data source
-    - options.class (string): Additional CSS classes
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "03-organisms/navigation-page.njk" import renderNavigation %}
-    
     {{ renderNavigation({ 
       name: "main",
       datas: organisms.navigations,
       links: atoms.links
     }) }}
   
+  Props:
+    - options.name (string): Navigation identifier
+    - options.datas (object): Navigation configurations
+    - options.links (object): Links data source
+    - options.class (string): Additional CSS classes
+  
   Features:
     - Auto-selects first navigation if name not found
     - Applies global styles from configuration
     - Integrates link components via data-nav-link attribute
+  
+  Accessibility:
+    - Semantic <nav> element with data-nav-container
+    - Keyboard accessible link navigation
+    - Screen reader friendly structure
   
   @created 2025-01-15
 #}
@@ -57,9 +61,8 @@
 {% endmacro %}
 
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

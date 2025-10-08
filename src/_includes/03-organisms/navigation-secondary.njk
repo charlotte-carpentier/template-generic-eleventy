@@ -1,29 +1,33 @@
 {# ┌─────────────────────────────────────────────────────────┐
-   │ ORGANISM › Navigation Secondary                        │
-   │ Secondary navigation with link integration             │
+   │ ORGANISM › Navigation Secondary                         │
+   │ Secondary navigation with link integration              │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Navigation identifier
-    - options.datas (object): Navigation configurations
-    - options.links (object): Links data source
-    - options.class (string): Additional CSS classes
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "03-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
-    
     {{ renderNavigationSecondary({ 
       name: "main",
       datas: organisms["navigation-secondarys"],
       links: atoms.links
     }) }}
   
+  Props:
+    - options.name (string): Navigation identifier
+    - options.datas (object): Navigation configurations
+    - options.links (object): Links data source
+    - options.class (string): Additional CSS classes
+  
   Features:
     - Auto-selects first navigation if name not found
     - Applies global styles from configuration
     - Data attributes for secondary nav identification
     - Custom spacing support via class prop
+  
+  Accessibility:
+    - Semantic <nav> element with role attributes
+    - data-nav-container and data-nav-secondary for screen readers
+    - Keyboard accessible link navigation
   
   @created 2025-01-15
 #}
@@ -58,9 +62,8 @@
 {% endmacro %}
 
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

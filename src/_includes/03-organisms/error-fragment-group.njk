@@ -4,16 +4,8 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - option.name (string): Error fragment group identifier
-    - option.datas (array): Error fragment group configuration
-    - option.errorFragmentDatas (array): Error fragments data
-    - option.iconDatas (array): Icons atom data
-    - option.typographyDatas (array): Typography atom data
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "03-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
-    
     {{ renderErrorFragmentGroup({ 
         name: "error_fragment_group_404",
         datas: organisms["error-fragment-group"]["error-fragment-groups"],
@@ -21,6 +13,13 @@
         iconDatas: atoms.icon.icons,
         typographyDatas: atoms.typography.texts
     }) }}
+  
+  Props:
+    - option.name (string): Error fragment group identifier
+    - option.datas (array): Error fragment group configuration
+    - option.errorFragmentDatas (array): Error fragments data
+    - option.iconDatas (array): Icons atom data
+    - option.typographyDatas (array): Typography atom data
   
   Variants:
     - grid-2x3: 2 columns × 3 rows layout
@@ -107,9 +106,8 @@
 {% endmacro %}
 
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

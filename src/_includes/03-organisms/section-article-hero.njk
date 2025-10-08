@@ -4,16 +4,8 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Hero section identifier
-    - options.datas (object): Hero section configurations
-    - options.images (object): Images data source
-    - options.headings (object): Headings data source
-    - options.class (string): Additional CSS classes
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "03-organisms/section-article-hero.njk" import renderSectionArticleHero %}
-    
     {{ renderSectionArticleHero({ 
       name: "article_hero_default", 
       datas: organisms["section-article-hero"],
@@ -21,11 +13,23 @@
       headings: atoms.headings
     }) }}
   
+  Props:
+    - options.name (string): Hero section identifier
+    - options.datas (object): Hero section configurations
+    - options.images (object): Images data source
+    - options.headings (object): Headings data source
+    - options.class (string): Additional CSS classes
+  
   Features:
     - Variant-based styling system
     - Centered image and title layout
     - Responsive sizing via image variants
     - Auto-selects first hero if name not found
+  
+  Accessibility:
+    - Semantic <section> element
+    - Proper heading hierarchy
+    - Descriptive alt text on images
   
   @created 2025-01-15
 #}
@@ -96,9 +100,8 @@
 {% endmacro %}
 
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

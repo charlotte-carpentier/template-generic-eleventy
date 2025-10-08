@@ -4,14 +4,7 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Lockup identifier
-    - options.datas (object): Lockup configuration
-    - options.images (object): Images atom data (for block-content)
-    - options.headings (object): Headings atom data (for block-content)
-    - options.class (string): Additional CSS classes
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "02-molecules/lockup.njk" import renderLockup %}
     
     Label-Value type:
@@ -30,6 +23,13 @@
         headings: atoms.headings,
         class: "my-custom-lockup-class"
     }) }}
+  
+  Props:
+    - options.name (string): Lockup identifier
+    - options.datas (object): Lockup configuration
+    - options.images (object): Images atom data (for block-content)
+    - options.headings (object): Headings atom data (for block-content)
+    - options.class (string): Additional CSS classes
   
   Lockup Types:
     - label-value: Label + Value (e.g., "Prix : 200€")
@@ -139,28 +139,10 @@
   {% endif %}
 {% endmacro %}
 
+
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-Structure of lockups.json:
-{
-  "lockups": [
-    {
-      "name": "price_info",
-      "type": "label-value",
-      "label": {
-        "text": "Prix :",
-        "style": "default"
-      },
-      "value": {
-        "text": "200€",
-        "style": "highlight"
-      }
-    }
-  ]
-}
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

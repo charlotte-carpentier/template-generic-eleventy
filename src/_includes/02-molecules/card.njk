@@ -4,17 +4,7 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Card identifier
-    - options.variant (string): Card style variant
-    - options.datas (object): Card configuration
-    - options.images (object): Images atom data
-    - options.headings (object): Headings atom data
-    - options.buttons (object): Buttons atom data
-    - options.post (object): Post data for blog cards (optional)
-    - options.class (string): Additional CSS classes
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "02-molecules/card.njk" import renderCard %}
     
     Regular card:
@@ -34,6 +24,16 @@
         buttons: atoms.buttons,
         post: post
     }) }}
+  
+  Props:
+    - options.name (string): Card identifier
+    - options.variant (string): Card style variant
+    - options.datas (object): Card configuration
+    - options.images (object): Images atom data
+    - options.headings (object): Headings atom data
+    - options.buttons (object): Buttons atom data
+    - options.post (object): Post data for blog cards (optional)
+    - options.class (string): Additional CSS classes
   
   Card Types:
     - Regular: Image + Heading + Content + Button
@@ -242,10 +242,10 @@
   {% endif %}
 {% endmacro %}
 
-{#
-============================
-Summon HAT Components Wisely
-============================
 
-May your bugs be forever exiled to the shadow realm. ✦
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

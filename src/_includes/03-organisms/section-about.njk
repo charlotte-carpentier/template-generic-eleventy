@@ -1,25 +1,24 @@
 {# ┌─────────────────────────────────────────────────────────┐
-   │ ORGANISM › Section About                               │
-   │ Responsive about section with dual layout              │
+   │ ORGANISM › Section About                                │
+   │ Responsive about section with dual layout               │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Section identifier
-    - options.datas (object): Section configurations
-    - options.headings (object): Headings data source
-    - options.buttons (object): Buttons data source
-    - options.class (string): Additional CSS classes
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "03-organisms/section-about.njk" import renderSectionAbout %}
-    
     {{ renderSectionAbout({ 
       name: "about_us", 
       datas: organisms["section-abouts"], 
       headings: atoms.headings, 
       buttons: atoms.buttons 
     }) }}
+  
+  Props:
+    - options.name (string): Section identifier
+    - options.datas (object): Section configurations
+    - options.headings (object): Headings data source
+    - options.buttons (object): Buttons data source
+    - options.class (string): Additional CSS classes
   
   Features:
     - Responsive layout (mobile column, desktop two-column)
@@ -28,6 +27,12 @@
     - Primary and secondary button support
     - Optional image content
     - Auto-selects first section if name not found
+  
+  Accessibility:
+    - Semantic <section> element
+    - Proper heading hierarchy
+    - Keyboard accessible buttons
+    - Alt text on images
   
   @created 2025-01-15
 #}
@@ -168,9 +173,8 @@
 {% endmacro %}
 
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

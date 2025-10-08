@@ -4,13 +4,7 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Breadcrumb set identifier (optional)
-    - options.datas (object): Breadcrumb configuration
-    - options.links (object): Links atom data
-    - options.class (string): Additional CSS classes
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
     
     {{ renderBreadcrumb({ 
@@ -25,6 +19,12 @@
         links: atoms.links,
         class: "my-custom-breadcrumb-class"
     }) }}
+  
+  Props:
+    - options.name (string): Breadcrumb set identifier (optional)
+    - options.datas (object): Breadcrumb configuration
+    - options.links (object): Links atom data
+    - options.class (string): Additional CSS classes
   
   Features:
     - Separator icon between items (default: /)
@@ -111,31 +111,10 @@
   {% endif %}
 {% endmacro %}
 
+
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-Structure of breadcrumbs.json:
-{
-  "breadcrumbs": [
-    {
-      "name": "adventure",
-      "links": [
-        {
-          "name": "home",
-          "link": "tavern_quest",
-          "style": "primary"
-        },
-        {
-          "name": "bestiary",
-          "link": "monster_manual",
-          "style": "secondary"
-        }
-      ]
-    }
-  ]
-}
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

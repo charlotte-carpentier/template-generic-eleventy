@@ -4,16 +4,8 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Rating identifier
-    - options.datas (object): Rating configuration
-    - options.icons (object): Icons atom data
-    - options.showValue (boolean): Display numeric value
-    - options.class (string): Additional CSS classes
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "02-molecules/rating-gauge.njk" import renderRatingGauge %}
-    
     {{ renderRatingGauge({ 
         name: "three_star",
         datas: molecules["rating-gauges"],
@@ -28,12 +20,23 @@
         icons: atoms.icons
     }) }}
   
+  Props:
+    - options.name (string): Rating identifier
+    - options.datas (object): Rating configuration
+    - options.icons (object): Icons atom data
+    - options.showValue (boolean): Display numeric value
+    - options.class (string): Additional CSS classes
+  
   Features:
     - Customizable star icons (filled/empty)
     - SVG loading via data-svg-src
     - Fallback text stars (★/☆)
     - Optional numeric value display
     - Style variants per rating level
+  
+  Accessibility:
+    - aria-hidden on decorative icons
+    - Descriptive alt text on image fallbacks
   
   @created 2025-01-15
 #}
@@ -115,9 +118,8 @@
 {% endmacro %}
 
 {#
-============================
-Summon HAT Components Wisely
-============================
-
-May your bugs be forever exiled to the shadow realm. ✦
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

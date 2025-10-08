@@ -4,15 +4,7 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - option.name (string): List form identifier
-    - option.datas (array): List form configuration
-    - option.radioDatas (array): Radio atoms data
-    - option.inputDatas (array): Input atoms data
-    - option.netlify (boolean): Enable Netlify Forms integration
-    - option.submitButton (string): Submit button HTML (safe)
-  
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "02-molecules/list-form.njk" import renderListForm %}
     
     {{ renderListForm({ 
@@ -23,6 +15,14 @@
         netlify: true,
         submitButton: '<button type="submit">Send</button>'
     }) }}
+  
+  Props:
+    - option.name (string): List form identifier
+    - option.datas (array): List form configuration
+    - option.radioDatas (array): Radio atoms data
+    - option.inputDatas (array): Input atoms data
+    - option.netlify (boolean): Enable Netlify Forms integration
+    - option.submitButton (string): Submit button HTML (safe)
   
   Features:
     - Radio button section (optional)
@@ -117,10 +117,10 @@
   {% endif %}
 {% endmacro %}
 
-{#
-============================
-Summon HAT Components Wisely
-============================
 
-May your bugs be forever exiled to the shadow realm. ✦
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}
