@@ -4,6 +4,17 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Button identifier
+    - options.datas (array): Button configuration data
+    - options.type (string): Button type override
+    - options.disabled (boolean): Override disabled state
+    - options.onclick (string): Inline click handler
+    - options.id (string): Button ID attribute
+    - options.ariaLabel (string): ARIA label for accessibility
+    - options.ariaDescribedby (string): ARIA described-by reference
+    - options.isErrorPage (boolean): Apply error-page-specific styling
+
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/button.njk" import renderButton %}
 
@@ -20,59 +31,55 @@
         isErrorPage: true
     }) }}
 
-  Props:
-    - option.name (string): Button identifier
-    - option.datas (array): Button configuration data
-    - option.type (string): Button type (default: "button")
-    - option.disabled (boolean): Override disabled state
-    - option.onclick (string): Inline click handler
-    - option.id (string): Button ID attribute
-    - option.ariaLabel (string): ARIA label for accessibility
-    - option.ariaDescribedby (string): ARIA described-by reference
-    - option.isErrorPage (boolean): Apply error-page-specific styling
-
   @created 2025-01-15
 #}
 
-{% macro renderButton(option) %}
-  {# Validate input data #}
-  {% if not option.datas %}
-    <span>Error: No button configuration provided</span>
+{% macro renderButton(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error">Error: Missing required prop (name)</span>
   {% else %}
-    {# Retrieve button config and find matching button by name #}
-    {% set buttonsConfig = option.datas %}
-    {% set buttonName = option.name %}
+    {# Find button configuration by name #}
     {% set buttonData = null %}
-    {% for button in buttonsConfig %}
-      {% if button.name == buttonName %}
+    {% for button in options.datas %}
+      {% if button.name == options.name %}
         {% set buttonData = button %}
       {% endif %}
     {% endfor %}
 
-    {# Fallback if button not found #}
+    {# Render button or error message #}
     {% if not buttonData %}
-      <span>Button not found:
-        {{ buttonName }}</span>
+      <span class="error">Button not found: {{ options.name }}</span>
     {% else %}
-      {# Compose CSS classes with variant and disabled state #}
-      {% set variant = buttonData.variant | default('') %}
-      {% set cssClasses = '' ~ variant %}
-      {% if option.disabled or buttonData.disabled %}
-        {% set cssClasses = cssClasses ~ '' %}
-      {% endif %}
+      {# Compute final values with fallback cascade #}
+      {% set buttonType = options.type | default(buttonData.type) | default('button') %}
+      {% set isDisabled = options.disabled or buttonData.disabled %}
+      {% set finalAriaLabel = options.ariaLabel | default(buttonData.ariaLabel) %}
+      {% set finalAriaDescribedby = options.ariaDescribedby | default(buttonData.ariaDescribedby) %}
 
-      {# Prepare accessibility attributes - auto-use from buttonData #}
-      {% set ariaLabel = option.ariaLabel or buttonData.ariaLabel or null %}
-      {% set ariaDescribedby = option.ariaDescribedby or buttonData.ariaDescribedby or null %}
+      {# Render button element #}
+      <button
+        type="{{ buttonType }}"
+        data-button-name="{{ buttonData.name }}"
+        data-button-type="button"
+        {% if isDisabled %}disabled{% endif %}
+        {% if options.onclick %}onclick="{{ options.onclick | escape }}"{% endif %}
+        {% if options.id %}id="{{ options.id }}"{% endif %}
+        {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
+        {% if finalAriaDescribedby %}aria-describedby="{{ finalAriaDescribedby }}"{% endif %}
+      >
+        {# TODO: Add icon rendering if iconName exists in buttonData #}
+        {# {% if buttonData.iconName and buttonData.iconPosition == 'left' %} #}
+        {#   {{ renderIcon({ name: buttonData.iconName }) }} #}
+        {# {% endif %} #}
 
-      {# Apply error-page-specific opacity and transitions for accessibility focus/hover #}
-      {% if option.isErrorPage %}
-        {% set cssClasses = cssClasses ~ '' %}
-      {% endif %}
-
-      {# Render the actual button element #}
-      <button type="{{ option.type | default(buttonData.type) | default('button') }}" class="{{ cssClasses }}" data-button="{{ buttonData.name }}" {% if option.disabled or buttonData.disabled %} disabled{% endif %}="disabled{% endif %}" {% if option.onclick %} onclick="{{ option.onclick | escape }}" {% endif %} {% if option.id %} id="{{ option.id }}" {% if ariaLabel %} aria-label="{{ ariaLabel }}" {% if ariaDescribedby %} aria-describedby="{{ ariaDescribedby }}">
         {{ buttonData.text }}
+
+        {# {% if buttonData.iconName and buttonData.iconPosition == 'right' %} #}
+        {#   {{ renderIcon({ name: buttonData.iconName }) }} #}
+        {# {% endif %} #}
       </button>
     {% endif %}
   {% endif %}

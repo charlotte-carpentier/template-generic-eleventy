@@ -4,6 +4,14 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.id (string): Checkbox identifier for single rendering
+    - options.group (boolean): Render as group if true
+    - options.groupName (string): Specific group name to render
+    - options.groupSrOnly (boolean): Hide group label visually
+    - options.datas (object): Checkbox configuration data
+    - options.boxStyles (object): Box styling configuration
+
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/checkbox.njk" import renderCheckbox %}
 
@@ -29,104 +37,84 @@
        boxStyles: atoms.boxes
     }) }}
 
-  Props:
-    - options.id (string): Checkbox identifier for single rendering
-    - options.group (boolean): Render as group if true
-    - options.groupName (string): Specific group name to render
-    - options.groupSrOnly (boolean): Hide group label visually
-    - options.datas (object): Checkbox configuration data
-    - options.boxStyles (object): Box styling configuration
-
-  Notes:
-    - Uses box.njk as foundation for checkbox visuals
-    - Adds labels, descriptions, and group functionality
-    - Supports disabled and checked states
-    - Shows pointer cursor on hover for box and label
-
-  Accessibility:
-    - Properly associates labels with inputs using for/id
-    - Includes fieldset/legend for checkbox groups
-    - Supports screen-reader-only group labels
-    - Provides description text for additional context
-    - Includes aria-label support
-    - Supports required and disabled state properties
-
   @created 2025-01-15
 #}
 
-{% from "03-atoms/box.njk" import renderSingleBox %}
-
 {% macro renderCheckbox(options) %}
-  {# Flexible data handling #}
-  {% set checkboxData = options.datas %}
-  {% set boxStyles = options.boxStyles %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error">Error: Missing required prop (datas)</span>
+  {% else %}
+    {% set checkboxData = options.datas %}
 
-  {# Group rendering logic #}
-  {% if options.group %}
-    {# Support for specifying a group name #}
-    {% if options.groupName %}
-      {# Render a specific group #}
-      {{ renderCheckboxGroup(
-        checkboxData[options.groupName],
-        boxStyles,
-        checkboxData[options.groupName].groupLabel or options.groupName,
-        options.groupSrOnly or false
-      ) }}
-    {% else %}
-      {# Render all groups if no specific group is specified #}
-      {% for groupName, groupConfig in checkboxData %}
-        {% if groupConfig.checkboxes %}
-          {{ renderCheckboxGroup(
-            groupConfig,
-            boxStyles,
-            groupConfig.groupLabel or groupName,
-            groupConfig.groupSrOnly or false
-          ) }}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+    {# Group rendering #}
+    {% if options.group %}
+      {% if options.groupName and checkboxData[options.groupName] %}
+        {# Render specific group #}
+        {{ renderCheckboxGroup(
+          checkboxData[options.groupName],
+          checkboxData[options.groupName].groupLabel | default(options.groupName)
+        ) }}
+      {% else %}
+        {# Render all groups #}
+        {% for groupName, groupConfig in checkboxData %}
+          {% if groupConfig.checkboxes %}
+            {{ renderCheckboxGroup(
+              groupConfig,
+              groupConfig.groupLabel | default(groupName)
+            ) }}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
 
     {# Single checkbox rendering #}
-  {% else %}
-    {% set targetCheckbox = null %}
-
-    {# Search across multiple potential group structures #}
-    {% for groupName, groupConfig in checkboxData %}
-      {% for checkbox in groupConfig.checkboxes %}
-        {% if checkbox.id == options.id %}
-          {% set targetCheckbox = checkbox %}
-        {% endif %}
-      {% endfor %}
-    {% endfor %}
-
-    {# Fallback to legacy single group search #}
-    {% if not targetCheckbox and checkboxData.checkboxes %}
-      {% for checkbox in checkboxData.checkboxes %}
-        {% if checkbox.id == options.id %}
-          {% set targetCheckbox = checkbox %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-
-    {# Render single checkbox or show error #}
-    {% if targetCheckbox %}
-      {{ renderSingleCheckbox(targetCheckbox, checkboxData, boxStyles) }}
     {% else %}
-      <span class="{{ checkboxData.errorClasses | default('') }}">Checkbox not found:
-        {{ options.id }}</span>
+      {% if not options.id %}
+        <span class="error">Error: Missing required prop (id) for single checkbox</span>
+      {% else %}
+        {# Find checkbox in data #}
+        {% set targetCheckbox = null %}
+
+        {# Search in flat checkboxes array #}
+        {% if checkboxData.checkboxes %}
+          {% for checkbox in checkboxData.checkboxes %}
+            {% if checkbox.id == options.id %}
+              {% set targetCheckbox = checkbox %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {# Search in grouped structure if not found #}
+        {% if not targetCheckbox %}
+          {% for groupName, groupConfig in checkboxData %}
+            {% if groupConfig.checkboxes %}
+              {% for checkbox in groupConfig.checkboxes %}
+                {% if checkbox.id == options.id %}
+                  {% set targetCheckbox = checkbox %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {# Render or show error #}
+        {% if targetCheckbox %}
+          {{ renderSingleCheckbox(targetCheckbox) }}
+        {% else %}
+          <span class="error">Checkbox not found: {{ options.id }}</span>
+        {% endif %}
+      {% endif %}
     {% endif %}
   {% endif %}
 {% endmacro %}
 
-{% macro renderCheckboxGroup(groupConfig, boxStyles, groupLabel, groupSrOnly) %}
-  {# Default configuration with fallback values #}
-  {% set fieldsetClasses = groupConfig.fieldsetClasses | default('') %}
-  {% set legendClasses = groupConfig.legendClasses | default('') %}
-  {% set groupContainerClasses = groupConfig.groupContainerClasses | default('') %}
-
-  <fieldset class="{{ fieldsetClasses }}" data-checkbox-group="data-checkbox-group" {% if groupConfig.ariaGroupLabel %} aria-label="{{ groupConfig.ariaGroupLabel }}" {% endif %}>
+{% macro renderCheckboxGroup(groupConfig, groupLabel) %}
+  <fieldset
+    data-checkbox-group
+    {% if groupConfig.ariaGroupLabel %}aria-label="{{ groupConfig.ariaGroupLabel }}"{% endif %}
+  >
     {% if groupLabel %}
-      <legend class="{{ legendClasses }} {% if groupSrOnly %}sr-only{% endif %}">
+      <legend {% if groupConfig.groupSrOnly %}class="sr-only"{% endif %}>
         {{ groupLabel }}
       </legend>
     {% endif %}
@@ -135,45 +123,55 @@
       <p>{{ groupConfig.groupDescription }}</p>
     {% endif %}
 
-    <div class="{{ groupContainerClasses }}">
+    <div>
       {% for checkbox in groupConfig.checkboxes %}
-        {{ renderSingleCheckbox(checkbox, groupConfig, boxStyles) }}
+        {{ renderSingleCheckbox(checkbox) }}
       {% endfor %}
     </div>
   </fieldset>
 {% endmacro %}
 
-{% macro renderSingleCheckbox(checkbox, checkboxOptions, boxStyles) %}
-  {# Modified for better vertical alignment and accessibility #}
-  {% set labelClasses = checkboxOptions.labelClasses | default('') %}
-  {% set labelTextClasses = checkboxOptions.labelTextClasses | default('') %}
-  {% set descriptionClasses = checkboxOptions.descriptionClasses | default('') %}
+{% macro renderSingleCheckbox(checkbox) %}
+  {# Compute final values #}
+  {% set isChecked = checkbox.checked | default(false) %}
+  {% set isDisabled = checkbox.disabled | default(false) %}
+  {% set isRequired = checkbox.required | default(false) %}
+  {% set finalAriaLabel = checkbox.ariaLabel | default(checkbox.label) %}
+  {% set hasDescription = checkbox.description %}
 
-  {% set boxData = {
-    "id": checkbox.id,
-    "value": checkbox.value,
-    "checked": checkbox.checked | default(false),
-    "disabled": checkbox.disabled | default(false),
-    "ariaLabel": checkbox.ariaLabel | default(checkbox.label),
-    "required": checkbox.required | default(false)
-  } %}
-
-  <label for="{{ checkbox.id }}" class="{{ labelClasses }}" data-checkbox-label="data-checkbox-label">
-    {# Wrapper div to control vertical alignment #}
+  <label
+    for="{{ checkbox.id }}"
+    data-checkbox-label
+  >
     <div>
-      {{ renderSingleBox(boxData, boxStyles) }}
+      <input
+        type="checkbox"
+        id="{{ checkbox.id }}"
+        name="{{ checkbox.id }}"
+        value="{{ checkbox.value }}"
+        data-checkbox-id="{{ checkbox.id }}"
+        data-checkbox-type="checkbox"
+        {% if isChecked %}checked{% endif %}
+        {% if isDisabled %}disabled{% endif %}
+        {% if isRequired %}required{% endif %}
+        {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
+        {% if hasDescription %}aria-describedby="{{ checkbox.id }}-description"{% endif %}
+      />
     </div>
 
     <div>
-      <strong class="{{ labelTextClasses }}">
+      <span>
         {{ checkbox.label }}
-        {% if checkbox.required %}
+        {% if isRequired %}
           <span aria-hidden="true">*</span>
           <span class="sr-only">(required)</span>
         {% endif %}
-      </strong>
-      {% if checkbox.description %}
-        <p class="{{ descriptionClasses }}" id="{{ checkbox.id }}-description">{{ checkbox.description }}</p>
+      </span>
+
+      {% if hasDescription %}
+        <p id="{{ checkbox.id }}-description">
+          {{ checkbox.description }}
+        </p>
       {% endif %}
     </div>
   </label>

@@ -10,13 +10,13 @@
     title: "My Page Title"
     description: "My page description"
     ---
-  
+
   Props:
     - title (string): Page title override
     - description (string): Page description override
     - favicon (object): Custom favicon paths
     - hideHeaderFooter (boolean): Hide header/footer for special pages
-  
+
   Features:
     - Complete SEO metadata (Open Graph, Twitter Cards)
     - Favicon support (PNG, ICO, SVG, Apple Touch)
@@ -29,14 +29,14 @@
     - Conditional header/footer rendering
     - Semantic HTML5 structure
     - Screen reader optimizations
-  
+
   Accessibility:
     - Semantic HTML5 structure (<header>, <main>, <footer>)
     - Screen reader only content (.sr-only) for SEO
     - Proper lang attribute
     - Skip to content patterns via semantic markup
     - ARIA landmarks via organism components
-  
+
   Configuration:
     Configure in src/_data/site.json:
     - site.language: HTML lang attribute
@@ -53,7 +53,7 @@
     - site.cookieConsent.clientId: Axeptio client ID
     - site.cookieConsent.cookiesVersion: Axeptio version
     - site.analytics.ga4: GA4 measurement ID
-  
+
   @created 2025-01-15
 #}
 
@@ -121,7 +121,7 @@
 
     {# ----- Stylesheets ----- #}
     <link rel="stylesheet" href="/output.css"/>
-    
+
     {# TODO: Configure icon library in src/_data/site.json if needed
        Example: "iconLibrary": { "fontAwesome": true }
        Note: Consider using SVG sprites instead for better performance #}
@@ -189,15 +189,7 @@
 
     {# ----- Header Organism ----- #}
     {% if not hideHeaderFooter %}
-      {% from "03-organisms/header.njk" import renderHeader %}
-      {{ renderHeader({ 
-          name: "main_header",
-          datas: organisms.header.headers,
-          typographyDatas: atoms.typography.texts,
-          tabMenuDatas: molecules["tab-menu"].tab_menus,
-          linkDatas: atoms.link.links,
-          iconDatas: atoms.icon.icons
-      }) }}
+
     {% endif %}
 
     {# ----- Main content ----- #}
@@ -213,13 +205,7 @@
 
     {# ----- Footer Organism ----- #}
     {% if not hideHeaderFooter %}
-      {% from "03-organisms/footer.njk" import renderFooter %}
-      {{ renderFooter({ 
-        name: "main_footer",
-        datas: organisms.footer,
-        typographyDatas: atoms.typography.texts,
-        linkDatas: atoms.link.links
-      }) }}
+
     {% endif %}
 
     {# ----- JavaScript scripts ----- #}
