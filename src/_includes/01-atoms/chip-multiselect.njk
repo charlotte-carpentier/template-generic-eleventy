@@ -6,16 +6,16 @@
 {#
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/chip-multiselect.njk" import renderChipMultiselect %}
-    
-    {{ renderChipMultiselect({ 
-        name: "fire", 
-        datas: atoms["chip-multiselects"] 
+
+    {{ renderChipMultiselect({
+        name: "fire",
+        datas: atoms["chip-multiselects"]
     }) }}
-  
+
   Props:
     - options.name (string): Chip identifier
     - options.datas (object): Chip configuration data
-  
+
   @created 2025-01-15
 #}
 
@@ -44,33 +44,21 @@
       'disabled': options.datas.variants.disabled
     } %}
 
-    <span 
-      class="{{ baseClasses }} {{ stateClasses.default }}"
-      onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
-      onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'" 
-      onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
-      tabindex="0"
-      data-chip-multiselect="{{ options.name }}"
-    >
+    <span class="{{ baseClasses }} {{ stateClasses.default }}" onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'" onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" tabindex="0" data-chip-multiselect="{{ options.name }}">
       {{ chipMultiselectData.text }}
       {# Render close/remove button with SVG icon #}
-      <button 
-        type="button" 
-        class="{{ options.datas.closeButtonStyle }}"
-        data-dismiss
-        aria-label="Remove {{ chipMultiselectData.text }}"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+      <button type="button" class="{{ options.datas.closeButtonStyle }}" data-dismiss="data-dismiss" aria-label="Remove {{ chipMultiselectData.text }}">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor">
+          <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"/>
         </svg>
       </button>
     </span>
   {% else %}
     {# Display error message if chip multiselect not found #}
-    <span>Chip Multiselect not found: {{ options.name }}</span>
+    <span>Chip Multiselect not found:
+      {{ options.name }}</span>
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

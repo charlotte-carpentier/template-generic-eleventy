@@ -6,25 +6,25 @@
 {#
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/heading.njk" import renderHeading %}
-    
-    {{ renderHeading({ 
+
+    {{ renderHeading({
         name: "page_title",
         datas: atoms.heading.texts
     }) }}
-  
+
   Props:
     - option.name (string): Heading identifier
     - option.datas (array): Heading configuration data
     - option.tag (string): Override HTML tag (h1-h6, p, span, small)
-  
+
   Notes:
     - Uses existing text classes from input.css
     - Automatically adds security attributes to external links
     - Supports inline HTML content with safe filter
-  
+
   Security:
     - Adds rel="noopener noreferrer" to external links with target="_blank"
-  
+
   @created 2025-01-15
 #}
 
@@ -36,7 +36,7 @@
     {# Retrieve heading configuration #}
     {% set headingConfig = option.datas %}
     {% set headingName = option.name %}
-    
+
     {# Find the specific heading by name #}
     {% set headingData = null %}
     {% for heading in headingConfig %}
@@ -47,19 +47,20 @@
 
     {# Fallback if heading not found #}
     {% if not headingData %}
-      <span>Heading not found: {{ headingName }}</span>
+      <span>Heading not found:
+        {{ headingName }}</span>
     {% else %}
       {# Build CSS classes #}
       {% set tag = option.tag | default(headingData.tag) | default('') %}
       {% set variant = headingData.variant | default('') %}
       {% set cssClasses = 'text-' ~ variant %}
-      
+
       {# Security: Add rel="noopener noreferrer" to external links with target="_blank" #}
       {% set secureContent = headingData.text %}
       {% if 'target="_blank"' in secureContent and 'rel=' not in secureContent %}
         {% set secureContent = secureContent | replace('target="_blank"', 'target="_blank" rel="noopener noreferrer"') %}
       {% endif %}
-      
+
       {# Render the heading with specified tag #}
       {% if tag == 'h1' %}
         <h1 class="{{ cssClasses }}">{{ secureContent | safe }}</h1>
@@ -83,7 +84,6 @@
     {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

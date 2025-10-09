@@ -6,29 +6,29 @@
 {#
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/checkbox.njk" import renderCheckbox %}
-    
+
     Single checkbox:
-    {{ renderCheckbox({ 
-       id: "charisma", 
+    {{ renderCheckbox({
+       id: "charisma",
        datas: atoms.checkboxes,
-       boxStyles: atoms.boxes 
+       boxStyles: atoms.boxes
     }) }}
-    
+
     Specific group:
-    {{ renderCheckbox({ 
-       group: true, 
+    {{ renderCheckbox({
+       group: true,
        groupName: "rpgStyles",
        datas: atoms.checkboxes,
-       boxStyles: atoms.boxes 
+       boxStyles: atoms.boxes
     }) }}
-    
+
     All groups:
-    {{ renderCheckbox({ 
-       group: true, 
+    {{ renderCheckbox({
+       group: true,
        datas: atoms.checkboxes,
-       boxStyles: atoms.boxes 
+       boxStyles: atoms.boxes
     }) }}
-  
+
   Props:
     - options.id (string): Checkbox identifier for single rendering
     - options.group (boolean): Render as group if true
@@ -36,13 +36,13 @@
     - options.groupSrOnly (boolean): Hide group label visually
     - options.datas (object): Checkbox configuration data
     - options.boxStyles (object): Box styling configuration
-  
+
   Notes:
     - Uses box.njk as foundation for checkbox visuals
     - Adds labels, descriptions, and group functionality
     - Supports disabled and checked states
     - Shows pointer cursor on hover for box and label
-  
+
   Accessibility:
     - Properly associates labels with inputs using for/id
     - Includes fieldset/legend for checkbox groups
@@ -50,7 +50,7 @@
     - Provides description text for additional context
     - Includes aria-label support
     - Supports required and disabled state properties
-  
+
   @created 2025-01-15
 #}
 
@@ -60,16 +60,16 @@
   {# Flexible data handling #}
   {% set checkboxData = options.datas %}
   {% set boxStyles = options.boxStyles %}
-  
+
   {# Group rendering logic #}
   {% if options.group %}
     {# Support for specifying a group name #}
     {% if options.groupName %}
       {# Render a specific group #}
       {{ renderCheckboxGroup(
-        checkboxData[options.groupName], 
-        boxStyles, 
-        checkboxData[options.groupName].groupLabel or options.groupName, 
+        checkboxData[options.groupName],
+        boxStyles,
+        checkboxData[options.groupName].groupLabel or options.groupName,
         options.groupSrOnly or false
       ) }}
     {% else %}
@@ -77,19 +77,19 @@
       {% for groupName, groupConfig in checkboxData %}
         {% if groupConfig.checkboxes %}
           {{ renderCheckboxGroup(
-            groupConfig, 
-            boxStyles, 
-            groupConfig.groupLabel or groupName, 
+            groupConfig,
+            boxStyles,
+            groupConfig.groupLabel or groupName,
             groupConfig.groupSrOnly or false
           ) }}
         {% endif %}
       {% endfor %}
     {% endif %}
-  
-  {# Single checkbox rendering #}
+
+    {# Single checkbox rendering #}
   {% else %}
     {% set targetCheckbox = null %}
-    
+
     {# Search across multiple potential group structures #}
     {% for groupName, groupConfig in checkboxData %}
       {% for checkbox in groupConfig.checkboxes %}
@@ -98,7 +98,7 @@
         {% endif %}
       {% endfor %}
     {% endfor %}
-    
+
     {# Fallback to legacy single group search #}
     {% if not targetCheckbox and checkboxData.checkboxes %}
       {% for checkbox in checkboxData.checkboxes %}
@@ -107,12 +107,13 @@
         {% endif %}
       {% endfor %}
     {% endif %}
-    
+
     {# Render single checkbox or show error #}
     {% if targetCheckbox %}
       {{ renderSingleCheckbox(targetCheckbox, checkboxData, boxStyles) }}
     {% else %}
-      <span class="{{ checkboxData.errorClasses | default('') }}">Checkbox not found: {{ options.id }}</span>
+      <span class="{{ checkboxData.errorClasses | default('') }}">Checkbox not found:
+        {{ options.id }}</span>
     {% endif %}
   {% endif %}
 {% endmacro %}
@@ -122,22 +123,18 @@
   {% set fieldsetClasses = groupConfig.fieldsetClasses | default('') %}
   {% set legendClasses = groupConfig.legendClasses | default('') %}
   {% set groupContainerClasses = groupConfig.groupContainerClasses | default('') %}
-  
-  <fieldset 
-    class="{{ fieldsetClasses }}" 
-    data-checkbox-group
-    {% if groupConfig.ariaGroupLabel %}aria-label="{{ groupConfig.ariaGroupLabel }}"{% endif %}
-  >
+
+  <fieldset class="{{ fieldsetClasses }}" data-checkbox-group="data-checkbox-group" {% if groupConfig.ariaGroupLabel %} aria-label="{{ groupConfig.ariaGroupLabel }}" {% endif %}>
     {% if groupLabel %}
       <legend class="{{ legendClasses }} {% if groupSrOnly %}sr-only{% endif %}">
         {{ groupLabel }}
       </legend>
     {% endif %}
-    
+
     {% if groupConfig.groupDescription %}
       <p>{{ groupConfig.groupDescription }}</p>
     {% endif %}
-    
+
     <div class="{{ groupContainerClasses }}">
       {% for checkbox in groupConfig.checkboxes %}
         {{ renderSingleCheckbox(checkbox, groupConfig, boxStyles) }}
@@ -151,7 +148,7 @@
   {% set labelClasses = checkboxOptions.labelClasses | default('') %}
   {% set labelTextClasses = checkboxOptions.labelTextClasses | default('') %}
   {% set descriptionClasses = checkboxOptions.descriptionClasses | default('') %}
-  
+
   {% set boxData = {
     "id": checkbox.id,
     "value": checkbox.value,
@@ -160,17 +157,13 @@
     "ariaLabel": checkbox.ariaLabel | default(checkbox.label),
     "required": checkbox.required | default(false)
   } %}
-  
-  <label 
-    for="{{ checkbox.id }}" 
-    class="{{ labelClasses }}" 
-    data-checkbox-label
-  >
+
+  <label for="{{ checkbox.id }}" class="{{ labelClasses }}" data-checkbox-label="data-checkbox-label">
     {# Wrapper div to control vertical alignment #}
     <div>
       {{ renderSingleBox(boxData, boxStyles) }}
     </div>
-    
+
     <div>
       <strong class="{{ labelTextClasses }}">
         {{ checkbox.label }}
@@ -185,7 +178,6 @@
     </div>
   </label>
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -6,20 +6,20 @@
 {#
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/button.njk" import renderButton %}
-    
+
     Basic button:
-    {{ renderButton({ 
+    {{ renderButton({
         name: "button_default",
         datas: atoms.button.buttons
     }) }}
-    
+
     Error page button with specific styling:
-    {{ renderButton({ 
+    {{ renderButton({
         name: "button-reveal-all",
         datas: option.buttonDatas,
         isErrorPage: true
     }) }}
-  
+
   Props:
     - option.name (string): Button identifier
     - option.datas (array): Button configuration data
@@ -30,7 +30,7 @@
     - option.ariaLabel (string): ARIA label for accessibility
     - option.ariaDescribedby (string): ARIA described-by reference
     - option.isErrorPage (boolean): Apply error-page-specific styling
-  
+
   @created 2025-01-15
 #}
 
@@ -51,7 +51,8 @@
 
     {# Fallback if button not found #}
     {% if not buttonData %}
-      <span>Button not found: {{ buttonName }}</span>
+      <span>Button not found:
+        {{ buttonName }}</span>
     {% else %}
       {# Compose CSS classes with variant and disabled state #}
       {% set variant = buttonData.variant | default('') %}
@@ -63,29 +64,19 @@
       {# Prepare accessibility attributes - auto-use from buttonData #}
       {% set ariaLabel = option.ariaLabel or buttonData.ariaLabel or null %}
       {% set ariaDescribedby = option.ariaDescribedby or buttonData.ariaDescribedby or null %}
-      
+
       {# Apply error-page-specific opacity and transitions for accessibility focus/hover #}
       {% if option.isErrorPage %}
         {% set cssClasses = cssClasses ~ '' %}
       {% endif %}
 
       {# Render the actual button element #}
-      <button 
-        type="{{ option.type | default(buttonData.type) | default('button') }}"
-        class="{{ cssClasses }}"
-        data-button="{{ buttonData.name }}"
-        {% if option.disabled or buttonData.disabled %}disabled{% endif %}
-        {% if option.onclick %}onclick="{{ option.onclick | escape }}"{% endif %}
-        {% if option.id %}id="{{ option.id }}"{% endif %}
-        {% if ariaLabel %}aria-label="{{ ariaLabel }}"{% endif %}
-        {% if ariaDescribedby %}aria-describedby="{{ ariaDescribedby }}"{% endif %}
-      >
+      <button type="{{ option.type | default(buttonData.type) | default('button') }}" class="{{ cssClasses }}" data-button="{{ buttonData.name }}" {% if option.disabled or buttonData.disabled %} disabled{% endif %}="disabled{% endif %}" {% if option.onclick %} onclick="{{ option.onclick | escape }}" {% endif %} {% if option.id %} id="{{ option.id }}" {% if ariaLabel %} aria-label="{{ ariaLabel }}" {% if ariaDescribedby %} aria-describedby="{{ ariaDescribedby }}">
         {{ buttonData.text }}
       </button>
     {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
