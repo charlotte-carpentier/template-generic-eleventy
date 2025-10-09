@@ -119,7 +119,7 @@ body {
   /* ─────────────────────────────
      Colors - Primitives
   ───────────────────────────── */
-  
+
   /* Brand Primary */
   --color-brand-primary-00: #231F15;
   --color-brand-primary-10: #3F3927;
@@ -347,14 +347,14 @@ body {
 
   --container-desktop: 1440px;
   --container-mobile: 320px;
-  
+
   --grid-columns-12: 12;
   --grid-columns-6: 6;
   --grid-columns-4: 4;
   --grid-columns-3: 3;
   --grid-columns-2: 2;
   --grid-columns-1: 1;
-  
+
   --column-width-840: 840px;
   --column-width-640: 640px;
   --column-width-416: 416px;

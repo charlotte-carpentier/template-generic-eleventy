@@ -8,9 +8,9 @@
  * @usage Import in input.css when CSS :target navigation or complex animations needed
  * @dependencies TailwindCSS v4
  * @created 2025-10-08
- * 
+ *
  * Note: Use this file ONLY for styles impossible with Tailwind utilities
- * Example use cases: CSS :target navigation, complex keyframe animations, 
+ * Example use cases: CSS :target navigation, complex keyframe animations,
  * custom pseudo-elements like ::-webkit-scrollbar
  */
 

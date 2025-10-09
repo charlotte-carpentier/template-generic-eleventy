@@ -10,7 +10,9 @@
     "watch:css": "postcss src/assets/styles/input.css -o public/output.css -w",
     "start": "npx concurrently \"npm run watch:css\" \"eleventy --serve --watch\"",
     "build": "cross-env NODE_ENV=production npm run build:css && eleventy",
-    "sprites": "./scripts/generate-sprite.sh"
+    "sprites": "./scripts/generate-sprite.sh",
+    "lint:css": "stylelint 'src/assets/styles/**/*.css'",
+    "lint": "npm run lint:css"
   },
   "keywords": [
     "eleventy",
@@ -30,6 +32,8 @@
     "nunjucks": "^3.2.4",
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.1",
+    "stylelint": "^16.25.0",
+    "stylelint-config-standard": "^39.0.1",
     "tailwindcss": "^4.1.13"
   }
 }
