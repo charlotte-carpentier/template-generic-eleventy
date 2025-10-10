@@ -4,75 +4,50 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Chip identifier
+    - options.datas (array): Chip notification configuration
+
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/chip-notification.njk" import renderChipNotification %}
 
     {{ renderChipNotification({
-        name: "notification_count",
-        datas: atoms.chipNotifications
+        name: "demoChip1",
+        datas: atoms.chipNotification.chipNotifs
     }) }}
-
-  Props:
-    - options.name (string): Chip identifier
-    - options.datas (object): Chip notification configuration
-
-  Notes:
-    - Style variants from "variants" object in chip-notifications.json
-    - Sizes auto-adapt based on content length
-    - Supports dismissible chips (add "dismissible" class)
-    - Additional custom classes via "classes" property
-
-  Accessibility:
-    - Uses role="status" for screen reader announcements
-    - Maintains sufficient color contrast for all variants
-    - Text size adjusts for readability at different scales
-    - Provides aria-label for descriptive announcements
-
-  JavaScript Interaction:
-    window.updateChipNotification("notification_count", "5", true);
-    Parameters: chip name, new value, animate (true/false)
 
   @created 2025-01-15
 #}
 
 {% macro renderChipNotification(options) %}
-  {# Initialize chipData as null before searching #}
-  {% set chipData = null %}
-
-  {# Find chip in data collection #}
-  {% for notification in options.datas["chip-notifications"] %}
-    {% if notification.name == options.name %}
-      {% set chipData = notification %}
-    {% endif %}
-  {% endfor %}
-
-  {# Get global style that applies to all chips #}
-  {% set globalStyle = options.datas.globalStyle %}
-
-  {# Render chip if data was found #}
-  {% if chipData %}
-    {# Get variant-specific style or default to empty string if not found #}
-    {% set variantStyle = options
-      .datas
-      .variants[chipData.style] | default('') %}
-
-    {# Determine size class based on content length #}
-    {% set contentLength = chipData.text | string | length %}
-    {% set sizeClass = "" %}
-
-    {% if contentLength > 2 %}
-      {% set sizeClass = "" %}
-    {% elif contentLength > 1 %}
-      {% set sizeClass = "" %}
-    {% endif %}
-
-    <span class="{{ globalStyle }} {{ variantStyle }} {{ sizeClass }} {{ chipData.classes | default('') }}" role="status" data-chip-notification="{{ chipData.name }}" {% if chipData.ariaLabel %} aria-label="{{ chipData.ariaLabel }}" {% endif %}>
-      {{ chipData.text }}
-    </span>
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error">Error: Missing required prop (name)</span>
   {% else %}
-    {# Error message if chip not found in data collection #}
-    <span>Chip notification not found:
-      {{ options.name }}</span>
+    {# Find chip configuration by name #}
+    {% set chipData = null %}
+    {% for notification in options.datas %}
+      {% if notification.name == options.name %}
+        {% set chipData = notification %}
+      {% endif %}
+    {% endfor %}
+
+    {# Render chip or error message #}
+    {% if not chipData %}
+      <span class="error">Chip notification not found: {{ options.name }}</span>
+    {% else %}
+      {# Render chip element #}
+      <span
+        role="status"
+        data-chip-notification-name="{{ chipData.name }}"
+        data-chip-notification-variant="{{ chipData.variant }}"
+        {% if chipData.ariaLabel %}aria-label="{{ chipData.ariaLabel }}"{% endif %}
+      >
+        {# Content will be injected dynamically via JavaScript #}
+      </span>
+    {% endif %}
   {% endif %}
 {% endmacro %}
 

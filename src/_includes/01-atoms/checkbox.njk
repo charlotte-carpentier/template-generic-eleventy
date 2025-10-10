@@ -9,32 +9,28 @@
     - options.group (boolean): Render as group if true
     - options.groupName (string): Specific group name to render
     - options.groupSrOnly (boolean): Hide group label visually
-    - options.datas (object): Checkbox configuration data
-    - options.boxStyles (object): Box styling configuration
+    - options.datas (array): Checkbox configuration data
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/checkbox.njk" import renderCheckbox %}
 
     Single checkbox:
     {{ renderCheckbox({
-       id: "charisma",
-       datas: atoms.checkboxes,
-       boxStyles: atoms.boxes
+       id: "demoCheck1",
+       datas: atoms.checkbox.checkboxes
     }) }}
 
     Specific group:
     {{ renderCheckbox({
        group: true,
        groupName: "rpgStyles",
-       datas: atoms.checkboxes,
-       boxStyles: atoms.boxes
+       datas: atoms.checkbox.checkboxes
     }) }}
 
     All groups:
     {{ renderCheckbox({
        group: true,
-       datas: atoms.checkboxes,
-       boxStyles: atoms.boxes
+       datas: atoms.checkbox.checkboxes
     }) }}
 
   @created 2025-01-15
@@ -45,19 +41,17 @@
   {% if not options.datas %}
     <span class="error">Error: Missing required prop (datas)</span>
   {% else %}
-    {% set checkboxData = options.datas %}
-
     {# Group rendering #}
     {% if options.group %}
-      {% if options.groupName and checkboxData[options.groupName] %}
+      {% if options.groupName and options.datas[options.groupName] %}
         {# Render specific group #}
         {{ renderCheckboxGroup(
-          checkboxData[options.groupName],
-          checkboxData[options.groupName].groupLabel | default(options.groupName)
+          options.datas[options.groupName],
+          options.datas[options.groupName].groupLabel | default(options.groupName)
         ) }}
       {% else %}
         {# Render all groups #}
-        {% for groupName, groupConfig in checkboxData %}
+        {% for groupName, groupConfig in options.datas %}
           {% if groupConfig.checkboxes %}
             {{ renderCheckboxGroup(
               groupConfig,
@@ -76,26 +70,11 @@
         {% set targetCheckbox = null %}
 
         {# Search in flat checkboxes array #}
-        {% if checkboxData.checkboxes %}
-          {% for checkbox in checkboxData.checkboxes %}
-            {% if checkbox.id == options.id %}
-              {% set targetCheckbox = checkbox %}
-            {% endif %}
-          {% endfor %}
-        {% endif %}
-
-        {# Search in grouped structure if not found #}
-        {% if not targetCheckbox %}
-          {% for groupName, groupConfig in checkboxData %}
-            {% if groupConfig.checkboxes %}
-              {% for checkbox in groupConfig.checkboxes %}
-                {% if checkbox.id == options.id %}
-                  {% set targetCheckbox = checkbox %}
-                {% endif %}
-              {% endfor %}
-            {% endif %}
-          {% endfor %}
-        {% endif %}
+        {% for checkbox in options.datas %}
+          {% if checkbox.id == options.id %}
+            {% set targetCheckbox = checkbox %}
+          {% endif %}
+        {% endfor %}
 
         {# Render or show error #}
         {% if targetCheckbox %}
@@ -132,10 +111,12 @@
 {% endmacro %}
 
 {% macro renderSingleCheckbox(checkbox) %}
-  {# Compute final values #}
-  {% set isChecked = checkbox.checked | default(false) %}
-  {% set isDisabled = checkbox.disabled | default(false) %}
-  {% set isRequired = checkbox.required | default(false) %}
+  {# Compute final values from nested box structure #}
+  {% set boxData = checkbox.box | default({}) %}
+  {% set isChecked = boxData.checked | default(false) %}
+  {% set isDisabled = boxData.disabled | default(false) %}
+  {% set isRequired = boxData.required | default(false) %}
+  {% set checkboxValue = boxData.value | default(checkbox.id) %}
   {% set finalAriaLabel = checkbox.ariaLabel | default(checkbox.label) %}
   {% set hasDescription = checkbox.description %}
 
@@ -148,7 +129,7 @@
         type="checkbox"
         id="{{ checkbox.id }}"
         name="{{ checkbox.id }}"
-        value="{{ checkbox.value }}"
+        value="{{ checkboxValue }}"
         data-checkbox-id="{{ checkbox.id }}"
         data-checkbox-type="checkbox"
         {% if isChecked %}checked{% endif %}
