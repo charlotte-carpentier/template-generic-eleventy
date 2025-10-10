@@ -20,7 +20,7 @@
 
     Basic button:
     {{ renderButton({
-        name: "button_default",
+        name: "demoButton1",
         datas: atoms.button.buttons
     }) }}
 
@@ -37,21 +37,16 @@
 {% macro renderButton(options) %}
   {# Validate required props #}
   {% if not options.datas %}
-    <span class="error">Error: Missing required prop (datas)</span>
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
-    <span class="error">Error: Missing required prop (name)</span>
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Find button configuration by name #}
-    {% set buttonData = null %}
-    {% for button in options.datas %}
-      {% if button.name == options.name %}
-        {% set buttonData = button %}
-      {% endif %}
-    {% endfor %}
+    {# Find button using universal filter #}
+    {% set buttonData = options.datas | findByName(options.name) %}
 
     {# Render button or error message #}
     {% if not buttonData %}
-      <span class="error">Button not found: {{ options.name }}</span>
+      <span class="error" role="alert">Button not found: {{ options.name }}</span>
     {% else %}
       {# Compute final values with fallback cascade #}
       {% set buttonType = options.type | default(buttonData.type) | default('button') %}

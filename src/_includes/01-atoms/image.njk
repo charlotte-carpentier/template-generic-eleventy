@@ -4,71 +4,60 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Image identifier
+    - options.datas (array): Image configuration data
+
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/image.njk" import renderImage %}
-    
-    {{ renderImage({ 
-        name: "profile_photo",
+
+    {{ renderImage({
+        name: "demoImage1",
         datas: atoms.image.images
     }) }}
-  
-  Props:
-    - option.name (string): Image identifier
-    - option.datas (array): Image configuration data
-  
-  Notes:
-    - Silent fallback if image not found (no error display)
-    - Supports lazy loading and async decoding
-    - Flexible variant handling from data structure
-    - Includes width/height attributes for better performance
-  
+
   @created 2025-01-15
 #}
 
-{% macro renderImage(option) %}
-  {# Check if datas is provided #}
-  {% if not option.datas %}
-    <!-- Fallback silencieux : pas d'affichage d'erreur -->
+{% macro renderImage(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Retrieve image configuration #}
-    {% set imagesConfig = option.datas %}
-    {% set imageName = option.name %}
-    
-    {# Find the specific image by name - stop loop when found #}
-    {% set imageData = null %}
-    {% set found = false %}
-    {% for image in imagesConfig %}
-      {% if image.name == imageName and not found %}
-        {% set imageData = image %}
-        {% set found = true %}
-      {% endif %}
-    {% endfor %}
+    {# Find image using universal filter #}
+    {% set imageData = options.datas | findByName(options.name) %}
 
-    {# Render only if image found - silent fallback #}
-    {% if imageData %}
+    {# Render image or error message #}
+    {% if not imageData %}
+      <span class="error" role="alert">Image not found: {{ options.name }}</span>
+    {% else %}
+      {# Compute final values with fallback cascade #}
+      {% set imageSrc = imageData.src | default('') %}
+      {% set imageAlt = imageData.alt | default('') %}
+
       {# Build CSS classes #}
-      {% set variant = imageData.variant | default('') %}
-      {% set cssClasses = 'image-' ~ variant %}
-      
-      {# Variant-specific classes moved to data structure if needed #}
-      {% if variant == '' %}
-        {% set cssClasses = cssClasses %}
+      {% set cssClasses = 'image' %}
+      {% if imageData.variant %}
+        {% set cssClasses = cssClasses ~ ' image-' ~ imageData.variant %}
       {% endif %}
-      
-      {# Render the image #}
-      <img 
-        src="{{ imageData.src }}" 
-        alt="{{ imageData.alt }}" 
+
+      {# Render image element #}
+      <img
+        src="{{ imageSrc }}"
+        alt="{{ imageAlt }}"
         class="{{ cssClasses }}"
         loading="lazy"
         decoding="async"
+        data-image-name="{{ imageData.name }}"
+        data-image-type="image"
         {% if imageData.width %}width="{{ imageData.width }}"{% endif %}
         {% if imageData.height %}height="{{ imageData.height }}"{% endif %}
       />
     {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

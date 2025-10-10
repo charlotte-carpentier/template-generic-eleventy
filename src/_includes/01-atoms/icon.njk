@@ -4,86 +4,62 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Icon identifier
+    - options.datas (object): Icon configuration data (nested by category)
+    - options.class (string): Additional CSS classes
+
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/icon.njk" import renderIcon %}
-    
-    {{ renderIcon({ 
-        name: "skills_treasure",
+
+    {{ renderIcon({
+        name: "demoSmile1",
         datas: atoms.icon.icons
     }) }}
-  
-  Props:
-    - option.name (string): Icon identifier
-    - option.datas (array): Icon configuration data
-    - option.class (string): Additional CSS classes
-  
-  Notes:
-    - Uses SVG sprite for fast loading
-    - Base + variant classes from input.css
-    - Supports responsive sizing based on variant
-    - Sprite ID can be customized or defaults to icon name
-  
-  Accessibility:
-    - Uses role="img" for proper screen reader support
-    - Includes aria-label for descriptive text
-  
+
   @created 2025-01-15
 #}
 
-{% macro renderIcon(option) %}
-  {# Check if option and required data is provided #}
-  {% if not option or not option.datas or not option.name %}
-    <span>Error: No icon configuration provided</span>
+{% macro renderIcon(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Retrieve icon configuration #}
-    {% set iconsConfig = option.datas %}
-    {% set iconName = option.name %}
-    
-    {# Find the specific icon by name #}
-    {% set iconData = null %}
-    {% for icon in iconsConfig %}
-      {% if icon.name == iconName %}
-        {% set iconData = icon %}
-      {% endif %}
-    {% endfor %}
+    {# Find icon using universal filter - handles nested categories automatically #}
+    {% set iconData = options.datas | findByName(options.name) %}
 
-    {# Fallback if icon not found #}
+    {# Render icon or error message #}
     {% if not iconData %}
-      <span>Icon not found: {{ iconName }}</span>
+      <span class="error" role="alert">Icon not found: {{ options.name }}</span>
     {% else %}
+      {# Compute final values with fallback cascade #}
+      {% set spriteId = iconData.spriteId | default(options.name) %}
+      {% set iconAlt = iconData.alt | default('Icon') %}
+
       {# Build CSS classes #}
-      {% set variant = iconData.variant | default('') %}
-      {% set cssClasses = 'icon-' ~ variant %}
-      
-      {# Add responsive classes based on variant #}
-      {% if variant == '' %}
-        {% set cssClasses = cssClasses %}
-      {% elif variant == '' %}
-        {% set cssClasses = cssClasses %}
-      {% elif variant == '' %}
-        {% set cssClasses = cssClasses %}
+      {% set cssClasses = 'icon' %}
+      {% if iconData.variant %}
+        {% set cssClasses = cssClasses ~ ' icon-' ~ iconData.variant %}
       {% endif %}
-      
-      {# Add any additional classes #}
-      {% if option.class %}
-        {% set cssClasses = cssClasses ~ ' ' ~ option.class %}
+      {% if options.class %}
+        {% set cssClasses = cssClasses ~ ' ' ~ options.class %}
       {% endif %}
-      
-      {# Generate sprite ID from name with fallback #}
-      {% set spriteId = iconData.spriteId | default(iconName) %}
-      
-      {# SVG Sprite usage - clean and fast #}
-      <svg 
-        class="{{ cssClasses }}" 
-        aria-label="{{ iconData.alt | default('Icon') }}"
+
+      {# Render SVG sprite #}
+      <svg
+        class="{{ cssClasses }}"
+        aria-label="{{ iconAlt }}"
         role="img"
+        data-icon-name="{{ iconData.name }}"
+        data-icon-type="icon"
       >
         <use href="/assets/icons/sprites/sprite.svg#{{ spriteId }}"></use>
       </svg>
     {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

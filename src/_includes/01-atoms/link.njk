@@ -1,99 +1,65 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ATOM › Link                                             │
-   │ Navigation links with variant styling                   │
+   │ Navigation links with semantic attributes               │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Link identifier
+    - options.datas (array): Link configuration data
+    - options.ariaLabel (string): Override aria-label
+    - options.disabled (boolean): Override disabled state
+
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/link.njk" import renderLink %}
-    
-    {{ renderLink({ 
-       name: "portfolio_link",
-       datas: atoms.link.links
+
+    {{ renderLink({
+        name: "demoLink1",
+        datas: atoms.link.links
     }) }}
-  
-  Props:
-    - option.name (string): Link identifier
-    - option.datas (array): Link configuration data
-  
-  Features:
-    - Base + variant classes from input.css
-    - Responsive font sizing based on variant
-    - External link indicator (↗ symbol)
-    - Download attribute support
-    - Custom onclick handlers
-  
-  Accessibility:
-    - Enhanced aria-label for mailto links
-    - Indicates external links opening in new tab
-    - Proper rel attributes for security
-  
+
   @created 2025-01-15
 #}
 
-{% macro renderLink(option) %}
- {# Check if datas is provided #}
- {% if not option.datas %}
-   <span>Error: No link configuration provided</span>
- {% else %}
-   {# Retrieve link configuration #}
-   {% set linksConfig = option.datas %}
-   {% set linkName = option.name %}
-   
-   {# Find the specific link by name #}
-   {% set linkData = null %}
-   {% for link in linksConfig %}
-     {% if link.name == linkName %}
-       {% set linkData = link %}
-     {% endif %}
-   {% endfor %}
+{% macro renderLink(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
+  {% else %}
+    {# Find link using universal filter #}
+    {% set linkData = options.datas | findByName(options.name) %}
 
-   {# Fallback if link not found #}
-   {% if not linkData %}
-     <span>Link not found: {{ linkName }}</span>
-   {% else %}
-     {# Build CSS classes #}
-     {% set variant = linkData.variant | default('') %}
-     {% set cssClasses = 'link link--' ~ variant %}
-     
-     {# Add responsive font size classes based on variant #}
-     {% if variant == '' %}
-       {% set cssClasses = cssClasses ~ '' %}
-     {% elif variant == '' %}
-       {% set cssClasses = cssClasses ~ '' %}
-     {% elif variant == '' %}
-       {% set cssClasses = cssClasses ~ '' %}
-     {% elif variant == '' %}
-       {% set cssClasses = cssClasses ~ '' %}
-     {% endif %}
-     
-     {# Enhanced accessibility attributes #}
-     {% set ariaLabel = '' %}
-     {% if linkData.href and 'mailto:' in linkData.href %}
-       {% set ariaLabel = 'aria-label="Envoyer un email à ' ~ linkData.text ~ '"' %}
-     {% elif linkData.target == '_blank' %}
-       {% set ariaLabel = 'aria-label="' ~ linkData.text ~ ' - Ouvre dans un nouvel onglet"' %}
-     {% endif %}
-     
-     {# Render the link #}
-     <a 
-       href="{{ linkData.href }}" 
-       class="{{ cssClasses }}"
-       {% if linkData.target %}target="{{ linkData.target }}"{% endif %}
-       {% if linkData.download %}download{% endif %}
-       {% if linkData.rel %}rel="{{ linkData.rel }}"{% endif %}
-       {% if linkData.onclick %}onclick="{{ linkData.onclick }}"{% endif %}
-       {% if ariaLabel %}{{ ariaLabel | safe }}{% endif %}
-     >
-       {{ linkData.text | safe }}
-       {% if linkData.variant == '' %}
-         <span aria-hidden="true">↗</span>
-       {% endif %}
-     </a>
-   {% endif %}
- {% endif %}
+    {# Render link or error message #}
+    {% if not linkData %}
+      <span class="error" role="alert">Link not found: {{ options.name }}</span>
+    {% else %}
+      {# Compute final aria-label with fallback cascade #}
+      {% set finalAriaLabel = options.ariaLabel | default(linkData.ariaLabel) %}
+
+      {# Render link element #}
+      <a
+        href="{{ linkData.href }}"
+        data-link-name="{{ linkData.name }}"
+        data-link-type="link"
+        data-link-variant="{{ linkData.variant }}"
+        {% if linkData.target %}target="{{ linkData.target }}"{% endif %}
+        {% if linkData.rel %}rel="{{ linkData.rel }}"{% endif %}
+        {% if linkData.download %}download{% endif %}
+        {% if linkData.onclick %}onclick="{{ linkData.onclick | escape }}"{% endif %}
+        {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
+      >
+        {# TODO: Add icon rendering if iconName exists in linkData #}
+        {# {% if linkData.iconName %} #}
+        {#   {{ renderIcon({ name: linkData.iconName }) }} #}
+        {# {% endif %} #}
+
+        {{ linkData.text }}
+      </a>
+    {% endif %}
+  {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -3,6 +3,7 @@ title: Nunjucks Guide
 description: Guide for using Nunjucks templating with Eleventy
 type: documentation
 created: 2025-01-15
+updated: 2025-10-10
 tags: [nunjucks, templates, templating]
 ---
 
@@ -14,23 +15,21 @@ tags: [nunjucks, templates, templating]
 {% macro renderComponent(options) %}
   {# Validate required props #}
   {% if not options.datas %}
-    <span class="error">Error: Missing required prop (datas)</span>
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
-    <span class="error">Error: Missing required prop (name)</span>
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Find by name #}
-    {% set componentData = null %}
-    {% for item in options.datas %}
-      {% if item.name == options.name %}
-        {% set componentData = item %}
-      {% endif %}
-    {% endfor %}
+    {# Find component using universal filter #}
+    {% set componentData = options.datas | findByName(options.name) %}
     
     {# Render or error #}
     {% if not componentData %}
-      <span class="error">Component not found: {{ options.name }}</span>
+      <span class="error" role="alert">Component not found: {{ options.name }}</span>
     {% else %}
-      <element data-component-name="{{ componentData.name }}">
+      <element 
+        data-component-name="{{ componentData.name }}"
+        data-component-type="component"
+      >
         {{ componentData.text }}
       </element>
     {% endif %}
@@ -51,6 +50,44 @@ tags: [nunjucks, templates, templating]
 
 ---
 
+## Universal Filter
+
+**Since Phase 3**, all components use the `findByName` custom filter for optimal performance.
+
+### Configuration (.eleventy.js)
+
+```javascript
+eleventyConfig.addFilter("findByName", function(data, name) {
+  if (!data || !name) return null;
+  
+  // Case 1: Flat array (button, image, input, etc.)
+  if (Array.isArray(data)) {
+    return data.find(item => item.name === name || item.id === name);
+  }
+  
+  // Case 2: Nested object with categories (icon)
+  if (typeof data === 'object') {
+    for (const category in data) {
+      if (Array.isArray(data[category])) {
+        const found = data[category].find(item => item.name === name || item.id === name);
+        if (found) return found; // Stop immediately when found
+      }
+    }
+  }
+  
+  return null;
+});
+```
+
+### Benefits
+
+- ✅ **Performance**: JavaScript `.find()` stops immediately when found
+- ✅ **Zero loop risk**: Native method guarantees return
+- ✅ **Universal**: Works for flat arrays AND nested objects
+- ✅ **DRY**: Single filter for all components
+
+---
+
 ## Naming Conventions
 
 ### Parameters
@@ -67,9 +104,38 @@ Pattern: `data-{component}-{property}="value"`
 
 ```njk
 data-button-name="{{ buttonData.name }}"
-data-button-type="{{ buttonType }}"
+data-button-type="button"
 data-checkbox-id="{{ checkbox.id }}"
+data-checkbox-type="checkbox"
 ```
+
+---
+
+## Error Messages
+
+**WCAG 2.2 AA Compliance** - All error messages follow accessibility guidelines:
+
+### Standard Pattern
+
+```njk
+{# Props validation errors #}
+<span class="error" role="alert">Error: Missing required prop (datas)</span>
+<span class="error" role="alert">Error: Missing required prop (name)</span>
+
+{# Component not found errors #}
+<span class="error" role="alert">Button not found: {{ options.name }}</span>
+<span class="error" role="alert">Icon not found: {{ options.name }}</span>
+
+{# Type errors (input only) #}
+<span class="error" role="alert">Unsupported input type: {{ inputType }}</span>
+```
+
+### Key Points
+
+- ✅ Always include `role="alert"` for screen reader announcement
+- ✅ Clear, descriptive text
+- ✅ Component name in message
+- ✅ Uniform pattern across all atoms
 
 ---
 
@@ -99,35 +165,17 @@ Figma design system may have nested structures:
 
 1. Check `options.datas`
 2. Check `options.name` or `options.id`
-3. Search in data array
+3. Find using universal filter
 4. Render or show error
 
 ```njk
 {% if not options.datas %}
-  <span class="error">Error: Missing required prop (datas)</span>
+  <span class="error" role="alert">Error: Missing required prop (datas)</span>
 {% elif not options.name %}
-  <span class="error">Error: Missing required prop (name)</span>
+  <span class="error" role="alert">Error: Missing required prop (name)</span>
 {% else %}
+  {% set componentData = options.datas | findByName(options.name) %}
   {# Process #}
-{% endif %}
-```
-
----
-
-## Search Pattern
-
-### Find Item by Name
-
-```njk
-{% set componentData = null %}
-{% for item in options.datas %}
-  {% if item.name == options.name %}
-    {% set componentData = item %}
-  {% endif %}
-{% endfor %}
-
-{% if not componentData %}
-  <span class="error">Component not found: {{ options.name }}</span>
 {% endif %}
 ```
 
@@ -170,3 +218,4 @@ Never remove "Summon HAT Components Wisely:" from headers.
 
 - [Official Documentation](https://mozilla.github.io/nunjucks/)
 - [Template Syntax](https://mozilla.github.io/nunjucks/templating.html)
+- [WCAG 2.2 Error Messages](https://www.w3.org/WAI/tutorials/forms/notifications/)

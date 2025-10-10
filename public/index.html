@@ -96,36 +96,21 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 <h2>Button Tests</h2>
 
   
   
     
-    
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
     
 
     
@@ -171,15 +156,6 @@
     
       
         
-        
-
-        
-        
-          
-            
-          
-        
-          
         
 
         
@@ -241,13 +217,6 @@
   
     
     
-    
-      
-        
-      
-    
-      
-    
 
     
     
@@ -255,6 +224,7 @@
       <span
         role="status"
         data-chip-notification-name="demoChip1"
+        data-chip-notification-type="chip-notification"
         data-chip-notification-variant="default"
         aria-label="Aria label for accessibility"
       >
@@ -271,29 +241,6 @@
   
     
     
-    
-      
-        
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
 
     
     
@@ -308,9 +255,426 @@
       
         <h1
           data-heading-name="demoHead1"
+          data-heading-type="heading"
           data-heading-tag="h1"
         >Heading</h1>
       
+    
+  
+
+
+
+<h2>Icon Tests</h2>
+
+  
+  
+    
+    
+
+    
+    
+      
+      
+      
+
+      
+      
+      
+      
+
+      
+      <svg
+        class="icon"
+        aria-label="Smile icon"
+        role="img"
+        data-icon-name="demoSmile1"
+        data-icon-type="icon"
+      >
+        <use href="/assets/icons/sprites/sprite.svg#smile"></use>
+      </svg>
+    
+  
+
+
+
+<h2>Image Tests</h2>
+
+  
+  
+    
+    
+
+    
+    
+      
+      
+      
+
+      
+      
+      
+
+      
+      <img
+        src="/assets/images/placeholders/placeholder-large.png"
+        alt="Image description"
+        class="image"
+        loading="lazy"
+        decoding="async"
+        data-image-name="demoImage1"
+        data-image-type="image"
+        
+        
+      />
+    
+  
+
+
+
+<h2>Input Tests</h2>
+
+  
+  
+    
+    
+
+    
+    
+      
+      
+      
+      
+      
+
+      
+      <div class="input-wrapper">
+        
+        
+          <label for="demoInput1" class="input-label">
+            Label
+            <span class="input-required">*</span>
+          </label>
+        
+
+        
+        
+          <input
+            type="text"
+            id="demoInput1"
+            name="demoInput1"
+            class="input-field"
+            placeholder="Placeholder"
+            data-input-name="demoInput1"
+            data-input-type="input"
+            required
+            maxlength="100"
+            pattern="^[a-zA-Z0-9]*$"
+            
+            aria-describedby="demoInput1-help demoInput1-error"
+          />
+
+        
+        
+
+        
+        
+          <div id="demoInput1-help" class="input-help">
+            Pattern validation message
+          </div>
+        
+
+        
+        
+          <div id="demoInput1-error" class="input-error" role="alert">
+            Label
+          </div>
+        
+      </div>
+    
+  
+
+
+
+<h2>Link Tests</h2>
+
+  
+  
+    
+    
+
+    
+    
+      
+      
+
+      
+      <a
+        href="#"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+      >
+        
+        
+        
+        
+
+        Label
+      </a>
+    
+  
+
+
+
+<h2>Radio Button Tests</h2>
+
+  
+  
+    
+    
+
+    
+      
+  
+  
+  
+  
+  
+
+  
+  <label for="demoRadio1">
+    <input
+      type="radio"
+      id="demoRadio1"
+      name="radio-group"
+      value="demoValue1"
+      data-radio-id="demoRadio1"
+      data-radio-type="radio-button"
+      
+      
+      
+    />
+
+    
+      <span>Label</span>
+    
+  </label>
+
+    
+  
+
+
+
+<h2>Select Tests</h2>
+
+  
+  
+    
+    
+
+    
+    
+      
+      
+      
+
+      
+      <div data-select-wrapper>
+        <select
+          name="demoSelect1"
+          data-select-name="demoSelect1"
+          data-select-type="select"
+          data-select-variant=""
+          
+          
+        >
+          
+            
+              <option
+                value="10"
+                selected
+              >
+                Label 10
+              </option>
+            
+          
+        </select>
+
+        
+        <div data-select-arrow aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+          </svg>
+        </div>
+      </div>
+    
+  
+
+
+
+<h2>Tag Tests</h2>
+
+  
+  
+    
+    
+
+    
+    
+      
+      <span
+        data-tag-name="demoTag1"
+        data-tag-type="tag"
+        data-tag-variant="default"
+        
+        role="status"
+        title="Tag tooltip"
+      >
+        LABEL
+        
+          <span class="sr-only">Screen reader description</span>
+        
+      </span>
+    
+  
+
+
+
+<h2>Toggle Tests</h2>
+
+  
+  
+    
+    
+
+    
+      
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <label for="demoToggle1">
+    <input
+      type="checkbox"
+      id="demoToggle1"
+      name="demoToggle1"
+      value="demoValue1"
+      class="sr-only peer"
+      data-toggle-id="demoToggle1"
+      data-toggle-type="toggle"
+      data-toggle-size="medium"
+      data-toggle-variant="default"
+      
+      
+      aria-label="Switch description"
+    />
+
+    
+    <div data-toggle-container>
+      <div data-toggle-thumb></div>
+    </div>
+
+    
+    
+      <div>
+        
+          <span>Label</span>
+        
+
+        
+          <p>Toggle description</p>
+        
+      </div>
+    
+  </label>
+
+    
+  
+
+
+
+<h2>Tooltip Tests</h2>
+
+  
+  
+    
+    
+
+    
+    
+      
+      <div
+        data-tooltip-name="demoTooltip1"
+        data-tooltip-type="tooltip"
+        role="tooltip"
+        aria-live="polite"
+      >
+        
+        <div role="heading" aria-level="3">
+          This is a long label
+        </div>
+
+        
+        
+          <div>First part of description</div>
+        
+
+        
+        <div data-tooltip-separator aria-hidden="true">
+          <div data-separator-line></div>
+          <div data-separator-diamond></div>
+          <div data-separator-line></div>
+        </div>
+
+        
+        <div>
+          
+            Second part of description
+          
+        </div>
+      </div>
+    
+  
+
+
+
+<h2>Vector Tests</h2>
+
+  
+  
+    
+    
+
+    
+    
+      
+      <div
+        data-vector-name="demoVector1"
+        data-vector-type="vector"
+        data-vector-variant="horizontal"
+      >
+        
+        <img
+          src="/assets/images/logos/demo-logo.svg"
+          alt="Demo logo"
+          data-vector-logo
+        />
+
+        
+        
+          <span data-vector-text>Starter kit</span>
+        
+      </div>
     
   
 

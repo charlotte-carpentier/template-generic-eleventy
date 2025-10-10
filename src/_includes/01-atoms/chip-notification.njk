@@ -13,7 +13,7 @@
 
     {{ renderChipNotification({
         name: "demoChip1",
-        datas: atoms.chipNotification.chipNotifs
+        datas: atoms["chip-notification"].chipNotifs
     }) }}
 
   @created 2025-01-15
@@ -22,27 +22,23 @@
 {% macro renderChipNotification(options) %}
   {# Validate required props #}
   {% if not options.datas %}
-    <span class="error">Error: Missing required prop (datas)</span>
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
-    <span class="error">Error: Missing required prop (name)</span>
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Find chip configuration by name #}
-    {% set chipData = null %}
-    {% for notification in options.datas %}
-      {% if notification.name == options.name %}
-        {% set chipData = notification %}
-      {% endif %}
-    {% endfor %}
+    {# Find chip using universal filter #}
+    {% set chipData = options.datas | findByName(options.name) %}
 
     {# Render chip or error message #}
     {% if not chipData %}
-      <span class="error">Chip notification not found: {{ options.name }}</span>
+      <span class="error" role="alert">Chip notification not found: {{ options.name }}</span>
     {% else %}
       {# Render chip element #}
       <span
         role="status"
         data-chip-notification-name="{{ chipData.name }}"
-        data-chip-notification-variant="{{ chipData.variant }}"
+        data-chip-notification-type="chip-notification"
+        {% if chipData.variant %}data-chip-notification-variant="{{ chipData.variant }}"{% endif %}
         {% if chipData.ariaLabel %}aria-label="{{ chipData.ariaLabel }}"{% endif %}
       >
         {# Content will be injected dynamically via JavaScript #}
