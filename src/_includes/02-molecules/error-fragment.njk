@@ -1,96 +1,76 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ MOLECULE › Error Fragment                               │
-   │ Error page fragments with icon or text content         │
+   │ Error page animated fragments (404, 500, maintenance)   │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Error fragment identifier
+    - options.datas (array): Error fragment configuration data
+    - options.iconDatas (array): Icon atom data (for icon variant)
+    - options.headingDatas (array): Heading atom data (for text variant)
+
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/error-fragment.njk" import renderErrorFragment %}
-    
-    {{ renderErrorFragment({ 
-        name: "fragment_404_01",
-        datas: molecules["error-fragment"]["error-fragments"],
+
+    {{ renderErrorFragment({
+        name: "frag4041",
+        datas: molecules["error-fragment"].errorFragments,
         iconDatas: atoms.icon.icons,
-        typographyDatas: atoms.typography.texts,
-        isClickable: true
+        headingDatas: atoms.heading.headings
     }) }}
-  
-  Props:
-    - option.name (string): Error fragment identifier
-    - option.datas (array): Error fragment configuration
-    - option.iconDatas (array): Icons atom data
-    - option.typographyDatas (array): Typography atom data
-    - option.isClickable (boolean): Make fragment clickable
-  
-  Variants:
-    - icon: Displays an icon from atoms
-    - text: Displays typography from atoms
-  
-  Features:
-    - Optional clickable wrapper (link)
-    - Icon or text content variants
-    - Integration with atoms (icon, typography)
-  
+
   @created 2025-01-15
 #}
 
-{# Import atoms #}
-{% from "01-atoms/heading.njk" import renderHeading %}
 {% from "01-atoms/icon.njk" import renderIcon %}
+{% from "01-atoms/heading.njk" import renderHeading %}
 
-{% macro renderErrorFragment(option) %}
-  {# Check if datas is provided #}
-  {% if not option.datas %}
-    <span class="text-red-500">Error: No error-fragment configuration provided</span>
+{% macro renderErrorFragment(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Retrieve error-fragment configuration #}
-    {% set errorFragmentsConfig = option.datas %}
-    {% set errorFragmentName = option.name %}
+    {# Find error fragment using universal filter #}
+    {% set fragmentData = options.datas | findByName(options.name) %}
 
-    {# Find the specific error-fragment by name #}
-    {% set errorFragmentData = null %}
-    {% for errorFragment in errorFragmentsConfig %}
-      {% if errorFragment.name == errorFragmentName %}
-        {% set errorFragmentData = errorFragment %}
-      {% endif %}
-    {% endfor %}
-
-    {# Fallback if error-fragment not found #}
-    {% if not errorFragmentData %}
-      <span class="text-red-500">Error-fragment not found: {{ errorFragmentName }}</span>
+    {# Render or error #}
+    {% if not fragmentData %}
+      <span class="error" role="alert">Error fragment not found: {{ options.name }}</span>
     {% else %}
-      {# Render error-fragment molecule based on variant #}
-      {% if option.isClickable %}
-        <a href="{{ errorFragmentData.link | default('#') }}" class="error-fragment-link">
-      {% endif %}
-
-      {% if errorFragmentData.variant == "icon" %}
-        <div class="error-fragment error-fragment--{{ errorFragmentData.variant }}">
-          <div class="error-fragment-icon">
-            {{ renderIcon({ 
-              name: errorFragmentData.iconName,
-              datas: option.iconDatas
-          }) }}
+      <div
+        data-error-fragment-name="{{ fragmentData.name }}"
+        data-error-fragment-type="error-fragment"
+        data-error-fragment-variant="{{ fragmentData.variant }}"
+      >
+        {# Icon variant #}
+        {% if fragmentData.variant == "icon" and fragmentData.iconName and options.iconDatas %}
+          <div data-error-fragment-content="icon">
+            {{ renderIcon({
+                name: fragmentData.iconName,
+                datas: options.iconDatas
+            }) }}
           </div>
-        </div>
-      {% elif errorFragmentData.variant == "text" %}
-        <div class="error-fragment error-fragment--{{ errorFragmentData.variant }}">
-          <div class="error-fragment-text">
-            {{ renderHeading({ 
-              name: errorFragmentData.textTypographyName,
-              datas: option.typographyDatas
-          }) }}
-          </div>
-        </div>
-      {% endif %}
 
-      {% if option.isClickable %}
-        </a>
-      {% endif %}
+        {# Text variant #}
+        {% elif fragmentData.variant == "text" and fragmentData.textTypographyName and options.headingDatas %}
+          <div data-error-fragment-content="text">
+            {{ renderHeading({
+                name: fragmentData.textTypographyName,
+                datas: options.headingDatas
+            }) }}
+          </div>
+
+        {# Unsupported variant #}
+        {% else %}
+          <span class="error" role="alert">Unsupported error fragment variant: {{ fragmentData.variant }}</span>
+        {% endif %}
+      </div>
     {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

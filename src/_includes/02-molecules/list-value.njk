@@ -1,133 +1,59 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ MOLECULE › List Value                                   │
-   │ Organized list of value-based lockup components         │
+   │ Value lists with lockup items and layout variants      │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.id (string): List value identifier
+    - options.datas (array): List value configuration data
+    - options.lockupDatas (array): Lockup molecule data
+
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/list-value.njk" import renderListValue %}
-    {% from "02-molecules/lockup.njk" import renderLockup as renderLockupComponent %}
-    
-    {{ renderListValue({ 
-        name: "vertical",
-        datas: molecules["list-values"],
-        lockups: molecules.lockups,
-        variant: "default"
+
+    {{ renderListValue({
+        id: "demoList1",
+        datas: molecules["list-value"].listValues,
+        lockupDatas: molecules.lockup.lockups
     }) }}
-    
-    With custom styles:
-    {{ renderListValue({ 
-        name: "columns",
-        datas: molecules["list-values"],
-        lockups: molecules.lockups,
-        class: "my-custom-list-class"
-    }) }}
-  
-  Props:
-    - options.name (string): List configuration identifier
-    - options.datas (object): List value configuration
-    - options.lockups (object): Lockups molecule data
-    - options.variant (string): Style variant (default: "default")
-    - options.class (string): Additional CSS classes
-  
-  Features:
-    - Style variants for list appearance
-    - Container and item-specific styling
-    - Integrates with lockup molecule
-    - Supports label-value, value-legend, block-content types
-    - Falls back to first configuration if name not found
-  
+
   @created 2025-01-15
 #}
 
-{% macro renderListValue(options) %}
-  {% if options.datas %}
-    {% set globalStyle = options.datas.globalStyle | default('') %}
-    
-    {% set listConfiguration = null %}
-    {% if options.name %}
-      {% for config in options.datas.listConfigurations %}
-        {% if config.name == options.name %}
-          {% set listConfiguration = config %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+{% from "02-molecules/lockup.njk" import renderLockup %}
 
-    {% if not listConfiguration %}
-      {% set listConfiguration = options.datas.listConfigurations[0] %}
-    {% endif %}
-    
-    {% set variantStyle = options.variant | default('default') %}
-    {% if options.datas.variants[variantStyle] %}
-      {% set variantClass = options.datas.variants[variantStyle] %}
+{% macro renderListValue(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.id %}
+    <span class="error" role="alert">Error: Missing required prop (id)</span>
+  {% else %}
+    {# Find list value using universal filter #}
+    {% set listData = options.datas | findByName(options.id) %}
+
+    {# Render or error #}
+    {% if not listData %}
+      <span class="error" role="alert">List value not found: {{ options.id }}</span>
     {% else %}
-      {% set variantClass = options.datas.variants.default | default('') %}
-    {% endif %}
-    
-    <div class="{{ globalStyle }} {{ variantClass }} {{ options.class | default('') }}">
-      <div class="{{ listConfiguration.containerStyle }}">
-        {% for lockup in listConfiguration.lockups %}
-          <div class="{{ listConfiguration.itemStyle }}">
-            {% if options.lockups %}
-              {# Try to find the corresponding lockup #}
-              {% set lockupFound = false %}
-              {% for availableLockup in options.lockups.lockups %}
-                {% if availableLockup.name == lockup.name %}
-                  {% if renderLockupComponent %}
-                    {{ renderLockupComponent({ 
-                      datas: options.lockups,
-                      name: lockup.name,
-                      type: lockup.type | default(availableLockup.type),
-                      class: lockup.class | default('')
-                    }) }}
-                  {% else %}
-                    <div>
-                      {% if availableLockup.type == "label-value" %}
-                        <div>
-                          {{ availableLockup.label.text | default('Label') }}
-                        </div>
-                        <div>
-                          {{ availableLockup.value.text | default('Value') }}
-                        </div>
-                      {% elif availableLockup.type == "value-legend" %}
-                        <div>
-                          {{ availableLockup.value.text | default('Value') }}
-                        </div>
-                        <div>
-                          {{ availableLockup.legend.text | default('Legend') }}
-                        </div>
-                      {% elif availableLockup.type == "block-content" %}
-                        <div>Block content</div>
-                        <div>
-                          {{ availableLockup.content.text | default('Content') }}
-                        </div>
-                      {% endif %}
-                    </div>
-                  {% endif %}
-                  {% set lockupFound = true %}
-                {% endif %}
-              {% endfor %}
-              
-              {% if not lockupFound %}
-                <div>Lockup "{{ lockup.name }}" not found</div>
-              {% endif %}
-            {% else %}
-              <div>No lockups data provided</div>
-              
-              {# Debug placeholder to show what we have instead #}
-              <div>
-                <pre>Lockup: {{ lockup | dump(2) }}</pre>
-              </div>
-            {% endif %}
+      <div
+        data-list-value-id="{{ listData.id }}"
+        data-list-value-type="list-value"
+      >
+        {% for item in listData.items %}
+          <div data-list-value-item="true">
+            {# Render lockup #}
+            {{ renderLockup({
+                name: item.lockupName,
+                datas: options.lockupDatas
+            }) }}
           </div>
         {% endfor %}
       </div>
-    </div>
-  {% else %}
-    <span>List-value data not found</span>
+    {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

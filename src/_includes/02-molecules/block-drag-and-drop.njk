@@ -1,143 +1,92 @@
 {# ┌─────────────────────────────────────────────────────────┐
-   │ MOLECULE › Dropzone Upload                              │
-   │ Drag-and-drop file upload with status variants          │
+   │ MOLECULE › Block Drag and Drop                          │
+   │ File upload with drag and drop support                  │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Usage — Summon HAT Components Wisely:
-    {% from "02-molecules/block-drag-and-drop.njk" import renderDropzoneUpload %}
-    
-    {{ renderDropzoneUpload({ 
-        name: "standard_upload", 
-        datas: molecules["dropzone-uploads"],
-        headings: atoms.headings,
-        icons: atoms.icons,
-        buttons: atoms.buttons
-    }) }}
-  
   Props:
-    - options.name (string): Dropzone identifier
-    - options.datas (object): Dropzone configuration
-    - options.headings (object): Headings atom data
-    - options.icons (object): Icons atom data
-    - options.buttons (object): Buttons atom data
-  
-  Variants:
-    - standard_upload: Default style
-    - error_upload: Shows error message
-    - loading_upload: Displays loading state with spinner
-  
-  Features:
-    - Drag-and-drop area with click-to-browse
-    - Loading spinner for upload progress
-    - Error message display with dismissible option
-    - File format and size information
-    - Keyboard accessible (tabindex, aria-label)
-  
-  Accessibility:
-    - role="button" on dropzone area
-    - aria-label for upload interaction
-    - aria-hidden for decorative elements
-    - Proper heading structure
-  
+    - options.name (string): Block drag and drop identifier
+    - options.datas (array): Block drag and drop configuration data
+    - options.headingDatas (array): Heading atom data
+    - options.iconDatas (array): Icon atom data
+    - options.buttonDatas (array): Button atom data
+
+  Usage — Summon HAT Components Wisely:
+    {% from "02-molecules/block-drag-and-drop.njk" import renderBlockDragAndDrop %}
+
+    {{ renderBlockDragAndDrop({
+        name: "demoDragDrop1",
+        datas: molecules["block-drag-and-drop"].blockDragAndDrops,
+        headingDatas: atoms.heading.headings,
+        iconDatas: atoms.icon.icons,
+        buttonDatas: atoms.button.buttons
+    }) }}
+
   @created 2025-01-15
 #}
 
-{% macro renderDropzoneUpload(options) %}
-  {% if options.datas %}
-    {% set dropzoneData = null %}
+{% from "01-atoms/heading.njk" import renderHeading %}
+{% from "01-atoms/icon.njk" import renderIcon %}
+{% from "01-atoms/button.njk" import renderButton %}
 
-    {% if options.name %}
-      {% for dropzone in options.datas.dropzones %}
-        {% if dropzone.name == options.name %}
-          {% set dropzoneData = dropzone %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+{% macro renderBlockDragAndDrop(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
+  {% else %}
+    {# Find block drag and drop using universal filter #}
+    {% set blockData = options.datas | findByName(options.name) %}
 
-    {% if not dropzoneData %}
-      <span>Dropzone upload not found: {{ options.name }}</span>
+    {# Render or error #}
+    {% if not blockData %}
+      <span class="error" role="alert">Block drag and drop not found: {{ options.name }}</span>
     {% else %}
-      {% set globalStyle = options.datas.globalStyle %}
-      {% set variantStyle = options.datas.variants[dropzoneData.style] %}
-      {% set iconStyle = options.datas.iconStyles.default %}
+      <div
+        data-drag-drop-name="{{ blockData.name }}"
+        data-drag-drop-type="block-drag-and-drop"
+        data-drag-drop-variant="{{ blockData.variant }}"
+      >
+        {# Heading #}
+        {{ renderHeading({
+            name: blockData.headingName,
+            datas: options.headingDatas
+        }) }}
 
-      {# Find heading data if headings are provided #}
-      {% set headingData = null %}
-      {% if dropzoneData.heading and options.headings %}
-        {% for heading in options.headings.headings %}
-          {% if heading.name == dropzoneData.heading %}
-            {% set headingData = heading %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
+        {# Dropzone area #}
+        <div
+          data-drag-drop-zone="true"
+          tabindex="0"
+          role="button"
+          aria-label="Upload file by dropping it here or by clicking"
+        >
+          {# Icon #}
+          {{ renderIcon({
+              name: blockData.iconName,
+              datas: options.iconDatas
+          }) }}
 
-      {% set iconData = null %}
-      {% if dropzoneData.icon and options.icons %}
-        {% for icon in options.icons.icons %}
-          {% if icon.name == dropzoneData.icon %}
-            {% set iconData = icon %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-
-      {% set buttonData = null %}
-      {% if dropzoneData.button and options.buttons %}
-        {% for button in options.buttons.buttons %}
-          {% if button.name == dropzoneData.button %}
-            {% set buttonData = button %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-
-      <div class="{{ globalStyle }}" data-dropzone="{{ options.name }}">
-        {# Render heading based on headingData if available #}
-        {% if headingData %}
-          {% set headingLevel = headingData.level %}
-          {% set headingText = headingData.text %}
-          {% set headingStyle = options.headings.variants[headingData.style] %}
-          {% set headingSizeStyle = options.headings.sizeStyles["h" + headingLevel] %}
-          {% set headingGlobalStyle = options.headings.globalStyle %}
-
-          {% if headingLevel == 1 %}
-            <h1 class="{{ headingGlobalStyle }} {{ headingSizeStyle }} {{ headingStyle }}">{{ headingText }}</h1>
-          {% elif headingLevel == 2 %}
-            <h2 class="{{ headingGlobalStyle }} {{ headingSizeStyle }} {{ headingStyle }}">{{ headingText }}</h2>
-          {% elif headingLevel == 3 %}
-            <h3 class="{{ headingGlobalStyle }} {{ headingSizeStyle }} {{ headingStyle }}">{{ headingText }}</h3>
-          {% elif headingLevel == 4 %}
-            <h4 class="{{ headingGlobalStyle }} {{ headingSizeStyle }} {{ headingStyle }}">{{ headingText }}</h4>
-          {% elif headingLevel == 5 %}
-            <h5 class="{{ headingGlobalStyle }} {{ headingSizeStyle }} {{ headingStyle }}">{{ headingText }}</h5>
-          {% else %}
-            <h6 class="{{ headingGlobalStyle }} {{ headingSizeStyle }} {{ headingStyle }}">{{ headingText }}</h6>
-          {% endif %}
-        {% else %}
-          <h4 class="{{ options.datas.defaultHeadingClass|default('') }}">{{ options.datas.defaultHeadingText|default('Upload file') }}</h4>
-        {% endif %}
-
-        <div class="{{ options.datas.dropzoneAreaClass }}" tabindex="0" role="button" aria-label="Upload file by dropping it here or by clicking">
-          {% if iconData %}
-            <span data-svg-src="{{ iconData.path }}" class="{{ iconStyle }}" aria-hidden="true"></span>
-          {% endif %}
-          <p class="{{ options.datas.textClass }}">{{ dropzoneData.dropzoneText }}</p>
-
-          {% if dropzoneData.style == "loading" %}
-            <div class="{{ options.datas.spinnerClass }}" aria-hidden="true">
-              <svg class="{{ options.datas.spinnerSvgClass }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-            </div>
-          {% endif %}
+          {# Dropzone text #}
+          <p data-drag-drop-text="true">
+            {{ blockData.dropzoneText }}
+          </p>
         </div>
 
-        {% if dropzoneData.errorMessage %}
-          <div class="{{ options.datas.errorContainerClass }}">
-            <p class="{{ options.datas.errorTextClass }}">{{ dropzoneData.errorMessage }}</p>
-            {% if dropzoneData.dismissible %}
-              <button type="button" class="{{ options.datas.dismissButtonClass }}" aria-label="Dismiss error message">
-                <svg xmlns="http://www.w3.org/2000/svg" class="{{ options.datas.dismissIconClass }}" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+        {# Error message (if present) #}
+        {% if blockData.errorMessage %}
+          <div
+            data-drag-drop-error="true"
+            role="alert"
+          >
+            <p>{{ blockData.errorMessage }}</p>
+            {% if blockData.dismissible %}
+              <button
+                type="button"
+                data-drag-drop-dismiss="true"
+                aria-label="Dismiss error message"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
               </button>
@@ -145,63 +94,44 @@
           </div>
         {% endif %}
 
-        <div class="{{ options.datas.separatorContainerClass }}">
-          <div class="{{ options.datas.separatorLineClass }}"></div>
-          <span class="{{ options.datas.separatorTextClass }}">{{ dropzoneData.separator }}</span>
-          <div class="{{ options.datas.separatorLineClass }}"></div>
+        {# Separator #}
+        <div data-drag-drop-separator="true">
+          <div data-separator-line="true"></div>
+          <span data-separator-text="true">{{ blockData.separator }}</span>
+          <div data-separator-line="true"></div>
         </div>
 
-        {% if buttonData and options.buttons %}
-          {% set buttonVariant = options.buttons.variants[buttonData.style] %}
-          {% set buttonSize = options.buttons.sizes[buttonData.size | default('button')] %}
-          {% set baseClasses = options.buttons.globalStyle ~ " " ~ buttonSize %}
-          {% set stateClasses = {
-            'default': buttonVariant.default,
-            'hover': buttonVariant.hover,
-            'focus': buttonVariant.focus,
-            'active': buttonVariant.active,
-            'disabled': buttonVariant.disabled
-          } %}
-          {% set buttonClasses = baseClasses ~ " " ~ stateClasses.default %}
+        {# Browse button #}
+        {{ renderButton({
+            name: blockData.buttonName,
+            datas: options.buttonDatas,
+            disabled: blockData.variant == "loading"
+        }) }}
 
-          <button type="button" class="{{ baseClasses }} {{ stateClasses.disabled }}" onfocus="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.focus }}'; this.setAttribute('data-focused', 'true'); }" onblur="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.default }}'; this.removeAttribute('data-focused'); }" onmouseover="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }}' : '{{ baseClasses }} {{ stateClasses.hover }}'; }" onmouseout="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }}' : '{{ baseClasses }} {{ stateClasses.default }}'; }" onmousedown="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.active }}'; }" onmouseup="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }}' : '{{ baseClasses }} {{ stateClasses.hover }}'; }" {% if dropzoneData.style == "loading" %} disabled="disabled" {% endif %}>
-            {{ buttonData.text }}
-          </button>
-        {% else %}
-          {% set baseClasses = options.datas.buttonClass %}
-          {% set stateClasses = {
-            'default': options.datas.buttonDefaultClass | default(options.datas.buttonClass),
-            'hover': options.datas.buttonHoverClass | default(options.datas.buttonClass),
-            'focus': options.datas.buttonFocusClass | default(options.datas.buttonClass),
-            'active': options.datas.buttonActiveClass | default(options.datas.buttonClass),
-            'disabled': options.datas.buttonDisabledClass | default(options.datas.buttonClass)
-          } %}
-
-          <button type="button" class="{{ baseClasses }} {{ stateClasses.disabled }}" onfocus="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.focus }}'; this.setAttribute('data-focused', 'true'); }" onblur="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.default }}'; this.removeAttribute('data-focused'); }" onmouseover="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }}' : '{{ baseClasses }} {{ stateClasses.hover }}'; }" onmouseout="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }}' : '{{ baseClasses }} {{ stateClasses.default }}'; }" onmousedown="if(!this.disabled) { this.className='{{ baseClasses }} {{ stateClasses.active }}'; }" onmouseup="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ stateClasses.focus }}' : '{{ baseClasses }} {{ stateClasses.hover }}'; }" {% if dropzoneData.style == "loading" %} disabled="disabled" {% endif %}>
-            {{ dropzoneData.buttonText|default('Browse files') }}
-          </button>
-        {% endif %}
-
-        <div class="{{ options.datas.fileInfoClass }}">
-          <p class="{{ options.datas.fileInfoTextClass }}">
-            <span>{{ options.datas.formatsLabel }}:</span>
-            <span>{{ dropzoneData.supportedFormats }}</span>
+        {# File info #}
+        <div data-drag-drop-info="true">
+          <p>
+            <span>Supported formats:</span>
+            <span>{{ blockData.supportedFormats }}</span>
           </p>
-          <p class="{{ options.datas.fileInfoTextClass }}">
-            <span>{{ options.datas.maxSizeLabel }}:</span>
-            <span>{{ dropzoneData.maxFileSize }}</span>
+          <p>
+            <span>Maximum file size:</span>
+            <span>{{ blockData.maxFileSize }}</span>
           </p>
         </div>
 
-        <!-- Hidden file input -->
-        <input type="file" id="file-{{ dropzoneData.name }}" accept="{{ dropzoneData.supportedFormats|replace(' ', '')|lower }}" aria-hidden="true" tabindex="-1">
+        {# Hidden file input #}
+        <input
+          type="file"
+          id="file-{{ blockData.name }}"
+          accept="{{ blockData.supportedFormats | replace(' ', '') | lower }}"
+          aria-hidden="true"
+          tabindex="-1"
+        >
       </div>
     {% endif %}
-  {% else %}
-    <span>No dropzone upload data provided</span>
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
