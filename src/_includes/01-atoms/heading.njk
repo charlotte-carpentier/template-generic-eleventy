@@ -4,56 +4,43 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Heading identifier
+    - options.datas (array): Heading configuration data
+    - options.tag (string): Override HTML tag (h1-h6, p, span, small)
+
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/heading.njk" import renderHeading %}
 
     {{ renderHeading({
-        name: "page_title",
-        datas: atoms.heading.texts
+        name: "demoHead1",
+        datas: atoms.heading.headings
     }) }}
-
-  Props:
-    - option.name (string): Heading identifier
-    - option.datas (array): Heading configuration data
-    - option.tag (string): Override HTML tag (h1-h6, p, span, small)
-
-  Notes:
-    - Uses existing text classes from input.css
-    - Automatically adds security attributes to external links
-    - Supports inline HTML content with safe filter
-
-  Security:
-    - Adds rel="noopener noreferrer" to external links with target="_blank"
 
   @created 2025-01-15
 #}
 
-{% macro renderHeading(option) %}
-  {# Check if datas is provided #}
-  {% if not option.datas %}
-    <span>Error: No heading configuration provided</span>
+{% macro renderHeading(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error">Error: Missing required prop (name)</span>
   {% else %}
-    {# Retrieve heading configuration #}
-    {% set headingConfig = option.datas %}
-    {% set headingName = option.name %}
-
-    {# Find the specific heading by name #}
+    {# Find heading configuration by name #}
     {% set headingData = null %}
-    {% for heading in headingConfig %}
-      {% if heading.name == headingName %}
+    {% for heading in options.datas %}
+      {% if heading.name == options.name %}
         {% set headingData = heading %}
       {% endif %}
     {% endfor %}
 
-    {# Fallback if heading not found #}
+    {# Render heading or error message #}
     {% if not headingData %}
-      <span>Heading not found:
-        {{ headingName }}</span>
+      <span class="error">Heading not found: {{ options.name }}</span>
     {% else %}
-      {# Build CSS classes #}
-      {% set tag = option.tag | default(headingData.tag) | default('') %}
-      {% set variant = headingData.variant | default('') %}
-      {% set cssClasses = 'text-' ~ variant %}
+      {# Compute final tag with fallback cascade #}
+      {% set finalTag = options.tag | default(headingData.tag) | default('p') %}
 
       {# Security: Add rel="noopener noreferrer" to external links with target="_blank" #}
       {% set secureContent = headingData.text %}
@@ -61,25 +48,52 @@
         {% set secureContent = secureContent | replace('target="_blank"', 'target="_blank" rel="noopener noreferrer"') %}
       {% endif %}
 
-      {# Render the heading with specified tag #}
-      {% if tag == 'h1' %}
-        <h1 class="{{ cssClasses }}">{{ secureContent | safe }}</h1>
-      {% elif tag == 'h2' %}
-        <h2 class="{{ cssClasses }}">{{ secureContent | safe }}</h2>
-      {% elif tag == 'h3' %}
-        <h3 class="{{ cssClasses }}">{{ secureContent | safe }}</h3>
-      {% elif tag == 'h4' %}
-        <h4 class="{{ cssClasses }}">{{ secureContent | safe }}</h4>
-      {% elif tag == 'h5' %}
-        <h5 class="{{ cssClasses }}">{{ secureContent | safe }}</h5>
-      {% elif tag == 'h6' %}
-        <h6 class="{{ cssClasses }}">{{ secureContent | safe }}</h6>
-      {% elif tag == 'span' %}
-        <span class="{{ cssClasses }}">{{ secureContent | safe }}</span>
-      {% elif tag == 'small' %}
-        <small class="{{ cssClasses }}">{{ secureContent | safe }}</small>
+      {# Render heading element #}
+      {% if finalTag == 'h1' %}
+        <h1
+          data-heading-name="{{ headingData.name }}"
+          data-heading-tag="h1"
+        >{{ secureContent | safe }}</h1>
+      {% elif finalTag == 'h2' %}
+        <h2
+          data-heading-name="{{ headingData.name }}"
+          data-heading-tag="h2"
+        >{{ secureContent | safe }}</h2>
+      {% elif finalTag == 'h3' %}
+        <h3
+          data-heading-name="{{ headingData.name }}"
+          data-heading-tag="h3"
+        >{{ secureContent | safe }}</h3>
+      {% elif finalTag == 'h4' %}
+        <h4
+          data-heading-name="{{ headingData.name }}"
+          data-heading-tag="h4"
+        >{{ secureContent | safe }}</h4>
+      {% elif finalTag == 'h5' %}
+        <h5
+          data-heading-name="{{ headingData.name }}"
+          data-heading-tag="h5"
+        >{{ secureContent | safe }}</h5>
+      {% elif finalTag == 'h6' %}
+        <h6
+          data-heading-name="{{ headingData.name }}"
+          data-heading-tag="h6"
+        >{{ secureContent | safe }}</h6>
+      {% elif finalTag == 'span' %}
+        <span
+          data-heading-name="{{ headingData.name }}"
+          data-heading-tag="span"
+        >{{ secureContent | safe }}</span>
+      {% elif finalTag == 'small' %}
+        <small
+          data-heading-name="{{ headingData.name }}"
+          data-heading-tag="small"
+        >{{ secureContent | safe }}</small>
       {% else %}
-        <p class="{{ cssClasses }}">{{ secureContent | safe }}</p>
+        <p
+          data-heading-name="{{ headingData.name }}"
+          data-heading-tag="p"
+        >{{ secureContent | safe }}</p>
       {% endif %}
     {% endif %}
   {% endif %}

@@ -1,16 +1,14 @@
 {
   "// Component": "Checkbox - Checkbox input with label and description support",
-  
   "_meta": {
     "component": "checkbox",
     "type": "atom",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "checkboxes": [
     {
-      "id": "demoCheck1", 
+      "id": "demoCheck1",
       "box": {
         "value": "demoValue1",
         "checked": false,
