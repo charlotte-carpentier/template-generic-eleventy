@@ -1,116 +1,78 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ MOLECULE › Breadcrumb                                   │
-   │ Navigation breadcrumb trail with link states            │
+   │ Navigation breadcrumb trail with link hierarchy         │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Breadcrumb identifier
+    - options.datas (array): Breadcrumb configuration data
+    - options.linkDatas (array): Link atom data for breadcrumb items
+
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
-    
-    {{ renderBreadcrumb({ 
-        name: "adventure",
-        datas: molecules.breadcrumbs,
-        links: atoms.links 
+
+    {{ renderBreadcrumb({
+        name: "demoBreadcrm1",
+        datas: molecules.breadcrumb.breadcrumbs,
+        linkDatas: atoms.link.links
     }) }}
-    
-    With custom styles:
-    {{ renderBreadcrumb({ 
-        datas: molecules.breadcrumbs,
-        links: atoms.links,
-        class: "my-custom-breadcrumb-class"
-    }) }}
-  
-  Props:
-    - options.name (string): Breadcrumb set identifier (optional)
-    - options.datas (object): Breadcrumb configuration
-    - options.links (object): Links atom data
-    - options.class (string): Additional CSS classes
-  
-  Features:
-    - Separator icon between items (default: /)
-    - Active item styling for current page
-    - Hover/focus states for clickable links
-    - Falls back to first breadcrumb set if name not found
-  
-  Accessibility:
-    - Semantic <nav> with aria-label="Breadcrumb"
-    - Ordered list structure
-    - aria-hidden for separator icons
-  
+
   @created 2025-01-15
 #}
 
-{% macro renderBreadcrumb(options) %}
-  {% if options.datas %}
-    {% set globalStyle = options.datas.globalStyle %}
-    {% set separatorStyle = options.datas.separatorStyle | default('') %}
-    {% set separatorIcon = options.datas.separatorIcon | default('/') %}
-    {% set activeItemStyle = options.datas.activeItemStyle | default('') %}
-    
-    {% set breadcrumbData = null %}
-    {% if options.name %}
-      {% for crumbSet in options.datas.breadcrumbs %}
-        {% if crumbSet.name == options.name %}
-          {% set breadcrumbData = crumbSet %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+{% from "01-atoms/link.njk" import renderLink %}
 
+{% macro renderBreadcrumb(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
+  {% else %}
+    {# Find breadcrumb using universal filter #}
+    {% set breadcrumbData = options.datas | findByName(options.name) %}
+
+    {# Render or error #}
     {% if not breadcrumbData %}
-      {% set breadcrumbData = options.datas.breadcrumbs[0] %}
-    {% endif %}
-    
-    {% set stateClasses = {
-      'default': options.datas.variants.default | default(''),
-      'hover': options.datas.variants.hover | default(''),
-      'focus': options.datas.variants.focus | default(''),
-      'disabled': options.datas.variants.disabled | default('')
-    } %}
-    
-    <nav aria-label="Breadcrumb" class="{{ globalStyle }} {{ options.class | default('') }}">
-      <ol>
-        {% for crumb in breadcrumbData.links %}
-          <li>
-            {% if loop.index > 1 %}
-              <span class="{{ separatorStyle }}" aria-hidden="true">{{ separatorIcon }}</span>
-            {% endif %}
-            
-            {% if crumb.link and options.links %}
-              {# Try to find the corresponding link #}
-              {% set linkFound = false %}
-              {% for link in options.links.links %}
-                {% if link.name == crumb.link %}
-                  <a href="{{ link.href }}" 
-                     class="{{ stateClasses.default }}"
-                     onmouseover="this.className='{{ stateClasses.hover }}'" 
-                     onmouseout="this.className='{{ stateClasses.default }}'"
-                     onfocus="this.className='{{ stateClasses.focus }}'"
-                     onblur="this.className='{{ stateClasses.default }}'">
-                    {{ link.text }}
-                  </a>
-                  {% set linkFound = true %}
-                {% endif %}
-              {% endfor %}
-              
-              {% if not linkFound %}
-                <span class="{{ stateClasses.default }}">
-                  {{ crumb.name }}
+      <span class="error" role="alert">Breadcrumb not found: {{ options.name }}</span>
+    {% else %}
+      <nav
+        aria-label="Breadcrumb"
+        data-breadcrumb-name="{{ breadcrumbData.name }}"
+        data-breadcrumb-type="breadcrumb"
+      >
+        <ol>
+          {% for item in breadcrumbData.breadcrumbLinks %}
+            <li>
+              {# Separator (skip for first item) #}
+              {% if not loop.first %}
+                <span data-breadcrumb-separator="true" aria-hidden="true">/</span>
+              {% endif %}
+
+              {# Link item #}
+              {% if item.type == "link" %}
+                {{ renderLink({
+                    name: item.linkName,
+                    datas: options.linkDatas
+                }) }}
+
+              {# Current page (no link) #}
+              {% elif item.type == "current" %}
+                <span
+                  data-breadcrumb-current="true"
+                  aria-current="page"
+                >
+                  {{ item.text }}
                 </span>
               {% endif %}
-            {% else %}
-              <span class="{{ activeItemStyle }}">
-                {{ crumb.name }}
-              </span>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ol>
-    </nav>
-  {% else %}
-    <span>Breadcrumb data not found</span>
+            </li>
+          {% endfor %}
+        </ol>
+      </nav>
+    {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

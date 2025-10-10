@@ -1,0 +1,133 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › List Group                                   │
+   │ Grouped lists with multiple interaction types          │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - options.id (string): List group identifier
+    - options.datas (array): List group configuration data
+    - options.iconDatas (array): Icon atom data
+    - options.linkDatas (array): Link atom data (if type is "link")
+    - options.radioDatas (array): Radio button atom data (if type is "radio")
+    - options.checkboxDatas (array): Checkbox atom data (if type is "checkbox")
+    - options.toggleDatas (array): Toggle atom data (if type is "toggle")
+
+  Usage — Summon HAT Components Wisely:
+    {% from "02-molecules/list-group.njk" import renderListGroup %}
+
+    {{ renderListGroup({
+        id: "demoGroup1",
+        datas: molecules["list-group"].listGroups,
+        iconDatas: atoms.icon.icons
+    }) }}
+
+    {{ renderListGroup({
+        id: "demoGroup3",
+        datas: molecules["list-group"].listGroups,
+        iconDatas: atoms.icon.icons,
+        linkDatas: atoms.link.links
+    }) }}
+
+    {{ renderListGroup({
+        id: "demoGroup4",
+        datas: molecules["list-group"].listGroups,
+        iconDatas: atoms.icon.icons,
+        radioDatas: atoms["radio-button"].radioButtons
+    }) }}
+
+  @created 2025-01-15
+#}
+
+{% from "01-atoms/icon.njk" import renderIcon %}
+{% from "01-atoms/link.njk" import renderLink %}
+{% from "01-atoms/radio-button.njk" import renderRadioButton %}
+{% from "01-atoms/checkbox.njk" import renderCheckbox %}
+{% from "01-atoms/toggle.njk" import renderToggle %}
+
+{% macro renderListGroup(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.id %}
+    <span class="error" role="alert">Error: Missing required prop (id)</span>
+  {% else %}
+    {# Find list group using universal filter #}
+    {% set listData = options.datas | findByName(options.id) %}
+
+    {# Render or error #}
+    {% if not listData %}
+      <span class="error" role="alert">List group not found: {{ options.id }}</span>
+    {% else %}
+      <div
+        data-list-group-id="{{ listData.id }}"
+        data-list-group-type="{{ listData.type }}"
+      >
+        {% for item in listData.items %}
+          <div data-list-group-item="true">
+            {# Icon (always present) #}
+            {{ renderIcon({
+                name: item.iconName,
+                datas: options.iconDatas
+            }) }}
+
+            {# Text #}
+            <span data-list-group-text="true">
+              {{ item.text }}
+            </span>
+
+            {# Type-specific elements #}
+            {% if listData.type == "closable" %}
+              {# Close icon #}
+              <button
+                type="button"
+                data-list-group-close="true"
+                aria-label="Close"
+              >
+                {{ renderIcon({
+                    name: item.iconClose,
+                    datas: options.iconDatas
+                }) }}
+              </button>
+
+            {% elif listData.type == "link" %}
+              {# Link #}
+              {{ renderLink({
+                  name: item.linkName,
+                  datas: options.linkDatas
+              }) }}
+
+            {% elif listData.type == "radio" %}
+              {# Radio button #}
+              {{ renderRadioButton({
+                  id: item.radioName,
+                  datas: options.radioDatas
+              }) }}
+
+            {% elif listData.type == "checkbox" %}
+              {# Checkbox #}
+              {{ renderCheckbox({
+                  id: item.checkboxName,
+                  datas: options.checkboxDatas
+              }) }}
+
+            {% elif listData.type == "toggle" %}
+              {# Toggle #}
+              {{ renderToggle({
+                  id: item.toggleName,
+                  datas: options.toggleDatas
+              }) }}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#}

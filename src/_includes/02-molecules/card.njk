@@ -1,247 +1,106 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ MOLECULE › Card                                         │
-   │ Flexible card component with image, heading and CTA     │
+   │ Content cards with lockup, heading, and action support  │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Usage — Summon HAT Components Wisely:
-    {% from "02-molecules/card.njk" import renderCard %}
-    
-    Regular card:
-    {{ renderCard({ 
-        name: "goblin_menace",
-        variant: "default",
-        datas: molecules.cards,
-        images: atoms.images,
-        headings: atoms.headings,
-        buttons: atoms.buttons
-    }) }}
-    
-    Post card:
-    {{ renderCard({ 
-        name: "post_template", 
-        datas: molecules.cards,
-        buttons: atoms.buttons,
-        post: post
-    }) }}
-  
   Props:
     - options.name (string): Card identifier
-    - options.variant (string): Card style variant
-    - options.datas (object): Card configuration
-    - options.images (object): Images atom data
-    - options.headings (object): Headings atom data
-    - options.buttons (object): Buttons atom data
-    - options.post (object): Post data for blog cards (optional)
-    - options.class (string): Additional CSS classes
-  
-  Card Types:
-    - Regular: Image + Heading + Content + Button
-    - Post: Blog post with author, date, and read more link
-  
-  Features:
-    - Responsive image support
-    - Heading levels (h1-h6)
-    - Content text with line clamping
-    - Button with hover/focus states
-    - Post metadata (author, date)
-  
+    - options.datas (array): Card configuration data
+    - options.lockupDatas (array): Lockup atom data (optional)
+    - options.headingDatas (array): Heading atom data (optional)
+    - options.buttonDatas (array): Button atom data (optional)
+    - options.tagDatas (array): Tag atom data (optional)
+
+  Usage — Summon HAT Components Wisely:
+    {% from "02-molecules/card.njk" import renderCard %}
+
+    {{ renderCard({
+        name: "demoCard1",
+        datas: molecules.card.cards,
+        lockupDatas: molecules.lockup.lockups,
+        headingDatas: atoms.heading.headings,
+        buttonDatas: atoms.button.buttons,
+        tagDatas: atoms.tag.tags
+    }) }}
+
   @created 2025-01-15
 #}
 
-{% macro renderCard(options) %}
-  {% if options.datas %}
-    {% set globalStyle = options.datas.globalStyle %}
-    {% set widthStyle = options.datas.widthStyle | default('') %}
-    
-    {% set cardData = null %}
-    {% if options.name %}
-      {% for cardItem in options.datas.cards %}
-        {% if cardItem.name == options.name %}
-          {% set cardData = cardItem %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+{% from "02-molecules/lockup.njk" import renderLockup %}
+{% from "01-atoms/heading.njk" import renderHeading %}
+{% from "01-atoms/button.njk" import renderButton %}
+{% from "01-atoms/tag.njk" import renderTag %}
 
+{% macro renderCard(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
+  {% else %}
+    {# Find card using universal filter (supports both name and id) #}
+    {% set cardData = options.datas | findByName(options.name) %}
+
+    {# Render or error #}
     {% if not cardData %}
-      {% set cardData = options.datas.cards[0] %}
-    {% endif %}
-    
-    {# Check if this is a post card #}
-    {% set isPostCard = cardData.type == 'post' %}
-    
-    {# Get variant style #}
-    {% set variantStyle = '' %}
-    {% if isPostCard %}
-      {% set variantStyle = options.datas.variants.post %}
+      <span class="error" role="alert">Card not found: {{ options.name }}</span>
     {% else %}
-      {% set variantStyle = options.datas.variants[options.variant] | default(options.datas.variants.default) %}
-    {% endif %}
-    
-    {# For regular cards, render normally #}
-    {% if not isPostCard and not options.post %}
-      <div class="{{ globalStyle }} {{ widthStyle }} {{ variantStyle }} {{ options.class | default('') }}">
-        {# Image section #}
-        {% if cardData.image and options.images %}
-          {% set imageData = null %}
-          {% for img in options.images.images %}
-            {% if img.name == cardData.image.name %}
-              {% set imageData = img %}
-            {% endif %}
-          {% endfor %}
-          
-          {% if imageData %}
-            {% set imgSize = options.images.variants[imageData.size] | default('') %}
-            <div>
-              <img 
-                src="{{ imageData.src }}" 
-                alt="{{ imageData.alt }}" 
-                class="{{ options.images.globalStyle }} {{ imgSize }}"
-              >
-            </div>
-          {% endif %}
+      <div
+        data-card-id="{{ cardData.id }}"
+        data-card-type="card"
+      >
+        {# Lockup (if present and lockupDatas provided) #}
+        {% if cardData.lockupName and options.lockupDatas %}
+          <div data-card-lockup="true">
+            {{ renderLockup({
+                name: cardData.lockupName,
+                datas: options.lockupDatas
+            }) }}
+          </div>
         {% endif %}
-        
-        {# Content section #}
-        <div class="{{ options.datas.contentStyle }}">
-          {# Render heading if present #}
-          {% if cardData.heading and options.headings %}
-            {% set headingData = null %}
-            {% for heading in options.headings.headings %}
-              {% if heading.name == cardData.heading.name %}
-                {% set headingData = heading %}
-              {% endif %}
-            {% endfor %}
-            
-            {% if headingData %}
-              {% set hLevel = headingData.level | default(3) %}
-              {% set headingStyle = options.headings.variants[headingData.style] | default(options.headings.variants.default) %}
-              {% set sizeStyle = options.headings.sizeStyles['h' + hLevel] | default('') %}
-              
-              <h{{ hLevel }} class="{{ options.headings.globalStyle }} {{ sizeStyle }} {{ headingStyle }}">
-                {{ headingData.text }}
-              </h{{ hLevel }}>
-            {% endif %}
+
+        {# Content wrapper #}
+        <div data-card-content="true">
+          {# Heading (if present) #}
+          {% if cardData.headingName and options.headingDatas %}
+            {{ renderHeading({
+                name: cardData.headingName,
+                datas: options.headingDatas
+            }) }}
           {% endif %}
-          
-          {# Render content text #}
+
+          {# Content text (if present) #}
           {% if cardData.content %}
-            {% set contentStyle = options.datas.contentStyles[cardData.content.style] | default(options.datas.contentStyles.default) %}
-            {% set maxLines = cardData.content.maxLines | default(0) %}
-            <p class="{{ contentStyle }}">{{ cardData.content.text }}</p>
+            <p data-card-text="true">
+              {{ cardData.content }}
+            </p>
           {% endif %}
-          
-          {# Render button if present #}
-          {% if cardData.button and options.buttons %}
-            {% set buttonData = null %}
-            {% for button in options.buttons.buttons %}
-              {% if button.name == cardData.button.name %}
-                {% set buttonData = button %}
-              {% endif %}
-            {% endfor %}
-            
-            {% if buttonData %}
-              {% set btnVariant = buttonData.style | default('primary') %}
-              {% set btnSize = buttonData.size | default('button') %}
-              {% set btnDefaultState = options.buttons.variants[btnVariant].default | default('') %}
-              {% set btnSizeStyle = options.buttons.sizes[btnSize] | default('') %}
-              
-              <div>
-                <a 
-                  href="{{ buttonData.href | default('#') }}" 
-                  class="{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}"
-                  {% if buttonData.target %}target="{{ buttonData.target }}"{% endif %}
-                  onmouseover="this.className='{{ options.buttons.globalStyle }} {{ options.buttons.variants[btnVariant].hover }} {{ btnSizeStyle }}'"
-                  onmouseout="this.className='{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}'"
-                  onfocus="this.className='{{ options.buttons.globalStyle }} {{ options.buttons.variants[btnVariant].focus }} {{ btnSizeStyle }}'"
-                  onblur="this.className='{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}'"
-                >
-                  {% if buttonData.iconBefore %}
-                    <img src="{{ buttonData.iconBefore }}" alt="">
-                  {% endif %}
-                  
-                  {{ buttonData.text }}
-                  
-                  {% if buttonData.iconAfter %}
-                    <img src="{{ buttonData.iconAfter }}" alt="">
-                  {% endif %}
-                </a>
-              </div>
-            {% endif %}
+
+          {# Button (if present) #}
+          {% if cardData.buttonName and options.buttonDatas %}
+            {{ renderButton({
+                name: cardData.buttonName,
+                datas: options.buttonDatas
+            }) }}
+          {% endif %}
+
+          {# Tags (if present) #}
+          {% if cardData.tags and options.tagDatas %}
+            <div data-card-tags="true">
+              {% for tagName in cardData.tags %}
+                {{ renderTag({
+                    name: tagName,
+                    datas: options.tagDatas
+                }) }}
+              {% endfor %}
+            </div>
           {% endif %}
         </div>
       </div>
-    {% else %}
-      {# For post cards, render with the post structure #}
-      {% set postCard = cardData %}
-      {% if options.post %}
-        {% set post = options.post %}
-        <li>
-          <article class="{{ variantStyle }} {{ options.class | default('') }}">
-            <div class="{{ postCard.imageStyle | default('') }}">
-              <img src="{{ post.data.image }}" alt="{{ post.data.title }}">
-            </div>
-            <div class="{{ options.datas.contentStyles.post | default('') }}">
-              <h3 class="{{ postCard.titleStyle | default('') }}">{{ post.data.title }}</h3>
-              <p class="{{ postCard.metaStyle | default('') }}">by
-                <span>{{ post.data.author }}</span>
-                on
-                <span>{{ post.data.date | postDate }}</span>
-              </p>
-              <p class="{{ postCard.descriptionStyle | default('') }}">{{ post.data.description }}</p>
-              <div class="{{ postCard.buttonContainerStyle | default('') }}">
-                {% if options.buttons %}
-                  {% set btnName = postCard.buttonName | default('read_more') %}
-                  {% set buttonData = null %}
-                  {% for button in options.buttons.buttons %}
-                    {% if button.name == btnName %}
-                      {% set buttonData = button %}
-                    {% endif %}
-                  {% endfor %}
-                  
-                  {% if buttonData %}
-                    {% set btnVariant = buttonData.style | default('primary') %}
-                    {% set btnSize = buttonData.size | default('button') %}
-                    {% set btnDefaultState = options.buttons.variants[btnVariant].default | default('') %}
-                    {% set btnSizeStyle = options.buttons.sizes[btnSize] | default('') %}
-                    
-                    <a 
-                      href="{{ post.url }}" 
-                      class="{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}"
-                      onmouseover="this.className='{{ options.buttons.globalStyle }} {{ options.buttons.variants[btnVariant].hover }} {{ btnSizeStyle }}'"
-                      onmouseout="this.className='{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}'"
-                      onfocus="this.className='{{ options.buttons.globalStyle }} {{ options.buttons.variants[btnVariant].focus }} {{ btnSizeStyle }}'"
-                      onblur="this.className='{{ options.buttons.globalStyle }} {{ btnDefaultState }} {{ btnSizeStyle }}'"
-                    >
-                      {% if buttonData.iconBefore %}
-                        <img src="{{ buttonData.iconBefore }}" alt="">
-                      {% endif %}
-                      
-                      {{ buttonData.text }}
-                      
-                      {% if buttonData.iconAfter %}
-                        <img src="{{ buttonData.iconAfter }}" alt="">
-                      {% endif %}
-                    </a>
-                  {% else %}
-                    <a href="{{ post.url }}">Read more</a>
-                  {% endif %}
-                {% else %}
-                  <a href="{{ post.url }}">Read more</a>
-                {% endif %}
-              </div>
-            </div>
-          </article>
-        </li>
-      {% else %}
-        <span>Post data not provided for post card type</span>
-      {% endif %}
     {% endif %}
-  {% else %}
-    <span>Card data not found</span>
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

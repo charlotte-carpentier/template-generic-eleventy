@@ -1,101 +1,90 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ MOLECULE › Disclaimer                                   │
-   │ Dismissible alert messages with icon support            │
+   │ Alert messages with semantic variants and actions       │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Usage — Summon HAT Components Wisely:
-    {% from "02-molecules/disclaimer.njk" import renderDisclaimer %}
-    
-    {{ renderDisclaimer({ 
-        name: "gdpr_consent", 
-        datas: molecules.disclaimers,
-        icons: atoms.icons 
-    }) }}
-  
   Props:
     - options.name (string): Disclaimer identifier
-    - options.datas (object): Disclaimer configuration
-    - options.icons (object): Icons atom data
-  
-  Features:
-    - Style variants (info, warning, error, success)
-    - Optional icon display
-    - Dismissible with close button
-    - Message content from configuration
-  
-  Accessibility:
-    - role="alert" for screen readers
-    - aria-live="polite" for dynamic updates
-    - aria-label on dismiss button
-    - aria-hidden for decorative icons
-  
+    - options.datas (array): Disclaimer configuration data
+    - options.iconDatas (array): Icon atom data
+
+  Usage — Summon HAT Components Wisely:
+    {% from "02-molecules/disclaimer.njk" import renderDisclaimer %}
+
+    {{ renderDisclaimer({
+        name: "demoDiscla1",
+        datas: molecules.disclaimer.disclaimers,
+        iconDatas: atoms.icon.icons
+    }) }}
+
   @created 2025-01-15
 #}
 
+{% from "01-atoms/icon.njk" import renderIcon %}
+
 {% macro renderDisclaimer(options) %}
-  {% if options.datas %}
-    {% set disclaimerData = null %}
-    
-    {% if options.name %}
-      {% for disclaimer in options.datas.disclaimers %}
-        {% if disclaimer.name == options.name %}
-          {% set disclaimerData = disclaimer %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
+  {% else %}
+    {# Find disclaimer using universal filter #}
+    {% set disclaimerData = options.datas | findByName(options.name) %}
 
+    {# Render or error #}
     {% if not disclaimerData %}
-      <span>Disclaimer not found: {{ options.name }}</span>
+      <span class="error" role="alert">Disclaimer not found: {{ options.name }}</span>
     {% else %}
-      {% set globalStyle = options.datas.globalStyle %}
-      {% set variantStyle = options.datas.variants[disclaimerData.style] %}
-      {% set iconStyle = options.datas.iconStyles.default %}
-      
-      {% set iconData = null %}
-      {% if disclaimerData.icon and options.icons %}
-        {% for icon in options.icons.icons %}
-          {% if icon.name == disclaimerData.icon %}
-            {% set iconData = icon %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-
-      <div 
-        aria-live="polite" 
+      <div
+        data-disclaimer-name="{{ disclaimerData.name }}"
+        data-disclaimer-type="disclaimer"
+        data-disclaimer-variant="{{ disclaimerData.variant }}"
         role="alert"
-        data-disclaimer="{{ options.name }}"
+        aria-live="polite"
       >
-        <div 
-          class="{{ globalStyle }} {{ variantStyle }}"
-        >
-          <div>
-            <div>
-              {% if iconData %}
-                <span 
-                  data-svg-src="{{ iconData.path }}" 
-                  class="{{ iconStyle }}" 
-                  aria-hidden="true"
-                ></span>
-              {% endif %}
-              <span>{{ disclaimerData.message }}</span>
+        <div data-disclaimer-content="true">
+          {# Icon (if present) #}
+          {% if disclaimerData.iconName and options.iconDatas %}
+            <div data-disclaimer-icon="true">
+              {{ renderIcon({
+                  name: disclaimerData.iconName,
+                  datas: options.iconDatas
+              }) }}
             </div>
-            
-            <button 
-              data-dismiss
-              aria-label="Dismiss disclaimer"
+          {% endif %}
+
+          {# Message #}
+          <span data-disclaimer-message="true">
+            {{ disclaimerData.message }}
+          </span>
+
+          {# Close button (if present) #}
+          {% if disclaimerData.closeIconName and options.iconDatas %}
+            <button
+              type="button"
+              data-disclaimer-dismiss="true"
+              aria-label="{{ disclaimerData.dismissLabel | default('Dismiss alert') }}"
             >
-              &times;
+              {{ renderIcon({
+                  name: disclaimerData.closeIconName,
+                  datas: options.iconDatas
+              }) }}
             </button>
-          </div>
+          {% endif %}
         </div>
+
+        {# Action button label (for future Phase 4 if needed) #}
+        {% if disclaimerData.actionLabel %}
+          <div data-disclaimer-action="true" aria-hidden="true">
+            {{ disclaimerData.actionLabel }}
+          </div>
+        {% endif %}
       </div>
     {% endif %}
-  {% else %}
-    <span>No disclaimer data provided</span>
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -8,7 +8,11 @@ permalink: "/"
 <!-- MAINTENANCE: Uncomment to activate -->
 <!-- <script>window.location.replace('/maintenance/');</script> -->
 
-{# Import macros #}
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Import Macros
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{# Atoms #}
 {% from "01-atoms/button.njk" import renderButton %}
 {% from "01-atoms/checkbox.njk" import renderCheckbox %}
 {% from "01-atoms/chip-notification.njk" import renderChipNotification %}
@@ -24,100 +28,195 @@ permalink: "/"
 {% from "01-atoms/tooltip.njk" import renderTooltip %}
 {% from "01-atoms/vector.njk" import renderVector %}
 
-{# Test button #}
-<h2>Button Tests</h2>
-{{ renderButton({
-    name: "demoButton1",
-    datas: atoms.button.buttons
-}) }}
+{# Molecules #}
+{% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
+{% from "02-molecules/caption.njk" import renderCaption %}
+{% from "02-molecules/block-drag-and-drop.njk" import renderBlockDragAndDrop %}
 
-{# Test checkbox #}
-<h2>Checkbox Tests</h2>
-{{ renderCheckbox({
-   id: "demoCheck1",
-   datas: atoms.checkbox.checkboxes
-}) }}
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Atoms
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-{# Test chip-notification #}
-<h2>Chip Notification Tests</h2>
-{{ renderChipNotification({
-    name: "demoChip1",
-    datas: atoms["chip-notification"].chipNotifs
-}) }}
+<h1>Atoms</h1>
 
-{# Test heading #}
-<h2>Heading Tests</h2>
-{{ renderHeading({
-    name: "demoHead1",
-    datas: atoms.heading.headings
-}) }}
+{# Button #}
+<section>
+  <h2>Button</h2>
+  {{ renderButton({
+      name: "demoButton1",
+      datas: atoms.button.buttons
+  }) }}
+</section>
 
-{# Test icon #}
-<h2>Icon Tests</h2>
-{{ renderIcon({
-    name: "demoSmile1",
-    datas: atoms.icon.icons
-}) }}
+{# Checkbox #}
+<section>
+  <h2>Checkbox</h2>
+  {{ renderCheckbox({
+      id: "demoCheck1",
+      datas: atoms.checkbox.checkboxes
+  }) }}
+</section>
 
-{# Test image #}
-<h2>Image Tests</h2>
-{{ renderImage({
-    name: "demoImage1",
-    datas: atoms.image.images
-}) }}
+{# Chip Notification #}
+<section>
+  <h2>Chip Notification</h2>
+  {{ renderChipNotification({
+      name: "demoChip1",
+      datas: atoms["chip-notification"].chipNotifs
+  }) }}
+</section>
 
-{# Test input #}
-<h2>Input Tests</h2>
-{{ renderInput({
-    name: "demoInput1",
-    datas: atoms.input.inputs
-}) }}
+{# Heading #}
+<section>
+  <h2>Heading</h2>
+  {{ renderHeading({
+      name: "demoHead1",
+      datas: atoms.heading.headings
+  }) }}
+</section>
 
-{# Test link #}
-<h2>Link Tests</h2>
-{{ renderLink({
-    name: "demoLink1",
-    datas: atoms.link.links
-}) }}
+{# Icon #}
+<section>
+  <h2>Icon</h2>
+  {{ renderIcon({
+      name: "demoSmile1",
+      datas: atoms.icon.icons
+  }) }}
+</section>
 
-{# Test radio-button #}
-<h2>Radio Button Tests</h2>
-{{ renderRadioButton({
-    id: "demoRadio1",
-    datas: atoms["radio-button"].radioButtons
-}) }}
+{# Image #}
+<section>
+  <h2>Image</h2>
+  {{ renderImage({
+      name: "demoImage1",
+      datas: atoms.image.images
+  }) }}
+</section>
 
-{# Test select #}
-<h2>Select Tests</h2>
-{{ renderSelect({
-    name: "demoSelect1",
-    datas: atoms.select.selects
-}) }}
+{# Input #}
+<section>
+  <h2>Input</h2>
+  {{ renderInput({
+      name: "demoInput1",
+      datas: atoms.input.inputs
+  }) }}
+</section>
 
-{# Test tag #}
-<h2>Tag Tests</h2>
-{{ renderTag({
-    name: "demoTag1",
-    datas: atoms.tag.tags
-}) }}
+{# Link #}
+<section>
+  <h2>Link</h2>
+  {{ renderLink({
+      name: "demoLink1",
+      datas: atoms.link.links
+  }) }}
+</section>
 
-{# Test toggle #}
-<h2>Toggle Tests</h2>
-{{ renderToggle({
-    id: "demoToggle1",
-    datas: atoms.toggle.toggles
-}) }}
+{# Radio Button #}
+<section>
+  <h2>Radio Button</h2>
+  {{ renderRadioButton({
+      id: "demoRadio1",
+      datas: atoms["radio-button"].radioButtons
+  }) }}
+</section>
 
-{# Test tooltip #}
-<h2>Tooltip Tests</h2>
-{{ renderTooltip({
-    name: "demoTooltip1",
-    datas: atoms.tooltip.tooltips
-}) }}
+{# Select #}
+<section>
+  <h2>Select</h2>
+  {{ renderSelect({
+      name: "demoSelect1",
+      datas: atoms.select.selects
+  }) }}
+</section>
 
-{# Test vector #}
-<h2>Vector Tests</h2>
-{{ renderVector({
-    name: "demoVector1",
-    datas: atoms.vector.vectors
-}) }}
+{# Tag #}
+<section>
+  <h2>Tag</h2>
+  {{ renderTag({
+      name: "demoTag1",
+      datas: atoms.tag.tags
+  }) }}
+</section>
+
+{# Toggle #}
+<section>
+  <h2>Toggle</h2>
+  {{ renderToggle({
+      id: "demoToggle1",
+      datas: atoms.toggle.toggles
+  }) }}
+</section>
+
+{# Tooltip #}
+<section>
+  <h2>Tooltip</h2>
+  {{ renderTooltip({
+      name: "demoTooltip1",
+      datas: atoms.tooltip.tooltips
+  }) }}
+</section>
+
+{# Vector #}
+<section>
+  <h2>Vector</h2>
+  {{ renderVector({
+      name: "demoVector1",
+      datas: atoms.vector.vectors
+  }) }}
+</section>
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Molecules
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+<h1>Molecules</h1>
+
+{# Breadcrumb #}
+<section>
+  <h2>Breadcrumb</h2>
+  {{ renderBreadcrumb({
+      name: "demoBreadcrm1",
+      datas: molecules.breadcrumb.breadcrumbs,
+      linkDatas: atoms.link.links
+  }) }}
+</section>
+
+{# Caption #}
+<section>
+  <h2>Caption</h2>
+  {{ renderCaption({
+      name: "demoCaption1",
+      datas: molecules.caption.captions,
+      iconDatas: atoms.icon.icons
+  }) }}
+
+  {{ renderCaption({
+      name: "demoCaption2",
+      datas: molecules.caption.captions,
+      iconDatas: atoms.icon.icons
+  }) }}
+
+  {{ renderCaption({
+      name: "demoCaption3",
+      datas: molecules.caption.captions,
+      iconDatas: atoms.icon.icons
+  }) }}
+
+  {{ renderCaption({
+      name: "demoCaption4",
+      datas: molecules.caption.captions,
+      iconDatas: atoms.icon.icons
+  }) }}
+</section>
+
+{# Block Drag and Drop #}
+<section>
+  <h2>Block Drag and Drop</h2>
+  {{ renderBlockDragAndDrop({
+      name: "demoDragDrop1",
+      datas: molecules["block-drag-and-drop"].blockDragAndDrops,
+      headingDatas: atoms.heading.headings,
+      iconDatas: atoms.icon.icons,
+      buttonDatas: atoms.button.buttons
+  }) }}
+</section>

@@ -1,98 +1,59 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ MOLECULE › List Content                                 │
-   │ Organized list of lockup components                     │
+   │ Content lists with lockup items                         │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.id (string): List content identifier
+    - options.datas (array): List content configuration data
+    - options.lockupDatas (array): Lockup molecule data
+
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/list-content.njk" import renderListContent %}
-    
-    {{ renderListContent({ 
-        name: "forgotten_legends",
-        datas: molecules.list_contents,
-        lockups: molecules.lockups,
-        images: atoms.images,
-        headings: atoms.headings
+
+    {{ renderListContent({
+        id: "demoList1",
+        datas: molecules["list-content"].listContents,
+        lockupDatas: molecules.lockup.lockups
     }) }}
-    
-    With custom styles:
-    {{ renderListContent({ 
-        name: "mystical_artifacts",
-        datas: molecules.list_contents,
-        lockups: molecules.lockups,
-        images: atoms.images,
-        headings: atoms.headings,
-        class: "my-custom-list-class"
-    }) }}
-  
-  Props:
-    - options.name (string): List content identifier
-    - options.datas (object): List content configuration
-    - options.lockups (object): Lockups molecule data
-    - options.images (object): Images atom data
-    - options.headings (object): Headings atom data
-    - options.class (string): Additional CSS classes
-  
-  Features:
-    - Style variants for list appearance
-    - Item-specific styling
-    - Integrates with lockup molecule
-    - Falls back to first list if name not found
-  
+
   @created 2025-01-15
 #}
 
-{% macro renderListContent(options) %}
-  {% if options.datas %}
-    {% set globalStyle = options.datas.globalStyle %}
-    {% set itemStyle = options.datas.itemStyle.default %}
-    
-    {% set listContentData = null %}
-    {% if options.name %}
-      {% for listSet in options.datas.list_contents %}
-        {% if listSet.name == options.name %}
-          {% set listContentData = listSet %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+{% from "02-molecules/lockup.njk" import renderLockup %}
 
-    {% if not listContentData %}
-      {% set listContentData = options.datas.list_contents[0] %}
-    {% endif %}
-    
-    {% set listVariant = options.datas.variants[listContentData.style | default('default')] %}
-    {% if listContentData.itemStyle %}
-      {% set itemStyle = options.datas.itemStyle[listContentData.itemStyle] %}
-    {% endif %}
-    
-    <div class="{{ globalStyle }} {{ listVariant }} {{ options.class | default('') }}">
-      {% for item in listContentData.items %}
-        <div class="{{ itemStyle }}">
-          {% if options.lockups %}
-            {% for lockup in options.lockups.lockups %}
-              {% if lockup.name == item.lockupName %}
-                {% if lockup.type == "block-content" %}
-                  {% from "02-molecules/lockup.njk" import renderLockup %}
-                  {{ renderLockup({ 
-                    name: item.lockupName,
-                    datas: options.lockups,
-                    images: options.images,
-                    headings: options.headings
-                  }) }}
-                {% endif %}
-              {% endif %}
-            {% endfor %}
-          {% else %}
-            <span>Lockup: {{ item.lockupName }}</span>
-          {% endif %}
-        </div>
-      {% endfor %}
-    </div>
+{% macro renderListContent(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.id %}
+    <span class="error" role="alert">Error: Missing required prop (id)</span>
   {% else %}
-    <span>List content data not found</span>
+    {# Find list content using universal filter #}
+    {% set listData = options.datas | findByName(options.id) %}
+
+    {# Render or error #}
+    {% if not listData %}
+      <span class="error" role="alert">List content not found: {{ options.id }}</span>
+    {% else %}
+      <div
+        data-list-content-id="{{ listData.id }}"
+        data-list-content-type="list-content"
+      >
+        {% for item in listData.items %}
+          <div data-list-content-item="true">
+            {# Render lockup #}
+            {{ renderLockup({
+                name: item.lockupName,
+                datas: options.lockupDatas
+            }) }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

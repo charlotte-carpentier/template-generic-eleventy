@@ -1,0 +1,96 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › List Control                                 │
+   │ Lists with radio, checkbox, and toggle controls        │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - options.id (string): List control identifier
+    - options.datas (array): List control configuration data
+    - options.radioDatas (array): Radio button atom data (if type is "radio")
+    - options.checkboxDatas (array): Checkbox atom data (if type is "checkbox")
+    - options.toggleDatas (array): Toggle atom data (if type is "toggle")
+
+  Usage — Summon HAT Components Wisely:
+    {% from "02-molecules/list-control.njk" import renderListControl %}
+
+    {{ renderListControl({
+        id: "demoList1",
+        datas: molecules["list-control"].listControls,
+        radioDatas: atoms["radio-button"].radioButtons
+    }) }}
+
+    {{ renderListControl({
+        id: "demoList2",
+        datas: molecules["list-control"].listControls,
+        checkboxDatas: atoms.checkbox.checkboxes
+    }) }}
+
+    {{ renderListControl({
+        id: "demoList3",
+        datas: molecules["list-control"].listControls,
+        toggleDatas: atoms.toggle.toggles
+    }) }}
+
+  @created 2025-01-15
+#}
+
+{% from "01-atoms/radio-button.njk" import renderRadioButton %}
+{% from "01-atoms/checkbox.njk" import renderCheckbox %}
+{% from "01-atoms/toggle.njk" import renderToggle %}
+
+{% macro renderListControl(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.id %}
+    <span class="error" role="alert">Error: Missing required prop (id)</span>
+  {% else %}
+    {# Find list control using universal filter #}
+    {% set listData = options.datas | findByName(options.id) %}
+
+    {# Render or error #}
+    {% if not listData %}
+      <span class="error" role="alert">List control not found: {{ options.id }}</span>
+    {% else %}
+      <div
+        data-list-control-id="{{ listData.id }}"
+        data-list-control-type="{{ listData.type }}"
+      >
+        {% for item in listData.items %}
+          <div data-list-control-item="true">
+            {# Render based on list type #}
+            {% if listData.type == "radio" %}
+              {{ renderRadioButton({
+                  id: item.radioName,
+                  datas: options.radioDatas,
+                  checked: item.checked
+              }) }}
+
+            {% elif listData.type == "checkbox" %}
+              {{ renderCheckbox({
+                  id: item.checkboxName,
+                  datas: options.checkboxDatas,
+                  checked: item.checked
+              }) }}
+
+            {% elif listData.type == "toggle" %}
+              {{ renderToggle({
+                  id: item.toggleName,
+                  datas: options.toggleDatas,
+                  checked: item.checked
+              }) }}
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#}

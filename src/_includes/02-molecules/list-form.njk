@@ -1,122 +1,59 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ MOLECULE › List Form                                    │
-   │ Form with radio and text inputs, Netlify support        │
+   │ Form input lists with ordered items                     │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.id (string): List form identifier
+    - options.datas (array): List form configuration data
+    - options.inputDatas (array): Input atom data
+
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/list-form.njk" import renderListForm %}
-    
-    {{ renderListForm({ 
-        name: "contact_form",
-        datas: molecules["list-form"]["list-forms"],
-        radioDatas: atoms.radio.radios,
-        inputDatas: atoms.input.inputs,
-        netlify: true,
-        submitButton: '<button type="submit">Send</button>'
+
+    {{ renderListForm({
+        id: "demoForm1",
+        datas: molecules["list-form"].listForms,
+        inputDatas: atoms.input.inputs
     }) }}
-  
-  Props:
-    - option.name (string): List form identifier
-    - option.datas (array): List form configuration
-    - option.radioDatas (array): Radio atoms data
-    - option.inputDatas (array): Input atoms data
-    - option.netlify (boolean): Enable Netlify Forms integration
-    - option.submitButton (string): Submit button HTML (safe)
-  
-  Features:
-    - Radio button section (optional)
-    - Multiple text inputs
-    - Netlify Forms integration with honeypot
-    - Submit button placement inside form
-    - Hidden redirect field for Netlify
-  
-  Netlify Integration:
-    - data-netlify="true" attribute
-    - netlify-honeypot for spam protection
-    - Hidden bot-field and _redirect fields
-  
+
   @created 2025-01-15
 #}
 
-{# Import atoms #}
-{% from "01-atoms/radio.njk" import renderRadio %}
 {% from "01-atoms/input.njk" import renderInput %}
 
-{% macro renderListForm(option) %}
-  {# Check if datas is provided #}
-  {% if not option.datas %}
-    <span>Error: No list-form configuration provided</span>
+{% macro renderListForm(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.id %}
+    <span class="error" role="alert">Error: Missing required prop (id)</span>
   {% else %}
-    {# Retrieve list-form configuration #}
-    {% set listFormsConfig = option.datas %}
-    {% set listFormName = option.name %}
-    
-    {# Find the specific list-form by name #}
-    {% set listFormData = null %}
-    {% for listForm in listFormsConfig %}
-      {% if listForm.name == listFormName %}
-        {% set listFormData = listForm %}
-      {% endif %}
-    {% endfor %}
+    {# Find list form using universal filter #}
+    {% set listFormData = options.datas | findByName(options.id) %}
 
-    {# Fallback if list-form not found #}
+    {# Render or error #}
     {% if not listFormData %}
-      <span>List-form not found: {{ listFormName }}</span>
+      <span class="error" role="alert">List form not found: {{ options.id }}</span>
     {% else %}
-      {# Render list-form molecule #}
-      <div>
-        <form 
-              method="POST" 
-              {% if option.netlify %}
-              name="contact"
-              data-netlify="true"
-              netlify-honeypot="bot-field"
-              action="/redirection/"
-              {% else %}
-              action="#"
-              {% endif %}>
-          
-          {% if option.netlify %}
-          {# Hidden honeypot field for spam protection #}
-          <input type="hidden" name="bot-field" />
-          {# Backup redirect field #}
-          <input type="hidden" name="_redirect" value="/redirection/" />
-          {% endif %}
-          
-          {# Radio section #}
-          {% if listFormData.radioName %}
-            <div>
-              {{ renderRadio({ 
-                  name: listFormData.radioName,
-                  datas: option.radioDatas
-              }) }}
-            </div>
-          {% endif %}
-          
-          {# Inputs section #}
-          <div>
-            {% for inputItem in listFormData.inputs %}
-              {{ renderInput({ 
-                  name: inputItem.inputName,
-                  datas: option.inputDatas
-              }) }}
-            {% endfor %}
+      <div
+        data-list-form-id="{{ listFormData.id }}"
+        data-list-form-type="{{ listFormData.type }}"
+      >
+        {% for item in listFormData.items %}
+          <div data-list-form-item="{{ item.order }}">
+            {# Render input #}
+            {{ renderInput({
+                name: item.inputName,
+                datas: options.inputDatas
+            }) }}
           </div>
-          
-          {# Submit button INSIDE the form #}
-          {% if option.submitButton %}
-          <div>
-            {{ option.submitButton | safe }}
-          </div>
-          {% endif %}
-          
-        </form>
+        {% endfor %}
       </div>
     {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

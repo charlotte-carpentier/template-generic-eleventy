@@ -1,139 +1,61 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ MOLECULE › Caption                                      │
-   │ Icon with text content and tooltip behavior             │
+   │ Contextual labels with semantic icon variants          │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Caption identifier
+    - options.datas (array): Caption configuration data
+    - options.iconDatas (array): Icon atom data
+
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/caption.njk" import renderCaption %}
-    
-    {{ renderCaption({ 
-        name: "languages_symfony",
+
+    {{ renderCaption({
+        name: "demoCaption1",
         datas: molecules.caption.captions,
-        iconDatas: atoms.icon.icons,
-        tooltipDatas: atoms.tooltip.tooltips,
-        typographyDatas: atoms.typography.texts
+        iconDatas: atoms.icon.icons
     }) }}
-  
-  Props:
-    - option.name (string): Caption identifier
-    - option.datas (array): Caption configuration
-    - option.iconDatas (array): Icons atom data
-    - option.tooltipDatas (array): Tooltips atom data
-    - option.typographyDatas (array): Typography atom data
-  
-  Features:
-    - Desktop: Icon + Title (hides on hover) + Tooltip (appears below)
-    - Mobile: Icon + Content side-by-side (label + description stacked)
-    - Gradient color support on icons
-    - Unique tooltip IDs for accessibility
-  
-  Accessibility:
-    - Keyboard accessible (tabindex="0")
-    - aria-describedby links to tooltip
-    - Tooltip has role="tooltip" and aria-hidden states
-  
+
   @created 2025-01-15
 #}
 
-{# Import atoms #}
 {% from "01-atoms/icon.njk" import renderIcon %}
-{% from "01-atoms/tooltip.njk" import renderTooltip %}
-{% from "01-atoms/heading.njk" import renderHeading %}
 
-{% macro renderCaption(option) %}
-  {# Check if datas is provided #}
-  {% if not option.datas %}
-    <span>Error: No caption configuration provided</span>
+{% macro renderCaption(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Retrieve caption configuration #}
-    {% set captionsConfig = option.datas %}
-    {% set captionName = option.name %}
-    
-    {# Find the specific caption by name #}
-    {% set captionData = null %}
-    {% for caption in captionsConfig %}
-      {% if caption.name == captionName %}
-        {% set captionData = caption %}
-      {% endif %}
-    {% endfor %}
+    {# Find caption using universal filter #}
+    {% set captionData = options.datas | findByName(options.name) %}
 
-    {# Fallback if caption not found #}
+    {# Render or error #}
     {% if not captionData %}
-      <span>Caption not found: {{ captionName }}</span>
+      <span class="error" role="alert">Caption not found: {{ options.name }}</span>
     {% else %}
-      {# Get tooltip data for label and description #}
-      {% set tooltipData = null %}
-      {% for tooltip in option.tooltipDatas %}
-        {% if tooltip.name == captionData.tooltipName %}
-          {% set tooltipData = tooltip %}
-        {% endif %}
-      {% endfor %}
-      
-      {# Get typography data for labels #}
-      {% set typographyData = null %}
-      {% for typography in option.typographyDatas %}
-        {% if typography.name == captionData.name %}
-          {% set typographyData = typography %}
-        {% endif %}
-      {% endfor %}
-      
-      {# Generate unique tooltip ID #}
-      {% set tooltipId = "tooltip-" ~ captionData.name ~ "-" ~ loop.index0 if loop.index0 is defined else "tooltip-" ~ captionData.name %}
-      
-      {# Caption container with tooltip logic and ARIA attributes #}
-      <div class="" 
-           data-tooltip="{{ captionData.name }}" 
-           tabindex="0"
-           aria-describedby="{{ tooltipId }}">
-        
-        {# Desktop version: Icon + Title + Tooltip (tooltip appears below, title hides) #}
-        <div class="">
-          {# Icon (64x64 desktop) with gradient class #}
-          {{ renderIcon({ 
+      <div
+        data-caption-name="{{ captionData.name }}"
+        data-caption-type="caption"
+        data-caption-variant="{{ captionData.variant }}"
+      >
+        {# Icon #}
+        {{ renderIcon({
             name: captionData.iconName,
-            datas: option.iconDatas,
-            class: "" ~ captionData.gradientColor
-          }) }}
-          
-          {# Title - Typography classes with proper text #}
-          <div class="">{{ typographyData.text if typographyData else captionData.name }}</div>
-          
-          {# Tooltip (hidden by default, shown below icon on hover/focus) #}
-          <div class="" 
-               id="{{ tooltipId }}" 
-               role="tooltip" 
-               aria-hidden="true">
-            {{ renderTooltip({ 
-              name: captionData.tooltipName,
-              datas: option.tooltipDatas
-            }) }}
-          </div>
-        </div>
+            datas: options.iconDatas
+        }) }}
 
-        {# Mobile version: Icon + Content (side by side) #}
-        <div class="">
-          {# Icon (50x50 mobile) with gradient class #}
-          {{ renderIcon({ 
-            name: captionData.iconName,
-            datas: option.iconDatas,
-            class: "" ~ captionData.gradientColor
-          }) }}
-          
-          {# Content container (label + description stacked) #}
-          <div class="">
-            {# Label - Typography classes #}
-            <div class="">{{ typographyData.text if typographyData else captionData.name }}</div>
-            
-            {# Description - Typography classes #}
-            <div class="">{{ tooltipData.description if tooltipData else "Description manquante" }}</div>
-          </div>
-        </div>
+        {# Text #}
+        <span data-caption-text="true">
+          {{ captionData.text }}
+        </span>
       </div>
     {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
