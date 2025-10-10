@@ -1,0 +1,91 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Stepper                                      │
+   │ Multi-step progress indicator with status tracking      │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - options.id (string): Stepper identifier
+    - options.datas (array): Stepper configuration data
+    - options.chipDatas (array): Chip notification atom data (optional)
+
+  Usage — Summon HAT Components Wisely:
+    {% from "02-molecules/stepper.njk" import renderStepper %}
+
+    {{ renderStepper({
+        id: "demoStep1",
+        datas: molecules.stepper.steppers,
+        chipDatas: atoms["chip-notification"].chipNotifs
+    }) }}
+
+  @created 2025-01-15
+#}
+
+{% from "01-atoms/chip-notification.njk" import renderChipNotification %}
+
+{% macro renderStepper(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.id %}
+    <span class="error" role="alert">Error: Missing required prop (id)</span>
+  {% else %}
+    {# Find stepper using universal filter #}
+    {% set stepperData = options.datas | findByName(options.id) %}
+
+    {# Render or error #}
+    {% if not stepperData %}
+      <span class="error" role="alert">Stepper not found: {{ options.id }}</span>
+    {% else %}
+      <div
+        data-stepper-id="{{ stepperData.id }}"
+        data-stepper-type="stepper"
+        role="navigation"
+        aria-label="Progress stepper"
+      >
+        {# Variants wrapper #}
+        {% for variant in stepperData.variants %}
+          <div data-stepper-variant="{{ variant }}">
+            {# Steps list #}
+            <ol data-stepper-list="true">
+              {% for item in stepperData.items %}
+                <li
+                  data-stepper-item="true"
+                  data-stepper-status="{{ item.status }}"
+                  data-stepper-index="{{ loop.index }}"
+                >
+                  {# Chip indicator #}
+                  {% if item.chipName and options.chipDatas %}
+                    {{ renderChipNotification({
+                        name: item.chipName,
+                        datas: options.chipDatas
+                    }) }}
+                  {% else %}
+                    <span data-stepper-number="true">{{ loop.index }}</span>
+                  {% endif %}
+
+                  {# Step label #}
+                  <span data-stepper-label="true">
+                    {{ item.label }}
+                  </span>
+
+                  {# Connector line (except last item) #}
+                  {% if not loop.last %}
+                    <div data-stepper-connector="true"></div>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ol>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#}

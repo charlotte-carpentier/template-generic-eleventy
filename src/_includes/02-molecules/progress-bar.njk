@@ -1,86 +1,65 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ MOLECULE › Progress Bar                                 │
-   │ Progress indicator with label and description           │
+   │ Progress indicator with label and percentage            │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Progress bar identifier
+    - options.datas (array): Progress bar configuration data
+
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/progress-bar.njk" import renderProgressBar %}
-    {{ renderProgressBar({ 
-        name: "learning_loop",
-        datas: molecules["progress-bar"]["progress-bars"],
-        typographyDatas: atoms.typography.texts
+
+    {{ renderProgressBar({
+        name: "demoProgr1",
+        datas: molecules["progress-bar"].progressBars
     }) }}
-  
-  Props:
-    - option.name (string): Progress bar identifier
-    - option.datas (array): Progress bar configuration
-    - option.typographyDatas (array): Typography atom data
-  
-  Features:
-    - Visual progress bar with percentage width
-    - Label and description using typography atoms
-    - Progress value display
-  
-  Accessibility:
-    - role="progressbar" with ARIA attributes
-    - aria-valuenow, aria-valuemin, aria-valuemax
-    - aria-label for screen reader context
-    - role="alert" for error states
-  
+
   @created 2025-01-15
 #}
 
-{# Import atoms #}
-{% from "01-atoms/heading.njk" import renderHeading %}
-
-{% macro renderProgressBar(option) %}
-  {# Check if datas is provided #}
-  {% if not option.datas %}
-    <span role="alert">Error: No progress-bar configuration provided</span>
+{% macro renderProgressBar(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Retrieve progress-bar configuration #}
-    {% set progressBarConfig = option.datas %}
-    {% set progressBarName = option.name %}
-    
-    {# Find the specific progress-bar by name #}
-    {% set progressBarData = null %}
-    {% for progressBar in progressBarConfig %}
-      {% if progressBar.name == progressBarName %}
-        {% set progressBarData = progressBar %}
-      {% endif %}
-    {% endfor %}
+    {# Find progress bar using universal filter #}
+    {% set progressData = options.datas | findByName(options.name) %}
 
-    {# Fallback if progress-bar not found #}
-    {% if not progressBarData %}
-      <span role="alert">Progress-bar not found: {{ progressBarName }}</span>
+    {# Render or error #}
+    {% if not progressData %}
+      <span class="error" role="alert">Progress bar not found: {{ options.name }}</span>
     {% else %}
-      {# Render progress-bar molecule #}
-      <div class="">
-        {# Progress bar visual with accessibility attributes #}
-        <div class="">
-          <div class="" 
-               role="progressbar" 
-               aria-valuenow="{{ progressBarData.value }}" 
-               aria-valuemin="0" 
-               aria-valuemax="100"
-               aria-label="Progress: {{ progressBarData.value }}%">
-            <div class="" style="width: {{ progressBarData.value }}%;"></div>
+      <div
+        data-progress-name="{{ progressData.name }}"
+        data-progress-type="progress-bar"
+      >
+        {# Label and percentage #}
+        {% if progressData.showLabels %}
+          <div data-progress-labels="true">
+            <span data-progress-label="true">{{ progressData.label }}</span>
+            {% if progressData.showPercentage %}
+              <span data-progress-percentage="true">{{ progressData.value }}%</span>
+            {% endif %}
           </div>
-        </div>
-        
-        {# Typography atoms for label and description #}
-        <div class="">
-          {{ renderHeading({ 
-              name: progressBarData.labelName,
-              datas: option.typographyDatas,
-              tag: "span"
-          }) }}
-          {{ renderHeading({ 
-              name: progressBarData.descriptionName,
-              datas: option.typographyDatas,
-              tag: "span"
-          }) }}
+        {% endif %}
+
+        {# Progress bar visual #}
+        <div
+          data-progress-track="true"
+          role="progressbar"
+          aria-valuenow="{{ progressData.value }}"
+          aria-valuemin="{{ progressData.min }}"
+          aria-valuemax="{{ progressData.max }}"
+          aria-label="Progress: {{ progressData.value }}%"
+        >
+          <div
+            data-progress-fill="true"
+            data-progress-value="{{ progressData.value }}"
+          ></div>
         </div>
       </div>
     {% endif %}

@@ -4,112 +4,62 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Rating gauge identifier
+    - options.datas (array): Rating gauge configuration data
+    - options.iconDatas (array): Icon atom data
+    - options.showValue (boolean): Display numeric value (optional)
+
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/rating-gauge.njk" import renderRatingGauge %}
-    {{ renderRatingGauge({ 
-        name: "three_star",
-        datas: molecules["rating-gauges"],
-        icons: atoms.icons
+
+    {{ renderRatingGauge({
+        name: "demoRating1",
+        datas: molecules["rating-gauge"].ratingGauges,
+        iconDatas: atoms.icon.icons
     }) }}
-    
-    With numeric value:
-    {{ renderRatingGauge({ 
-        name: "four_star",
-        showValue: true,
-        datas: molecules["rating-gauges"],
-        icons: atoms.icons
-    }) }}
-  
-  Props:
-    - options.name (string): Rating identifier
-    - options.datas (object): Rating configuration
-    - options.icons (object): Icons atom data
-    - options.showValue (boolean): Display numeric value
-    - options.class (string): Additional CSS classes
-  
-  Features:
-    - Customizable star icons (filled/empty)
-    - SVG loading via data-svg-src
-    - Fallback text stars (★/☆)
-    - Optional numeric value display
-    - Style variants per rating level
-  
-  Accessibility:
-    - aria-hidden on decorative icons
-    - Descriptive alt text on image fallbacks
-  
+
   @created 2025-01-15
 #}
 
+{% from "01-atoms/icon.njk" import renderIcon %}
+
 {% macro renderRatingGauge(options) %}
-  {% if not options or not options.datas %}
-    <p>Error: Missing required data for rating gauge</p>
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {% set globalStyle = options.datas.globalStyle | default('') %}
-    {% set ratingData = null %}
-    
-    {# Find the specific rating by name if provided #}
-    {% if options.name %}
-      {% for rating in options.datas.ratingLevels %}
-        {% if rating.name == options.name %}
-          {% set ratingData = rating %}
-        {% endif %}
-      {% endfor %}
-    {% else %}
-      {# Use first rating as default #}
-      {% set ratingData = options.datas.ratingLevels[0] %}
-    {% endif %}
-    
+    {# Find rating gauge using universal filter #}
+    {% set ratingData = options.datas | findByName(options.name) %}
+
+    {# Render or error #}
     {% if not ratingData %}
-      <p>Error: Rating "{{ options.name }}" not found</p>
+      <span class="error" role="alert">Rating gauge not found: {{ options.name }}</span>
     {% else %}
-      <div class="{{ globalStyle }} {{ options.class | default('') }}">
-        {% for star in ratingData.stars %}
-          {% set iconData = null %}
-          
-          {# Find icon data if icons are provided #}
-          {% if options.icons and options.icons.icons %}
-            {% for icon in options.icons.icons %}
-              {% if icon.name == star %}
-                {% set iconData = icon %}
-              {% endif %}
-            {% endfor %}
-          {% endif %}
-          
-          {# Apply the appropriate style based on the star type #}
-          {% set starStyle = options.datas.variants[ratingData.style] | default('') %}
-          {% set iconStyle = options.datas.iconStyles.default | default('') %}
-          
-          <span class="{{ starStyle }}">
-            {% if iconData and iconData.path %}
-              {# Render SVG with data-svg-src for SVG loader #}
-              {% if iconData.path.endsWith('.svg') %}
-                <span 
-                  data-svg-src="{{ iconData.path }}" 
-                  class="{{ iconStyle }}"
-                  aria-hidden="true"
-                ></span>
-              {% else %}
-                {# Standard image fallback #}
-                <img 
-                  src="{{ iconData.path }}" 
-                  alt="{{ iconData.alt | default('Rating star') }}" 
-                  class="{{ iconStyle }}"
-                >
-              {% endif %}
-            {% else %}
-              {# Fallback for missing icons #}
-              <span class="{{ iconStyle }}">
-                {% if star == 'star-filled' %}★{% else %}☆{% endif %}
-              </span>
-            {% endif %}
-          </span>
-        {% endfor %}
-        
-        {# Optional numeric value #}
-        {% if options.showValue and ratingData.value %}
-          <span>
-            {{ ratingData.value }}
+      <div
+        data-rating-name="{{ ratingData.name }}"
+        data-rating-type="rating-gauge"
+        data-rating-value="{{ ratingData.rating }}"
+        data-rating-max="{{ ratingData.maxRating }}"
+      >
+        {# Stars - generate based on rating and maxRating #}
+        <div data-rating-stars="true">
+          {% for i in range(0, ratingData.maxRating) %}
+            <span data-rating-star="{% if i < ratingData.rating %}filled{% else %}empty{% endif %}">
+              {{ renderIcon({
+                  name: ratingData.iconName,
+                  datas: options.iconDatas
+              }) }}
+            </span>
+          {% endfor %}
+        </div>
+
+        {# Numeric value (if showValue enabled) #}
+        {% if options.showValue %}
+          <span data-rating-value="true">
+            {{ ratingData.rating }}/{{ ratingData.maxRating }}
           </span>
         {% endif %}
       </div>

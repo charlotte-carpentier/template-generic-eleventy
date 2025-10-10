@@ -1,0 +1,109 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Lockup                                       │
+   │ Flexible content pairing (label-value, value-legend)    │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - options.name (string): Lockup identifier
+    - options.datas (array): Lockup configuration data
+    - options.imageDatas (array): Image atom data (for block-content type)
+    - options.headingDatas (array): Heading atom data (for block-content type)
+
+  Usage — Summon HAT Components Wisely:
+    {% from "02-molecules/lock-up.njk" import renderLockup %}
+
+    {{ renderLockup({
+        name: "demoLock1",
+        datas: molecules["lock-up"].lockUps,
+        imageDatas: atoms.image.images,
+        headingDatas: atoms.heading.headings
+    }) }}
+
+  @created 2025-01-15
+#}
+
+{% from "01-atoms/image.njk" import renderImage %}
+{% from "01-atoms/heading.njk" import renderHeading %}
+
+{% macro renderLockup(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
+  {% else %}
+    {# Find lockup using universal filter (works with both name and id) #}
+    {% set lockupData = options.datas | findByName(options.name) %}
+
+    {# Render or error #}
+    {% if not lockupData %}
+      <span class="error" role="alert">Lockup not found: {{ options.name }}</span>
+    {% else %}
+      <div
+        data-lockup-id="{{ lockupData.id }}"
+        data-lockup-type="{{ lockupData.type }}"
+      >
+        {# Default type (was label-value in old JSON) #}
+        {% if lockupData.type == "default" %}
+          {% if lockupData.label and lockupData.value %}
+            <span data-lockup-label="true" data-lockup-label-variant="{{ lockupData.label.variant }}">
+              {{ lockupData.label.text }}
+            </span>
+            <span data-lockup-value="true" data-lockup-value-variant="{{ lockupData.value.variant }}">
+              {{ lockupData.value.text }}
+            </span>
+          {% endif %}
+
+        {# Value-Legend type #}
+        {% elif lockupData.type == "value-legend" %}
+          {% if lockupData.value and lockupData.legend %}
+            <span data-lockup-value="true" data-lockup-value-variant="{{ lockupData.value.variant }}">
+              {{ lockupData.value.text }}
+            </span>
+            <span data-lockup-legend="true" data-lockup-legend-variant="{{ lockupData.legend.variant }}">
+              {{ lockupData.legend.text }}
+            </span>
+          {% endif %}
+
+        {# Block-Content type #}
+        {% elif lockupData.type == "block-content" %}
+          {# Image column #}
+          {% if lockupData.imageName and options.imageDatas %}
+            <div data-lockup-image="true">
+              {{ renderImage({
+                  name: lockupData.imageName,
+                  datas: options.imageDatas
+              }) }}
+            </div>
+          {% endif %}
+
+          {# Content column #}
+          <div data-lockup-content="true">
+            {# Heading #}
+            {% if lockupData.headingName and options.headingDatas %}
+              {{ renderHeading({
+                  name: lockupData.headingName,
+                  datas: options.headingDatas
+              }) }}
+            {% endif %}
+
+            {# Content text #}
+            {% if lockupData.content %}
+              <p data-lockup-text="true" data-lockup-content-variant="{{ lockupData.content.variant }}">
+                {{ lockupData.content.text }}
+              </p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#}

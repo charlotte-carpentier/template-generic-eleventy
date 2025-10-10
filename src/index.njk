@@ -32,6 +32,23 @@ permalink: "/"
 {% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
 {% from "02-molecules/caption.njk" import renderCaption %}
 {% from "02-molecules/block-drag-and-drop.njk" import renderBlockDragAndDrop %}
+{% from "02-molecules/card.njk" import renderCard %}
+{% from "02-molecules/disclaimer.njk" import renderDisclaimer %}
+
+{% from "02-molecules/list-content.njk" import renderListContent %}
+{% from "02-molecules/list-control.njk" import renderListControl %}
+{% from "02-molecules/list-form.njk" import renderListForm %}
+{% from "02-molecules/list-group.njk" import renderListGroup %}
+{% from "02-molecules/list-value.njk" import renderListValue %}
+{% from "02-molecules/lock-up.njk" import renderLockup %}
+{% from "02-molecules/pagination.njk" import renderPagination %}
+{% from "02-molecules/panel.njk" import renderPanel %}
+{% from "02-molecules/progress-bar.njk" import renderProgressBar %}
+{% from "02-molecules/rating-gauge.njk" import renderRatingGauge %}
+{% from "02-molecules/segmented-control.njk" import renderSegmentedControl %}
+{% from "02-molecules/slider.njk" import renderSlider %}
+{% from "02-molecules/stepper.njk" import renderStepper %}
+{% from "02-molecules/toast.njk" import renderToast %}
 
 {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Atoms
@@ -39,131 +56,133 @@ permalink: "/"
 
 <h1>Atoms</h1>
 
-{# Button #}
-<section>
-  <h2>Button</h2>
-  {{ renderButton({
-      name: "demoButton1",
-      datas: atoms.button.buttons
-  }) }}
-</section>
+<div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 3px solid #333;">
+  {# Button #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Button</h2>
+    {{ renderButton({
+        name: "demoButton1",
+        datas: atoms.button.buttons
+    }) }}
+  </section>
 
-{# Checkbox #}
-<section>
-  <h2>Checkbox</h2>
-  {{ renderCheckbox({
-      id: "demoCheck1",
-      datas: atoms.checkbox.checkboxes
-  }) }}
-</section>
+  {# Checkbox #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Checkbox</h2>
+    {{ renderCheckbox({
+        id: "demoCheck1",
+        datas: atoms.checkbox.checkboxes
+    }) }}
+  </section>
 
-{# Chip Notification #}
-<section>
-  <h2>Chip Notification</h2>
-  {{ renderChipNotification({
-      name: "demoChip1",
-      datas: atoms["chip-notification"].chipNotifs
-  }) }}
-</section>
+  {# Chip Notification #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Chip Notification</h2>
+    {{ renderChipNotification({
+        name: "demoChip1",
+        datas: atoms["chip-notification"].chipNotifs
+    }) }}
+  </section>
 
-{# Heading #}
-<section>
-  <h2>Heading</h2>
-  {{ renderHeading({
-      name: "demoHead1",
-      datas: atoms.heading.headings
-  }) }}
-</section>
+  {# Heading #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Heading</h2>
+    {{ renderHeading({
+        name: "demoHead1",
+        datas: atoms.heading.headings
+    }) }}
+  </section>
 
-{# Icon #}
-<section>
-  <h2>Icon</h2>
-  {{ renderIcon({
-      name: "demoSmile1",
-      datas: atoms.icon.icons
-  }) }}
-</section>
+  {# Icon #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Icon</h2>
+    {{ renderIcon({
+        name: "demoSmile1",
+        datas: atoms.icon.icons
+    }) }}
+  </section>
 
-{# Image #}
-<section>
-  <h2>Image</h2>
-  {{ renderImage({
-      name: "demoImage1",
-      datas: atoms.image.images
-  }) }}
-</section>
+  {# Image #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Image</h2>
+    {{ renderImage({
+        name: "demoImage1",
+        datas: atoms.image.images
+    }) }}
+  </section>
 
-{# Input #}
-<section>
-  <h2>Input</h2>
-  {{ renderInput({
-      name: "demoInput1",
-      datas: atoms.input.inputs
-  }) }}
-</section>
+  {# Input #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Input</h2>
+    {{ renderInput({
+        name: "demoInput1",
+        datas: atoms.input.inputs
+    }) }}
+  </section>
 
-{# Link #}
-<section>
-  <h2>Link</h2>
-  {{ renderLink({
-      name: "demoLink1",
-      datas: atoms.link.links
-  }) }}
-</section>
+  {# Link #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Link</h2>
+    {{ renderLink({
+        name: "demoLink1",
+        datas: atoms.link.links
+    }) }}
+  </section>
 
-{# Radio Button #}
-<section>
-  <h2>Radio Button</h2>
-  {{ renderRadioButton({
-      id: "demoRadio1",
-      datas: atoms["radio-button"].radioButtons
-  }) }}
-</section>
+  {# Radio Button #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Radio Button</h2>
+    {{ renderRadioButton({
+        id: "demoRadio1",
+        datas: atoms["radio-button"].radioButtons
+    }) }}
+  </section>
 
-{# Select #}
-<section>
-  <h2>Select</h2>
-  {{ renderSelect({
-      name: "demoSelect1",
-      datas: atoms.select.selects
-  }) }}
-</section>
+  {# Select #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Select</h2>
+    {{ renderSelect({
+        name: "demoSelect1",
+        datas: atoms.select.selects
+    }) }}
+  </section>
 
-{# Tag #}
-<section>
-  <h2>Tag</h2>
-  {{ renderTag({
-      name: "demoTag1",
-      datas: atoms.tag.tags
-  }) }}
-</section>
+  {# Tag #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Tag</h2>
+    {{ renderTag({
+        name: "demoTag1",
+        datas: atoms.tag.tags
+    }) }}
+  </section>
 
-{# Toggle #}
-<section>
-  <h2>Toggle</h2>
-  {{ renderToggle({
-      id: "demoToggle1",
-      datas: atoms.toggle.toggles
-  }) }}
-</section>
+  {# Toggle #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Toggle</h2>
+    {{ renderToggle({
+        id: "demoToggle1",
+        datas: atoms.toggle.toggles
+    }) }}
+  </section>
 
-{# Tooltip #}
-<section>
-  <h2>Tooltip</h2>
-  {{ renderTooltip({
-      name: "demoTooltip1",
-      datas: atoms.tooltip.tooltips
-  }) }}
-</section>
+  {# Tooltip #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Tooltip</h2>
+    {{ renderTooltip({
+        name: "demoTooltip1",
+        datas: atoms.tooltip.tooltips
+    }) }}
+  </section>
 
-{# Vector #}
-<section>
-  <h2>Vector</h2>
-  {{ renderVector({
-      name: "demoVector1",
-      datas: atoms.vector.vectors
-  }) }}
-</section>
+  {# Vector #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Vector</h2>
+    {{ renderVector({
+        name: "demoVector1",
+        datas: atoms.vector.vectors
+    }) }}
+  </section>
+</div>
 
 {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Molecules
@@ -171,52 +190,202 @@ permalink: "/"
 
 <h1>Molecules</h1>
 
-{# Breadcrumb #}
-<section>
-  <h2>Breadcrumb</h2>
-  {{ renderBreadcrumb({
-      name: "demoBreadcrm1",
-      datas: molecules.breadcrumb.breadcrumbs,
-      linkDatas: atoms.link.links
-  }) }}
-</section>
+<div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start;">
+  {# Breadcrumb #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Breadcrumb</h2>
+    {{ renderBreadcrumb({
+        name: "demoBreadcrm1",
+        datas: molecules.breadcrumb.breadcrumbs,
+        linkDatas: atoms.link.links
+    }) }}
+  </section>
 
-{# Caption #}
-<section>
-  <h2>Caption</h2>
-  {{ renderCaption({
-      name: "demoCaption1",
-      datas: molecules.caption.captions,
-      iconDatas: atoms.icon.icons
-  }) }}
+  {# Caption #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Caption</h2>
+    {{ renderCaption({
+        name: "demoCaption1",
+        datas: molecules.caption.captions,
+        iconDatas: atoms.icon.icons
+    }) }}
+  </section>
 
-  {{ renderCaption({
-      name: "demoCaption2",
-      datas: molecules.caption.captions,
-      iconDatas: atoms.icon.icons
-  }) }}
+  {# Block Drag and Drop #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Block Drag and Drop</h2>
+    {{ renderBlockDragAndDrop({
+        name: "demoDragDrop1",
+        datas: molecules["block-drag-and-drop"].blockDragAndDrops,
+        headingDatas: atoms.heading.headings,
+        iconDatas: atoms.icon.icons,
+        buttonDatas: atoms.button.buttons
+    }) }}
+  </section>
 
-  {{ renderCaption({
-      name: "demoCaption3",
-      datas: molecules.caption.captions,
-      iconDatas: atoms.icon.icons
-  }) }}
+  {# Card #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Card</h2>
+    {{ renderCard({
+        name: "demoCard1",
+        datas: molecules.card.cards,
+        lockupDatas: molecules["lock-up"].lockUps,
+        headingDatas: atoms.heading.headings,
+        buttonDatas: atoms.button.buttons
+    }) }}
+  </section>
 
-  {{ renderCaption({
-      name: "demoCaption4",
-      datas: molecules.caption.captions,
-      iconDatas: atoms.icon.icons
-  }) }}
-</section>
+  {# Disclaimer #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Disclaimer</h2>
+    {{ renderDisclaimer({
+        name: "demoDiscla1",
+        datas: molecules.disclaimer.disclaimers,
+        iconDatas: atoms.icon.icons
+    }) }}
+  </section>
 
-{# Block Drag and Drop #}
-<section>
-  <h2>Block Drag and Drop</h2>
-  {{ renderBlockDragAndDrop({
-      name: "demoDragDrop1",
-      datas: molecules["block-drag-and-drop"].blockDragAndDrops,
-      headingDatas: atoms.heading.headings,
-      iconDatas: atoms.icon.icons,
-      buttonDatas: atoms.button.buttons
-  }) }}
-</section>
+{# List Content #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Content</h2>
+    {{ renderListContent({
+        id: "demoList1",
+        datas: molecules["list-content"].listContents,
+        lockupDatas: molecules["lock-up"].lockUps
+    }) }}
+  </section>
+
+  {# List Control #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Control</h2>
+    {{ renderListControl({
+        id: "demoList1",
+        datas: molecules["list-control"].listControls,
+        radioDatas: atoms["radio-button"].radioButtons
+    }) }}
+  </section>
+
+  {# List Form #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Form</h2>
+    {{ renderListForm({
+        id: "demoForm1",
+        datas: molecules["list-form"].listForms,
+        inputDatas: atoms.input.inputs
+    }) }}
+  </section>
+
+  {# List Group #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Group</h2>
+    {{ renderListGroup({
+        id: "demoGroup1",
+        datas: molecules["list-group"].listGroups,
+        iconDatas: atoms.icon.icons
+    }) }}
+  </section>
+
+  {# List Value #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Value</h2>
+    {{ renderListValue({
+        id: "demoList1",
+        datas: molecules["list-value"].listValues,
+        lockupDatas: molecules["lock-up"].lockUps
+    }) }}
+  </section>
+
+  {# Lockup #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Lockup</h2>
+    {{ renderLockup({
+        name: "demoLock1",
+        datas: molecules["lock-up"].lockUps
+    }) }}
+  </section>
+
+  {# Pagination #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Pagination</h2>
+    {{ renderPagination({
+        name: "demoPager1",
+        datas: molecules.pagination.paginations,
+        selectDatas: atoms.select.selects,
+        buttonDatas: atoms.button.buttons,
+        iconDatas: atoms.icon.icons,
+        currentPage: 1,
+        totalPages: 10,
+        itemsPerPage: 10,
+        totalItems: 98
+    }) }}
+  </section>
+
+  {# Panel #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Panel</h2>
+    {{ renderPanel({
+        name: "demoPanel1",
+        datas: molecules.panel.panels,
+        checkboxDatas: atoms.checkbox.checkboxes,
+        iconDatas: atoms.icon.icons
+    }) }}
+  </section>
+
+  {# Progress Bar #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Progress Bar</h2>
+    {{ renderProgressBar({
+        name: "demoProgr1",
+        datas: molecules["progress-bar"].progressBars
+    }) }}
+  </section>
+
+  {# Rating Gauge #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Rating Gauge</h2>
+    {{ renderRatingGauge({
+        name: "demoRating1",
+        datas: molecules["rating-gauge"].ratingGauges,
+        iconDatas: atoms.icon.icons
+    }) }}
+  </section>
+
+  {# Segmented Control #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Segmented Control</h2>
+    {{ renderSegmentedControl({
+        id: "demoSeg1",
+        datas: molecules["segmented-control"].segmentedControls,
+        buttonDatas: atoms.button.buttons
+    }) }}
+  </section>
+
+  {# Slider #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Slider</h2>
+    {{ renderSlider({
+        name: "demoSlider1",
+        datas: molecules.slider.sliders
+    }) }}
+  </section>
+
+  {# Stepper #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Stepper</h2>
+    {{ renderStepper({
+        id: "demoStep1",
+        datas: molecules.stepper.steppers,
+        chipDatas: atoms["chip-notification"].chipNotifs
+    }) }}
+  </section>
+
+  {# Toast #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Toast</h2>
+    {{ renderToast({
+        name: "demoToast1",
+        datas: molecules.toast.toasts,
+        iconDatas: atoms.icon.icons
+    }) }}
+  </section>
+</div>

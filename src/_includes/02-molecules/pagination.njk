@@ -1,299 +1,128 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ MOLECULE › Pagination                                   │
-   │ Complete pagination with select, navigation and count   │
+   │ Complete pagination with navigation and count           │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Pagination identifier
+    - options.datas (array): Pagination configuration data
+    - options.selectDatas (array): Select atom data (optional)
+    - options.buttonDatas (array): Button atom data (optional)
+    - options.iconDatas (array): Icon atom data (optional)
+    - options.currentPage (number): Current active page
+    - options.totalPages (number): Total number of pages
+    - options.itemsPerPage (number): Items per page
+    - options.totalItems (number): Total count of items
+
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/pagination.njk" import renderPagination %}
-    
-    Full pagination:
-    {{ renderPagination({ 
-        name: "pager", 
+
+    {{ renderPagination({
+        name: "demoPagination1",
+        datas: molecules.pagination.paginations,
+        selectDatas: atoms.select.selects,
+        buttonDatas: atoms.button.buttons,
+        iconDatas: atoms.icon.icons,
         currentPage: 1,
         totalPages: 10,
         itemsPerPage: 10,
-        totalItems: 98,
-        label: "Show",
-        labelSuffix: "items",
-        buttonData: atoms.buttons,
-        selectData: atoms.selects,
-        icons: atoms.icons,
-        datas: molecules.paginations 
+        totalItems: 98
     }) }}
-    
-    Navigation only:
-    {{ renderPagination({ 
-        name: "navigation-pager", 
-        currentPage: 1,
-        totalPages: 10,
-        buttonData: atoms.buttons,
-        icons: atoms.icons, 
-        datas: molecules.paginations 
-    }) }}
-  
-  Props:
-    - option.name (string): Pagination identifier
-    - option.datas (object): Pagination configuration
-    - option.buttonData (object): Buttons atom data
-    - option.selectData (object): Select atom data
-    - option.icons (object): Icons atom data
-    - option.currentPage (number): Current active page
-    - option.totalPages (number): Total number of pages
-    - option.itemsPerPage (number): Items per page
-    - option.totalItems (number): Total count of items
-    - option.label (string): Label for select
-    - option.labelSuffix (string): Text after number (default: "per page")
-  
-  Features:
-    - Items per page selector (dropdown)
-    - Page navigation buttons with icons
-    - Current page indicator
-    - Items counter (e.g., "1-10 of 98")
-    - Button state management (hover, focus, active)
-    - Fallback SVG icons if not found in data
-  
-  Accessibility:
-    - role="navigation" with aria-label
-    - aria-current="page" for current page
-    - aria-label on controls
-    - rel="nofollow" on pagination links
-  
+
   @created 2025-01-15
 #}
 
-{% macro renderPagination(option) %}
-  {# Check if required data is provided #}
-  {% if not option or not option.datas or (not option.datas.pager and not option.datas.navigationPager) %}
-    <span>Error: No pagination data provided</span>
+{% from "01-atoms/select.njk" import renderSelect %}
+{% from "01-atoms/button.njk" import renderButton %}
+{% from "01-atoms/icon.njk" import renderIcon %}
+
+{% macro renderPagination(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Initialize pagination data based on provided structure #}
-    {% if option.datas.navigationPager %}
-      {% set paginationData = option.datas.navigationPager %}
-      {% set children = paginationData.children | default([]) %}
+    {# Find pagination using universal filter #}
+    {% set paginationData = options.datas | findByName(options.name) %}
+
+    {# Render or error #}
+    {% if not paginationData %}
+      <span class="error" role="alert">Pagination not found: {{ options.name }}</span>
     {% else %}
-      {% set paginationData = option.datas.pager %}
-    {% endif %}
-
-    {# Select specific paginator by name if provided #}
-    {% if option.name %}
-      {% if option.datas.pager.name == option.name %}
-        {% set paginationData = option.datas.pager %}
-      {% elif option.datas.navigationPager and option.datas.navigationPager.name == option.name %}
-        {% set paginationData = option.datas.navigationPager %}
-        {% set children = paginationData.children | default([]) %}
-      {% endif %}
-    {% endif %}
-
-    {# Get global style from data #}
-    {% set globalStyle = option.datas.globalStyle | default('') %}
-
-    <div>
-      {# Items per page selector #}
-      {% if option.itemsPerPage and option.selectData %}
-        <div>
-          {% set selectRef = "" %}
-          {% set selectVariant = "default" %}
-          
-          {# Get select reference if available #}
-          {% if paginationData.select and paginationData.select.itemsPerPage and paginationData.select.itemsPerPage.ref %}
-            {% set selectRef = paginationData.select.itemsPerPage.ref %}
-            {% set refParts = selectRef.split('.') %}
-            
-            {% if refParts | length == 2 %}
-              {% set selectName = refParts[1] %}
-              {% set matchingSelect = null %}
-              
-              {# Find the matching select in selectData #}
-              {% for select in option.selectData.selects %}
-                {% if select.name == selectName and not matchingSelect %}
-                  {% set matchingSelect = select %}
-                {% endif %}
-              {% endfor %}
-              
-              {# Get variant if matching select is found #}
-              {% if matchingSelect and matchingSelect.variant %}
-                {% set selectVariant = matchingSelect.variant %}
-              {% endif %}
-            {% endif %}
-          {% endif %}
-          
-          {# Apply select styling #}
-          {% set selectGlobalStyle = option.selectData.globalStyle | default('') %}
-          {% set selectVariantStyle = option.selectData.variants[selectVariant] | default('') %}
-          
-          <select 
-            class="{{ selectGlobalStyle }} {{ selectVariantStyle }}"
-            aria-label="{{ option.label | default('Items per page') }}"
-            onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-url')"
-          >
-            {% set optionValues = [10, 20, 50, 100] %}
-            {% if matchingSelect and matchingSelect.options %}
-              {% set optionValues = [] %}
-              {% for opt in matchingSelect.options %}
-                {% set optionValues = (optionValues.push(opt.value | int), optionValues) %}
-              {% endfor %}
-            {% endif %}
-            
-            {% for count in optionValues %}
-              {% set optionLabel = count %}
-              {% if matchingSelect and matchingSelect.options %}
-                {% for opt in matchingSelect.options %}
-                  {% if opt.value | int == count %}
-                    {% set optionLabel = opt.label %}
-                  {% endif %}
-                {% endfor %}
-              {% else %}
-                {% set optionLabel = count ~ ' ' ~ (option.labelSuffix | default('per page')) %}
-              {% endif %}
-              
-              <option 
-                value="{{ count }}" 
-                {% if count == option.itemsPerPage %} selected{% endif %} 
-                data-url="?items={{ count }}"
-              >
-                {{ optionLabel }}
-              </option>
-            {% endfor %}
-          </select>
-          
-          {# Dropdown arrow indicator #}
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-            </svg>
+      <div
+        data-pagination-name="{{ paginationData.name }}"
+        data-pagination-type="pagination"
+      >
+        {# Items per page selector (if selectName provided) #}
+        {% if paginationData.selectName and options.selectDatas %}
+          <div data-pagination-selector="true">
+            {{ renderSelect({
+                name: paginationData.selectName,
+                datas: options.selectDatas
+            }) }}
           </div>
-        </div>
-      {% endif %}
-
-      {# Pagination navigation #}
-      {% if children and children | length > 0 %}
-        <nav role="navigation" aria-label="Pagination">
-          <ul>
-            {% for page in children %}
-              {% set buttonStyle = "" %}
-              {% set buttonSize = "" %}
-              {% set buttonClasses = "" %}
-              {% set buttonStateClasses = {} %}
-              
-              {# Resolve button reference if it exists #}
-              {% if page.ref and option.buttonData %}
-                {% set buttonParts = page.ref.split('.') %}
-                {% if buttonParts | length == 2 %}
-                  {% set buttonName = buttonParts[1] %}
-                  {% set matchingButton = null %}
-                  
-                  {# Find the matching button #}
-                  {% for button in option.buttonData.buttons %}
-                    {% if button.name == buttonName and not matchingButton %}
-                      {% set matchingButton = button %}
-                    {% endif %}
-                  {% endfor %}
-                  
-                  {# Apply styles if button found #}
-                  {% if matchingButton %}
-                    {% set buttonVariant = matchingButton.style | default('default') %}
-                    {% set variantConfig = option.buttonData.variants[buttonVariant] %}
-                    
-                    {% set buttonSizeKey = matchingButton.size | default('button') %}
-                    {% set buttonSize = option.buttonData.sizes[buttonSizeKey] | default('') %}
-                    
-                    {% set baseClasses = option.buttonData.globalStyle ~ " " ~ buttonSize %}
-                    
-                    {% set buttonStateClasses = {
-                      'default': variantConfig.default,
-                      'hover': variantConfig.hover,
-                      'focus': variantConfig.focus,
-                      'active': variantConfig.active,
-                      'disabled': variantConfig.disabled
-                    } %}
-                    
-                    {% set buttonClasses = baseClasses ~ " " ~ buttonStateClasses.default %}
-                    
-                    {# Add current state style #}
-                    {% if page.current and option.buttonData.states and option.buttonData.states.current %}
-                      {% set buttonClasses = buttonClasses ~ " " ~ option.buttonData.states.current %}
-                    {% endif %}
-                  {% endif %}
-                {% endif %}
-              {% endif %}
-              
-              <li>
-                <a href="{{ page.url }}" 
-                  class="{{ buttonClasses }}" 
-                  rel="nofollow" 
-                  {% if page.current %} aria-current="page" {% endif %}
-                  {% if page.icon %} aria-label="{{ page.ariaLabel | default('Navigate') }}"{% endif %}
-                  
-                  {% if buttonStateClasses | length > 0 %}
-                    onfocus="if(!this.disabled) { this.className='{{ baseClasses }} {{ buttonStateClasses.focus }} {% if page.current %}active{% endif %}'; this.setAttribute('data-focused', 'true'); }" 
-                    onblur="if(!this.disabled) { this.className='{{ baseClasses }} {{ buttonStateClasses.default }} {% if page.current %}active{% endif %}'; this.removeAttribute('data-focused'); }"
-                    onmouseover="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ buttonStateClasses.focus }} {% if page.current %}active{% endif %}' : '{{ baseClasses }} {{ buttonStateClasses.hover }} {% if page.current %}active{% endif %}'; }" 
-                    onmouseout="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ buttonStateClasses.focus }} {% if page.current %}active{% endif %}' : '{{ baseClasses }} {{ buttonStateClasses.default }} {% if page.current %}active{% endif %}'; }" 
-                    onmousedown="if(!this.disabled) { this.className='{{ baseClasses }} {{ buttonStateClasses.active }} {% if page.current %}active{% endif %}'; }" 
-                    onmouseup="if(!this.disabled) { this.className=this.hasAttribute('data-focused') ? '{{ baseClasses }} {{ buttonStateClasses.focus }} {% if page.current %}active{% endif %}' : '{{ baseClasses }} {{ buttonStateClasses.hover }} {% if page.current %}active{% endif %}'; }"
-                  {% endif %}
-                >
-                  
-                  {% if page.icon %}
-                    {# Find icon in data #}
-                    {% set iconData = null %}
-                    {% if option.icons %}
-                      {% for icon in option.icons.icons %}
-                        {% if icon.name == page.icon %}
-                          {% set iconData = icon %}
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
-                    
-                    {% if iconData %}
-                      <span data-svg-src="{{ iconData.path }}">
-                        <!-- SVG will be loaded here -->
-                      </span>
-                    {% else %}
-                      {# Fallback SVG icons #}
-                      <span>
-                        {% if page.icon == 'first' %}
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
-                        {% elif page.icon == 'last' %}
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 17 5-5-5-5"/><path d="m6 17 5-5-5-5"/></svg>
-                        {% elif page.icon == 'next' %}
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                        {% elif page.icon == 'prev' %}
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                        {% else %}
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
-                        {% endif %}
-                      </span>
-                    {% endif %}
-                  {% else %}
-                    {{ page.label }}
-                  {% endif %}
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </nav>
-      {% else %}
-        <span>No pages available</span>
-      {% endif %}
-
-      {# Items counter #}
-      {% if option.totalItems and option.currentPage and option.itemsPerPage and paginationData.showTotalCount %}
-        {% set firstItem = (option.currentPage - 1) * option.itemsPerPage + 1 %}
-        {% set lastItemTemp = option.currentPage * option.itemsPerPage %}
-        {% set lastItem = lastItemTemp %}
-        {% if lastItemTemp > option.totalItems %}
-          {% set lastItem = option.totalItems %}
         {% endif %}
 
-        <div>
-          <span>
-            {{ firstItem }} - {{ lastItem }} of {{ option.totalItems }}
-          </span>
-        </div>
-      {% endif %}
-    </div>
+        {# Navigation #}
+        {% if paginationData.pages %}
+          <nav
+            role="navigation"
+            aria-label="Pagination"
+            data-pagination-nav="true"
+          >
+            <ul>
+              {% for page in paginationData.pages %}
+                <li>
+                  {# Icon button (first, prev, next, last) #}
+                  {% if page.iconName %}
+                    <a
+                      href="{{ page.url | default('#') }}"
+                      data-pagination-link="true"
+                      data-pagination-action="{{ page.action }}"
+                      aria-label="{{ page.ariaLabel | default('Navigate') }}"
+                      rel="nofollow"
+                    >
+                      {{ renderIcon({
+                          name: page.iconName,
+                          datas: options.iconDatas
+                      }) }}
+                    </a>
+
+                  {# Page number #}
+                  {% else %}
+                    <a
+                      href="{{ page.url | default('#') }}"
+                      data-pagination-link="true"
+                      {% if page.current %}data-pagination-current="true" aria-current="page"{% endif %}
+                      rel="nofollow"
+                    >
+                      {{ page.label }}
+                    </a>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </nav>
+        {% endif %}
+
+        {# Items counter (if totalItems provided) #}
+        {% if options.totalItems and options.currentPage and options.itemsPerPage %}
+          {% set firstItem = (options.currentPage - 1) * options.itemsPerPage + 1 %}
+          {% set lastItem = options.currentPage * options.itemsPerPage %}
+          {% if lastItem > options.totalItems %}
+            {% set lastItem = options.totalItems %}
+          {% endif %}
+
+          <div data-pagination-counter="true">
+            <span>
+              {{ firstItem }} - {{ lastItem }} of {{ options.totalItems }}
+            </span>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
   {% endif %}
 {% endmacro %}
 

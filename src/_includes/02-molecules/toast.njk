@@ -4,99 +4,76 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Usage — Summon HAT Components Wisely:
-    {% from "02-molecules/toast.njk" import renderToast %}
-    {{ renderToast({ 
-        name: "success_notification", 
-        datas: molecules.toasts,
-        icons: atoms.icons 
-    }) }}
-  
   Props:
     - options.name (string): Toast identifier
-    - options.datas (object): Toast configuration
-    - options.icons (object): Icons atom data
-  
-  Features:
-    - Style variants (success, error, warning, info)
-    - Optional icon display
-    - Dismissible with close button
-    - Auto-dismiss duration support (data attribute)
-    - Message content from configuration
-  
-  Accessibility:
-    - aria-live="polite" for screen reader announcements
-    - role="status" for notification semantics
-    - aria-label on dismiss button
-    - aria-hidden for decorative icons
-  
+    - options.datas (array): Toast configuration data
+    - options.iconDatas (array): Icon atom data
+
+  Usage — Summon HAT Components Wisely:
+    {% from "02-molecules/toast.njk" import renderToast %}
+
+    {{ renderToast({
+        name: "demoToast1",
+        datas: molecules.toast.toasts,
+        iconDatas: atoms.icon.icons
+    }) }}
+
   @created 2025-01-15
 #}
 
+{% from "01-atoms/icon.njk" import renderIcon %}
+
 {% macro renderToast(options) %}
-  {% if options.datas %}
-    {% set toastData = null %}
-    
-    {% if options.name %}
-      {% for toast in options.datas.toasts %}
-        {% if toast.name == options.name %}
-          {% set toastData = toast %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
+  {% else %}
+    {# Find toast using universal filter #}
+    {% set toastData = options.datas | findByName(options.name) %}
 
+    {# Render or error #}
     {% if not toastData %}
-      <span>Toast not found: {{ options.name }}</span>
+      <span class="error" role="alert">Toast not found: {{ options.name }}</span>
     {% else %}
-      {% set globalStyle = options.datas.globalStyle %}
-      {% set variantStyle = options.datas.variants[toastData.style] %}
-      {% set iconStyle = options.datas.iconStyles.default %}
-      
-      {% set iconData = null %}
-      {% if toastData.icon and options.icons %}
-        {% for icon in options.icons.icons %}
-          {% if icon.name == toastData.icon %}
-            {% set iconData = icon %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-
-      <div 
-        class=""
-        aria-live="polite" 
+      <div
+        data-toast-name="{{ toastData.name }}"
+        data-toast-type="toast"
+        data-toast-variant="{{ toastData.variant }}"
+        {% if toastData.duration %}data-toast-duration="{{ toastData.duration }}"{% endif %}
+        aria-live="polite"
         role="status"
-        data-toast="{{ options.name }}"
-        data-toast-duration="{{ toastData.duration }}"
       >
-        <div 
-          class="{{ globalStyle }} {{ variantStyle }}"
-        >
-          <div>
-            <div>
-              {% if iconData %}
-                <span 
-                  data-svg-src="{{ iconData.path }}" 
-                  class="{{ iconStyle }}" 
-                  aria-hidden="true"
-                ></span>
-              {% endif %}
-              <span>{{ toastData.message }}</span>
+        <div data-toast-content="true">
+          {# Icon (if present) #}
+          {% if toastData.iconName and options.iconDatas %}
+            <div data-toast-icon="true">
+              {{ renderIcon({
+                  name: toastData.iconName,
+                  datas: options.iconDatas
+              }) }}
             </div>
-            
-            {% if toastData.dismissible %}
-              <button 
-                data-dismiss
-                aria-label="Dismiss notification"
-              >
-                &times;
-              </button>
-            {% endif %}
-          </div>
+          {% endif %}
+
+          {# Message #}
+          <span data-toast-message="true">
+            {{ toastData.message }}
+          </span>
+
+          {# Close button (if dismissible) #}
+          {% if toastData.dismissible %}
+            <button
+              type="button"
+              data-toast-dismiss="true"
+              aria-label="Dismiss notification"
+            >
+              &times;
+            </button>
+          {% endif %}
         </div>
       </div>
     {% endif %}
-  {% else %}
-    <span>No toast data provided</span>
   {% endif %}
 {% endmacro %}
 
