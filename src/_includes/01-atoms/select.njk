@@ -1,75 +1,76 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ATOM › Select                                           │
-   │ Dropdown elements with consistent styling               │
+   │ Dropdown select inputs with semantic attributes         │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Usage — Summon HAT Components Wisely:
-    {% from "01-atoms/select.njk" import renderSelect %}
-    
-    {{ renderSelect({ name: "categories", datas: atoms.selects }) }}
-  
   Props:
     - options.name (string): Select identifier
     - options.datas (object): Select configuration data
-  
-  Features:
-    - Variant-based styling
-    - Custom dropdown arrow icon
-    - Selected option support
-    - Disabled state handling
-  
+    - options.disabled (boolean): Override disabled state
+    - options.ariaLabel (string): Override aria-label
+
+  Usage — Summon HAT Components Wisely:
+    {% from "01-atoms/select.njk" import renderSelect %}
+
+    {{ renderSelect({
+        name: "demoSelect1",
+        datas: atoms.select.selects
+    }) }}
+
   @created 2025-01-15
 #}
 
 {% macro renderSelect(options) %}
-  {# Initialize selectData as null before searching #}
-  {% set selectData = null %}
-  
-  {# Find the select matching the requested name in the data collection #}
-  {% for select in options.datas.selects %}
-    {% if select.name == options.name %}
-      {% set selectData = select %}
-    {% endif %}
-  {% endfor %}
-
-  {# Get global style that applies to all selects #}
-  {% set globalStyle = options.datas.globalStyle %}
-
-  {# Render select if data was found #}
-  {% if selectData %}
-    {# Get variant-specific style or default to empty string if not found #}
-    {% set variantStyle = options.datas.variants[selectData.variant] | default('') %}
-    
-    <div>
-      <select 
-        name="{{ selectData.name }}" 
-        class="{{ globalStyle }} {{ variantStyle }}"
-        {% if selectData.variant == 'disabled' %}disabled{% endif %}
-      >
-        {# Render all options from the select data #}
-        {% for opt in selectData.options %}
-          <option 
-            value="{{ opt.value }}"
-            {% if opt.selected %} selected{% endif %}
-          >
-            {{ opt.label }}
-          </option>
-        {% endfor %}
-      </select>
-      {# Add dropdown arrow icon #}
-      <div>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-        </svg>
-      </div>
-    </div>
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Display error message if select not found #}
-    <span>Select not found: {{ options.name }}</span>
+    {# Find select using universal filter #}
+    {% set selectData = options.datas | findByName(options.name) %}
+
+    {# Render select or error message #}
+    {% if not selectData %}
+      <span class="error" role="alert">Select not found: {{ options.name }}</span>
+    {% else %}
+      {# Compute final values with fallback cascade #}
+      {% set isDisabled = options.disabled | default(selectData.disabled) | default(false) %}
+      {% set finalAriaLabel = options.ariaLabel | default(selectData.ariaLabel) %}
+
+      {# Wrapper for select + arrow positioning #}
+      <div data-select-wrapper>
+        <select
+          name="{{ selectData.name }}"
+          data-select-name="{{ selectData.name }}"
+          data-select-type="select"
+          data-select-variant="{{ selectData.variant }}"
+          {% if isDisabled %}disabled{% endif %}
+          {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
+        >
+          {% if selectData.options %}
+            {% for opt in selectData.options %}
+              <option
+                value="{{ opt.value }}"
+                {% if opt.selected %}selected{% endif %}
+              >
+                {{ opt.label }}
+              </option>
+            {% endfor %}
+          {% endif %}
+        </select>
+
+        {# TODO: Replace with icon atom when available #}
+        <div data-select-arrow aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+          </svg>
+        </div>
+      </div>
+    {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

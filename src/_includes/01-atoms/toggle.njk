@@ -1,148 +1,114 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ATOM › Toggle                                           │
-   │ Toggle switches with consistent styling                 │
+   │ Toggle switches with label and description support      │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Usage — Summon HAT Components Wisely:
-    {% from "01-atoms/toggle.njk" import renderToggle %}
-    
-    Single toggle:
-    {{ renderToggle({ id: "option1", datas: atoms.toggles }) }}
-    
-    Group of toggles:
-    {{ renderToggle({ 
-        group: true, 
-        groupLabel: "Options",
-        datas: atoms.toggles 
-    }) }}
-  
   Props:
     - options.id (string): Toggle identifier for single rendering
     - options.group (boolean): Render as group if true
-    - options.groupLabel (string): Group label text
+    - options.groupLabel (string): Group label text for fieldset legend
     - options.groupSrOnly (boolean): Hide group label visually
-    - options.datas (object): Toggle configuration data
-  
-  Features:
-    - Supports single or group rendering
-    - Label with description support
-    - State-based styling (default, checked, disabled, disabledChecked)
-    - Peer utility class for CSS-based state management
-  
-  Accessibility:
-    - Checkbox input with sr-only class for screen readers
-    - aria-label support for enhanced descriptions
-    - Fieldset/legend for semantic grouping
-    - Screen-reader-only labels option
-  
+    - options.datas (array): Toggle configuration data
+
+  Usage — Summon HAT Components Wisely:
+    {% from "01-atoms/toggle.njk" import renderToggle %}
+
+    Single toggle:
+    {{ renderToggle({
+        id: "demoToggle1",
+        datas: atoms.toggle.toggles
+    }) }}
+
+    Group of toggles:
+    {{ renderToggle({
+        group: true,
+        groupLabel: "Options",
+        datas: atoms.toggle.toggles
+    }) }}
+
   @created 2025-01-15
 #}
 
 {% macro renderToggle(options) %}
-  {# Initialize default values for styling classes #}
-  {% set globalStyle = options.datas.globalStyle | default('') %}
-  {% set fieldsetClasses = options.datas.fieldsetClasses | default('') %}
-  {% set legendClasses = options.datas.legendClasses | default('') %}
-  {% set groupContainerClasses = options.datas.groupContainerClasses | default('') %}
-  
-  {# Check if rendering as a group or individual toggle #}
-  {% if options.group %}
-    <fieldset class="{{ fieldsetClasses }}">
-      {% if options.groupLabel %}
-        <legend class="{{ legendClasses }} {% if options.groupSrOnly %}sr-only{% endif %}">
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif options.group %}
+    {# Group mode validation #}
+    {% if not options.groupLabel %}
+      <span class="error" role="alert">Error: Missing required prop (groupLabel) for group mode</span>
+    {% else %}
+      {# Render fieldset group #}
+      <fieldset data-toggle-group-type="toggle">
+        <legend {% if options.groupSrOnly %}class="sr-only"{% endif %}>
           {{ options.groupLabel }}
         </legend>
-      {% endif %}
-      
-      <div class="{{ groupContainerClasses }}">
-        {% for toggle in options.datas.toggles %}
-          {{ renderSingleToggle(toggle, options.datas) }}
+
+        {% for toggle in options.datas %}
+          {{ renderSingleToggle(toggle) }}
         {% endfor %}
-      </div>
-    </fieldset>
+      </fieldset>
+    {% endif %}
+  {% elif not options.id %}
+    <span class="error" role="alert">Error: Missing required prop (id) for single mode</span>
   {% else %}
-    {# Initialize toggleData as null before searching #}
-    {% set toggleData = null %}
-    
-    {# Find the toggle matching the requested ID in the data collection #}
-    {% for toggle in options.datas.toggles %}
-      {% if toggle.id == options.id %}
-        {% set toggleData = toggle %}
-      {% endif %}
-    {% endfor %}
-    
-    {# Render toggle if data was found, otherwise show error #}
-    {% if toggleData %}
-      {{ renderSingleToggle(toggleData, options.datas) }}
+    {# Single mode - find toggle using universal filter #}
+    {% set toggleData = options.datas | findByName(options.id) %}
+
+    {% if not toggleData %}
+      <span class="error" role="alert">Toggle not found: {{ options.id }}</span>
     {% else %}
-      <span class="{{ options.datas.errorClasses | default('') }}">Toggle not found: {{ options.id }}</span>
+      {{ renderSingleToggle(toggleData) }}
     {% endif %}
   {% endif %}
 {% endmacro %}
 
-{% macro renderSingleToggle(toggle, datas) %}
-  {# Initialize style classes for the toggle and its components #}
-  {% set labelTextClasses = datas.labelTextClasses | default('') %}
-  {% set descriptionClasses = datas.descriptionClasses | default('') %}
-  
-  {# Determine variant, default to 'default' if not specified #}
-  {% set variant = toggle.variant | default('default') %}
-  
-  {# Determine additional state classes based on toggle state #}
-  {% if toggle.disabled and toggle.checked %}
-    {% set variant = 'disabledChecked' %}
-  {% elseif toggle.disabled %}
-    {% set variant = 'disabled' %}
-  {% elseif toggle.checked %}
-    {% set variant = 'checked' %}
-  {% endif %}
-  
-  {# Retrieve specific classes for the selected variant #}
-  {% set toggleBaseClasses = datas.variants.container[variant].base %}
-  {% set toggleCheckedClasses = datas.variants.container[variant].checked %}
-  {% set toggleFocusClasses = datas.variants.container[variant].focus %}
-  
-  {# Retrieve thumb classes for the current variant #}
-  {% set thumbBaseClasses = datas.variants.thumb[variant].base | default('') %}
-  {% set thumbCheckedClasses = datas.variants.thumb[variant].checked | default('') %}
-  
-  <label>
-    <input 
-      type="checkbox" 
-      id="{{ toggle.id }}" 
+{% macro renderSingleToggle(toggle) %}
+  {# Read nested structure with fallbacks #}
+  {% set switchData = toggle.switch | default({}) %}
+  {% set switchValue = switchData.value | default(toggle.id) %}
+  {% set isChecked = switchData.checked | default(false) %}
+  {% set isDisabled = switchData.disabled | default(false) %}
+  {% set switchSize = switchData.size | default('medium') %}
+  {% set switchVariant = switchData.variant | default('default') %}
+
+  {# Render toggle with label #}
+  <label for="{{ toggle.id }}">
+    <input
+      type="checkbox"
+      id="{{ toggle.id }}"
       name="{{ toggle.id }}"
-      value="{{ toggle.value }}"
+      value="{{ switchValue }}"
       class="sr-only peer"
-      {% if toggle.checked %}checked{% endif %}
-      {% if toggle.disabled %}disabled{% endif %}
-      {% if toggle.ariaLabel %}aria-label="{{ toggle.ariaLabel }}"{% endif %}
+      data-toggle-id="{{ toggle.id }}"
+      data-toggle-type="toggle"
+      data-toggle-size="{{ switchSize }}"
+      data-toggle-variant="{{ switchVariant }}"
+      {% if isChecked %}checked{% endif %}
+      {% if isDisabled %}disabled{% endif %}
+      {% if switchData.ariaLabel %}aria-label="{{ switchData.ariaLabel }}"{% endif %}
     />
-    <div 
-      class="{{ toggleBaseClasses }}
-      {% if toggle.checked %}{{ toggleCheckedClasses }}{% endif %}
-      {{ toggleFocusClasses }}"
-    >
-      <div 
-        class="{{ thumbBaseClasses }}
-        {% if toggle.checked %}
-          {{ thumbCheckedClasses }}
-        {% endif %}"
-      ></div>
+
+    {# Toggle visual container #}
+    <div data-toggle-container>
+      <div data-toggle-thumb></div>
     </div>
-    
-    <div>
-      <span class="{{ labelTextClasses }}">
-        {{ toggle.label }}
-      </span>
-      
-      {% if toggle.description %}
-        <p class="{{ descriptionClasses }}">{{ toggle.description }}</p>
-      {% endif %}
-    </div>
+
+    {# Label and description #}
+    {% if toggle.label or toggle.description %}
+      <div>
+        {% if toggle.label %}
+          <span>{{ toggle.label }}</span>
+        {% endif %}
+
+        {% if toggle.description %}
+          <p>{{ toggle.description }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
   </label>
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -23,21 +23,16 @@
 {% macro renderHeading(options) %}
   {# Validate required props #}
   {% if not options.datas %}
-    <span class="error">Error: Missing required prop (datas)</span>
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
-    <span class="error">Error: Missing required prop (name)</span>
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Find heading configuration by name #}
-    {% set headingData = null %}
-    {% for heading in options.datas %}
-      {% if heading.name == options.name %}
-        {% set headingData = heading %}
-      {% endif %}
-    {% endfor %}
+    {# Find heading using universal filter #}
+    {% set headingData = options.datas | findByName(options.name) %}
 
     {# Render heading or error message #}
     {% if not headingData %}
-      <span class="error">Heading not found: {{ options.name }}</span>
+      <span class="error" role="alert">Heading not found: {{ options.name }}</span>
     {% else %}
       {# Compute final tag with fallback cascade #}
       {% set finalTag = options.tag | default(headingData.tag) | default('p') %}
@@ -52,46 +47,55 @@
       {% if finalTag == 'h1' %}
         <h1
           data-heading-name="{{ headingData.name }}"
+          data-heading-type="heading"
           data-heading-tag="h1"
         >{{ secureContent | safe }}</h1>
       {% elif finalTag == 'h2' %}
         <h2
           data-heading-name="{{ headingData.name }}"
+          data-heading-type="heading"
           data-heading-tag="h2"
         >{{ secureContent | safe }}</h2>
       {% elif finalTag == 'h3' %}
         <h3
           data-heading-name="{{ headingData.name }}"
+          data-heading-type="heading"
           data-heading-tag="h3"
         >{{ secureContent | safe }}</h3>
       {% elif finalTag == 'h4' %}
         <h4
           data-heading-name="{{ headingData.name }}"
+          data-heading-type="heading"
           data-heading-tag="h4"
         >{{ secureContent | safe }}</h4>
       {% elif finalTag == 'h5' %}
         <h5
           data-heading-name="{{ headingData.name }}"
+          data-heading-type="heading"
           data-heading-tag="h5"
         >{{ secureContent | safe }}</h5>
       {% elif finalTag == 'h6' %}
         <h6
           data-heading-name="{{ headingData.name }}"
+          data-heading-type="heading"
           data-heading-tag="h6"
         >{{ secureContent | safe }}</h6>
       {% elif finalTag == 'span' %}
         <span
           data-heading-name="{{ headingData.name }}"
+          data-heading-type="heading"
           data-heading-tag="span"
         >{{ secureContent | safe }}</span>
       {% elif finalTag == 'small' %}
         <small
           data-heading-name="{{ headingData.name }}"
+          data-heading-type="heading"
           data-heading-tag="small"
         >{{ secureContent | safe }}</small>
       {% else %}
         <p
           data-heading-name="{{ headingData.name }}"
+          data-heading-type="heading"
           data-heading-tag="p"
         >{{ secureContent | safe }}</p>
       {% endif %}

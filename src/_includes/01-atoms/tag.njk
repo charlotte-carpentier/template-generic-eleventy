@@ -1,99 +1,64 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ATOM › Tag                                              │
-   │ Labels and badges with interactive support              │
+   │ Labels and status tags with semantic attributes         │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Usage — Summon HAT Components Wisely:
-    {% from "01-atoms/tag.njk" import renderTag %}
-    
-    Static tag:
-    {{ renderTag({ name: "adventure", datas: atoms.tags }) }}
-    
-    Interactive tag:
-    {{ renderTag({ 
-        name: "filter_sword", 
-        datas: atoms.tags, 
-        dataActiveTag: true 
-    }) }}
-  
   Props:
     - options.name (string): Tag identifier
     - options.datas (object): Tag configuration data
-    - options.dataActiveTag (boolean): Enable interactive behavior
-  
-  Notes:
-    - Style variants from "variants" object in tags.json
-    - Interactive tags enabled via isInteractive or dataActiveTag
-    - Hover states defined in variant CSS classes
-    - active-tag.js script required for interactivity (included in base.njk)
-  
-  Accessibility:
-    - Supports role="status" or role="alert" when specified
-    - Title attribute for hover context
-    - Optional visually-hidden text for screen readers
-    - Keyboard support (Space/Enter) for interactive tags
-  
-  Features:
-    - Adds inline styles for active-tag and sr-only (first instance only)
-    - Screen reader text support
-    - Toggle functionality for filtering content
-  
+    - options.isInteractive (boolean): Enable interactive behavior
+
+  Usage — Summon HAT Components Wisely:
+    {% from "01-atoms/tag.njk" import renderTag %}
+
+    Static tag:
+    {{ renderTag({
+        name: "demoTag1",
+        datas: atoms.tag.tags
+    }) }}
+
+    Interactive tag:
+    {{ renderTag({
+        name: "demoTag1",
+        datas: atoms.tag.tags,
+        isInteractive: true
+    }) }}
+
   @created 2025-01-15
 #}
 
 {% macro renderTag(options) %}
-  {# Initialize tagData as null before searching #}
-  {% set tagData = null %}
-  
-  {# Find tag in data collection #}
-  {% for tag in options.datas.tags %}
-    {% if tag.name == options.name %}
-      {% set tagData = tag %}
-    {% endif %}
-  {% endfor %}
-
-  {# Get global style that applies to all tags #}
-  {% set globalStyle = options.datas.globalStyle %}
-
-  {# Add styles for active tags and screen reader only content #}
-  {% if loop.first %}
-    <style>
-      .active-tag { {{ options.datas.activeTagStyle }} }
-      .sr-only { {{ options.datas.srOnlyStyle }} }
-    </style>
-  {% endif %}
-
-  {# Render tag if data was found #}
-  {% if tagData %}
-    {# Get variant-specific style or default to empty string if not found #}
-    {% set variantStyle = options.datas.variants[tagData.variant] | default('') %}
-    
-    {# Store title and screenReaderText values for easier access #}
-    {% set titleAttr = tagData.title %}
-    {% set screenReaderText = tagData.screenReaderText %}
-    
-    {# Determine if tag should be interactive #}
-    {% set isInteractive = options.dataActiveTag or tagData.isInteractive %}
-    
-    <span 
-      class="{{ globalStyle }} {{ variantStyle }}"
-      {% if isInteractive %}data-active-tag="true"{% endif %}
-      {% if tagData.role %}role="{{ tagData.role }}"{% endif %}
-      {% if titleAttr %}title="{{ titleAttr }}"{% endif %}
-    >
-      {{ tagData.text }}
-      {% if screenReaderText %}
-        <span class="">{{ screenReaderText }}</span>
-      {% endif %}
-    </span>
-    
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Error message if tag not found in data collection #}
-    <span>Tag not found: {{ options.name }}</span>
+    {# Find tag using universal filter #}
+    {% set tagData = options.datas | findByName(options.name) %}
+
+    {# Render tag or error message #}
+    {% if not tagData %}
+      <span class="error" role="alert">Tag not found: {{ options.name }}</span>
+    {% else %}
+      {# Render tag element #}
+      <span
+        data-tag-name="{{ tagData.name }}"
+        data-tag-type="tag"
+        data-tag-variant="{{ tagData.variant }}"
+        {% if options.isInteractive or tagData.isInteractive %}data-tag-interactive="true"{% endif %}
+        {% if tagData.role %}role="{{ tagData.role }}"{% endif %}
+        {% if tagData.title %}title="{{ tagData.title }}"{% endif %}
+      >
+        {{ tagData.text }}
+        {% if tagData.screenReaderText %}
+          <span class="sr-only">{{ tagData.screenReaderText }}</span>
+        {% endif %}
+      </span>
+    {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

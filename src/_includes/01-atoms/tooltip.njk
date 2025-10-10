@@ -4,75 +4,63 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Tooltip identifier
+    - options.datas (array): Tooltip configuration data
+
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/tooltip.njk" import renderTooltip %}
-    
-    {{ renderTooltip({ 
-        name: "escrime",
+
+    {{ renderTooltip({
+        name: "demoTooltip1",
         datas: atoms.tooltip.tooltips
     }) }}
-  
-  Props:
-    - option.name (string): Tooltip identifier
-    - option.datas (array): Tooltip configuration data
-  
-  Features:
-    - Title with heading role
-    - Split description (optional part1 and part2)
-    - Decorative bar with diamond separator
-    - Always visible for atom display
-  
-  Accessibility:
-    - role="tooltip" for semantic meaning
-    - aria-live="polite" for dynamic updates
-    - role="heading" with aria-level for title
-    - aria-hidden for decorative elements
-  
+
   @created 2025-01-15
 #}
 
-{% macro renderTooltip(option) %}
-  {# Check if datas is provided #}
-  {% if not option.datas %}
-    <span>Error: No tooltip configuration provided</span>
+{% macro renderTooltip(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Retrieve tooltip configuration #}
-    {% set tooltipsConfig = option.datas %}
-    {% set tooltipName = option.name %}
-    
-    {# Find the specific tooltip by name #}
-    {% set tooltipData = null %}
-    {% for tooltip in tooltipsConfig %}
-      {% if tooltip.name == tooltipName %}
-        {% set tooltipData = tooltip %}
-      {% endif %}
-    {% endfor %}
+    {# Find tooltip using universal filter #}
+    {% set tooltipData = options.datas | findByName(options.name) %}
 
-    {# Fallback if tooltip not found #}
+    {# Render tooltip or error message #}
     {% if not tooltipData %}
-      <span>Tooltip not found: {{ tooltipName }}</span>
+      <span class="error" role="alert">Tooltip not found: {{ options.name }}</span>
     {% else %}
-      {# Tooltip - always visible for atom display #}
-      <div class="" role="tooltip" aria-live="polite">
+      {# Render tooltip element #}
+      <div
+        data-tooltip-name="{{ tooltipData.name }}"
+        data-tooltip-type="tooltip"
+        role="tooltip"
+        aria-live="polite"
+      >
         {# Title #}
-        <div class="" role="heading" aria-level="3">{{ tooltipData.title }}</div>
-        
-        {# Description part 1 (above bar) #}
-        {% if tooltipData.description_part1 %}
-          <div class="">{{ tooltipData.description_part1 }}</div>
-        {% endif %}
-        
-        {# Decorative bar with diamond #}
-        <div aria-hidden="true">
-          <div class=""></div>
-          <div class=""></div>
-          <div class=""></div>
+        <div role="heading" aria-level="3">
+          {{ tooltipData.title }}
         </div>
-        
+
+        {# Description part 1 (above bar) #}
+        {% if tooltipData.descriptionPart1 %}
+          <div>{{ tooltipData.descriptionPart1 }}</div>
+        {% endif %}
+
+        {# Decorative bar with diamond #}
+        <div data-tooltip-separator aria-hidden="true">
+          <div data-separator-line></div>
+          <div data-separator-diamond></div>
+          <div data-separator-line></div>
+        </div>
+
         {# Description part 2 (below bar) or regular description #}
-        <div class="">
-          {% if tooltipData.description_part2 %}
-            {{ tooltipData.description_part2 }}
+        <div>
+          {% if tooltipData.descriptionPart2 %}
+            {{ tooltipData.descriptionPart2 }}
           {% else %}
             {{ tooltipData.description }}
           {% endif %}
@@ -81,7 +69,6 @@
     {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -32,10 +32,42 @@ export default function(eleventyConfig) {
   // --------------------------
   // Filters
   // --------------------------
+
   // Check if a string ends with a specific suffix
   eleventyConfig.addFilter("endsWith", (str, suffix) => {
     if (!str || !suffix) return false;
     return str.toString().toLowerCase().endsWith(suffix.toLowerCase());
+  });
+
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  // Universal Filter: Find by Name/ID
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  /**
+   * Find an item in array or nested object by name or id
+   * @param {Array|Object} data - Data to search (flat array or nested object)
+   * @param {string} name - Name or id to find
+   * @returns {Object|null} Found item or null
+   */
+  eleventyConfig.addFilter("findByName", function(data, name) {
+    if (!data || !name) return null;
+
+    // Case 1: Flat array (button, image, input, checkbox, etc.)
+    if (Array.isArray(data)) {
+      return data.find(item => item.name === name || item.id === name);
+    }
+
+    // Case 2: Nested object with categories (icon)
+    if (typeof data === 'object') {
+      for (const category in data) {
+        if (Array.isArray(data[category])) {
+          const found = data[category].find(item => item.name === name || item.id === name);
+          if (found) return found; // Stop immediately when found
+        }
+      }
+    }
+
+    return null;
   });
 
   // --------------------------

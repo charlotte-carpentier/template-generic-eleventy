@@ -1,138 +1,95 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ATOM › Radio Button                                     │
-   │ Enhanced radio inputs with labels and descriptions      │
+   │ Radio inputs with label and description support         │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Usage — Summon HAT Components Wisely:
-    {% from "01-atoms/radio-button.njk" import renderRadioButton %}
-    
-    Single radio button:
-    {{ renderRadioButton({ id: "option1", datas: atoms.radioButtons }) }}
-    
-    Group of radio buttons:
-    {{ renderRadioButton({ 
-        group: true, 
-        groupLabel: "Choose an option",
-        datas: atoms.radioButtons 
-    }) }}
-  
   Props:
     - options.id (string): Radio button identifier for single rendering
     - options.group (boolean): Render as group if true
-    - options.groupLabel (string): Group label text
+    - options.groupLabel (string): Group label text for fieldset legend
     - options.groupSrOnly (boolean): Hide group label visually
-    - options.datas (object): Radio button configuration
-  
-  Features:
-    - Supports single or group rendering
-    - Label with description support
-    - State management (default, hover, focus, checked, disabled)
-    - Inline event handlers for state transitions
-  
-  Accessibility:
-    - Proper fieldset/legend for groups
-    - aria-label support for screen readers
-    - Screen-reader-only labels option
-    - Disabled state handling
-  
+    - options.datas (object): Radio button configuration data
+
+  Usage — Summon HAT Components Wisely:
+    {% from "01-atoms/radio-button.njk" import renderRadioButton %}
+
+    Single radio button:
+    {{ renderRadioButton({
+        id: "demoRadio1",
+        datas: atoms["radio-button"].radioButtons
+    }) }}
+
+    Group of radio buttons:
+    {{ renderRadioButton({
+        group: true,
+        groupLabel: "Choose an option",
+        datas: atoms["radio-button"].radioButtons
+    }) }}
+
   @created 2025-01-15
 #}
 
 {% macro renderRadioButton(options) %}
-  {# Initialize default values for styling classes #}
-  {% set globalStyle = options.datas.globalStyle | default('') %}
-  {% set fieldsetClasses = options.datas.fieldsetClasses | default('') %}
-  {% set legendClasses = options.datas.legendClasses | default('') %}
-  {% set groupContainerClasses = options.datas.groupContainerClasses | default('') %}
-  
-  {# Check if rendering as a group or individual radio button #}
-  {% if options.group %}
-    <fieldset class="{{ fieldsetClasses }}">
-      {% if options.groupLabel %}
-        <legend class="{{ legendClasses }} {% if options.groupSrOnly %}sr-only{% endif %}">
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif options.group %}
+    {# Group mode validation #}
+    {% if not options.groupLabel %}
+      <span class="error" role="alert">Error: Missing required prop (groupLabel) for group mode</span>
+    {% else %}
+      {# Render fieldset group #}
+      <fieldset data-radio-group-type="radio-button">
+        <legend {% if options.groupSrOnly %}class="sr-only"{% endif %}>
           {{ options.groupLabel }}
         </legend>
-      {% endif %}
-      
-      <div class="{{ groupContainerClasses }}">
+
         {% for radioButton in options.datas.radioButtons %}
-          {{ renderSingleRadioButton(radioButton, options.datas) }}
+          {{ renderSingleRadio(radioButton) }}
         {% endfor %}
-      </div>
-    </fieldset>
+      </fieldset>
+    {% endif %}
+  {% elif not options.id %}
+    <span class="error" role="alert">Error: Missing required prop (id) for single mode</span>
   {% else %}
-    {# Initialize radioButtonData as null before searching #}
-    {% set radioButtonData = null %}
-    
-    {# Find the radio button matching the requested ID in the data collection #}
-    {% for radioButton in options.datas.radioButtons %}
-      {% if radioButton.id == options.id %}
-        {% set radioButtonData = radioButton %}
-      {% endif %}
-    {% endfor %}
-    
-    {# Render radio button if data was found, otherwise show error #}
-    {% if radioButtonData %}
-      {{ renderSingleRadioButton(radioButtonData, options.datas) }}
+    {# Single mode - find radio button using universal filter #}
+    {% set radioButtonData = options.datas | findByName(options.id) %}
+
+    {% if not radioButtonData %}
+      <span class="error" role="alert">Radio button not found: {{ options.id }}</span>
     {% else %}
-      <span class="{{ options.datas.errorClasses | default('') }}">Radio button not found: {{ options.id }}</span>
+      {{ renderSingleRadio(radioButtonData) }}
     {% endif %}
   {% endif %}
 {% endmacro %}
 
-{% macro renderSingleRadioButton(radioButton, datas) %}
-  {# Initialize style classes for the radio button and its components #}
-  {% set labelClasses = datas.labelClasses | default('') %}
-  {% set radioButtonContainerClasses = datas.radioButtonContainerClasses | default('') %}
-  {% set baseClasses = datas.baseClasses | default('') %}
-  {% set labelTextClasses = datas.labelTextClasses | default('') %}
-  {% set descriptionClasses = datas.descriptionClasses | default('') %}
-  
-  {# Define state classes for different visual states #}
-  {% set stateClasses = {
-    'default': datas.variants.default | default(''),
-    'hover': datas.variants.hover | default(''),
-    'checked': datas.variants.checked | default(''),
-    'focus': datas.variants.focus | default(''),
-    'disabled': datas.variants.disabled | default(''),
-    'disabledChecked': datas.variants.disabledChecked | default('')
-  } %}
-  
-  {# Combine base classes with default state #}
-  {% set inputClasses = baseClasses ~ ' ' ~ stateClasses.default %}
-  
-  <label for="{{ radioButton.id }}" class="{{ labelClasses }}">
-    <div class="{{ radioButtonContainerClasses }}">
-      <input 
-        type="radio" 
-        id="{{ radioButton.id }}" 
-        name="{{ radioButton.name }}"
-        value="{{ radioButton.value }}"
-        class="{{ inputClasses }}"
-        onfocus="this.className='{{ baseClasses }} {{ stateClasses.focus }}'" 
-        onblur="this.className='{{ baseClasses }} {{ stateClasses.default }}'"
-        onmouseover="this.className='{{ baseClasses }} {{ stateClasses.hover }}'" 
-        onclick="this.checked ? this.className='{{ baseClasses }} {{ stateClasses.checked }}' : this.className='{{ baseClasses }} {{ stateClasses.default }}'"
-        {% if radioButton.disabled %}
-          disabled 
-          class="{{ baseClasses }} {% if radioButton.checked %}{{ stateClasses.disabledChecked }}{% else %}{{ stateClasses.disabled }}{% endif %}"
-        {% endif %}
-        {% if radioButton.checked %}checked{% endif %}
-        {% if radioButton.ariaLabel %}aria-label="{{ radioButton.ariaLabel }}"{% endif %}
-      />
-    </div>
-    <div>
-      <strong class="{{ labelTextClasses }}">
-        {{ radioButton.label }}
-      </strong>
-      {% if radioButton.description %}
-        <p class="{{ descriptionClasses }}">{{ radioButton.description }}</p>
-      {% endif %}
-    </div>
+{% macro renderSingleRadio(radioButton) %}
+  {# Read nested structure with fallbacks #}
+  {% set radioData = radioButton.radio | default({}) %}
+  {% set radioValue = radioData.value | default(radioButton.id) %}
+  {% set isChecked = radioData.checked | default(false) %}
+  {% set isDisabled = radioData.disabled | default(false) %}
+
+  {# Render radio button with label #}
+  <label for="{{ radioButton.id }}">
+    <input
+      type="radio"
+      id="{{ radioButton.id }}"
+      name="{{ radioButton.name | default('radio-group') }}"
+      value="{{ radioValue }}"
+      data-radio-id="{{ radioButton.id }}"
+      data-radio-type="radio-button"
+      {% if isChecked %}checked{% endif %}
+      {% if isDisabled %}disabled{% endif %}
+      {% if radioButton.ariaLabel %}aria-label="{{ radioButton.ariaLabel }}"{% endif %}
+    />
+
+    {% if radioButton.label %}
+      <span>{{ radioButton.label }}</span>
+    {% endif %}
   </label>
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

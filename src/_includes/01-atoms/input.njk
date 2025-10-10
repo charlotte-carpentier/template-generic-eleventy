@@ -4,117 +4,195 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Input identifier
+    - options.datas (array): Input configuration data
+    - options.disabled (boolean): Override disabled state
+
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/input.njk" import renderInput %}
-    
-    {{ renderInput({ 
-        name: "username",
+
+    {{ renderInput({
+        name: "demoInput1",
         datas: atoms.input.inputs
     }) }}
-  
-  Props:
-    - option.name (string): Input identifier
-    - option.datas (array): Input configuration data
-    - option.disabled (boolean): Override disabled state
-  
-  Supported Types:
-    - text, email, tel, password (standard inputs)
-    - textarea (multi-line text with character counter)
-  
-  Features:
-    - Label with required indicator
-    - Pattern validation with help text
-    - Error message containers with ARIA
-    - Character counter for textarea
-    - Accessible disabled states
-  
-  Accessibility:
-    - Proper label/input association
-    - aria-describedby for help text and errors
-    - role="alert" for error messages
-    - Required field indicators
-  
+
   @created 2025-01-15
 #}
 
-{% macro renderInput(option) %}
-  {# Check if datas is provided #}
-  {% if not option.datas %}
-    <span>Error: No input configuration provided</span>
+{% macro renderInput(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Retrieve input configuration #}
-    {% set inputsConfig = option.datas %}
-    {% set inputName = option.name %}
-    
-    {# Find the specific input by name #}
-    {% set inputData = null %}
-    {% for input in inputsConfig %}
-      {% if input.name == inputName %}
-        {% set inputData = input %}
-      {% endif %}
-    {% endfor %}
+    {# Find input using universal filter #}
+    {% set inputData = options.datas | findByName(options.name) %}
 
-    {# Fallback if input not found #}
+    {# Render input or error message #}
     {% if not inputData %}
-      <span>Input not found: {{ inputName }}</span>
+      <span class="error" role="alert">Input not found: {{ options.name }}</span>
     {% else %}
+      {# Compute final values with fallback cascade #}
+      {% set inputId = inputData.id | default(options.name) %}
+      {% set inputName = inputData.name | default(inputId) %}
+      {% set inputType = inputData.type | default('text') %}
+      {% set isDisabled = options.disabled or inputData.disabled %}
+
       {# Input container #}
-      <div class="">
+      <div class="input-wrapper">
         {# Label #}
         {% if inputData.label %}
-          <label for="{{ inputData.id }}" class="">
+          <label for="{{ inputId }}" class="input-label">
             {{ inputData.label }}
-            {% if inputData.required %}<span>*</span>{% endif %}
+            {% if inputData.required %}<span class="input-required">*</span>{% endif %}
           </label>
         {% endif %}
-        
+
         {# Text Input #}
-        {% if inputData.type in ['text', 'email', 'tel', 'password'] %}
-          <input 
-            type="{{ inputData.type }}"
-            id="{{ inputData.id }}"
-            name="{{ inputData.name or inputData.id }}"
-            class=""
+        {% if inputType in ['text', 'email', 'tel', 'password'] %}
+          <input
+            type="{{ inputType }}"
+            id="{{ inputId }}"
+            name="{{ inputName }}"
+            class="input-field"
             placeholder="{{ inputData.placeholder }}"
+            data-input-name="{{ inputData.name }}"
+            data-input-type="input"
             {% if inputData.required %}required{% endif %}
             {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
             {% if inputData.pattern %}pattern="{{ inputData.pattern }}"{% endif %}
-            {% if option.disabled %}disabled{% endif %}
-            aria-describedby="{% if inputData.patternMessage %}{{ inputData.id }}-help{% endif %} {% if inputData.errorMessage %}{{ inputData.id }}-error{% endif %}"
+            {% if isDisabled %}disabled{% endif %}
+            aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help{% endif %} {% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
           />
-        
+
         {# Textarea #}
-        {% elif inputData.type == 'textarea' %}
-          <textarea 
-            id="{{ inputData.id }}"
-            name="{{ inputData.name or inputData.id }}"
-            class="input-base"
+        {% elif inputType == 'textarea' %}
+          <textarea
+            id="{{ inputId }}"
+            name="{{ inputName }}"
+            class="input-field input-textarea"
             placeholder="{{ inputData.placeholder }}"
-            rows="{{ inputData.rows or 3 }}"
+            rows="{{ inputData.rows | default(3) }}"
+            data-input-name="{{ inputData.name }}"
+            data-input-type="textarea"
             {% if inputData.required %}required{% endif %}
             {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
-            {% if option.disabled %}disabled{% endif %}
-            aria-describedby="{% if inputData.maxLength %}{{ inputData.id }}-count{% endif %} {% if inputData.errorMessage %}{{ inputData.id }}-error{% endif %}"
+            {% if isDisabled %}disabled{% endif %}
+            aria-describedby="{% if inputData.maxLength %}{{ inputId }}-count{% endif %} {% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
           ></textarea>
-          
+
           {# Character counter for textarea #}
           {% if inputData.maxLength %}
-            <div id="{{ inputData.id }}-count" class="">
+            <div id="{{ inputId }}-count" class="input-counter">
               0/{{ inputData.maxLength }}
             </div>
           {% endif %}
+
+        {# Select dropdown #}
+        {% elif inputType == 'select' %}
+          <select
+            id="{{ inputId }}"
+            name="{{ inputName }}"
+            class="input-field input-select"
+            data-input-name="{{ inputData.name }}"
+            data-input-type="select"
+            {% if inputData.required %}required{% endif %}
+            {% if isDisabled %}disabled{% endif %}
+            {% if inputData.selectName %}data-select-name="{{ inputData.selectName }}"{% endif %}
+            aria-describedby="{% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
+          >
+            {# TODO: Populate options from select data using selectName #}
+            <option value="">Select an option</option>
+          </select>
+
+        {# Multiselect with chips #}
+        {% elif inputType == 'multiselect' %}
+          <div class="input-multiselect" data-input-type="multiselect">
+            <select
+              id="{{ inputId }}"
+              name="{{ inputName }}"
+              multiple
+              class="input-field input-multiselect-field"
+              data-input-name="{{ inputData.name }}"
+              {% if inputData.required %}required{% endif %}
+              {% if isDisabled %}disabled{% endif %}
+              aria-describedby="{% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
+            >
+              {# TODO: Populate options from select data #}
+              <option value="">Select options</option>
+            </select>
+
+            {# Display selected chips #}
+            {% if inputData.chipMulti %}
+              <div class="input-multiselect-chips">
+                {# TODO: Render selected chips dynamically with JS #}
+              </div>
+            {% endif %}
+          </div>
+
+        {# Date input #}
+        {% elif inputType == 'date' %}
+          <input
+            type="date"
+            id="{{ inputId }}"
+            name="{{ inputName }}"
+            class="input-field input-date"
+            placeholder="{{ inputData.placeholder | default('dd/mm/yyyy') }}"
+            data-input-name="{{ inputData.name }}"
+            data-input-type="date"
+            {% if inputData.required %}required{% endif %}
+            {% if isDisabled %}disabled{% endif %}
+            aria-describedby="{% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
+          />
+
+        {# Phone input with formatting #}
+        {% elif inputType == 'phone' %}
+          <input
+            type="tel"
+            id="{{ inputId }}"
+            name="{{ inputName }}"
+            class="input-field input-phone"
+            placeholder="{{ inputData.placeholder }}"
+            data-input-name="{{ inputData.name }}"
+            data-input-type="phone"
+            {% if inputData.required %}required{% endif %}
+            {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
+            {% if isDisabled %}disabled{% endif %}
+            aria-describedby="{% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
+          />
+
+        {# Panel input (special type) #}
+        {% elif inputType == 'panel' %}
+          <textarea
+            id="{{ inputId }}"
+            name="{{ inputName }}"
+            class="input-field input-panel"
+            placeholder="{{ inputData.placeholder }}"
+            rows="{{ inputData.rows | default(4) }}"
+            data-input-name="{{ inputData.name }}"
+            data-input-type="panel"
+            {% if inputData.required %}required{% endif %}
+            {% if isDisabled %}disabled{% endif %}
+            aria-describedby="{% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
+          ></textarea>
+
+        {# Unknown input type #}
+        {% else %}
+          <span class="error" role="alert">Unsupported input type: {{ inputType }}</span>
         {% endif %}
-        
+
         {# Help text #}
         {% if inputData.patternMessage %}
-          <div id="{{ inputData.id }}-help" class="">
+          <div id="{{ inputId }}-help" class="input-help">
             {{ inputData.patternMessage }}
           </div>
         {% endif %}
-        
+
         {# Error message container #}
         {% if inputData.errorMessage %}
-          <div id="{{ inputData.id }}-error" role="alert">
+          <div id="{{ inputId }}-error" class="input-error" role="alert">
             {{ inputData.errorMessage }}
           </div>
         {% endif %}
@@ -122,7 +200,6 @@
     {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

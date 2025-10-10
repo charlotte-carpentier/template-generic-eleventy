@@ -39,7 +39,7 @@
 {% macro renderCheckbox(options) %}
   {# Validate required props #}
   {% if not options.datas %}
-    <span class="error">Error: Missing required prop (datas)</span>
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% else %}
     {# Group rendering #}
     {% if options.group %}
@@ -64,23 +64,16 @@
     {# Single checkbox rendering #}
     {% else %}
       {% if not options.id %}
-        <span class="error">Error: Missing required prop (id) for single checkbox</span>
+        <span class="error" role="alert">Error: Missing required prop (id) for single checkbox</span>
       {% else %}
-        {# Find checkbox in data #}
-        {% set targetCheckbox = null %}
-
-        {# Search in flat checkboxes array #}
-        {% for checkbox in options.datas %}
-          {% if checkbox.id == options.id %}
-            {% set targetCheckbox = checkbox %}
-          {% endif %}
-        {% endfor %}
+        {# Find checkbox using universal filter #}
+        {% set targetCheckbox = options.datas | findByName(options.id) %}
 
         {# Render or show error #}
         {% if targetCheckbox %}
           {{ renderSingleCheckbox(targetCheckbox) }}
         {% else %}
-          <span class="error">Checkbox not found: {{ options.id }}</span>
+          <span class="error" role="alert">Checkbox not found: {{ options.id }}</span>
         {% endif %}
       {% endif %}
     {% endif %}
