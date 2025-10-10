@@ -1,0 +1,35 @@
+---
+title: "Accueil"
+description: "Page d'accueil du site"
+layout: "04-core/base.njk"
+permalink: "/"
+---
+
+<!-- MAINTENANCE: Uncomment to activate -->
+<!-- <script>window.location.replace('/maintenance/');</script> -->
+
+{# Test Batch 1 - Atoms optimisés #}
+
+{# Import macros #}
+{% from "01-atoms/button.njk" import renderButton %}
+{% from "01-atoms/checkbox.njk" import renderCheckbox %}
+
+{# Test button #}
+<h2>Button Tests</h2>
+{{ renderButton({
+    name: "demoButton1",
+    datas: atoms.button.buttons
+}) }}
+
+{{ renderButton({
+    name: "demoCont1",
+    datas: atoms.button.buttons,
+    disabled: true
+}) }}
+
+{# Test checkbox #}
+<h2>Checkbox Tests</h2>
+{{ renderCheckbox({
+   id: "demoCheck1",
+   datas: atoms.checkbox
+}) }}

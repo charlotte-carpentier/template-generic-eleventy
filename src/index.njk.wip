@@ -1,9 +1,0 @@
----
-title: "Accueil"
-description: "Page d'accueil du site"
-layout: "04-core/base.njk"
-permalink: "/"
----
-
-<!-- MAINTENANCE: Uncomment to activate -->
-<!-- <script>window.location.replace('/maintenance/');</script> -->

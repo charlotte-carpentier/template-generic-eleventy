@@ -76,7 +76,7 @@ export { initTooltips };
     - option.datas (array): Button configurations
     - option.disabled (boolean): Override disabled state
   
-  Usage:
+  Usage — Summon HAT Components Wisely:
     {% from "01-atoms/button.njk" import renderButton %}
     {{ renderButton({ name: "demo", datas: atoms.button.buttons }) }}
   
