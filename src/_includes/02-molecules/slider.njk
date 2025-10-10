@@ -1,0 +1,132 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Slider                                       │
+   │ Single value and range sliders with handle indicators   │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - options.name (string): Slider identifier
+    - options.datas (array): Slider configuration data
+
+  Usage — Summon HAT Components Wisely:
+    {% from "02-molecules/slider.njk" import renderSlider %}
+
+    {{ renderSlider({
+        name: "demoSlider1",
+        datas: molecules.slider.sliders
+    }) }}
+
+  @created 2025-01-15
+#}
+
+{% macro renderSlider(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
+  {% else %}
+    {# Find slider using universal filter #}
+    {% set sliderData = options.datas | findByName(options.name) %}
+
+    {# Render or error #}
+    {% if not sliderData %}
+      <span class="error" role="alert">Slider not found: {{ options.name }}</span>
+    {% else %}
+      <div
+        data-slider-name="{{ sliderData.name }}"
+        data-slider-type="{{ sliderData.type }}"
+      >
+        {# Label #}
+        {% if sliderData.label %}
+          <label data-slider-label="true">
+            {{ sliderData.label }}
+          </label>
+        {% endif %}
+
+        {# Values display #}
+        <div data-slider-values="true">
+          {% for value in sliderData.values %}
+            <span data-slider-value="{{ loop.index0 }}">{{ value }}</span>
+          {% endfor %}
+        </div>
+
+        {# Slider track and handles #}
+        <div
+          data-slider-track="true"
+          role="slider"
+          aria-valuemin="{{ sliderData.min }}"
+          aria-valuemax="{{ sliderData.max }}"
+          aria-valuenow="{{ sliderData.values[0] }}"
+          {% if sliderData.disabled %}aria-disabled="true"{% endif %}
+        >
+          {# Single slider #}
+          {% if sliderData.type == "single" %}
+            <div
+              data-slider-handle="true"
+              data-slider-handle-index="0"
+              data-slider-value="{{ sliderData.values[0] }}"
+            >
+              {# Handle indicator #}
+              {% if sliderData.handleIndicator and sliderData.handleIndicator.show %}
+                <span
+                  data-slider-indicator="true"
+                  data-slider-indicator-variant="{{ sliderData.handleIndicator.variant }}"
+                >
+                  {{ sliderData.values[0] }}
+                </span>
+              {% endif %}
+            </div>
+
+          {# Range slider #}
+          {% elif sliderData.type == "range" %}
+            <div
+              data-slider-handle="true"
+              data-slider-handle-index="0"
+              data-slider-value="{{ sliderData.values[0] }}"
+            >
+              {# Handle indicator (start) #}
+              {% if sliderData.handleIndicator and sliderData.handleIndicator.show %}
+                <span
+                  data-slider-indicator="true"
+                  data-slider-indicator-variant="{{ sliderData.handleIndicator.variant }}"
+                >
+                  {{ sliderData.values[0] }}
+                </span>
+              {% endif %}
+            </div>
+
+            <div
+              data-slider-handle="true"
+              data-slider-handle-index="1"
+              data-slider-value="{{ sliderData.values[1] }}"
+            >
+              {# Handle indicator (end) #}
+              {% if sliderData.handleIndicator and sliderData.handleIndicator.show %}
+                <span
+                  data-slider-indicator="true"
+                  data-slider-indicator-variant="{{ sliderData.handleIndicator.variant }}"
+                >
+                  {{ sliderData.values[1] }}
+                </span>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+
+        {# Min/Max labels #}
+        <div data-slider-labels="true">
+          <span data-slider-min="true">{{ sliderData.min }}</span>
+          <span data-slider-max="true">{{ sliderData.max }}</span>
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#}

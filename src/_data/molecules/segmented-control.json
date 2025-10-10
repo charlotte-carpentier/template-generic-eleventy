@@ -1,17 +1,19 @@
 {
   "// Component": "Segmented Control - Button groups with left/center/right segments",
-  
   "_meta": {
     "component": "segmented-control",
     "type": "molecule",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "segmentedControls": [
     {
       "id": "demoSeg1",
-      "variants": ["default", "false", "large"],
+      "variants": [
+        "default",
+        "false",
+        "large"
+      ],
       "items": [
         {
           "buttonName": "demoSeg1",

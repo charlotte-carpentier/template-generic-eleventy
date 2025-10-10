@@ -1,0 +1,180 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Panel                                        │
+   │ Dropdown panels with default, date, and list variants   │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - options.name (string): Panel identifier
+    - options.datas (array): Panel configuration data
+    - options.checkboxDatas (array): Checkbox atom data (optional)
+    - options.iconDatas (array): Icon atom data (optional)
+
+  Usage — Summon HAT Components Wisely:
+    {% from "02-molecules/panel.njk" import renderPanel %}
+
+    {{ renderPanel({
+        name: "demoPanel1",
+        datas: molecules.panel.panels,
+        checkboxDatas: atoms.checkbox.checkboxes,
+        iconDatas: atoms.icon.icons
+    }) }}
+
+  @created 2025-01-15
+#}
+
+{% from "01-atoms/checkbox.njk" import renderCheckbox %}
+{% from "01-atoms/icon.njk" import renderIcon %}
+
+{% macro renderPanel(options) %}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
+  {% else %}
+    {# Find panel using universal filter #}
+    {% set panelData = options.datas | findByName(options.name) %}
+
+    {# Render or error #}
+    {% if not panelData %}
+      <span class="error" role="alert">Panel not found: {{ options.name }}</span>
+    {% else %}
+      <div
+        data-panel-name="{{ panelData.name }}"
+        data-panel-type="{{ panelData.type }}"
+        role="dialog"
+        aria-label="Panel {{ panelData.name }}"
+      >
+        {# Default type panels #}
+        {% if panelData.type == "default" %}
+          {% for variant in panelData.variants %}
+            <div data-panel-variant="{{ variant.name }}">
+              {% for item in variant.items %}
+                <div data-panel-item="true">
+                  {# Checkbox variant #}
+                  {% if item.checkboxName and options.checkboxDatas %}
+                    {{ renderCheckbox({
+                        id: item.checkboxName,
+                        datas: options.checkboxDatas
+                    }) }}
+                    <span>{{ item.text }}</span>
+
+                  {# Icon variant #}
+                  {% elif item.iconName and options.iconDatas %}
+                    {{ renderIcon({
+                        name: item.iconName,
+                        datas: options.iconDatas
+                    }) }}
+                    <span>{{ item.text }}</span>
+                    {% if item.code %}
+                      <span data-panel-code="true">{{ item.code }}</span>
+                    {% endif %}
+
+                  {# Simple text variant #}
+                  {% else %}
+                    <span>{{ item.text }}</span>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          {% endfor %}
+
+        {# Date type panels #}
+        {% elif panelData.type == "date" %}
+          {% for variant in panelData.variants %}
+            <div data-panel-variant="{{ variant.name }}">
+              {# Navigation #}
+              {% if variant.navigation %}
+                <div data-panel-nav="true">
+                  <button
+                    type="button"
+                    data-panel-nav-prev="true"
+                    aria-label="Previous month"
+                  >
+                    {{ renderIcon({
+                        name: variant.navigation.prevIcon,
+                        datas: options.iconDatas
+                    }) }}
+                  </button>
+
+                  {# Month display #}
+                  {% if variant.dateRange.month %}
+                    <span data-panel-month="true">{{ variant.dateRange.month }}</span>
+                  {% elif variant.dateRange.startMonth %}
+                    <span data-panel-month="true">{{ variant.dateRange.startMonth }}</span>
+                    <span data-panel-month="true">{{ variant.dateRange.endMonth }}</span>
+                  {% endif %}
+
+                  <button
+                    type="button"
+                    data-panel-nav-next="true"
+                    aria-label="Next month"
+                  >
+                    {{ renderIcon({
+                        name: variant.navigation.nextIcon,
+                        datas: options.iconDatas
+                    }) }}
+                  </button>
+                </div>
+              {% endif %}
+
+              {# Calendar grid (placeholder for Phase 4) #}
+              <div data-panel-calendar="true">
+                {% if variant.dateRange.selectedDates %}
+                  {% for date in variant.dateRange.selectedDates %}
+                    <time
+                      datetime="{{ date }}"
+                      data-panel-date="{{ date }}"
+                      data-panel-selected="true"
+                    >
+                      {{ date }}
+                    </time>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+
+        {# List-item type panels #}
+        {% elif panelData.type == "list-item" %}
+          {% for variant in panelData.variants %}
+            <div data-panel-variant="{{ variant.name }}">
+              {% for item in variant.items %}
+                <div data-panel-item="true" data-panel-item-type="{{ item.type }}">
+                  {# Checkbox type #}
+                  {% if item.type == "checkbox" and item.checkboxName and options.checkboxDatas %}
+                    {{ renderCheckbox({
+                        id: item.checkboxName,
+                        datas: options.checkboxDatas
+                    }) }}
+                    <span>{{ item.text }}</span>
+
+                  {# Label-icon type #}
+                  {% elif item.type == "label-icon" and item.iconName and options.iconDatas %}
+                    {{ renderIcon({
+                        name: item.iconName,
+                        datas: options.iconDatas
+                    }) }}
+                    <span>{{ item.text }}</span>
+
+                  {# Simple label type #}
+                  {% elif item.type == "label" %}
+                    <span>{{ item.text }}</span>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#}

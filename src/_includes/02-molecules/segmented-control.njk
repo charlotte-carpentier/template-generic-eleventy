@@ -4,131 +4,70 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.id (string): Segmented control identifier
+    - options.datas (array): Segmented control configuration data
+    - options.buttonDatas (array): Button atom data (optional)
+
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/segmented-control.njk" import renderSegmentedControl %}
-    {{ renderSegmentedControl({ 
-        name: "tab_navigation",
-        datas: molecules.segmentedControls,
-        buttons: atoms.buttons 
+
+    {{ renderSegmentedControl({
+        id: "demoSeg1",
+        datas: molecules["segmented-control"].segmentedControls,
+        buttonDatas: atoms.button.buttons
     }) }}
-    
-    With custom styles:
-    {{ renderSegmentedControl({ 
-        datas: molecules.segmentedControls,
-        buttons: atoms.buttons,
-        class: "my-custom-segmented-class"
-    }) }}
-  
-  Props:
-    - options.name (string): Segmented control identifier
-    - options.datas (object): Segmented control configuration
-    - options.buttons (object): Buttons atom data
-    - options.class (string): Additional CSS classes
-  
-  Features:
-    - First/middle/last position styling
-    - Active segment highlighting
-    - Button size support
-    - Icon before/after support
-    - Hover/focus states
-  
-  Accessibility:
-    - role="tablist" on container
-    - role="tab" on segments
-    - aria-selected for active state
-    - aria-label on container
-  
+
   @created 2025-01-15
 #}
 
+{% from "01-atoms/button.njk" import renderButton %}
+
 {% macro renderSegmentedControl(options) %}
-  {% if options.datas %}
-    {% set globalStyle = options.datas.globalStyle %}
-    {% set variants = options.datas.variants %}
-    {% set segmentStyle = options.datas.segmentStyle %}
-
-    {# Define default icon styles #}
-    {% set iconBeforeStyle = options.datas.iconBeforeStyle | default('') %}
-    {% set iconAfterStyle = options.datas.iconAfterStyle | default('') %}
-
-    {% set segmentedControlData = null %}
-    {% if options.name %}
-      {% for controlSet in options.datas.segmentedControls %}
-        {% if controlSet.name == options.name %}
-          {% set segmentedControlData = controlSet %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-
-    {% if not segmentedControlData %}
-      {% set segmentedControlData = options.datas.segmentedControls[0] %}
-    {% endif %}
-
-    <div class="{{ globalStyle }} {{ variants.default }} {{ options.class | default('') }}" role="tablist" aria-label="{{ segmentedControlData.name | replace('_', ' ') }}" onfocus="this.className='{{ globalStyle }} {{ variants.focus }} {{ options.class | default('') }}'" onblur="this.className='{{ globalStyle }} {{ variants.default }} {{ options.class | default('') }}'" data-segmented-control="{{ segmentedControlData.name }}">
-
-      {% for segment in segmentedControlData.segments %}
-        {% set positionClass = "" %}
-        {% if loop.first %}
-          {% set positionClass = segmentStyle.first %}
-        {% elif loop.last %}
-          {% set positionClass = segmentStyle.last %}
-        {% else %}
-          {% set positionClass = segmentStyle.middle %}
-        {% endif %}
-
-        {% set buttonData = null %}
-        {% if options.buttons %}
-          {% for button in options.buttons.buttons %}
-            {% if button.name == segment.buttonRef %}
-              {% set buttonData = button %}
-            {% endif %}
-          {% endfor %}
-        {% endif %}
-
-        {% if segment.isActive %}
-          {% set baseStyle = segmentStyle.active %}
-          {% set hoverStyle = segmentStyle.active %}
-          {% set focusStyle = segmentStyle[''] %}
-        {% else %}
-          {% set baseStyle = segmentStyle.default %}
-          {% set hoverStyle = segmentStyle.hover %}
-          {% set focusStyle = segmentStyle.focus %}
-        {% endif %}
-
-        {% if buttonData %}
-          {% set buttonSize = options.buttons.sizes[buttonData.size] %}
-
-          <button id="{{ segmentedControlData.name }}-{{ segment.name }}" role="tab" aria-selected="{{ segment.isActive | string }}" class="{{ positionClass }} {{ buttonSize }} {{ baseStyle }}" onmouseover="this.className='{{ positionClass }} {{ buttonSize }} {{ hoverStyle }}'" onmouseout="this.className='{{ positionClass }} {{ buttonSize }} {{ baseStyle }}'" onfocus="this.className='{{ positionClass }} {{ buttonSize }} {{ focusStyle }}'" onblur="this.className='{{ positionClass }} {{ buttonSize }} {{ baseStyle }}'">
-
-            {% if buttonData.iconBefore %}
-              <span class="">
-                <img src="{{ buttonData.iconBefore }}" alt="" aria-hidden="true"/>
-              </span>
-            {% endif %}
-
-            {% if buttonData.text %}
-              <span class="">{{ buttonData.text }}</span>
-            {% elif buttonData.number %}
-              <span class="">{{ buttonData.number }}</span>
-            {% else %}
-              <span class="">{{ segment.name | replace('_', ' ') }}</span>
-            {% endif %}
-
-            {% if buttonData.iconAfter %}
-              <span class="">
-                <img src="{{ buttonData.iconAfter }}" alt="" aria-hidden="true"/>
-              </span>
-            {% endif %}
-          </button>
-        {% else %}
-          <button id="{{ segmentedControlData.name }}-{{ segment.name }}" role="tab" aria-selected="{{ segment.isActive | string }}" class="{{ positionClass }} {{ baseStyle }}" onmouseover="this.className='{{ positionClass }} {{ hoverStyle }}'" onmouseout="this.className='{{ positionClass }} {{ baseStyle }}'" onfocus="this.className='{{ positionClass }} {{ focusStyle }}'" onblur="this.className='{{ positionClass }} {{ baseStyle }}'">
-            <span class="">{{ segment.name | replace('_', ' ') }}</span>
-          </button>
-        {% endif %}
-      {% endfor %}
-    </div>
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.id %}
+    <span class="error" role="alert">Error: Missing required prop (id)</span>
   {% else %}
-    <span>Segmented control data not found</span>
+    {# Find segmented control using universal filter (works with both name and id) #}
+    {% set segmentedData = options.datas | findByName(options.id) %}
+
+    {# Render or error #}
+    {% if not segmentedData %}
+      <span class="error" role="alert">Segmented control not found: {{ options.id }}</span>
+    {% else %}
+      <div
+        data-segmented-id="{{ segmentedData.id }}"
+        data-segmented-type="segmented-control"
+        role="tablist"
+        aria-label="Segmented control {{ segmentedData.id }}"
+      >
+        {# Items (boucle inévitable sur array items) #}
+        {% for item in segmentedData.items %}
+          <button
+            type="button"
+            role="tab"
+            data-segmented-segment="true"
+            data-segmented-variant="{{ item.variant }}"
+            data-segmented-position="{% if loop.first %}first{% elif loop.last %}last{% else %}middle{% endif %}"
+            {% if item.isActive %}data-segmented-active="true" aria-selected="true"{% else %}aria-selected="false"{% endif %}
+          >
+            {# Get button text from buttonDatas #}
+            {% if item.buttonName and options.buttonDatas %}
+              {% set buttonData = options.buttonDatas | findByName(item.buttonName) %}
+              {% if buttonData %}
+                {{ buttonData.text }}
+              {% else %}
+                Segment {{ loop.index }}
+              {% endif %}
+            {% else %}
+              Segment {{ loop.index }}
+            {% endif %}
+          </button>
+        {% endfor %}
+      </div>
+    {% endif %}
   {% endif %}
 {% endmacro %}
 
