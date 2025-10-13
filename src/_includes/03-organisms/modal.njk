@@ -1,0 +1,121 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Modal                                        │
+   │ Dialog modal with backdrop and action buttons           │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Props:
+    - options.name (string): Modal identifier
+    - options.datas (array): Modal configuration data
+    - options.headingDatas (array): Heading atom data
+    - options.buttonDatas (array): Button atom data
+
+  Usage — Summon HAT Components Wisely:
+    {% from "03-organisms/modal.njk" import renderModal %}
+
+    {{ renderModal({
+        name: "demoModal1",
+        datas: organisms.modal.modals,
+        headingDatas: atoms.heading.headings,
+        buttonDatas: atoms.button.buttons
+    }) }}
+
+  @created 2025-01-15
+#}
+
+{% macro renderModal(options) %}
+  {# Import sub-components #}
+  {% from "01-atoms/heading.njk" import renderHeading %}
+  {% from "01-atoms/button.njk" import renderButton %}
+
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
+  {% else %}
+    {# Find modal using universal filter #}
+    {% set modalData = options.datas | findByName(options.name) %}
+
+    {# Render modal or error message #}
+    {% if not modalData %}
+      <span class="error" role="alert">Modal not found: {{ options.name }}</span>
+    {% else %}
+      {# Backdrop overlay - Optional based on JSON config #}
+      {% if modalData.backdrop %}
+        <div 
+          data-modal-backdrop
+          aria-hidden="true"
+        ></div>
+      {% endif %}
+      
+      {# Modal dialog - WCAG 2.2 AA Dialog pattern #}
+      {# Source: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/ #}
+      <div 
+        role="dialog"
+        aria-modal="true"
+        aria-label="{{ modalData.ariaLabel }}"
+        {% if modalData.ariaDescribedBy %}aria-describedby="{{ modalData.ariaDescribedBy }}"{% endif %}
+        data-modal-name="{{ modalData.name }}"
+        data-modal-type="modal"
+        data-modal-variant="{{ modalData.variant }}"
+      >
+        
+        <div data-modal-container>
+          
+          {# Modal header with heading #}
+          {% if modalData.headingName %}
+            <div data-modal-header>
+              {{ renderHeading({
+                  name: modalData.headingName,
+                  datas: options.headingDatas
+              }) }}
+            </div>
+          {% endif %}
+          
+          {# Modal content - Direct text from JSON #}
+          {% if modalData.content %}
+            <div 
+              data-modal-content
+              {% if modalData.ariaDescribedBy %}id="{{ modalData.ariaDescribedBy }}"{% endif %}
+            >
+              <p>{{ modalData.content }}</p>
+            </div>
+          {% endif %}
+          
+          {# Modal footer with action buttons #}
+          {% if modalData.primaryButton or modalData.secondaryButton %}
+            <div data-modal-footer>
+              
+              {# Primary action button (e.g., "Continue") #}
+              {% if modalData.primaryButton %}
+                {{ renderButton({
+                    name: modalData.primaryButton,
+                    datas: options.buttonDatas
+                }) }}
+              {% endif %}
+              
+              {# Secondary action button (e.g., "Close") #}
+              {% if modalData.secondaryButton %}
+                {{ renderButton({
+                    name: modalData.secondaryButton,
+                    datas: options.buttonDatas
+                }) }}
+              {% endif %}
+              
+            </div>
+          {% endif %}
+          
+        </div>
+        
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+Charlotte Carpentier · 2025
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#}

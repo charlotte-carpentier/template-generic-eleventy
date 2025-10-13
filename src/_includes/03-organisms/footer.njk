@@ -1,78 +1,115 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ORGANISM › Footer                                       │
-   │ Site footer with copyright and legal links              │
+   │ Site footer with branding, navigation, and copyright    │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Footer identifier
+    - options.datas (array): Footer configuration data
+    - options.headingDatas (array): Heading atom data
+    - options.linkDatas (array): Link atom data
+    - options.vectorDatas (array): Vector atom data
+    - options.navSecondaryDatas (array): Navigation secondary organism data
+
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/footer.njk" import renderFooter %}
-    {{ renderFooter({ 
-        name: "main_footer",
-        datas: organisms.footer,
-        typographyDatas: atoms.typography.texts,
-        linkDatas: atoms.link.links
+
+    {{ renderFooter({
+        name: "demoFooter1",
+        datas: organisms.footer.footers,
+        headingDatas: atoms.heading.headings,
+        linkDatas: atoms.link.links,
+        vectorDatas: atoms.vector.vectors,
+        navSecondaryDatas: organisms["navigation-secondary"].navSecondary
     }) }}
-  
-  Props:
-    - option.name (string): Footer identifier
-    - option.datas (object): Footer configuration
-    - option.typographyDatas (array): Typography atom data
-    - option.linkDatas (array): Links atom data
-  
-  Features:
-    - Copyright text using typography atom
-    - Legal link using link atom
-    - Variant-based styling
-  
-  Accessibility:
-    - role="contentinfo" for semantic footer
-  
+
   @created 2025-01-15
 #}
 
-{% macro renderFooter(option) %}
-  {# Import atoms macros #}
+{% macro renderFooter(options) %}
+  {# Import sub-components #}
   {% from "01-atoms/heading.njk" import renderHeading %}
   {% from "01-atoms/link.njk" import renderLink %}
-  
-  {# Check if datas is provided #}
-  {% if not option.datas %}
-    <span>Error: No footer configuration provided</span>
-  {% else %}
-    {# Retrieve footer configuration #}
-    {% set footerConfig = option.datas %}
-    {% set footerName = option.name %}
-    
-    {# Find the specific footer by name #}
-    {% set footerData = footerConfig.footer %}
+  {% from "01-atoms/vector.njk" import renderVector %}
+  {% from "03-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
 
-    {# Fallback if footer not found #}
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
+  {% else %}
+    {# Find footer using universal filter #}
+    {% set footerData = options.datas | findByName(options.name) %}
+
+    {# Render footer or error message #}
     {% if not footerData %}
-      <span>Footer not found: {{ footerName }}</span>
+      <span class="error" role="alert">Footer not found: {{ options.name }}</span>
     {% else %}
-      {# Build CSS classes #}
-      {% set variant = footerData.variant | default('') %}
-      {% set cssClasses = 'footer footer--' ~ variant %}
-      
-      {# Render the footer #}
-      <footer class="{{ cssClasses }}" role="contentinfo">
-        <div>
-          {# Copyright text #}
-          <div>
-            {{ renderHeading({ 
-                name: footerData.copyright.name,
-                datas: option.typographyDatas
-            }) }}
-          </div>
-          
-          {# Legal link #}
-          <div>
-            {{ renderLink({ 
-                name: footerData.legal_link.name,
-                datas: option.linkDatas
-            }) }}
-          </div>
+      {# Render footer element #}
+      <footer 
+        role="contentinfo" 
+        aria-label="{{ footerData.ariaLabel }}"
+        data-footer-name="{{ footerData.name }}"
+        data-footer-type="footer"
+      >
+        
+        {# Logo branding section #}
+        <div data-footer-section="branding">
+          {{ renderVector({
+              name: footerData.vectorName,
+              datas: options.vectorDatas
+          }) }}
         </div>
+        
+        {# Navigation columns section #}
+        <div data-footer-section="navigation">
+          {% for item in footerData.items %}
+            <div data-footer-column>
+              
+              {# Column heading #}
+              {{ renderHeading({
+                  name: item.headingName,
+                  datas: options.headingDatas
+              }) }}
+              
+              {# Column navigation #}
+              {{ renderNavigationSecondary({
+                  name: item.navSecondaryName,
+                  datas: options.navSecondaryDatas,
+                  linkDatas: options.linkDatas
+              }) }}
+              
+            </div>
+          {% endfor %}
+        </div>
+        
+        {# Copyright and legal section #}
+        <div data-footer-section="legal">
+          
+          {# Copyright text - Direct text in semantic element (MDN best practice) #}
+          <p data-footer-copyright>&copy; {{ footerData.copyright.text }}</p>
+          
+          {# Version info #}
+          <p data-footer-version>{{ footerData.copyright.version }}</p>
+          
+          {# Legal links navigation - W3C Navigation Lists pattern #}
+          <nav aria-label="Legal links">
+            <ul>
+              {% for linkName in footerData.copyright.links %}
+                <li>
+                  {{ renderLink({
+                      name: linkName,
+                      datas: options.linkDatas
+                  }) }}
+                </li>
+              {% endfor %}
+            </ul>
+          </nav>
+          
+        </div>
+        
       </footer>
     {% endif %}
   {% endif %}

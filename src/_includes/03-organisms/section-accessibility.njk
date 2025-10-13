@@ -1,6 +1,6 @@
 {# ┌─────────────────────────────────────────────────────────┐
-   │ ORGANISM › Section About                                │
-   │ About section with heading hierarchy and CTAs           │
+   │ ORGANISM › Section Accessibility                        │
+   │ Accessibility statement section with semantic markup    │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
@@ -8,25 +8,22 @@
     - options.name (string): Section identifier
     - options.datas (array): Section configuration data
     - options.headingDatas (array): Heading atom data
-    - options.buttonDatas (array): Button atom data
 
   Usage — Summon HAT Components Wisely:
-    {% from "03-organisms/section-about.njk" import renderSectionAbout %}
+    {% from "03-organisms/section-accessibility.njk" import renderSectionAccessibility %}
 
-    {{ renderSectionAbout({
-        name: "demoSectAb1",
-        datas: organisms["section-about"].sectAbouts,
-        headingDatas: atoms.heading.headings,
-        buttonDatas: atoms.button.buttons
+    {{ renderSectionAccessibility({
+        name: "demoSectA1",
+        datas: organisms["section-accessibility"].sectionsA11y,
+        headingDatas: atoms.heading.headings
     }) }}
 
   @created 2025-01-15
 #}
 
-{% macro renderSectionAbout(options) %}
-  {# Import sub-components #}
+{% macro renderSectionAccessibility(options) %}
+  {# Import sub-component #}
   {% from "01-atoms/heading.njk" import renderHeading %}
-  {% from "01-atoms/button.njk" import renderButton %}
 
   {# Validate required props #}
   {% if not options.datas %}
@@ -34,33 +31,27 @@
   {% elif not options.name %}
     <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Find section using universal filter - Performance optimized #}
+    {# Find section using universal filter #}
     {% set sectionData = options.datas | findByName(options.name) %}
 
     {# Render section or error message #}
     {% if not sectionData %}
       <span class="error" role="alert">Section not found: {{ options.name }}</span>
     {% else %}
-      {# Render section element - Semantic HTML with ARIA #}
+      {# Render section element - Accessibility statement semantic pattern #}
+      {# WCAG 2.2 AA: Accessibility statements should be in a region landmark #}
+      {# Source: https://www.w3.org/WAI/WCAG22/Understanding/parsing.html #}
       <section 
+        role="{{ sectionData.role }}"
         aria-label="{{ sectionData.ariaLabel }}"
         data-section-name="{{ sectionData.name }}"
-        data-section-type="section-about"
+        data-section-type="section-accessibility"
+        data-section-variant="{{ sectionData.variant }}"
       >
         
         <div data-section-container>
           
-          {# Super heading - Secondary heading (e.g., "About Us") #}
-          {% if sectionData.superHeadingName %}
-            <div data-section-super-heading>
-              {{ renderHeading({
-                  name: sectionData.superHeadingName,
-                  datas: options.headingDatas
-              }) }}
-            </div>
-          {% endif %}
-          
-          {# Main heading - Primary heading (e.g., large title) #}
+          {# Section heading - Main accessibility statement title #}
           {% if sectionData.headingName %}
             <div data-section-heading>
               {{ renderHeading({
@@ -70,33 +61,11 @@
             </div>
           {% endif %}
           
-          {# Content - Direct text from JSON (not an atom) #}
+          {# Section content - Direct text from JSON #}
+          {# For real accessibility statements, content would be more structured #}
           {% if sectionData.content %}
             <div data-section-content>
               <p>{{ sectionData.content }}</p>
-            </div>
-          {% endif %}
-          
-          {# Call-to-action buttons #}
-          {% if sectionData.primaryButtonName or sectionData.secondaryButtonName %}
-            <div data-section-buttons>
-              
-              {# Primary button (e.g., "Get Started") #}
-              {% if sectionData.primaryButtonName %}
-                {{ renderButton({
-                    name: sectionData.primaryButtonName,
-                    datas: options.buttonDatas
-                }) }}
-              {% endif %}
-              
-              {# Secondary button (e.g., "Learn More") #}
-              {% if sectionData.secondaryButtonName %}
-                {{ renderButton({
-                    name: sectionData.secondaryButtonName,
-                    datas: options.buttonDatas
-                }) }}
-              {% endif %}
-              
             </div>
           {% endif %}
           

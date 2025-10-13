@@ -1,238 +1,70 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ORGANISM › Tab Bar                                      │
-   │ Tab sections container with CSS :target navigation      │
+   │ Navigation tab bar with active state management         │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Usage — Summon HAT Components Wisely:
-    {% from "03-organisms/tab-bar.njk" import renderTabSections %}
-    {{ renderTabSections({ 
-      name: "charlotte_main",
-      datas: organisms["tab-sections"]["tab-sections"],
-      tabMenuDatas: molecules["tab-menu"].tab_menus,
-      linkDatas: atoms.link.links,
-      portfolioDatas: organisms["section-portfolio"].sections,
-      timelineDatas: organisms["section-timeline"].sections,
-      contactDatas: organisms["section-contact"].sections,
-      typographyDatas: atoms.typography.texts,
-      contentBlockDatas: molecules["content-block"]["content-blocks"],
-      contactBlockDatas: molecules["contact-block"].contact_blocks,
-      listFormDatas: molecules["list-form"]["list-forms"],
-      progressBarDatas: molecules["progress-bar"]["progress-bars"],
-      imageDatas: atoms.image.images,
-      iconDatas: atoms.icon.icons,
-      radioDatas: atoms.radio.radios,
-      inputDatas: atoms.input.inputs,
-      buttonDatas: atoms.button.buttons
-    }) }}
-  
   Props:
-    - option.name (string): Tab sections identifier
-    - option.datas (array): Tab sections configurations
-    - option.tabMenuDatas (object): Tab menu data source
-    - option.linkDatas (object): Links data source
-    - option.portfolioDatas (object): Portfolio section data
-    - option.timelineDatas (object): Timeline section data
-    - option.contactDatas (object): Contact section data
-    - option.typographyDatas (object): Typography data source
-    - option.contentBlockDatas (object): Content blocks data
-    - option.contactBlockDatas (object): Contact blocks data
-    - option.listFormDatas (object): Forms data source
-    - option.progressBarDatas (object): Progress bars data
-    - option.imageDatas (object): Images data source
-    - option.iconDatas (object): Icons data source
-    - option.radioDatas (object): Radio buttons data
-    - option.inputDatas (object): Input fields data
-    - option.buttonDatas (object): Buttons data source
-  
-  Features:
-    - CSS :target-based navigation system
-    - Desktop/tablet tab menu navigation
-    - Multiple section types (portfolio, timeline, contact)
-    - Custom scroll cursor for desktop
-    - Default section marked with data attribute
-    - Gradient decorative lines
-  
-  Accessibility:
-    - ARIA tablist/tabpanel roles
-    - Proper labelledby references
-    - Keyboard navigation support via tabindex
-    - Semantic region landmarks
-  
+    - options.name (string): Tab bar identifier
+    - options.datas (array): Tab bar configuration data
+    - options.linkDatas (array): Link atom data
+
+  Usage — Summon HAT Components Wisely:
+    {% from "03-organisms/tab-bar.njk" import renderTabBar %}
+
+    {{ renderTabBar({
+        name: "demoTabBar1",
+        datas: organisms["tab-bar"].tabBars,
+        linkDatas: atoms.link.links
+    }) }}
+
   @created 2025-01-15
 #}
 
-{% macro renderTabSections(option) %}
-  {% from "03-organisms/section-portfolio.njk" import renderSectionPortfolio %}
-  {% from "03-organisms/section-timeline.njk" import renderSectionTimeline %}
-  {% from "03-organisms/section-contact.njk" import renderSectionContact %}
-  {% from "02-molecules/tab-menu.njk" import renderTabMenu %}
+{% macro renderTabBar(options) %}
+  {# Import sub-component #}
+  {% from "01-atoms/link.njk" import renderLink %}
 
-  {% if not option.datas %}
-    <span>Error: No tab-sections configuration provided</span>
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {% set tabSectionsConfig = option.datas %}
-    {% set tabSectionsName = option.name %}
-    
-    {% set tabSectionsData = null %}
-    {% for tabSections in tabSectionsConfig %}
-      {% if tabSections.name == tabSectionsName %}
-        {% set tabSectionsData = tabSections %}
-      {% endif %}
-    {% endfor %}
+    {# Find tab bar using universal filter - DRY principle, performance optimized #}
+    {% set tabBarData = options.datas | findByName(options.name) %}
 
-    {% if not tabSectionsData %}
-      <span>Tab-sections not found: {{ tabSectionsName }}</span>
+    {# Render tab bar or error message #}
+    {% if not tabBarData %}
+      <span class="error" role="alert">Tab bar not found: {{ options.name }}</span>
     {% else %}
-      <div id="main-tab-sections">
-        
-        {# Desktop/tablet navigation #}
-        <div role="tablist" aria-label="Navigation sections">
-          {{ renderTabMenu({ 
-              name: tabSectionsData.navigation.menu,
-              datas: option.tabMenuDatas,
-              linkDatas: option.linkDatas
-          }) }}
-        </div>
-        
-        {# Main container #}
-        <div>
-          
-          {# Content area with borders #}
-          <div style="overflow-y: auto;">
-            
-            {# Gradient lines #}
-            <div>
-              <div></div>
-              <div></div>
-            </div>
-            
-            {# Sections with :target navigation #}
-            <div>
-              
-              {# Portfolio - default #}
-              <div id="portfolio" data-default="true" role="tabpanel" tabindex="0" aria-labelledby="tab-portfolio">
-                {{ renderSectionPortfolio({ 
-                    name: "charlotte_missions",
-                    datas: option.portfolioDatas,
-                    typographyDatas: option.typographyDatas,
-                    contentBlockDatas: option.contentBlockDatas,
-                    imageDatas: option.imageDatas,
-                    buttonDatas: option.buttonDatas,
-                    linkDatas: option.linkDatas,
-                    class: "tab-section-content"
-                }) }}
-              </div>
-              
-              {# Profile #}
-              <div id="profile" role="tabpanel" tabindex="0" aria-labelledby="tab-profile">
-                {{ renderSectionTimeline({ 
-                    name: "charlotte_profile",
-                    datas: option.timelineDatas,
-                    typographyDatas: option.typographyDatas,
-                    contentBlockDatas: option.contentBlockDatas,
-                    progressBarDatas: option.progressBarDatas,
-                    imageDatas: option.imageDatas,
-                    buttonDatas: option.buttonDatas,
-                    linkDatas: option.linkDatas,
-                    iconDatas: option.iconDatas,
-                    class: "tab-section-content"
-                }) }}
-              </div>
-              
-              {# Journey #}
-              <div id="journey" role="tabpanel" tabindex="0" aria-labelledby="tab-journey">
-                {{ renderSectionTimeline({ 
-                    name: "charlotte_journey",
-                    datas: option.timelineDatas,
-                    typographyDatas: option.typographyDatas,
-                    contentBlockDatas: option.contentBlockDatas,
-                    progressBarDatas: option.progressBarDatas,
-                    imageDatas: option.imageDatas,
-                    buttonDatas: option.buttonDatas,
-                    linkDatas: option.linkDatas,
-                    iconDatas: option.iconDatas,
-                    class: "tab-section-content"
-                }) }}
-              </div>
-              
-              {# Knowledge #}
-              <div id="knowledge" role="tabpanel" tabindex="0" aria-labelledby="tab-knowledge">
-                {{ renderSectionTimeline({ 
-                    name: "charlotte_knowledge",
-                    datas: option.timelineDatas,
-                    typographyDatas: option.typographyDatas,
-                    contentBlockDatas: option.contentBlockDatas,
-                    progressBarDatas: option.progressBarDatas,
-                    imageDatas: option.imageDatas,
-                    buttonDatas: option.buttonDatas,
-                    linkDatas: option.linkDatas,
-                    iconDatas: option.iconDatas,
-                    class: "tab-section-content"
-                }) }}
-              </div>
-              
-              {# Contact #}
-              <div id="contact" role="tabpanel" tabindex="0" aria-labelledby="tab-contact">
-                {{ renderSectionContact({ 
-                    name: "charlotte_contact",
-                    datas: option.contactDatas,
-                    typographyDatas: option.typographyDatas,
-                    contactBlockDatas: option.contactBlockDatas,
-                    listFormDatas: option.listFormDatas,
-                    iconDatas: option.iconDatas,
-                    radioDatas: option.radioDatas,
-                    inputDatas: option.inputDatas,
-                    buttonDatas: option.buttonDatas,
-                    linkDatas: option.linkDatas,
-                    class: "tab-section-content"
-                }) }}
-              </div>
-              
-              {# Thanks section #}
-              <div id="message" role="tabpanel" tabindex="0" aria-labelledby="tab-message">
-                {{ renderSectionTimeline({ 
-                    name: "charlotte_thanks",
-                    datas: option.timelineDatas,
-                    typographyDatas: option.typographyDatas,
-                    contentBlockDatas: option.contentBlockDatas,
-                    progressBarDatas: option.progressBarDatas,
-                    imageDatas: option.imageDatas,
-                    buttonDatas: option.buttonDatas,
-                    linkDatas: option.linkDatas,
-                    iconDatas: option.iconDatas,
-                    class: "tab-section-content"
-                }) }}
-              </div>
-              
-              {# Legal #}
-              <div id="legal" role="tabpanel" tabindex="0" aria-labelledby="tab-legal">
-                {{ renderSectionTimeline({ 
-                    name: "",
-                    datas: option.timelineDatas,
-                    typographyDatas: option.typographyDatas,
-                    contentBlockDatas: option.contentBlockDatas,
-                    progressBarDatas: option.progressBarDatas,
-                    imageDatas: option.imageDatas,
-                    buttonDatas: option.buttonDatas,
-                    linkDatas: option.linkDatas,
-                    iconDatas: option.iconDatas,
-                    class: ""
-                }) }}
-              </div>
-              
-            </div>
-          </div>
-          
-          {# Custom scroll cursor - desktop only #}
-          <div>
-            <div>
-              <div id="scroll-cursor-thumb"></div>
-            </div>
-          </div>
-          
-        </div>
-      </div>
+      {# Render nav element - WCAG 2.2 AA ARIA Tabs pattern #}
+      {# Source: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/ #}
+      <nav 
+        role="tablist"
+        aria-label="{{ tabBarData.ariaLabel }}"
+        data-tabbar-name="{{ tabBarData.name }}"
+        data-tabbar-type="tab-bar"
+      >
+        <ul data-tabbar-list>
+          {% for item in tabBarData.items %}
+            <li 
+              role="presentation"
+              data-tabbar-item
+            >
+              {# Tab link with ARIA role and active state #}
+              {# WCAG: aria-selected indicates current tab #}
+              {{ renderLink({
+                  name: item.linkName,
+                  datas: options.linkDatas,
+                  active: item.active,
+                  role: "tab",
+                  ariaSelected: item.active
+              }) }}
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
     {% endif %}
   {% endif %}
 {% endmacro %}
@@ -241,4 +73,5 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
 Charlotte Carpentier · 2025
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#}

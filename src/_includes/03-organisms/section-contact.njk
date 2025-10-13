@@ -1,141 +1,93 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ORGANISM › Section Contact                              │
-   │ Contact section with info block and Netlify form        │
+   │ Contact section with form and nested section            │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Section identifier
+    - options.datas (array): Section configuration data
+    - options.formDatas (array): Form organism/molecule data
+    - options.sectionAboutDatas (array): Section about organism data
+    - options.buttonDatas (array): Button atom data
+    - options.headingDatas (array): Heading atom data (for nested section-about)
+
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/section-contact.njk" import renderSectionContact %}
-    {{ renderSectionContact({ 
-      name: "charlotte_contact",
-      datas: organisms["section-contact"].sections,
-      typographyDatas: atoms.typography.texts,
-      contactBlockDatas: molecules["contact-block"].contact_blocks,
-      listFormDatas: molecules["list-form"]["list-forms"],
-      iconDatas: atoms.icon.icons,
-      radioDatas: atoms.radio.radios,
-      inputDatas: atoms.input.inputs,
-      buttonDatas: atoms.button.buttons
+
+    {{ renderSectionContact({
+        name: "demoSectC1",
+        datas: organisms["section-contact"].sectContacts,
+        formDatas: molecules["list-form"]["list-forms"],
+        sectionAboutDatas: organisms["section-about"].sectAbouts,
+        buttonDatas: atoms.button.buttons,
+        headingDatas: atoms.heading.headings
     }) }}
-  
-  Props:
-    - option.name (string): Section identifier
-    - option.datas (array): Section configurations
-    - option.typographyDatas (object): Typography data source
-    - option.contactBlockDatas (object): Contact block data source
-    - option.listFormDatas (object): Form data source
-    - option.iconDatas (object): Icons data source
-    - option.radioDatas (object): Radio buttons data source
-    - option.inputDatas (object): Input fields data source
-    - option.buttonDatas (object): Buttons data source
-    - option.class (string): Additional CSS classes
-  
-  Features:
-    - Semantic HTML with ARIA landmarks
-    - Contact information display via contact-block molecule
-    - Netlify form integration with submit button
-    - Horizontal separator with gradient
-    - Responsive centered layout
-  
-  Accessibility:
-    - Region role with labelledby reference
-    - Proper heading hierarchy
-    - Form accessibility via list-form molecule
-    - Decorative separator marked as aria-hidden
-  
+
   @created 2025-01-15
 #}
 
-{% macro renderSectionContact(option) %}
-  {# Import required molecules and atoms #}
-  {% from "02-molecules/contact-block.njk" import renderContactBlock %}
+{% macro renderSectionContact(options) %}
+  {# Import sub-components #}
   {% from "02-molecules/list-form.njk" import renderListForm %}
-  {% from "01-atoms/heading.njk" import renderHeading %}
+  {% from "03-organisms/section-about.njk" import renderSectionAbout %}
   {% from "01-atoms/button.njk" import renderButton %}
 
-  {# Check if datas is provided #}
-  {% if not option.datas %}
-    <span>Error: No section-contact configuration provided</span>
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Retrieve section-contact configuration #}
-    {% set sectionsConfig = option.datas %}
-    {% set sectionName = option.name %}
-    
-    {# Find the specific section by name #}
-    {% set sectionData = null %}
-    {% for section in sectionsConfig %}
-      {% if section.name == sectionName %}
-        {% set sectionData = section %}
-      {% endif %}
-    {% endfor %}
+    {# Find section using universal filter #}
+    {% set sectionData = options.datas | findByName(options.name) %}
 
-    {# Fallback if section not found #}
+    {# Render section or error message #}
     {% if not sectionData %}
-      <span>Section-contact not found: {{ sectionName }}</span>
+      <span class="error" role="alert">Section not found: {{ options.name }}</span>
     {% else %}
-      {# Build CSS classes from section name #}
-      {% set cssClasses = '' %}
-      
-      {# Add any additional classes #}
-      {% if option.class %}
-        {% set cssClasses = cssClasses ~ ' ' ~ option.class %}
-      {% endif %}
-      
-      {# Section container with semantic structure and accessibility #}
-      <section class="{{ cssClasses }}" id="contact" role="region" aria-labelledby="contact-heading">
+      {# Render section element - Two-column layout pattern #}
+      <section 
+        aria-label="{{ sectionData.ariaLabel }}"
+        data-section-name="{{ sectionData.name }}"
+        data-section-type="section-contact"
+      >
         
-        {# Section content with responsive padding and max-width #}
-        <div>
+        <div data-section-container>
           
-          {# Section header with system gaps and proper heading hierarchy #}
-          <header>
-            <div id="contact-heading">
-              {{ renderHeading({ 
-                  name: sectionData.header.title,
-                  datas: option.typographyDatas
-              }) }}
-            </div>
-          </header>
-          
-          {# Section content container with reduced gaps #}
-          <div>
+          {# Left column - Contact form #}
+          <div data-section-column="left">
             
-            {# Contact information block - centered container with left-aligned text #}
-            <div>
-              <div>
-                {{ renderContactBlock({ 
-                    name: sectionData.content.contact_block,
-                    datas: option.contactBlockDatas,
-                    iconDatas: option.iconDatas,
-                    typographyDatas: option.typographyDatas
-                }) }}
-              </div>
-            </div>
-            
-            {# Horizontal separator with gradient #}
-            <div role="separator" aria-hidden="true">
-              <div></div>
-            </div>
-            
-            {# Contact form with Netlify integration - Button included in form #}
-            <div>
+            {% if sectionData.leftForm %}
+              {# Form with submit button #}
               {% set submitButtonHtml %}
-                {{ renderButton({ 
-                    name: sectionData.content.button,
-                    datas: option.buttonDatas,
+                {{ renderButton({
+                    name: sectionData.buttonName,
+                    datas: options.buttonDatas,
                     type: "submit"
                 }) }}
               {% endset %}
               
-              {{ renderListForm({ 
-                  name: sectionData.content.form,
-                  datas: option.listFormDatas,
-                  radioDatas: option.radioDatas,
-                  inputDatas: option.inputDatas,
-                  netlify: true,
+              {{ renderListForm({
+                  name: sectionData.leftForm,
+                  datas: options.formDatas,
                   submitButton: submitButtonHtml | safe
               }) }}
-            </div>
+            {% endif %}
+            
+          </div>
+          
+          {# Right column - Nested section-about organism #}
+          <div data-section-column="right">
+            
+            {% if sectionData.rightSection %}
+              {{ renderSectionAbout({
+                  name: sectionData.rightSection,
+                  datas: options.sectionAboutDatas,
+                  headingDatas: options.headingDatas,
+                  buttonDatas: options.buttonDatas
+              }) }}
+            {% endif %}
             
           </div>
           
