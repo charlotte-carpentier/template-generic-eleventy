@@ -1,101 +1,79 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ORGANISM › Section Article Hero                         │
-   │ Hero section for article pages with image and title     │
+   │ Hero section for article pages with image and heading   │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Section identifier
+    - options.datas (array): Section configuration data
+    - options.imageDatas (array): Image atom data
+    - options.headingDatas (array): Heading atom data
+
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/section-article-hero.njk" import renderSectionArticleHero %}
-    {{ renderSectionArticleHero({ 
-      name: "article_hero_default", 
-      datas: organisms["section-article-hero"],
-      images: atoms.images,
-      headings: atoms.headings
+
+    {{ renderSectionArticleHero({
+        name: "demoSectAH1",
+        datas: organisms["section-article-hero"].sectArtHero,
+        imageDatas: atoms.image.images,
+        headingDatas: atoms.heading.headings
     }) }}
-  
-  Props:
-    - options.name (string): Hero section identifier
-    - options.datas (object): Hero section configurations
-    - options.images (object): Images data source
-    - options.headings (object): Headings data source
-    - options.class (string): Additional CSS classes
-  
-  Features:
-    - Variant-based styling system
-    - Centered image and title layout
-    - Responsive sizing via image variants
-    - Auto-selects first hero if name not found
-  
-  Accessibility:
-    - Semantic <section> element
-    - Proper heading hierarchy
-    - Descriptive alt text on images
-  
+
   @created 2025-01-15
 #}
 
-{% from "01-atoms/heading.njk" import renderHeading %}
-
 {% macro renderSectionArticleHero(options) %}
-  {% if options.datas %}
-    {% set globalStyle = options.datas.globalStyle %}
-    
-    {# Find the hero data by name #}
-    {% set variant = null %}
-    {% if options.name %}
-      {% for heroSection in options.datas.heroSections %}
-        {% if heroSection.name == options.name %}
-          {% set variant = heroSection %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+  {# Import sub-components #}
+  {% from "01-atoms/heading.njk" import renderHeading %}
+  {% from "01-atoms/image.njk" import renderImage %}
 
-    {# If no matching hero found, use the first one #}
-    {% if not variant %}
-      {% set variant = options.datas.heroSections[0] %}
-    {% endif %}
-    
-    {% set variantStyle = options.datas.variants[variant.variant] | default(options.datas.variants.default) %}
-    
-    <section class="{{ globalStyle }} {{ variantStyle }} {{ options.class | default('') }}">
-      <div class="{{ options.datas.containerStyle }}">
-        <div class="{{ options.datas.contentWrapperStyle }}">
-          {# Both image and title in the same container for proper alignment #}
-          <div>
-            {# Image with centering #}
-            <div class="{{ options.datas.imageContainerStyle }}">
-              {% if variant.image and options.images %}
-                {% set heroImage = null %}
-                {% for image in options.images.images %}
-                  {% if image.name == variant.image %}
-                    {% set heroImage = image %}
-                  {% endif %}
-                {% endfor %}
-                
-                {% if heroImage %}
-                  {% set imageVariant = options.images.variants[heroImage.size] %}
-                  <img src="{{ heroImage.src }}" 
-                       alt="{{ heroImage.alt }}" 
-                       class="{{ options.images.globalStyle }} {{ imageVariant }}">
-                {% endif %}
-              {% endif %}
-            </div>
-            
-            {# Title container - centered as in the design #}
-            <div class="{{ options.datas.titleContainerStyle }}">
-              {% if variant.headingName and options.headings %}
-                {{ renderHeading({ 
-                  name: variant.headingName, 
-                  datas: options.headings
-                }) }}
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    <span class="">Section article hero data not found</span>
+    {# Find section using universal filter - DRY principle #}
+    {% set sectionData = options.datas | findByName(options.name) %}
+
+    {# Render section or error message #}
+    {% if not sectionData %}
+      <span class="error" role="alert">Section not found: {{ options.name }}</span>
+    {% else %}
+      {# Render section element - Semantic HTML hero pattern #}
+      <section 
+        aria-label="{{ sectionData.ariaLabel }}"
+        data-section-name="{{ sectionData.name }}"
+        data-section-type="section-article-hero"
+      >
+        
+        <div data-section-container>
+          
+          {# Hero image - Centered layout #}
+          {% if sectionData.imageName %}
+            <div data-section-image>
+              {{ renderImage({
+                  name: sectionData.imageName,
+                  datas: options.imageDatas
+              }) }}
+            </div>
+          {% endif %}
+          
+          {# Hero heading - Main title centered below image #}
+          {% if sectionData.headingName %}
+            <div data-section-heading>
+              {{ renderHeading({
+                  name: sectionData.headingName,
+                  datas: options.headingDatas
+              }) }}
+            </div>
+          {% endif %}
+          
+        </div>
+        
+      </section>
+    {% endif %}
   {% endif %}
 {% endmacro %}
 

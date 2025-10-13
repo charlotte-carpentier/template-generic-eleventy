@@ -1,97 +1,80 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ORGANISM › Menu                                         │
-   │ Navigation menu with heading and secondary nav          │
+   │ Navigation menu with heading and secondary navigation   │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Usage — Summon HAT Components Wisely:
-    {% from "03-organisms/menu.njk" import renderMenu %}
-    {{ renderMenu({ 
-        name: "main_navigation",
-        datas: organisms.menus,
-        "navigation-secondarys": organisms["navigation-secondarys"],
-        links: atoms.links,
-        headings: atoms.headings
-    }) }}
-    
-    With custom styles:
-    {{ renderMenu({ 
-        name: "footer_navigation",
-        datas: organisms.menus,
-        "navigation-secondarys": organisms["navigation-secondarys"],
-        links: atoms.links,
-        headings: atoms.headings,
-        class: "my-custom-menu-class"
-    }) }}
-  
   Props:
     - options.name (string): Menu identifier
-    - options.datas (object): Menu configuration
-    - options.navigation-secondarys (object): Secondary navigation data
-    - options.links (object): Links atom data
-    - options.headings (object): Headings atom data
-    - options.class (string): Additional CSS classes
-  
-  Features:
-    - Dynamic heading with level and styling
-    - Integration with navigation-secondary organism
-    - Heading text resolution from data
-    - Falls back to first menu if name not found
-  
-  Accessibility:
-    - Semantic <nav> element
-    - Proper heading hierarchy
-    - Keyboard navigable links
-  
+    - options.datas (array): Menu configuration data
+    - options.headingDatas (array): Heading atom data
+    - options.navSecondaryDatas (array): Navigation secondary organism data
+    - options.linkDatas (array): Link atom data
+
+  Usage — Summon HAT Components Wisely:
+    {% from "03-organisms/menu.njk" import renderMenu %}
+
+    {{ renderMenu({
+        name: "demoMenu1",
+        datas: organisms.menu.menus,
+        headingDatas: atoms.heading.headings,
+        navSecondaryDatas: organisms["navigation-secondary"].navSecondary,
+        linkDatas: atoms.link.links
+    }) }}
+
   @created 2025-01-15
 #}
 
-{% from "01-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
-
 {% macro renderMenu(options) %}
-  {% if options.datas %}
-    {% set globalStyle = options.datas.globalStyle %}
-    
-    {% set menuData = null %}
-    {% if options.name %}
-      {% for menuSet in options.datas.menus %}
-        {% if menuSet.name == options.name %}
-          {% set menuData = menuSet %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+  {# Import sub-components #}
+  {% from "01-atoms/heading.njk" import renderHeading %}
+  {% from "03-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
 
-    {% if not menuData %}
-      {% set menuData = options.datas.menus[0] %}
-    {% endif %}
-    
-    {% set headingText = menuData.heading %}
-    {% set headingLevel = 2 %}
-    {% set headingStyle = menuData.headingStyle %}
-    
-    {% if options.headings %}
-      {% for heading in options.headings.headings %}
-        {% if heading.name == menuData.heading %}
-          {% set headingText = heading.text %}
-          {% set headingLevel = heading.level %}
-          {% set headingStyle = headingStyle + ' ' + options.headings.variants[heading.style|default('default')] %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-    
-    <nav class="{{ globalStyle }} {{ options.class | default('') }}">
-      <h{{ headingLevel }} class="{{ headingStyle }}">{{ headingText }}</h{{ headingLevel }}>
-      
-      {# Use navigation-secondary component #}
-      {{ renderNavigationSecondary({ 
-          name: menuData['navigation-secondarys'],
-          datas: options['navigation-secondarys'],
-          links: options.links,
-          class: menuData.menuStyle
-      }) }}
-    </nav>
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    <span class="">Menu data not found</span>
+    {# Find menu using universal filter - DRY principle, performance optimized #}
+    {% set menuData = options.datas | findByName(options.name) %}
+
+    {# Render menu or error message #}
+    {% if not menuData %}
+      <span class="error" role="alert">Menu not found: {{ options.name }}</span>
+    {% else %}
+      {# Render nav element - Semantic HTML best practice #}
+      <nav 
+        aria-label="{{ menuData.ariaLabel }}"
+        data-menu-name="{{ menuData.name }}"
+        data-menu-type="menu"
+      >
+        
+        {# Menu items - Column layout pattern #}
+        <div data-menu-columns>
+          {% for item in menuData.items %}
+            <div data-menu-column>
+              
+              {# Column heading - DRY: Use renderHeading atom (not direct HTML) #}
+              {# Source: The Pragmatic Programmer - Don't Repeat Yourself principle #}
+              {{ renderHeading({
+                  name: item.headingName,
+                  datas: options.headingDatas
+              }) }}
+              
+              {# Column navigation - Navigation secondary organism #}
+              {{ renderNavigationSecondary({
+                  name: item.navSecondaryName,
+                  datas: options.navSecondaryDatas,
+                  linkDatas: options.linkDatas
+              }) }}
+              
+            </div>
+          {% endfor %}
+        </div>
+        
+      </nav>
+    {% endif %}
   {% endif %}
 {% endmacro %}
 

@@ -1,240 +1,236 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ORGANISM › Error Layout                                 │
-   │ Cross layout with desktop/mobile responsive variants    │
+   │ Complete error page layout with fragments and triptych  │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Error layout identifier
+    - options.datas (array): Error layout configuration data
+    - options.groupDatas (array): Error fragment group organism data
+    - options.fragmentDatas (array): Error fragment molecule data
+    - options.headingDatas (array): Heading atom data
+    - options.buttonDatas (array): Button atom data
+    - options.linkDatas (array): Link atom data
+    - options.iconDatas (array): Icon atom data
+
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/error-layout.njk" import renderErrorLayout %}
-    {{ renderErrorLayout({ 
-        name: "error_layout_404",
-        datas: organisms["error-layout"]["error-layouts"],
-        errorFragmentGroupDatas: organisms["error-fragment-group"]["error-fragment-groups"],
-        errorFragmentDatas: molecules["error-fragment"]["error-fragments"],
-        iconDatas: atoms.icon.icons,
-        typographyDatas: atoms.typography.texts,
+
+    {{ renderErrorLayout({
+        name: "layout404",
+        datas: organisms["error-layout"].errorLayouts,
+        groupDatas: organisms["error-fragment-group"].errorFragmentGroups,
+        fragmentDatas: molecules["error-fragment"]["error-fragments"],
+        headingDatas: atoms.heading.headings,
         buttonDatas: atoms.button.buttons,
-        linkDatas: atoms.link.links
+        linkDatas: atoms.link.links,
+        iconDatas: atoms.icon.icons
     }) }}
-  
-  Props:
-    - option.name (string): Error layout identifier
-    - option.datas (array): Error layout configuration
-    - option.errorFragmentGroupDatas (array): Fragment groups data
-    - option.errorFragmentDatas (array): Error fragments data
-    - option.iconDatas (array): Icons atom data
-    - option.typographyDatas (array): Typography atom data
-    - option.buttonDatas (array): Buttons atom data
-    - option.linkDatas (array): Links atom data
-  
-  Variants:
-    - cross-layout: Desktop cross formation with centered triptych, mobile vertical stack
-  
-  Features Desktop:
-    - Cross formation with fragments covering entire space
-    - Centered triptych (title, subtitle, CTA)
-    - Accessibility toggle button
-  
-  Features Mobile:
-    - Vertical scrollable stack
-    - Scroll-based fragment reveal
-    - Triptych always visible in halo
-  
-  Accessibility:
-    - Proper focus states on interactive elements
-    - Opacity transitions for accessibility controls
-    - role="button" on clickable elements
-  
+
   @created 2025-01-15
 #}
 
-{# Import organisms, molecules and atoms #}
-{% from "03-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
-{% from "01-atoms/heading.njk" import renderHeading %}
-{% from "01-atoms/button.njk" import renderButton %}
-{% from "01-atoms/link.njk" import renderLink %}
+{% macro renderErrorLayout(options) %}
+  {# Import sub-components #}
+  {% from "03-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
+  {% from "01-atoms/heading.njk" import renderHeading %}
+  {% from "01-atoms/button.njk" import renderButton %}
+  {% from "01-atoms/link.njk" import renderLink %}
 
-{% macro renderErrorLayout(option) %}
-  {# Check if datas is provided #}
-  {% if not option.datas %}
-    <span class="text-red-500">Error: No error-layout configuration provided</span>
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Retrieve error-layout configuration #}
-    {% set errorLayoutsConfig = option.datas %}
-    {% set errorLayoutName = option.name %}
-    
-    {# Find the specific error-layout by name #}
-    {% set errorLayoutData = null %}
-    {% for errorLayout in errorLayoutsConfig %}
-      {% if errorLayout.name == errorLayoutName %}
-        {% set errorLayoutData = errorLayout %}
-      {% endif %}
-    {% endfor %}
+    {# Find layout using universal filter #}
+    {% set layoutData = options.datas | findByName(options.name) %}
 
-    {# Fallback if error-layout not found #}
-    {% if not errorLayoutData %}
-      <span class="text-red-500">Error-layout not found: {{ errorLayoutName }}</span>
+    {# Render layout or error message #}
+    {% if not layoutData %}
+      <span class="error" role="alert">Error layout not found: {{ options.name }}</span>
     {% else %}
-      {# Render error-layout organism based on variant #}
-      {% if errorLayoutData.variant == "cross-layout" %}
+      {# Main error layout container - Full screen absolute positioning #}
+      <div 
+        data-error-layout-name="{{ layoutData.name }}"
+        data-error-layout-type="error-layout"
+        data-error-layout-variant="{{ layoutData.variant }}"
+      >
         
-        {# Main Error Layout Container #}
-        <div class="error-layout error-layout--{{ errorLayoutData.variant }} absolute inset-0 pt-20 pb-8 lg:pb-32 overflow-hidden">
+        {# Desktop Layout - Cross formation with centered triptych #}
+        <div data-error-layout-desktop>
           
-          {# Desktop Layout - Cross Formation with Centered Triptych #}
-          <div class="error-layout-desktop hidden lg:block lg:relative lg:h-full lg:w-full">
+          {# Fragment group - Covers entire space in cross formation #}
+          <div data-error-layout-fragments>
+            {{ renderErrorFragmentGroup({
+                name: layoutData.groupName,
+                datas: options.groupDatas,
+                fragmentDatas: options.fragmentDatas,
+                iconDatas: options.iconDatas,
+                headingDatas: options.headingDatas
+            }) }}
+          </div>
+          
+          {# Triptych - Centered overlay (title + subtitle + CTA) #}
+          <div data-error-layout-triptych>
             
-            {# Error Fragment Group - Covers entire space #}
-            <div class="error-layout-fragments-container absolute inset-0 p-8">
-              {{ renderErrorFragmentGroup({ 
-                  name: errorLayoutData.errorFragmentGroupName,
-                  datas: option.errorFragmentGroupDatas,
-                  errorFragmentDatas: option.errorFragmentDatas,
-                  iconDatas: option.iconDatas,
-                  typographyDatas: option.typographyDatas
+            {# Title #}
+            <div data-triptych-title>
+              {{ renderHeading({
+                  name: layoutData.titleTypographyName,
+                  datas: options.headingDatas
               }) }}
             </div>
             
-            {# Triptych - Centered Absolutely #}
-            <div class="error-layout-triptych absolute inset-0 flex flex-col items-center justify-center gap-6 pointer-events-none translate-y-1/6">
-              <div class="error-layout-title text-center pointer-events-auto">
-                {{ renderHeading({ 
-                    name: errorLayoutData.titleTypographyName,
-                    datas: option.typographyDatas
-                }) }}
-              </div>
-              <div class="error-layout-subtitle text-center pointer-events-auto">
-                {{ renderHeading({ 
-                    name: errorLayoutData.subtitleTypographyName,
-                    datas: option.typographyDatas
-                }) }}
-              </div>
-              <div class="error-layout-cta pointer-events-auto">
-                {% if errorLayoutData.buttonName %}
-                  {{ renderButton({ 
-                      name: errorLayoutData.buttonName,
-                      datas: option.buttonDatas
-                  }) }}
-                {% elif errorLayoutData.linkName %}
-                  {{ renderLink({ 
-                      name: errorLayoutData.linkName,
-                      datas: option.linkDatas
-                  }) }}
-                {% endif %}
-              </div>
-              <div class="error-layout-accessibility flex items-center justify-center gap-4 mt-20 pointer-events-auto">
-                <div class="error-layout-accessibility-text inline-block opacity-70 hover:opacity-100 focus-within:opacity-100 transition-opacity">
-                  {{ renderHeading({ 
-                      name: errorLayoutData.accessibilityTextTypographyName,
-                      datas: option.typographyDatas
-                  }) }}
-                </div>
-                <div class="error-layout-accessibility-button inline-block">
-                  {{ renderButton({ 
-                      name: errorLayoutData.accessibilityButtonName,
-                      datas: option.buttonDatas,
-                      isErrorPage: true
-                  }) }}
-                </div>
-              </div>
+            {# Subtitle #}
+            <div data-triptych-subtitle>
+              {{ renderHeading({
+                  name: layoutData.subtitleTypographyName,
+                  datas: options.headingDatas
+              }) }}
             </div>
             
-          </div>
-          
-          {# Mobile/Tablet Vertical Stack with Scroll-based Halo #}
-          <div class="error-layout-mobile block lg:hidden overflow-y-auto h-full w-full p-4 sm:p-6">
-            
-            {# Triptych First - Always visible in mobile halo #}
-            <div class="error-layout-triptych-mobile flex flex-col items-center gap-4 sm:gap-6 mb-8 sm:mb-12">
-              <div class="error-layout-title text-center">
-                {{ renderHeading({ 
-                    name: errorLayoutData.titleTypographyName,
-                    datas: option.typographyDatas
+            {# CTA - Link or Button #}
+            <div data-triptych-cta>
+              {% if layoutData.linkName %}
+                {{ renderLink({
+                    name: layoutData.linkName,
+                    datas: options.linkDatas
                 }) }}
-              </div>
-              <div class="error-layout-subtitle text-center">
-                {{ renderHeading({ 
-                    name: errorLayoutData.subtitleTypographyName,
-                    datas: option.typographyDatas
+              {% elif layoutData.buttonName %}
+                {{ renderButton({
+                    name: layoutData.buttonName,
+                    datas: options.buttonDatas
                 }) }}
-              </div>
-              <div class="error-layout-cta">
-                {% if errorLayoutData.buttonName %}
-                  {{ renderButton({ 
-                      name: errorLayoutData.buttonName,
-                      datas: option.buttonDatas
-                  }) }}
-                {% elif errorLayoutData.linkName %}
-                  {{ renderLink({ 
-                      name: errorLayoutData.linkName,
-                      datas: option.linkDatas
-                  }) }}
-                {% endif %}
-              </div>
-              
-              {# Accessibility section #}
-              <div class="error-layout-accessibility text-center mt-8">
-                <div class="error-layout-accessibility-text mb-4 opacity-70 hover:opacity-100 focus-within:opacity-100 transition-opacity">
-                  {{ renderHeading({ 
-                      name: errorLayoutData.accessibilityTextTypographyName,
-                      datas: option.typographyDatas
-                  }) }}
-                </div>
-                <div class="error-layout-accessibility-button opacity-70 hover:opacity-100 focus-within:opacity-100 transition-opacity">
-                  {{ renderButton({ 
-                      name: errorLayoutData.accessibilityButtonName,
-                      datas: option.buttonDatas,
-                      isErrorPage: true
-                  }) }}
-                </div>
-              </div>
-            </div>
-            
-            {# Fragments Container #}
-            <div class="error-layout-fragments-mobile space-y-8 sm:space-y-12">
-              {# Get fragment group data #}
-              {% set fragmentGroupData = null %}
-              {% for group in option.errorFragmentGroupDatas %}
-                {% if group.name == errorLayoutData.errorFragmentGroupName %}
-                  {% set fragmentGroupData = group %}
-                {% endif %}
-              {% endfor %}
-              
-              {# Render fragments if found #}
-              {% if fragmentGroupData and fragmentGroupData.fragmentNames %}
-                {% for fragmentName in fragmentGroupData.fragmentNames %}
-                  <div class="error-layout-fragment-mobile error-layout-fragment-{{ loop.index }} w-full min-h-[120px] flex items-center justify-center">
-                    <div class="error-layout-fragment-placeholder opacity-0 transition-opacity duration-500" data-fragment-index="{{ loop.index }}">
-                      {% from "02-molecules/error-fragment.njk" import renderErrorFragment %}
-                      {% set isFragment6 = loop.index == 6 %}
-                      {% if isFragment6 %}
-                        <div class="error-fragment-clickable" tabindex="0" role="button" aria-label="Retourner à la page précédente ou à l'accueil">
-                          {{ renderErrorFragment({ 
-                              name: fragmentName,
-                              datas: option.errorFragmentDatas,
-                              iconDatas: option.iconDatas,
-                              typographyDatas: option.typographyDatas
-                          }) }}
-                        </div>
-                      {% else %}
-                        {{ renderErrorFragment({ 
-                            name: fragmentName,
-                            datas: option.errorFragmentDatas,
-                            iconDatas: option.iconDatas,
-                            typographyDatas: option.typographyDatas
-                        }) }}
-                      {% endif %}
-                    </div>
-                  </div>
-                {% endfor %}
               {% endif %}
+            </div>
+            
+            {# Accessibility controls #}
+            <div data-triptych-accessibility>
+              
+              {# Accessibility text #}
+              <div data-a11y-text>
+                {{ renderHeading({
+                    name: layoutData.a11yTextName,
+                    datas: options.headingDatas
+                }) }}
+              </div>
+              
+              {# Accessibility toggle button #}
+              <div data-a11y-button>
+                {{ renderButton({
+                    name: layoutData.a11yBtnName,
+                    datas: options.buttonDatas
+                }) }}
+              </div>
+              
             </div>
             
           </div>
           
         </div>
         
-      {% endif %}
+        {# Mobile Layout - Vertical scrollable stack #}
+        <div data-error-layout-mobile>
+          
+          {# Triptych first - Always visible at top #}
+          <div data-error-layout-triptych-mobile>
+            
+            {# Title #}
+            <div data-triptych-title>
+              {{ renderHeading({
+                  name: layoutData.titleTypographyName,
+                  datas: options.headingDatas
+              }) }}
+            </div>
+            
+            {# Subtitle #}
+            <div data-triptych-subtitle>
+              {{ renderHeading({
+                  name: layoutData.subtitleTypographyName,
+                  datas: options.headingDatas
+              }) }}
+            </div>
+            
+            {# CTA #}
+            <div data-triptych-cta>
+              {% if layoutData.linkName %}
+                {{ renderLink({
+                    name: layoutData.linkName,
+                    datas: options.linkDatas
+                }) }}
+              {% elif layoutData.buttonName %}
+                {{ renderButton({
+                    name: layoutData.buttonName,
+                    datas: options.buttonDatas
+                }) }}
+              {% endif %}
+            </div>
+            
+            {# Accessibility controls #}
+            <div data-triptych-accessibility>
+              <div data-a11y-text>
+                {{ renderHeading({
+                    name: layoutData.a11yTextName,
+                    datas: options.headingDatas
+                }) }}
+              </div>
+              <div data-a11y-button>
+                {{ renderButton({
+                    name: layoutData.a11yBtnName,
+                    datas: options.buttonDatas
+                }) }}
+              </div>
+            </div>
+            
+          </div>
+          
+          {# Fragments - Stacked vertically below triptych #}
+          <div data-error-layout-fragments-mobile>
+            {# Find fragment group to get fragment names #}
+            {% set groupData = options.groupDatas | findByName(layoutData.groupName) %}
+            
+            {% if groupData and groupData.fragmentNames %}
+              {% for fragmentName in groupData.fragmentNames %}
+                <div 
+                  data-fragment-mobile-item
+                  data-fragment-index="{{ loop.index }}"
+                >
+                  {% from "02-molecules/error-fragment.njk" import renderErrorFragment %}
+                  
+                  {# Fragment 6 clickable logic #}
+                  {% set isFragment6 = loop.index == 6 %}
+                  {% if isFragment6 and not groupData.disableFragment6Click %}
+                    <div 
+                      tabindex="0" 
+                      role="button" 
+                      aria-label="Return to previous page or home"
+                      data-fragment-clickable
+                    >
+                      {{ renderErrorFragment({
+                          name: fragmentName,
+                          datas: options.fragmentDatas,
+                          iconDatas: options.iconDatas,
+                          headingDatas: options.headingDatas
+                      }) }}
+                    </div>
+                  {% else %}
+                    {{ renderErrorFragment({
+                        name: fragmentName,
+                        datas: options.fragmentDatas,
+                        iconDatas: options.iconDatas,
+                        headingDatas: options.headingDatas
+                    }) }}
+                  {% endif %}
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+          
+        </div>
+        
+      </div>
     {% endif %}
   {% endif %}
 {% endmacro %}

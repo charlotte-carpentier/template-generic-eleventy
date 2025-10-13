@@ -1,106 +1,96 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ORGANISM › Error Fragment Group                         │
-   │ Error fragments in 2x3 grid layout                      │
+   │ Error fragments in 2x3 grid layout for error pages      │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
+  Props:
+    - options.name (string): Error fragment group identifier
+    - options.datas (array): Error fragment group configuration data
+    - options.fragmentDatas (array): Error fragment molecule data
+    - options.iconDatas (array): Icon atom data
+    - options.headingDatas (array): Heading atom data
+
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
-    {{ renderErrorFragmentGroup({ 
-        name: "error_fragment_group_404",
-        datas: organisms["error-fragment-group"]["error-fragment-groups"],
-        errorFragmentDatas: molecules["error-fragment"]["error-fragments"],
+
+    {{ renderErrorFragmentGroup({
+        name: "errGroup404",
+        datas: organisms["error-fragment-group"].errorFragmentGroups,
+        fragmentDatas: molecules["error-fragment"]["error-fragments"],
         iconDatas: atoms.icon.icons,
-        typographyDatas: atoms.typography.texts
+        headingDatas: atoms.heading.headings
     }) }}
-  
-  Props:
-    - option.name (string): Error fragment group identifier
-    - option.datas (array): Error fragment group configuration
-    - option.errorFragmentDatas (array): Error fragments data
-    - option.iconDatas (array): Icons atom data
-    - option.typographyDatas (array): Typography atom data
-  
-  Variants:
-    - grid-2x3: 2 columns × 3 rows layout
-  
-  Features:
-    - Fragment 6 with optional click behavior
-    - Left/right alignment based on column
-    - Keyboard accessible clickable fragment
-    - Integration with error-fragment molecule
-  
-  Accessibility:
-    - role="button" on clickable fragment
-    - tabindex="0" for keyboard navigation
-    - aria-label on interactive elements
-  
+
   @created 2025-01-15
 #}
 
-{# Import molecules #}
-{% from "02-molecules/error-fragment.njk" import renderErrorFragment %}
+{% macro renderErrorFragmentGroup(options) %}
+  {# Import sub-component #}
+  {% from "02-molecules/error-fragment.njk" import renderErrorFragment %}
 
-{% macro renderErrorFragmentGroup(option) %}
-  {# Check if datas is provided #}
-  {% if not option.datas %}
-    <span class="text-red-500">Error: No error-fragment-group configuration provided</span>
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Retrieve error-fragment-group configuration #}
-    {% set errorFragmentGroupsConfig = option.datas %}
-    {% set errorFragmentGroupName = option.name %}
-    
-    {# Find the specific error-fragment-group by name #}
-    {% set errorFragmentGroupData = null %}
-    {% for errorFragmentGroup in errorFragmentGroupsConfig %}
-      {% if errorFragmentGroup.name == errorFragmentGroupName %}
-        {% set errorFragmentGroupData = errorFragmentGroup %}
-      {% endif %}
-    {% endfor %}
+    {# Find group using universal filter #}
+    {% set groupData = options.datas | findByName(options.name) %}
 
-    {# Fallback if error-fragment-group not found #}
-    {% if not errorFragmentGroupData %}
-      <span class="text-red-500">Error-fragment-group not found: {{ errorFragmentGroupName }}</span>
+    {# Render group or error message #}
+    {% if not groupData %}
+      <span class="error" role="alert">Error fragment group not found: {{ options.name }}</span>
     {% else %}
-      {# Render error-fragment-group organism based on variant #}
-      {% if errorFragmentGroupData.variant == "grid-2x3" %}
-        <div class="error-fragment-group error-fragment-group--{{ errorFragmentGroupData.variant }} grid grid-cols-2 grid-rows-3 gap-4 sm:gap-6">
-          {% for fragmentName in errorFragmentGroupData.fragmentNames %}
-            {% set isLeftColumn = loop.index0 % 2 == 0 %}
-            {% set isFragment6 = loop.index == 6 %}
-            <div class="error-fragment-group-item flex items-center{% if isLeftColumn %} justify-start{% else %} justify-end{% endif %}">
-              {% if isFragment6 %}
-                {% if errorFragmentGroupData.disableFragment6Click %}
-                  {{ renderErrorFragment({ 
-                      name: fragmentName,
-                      datas: option.errorFragmentDatas,
-                      iconDatas: option.iconDatas,
-                      typographyDatas: option.typographyDatas,
-                      isClickable: false
-                  }) }}
-                {% else %}
-                  <div class="error-fragment-clickable" tabindex="0" role="button" aria-label="Retourner à la page précédente ou à l'accueil">
-                    {{ renderErrorFragment({ 
-                        name: fragmentName,
-                        datas: option.errorFragmentDatas,
-                        iconDatas: option.iconDatas,
-                        typographyDatas: option.typographyDatas,
-                        isClickable: true
-                    }) }}
-                  </div>
-                {% endif %}
-              {% else %}
-                {{ renderErrorFragment({ 
+      {# Render grid container - 2x3 grid layout for error pages #}
+      <div 
+        data-error-group-name="{{ groupData.name }}"
+        data-error-group-type="error-fragment-group"
+        data-error-group-variant="{{ groupData.variant }}"
+      >
+        
+        {# Loop through fragment names and render each #}
+        {% for fragmentName in groupData.fragmentNames %}
+          {# Calculate column position (left = even index, right = odd) #}
+          {% set isLeftColumn = loop.index0 % 2 == 0 %}
+          {# Fragment 6 is special - can be clickable #}
+          {% set isFragment6 = loop.index == 6 %}
+          
+          <div 
+            data-fragment-item
+            data-fragment-position="{{ 'left' if isLeftColumn else 'right' }}"
+            data-fragment-index="{{ loop.index }}"
+          >
+            
+            {% if isFragment6 and not groupData.disableFragment6Click %}
+              {# Fragment 6 - Clickable with ARIA for navigation back #}
+              <div 
+                tabindex="0" 
+                role="button" 
+                aria-label="Return to previous page or home"
+                data-fragment-clickable
+              >
+                {{ renderErrorFragment({
                     name: fragmentName,
-                    datas: option.errorFragmentDatas,
-                    iconDatas: option.iconDatas,
-                    typographyDatas: option.typographyDatas
+                    datas: options.fragmentDatas,
+                    iconDatas: options.iconDatas,
+                    headingDatas: options.headingDatas
                 }) }}
-              {% endif %}
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
+              </div>
+            {% else %}
+              {# Regular fragment - Not clickable #}
+              {{ renderErrorFragment({
+                  name: fragmentName,
+                  datas: options.fragmentDatas,
+                  iconDatas: options.iconDatas,
+                  headingDatas: options.headingDatas
+              }) }}
+            {% endif %}
+            
+          </div>
+        {% endfor %}
+        
+      </div>
     {% endif %}
   {% endif %}
 {% endmacro %}

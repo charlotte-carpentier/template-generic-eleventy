@@ -9,13 +9,34 @@
     - options.datas (array): Link configuration data
     - options.ariaLabel (string): Override aria-label
     - options.disabled (boolean): Override disabled state
+    - options.active (boolean): Active state for navigation
+    - options.role (string): ARIA role (e.g., "tab" for tab-bar)
+    - options.ariaSelected (boolean): ARIA selected state for tabs
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/link.njk" import renderLink %}
 
+    Basic link:
     {{ renderLink({
         name: "demoLink1",
         datas: atoms.link.links
+    }) }}
+
+    Tab link with ARIA:
+    {{ renderLink({
+        name: "demoLinkTab",
+        datas: atoms.link.links,
+        active: true,
+        role: "tab",
+        ariaSelected: true
+    }) }}
+
+    Navigation link with states:
+    {{ renderLink({
+        name: "demoLink1",
+        datas: atoms.link.links,
+        active: true,
+        disabled: false
     }) }}
 
   @created 2025-01-15
@@ -35,8 +56,10 @@
     {% if not linkData %}
       <span class="error" role="alert">Link not found: {{ options.name }}</span>
     {% else %}
-      {# Compute final aria-label with fallback cascade #}
+      {# Compute final values with fallback cascade #}
       {% set finalAriaLabel = options.ariaLabel | default(linkData.ariaLabel) %}
+      {% set isDisabled = options.disabled | default(linkData.disabled) | default(false) %}
+      {% set isActive = options.active | default(false) %}
 
       {# Render link element #}
       <a
@@ -49,6 +72,10 @@
         {% if linkData.download %}download{% endif %}
         {% if linkData.onclick %}onclick="{{ linkData.onclick | escape }}"{% endif %}
         {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
+        {% if isDisabled %}aria-disabled="true"{% endif %}
+        {% if isActive %}data-link-active="true" aria-current="page"{% endif %}
+        {% if options.role %}role="{{ options.role }}"{% endif %}
+        {% if options.ariaSelected is defined %}aria-selected="{{ options.ariaSelected }}"{% endif %}
       >
         {# TODO: Add icon rendering if iconName exists in linkData #}
         {# {% if linkData.iconName %} #}

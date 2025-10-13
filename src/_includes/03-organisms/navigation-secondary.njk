@@ -4,60 +4,63 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Usage — Summon HAT Components Wisely:
-    {% from "03-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
-    {{ renderNavigationSecondary({ 
-      name: "main",
-      datas: organisms["navigation-secondarys"],
-      links: atoms.links
-    }) }}
-  
   Props:
     - options.name (string): Navigation identifier
-    - options.datas (object): Navigation configurations
-    - options.links (object): Links data source
-    - options.class (string): Additional CSS classes
-  
-  Features:
-    - Auto-selects first navigation if name not found
-    - Applies global styles from configuration
-    - Data attributes for secondary nav identification
-    - Custom spacing support via class prop
-  
-  Accessibility:
-    - Semantic <nav> element with role attributes
-    - data-nav-container and data-nav-secondary for screen readers
-    - Keyboard accessible link navigation
-  
+    - options.datas (array): Navigation configuration data
+    - options.linkDatas (array): Link atom data
+
+  Usage — Summon HAT Components Wisely:
+    {% from "03-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
+
+    {{ renderNavigationSecondary({
+        name: "demoNavSec1",
+        datas: organisms["navigation-secondary"].navSecondary,
+        linkDatas: atoms.link.links
+    }) }}
+
   @created 2025-01-15
 #}
 
-{% from "01-atoms/link.njk" import linkComponent %}
-
 {% macro renderNavigationSecondary(options) %}
-  {% if options.datas %}
-    {% set globalStyle = options.datas.globalStyle %}
-    
-    {% set navigationData = null %}
-    {% if options.name %}
-      {% for navSet in options.datas["navigation-secondarys"] %}
-        {% if navSet.name == options.name %}
-          {% set navigationData = navSet %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
+  {# Import sub-component - Fix: renderLink instead of linkComponent #}
+  {% from "01-atoms/link.njk" import renderLink %}
 
-    {% if not navigationData %}
-      {% set navigationData = options.datas["navigation-secondarys"][0] %}
-    {% endif %}
-    
-    <nav class="{{ globalStyle }} {{ options.class | default('') }}" data-nav-container data-nav-secondary>
-      {% for linkName in navigationData.links %}
-        {{ linkComponent({ name: linkName, datas: options.links, dataNavLink: true }) }}
-      {% endfor %}
-    </nav>
+  {# Validate required props #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    <span class="">Navigation data not found</span>
+    {# Find navigation using universal filter - Performance: early return with JavaScript .find() #}
+    {% set navData = options.datas | findByName(options.name) %}
+
+    {# Render navigation or error message #}
+    {% if not navData %}
+      <span class="error" role="alert">Navigation not found: {{ options.name }}</span>
+    {% else %}
+      {# Render nav element - W3C Navigation Lists pattern with <ul> wrapper #}
+      {# Source: https://www.w3.org/WAI/tutorials/menus/structure/ #}
+      <nav 
+        aria-label="{{ navData.ariaLabel }}"
+        data-nav-name="{{ navData.name }}"
+        data-nav-type="navigation-secondary"
+      >
+        <ul data-nav-list>
+          {# Loop through items (not links - JSON structure uses items[]) #}
+          {% for item in navData.items %}
+            <li data-nav-item>
+              {# Render link with active/disabled states support #}
+              {{ renderLink({
+                  name: item.linkName,
+                  datas: options.linkDatas,
+                  active: item.active,
+                  disabled: item.disabled
+              }) }}
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    {% endif %}
   {% endif %}
 {% endmacro %}
 
