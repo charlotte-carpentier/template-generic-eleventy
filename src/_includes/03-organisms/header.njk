@@ -31,7 +31,7 @@
   {# Import sub-components #}
   {% from "01-atoms/vector.njk" import renderVector %}
   {% from "01-atoms/icon.njk" import renderIcon %}
-  {% from "03-organisms/tab-bar.njk" import renderTabSections %}
+  {% from "03-organisms/tab-bar.njk" import renderTabBar %}
 
   {# Validate required props #}
   {% if not options.datas %}
@@ -66,7 +66,7 @@
           
           {# Desktop navigation - Tab bar #}
           <div data-header-section="desktop-navigation">
-            {{ renderTabSections({
+            {{ renderTabBar({
                 name: headerData.desktop.tabBarName,
                 datas: options.tabBarDatas,
                 linkDatas: options.linkDatas
@@ -120,7 +120,7 @@
               
               {# Mobile navigation - Same tab bar data, different presentation #}
               <div data-overlay-section="navigation">
-                {{ renderTabSections({
+                {{ renderTabBar({
                     name: headerData.desktop.tabBarName,
                     datas: options.tabBarDatas,
                     linkDatas: options.linkDatas
