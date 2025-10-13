@@ -54,6 +54,8 @@ tags: [coding-style, conventions, guidelines]
 | Molecules | `card`, `breadcrumb` |
 | Organisms | `header`, `footer`, `section-hero` |
 
+> **JSON Data Patterns**: For component data structure guidelines (variants vs separate objects), see [Data Structure Guide](./data-structure.md).
+
 ---
 
 ## Abbreviations
