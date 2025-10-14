@@ -8,6 +8,7 @@
     - options.name (string): Input identifier
     - options.datas (array): Input configuration data
     - options.disabled (boolean): Override disabled state
+    - options.selectDatas (array): Select atom data (for type="select")
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/input.njk" import renderInput %}
@@ -15,6 +16,13 @@
     {{ renderInput({
         name: "demoInput1",
         datas: atoms.input.inputs
+    }) }}
+
+    Input with select dropdown:
+    {{ renderInput({
+        name: "demoInput2",
+        datas: atoms.input.inputs,
+        selectDatas: atoms.select.selects
     }) }}
 
   @created 2025-01-15
@@ -90,22 +98,38 @@
             </div>
           {% endif %}
 
-        {# Select dropdown #}
+        {# Select dropdown - Integrate with select atom #}
         {% elif inputType == 'select' %}
-          <select
-            id="{{ inputId }}"
-            name="{{ inputName }}"
-            class="input-field input-select"
-            data-input-name="{{ inputData.name }}"
-            data-input-type="select"
-            {% if inputData.required %}required{% endif %}
-            {% if isDisabled %}disabled{% endif %}
-            {% if inputData.selectName %}data-select-name="{{ inputData.selectName }}"{% endif %}
-            aria-describedby="{% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
-          >
-            {# TODO: Populate options from select data using selectName #}
-            <option value="">Select an option</option>
-          </select>
+          {% if inputData.selectName and options.selectDatas %}
+            {# Find the select data by name #}
+            {% set selectData = options.selectDatas | findByName(inputData.selectName) %}
+            {% if selectData %}
+              <select
+                id="{{ inputId }}"
+                name="{{ inputName }}"
+                class="input-field input-select"
+                data-input-name="{{ inputData.name }}"
+                data-input-type="select"
+                {% if inputData.required %}required{% endif %}
+                {% if isDisabled %}disabled{% endif %}
+                aria-describedby="{% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
+              >
+                {# Render options from select data #}
+                {% for opt in selectData.options %}
+                  <option 
+                    value="{{ opt.value }}"
+                    {% if opt.selected %}selected{% endif %}
+                  >
+                    {{ opt.label }}
+                  </option>
+                {% endfor %}
+              </select>
+            {% else %}
+              <span class="error" role="alert">Select data not found: {{ inputData.selectName }}</span>
+            {% endif %}
+          {% else %}
+            <span class="error" role="alert">Missing selectDatas prop or selectName in input data</span>
+          {% endif %}
 
         {# Multiselect with chips #}
         {% elif inputType == 'multiselect' %}
@@ -120,14 +144,23 @@
               {% if isDisabled %}disabled{% endif %}
               aria-describedby="{% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
             >
-              {# TODO: Populate options from select data #}
+              {# Options will be populated via JavaScript or server-side #}
               <option value="">Select options</option>
             </select>
 
-            {# Display selected chips #}
+            {# Display selected chips - JavaScript will populate this dynamically #}
             {% if inputData.chipMulti %}
-              <div class="input-multiselect-chips">
-                {# TODO: Render selected chips dynamically with JS #}
+              <div 
+                class="input-multiselect-chips" 
+                data-chip-container="{{ inputId }}"
+                data-chip-template="{{ inputData.chipMulti | dump | escape }}"
+              >
+                {# Chips rendered dynamically by JavaScript:
+                   - Read options from select element
+                   - Create chip elements with text, variant, removable button
+                   - Handle chip removal events
+                   - Update select element state
+                   See: /assets/scripts/components/multiselect.js #}
               </div>
             {% endif %}
           </div>

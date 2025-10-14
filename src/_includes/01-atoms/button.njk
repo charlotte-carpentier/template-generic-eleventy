@@ -14,6 +14,7 @@
     - options.ariaLabel (string): ARIA label for accessibility
     - options.ariaDescribedby (string): ARIA described-by reference
     - options.isErrorPage (boolean): Apply error-page-specific styling
+    - options.iconDatas (array): Icon atom data (required if button has icons)
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/button.njk" import renderButton %}
@@ -21,18 +22,22 @@
     Basic button:
     {{ renderButton({
         name: "demoButton1",
-        datas: atoms.button.buttons
+        datas: atoms.button.buttons,
+        iconDatas: atoms.icon.icons
     }) }}
 
     Error page button with specific styling:
     {{ renderButton({
         name: "button-reveal-all",
         datas: option.buttonDatas,
+        iconDatas: option.iconDatas,
         isErrorPage: true
     }) }}
 
   @created 2025-01-15
 #}
+
+{% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderButton(options) %}
   {# Validate required props #}
@@ -53,28 +58,57 @@
       {% set isDisabled = options.disabled or buttonData.disabled %}
       {% set finalAriaLabel = options.ariaLabel | default(buttonData.ariaLabel) %}
       {% set finalAriaDescribedby = options.ariaDescribedby | default(buttonData.ariaDescribedby) %}
+      
+      {# Check if button has icon #}
+      {% set hasIcon = buttonData.iconName %}
+      {% set iconPosition = buttonData.iconPosition | default('left') %}
 
       {# Render button element #}
       <button
         type="{{ buttonType }}"
         data-button-name="{{ buttonData.name }}"
         data-button-type="button"
+        {% if hasIcon %}data-button-icon-position="{{ iconPosition }}"{% endif %}
         {% if isDisabled %}disabled{% endif %}
         {% if options.onclick %}onclick="{{ options.onclick | escape }}"{% endif %}
         {% if options.id %}id="{{ options.id }}"{% endif %}
         {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
         {% if finalAriaDescribedby %}aria-describedby="{{ finalAriaDescribedby }}"{% endif %}
       >
-        {# TODO: Add icon rendering if iconName exists in buttonData #}
-        {# {% if buttonData.iconName and buttonData.iconPosition == 'left' %} #}
-        {#   {{ renderIcon({ name: buttonData.iconName }) }} #}
-        {# {% endif %} #}
+        {# Icon left position #}
+        {% if hasIcon and (iconPosition == 'left' or iconPosition == 'both') %}
+          {% if options.iconDatas %}
+            {{ renderIcon({ 
+                name: buttonData.iconName, 
+                datas: options.iconDatas 
+            }) }}
+          {% endif %}
+        {% endif %}
 
-        {{ buttonData.text }}
+        {# Icon center position (icon-only button) #}
+        {% if hasIcon and iconPosition == 'center' %}
+          {% if options.iconDatas %}
+            {{ renderIcon({ 
+                name: buttonData.iconName, 
+                datas: options.iconDatas 
+            }) }}
+          {% endif %}
+        {% endif %}
 
-        {# {% if buttonData.iconName and buttonData.iconPosition == 'right' %} #}
-        {#   {{ renderIcon({ name: buttonData.iconName }) }} #}
-        {# {% endif %} #}
+        {# Button text (skip for icon-only buttons) #}
+        {% if iconPosition != 'center' %}
+          {{ buttonData.text }}
+        {% endif %}
+
+        {# Icon right position #}
+        {% if hasIcon and (iconPosition == 'right' or iconPosition == 'both') %}
+          {% if options.iconDatas %}
+            {{ renderIcon({ 
+                name: buttonData.iconName, 
+                datas: options.iconDatas 
+            }) }}
+          {% endif %}
+        {% endif %}
       </button>
     {% endif %}
   {% endif %}
