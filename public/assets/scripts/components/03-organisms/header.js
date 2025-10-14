@@ -1,6 +1,7 @@
 /* ┌─────────────────────────────────────────────────────────┐
    │ ORGANISM › Header                                       │
-   │ Mobile menu and contact link active state management   │
+   │ Mobile menu and contact link active state management    │
+   │ Path: src/assets/scripts/components/03-organisms/       │
    └─────────────────────────────────────────────────────────┘ */
 
 /**
@@ -10,6 +11,30 @@
  */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Configuration
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const CONFIG = {
+  BURGER_ID: 'burger-toggle',
+  OVERLAY_ID: 'mobile-overlay',
+  MOBILE_BREAKPOINT: 1024,
+  SMALL_BREAKPOINT: 639,
+  OVERLAY_TOP_SMALL: '75px',
+  OVERLAY_TOP_DEFAULT: '87px',
+  TRANSITION_DURATION: '0.3s',
+  LINK_SELECTOR: '.link--tab',
+  NAV_LINK_SELECTORS: [
+    '.header-navigation .link--nav',
+    '.header-navigation .link--nav-white',
+    '[href*="contact"]',
+    'a[href="#contact"]'
+  ],
+  ACTIVE_CLASS: 'current',
+  CONTACT_HASH: '#contact'
+};
+
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Mobile Menu
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -17,123 +42,153 @@
  * Initialize mobile menu functionality
  * @returns {void}
  */
-function initMobileMenu() {
-  const burgerToggle = document.getElementById('burger-toggle');
-  const mobileOverlay = document.getElementById('mobile-overlay');
+export function initMobileMenu() {
+  const burgerToggle = document.getElementById(CONFIG.BURGER_ID);
+  const mobileOverlay = document.getElementById(CONFIG.OVERLAY_ID);
   const burgerIconOpen = burgerToggle?.querySelector('.burger-icon-open');
   const burgerIconClose = burgerToggle?.querySelector('.burger-icon-close');
   
   if (!burgerToggle || !mobileOverlay || !burgerIconOpen || !burgerIconClose) {
-    console.warn('Header: Mobile menu elements not found');
     return;
   }
   
-  // Initialize burger icons styles
-  function initBurgerStyles() {
-    burgerIconOpen.style.opacity = '1';
-    burgerIconOpen.style.transition = 'none';
-    
-    burgerIconClose.style.opacity = '0';
-    burgerIconClose.style.transition = 'none';
-  }
-  
-  // Initialize mobile overlay styles
-  function initOverlayStyles() {
-    mobileOverlay.style.display = 'none';
-    mobileOverlay.style.opacity = '0';
-    mobileOverlay.style.visibility = 'hidden';
-    mobileOverlay.style.transform = 'translateY(-5px)';
-    mobileOverlay.style.transition = 'opacity 0.3s ease';
-    mobileOverlay.style.zIndex = '1';
-    
-    // Responsive positioning
-    if (window.innerWidth <= 639) {
-      mobileOverlay.style.top = '75px';
-    } else {
-      mobileOverlay.style.top = '87px';
-    }
-  }
-  
-  // Toggle mobile menu
-  function toggleMobileMenu() {
-    const isExpanded = burgerToggle.getAttribute('aria-expanded') === 'true';
-    burgerToggle.setAttribute('aria-expanded', !isExpanded);
-    
-    if (!isExpanded) {
-      burgerIconOpen.style.opacity = '0';
-      burgerIconClose.style.opacity = '1';
-    } else {
-      burgerIconOpen.style.opacity = '1';
-      burgerIconClose.style.opacity = '0';
-    }
-    
-    if (!isExpanded) {
-      mobileOverlay.style.display = 'block';
-      mobileOverlay.style.opacity = '1';
-      mobileOverlay.style.visibility = 'visible';
-      mobileOverlay.style.transform = 'translateY(0)';
-      mobileOverlay.style.zIndex = '50';
-      document.body.style.overflow = 'hidden';
-    } else {
-      closeMobileMenu();
-    }
-  }
-  
-  // Close mobile menu
-  function closeMobileMenu() {
-    burgerToggle.setAttribute('aria-expanded', 'false');
-    
-    burgerIconOpen.style.opacity = '1';
-    burgerIconClose.style.opacity = '0';
-    
-    mobileOverlay.style.display = 'none';
-    mobileOverlay.style.opacity = '0';
-    mobileOverlay.style.visibility = 'hidden';
-    mobileOverlay.style.transform = 'translateY(-5px)';
-    mobileOverlay.style.zIndex = '1';
-    document.body.style.overflow = '';
-  }
-  
-  // Handle window resize
-  function handleResize() {
-    if (window.innerWidth <= 639) {
-      mobileOverlay.style.top = '75px';
-    } else {
-      mobileOverlay.style.top = '87px';
-    }
-    
-    if (window.innerWidth >= 1025) {
-      closeMobileMenu();
-    }
-  }
-  
   // Initialize styles
-  initBurgerStyles();
-  initOverlayStyles();
+  initBurgerStyles(burgerIconOpen, burgerIconClose);
+  initOverlayStyles(mobileOverlay);
   
   // Event listeners
-  burgerToggle.addEventListener('click', toggleMobileMenu);
+  burgerToggle.addEventListener('click', () => toggleMobileMenu(
+    burgerToggle, mobileOverlay, burgerIconOpen, burgerIconClose
+  ));
   
-  mobileOverlay.addEventListener('click', function(e) {
+  mobileOverlay.addEventListener('click', (e) => {
     if (e.target === mobileOverlay) {
-      closeMobileMenu();
+      closeMobileMenu(burgerToggle, mobileOverlay, burgerIconOpen, burgerIconClose);
     }
   });
   
-  const mobileLinks = mobileOverlay.querySelectorAll('.link--tab');
+  const mobileLinks = mobileOverlay.querySelectorAll(CONFIG.LINK_SELECTOR);
   mobileLinks.forEach(link => {
-    link.addEventListener('click', function() {
-      closeMobileMenu();
+    link.addEventListener('click', () => {
+      closeMobileMenu(burgerToggle, mobileOverlay, burgerIconOpen, burgerIconClose);
     });
   });
   
-  document.addEventListener('keydown', function(e) {
+  document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && mobileOverlay.style.opacity === '1') {
-      closeMobileMenu();
+      closeMobileMenu(burgerToggle, mobileOverlay, burgerIconOpen, burgerIconClose);
     }
   });
   
-  window.addEventListener('resize', handleResize);
+  window.addEventListener('resize', () => handleResize(
+    burgerToggle, mobileOverlay, burgerIconOpen, burgerIconClose
+  ));
+}
+
+/**
+ * Initialize burger icon styles
+ * @param {HTMLElement} iconOpen - Open icon element
+ * @param {HTMLElement} iconClose - Close icon element
+ * @returns {void}
+ */
+function initBurgerStyles(iconOpen, iconClose) {
+  iconOpen.style.opacity = '1';
+  iconOpen.style.transition = 'none';
+  iconClose.style.opacity = '0';
+  iconClose.style.transition = 'none';
+}
+
+/**
+ * Initialize mobile overlay styles
+ * @param {HTMLElement} overlay - Overlay element
+ * @returns {void}
+ */
+function initOverlayStyles(overlay) {
+  overlay.style.display = 'none';
+  overlay.style.opacity = '0';
+  overlay.style.visibility = 'hidden';
+  overlay.style.transform = 'translateY(-5px)';
+  overlay.style.transition = `opacity ${CONFIG.TRANSITION_DURATION} ease`;
+  overlay.style.zIndex = '1';
+  overlay.style.top = window.innerWidth <= CONFIG.SMALL_BREAKPOINT 
+    ? CONFIG.OVERLAY_TOP_SMALL 
+    : CONFIG.OVERLAY_TOP_DEFAULT;
+}
+
+/**
+ * Toggle mobile menu open/close
+ * @param {HTMLElement} toggle - Burger toggle element
+ * @param {HTMLElement} overlay - Overlay element
+ * @param {HTMLElement} iconOpen - Open icon element
+ * @param {HTMLElement} iconClose - Close icon element
+ * @returns {void}
+ */
+function toggleMobileMenu(toggle, overlay, iconOpen, iconClose) {
+  const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+  
+  if (!isExpanded) {
+    openMobileMenu(toggle, overlay, iconOpen, iconClose);
+  } else {
+    closeMobileMenu(toggle, overlay, iconOpen, iconClose);
+  }
+}
+
+/**
+ * Open mobile menu
+ * @param {HTMLElement} toggle - Burger toggle element
+ * @param {HTMLElement} overlay - Overlay element
+ * @param {HTMLElement} iconOpen - Open icon element
+ * @param {HTMLElement} iconClose - Close icon element
+ * @returns {void}
+ */
+function openMobileMenu(toggle, overlay, iconOpen, iconClose) {
+  toggle.setAttribute('aria-expanded', 'true');
+  iconOpen.style.opacity = '0';
+  iconClose.style.opacity = '1';
+  overlay.style.display = 'block';
+  overlay.style.opacity = '1';
+  overlay.style.visibility = 'visible';
+  overlay.style.transform = 'translateY(0)';
+  overlay.style.zIndex = '50';
+  document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Close mobile menu
+ * @param {HTMLElement} toggle - Burger toggle element
+ * @param {HTMLElement} overlay - Overlay element
+ * @param {HTMLElement} iconOpen - Open icon element
+ * @param {HTMLElement} iconClose - Close icon element
+ * @returns {void}
+ */
+function closeMobileMenu(toggle, overlay, iconOpen, iconClose) {
+  toggle.setAttribute('aria-expanded', 'false');
+  iconOpen.style.opacity = '1';
+  iconClose.style.opacity = '0';
+  overlay.style.display = 'none';
+  overlay.style.opacity = '0';
+  overlay.style.visibility = 'hidden';
+  overlay.style.transform = 'translateY(-5px)';
+  overlay.style.zIndex = '1';
+  document.body.style.overflow = '';
+}
+
+/**
+ * Handle window resize
+ * @param {HTMLElement} toggle - Burger toggle element
+ * @param {HTMLElement} overlay - Overlay element
+ * @param {HTMLElement} iconOpen - Open icon element
+ * @param {HTMLElement} iconClose - Close icon element
+ * @returns {void}
+ */
+function handleResize(toggle, overlay, iconOpen, iconClose) {
+  overlay.style.top = window.innerWidth <= CONFIG.SMALL_BREAKPOINT 
+    ? CONFIG.OVERLAY_TOP_SMALL 
+    : CONFIG.OVERLAY_TOP_DEFAULT;
+  
+  if (window.innerWidth >= CONFIG.MOBILE_BREAKPOINT) {
+    closeMobileMenu(toggle, overlay, iconOpen, iconClose);
+  }
 }
 
 
@@ -145,90 +200,86 @@ function initMobileMenu() {
  * Initialize contact link active state management
  * @returns {void}
  */
-function initContactActiveState() {
-  const contactLink = document.querySelector('.header-navigation .link--nav') ||
-                    document.querySelector('.header-navigation .link--nav-white') ||
-                    document.querySelector('[href*="contact"]') ||
-                    document.querySelector('a[href="#contact"]');
+export function initContactActiveState() {
+  const contactLink = findContactLink();
+  if (!contactLink) return;
+  
+  // Make contact link bold
+  contactLink.classList.add('font-bold');
   
   let observer = null;
   
-  if (!contactLink) {
-    console.warn('Header: Contact link not found with any selector');
-    return;
-  }
-  
-  console.log('Header: Contact link found:', contactLink);
-  
-  // Always make contact link bold
-  contactLink.style.fontWeight = 'bold';
-  
-  // Enhanced detection function
+  /**
+   * Check if contact section is currently active
+   * @returns {boolean} True if contact is active
+   */
   function isContactSectionActive() {
     const currentHash = window.location.hash;
     
-    // Method 1: Hash detection
-    if (currentHash === '#contact') return true;
+    // Direct hash match
+    if (currentHash === CONFIG.CONTACT_HASH) return true;
     
-    // Method 2: Check tab sections system
-    const contactTabSection = document.querySelector('#contact');
-    if (contactTabSection) {
-      const isTarget = contactTabSection.matches(':target');
-      const hasDisplayBlock = contactTabSection.style.display === 'block';
-      const hasDisplayFlex = contactTabSection.style.display === 'flex';
+    // Check contact section visibility
+    const contactSection = document.querySelector(CONFIG.CONTACT_HASH);
+    if (contactSection) {
+      const isTarget = contactSection.matches(':target');
+      const isDisplayBlock = contactSection.style.display === 'block';
+      const isDisplayFlex = contactSection.style.display === 'flex';
       
-      if (isTarget || hasDisplayBlock || hasDisplayFlex) return true;
+      if (isTarget || isDisplayBlock || isDisplayFlex) return true;
       
-      if (contactTabSection.hasAttribute('data-default') && !window.location.hash) {
+      // Default section with no hash
+      if (contactSection.hasAttribute('data-default') && !window.location.hash) {
         return true;
       }
     }
     
-    // Method 3: Check active tab in tab menu
-    const activeTabLink = document.querySelector('.tab-menu .link--tab.current, .tab-menu .link--tab[aria-current="page"]');
-    if (activeTabLink && activeTabLink.getAttribute('href') === '#contact') {
+    // Active tab link
+    const activeTabLink = document.querySelector(
+      `.tab-menu .link--tab.${CONFIG.ACTIVE_CLASS}, .tab-menu .link--tab[aria-current="page"]`
+    );
+    if (activeTabLink && activeTabLink.getAttribute('href') === CONFIG.CONTACT_HASH) {
       return true;
     }
     
-    // Method 4: Check URL pathname for contact page
+    // URL pathname
     if (window.location.pathname.includes('contact')) return true;
     
     return false;
   }
   
-  // Update contact link active state
+  /**
+   * Update contact link active state
+   * @returns {void}
+   */
   function updateContactActiveState() {
     const isActive = isContactSectionActive();
     
-    console.log('Header: Contact section active?', isActive);
+    contactLink.classList.toggle(CONFIG.ACTIVE_CLASS, isActive);
     
     if (isActive) {
-      contactLink.classList.add('current');
       contactLink.setAttribute('aria-current', 'page');
-      contactLink.style.pointerEvents = 'none';
+      contactLink.classList.add('pointer-events-none');
       startObserver();
     } else {
-      contactLink.classList.remove('current');
       contactLink.removeAttribute('aria-current');
-      contactLink.style.pointerEvents = '';
+      contactLink.classList.remove('pointer-events-none');
       stopObserver();
     }
   }
   
-  // Start MutationObserver for dynamic changes
+  /**
+   * Start MutationObserver for dynamic changes
+   * @returns {void}
+   */
   function startObserver() {
     if (observer || !window.MutationObserver) return;
     
-    const contactSection = document.querySelector('#contact');
+    const contactSection = document.querySelector(CONFIG.CONTACT_HASH);
     if (!contactSection) return;
     
-    observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        if (mutation.type === 'attributes' && 
-            (mutation.attributeName === 'style' || mutation.attributeName === 'class')) {
-          setTimeout(updateContactActiveState, 10);
-        }
-      });
+    observer = new MutationObserver(() => {
+      setTimeout(updateContactActiveState, 10);
     });
     
     observer.observe(contactSection, { 
@@ -237,7 +288,10 @@ function initContactActiveState() {
     });
   }
   
-  // Stop MutationObserver when not needed
+  /**
+   * Stop MutationObserver when not needed
+   * @returns {void}
+   */
   function stopObserver() {
     if (observer) {
       observer.disconnect();
@@ -245,32 +299,39 @@ function initContactActiveState() {
     }
   }
   
-  // Initial check with delay
+  // Initial check
   setTimeout(updateContactActiveState, 100);
   
-  // Listen for hash changes
-  window.addEventListener('hashchange', function() {
+  // Event listeners
+  window.addEventListener('hashchange', () => {
     setTimeout(updateContactActiveState, 10);
   });
   
-  // Listen for tab menu clicks
-  document.addEventListener('click', function(e) {
+  document.addEventListener('click', (e) => {
     const clickedLink = e.target.closest('a[href*="#"]');
     if (clickedLink) {
       setTimeout(updateContactActiveState, 100);
     }
   });
   
-  // Listen for popstate
-  window.addEventListener('popstate', function() {
+  window.addEventListener('popstate', () => {
     setTimeout(updateContactActiveState, 10);
   });
   
-  // Periodic check as fallback
-  setInterval(updateContactActiveState, 2000);
-  
   // Cleanup on unload
   window.addEventListener('beforeunload', stopObserver);
+}
+
+/**
+ * Find contact link element
+ * @returns {HTMLElement|null} Contact link or null
+ */
+function findContactLink() {
+  for (const selector of CONFIG.NAV_LINK_SELECTORS) {
+    const link = document.querySelector(selector);
+    if (link) return link;
+  }
+  return null;
 }
 
 
@@ -278,14 +339,13 @@ function initContactActiveState() {
 // Initialization
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initContactActiveState();
-  console.log('Header organism initialized successfully');
 });
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
 // Charlotte Carpentier · 2025
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

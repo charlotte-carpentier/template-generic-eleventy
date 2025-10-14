@@ -282,7 +282,7 @@ function hideTooltip(tooltip) {
  */
 function handleTooltipResize() {
   hideAllTooltips();
-  positionCache.clear();
+  // WeakMap has no clear() method - cache will auto-cleanup
   
   if (window.innerWidth >= CONFIG.BREAKPOINT) {
     initTooltips();
@@ -295,7 +295,7 @@ function handleTooltipResize() {
  */
 function handleTooltipScroll() {
   hideAllTooltips();
-  positionCache.clear();
+  // WeakMap has no clear() method - cache will auto-cleanup
 }
 
 

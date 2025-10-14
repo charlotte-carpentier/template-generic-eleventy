@@ -1,6 +1,7 @@
 /* ┌─────────────────────────────────────────────────────────┐
    │ ATOM › Error Link                                       │
-   │ Navigation for error page links with fallback           │
+   │ Navigation for error page links with event delegation   │
+   │ Path: src/assets/scripts/components/01-atoms/           │
    └─────────────────────────────────────────────────────────┘ */
 
 /**
@@ -9,85 +10,56 @@
  * @created 2025-01-15
  */
 
+import { goToPreviousPageOrHome } from '../../utils/navigation.js';
+
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Configuration
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const CONFIG = {
+  SELECTOR: '[data-error-link]',
+  ACTION_ATTRIBUTE: 'data-error-link'
+};
+
+
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Core Functions
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
- * Navigate to previous page or home as fallback
- * Used by error page CTA links with onclick handlers
+ * Initialize error link navigation with event delegation
  * @returns {void}
  */
-function goToPreviousPageOrHome() {
-  if (canGoToPreviousPage()) {
-    goToPreviousPage();
-  } else {
-    goToHomePage();
-  }
+export function initErrorLinks() {
+  document.addEventListener('click', handleErrorLinkClick);
 }
 
 /**
- * Check if we can safely go to previous page
- * @returns {boolean} True if safe to navigate back
- */
-function canGoToPreviousPage() {
-  // Check if referrer exists and is not current error page
-  if (!document.referrer) return false;
-  
-  // Avoid navigation loops
-  if (document.referrer === window.location.href) return false;
-  
-  // Avoid going back to other error pages
-  const referrerUrl = new URL(document.referrer);
-  const referrerPath = referrerUrl.pathname;
-  
-  const errorPages = ['/404', '/500', '/maintenance'];
-  if (errorPages.some(errorPage => referrerPath.includes(errorPage))) {
-    return false;
-  }
-  
-  return true;
-}
-
-/**
- * Navigate to previous page
+ * Handle clicks on error navigation links
+ * @param {Event} event - Click event
  * @returns {void}
  */
-function goToPreviousPage() {
-  try {
-    if (window.history.length > 1) {
-      window.history.back();
-    } else {
-      window.location.href = document.referrer;
-    }
-  } catch (error) {
-    console.warn('Failed to navigate back:', error);
-    goToHomePage();
+function handleErrorLinkClick(event) {
+  const errorLink = event.target.closest(CONFIG.SELECTOR);
+  
+  if (!errorLink) return;
+  
+  event.preventDefault();
+  
+  const action = errorLink.getAttribute(CONFIG.ACTION_ATTRIBUTE);
+  
+  if (action === 'back-or-home') {
+    goToPreviousPageOrHome();
   }
-}
-
-/**
- * Navigate to home page
- * @returns {void}
- */
-function goToHomePage() {
-  window.location.href = '/';
 }
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// Export
+// Initialization
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-// Export for external use or testing
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { 
-    goToPreviousPageOrHome, 
-    canGoToPreviousPage, 
-    goToPreviousPage,
-    goToHomePage
-  };
-}
+document.addEventListener('DOMContentLoaded', initErrorLinks);
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
