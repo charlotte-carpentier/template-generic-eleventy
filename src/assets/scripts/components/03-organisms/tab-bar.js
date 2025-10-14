@@ -1,11 +1,12 @@
 /* ┌─────────────────────────────────────────────────────────┐
-   │ ORGANISM › Tab Sections                                 │
+   │ ORGANISM › Tab Bar                                      │
    │ CSS :target navigation with accessibility               │
+   │ Path: src/assets/scripts/components/03-organisms/      │
    └─────────────────────────────────────────────────────────┘ */
 
 /**
  * @fileoverview Tab navigation system using CSS :target selector
- * @module organisms/tab-sections
+ * @module organisms/tab-bar
  * @created 2025-01-15
  */
 
@@ -13,39 +14,45 @@
 // Configuration
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const DEFAULT_HASH = '#portfolio';
+const CONFIG = {
+  DEFAULT_HASH: '#portfolio',
+  DESKTOP_BREAKPOINT: 1024,
+  LIVE_REGION_ID: 'tab-sections-live-region',
+  RESIZE_DEBOUNCE: 150,
+  SCROLL_CURSOR: {
+    TRACK_HEIGHT: 525,
+    THUMB_HEIGHT: 56,
+    KEYBOARD_STEP: 20,
+    KEYBOARD_PAGE_STEP: 100
+  },
+  SELECTORS: {
+    HOME_LAYOUT: '.home-layout',
+    TAB_SECTION: '.tab-section-item',
+    CONTENT: '.tab-sections-content',
+    CURSOR: '.tab-sections-scroll-cursor',
+    THUMB: '#scroll-cursor-thumb',
+    NAV: '.tab-sections-navigation'
+  },
+  LAYOUTS: ['sm', 'md', 'lg', 'xl']
+};
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// Accessibility Helpers
+// Utilities
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
- * Create ARIA live region for section announcements
- * @returns {void}
+ * Debounce function calls
+ * @param {Function} fn - Function to debounce
+ * @param {number} delay - Delay in milliseconds
+ * @returns {Function} Debounced function
  */
-function createLiveRegion() {
-  if (document.getElementById('tab-sections-live-region')) return;
-  
-  const liveRegion = document.createElement('div');
-  liveRegion.id = 'tab-sections-live-region';
-  liveRegion.setAttribute('aria-live', 'polite');
-  liveRegion.setAttribute('aria-atomic', 'true');
-  liveRegion.className = 'sr-only absolute -left-[10000px] w-1 h-1 overflow-hidden';
-  document.body.appendChild(liveRegion);
-}
-
-/**
- * Announce section changes to screen readers
- * @param {string} sectionId - Section identifier
- * @returns {void}
- */
-function announceSection(sectionId) {
-  const liveRegion = document.getElementById('tab-sections-live-region');
-  const sectionName = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
-  if (liveRegion) {
-    liveRegion.textContent = `Section ${sectionName} activated`;
-  }
+function debounce(fn, delay) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn.apply(this, args), delay);
+  };
 }
 
 
@@ -58,9 +65,11 @@ function announceSection(sectionId) {
  * @returns {string} Active layout identifier
  */
 function getCurrentActiveLayout() {
-  if (!document.querySelector('.home-layout')) return 'standalone';
+  if (!document.querySelector(CONFIG.SELECTORS.HOME_LAYOUT)) {
+    return 'standalone';
+  }
 
-  return ['sm', 'md', 'lg', 'xl'].find(layout => {
+  return CONFIG.LAYOUTS.find(layout => {
     const el = document.querySelector(`.home-layout__${layout}`);
     return el && window.getComputedStyle(el).display !== 'none';
   }) || 'standalone';
@@ -74,30 +83,52 @@ function getSelectors() {
   const activeLayout = getCurrentActiveLayout();
   let prefix = '';
   
-  if (activeLayout === 'sm') {
-    prefix = '.home-layout__sm ';
-  } else if (activeLayout === 'md') {
-    prefix = '.home-layout__md ';
-  } else if (activeLayout === 'lg') {
-    prefix = '.home-layout__lg ';
-  } else if (activeLayout === 'xl') {
-    prefix = '.home-layout__xl ';
+  if (activeLayout !== 'standalone') {
+    prefix = `.home-layout__${activeLayout} `;
   }
 
   return {
-    allSections: `${prefix}.tab-section-item`,
+    allSections: `${prefix}${CONFIG.SELECTORS.TAB_SECTION}`,
     navLinks: `${prefix}.header-navigation .link--nav, ${prefix}.header-mobile-overlay .link--tab, ${prefix}.tab-menu .link--tab, #mobile-overlay .link--tab`,
-    contentContainer: `${prefix}.tab-sections-content`,
-    scrollCursor: `${prefix}.tab-sections-scroll-cursor`,
-    scrollThumb: `${prefix}#scroll-cursor-thumb`,
-    tabNavigation: `${prefix}.tab-sections-navigation`
+    contentContainer: `${prefix}${CONFIG.SELECTORS.CONTENT}`,
+    scrollCursor: `${prefix}${CONFIG.SELECTORS.CURSOR}`,
+    scrollThumb: `${prefix}${CONFIG.SELECTORS.THUMB}`,
+    tabNavigation: `${prefix}${CONFIG.SELECTORS.NAV}`
   };
 }
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// ARIA Setup
+// Accessibility
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Create ARIA live region for section announcements
+ * @returns {void}
+ */
+function createLiveRegion() {
+  if (document.getElementById(CONFIG.LIVE_REGION_ID)) return;
+  
+  const liveRegion = document.createElement('div');
+  liveRegion.id = CONFIG.LIVE_REGION_ID;
+  liveRegion.setAttribute('aria-live', 'polite');
+  liveRegion.setAttribute('aria-atomic', 'true');
+  liveRegion.className = 'sr-only absolute -left-[10000px] w-1 h-1 overflow-hidden';
+  document.body.appendChild(liveRegion);
+}
+
+/**
+ * Announce section changes to screen readers
+ * @param {string} sectionId - Section identifier
+ * @returns {void}
+ */
+function announceSection(sectionId) {
+  const liveRegion = document.getElementById(CONFIG.LIVE_REGION_ID);
+  if (liveRegion) {
+    const sectionName = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
+    liveRegion.textContent = `Section ${sectionName} activated`;
+  }
+}
 
 /**
  * Setup ARIA attributes for tab navigation
@@ -112,7 +143,7 @@ function setupTabAria() {
     navContainer.setAttribute('aria-label', 'Navigation sections');
   }
 
-  document.querySelectorAll(navLinks).forEach((link, index) => {
+  document.querySelectorAll(navLinks).forEach(link => {
     link.setAttribute('role', 'tab');
     link.setAttribute('aria-selected', 'false');
     link.setAttribute('tabindex', '-1');
@@ -150,7 +181,7 @@ function setupSectionAria() {
  * @returns {void}
  */
 function updateCurrentLinks() {
-  const currentHash = window.location.hash || DEFAULT_HASH;
+  const currentHash = window.location.hash || CONFIG.DEFAULT_HASH;
   const { navLinks } = getSelectors();
 
   document.querySelectorAll(navLinks).forEach(link => {
@@ -167,18 +198,16 @@ function updateCurrentLinks() {
  * @returns {void}
  */
 function updateSections() {
-  const hash = window.location.hash || DEFAULT_HASH;
+  const hash = window.location.hash || CONFIG.DEFAULT_HASH;
   const { allSections } = getSelectors();
   let activeSection = null;
 
   const sections = document.querySelectorAll(allSections);
-  if (sections.length === 0) {
-    console.warn('No sections found with selector:', allSections);
-  }
 
   sections.forEach(section => {
     const isDefault = section.hasAttribute('data-default');
-    const shouldShow = hash === `#${section.id}` || (isDefault && (hash === DEFAULT_HASH || !window.location.hash));
+    const shouldShow = hash === `#${section.id}` || 
+                      (isDefault && (hash === CONFIG.DEFAULT_HASH || !window.location.hash));
     
     if (shouldShow) {
       section.style.display = 'block';
@@ -267,7 +296,7 @@ function updateScrollCursor() {
   if (!contentEl || !cursorEl || !thumbEl) return;
 
   const contentOverflows = contentEl.scrollHeight > contentEl.clientHeight;
-  const isDesktop = window.innerWidth >= 1024;
+  const isDesktop = window.innerWidth >= CONFIG.DESKTOP_BREAKPOINT;
   
   if (isDesktop && contentOverflows) {
     cursorEl.style.opacity = '1';
@@ -277,6 +306,7 @@ function updateScrollCursor() {
     cursorEl.style.opacity = '0';
     cursorEl.style.visibility = 'hidden';
     cursorEl.setAttribute('aria-hidden', 'true');
+    return;
   }
 
   // Configure accessibility attributes
@@ -288,9 +318,7 @@ function updateScrollCursor() {
   // Calculate thumb position
   function updateThumbPosition() {
     const scrollRatio = contentEl.scrollTop / (contentEl.scrollHeight - contentEl.clientHeight);
-    const trackHeight = 525;
-    const thumbHeight = 56;
-    const maxThumbTop = trackHeight - thumbHeight;
+    const maxThumbTop = CONFIG.SCROLL_CURSOR.TRACK_HEIGHT - CONFIG.SCROLL_CURSOR.THUMB_HEIGHT;
     
     const thumbTop = scrollRatio * maxThumbTop;
     thumbEl.style.top = `${thumbTop}px`;
@@ -302,21 +330,19 @@ function updateScrollCursor() {
     thumbEl.setAttribute('aria-valuetext', `${percentage}% scrolled`);
   }
 
-  // Drag variables
+  // Drag state
   let isDragging = false;
   let startY = 0;
   let startThumbTop = 0;
   
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const speedMultiplier = prefersReducedMotion ? 1 : 1;
+  const speedMultiplier = prefersReducedMotion ? 0.5 : 1;
   
   thumbEl.style.cursor = 'grab';
   
   // Keyboard support
   thumbEl.addEventListener('keydown', (e) => {
-    const trackHeight = 525;
-    const thumbHeight = 56;
-    const maxThumbTop = trackHeight - thumbHeight;
+    const maxThumbTop = CONFIG.SCROLL_CURSOR.TRACK_HEIGHT - CONFIG.SCROLL_CURSOR.THUMB_HEIGHT;
     const contentHeight = contentEl.scrollHeight - contentEl.clientHeight;
     const currentThumbTop = parseInt(thumbEl.style.top) || 0;
     
@@ -324,16 +350,16 @@ function updateScrollCursor() {
     
     switch(e.key) {
       case 'ArrowUp':
-        newThumbTop = Math.max(0, currentThumbTop - 20);
+        newThumbTop = Math.max(0, currentThumbTop - CONFIG.SCROLL_CURSOR.KEYBOARD_STEP);
         break;
       case 'ArrowDown':
-        newThumbTop = Math.min(maxThumbTop, currentThumbTop + 20);
+        newThumbTop = Math.min(maxThumbTop, currentThumbTop + CONFIG.SCROLL_CURSOR.KEYBOARD_STEP);
         break;
       case 'PageUp':
-        newThumbTop = Math.max(0, currentThumbTop - 100);
+        newThumbTop = Math.max(0, currentThumbTop - CONFIG.SCROLL_CURSOR.KEYBOARD_PAGE_STEP);
         break;
       case 'PageDown':
-        newThumbTop = Math.min(maxThumbTop, currentThumbTop + 100);
+        newThumbTop = Math.min(maxThumbTop, currentThumbTop + CONFIG.SCROLL_CURSOR.KEYBOARD_PAGE_STEP);
         break;
       case 'Home':
         newThumbTop = 0;
@@ -353,6 +379,7 @@ function updateScrollCursor() {
     updateThumbPosition();
   });
   
+  // Mouse drag
   thumbEl.addEventListener('mousedown', (e) => {
     isDragging = true;
     thumbEl.style.cursor = 'grabbing';
@@ -364,6 +391,7 @@ function updateScrollCursor() {
     e.stopPropagation();
   });
 
+  // Focus styles
   thumbEl.addEventListener('focus', () => {
     thumbEl.style.outline = '2px solid #4a7c59';
     thumbEl.style.outlineOffset = '2px';
@@ -373,12 +401,14 @@ function updateScrollCursor() {
     thumbEl.style.outline = 'none';
   });
 
+  // Content scroll sync
   contentEl.addEventListener('scroll', () => {
     if (!isDragging) {
       updateThumbPosition();
     }
-  });
+  }, { passive: true });
 
+  // Document mouse move
   document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
     
@@ -386,9 +416,7 @@ function updateScrollCursor() {
     const adjustedDelta = deltaY * speedMultiplier;
     const newThumbTop = startThumbTop + adjustedDelta;
     
-    const trackHeight = 525;
-    const thumbHeight = 56;
-    const maxThumbTop = trackHeight - thumbHeight;
+    const maxThumbTop = CONFIG.SCROLL_CURSOR.TRACK_HEIGHT - CONFIG.SCROLL_CURSOR.THUMB_HEIGHT;
     const clampedThumbTop = Math.max(0, Math.min(newThumbTop, maxThumbTop));
     
     thumbEl.style.top = `${clampedThumbTop}px`;
@@ -401,6 +429,7 @@ function updateScrollCursor() {
     updateThumbPosition();
   });
 
+  // Document mouse up
   document.addEventListener('mouseup', () => {
     if (isDragging) {
       isDragging = false;
@@ -416,18 +445,13 @@ function updateScrollCursor() {
 // Resize Handler
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-let resizeTimeout;
-
 /**
  * Handle window resize with debounce
  * @returns {void}
  */
 function handleResize() {
-  clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(() => {
-    updateCurrentLinks();
-    updateSections();
-  }, 150);
+  updateCurrentLinks();
+  updateSections();
 }
 
 
@@ -435,10 +459,14 @@ function handleResize() {
 // Initialization
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-document.addEventListener('DOMContentLoaded', () => {
+/**
+ * Initialize tab bar navigation system
+ * @returns {void}
+ */
+export function initTabBar() {
   // Initialize default hash
   if (!window.location.hash) {
-    window.location.hash = DEFAULT_HASH;
+    window.location.hash = CONFIG.DEFAULT_HASH;
   }
 
   createLiveRegion();
@@ -454,10 +482,8 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSections();
   });
 
-  window.addEventListener('resize', handleResize);
-
-  console.log('Tab navigation with enhanced accessibility ready');
-});
+  window.addEventListener('resize', debounce(handleResize, CONFIG.RESIZE_DEBOUNCE));
+}
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

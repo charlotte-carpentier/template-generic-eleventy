@@ -29,6 +29,7 @@
     - Conditional header/footer rendering
     - Semantic HTML5 structure
     - Screen reader optimizations
+    - Optimized JavaScript loading (ES modules with conditional imports)
 
   Accessibility:
     - Semantic HTML5 structure (<header>, <main>, <footer>)
@@ -95,9 +96,6 @@
     <meta name="twitter:image" content="{{ site.url }}{{ site.socialImage | default('/assets/images/social-share.jpg') }}">
 
     {# ----- Fonts ----- #}
-    {# TODO: Configure your Google Fonts in src/_data/site.json
-       Example: "fonts": { "google": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" }
-       See: https://fonts.google.com/ #}
     {% if site.fonts.preconnect %}
       <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="anonymous"/>
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
@@ -107,9 +105,6 @@
     {% endif %}
 
     {# ----- Image preload (optional) ----- #}
-    {# TODO: Add critical images to preload for better LCP (Largest Contentful Paint)
-       Configure in src/_data/site.json under "preloadImages": ["path/to/hero.jpg", ...]
-       See: https://web.dev/preload-critical-assets/ #}
     {% if site.preloadImages %}
       {% for image in site.preloadImages %}
         <link rel="preload" as="image" href="{{ image }}">
@@ -122,9 +117,6 @@
     {# ----- Stylesheets ----- #}
     <link rel="stylesheet" href="/output.css"/>
 
-    {# TODO: Configure icon library in src/_data/site.json if needed
-       Example: "iconLibrary": { "fontAwesome": true }
-       Note: Consider using SVG sprites instead for better performance #}
     {% if site.iconLibrary.fontAwesome %}
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     {% endif %}
@@ -134,10 +126,6 @@
     <meta name="theme-color" content="{{ site.themeColor | default('#ffffff') }}"/>
 
     {# ----- Cookie Consent (Axeptio integration) ----- #}
-    {# TODO: Configure cookie consent in src/_data/site.json
-       Example: "cookieConsent": { "provider": "axeptio", "clientId": "YOUR_CLIENT_ID", "cookiesVersion": "YOUR_DOMAIN-REGION" }
-       Get your credentials at: https://admin.axeptio.eu/
-       Note: This setup includes Google Consent Mode v2 compliance #}
     {% if site.cookieConsent.provider === "axeptio" and site.cookieConsent.clientId %}
       <script>
         window.axeptioSettings = {
@@ -165,17 +153,12 @@
     {% endif %}
 
     {# ----- Google Analytics 4 (with Consent Mode v2) ----- #}
-    {# TODO: Configure Google Analytics in src/_data/site.json
-       Example: "analytics": { "ga4": "G-XXXXXXXXXX" }
-       Get your measurement ID at: https://analytics.google.com/
-       See: https://developers.google.com/tag-platform/devguides/consent #}
     {% if site.analytics.ga4 %}
       <script async="async" src="https://www.googletagmanager.com/gtag/js?id={{ site.analytics.ga4 }}"></script>
       <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
 
-        // Initialize GA4 (consent managed by cookie consent provider)
         gtag('js', new Date());
         gtag('config', '{{ site.analytics.ga4 }}', {
           anonymize_ip: true,
@@ -208,17 +191,11 @@
 
     {% endif %}
 
-    {# ----- JavaScript scripts ----- #}
-    <script src="/assets/js/main.js" defer="defer"></script>
-    <script src="/assets/js/components/01-atoms/error-link.js" defer="defer"></script>
-    <script src="/assets/js/components/02-molecules/caption.js" defer="defer"></script>
-    <script src="/assets/js/components/03-organisms/error-fragment-group.js" defer="defer"></script>
-    <script src="/assets/js/components/03-organisms/error-layout.js" defer="defer"></script>
-    <script src="/assets/js/components/03-organisms/header.js" defer="defer"></script>
+    {# ----- JavaScript scripts (optimized loading) ----- #}
+    {# Main bundled script with conditional component loading #}
+    <script src="/assets/scripts/main.js" type="module" defer></script>
 
     {# ----- Netlify Identity redirect (for Decap CMS login) ----- #}
-    {# This script redirects users to /admin/ after login via Netlify Identity
-       See: https://decapcms.org/docs/add-to-your-site/#enable-identity-and-git-gateway #}
     <script>
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", (user) => {
