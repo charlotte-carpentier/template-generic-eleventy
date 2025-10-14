@@ -1,6 +1,7 @@
 /* ┌─────────────────────────────────────────────────────────┐
    │ MOLECULE › Caption                                      │
    │ Desktop tooltip with smart positioning                  │
+   │ Path: src/assets/scripts/components/02-molecules/       │
    └─────────────────────────────────────────────────────────┘ */
 
 /**
@@ -13,15 +14,42 @@
 // Configuration
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const TOOLTIP_BREAKPOINT = 1024;
-const VIEWPORT_MARGIN = 20;
-const CURSOR_OFFSET = 15;
+const CONFIG = {
+  BREAKPOINT: 1024,
+  VIEWPORT_MARGIN: 20,
+  CURSOR_OFFSET: 15,
+  CONTAINER_SELECTOR: '.caption-container',
+  TOOLTIP_SELECTOR: '.tooltip-popup',
+  AVATAR_CLASS: 'avatar-tooltip-container',
+  TOOLTIP_OFFSET_Y: 68,
+  TOOLTIP_OFFSET_ABOVE: 4,
+  HIDE_TRANSITION_DELAY: 300,
+  CACHE_TTL: 100,
+  RESIZE_DEBOUNCE: 150
+};
 
-// Cache for DOM measurements to avoid repeated getBoundingClientRect calls
+// Cache for DOM measurements
 const positionCache = new WeakMap();
-
-// Store timeout IDs to prevent accumulation
 const hideTimeouts = new WeakMap();
+
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Utilities
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Debounce function calls
+ * @param {Function} fn - Function to debounce
+ * @param {number} delay - Delay in milliseconds
+ * @returns {Function} Debounced function
+ */
+function debounce(fn, delay) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -32,13 +60,13 @@ const hideTimeouts = new WeakMap();
  * Initialize tooltips for desktop devices only
  * @returns {void}
  */
-function initTooltips() {
-  if (window.innerWidth < TOOLTIP_BREAKPOINT) return;
+export function initTooltips() {
+  if (window.innerWidth < CONFIG.BREAKPOINT) return;
   
-  const captionContainers = document.querySelectorAll('.caption-container');
+  const captionContainers = document.querySelectorAll(CONFIG.CONTAINER_SELECTOR);
   
   captionContainers.forEach(container => {
-    const tooltip = container.querySelector('.tooltip-popup');
+    const tooltip = container.querySelector(CONFIG.TOOLTIP_SELECTOR);
     if (!tooltip) return;
     
     setupTooltipAria(tooltip, container);
@@ -67,7 +95,7 @@ function setupTooltipAria(tooltip, container) {
  * @returns {void}
  */
 function attachTooltipEvents(tooltip, container) {
-  const isAvatarTooltip = container.classList.contains('avatar-tooltip-container');
+  const isAvatarTooltip = container.classList.contains(CONFIG.AVATAR_CLASS);
   
   if (isAvatarTooltip) {
     container.addEventListener('mouseenter', () => showTooltip(tooltip, container));
@@ -105,23 +133,23 @@ function trackCursorForAvatarTooltip(tooltip, event) {
   const cursorX = event.clientX;
   const cursorY = event.clientY;
   
-  let tooltipX = cursorX + CURSOR_OFFSET;
-  let tooltipY = cursorY + CURSOR_OFFSET;
+  let tooltipX = cursorX + CONFIG.CURSOR_OFFSET;
+  let tooltipY = cursorY + CONFIG.CURSOR_OFFSET;
   
   const tooltipRect = tooltip.getBoundingClientRect();
   
   // Check horizontal overflow
-  if (tooltipX + tooltipRect.width > viewportWidth - VIEWPORT_MARGIN) {
-    tooltipX = cursorX - tooltipRect.width - CURSOR_OFFSET;
+  if (tooltipX + tooltipRect.width > viewportWidth - CONFIG.VIEWPORT_MARGIN) {
+    tooltipX = cursorX - tooltipRect.width - CONFIG.CURSOR_OFFSET;
   }
   
   // Check vertical overflow
-  if (tooltipY + tooltipRect.height > viewportHeight - VIEWPORT_MARGIN) {
-    tooltipY = cursorY - tooltipRect.height - CURSOR_OFFSET;
+  if (tooltipY + tooltipRect.height > viewportHeight - CONFIG.VIEWPORT_MARGIN) {
+    tooltipY = cursorY - tooltipRect.height - CONFIG.CURSOR_OFFSET;
   }
   
-  tooltip.style.left = tooltipX + 'px';
-  tooltip.style.top = tooltipY + 'px';
+  tooltip.style.left = `${tooltipX}px`;
+  tooltip.style.top = `${tooltipY}px`;
   tooltip.style.transform = 'none';
 }
 
@@ -132,7 +160,7 @@ function trackCursorForAvatarTooltip(tooltip, event) {
  * @returns {void}
  */
 function showTooltip(tooltip, container) {
-  if (window.innerWidth < TOOLTIP_BREAKPOINT) return;
+  if (window.innerWidth < CONFIG.BREAKPOINT) return;
   
   hideAllTooltips();
   
@@ -142,7 +170,7 @@ function showTooltip(tooltip, container) {
     document.body.appendChild(tooltip);
   }
   
-  const isAvatarTooltip = container.classList.contains('avatar-tooltip-container');
+  const isAvatarTooltip = container.classList.contains(CONFIG.AVATAR_CLASS);
   
   if (isAvatarTooltip) {
     tooltip.style.position = 'fixed';
@@ -165,15 +193,15 @@ function positionRegularTooltip(tooltip, container) {
   if (!containerRect) {
     containerRect = container.getBoundingClientRect();
     positionCache.set(container, containerRect);
-    setTimeout(() => positionCache.delete(container), 100);
+    setTimeout(() => positionCache.delete(container), CONFIG.CACHE_TTL);
   }
   
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
   
   tooltip.style.position = 'fixed';
-  tooltip.style.top = (containerRect.top + 68) + 'px';
-  tooltip.style.left = (containerRect.left + containerRect.width / 2) + 'px';
+  tooltip.style.top = `${containerRect.top + CONFIG.TOOLTIP_OFFSET_Y}px`;
+  tooltip.style.left = `${containerRect.left + containerRect.width / 2}px`;
   tooltip.style.transform = 'translateX(-50%)';
   tooltip.style.zIndex = '1000';
   
@@ -184,17 +212,17 @@ function positionRegularTooltip(tooltip, container) {
     const tooltipRect = tooltip.getBoundingClientRect();
     
     // Check vertical overflow
-    if (tooltipRect.bottom > viewportHeight - VIEWPORT_MARGIN) {
-      const newTop = containerRect.top - tooltipRect.height - 4;
-      tooltip.style.top = newTop + 'px';
+    if (tooltipRect.bottom > viewportHeight - CONFIG.VIEWPORT_MARGIN) {
+      const newTop = containerRect.top - tooltipRect.height - CONFIG.TOOLTIP_OFFSET_ABOVE;
+      tooltip.style.top = `${newTop}px`;
     }
     
     // Check horizontal overflow
-    if (tooltipRect.left < VIEWPORT_MARGIN) {
-      tooltip.style.left = containerRect.left + 'px';
+    if (tooltipRect.left < CONFIG.VIEWPORT_MARGIN) {
+      tooltip.style.left = `${containerRect.left}px`;
       tooltip.style.transform = 'translateX(0)';
-    } else if (tooltipRect.right > viewportWidth - VIEWPORT_MARGIN) {
-      tooltip.style.left = containerRect.right + 'px';
+    } else if (tooltipRect.right > viewportWidth - CONFIG.VIEWPORT_MARGIN) {
+      tooltip.style.left = `${containerRect.right}px`;
       tooltip.style.transform = 'translateX(-100%)';
     }
   });
@@ -205,7 +233,7 @@ function positionRegularTooltip(tooltip, container) {
  * @returns {void}
  */
 function hideAllTooltips() {
-  const allTooltips = document.querySelectorAll('.tooltip-popup');
+  const allTooltips = document.querySelectorAll(CONFIG.TOOLTIP_SELECTOR);
   allTooltips.forEach(tooltip => {
     tooltip.style.opacity = '0';
     tooltip.style.visibility = 'hidden';
@@ -238,7 +266,7 @@ function hideTooltip(tooltip) {
       tooltip.style.zIndex = '';
     }
     hideTimeouts.delete(tooltip);
-  }, 300);
+  }, CONFIG.HIDE_TRANSITION_DELAY);
   
   hideTimeouts.set(tooltip, timeoutId);
 }
@@ -256,7 +284,7 @@ function handleTooltipResize() {
   hideAllTooltips();
   positionCache.clear();
   
-  if (window.innerWidth >= TOOLTIP_BREAKPOINT) {
+  if (window.innerWidth >= CONFIG.BREAKPOINT) {
     initTooltips();
   }
 }
@@ -276,13 +304,8 @@ function handleTooltipScroll() {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 document.addEventListener('DOMContentLoaded', initTooltips);
-window.addEventListener('resize', handleTooltipResize);
-window.addEventListener('scroll', handleTooltipScroll);
-
-// Export for testing
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { initTooltips, showTooltip, hideTooltip };
-}
+window.addEventListener('resize', debounce(handleTooltipResize, CONFIG.RESIZE_DEBOUNCE));
+window.addEventListener('scroll', handleTooltipScroll, { passive: true });
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
