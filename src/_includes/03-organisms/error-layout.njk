@@ -34,6 +34,7 @@
 {% macro renderErrorLayout(options) %}
   {# Import sub-components #}
   {% from "03-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
+  {% from "02-molecules/error-fragment.njk" import renderErrorFragment %}
   {% from "01-atoms/heading.njk" import renderHeading %}
   {% from "01-atoms/button.njk" import renderButton %}
   {% from "01-atoms/link.njk" import renderLink %}
@@ -197,8 +198,6 @@
                   data-fragment-mobile-item
                   data-fragment-index="{{ loop.index }}"
                 >
-                  {% from "02-molecules/error-fragment.njk" import renderErrorFragment %}
-                  
                   {# Fragment 6 clickable logic #}
                   {% set isFragment6 = loop.index == 6 %}
                   {% if isFragment6 and not groupData.disableFragment6Click %}

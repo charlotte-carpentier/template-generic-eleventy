@@ -9,17 +9,21 @@
     - options.datas (object): Select configuration data
     - options.disabled (boolean): Override disabled state
     - options.ariaLabel (string): Override aria-label
+    - options.iconDatas (array): Icon atom data for dropdown arrow
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/select.njk" import renderSelect %}
 
     {{ renderSelect({
         name: "demoSelect1",
-        datas: atoms.select.selects
+        datas: atoms.select.selects,
+        iconDatas: atoms.icon.icons
     }) }}
 
   @created 2025-01-15
 #}
+
+{% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderSelect(options) %}
   {# Validate required props #}
@@ -61,11 +65,28 @@
           {% endif %}
         </select>
 
-        {# TODO: Replace with icon atom when available #}
+        {# Dropdown arrow icon - Use icon atom if available, fallback to SVG #}
         <div data-select-arrow aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-          </svg>
+          {% if options.iconDatas %}
+            {# Try to find a chevron/caret down icon #}
+            {% set arrowIcon = options.iconDatas | findByName('demoRight1') %}
+            {% if arrowIcon %}
+              {{ renderIcon({ 
+                  name: 'demoRight1', 
+                  datas: options.iconDatas 
+              }) }}
+            {% else %}
+              {# Fallback to inline SVG if no suitable icon found #}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+              </svg>
+            {% endif %}
+          {% else %}
+            {# Fallback to inline SVG #}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+            </svg>
+          {% endif %}
         </div>
       </div>
     {% endif %}
