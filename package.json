@@ -9,7 +9,7 @@
     "build:css": "postcss src/assets/styles/input.css -o public/output.css",
     "watch:css": "postcss src/assets/styles/input.css -o public/output.css -w",
     "start": "npx concurrently \"npm run watch:css\" \"eleventy --serve --watch\"",
-    "build": "cross-env NODE_ENV=production npm run build:css && eleventy",
+    "build": "cross-env NODE_ENV=production npm run build:css && eleventy && node src/assets/scripts/utils/update-sitemap.js",
     "sprites": "./scripts/generate-sprite.sh",
     "lint:css": "stylelint 'src/assets/styles/**/*.css'",
     "lint": "npm run lint:css"
