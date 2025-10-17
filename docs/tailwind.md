@@ -163,6 +163,183 @@ Output: `public/output.css` (auto-included in `base.njk`)
 
 ---
 
+## CSS Integration Conventions
+
+### Strategy Overview
+
+**90% Tailwind utilities** applied directly in `.njk` templates  
+**10% Custom CSS** only when Tailwind is insufficient
+
+### Component Structure
+
+Each component follows the OMA pattern:
+
+```
+Component Example: button
+├── src/_data/atoms/button.json          # Content data
+├── src/_includes/01-atoms/button.njk    # Presentation (macro with Tailwind classes)
+├── src/assets/scripts/components/01-atoms/button.js    # Interactions (optional)
+└── src/assets/styles/01-atoms/button.css               # Custom CSS (rare, only if needed)
+```
+
+### Class Organization in Templates
+
+**Use Nunjucks variables for common classes:**
+
+```njk
+{% macro renderButton(label, variant) %}
+  {% set baseClasses = "inline-flex items-center px-6 py-3 font-semibold rounded-lg transition-colors" %}
+  {% set variantClasses = "" %}
+  
+  {% if variant == 'primary' %}
+    {% set variantClasses = "bg-[var(--color-button-primary)] hover:bg-[var(--color-button-primary-hover)] text-white" %}
+  {% elif variant == 'secondary' %}
+    {% set variantClasses = "bg-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover)] text-white" %}
+  {% endif %}
+  
+  <button class="{{ baseClasses }} {{ variantClasses }}">
+    {{ label }}
+  </button>
+{% endmacro %}
+```
+
+### Class Order Standard
+
+For readability and maintainability, follow this order:
+
+1. **Layout** - `flex`, `grid`, `block`, `inline-flex`
+2. **Positioning** - `absolute`, `relative`, `top-*`, `left-*`
+3. **Sizing** - `w-*`, `h-*`, `min-*`, `max-*`
+4. **Spacing** - `p-*`, `m-*`, `gap-*`
+5. **Typography** - `text-*`, `font-*`, `leading-*`
+6. **Colors** - `bg-*`, `text-*`, `border-color-*`
+7. **Borders** - `border-*`, `rounded-*`
+8. **Effects** - `shadow-*`, `opacity-*`, `transition-*`
+9. **Responsive** - `md:*`, `lg:*`, `xl:*`
+10. **States** - `hover:*`, `focus:*`, `active:*`, `disabled:*`
+
+**Example:**
+
+```html
+<button class="inline-flex items-center px-6 py-3 font-semibold text-white bg-[var(--color-button-primary)] rounded-lg shadow-md transition-colors md:px-8 hover:bg-[var(--color-button-primary-hover)] focus:ring-2">
+```
+
+**Automation:** Use Prettier with `prettier-plugin-tailwindcss` to auto-sort classes.
+
+### Variant Management
+
+**JSON (data)** - Store variant type only:
+
+```json
+{
+  "buttons": [{
+    "name": "cta",
+    "label": "Get Started",
+    "variant": "primary"
+  }]
+}
+```
+
+**Macro (presentation)** - Map variants to classes:
+
+```njk
+{% if variant == 'primary' %}
+  {% set variantClasses = "bg-[var(--color-button-primary)] hover:bg-[var(--color-button-primary-hover)]" %}
+{% elif variant == 'secondary' %}
+  {% set variantClasses = "bg-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover)]" %}
+{% endif %}
+```
+
+**Never** pass CSS classes as data in JSON.
+
+### Custom CSS (Rare Cases)
+
+Only create custom CSS when Tailwind utilities are insufficient:
+
+- Complex `@keyframes` animations
+- CSS `:target` navigation
+- Pseudo-elements (`::-webkit-scrollbar`, `::before`, `::after`)
+- Advanced selectors impossible with Tailwind
+
+**File structure:**
+
+```
+src/assets/styles/
+├── input.css                           # Main entry (imports components)
+├── 01-atoms/
+│   └── custom-scrollbar.css           # Only if needed
+├── 02-molecules/
+│   └── card-animation.css             # Only if needed
+└── 03-organisms/
+    └── error-layout.css               # Only if needed
+```
+
+**Import in `input.css`:**
+
+```css
+/* Custom Styles - Import individually by component */
+
+/* Organisms */
+@import "./03-organisms/error-layout.css";
+
+/* Molecules */
+@import "./02-molecules/card-animation.css";
+
+/* Atoms */
+@import "./01-atoms/custom-scrollbar.css";
+```
+
+**Use BEM naming:**
+
+```css
+/* error-layout.css */
+.error-layout { }
+.error-layout__header { }
+.error-layout__section--active { }
+```
+
+### Design Tokens Usage
+
+Always use design tokens from `@theme`:
+
+```html
+<!-- Colors -->
+<div class="bg-[var(--color-button-primary)]">
+
+<!-- Spacing -->
+<div class="p-[var(--spacing-component-padding)]">
+
+<!-- Border radius -->
+<div class="rounded-[var(--radius-button)]">
+
+<!-- Shadows -->
+<div class="shadow-[var(--elevation-card)]">
+```
+
+### Tools Setup
+
+Install Prettier plugin for automatic class sorting:
+
+```bash
+npm install -D prettier prettier-plugin-tailwindcss
+```
+
+`.prettierrc`:
+
+```json
+{
+  "plugins": ["prettier-plugin-tailwindcss"]
+}
+```
+
+---
+
+**See also:**
+- [Coding Style Guide](./coding-style.md) - General conventions
+- [Code Examples](./examples.md) - Complete component examples
+
+---
+
 ## TailwindCSS v4 Key Features
 
 **New in v4:**
