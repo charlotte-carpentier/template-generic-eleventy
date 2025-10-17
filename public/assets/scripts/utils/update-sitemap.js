@@ -4,19 +4,20 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 /**
- * @fileoverview Automated sitemap date updater
+ * @fileoverview Automated sitemap date updater for build process
  * @module utils/update-sitemap
  * @created 2025-01-15
+ * @updated 2025-10-17
  */
 
-import fs from 'fs';
+import { readFile, writeFile } from 'fs/promises';
 import path from 'path';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Configuration
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const SITEMAP_PATH = path.resolve(process.cwd(), 'src/sitemap.xml');
+const DEFAULT_SITEMAP_PATH = 'src/sitemap.xml';
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -24,38 +25,32 @@ const SITEMAP_PATH = path.resolve(process.cwd(), 'src/sitemap.xml');
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
- * Update sitemap lastmod dates
- * @returns {void}
+ * Update sitemap lastmod dates to current date
+ * @param {string} [sitemapPath] - Path to sitemap file
+ * @returns {Promise<void>}
  */
-function updateSitemap() {
-  console.log(`Sitemap path: ${SITEMAP_PATH}`);
-  
+export async function updateSitemap(sitemapPath = DEFAULT_SITEMAP_PATH) {
+  const fullPath = path.resolve(process.cwd(), sitemapPath);
   const currentDate = new Date().toISOString().split('T')[0];
   
-  fs.readFile(SITEMAP_PATH, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading sitemap.xml:', err);
-      return;
-    }
+  console.log(`Updating sitemap: ${fullPath}`);
+  
+  try {
+    const data = await readFile(fullPath, 'utf8');
+    console.log('✓ Sitemap file loaded');
     
-    console.log('Original sitemap content loaded');
-    
-    // Replace all lastmod tags with current date
     const updatedData = data.replace(
       /<lastmod>.*?<\/lastmod>/g,
       `<lastmod>${currentDate}</lastmod>`
     );
     
-    console.log('Sitemap updated with current date');
+    await writeFile(fullPath, updatedData, 'utf8');
+    console.log(`✓ Sitemap updated: ${currentDate}`);
     
-    fs.writeFile(SITEMAP_PATH, updatedData, 'utf8', (err) => {
-      if (err) {
-        console.error('Error saving sitemap.xml:', err);
-        return;
-      }
-      console.log(`✓ Sitemap updated successfully with date: ${currentDate}`);
-    });
-  });
+  } catch (error) {
+    console.error('✗ Error updating sitemap:', error.message);
+    throw error;
+  }
 }
 
 
@@ -63,4 +58,15 @@ function updateSitemap() {
 // Execution
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-updateSitemap();
+if (import.meta.url === `file://${process.argv[1]}`) {
+  updateSitemap().catch(error => {
+    console.error('Fatal error:', error);
+    process.exit(1);
+  });
+}
+
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// May your bugs be forever exiled to the shadow realm ✦
+// Charlotte Carpentier · 2025
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -35,6 +35,7 @@
     }) }}
 
   @created 2025-01-15
+  @updated 2025-01-17 - Added Tailwind CSS styles (Phase 4)
 #}
 
 {% from "01-atoms/icon.njk" import renderIcon %}
@@ -63,9 +64,62 @@
       {% set hasIcon = buttonData.iconName %}
       {% set iconPosition = buttonData.iconPosition | default('left') %}
 
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         CSS Classes - Tailwind Utilities
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# Base classes - Common to all buttons
+         Layout, typography, transitions, focus states (WCAG 2.2 AA compliant) #}
+      {% set baseClasses = "inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+
+      {# Size classes - Padding and text size
+         Based on Material Design standards + WCAG 44px minimum touch target #}
+      {% set sizeClasses = "" %}
+      {% if buttonData.size == 'small' %}
+        {% set sizeClasses = "px-4 py-2 text-sm rounded-[var(--radius-6)]" %}
+      {% else %}
+        {# Default size #}
+        {% set sizeClasses = "px-6 py-3 text-base rounded-[var(--radius-button)]" %}
+      {% endif %}
+
+      {# Variant classes - Visual style mapping
+         Uses design tokens from input.css @theme #}
+      {% set variantClasses = "" %}
+      
+      {% if buttonData.variant == 'primary' %}
+        {% set variantClasses = "bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+      
+      {% elif buttonData.variant == 'secondary' %}
+        {% set variantClasses = "bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+      
+      {% elif buttonData.variant == 'ghost' %}
+        {% set variantClasses = "bg-transparent text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-04)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+      
+      {% elif buttonData.variant == 'icon' %}
+        {% set variantClasses = "bg-transparent text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-04)] active:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+      
+      {% elif buttonData.variant == 'segmented' %}
+        {% set variantClasses = "bg-transparent border border-[var(--color-global-contrast-light-03)] text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-04)] active:bg-[var(--color-button-primary)] active:text-white aria-selected:bg-[var(--color-button-primary)] aria-selected:text-white disabled:opacity-50 disabled:cursor-not-allowed" %}
+      
+      {% elif buttonData.variant == 'fixed' %}
+        {% set variantClasses = "bg-[var(--color-global-contrast-light-04)] text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-03)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+      
+      {% else %}
+        {# Default fallback = primary variant #}
+        {% set variantClasses = "bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+      {% endif %}
+
+      {# Icon spacing - Gap between icon and text
+         Material Design standard: 8px gap #}
+      {% set iconClasses = "" %}
+      {% if hasIcon and iconPosition != 'center' %}
+        {% set iconClasses = "gap-2" %}
+      {% endif %}
+
       {# Render button element #}
       <button
         type="{{ buttonType }}"
+        class="{{ baseClasses }} {{ sizeClasses }} {{ variantClasses }} {{ iconClasses }}"
         data-button-name="{{ buttonData.name }}"
         data-button-type="button"
         {% if hasIcon %}data-button-icon-position="{{ iconPosition }}"{% endif %}
