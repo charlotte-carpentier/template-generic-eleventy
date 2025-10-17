@@ -56,13 +56,6 @@ function handleErrorLinkClick(event) {
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// Initialization
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-document.addEventListener('DOMContentLoaded', initErrorLinks);
-
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
 // Charlotte Carpentier · 2025
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

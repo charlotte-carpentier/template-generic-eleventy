@@ -88,13 +88,6 @@ function handleFragmentNavigation(event) {
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// Initialization
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-document.addEventListener('DOMContentLoaded', initErrorFragmentGroup);
-
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
 // Charlotte Carpentier · 2025
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
