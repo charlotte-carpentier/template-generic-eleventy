@@ -44,7 +44,7 @@ const CONFIG = {
  */
 function debounce(fn, delay) {
   let timeout;
-  return function(...args) {
+  return function (...args) {
     clearTimeout(timeout);
     timeout = setTimeout(() => fn.apply(this, args), delay);
   };
@@ -108,7 +108,7 @@ function initMobileHalo(container) {
     const scrollHeight = mobileContainer.scrollHeight - mobileContainer.clientHeight;
     const scrollPercent = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
     const scrollY = CONFIG.SCROLL_Y_BASE + (scrollPercent * CONFIG.SCROLL_Y_RANGE);
-    
+
     container.style.setProperty('--scroll-y', `${scrollY}%`);
   }, { passive: true });
 
@@ -123,12 +123,12 @@ function initMobileHalo(container) {
  */
 function initFragmentReveal(mobileContainer) {
   const fragments = mobileContainer.querySelectorAll(CONFIG.FRAGMENT_SELECTOR);
-  
+
   const observerOptions = {
     root: mobileContainer,
     threshold: [0, 0.25, 0.5, 0.75, 1]
   };
-  
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -136,7 +136,7 @@ function initFragmentReveal(mobileContainer) {
       }
     });
   }, observerOptions);
-  
+
   fragments.forEach(fragment => {
     fragment.style.opacity = '0';
     fragment.style.transition = 'opacity 0.3s ease';
@@ -158,7 +158,7 @@ export function initAccessibilityToggle() {
   if (!container) return;
 
   const buttons = container.querySelectorAll('[data-button="button-reveal-all"], [data-button="button-hide-all"]');
-  
+
   buttons.forEach(button => {
     button.addEventListener('click', () => toggleMaskVisibility(container, button));
   });
@@ -172,11 +172,11 @@ export function initAccessibilityToggle() {
  */
 function toggleMaskVisibility(container, button) {
   const isRevealing = button.getAttribute('data-button') === 'button-reveal-all';
-  
+
   if (isRevealing) {
     container.classList.add(CONFIG.NO_MASK_CLASS);
     updateAccessibilityContent(container, 'hidden');
-    
+
     if (window.innerWidth < CONFIG.DESKTOP_BREAKPOINT) {
       container.querySelectorAll(CONFIG.FRAGMENT_SELECTOR).forEach(f => {
         f.style.opacity = '1';
@@ -197,7 +197,7 @@ function toggleMaskVisibility(container, button) {
 function updateAccessibilityContent(container, state) {
   const textElements = container.querySelectorAll(CONFIG.TEXT_SELECTOR);
   const buttons = container.querySelectorAll(CONFIG.BUTTON_SELECTOR);
-  
+
   if (state === 'hidden') {
     textElements.forEach(text => {
       text.textContent = 'Pour invisibiliser les contenus révélés :';
@@ -235,22 +235,12 @@ function handleResize() {
   container.style.removeProperty('--mouse-x');
   container.style.removeProperty('--mouse-y');
   container.style.removeProperty('--scroll-y');
-  
+
   initErrorLayout();
+
+
+  window.addEventListener('resize', debounce(handleResize, CONFIG.RESIZE_DEBOUNCE));
 }
-
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// Initialization
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-document.addEventListener('DOMContentLoaded', () => {
-  initErrorLayout();
-  initAccessibilityToggle();
-});
-
-window.addEventListener('resize', debounce(handleResize, CONFIG.RESIZE_DEBOUNCE));
-
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦

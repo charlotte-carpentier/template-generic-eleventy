@@ -8,6 +8,7 @@
  * @fileoverview Main JavaScript entry point for site-wide functionality
  * @module core/main
  * @created 2025-01-15
+ * @updated 2025-10-17
  */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -18,6 +19,7 @@
 import { initToggle } from './components/01-atoms/toggle.js';
 import { initTooltip } from './components/01-atoms/tooltip.js';
 import { initInput } from './components/01-atoms/input.js';
+import { initErrorLinks } from './components/01-atoms/error-link.js';
 
 // Molecules
 import { initTooltips } from './components/02-molecules/caption.js';
@@ -46,6 +48,7 @@ const COMPONENT_SELECTORS = {
   TOGGLE: '[data-toggle-type="toggle"]',
   TOOLTIP: '[data-tooltip]',
   INPUT: '[data-input-type="input"]',
+  ERROR_LINK: '[data-error-link]',
   
   // Molecules
   CAPTION: '.caption-container',
@@ -87,6 +90,10 @@ function initComponents() {
   
   if (document.querySelector(COMPONENT_SELECTORS.INPUT)) {
     initInput();
+  }
+  
+  if (document.querySelector(COMPONENT_SELECTORS.ERROR_LINK)) {
+    initErrorLinks();
   }
   
   // Molecules
