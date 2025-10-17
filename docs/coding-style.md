@@ -3,11 +3,12 @@ title: Coding Style Guide
 description: Rules and conventions for code formatting and structure
 type: documentation
 created: 2025-01-15
+updated: 2025-01-17
 tags: [coding-style, conventions, guidelines]
 ---
 
-**Version**: 3.0.0  
-**Last Updated**: October 2025  
+**Version**: 3.1.0  
+**Last Updated**: January 2025  
 **Maintained by**: Charlotte Carpentier
 
 ## Documentation
@@ -149,15 +150,40 @@ tags: [coding-style, conventions, guidelines]
 
 ## Version Control
 
-**Format**:
+### Commit Message Format
 
-```text
-<type>(<scope>): <subject>
+**Structure (one line only):**
+
+```
+[emoji] [type]: [Subject starting with verb and capital letter]
 ```
 
-**Types**: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+**Example:**
 
-**Full spec**: [Conventional Commits](https://www.conventionalcommits.org/)
+```bash
+git commit -m "📝 docs: Improve JSDoc and modernize async patterns"
+```
+
+### Commit Types
+
+| Emoji | Type | Usage |
+|-------|------|-------|
+| ✨ | `feat` | Nouvelle fonctionnalité ou composant |
+| 🐛 | `fix` | Correction de bug ou mauvais comportement |
+| ♻️ | `refactor` | Réécriture ou nettoyage de code sans changer la fonctionnalité |
+| 📝 | `docs` | Changement de contenu rédactionnel (README, commentaires…) |
+| 💄 | `style` | Modifications purement visuelles (HTML/CSS/Figma) |
+| 🔧 | `chore` | Tâche annexe ou setup (config, `.gitignore`, script build…) |
+| 🚀 | `deploy` | Action liée au déploiement (Netlify, config prod…) |
+| 🔒 | `security` | Patch, clés, `.env`, permissions |
+| ✅ | `test` | Ajout/modif de tests ou vérification |
+
+### Subject Rules
+
+- **Start with a verb** (imperative mood): Add, Fix, Update, Remove, Refactor
+- **Capital first letter**: "Add" not "add"
+- **No period at the end**
+- **Concise**: Describe what changed, not why
 
 ---
 

@@ -1,13 +1,13 @@
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    UTILITY › Navigation
    Shared navigation logic for error pages
-   Path: src/assets/scripts/utils/navigation.js
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 /**
- * @fileoverview Centralized navigation utilities
+ * @fileoverview Centralized navigation utilities for error pages
  * @module utils/navigation
  * @created 2025-01-15
+ * @updated 2025-10-17
  */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
