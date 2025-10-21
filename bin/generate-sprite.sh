@@ -12,6 +12,7 @@
 # Features:
 # - Normalizes colors to currentColor for theming
 # - Wraps icons in <symbol> tags with unique IDs
+# - PRESERVES original viewBox from source SVGs
 # - Validates output with symbol and path counts
 #
 
@@ -48,6 +49,19 @@ normalize_svg_colors() {
     echo "$temp_file"
 }
 
+# Extract viewBox from SVG file
+extract_viewbox() {
+    local file="$1"
+    local viewbox=$(grep -oP 'viewBox="\K[^"]+' "$file" | head -1)
+    
+    # Fallback to default if no viewBox found
+    if [ -z "$viewbox" ]; then
+        echo "0 0 24 24"
+    else
+        echo "$viewbox"
+    fi
+}
+
 # Process individual SVG file and wrap in <symbol>
 process_svg() {
     local file="$1"
@@ -56,8 +70,11 @@ process_svg() {
     # Normalize colors first
     local normalized_file=$(normalize_svg_colors "$file")
     
-    # Extract SVG content and wrap in symbol
-    echo "    <symbol id=\"$id\" viewBox=\"0 0 256 256\">"
+    # Extract original viewBox
+    local viewbox=$(extract_viewbox "$file")
+    
+    # Wrap in symbol with original viewBox
+    echo "    <symbol id=\"$id\" viewBox=\"$viewbox\">"
     
     # Extract content between <svg> tags, remove wrapper, indent properly
     sed -n '/<svg/,/<\/svg>/p' "$normalized_file" | \
@@ -89,7 +106,8 @@ for file in "$ICONS_DIR"/*.svg; do
     if [ -f "$file" ] && [[ "$file" != *"sprite.svg" ]]; then
         filename=$(basename "$file" .svg)
         id="$filename"
-        echo "  Processing: $id"
+        viewbox=$(extract_viewbox "$file")
+        echo "  Processing: $id (viewBox: $viewbox)"
         process_svg "$file" "$id" >> "$SPRITE_FILE"
     fi
 done
@@ -122,3 +140,6 @@ if [ "$total_paths" -eq 0 ]; then
     echo "Sample SVG content:"
     head -5 "$ICONS_DIR"/*.svg | head -10
 fi
+
+echo ""
+echo "Sprite generation complete!"
