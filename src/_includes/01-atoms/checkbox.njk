@@ -34,6 +34,7 @@
     }) }}
 
   @created 2025-01-15
+  @updated 2025-01-17 - Added Tailwind CSS styles (Phase 4)
 #}
 
 {% macro renderCheckbox(options) %}
@@ -81,21 +82,38 @@
 {% endmacro %}
 
 {% macro renderCheckboxGroup(groupConfig, groupLabel) %}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     CSS Classes - Fieldset/Legend
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+  {# Fieldset classes - Semantic grouping with minimal styling #}
+  {% set fieldsetClasses = "border-0 p-0 m-0" %}
+
+  {# Legend classes - Group label typography #}
+  {% set legendClasses = "mb-3 text-base font-semibold text-[var(--color-global-default)]" %}
+
+  {# Description classes - Help text for group #}
+  {% set descriptionClasses = "mt-1 mb-3 text-sm text-[var(--color-neutral-50)]" %}
+
+  {# Checkbox container - Vertical stack with spacing #}
+  {% set containerClasses = "flex flex-col gap-2" %}
+
   <fieldset
+    class="{{ fieldsetClasses }}"
     data-checkbox-group
     {% if groupConfig.ariaGroupLabel %}aria-label="{{ groupConfig.ariaGroupLabel }}"{% endif %}
   >
     {% if groupLabel %}
-      <legend {% if groupConfig.groupSrOnly %}class="sr-only"{% endif %}>
+      <legend class="{{ legendClasses }} {% if groupConfig.groupSrOnly %}sr-only{% endif %}">
         {{ groupLabel }}
       </legend>
     {% endif %}
 
     {% if groupConfig.groupDescription %}
-      <p>{{ groupConfig.groupDescription }}</p>
+      <p class="{{ descriptionClasses }}">{{ groupConfig.groupDescription }}</p>
     {% endif %}
 
-    <div>
+    <div class="{{ containerClasses }}">
       {% for checkbox in groupConfig.checkboxes %}
         {{ renderSingleCheckbox(checkbox) }}
       {% endfor %}
@@ -113,16 +131,45 @@
   {% set finalAriaLabel = checkbox.ariaLabel | default(checkbox.label) %}
   {% set hasDescription = checkbox.description %}
 
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     CSS Classes - Tailwind Utilities
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+  {# Label wrapper - Flex layout for checkbox + text #}
+  {% set labelClasses = "inline-flex items-start gap-2 cursor-pointer" %}
+
+  {# Input wrapper - Position relative for absolute checkmark positioning #}
+  {% set inputWrapperClasses = "relative flex items-center" %}
+
+  {# Input base - Custom styled checkbox using appearance-none
+     Peer class enables styling checkmark based on checked state #}
+  {% set inputClasses = "peer h-5 w-5 cursor-pointer appearance-none rounded-[var(--radius-4)] border-2 transition-all border-[var(--color-form)] hover:border-[var(--color-form-hover)] checked:bg-[var(--color-form-control-checked)] checked:border-[var(--color-form-control-checked)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+
+  {# Checkmark - Standard Material Tailwind approach
+     Absolute positioned with transform translate for perfect centering #}
+  {% set checkmarkClasses = "absolute text-white opacity-0 pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 peer-checked:opacity-100 transition-opacity" %}
+
+  {# Text container - Vertical stack for label + description #}
+  {% set textContainerClasses = "flex flex-col" %}
+
+  {# Label text - Primary text with required indicator #}
+  {% set labelTextClasses = "text-base text-[var(--color-global-default)]" %}
+
+  {# Description text - Secondary help text #}
+  {% set descriptionClasses = "mt-0.5 text-sm text-[var(--color-neutral-50)]" %}
+
   <label
     for="{{ checkbox.id }}"
+    class="{{ labelClasses }}"
     data-checkbox-label
   >
-    <div>
+    <div class="{{ inputWrapperClasses }}">
       <input
         type="checkbox"
         id="{{ checkbox.id }}"
         name="{{ checkbox.id }}"
         value="{{ checkboxValue }}"
+        class="{{ inputClasses }}"
         data-checkbox-id="{{ checkbox.id }}"
         data-checkbox-type="checkbox"
         {% if isChecked %}checked{% endif %}
@@ -131,10 +178,17 @@
         {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
         {% if hasDescription %}aria-describedby="{{ checkbox.id }}-description"{% endif %}
       />
+
+      {# Checkmark SVG - Simple checkmark, centered in 16x16 viewBox #}
+      <span class="{{ checkmarkClasses }}">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class="w-3 h-3">
+          <path d="M3 8L6 11L13 4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
     </div>
 
-    <div>
-      <span>
+    <div class="{{ textContainerClasses }}">
+      <span class="{{ labelTextClasses }}">
         {{ checkbox.label }}
         {% if isRequired %}
           <span aria-hidden="true">*</span>
@@ -143,7 +197,7 @@
       </span>
 
       {% if hasDescription %}
-        <p id="{{ checkbox.id }}-description">
+        <p id="{{ checkbox.id }}-description" class="{{ descriptionClasses }}">
           {{ checkbox.description }}
         </p>
       {% endif %}
