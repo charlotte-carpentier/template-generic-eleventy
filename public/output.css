@@ -13,6 +13,8 @@
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
+    --text-xs: 0.75rem;
+    --text-xs--line-height: calc(1 / 0.75);
     --text-sm: 0.875rem;
     --text-sm--line-height: calc(1.25 / 0.875);
     --text-base: 1rem;
@@ -96,6 +98,7 @@
     --radius-32: 32px;
     --radius-button: var(--radius-8);
     --radius-card: var(--radius-12);
+    --radius-pill: var(--radius-32);
     --spacing-1: 4px;
     --spacing-2: 8px;
     --spacing-3: 12px;
@@ -386,6 +389,9 @@
   .h-5 {
     height: var(--spacing-5);
   }
+  .min-h-6 {
+    min-height: var(--spacing-6);
+  }
   .min-h-screen {
     min-height: 100vh;
   }
@@ -400,6 +406,9 @@
   }
   .w-full {
     width: 100%;
+  }
+  .min-w-6 {
+    min-width: var(--spacing-6);
   }
   .flex-1 {
     flex: 1;
@@ -475,6 +484,9 @@
   .rounded-\[var\(--radius-card\)\] {
     border-radius: var(--radius-card);
   }
+  .rounded-\[var\(--radius-pill\)\] {
+    border-radius: var(--radius-pill);
+  }
   .rounded-lg {
     border-radius: var(--radius-lg);
   }
@@ -521,6 +533,9 @@
   .bg-\[var\(--color-global-contrast-light-04\)\] {
     background-color: var(--color-global-contrast-light-04);
   }
+  .bg-\[var\(--color-semantic-critical-40\)\] {
+    background-color: var(--color-semantic-critical-40);
+  }
   .bg-gray-50 {
     background-color: var(--color-gray-50);
   }
@@ -535,6 +550,9 @@
   }
   .p-\[var\(--spacing-component-padding\)\] {
     padding: var(--spacing-component-padding);
+  }
+  .px-1\.5 {
+    padding-inline: calc(var(--spacing) * 1.5);
   }
   .px-3 {
     padding-inline: var(--spacing-3);
@@ -572,6 +590,10 @@
   .text-sm {
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+  .text-xs {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
   }
   .font-\[var\(--font-weight-bold\)\] {
     --tw-font-weight: var(--font-weight-bold);

@@ -17,6 +17,7 @@
     }) }}
 
   @created 2025-01-15
+  @updated 2025-01-17 - Added Tailwind CSS styles (Phase 4)
 #}
 
 {% macro renderChipNotification(options) %}
@@ -33,9 +34,29 @@
     {% if not chipData %}
       <span class="error" role="alert">Chip notification not found: {{ options.name }}</span>
     {% else %}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         CSS Classes - Tailwind Utilities
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# Base classes - Common to all chip notifications
+         Circular badge with centered content, minimum size for readability #}
+      {% set baseClasses = "inline-flex items-center justify-center min-w-6 min-h-6 px-1.5 text-xs font-semibold text-white rounded-[var(--radius-pill)]" %}
+
+      {# Variant classes - Visual style per usage context #}
+      {% set variantClasses = "" %}
+      
+      {% if chipData.variant == 'stepper' %}
+        {# Stepper variant - Sequential step indicator (brand color) #}
+        {% set variantClasses = "bg-[var(--color-button-primary)]" %}
+      {% else %}
+        {# Default variant - Notification badge (critical red) #}
+        {% set variantClasses = "bg-[var(--color-semantic-critical-40)]" %}
+      {% endif %}
+
       {# Render chip element #}
       <span
         role="status"
+        class="{{ baseClasses }} {{ variantClasses }}"
         data-chip-notification-name="{{ chipData.name }}"
         data-chip-notification-type="chip-notification"
         {% if chipData.variant %}data-chip-notification-variant="{{ chipData.variant }}"{% endif %}
