@@ -12,17 +12,29 @@
     - options.active (boolean): Active state for navigation
     - options.role (string): ARIA role (e.g., "tab" for tab-bar)
     - options.ariaSelected (boolean): ARIA selected state for tabs
+    - options.iconDatas (array): Icon atom data (required if link has icons)
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/link.njk" import renderLink %}
 
+    Basic link:
     {{ renderLink({
         name: "demoLink1",
         datas: atoms.link.links
     }) }}
 
+    Social link with icon:
+    {{ renderLink({
+        name: "demoFacebook",
+        datas: atoms.link.links,
+        iconDatas: atoms.icon.icons
+    }) }}
+
   @created 2025-01-15
+  @updated 2025-01-17 - Added Tailwind CSS styles (Phase 4)
 #}
+
+{% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderLink(options) %}
   {# Validate required props #}
@@ -42,9 +54,69 @@
       {% set finalAriaLabel = options.ariaLabel | default(linkData.ariaLabel) %}
       {% set isDisabled = options.disabled | default(linkData.disabled) | default(false) %}
       {% set isActive = options.active | default(false) %}
+      
+      {# Check if link has icon #}
+      {% set hasIcon = linkData.iconName %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         CSS Classes - Tailwind Utilities
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# Base classes - Common to all links
+         Layout, typography, transitions, focus with rounded border (Figma specs) #}
+      {% set baseClasses = "inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1" %}
+
+      {# Variant classes - Visual style mapping
+         Hover removes underline per Figma specs #}
+      {% set variantClasses = "" %}
+      
+      {% if linkData.variant == 'default' %}
+        {% set variantClasses = "text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed" %}
+      
+      {% elif linkData.variant == 'tab' %}
+        {% set variantClasses = "justify-center px-4 py-2.5 text-base text-[var(--color-global-default)] border-b-2 border-transparent hover:border-[var(--color-global-accent)] hover:text-[var(--color-global-accent)] hover:no-underline active:border-[var(--color-button-primary)] active:text-[var(--color-button-primary)] aria-selected:border-[var(--color-button-primary)] aria-selected:text-[var(--color-button-primary)] aria-selected:font-semibold disabled:opacity-50 disabled:cursor-not-allowed" %}
+      
+      {% elif linkData.variant == 'menu-link' %}
+        {% set variantClasses = "justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed" %}
+      
+      {% elif linkData.variant == 'social' %}
+        {% set variantClasses = "gap-2 px-3 py-2.5 text-sm text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+      
+      {% elif linkData.variant == 'footer' %}
+        {% set variantClasses = "text-sm text-[var(--color-global-contrast-light-02)] hover:text-[var(--color-global-default)] hover:no-underline active:text-[var(--color-global-accent)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+      
+      {% else %}
+        {% set variantClasses = "text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed" %}
+      {% endif %}
 
       {# Render link element #}
-      <a href="{{ linkData.href }}" data-link-name="{{ linkData.name }}" data-link-type="link" data-link-variant="{{ linkData.variant }}" {% if linkData.target %}target="{{ linkData.target }}"{% endif %} {% if linkData.rel %}rel="{{ linkData.rel }}"{% endif %} {% if linkData.download %}download{% endif %} {% if linkData.onclick %}onclick="{{ linkData.onclick | escape }}"{% endif %} {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %} {% if isDisabled %}aria-disabled="true"{% endif %} {% if isActive %}data-link-active="true" aria-current="page"{% endif %} {% if options.role %}role="{{ options.role }}"{% endif %} {% if options.ariaSelected is defined %}aria-selected="{{ options.ariaSelected }}"{% endif %}>{{ linkData.text }}</a>
+      <a
+        href="{{ linkData.href }}"
+        class="{{ baseClasses }} {{ variantClasses }}"
+        data-link-name="{{ linkData.name }}"
+        data-link-type="link"
+        data-link-variant="{{ linkData.variant }}"
+        {% if linkData.target %}target="{{ linkData.target }}"{% endif %}
+        {% if linkData.rel %}rel="{{ linkData.rel }}"{% endif %}
+        {% if linkData.download %}download{% endif %}
+        {% if linkData.onclick %}onclick="{{ linkData.onclick | escape }}"{% endif %}
+        {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
+        {% if isDisabled %}aria-disabled="true"{% endif %}
+        {% if isActive %}data-link-active="true" aria-current="page"{% endif %}
+        {% if options.role %}role="{{ options.role }}"{% endif %}
+        {% if options.ariaSelected is defined %}aria-selected="{{ options.ariaSelected }}"{% endif %}
+      >
+        {# Icon (for social links) #}
+        {% if hasIcon and options.iconDatas %}
+          {{ renderIcon({ 
+              name: linkData.iconName, 
+              datas: options.iconDatas 
+          }) }}
+        {% endif %}
+
+        {# Link text #}
+        {{ linkData.text }}
+      </a>
     {% endif %}
   {% endif %}
 {% endmacro %}
