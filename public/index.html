@@ -53,6 +53,9 @@
     <link rel="stylesheet" href="/output.css"/>
 
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"/>
+
+    
 
     
     <link rel="manifest" href="/site.webmanifest"/>
@@ -195,7 +198,7 @@
       
       <button
         type="button"
-        class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
         data-button-name="demoButton1"
         data-button-type="button"
         data-button-icon-position="both"
@@ -252,16 +255,41 @@
   
   
 
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
   <label
     for="demoCheck1"
+    class="inline-flex items-start gap-2 cursor-pointer"
     data-checkbox-label
   >
-    <div>
+    <div class="relative flex items-center">
       <input
         type="checkbox"
         id="demoCheck1"
         name="demoCheck1"
         value="demoValue1"
+        class="peer h-5 w-5 cursor-pointer appearance-none rounded-[var(--radius-4)] border-2 transition-all border-[var(--color-form)] hover:border-[var(--color-form-hover)] checked:bg-[var(--color-form-control-checked)] checked:border-[var(--color-form-control-checked)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] disabled:opacity-50 disabled:cursor-not-allowed"
         data-checkbox-id="demoCheck1"
         data-checkbox-type="checkbox"
         
@@ -270,16 +298,23 @@
         aria-label="Aria label for this checkbox"
         aria-describedby="demoCheck1-description"
       />
+
+      
+      <span class="absolute text-white opacity-0 pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 peer-checked:opacity-100 transition-opacity">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class="w-3 h-3">
+          <path d="M3 8L6 11L13 4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
     </div>
 
-    <div>
-      <span>
+    <div class="flex flex-col">
+      <span class="text-base text-[var(--color-global-default)]">
         Label
         
       </span>
 
       
-        <p id="demoCheck1-description">
+        <p id="demoCheck1-description" class="mt-0.5 text-sm text-[var(--color-neutral-50)]">
           Description of this checkbox option
         </p>
       
@@ -305,8 +340,22 @@
     
     
       
+
+      
+      
+
+      
+      
+      
+      
+        
+        
+      
+
+      
       <span
         role="status"
+        class="inline-flex items-center justify-center min-w-6 min-h-6 px-1.5 text-xs font-semibold text-white rounded-[var(--radius-pill)] bg-[var(--color-semantic-critical-40)]"
         data-chip-notification-name="demoChip1"
         data-chip-notification-type="chip-notification"
         data-chip-notification-variant="default"
@@ -338,8 +387,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h1
+          class="text-[var(--color-global-heading)] text-4xl font-bold leading-tight"
           data-heading-name="demoHead1"
           data-heading-type="heading"
           data-heading-tag="h1"
@@ -367,19 +429,38 @@
 
       
       
-      
+
       
 
       
-      <svg
-        class="icon"
-        aria-label="Smile icon"
-        role="img"
-        data-icon-name="demoSmile1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#smile"></use>
-      </svg>
+      
+      
+      
+        
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-6 h-6"
+          aria-label="Smile icon"
+          role="img"
+          data-icon-name="demoSmile1"
+          data-icon-type="icon"
+          
+        >
+          <use href="/assets/icons/sprites/sprite.svg#smiley"></use>
+        </svg>
+      
     
   
 
@@ -502,9 +583,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -816,9 +934,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -847,9 +1002,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -913,21 +1105,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Information"
-        role="img"
-        data-icon-name="demoInfo1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#info"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Information"
+          role="img"
+          data-icon-name="demoInfo1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#info"></use>
+        </svg>
+      
     
   
 
@@ -975,8 +1183,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h3
+          class="text-[var(--color-global-heading)] text-2xl font-semibold leading-snug"
           data-heading-name="demoHeadUp1"
           data-heading-type="heading"
           data-heading-tag="h3"
@@ -1008,21 +1229,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Upload file"
-        role="img"
-        data-icon-name="demoFileUp1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#file-arrow-up"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Upload file"
+          role="img"
+          data-icon-name="demoFileUp1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#file-arrow-up"></use>
+        </svg>
+      
     
   
 
@@ -1097,7 +1334,7 @@
       
       <button
         type="button"
-        class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed "
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed "
         data-button-name="demoBrowse1"
         data-button-type="button"
         
@@ -1263,7 +1500,7 @@
       
       <button
         type="button"
-        class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
         data-button-name="demoButton1"
         data-button-type="button"
         data-button-icon-position="both"
@@ -1341,21 +1578,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Information"
-        role="img"
-        data-icon-name="demoInfo1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#info"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Information"
+          role="img"
+          data-icon-name="demoInfo1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#info"></use>
+        </svg>
+      
     
   
 
@@ -1388,21 +1641,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Close"
-        role="img"
-        data-icon-name="demoClose1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#x"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Close"
+          role="img"
+          data-icon-name="demoClose1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#x"></use>
+        </svg>
+      
     
   
 
@@ -1958,21 +2227,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Settings"
-        role="img"
-        data-icon-name="demoSlider1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#sliders-horizontal"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Settings"
+          role="img"
+          data-icon-name="demoSlider1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#sliders-horizontal"></use>
+        </svg>
+      
     
   
 
@@ -2002,21 +2287,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Settings"
-        role="img"
-        data-icon-name="demoSlider1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#sliders-horizontal"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Settings"
+          role="img"
+          data-icon-name="demoSlider1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#sliders-horizontal"></use>
+        </svg>
+      
     
   
 
@@ -2046,21 +2347,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Settings"
-        role="img"
-        data-icon-name="demoSlider1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#sliders-horizontal"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Settings"
+          role="img"
+          data-icon-name="demoSlider1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#sliders-horizontal"></use>
+        </svg>
+      
     
   
 
@@ -2090,21 +2407,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Settings"
-        role="img"
-        data-icon-name="demoSlider1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#sliders-horizontal"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Settings"
+          role="img"
+          data-icon-name="demoSlider1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#sliders-horizontal"></use>
+        </svg>
+      
     
   
 
@@ -2134,21 +2467,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Settings"
-        role="img"
-        data-icon-name="demoSlider1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#sliders-horizontal"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Settings"
+          role="img"
+          data-icon-name="demoSlider1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#sliders-horizontal"></use>
+        </svg>
+      
     
   
 
@@ -2178,21 +2527,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Settings"
-        role="img"
-        data-icon-name="demoSlider1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#sliders-horizontal"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Settings"
+          role="img"
+          data-icon-name="demoSlider1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#sliders-horizontal"></use>
+        </svg>
+      
     
   
 
@@ -2491,16 +2856,41 @@
   
   
 
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
   <label
     for="demoCheck1"
+    class="inline-flex items-start gap-2 cursor-pointer"
     data-checkbox-label
   >
-    <div>
+    <div class="relative flex items-center">
       <input
         type="checkbox"
         id="demoCheck1"
         name="demoCheck1"
         value="demoValue1"
+        class="peer h-5 w-5 cursor-pointer appearance-none rounded-[var(--radius-4)] border-2 transition-all border-[var(--color-form)] hover:border-[var(--color-form-hover)] checked:bg-[var(--color-form-control-checked)] checked:border-[var(--color-form-control-checked)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] disabled:opacity-50 disabled:cursor-not-allowed"
         data-checkbox-id="demoCheck1"
         data-checkbox-type="checkbox"
         
@@ -2509,16 +2899,23 @@
         aria-label="Aria label for this checkbox"
         aria-describedby="demoCheck1-description"
       />
+
+      
+      <span class="absolute text-white opacity-0 pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 peer-checked:opacity-100 transition-opacity">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class="w-3 h-3">
+          <path d="M3 8L6 11L13 4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
     </div>
 
-    <div>
-      <span>
+    <div class="flex flex-col">
+      <span class="text-base text-[var(--color-global-default)]">
         Label
         
       </span>
 
       
-        <p id="demoCheck1-description">
+        <p id="demoCheck1-description" class="mt-0.5 text-sm text-[var(--color-neutral-50)]">
           Description of this checkbox option
         </p>
       
@@ -2560,16 +2957,41 @@
   
   
 
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
   <label
     for="demoCheck1"
+    class="inline-flex items-start gap-2 cursor-pointer"
     data-checkbox-label
   >
-    <div>
+    <div class="relative flex items-center">
       <input
         type="checkbox"
         id="demoCheck1"
         name="demoCheck1"
         value="demoValue1"
+        class="peer h-5 w-5 cursor-pointer appearance-none rounded-[var(--radius-4)] border-2 transition-all border-[var(--color-form)] hover:border-[var(--color-form-hover)] checked:bg-[var(--color-form-control-checked)] checked:border-[var(--color-form-control-checked)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] disabled:opacity-50 disabled:cursor-not-allowed"
         data-checkbox-id="demoCheck1"
         data-checkbox-type="checkbox"
         
@@ -2578,16 +3000,23 @@
         aria-label="Aria label for this checkbox"
         aria-describedby="demoCheck1-description"
       />
+
+      
+      <span class="absolute text-white opacity-0 pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 peer-checked:opacity-100 transition-opacity">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class="w-3 h-3">
+          <path d="M3 8L6 11L13 4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
     </div>
 
-    <div>
-      <span>
+    <div class="flex flex-col">
+      <span class="text-base text-[var(--color-global-default)]">
         Label
         
       </span>
 
       
-        <p id="demoCheck1-description">
+        <p id="demoCheck1-description" class="mt-0.5 text-sm text-[var(--color-neutral-50)]">
           Description of this checkbox option
         </p>
       
@@ -2629,16 +3058,41 @@
   
   
 
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
   <label
     for="demoCheck1"
+    class="inline-flex items-start gap-2 cursor-pointer"
     data-checkbox-label
   >
-    <div>
+    <div class="relative flex items-center">
       <input
         type="checkbox"
         id="demoCheck1"
         name="demoCheck1"
         value="demoValue1"
+        class="peer h-5 w-5 cursor-pointer appearance-none rounded-[var(--radius-4)] border-2 transition-all border-[var(--color-form)] hover:border-[var(--color-form-hover)] checked:bg-[var(--color-form-control-checked)] checked:border-[var(--color-form-control-checked)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] disabled:opacity-50 disabled:cursor-not-allowed"
         data-checkbox-id="demoCheck1"
         data-checkbox-type="checkbox"
         
@@ -2647,16 +3101,23 @@
         aria-label="Aria label for this checkbox"
         aria-describedby="demoCheck1-description"
       />
+
+      
+      <span class="absolute text-white opacity-0 pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 peer-checked:opacity-100 transition-opacity">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class="w-3 h-3">
+          <path d="M3 8L6 11L13 4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
     </div>
 
-    <div>
-      <span>
+    <div class="flex flex-col">
+      <span class="text-base text-[var(--color-global-default)]">
         Label
         
       </span>
 
       
-        <p id="demoCheck1-description">
+        <p id="demoCheck1-description" class="mt-0.5 text-sm text-[var(--color-neutral-50)]">
           Description of this checkbox option
         </p>
       
@@ -2698,16 +3159,41 @@
   
   
 
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
   <label
     for="demoCheck1"
+    class="inline-flex items-start gap-2 cursor-pointer"
     data-checkbox-label
   >
-    <div>
+    <div class="relative flex items-center">
       <input
         type="checkbox"
         id="demoCheck1"
         name="demoCheck1"
         value="demoValue1"
+        class="peer h-5 w-5 cursor-pointer appearance-none rounded-[var(--radius-4)] border-2 transition-all border-[var(--color-form)] hover:border-[var(--color-form-hover)] checked:bg-[var(--color-form-control-checked)] checked:border-[var(--color-form-control-checked)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] disabled:opacity-50 disabled:cursor-not-allowed"
         data-checkbox-id="demoCheck1"
         data-checkbox-type="checkbox"
         
@@ -2716,16 +3202,23 @@
         aria-label="Aria label for this checkbox"
         aria-describedby="demoCheck1-description"
       />
+
+      
+      <span class="absolute text-white opacity-0 pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 peer-checked:opacity-100 transition-opacity">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class="w-3 h-3">
+          <path d="M3 8L6 11L13 4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
     </div>
 
-    <div>
-      <span>
+    <div class="flex flex-col">
+      <span class="text-base text-[var(--color-global-default)]">
         Label
         
       </span>
 
       
-        <p id="demoCheck1-description">
+        <p id="demoCheck1-description" class="mt-0.5 text-sm text-[var(--color-neutral-50)]">
           Description of this checkbox option
         </p>
       
@@ -2767,16 +3260,41 @@
   
   
 
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
   <label
     for="demoCheck1"
+    class="inline-flex items-start gap-2 cursor-pointer"
     data-checkbox-label
   >
-    <div>
+    <div class="relative flex items-center">
       <input
         type="checkbox"
         id="demoCheck1"
         name="demoCheck1"
         value="demoValue1"
+        class="peer h-5 w-5 cursor-pointer appearance-none rounded-[var(--radius-4)] border-2 transition-all border-[var(--color-form)] hover:border-[var(--color-form-hover)] checked:bg-[var(--color-form-control-checked)] checked:border-[var(--color-form-control-checked)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] disabled:opacity-50 disabled:cursor-not-allowed"
         data-checkbox-id="demoCheck1"
         data-checkbox-type="checkbox"
         
@@ -2785,16 +3303,23 @@
         aria-label="Aria label for this checkbox"
         aria-describedby="demoCheck1-description"
       />
+
+      
+      <span class="absolute text-white opacity-0 pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 peer-checked:opacity-100 transition-opacity">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class="w-3 h-3">
+          <path d="M3 8L6 11L13 4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
     </div>
 
-    <div>
-      <span>
+    <div class="flex flex-col">
+      <span class="text-base text-[var(--color-global-default)]">
         Label
         
       </span>
 
       
-        <p id="demoCheck1-description">
+        <p id="demoCheck1-description" class="mt-0.5 text-sm text-[var(--color-neutral-50)]">
           Description of this checkbox option
         </p>
       
@@ -2833,21 +3358,34 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="United States flag"
-        role="img"
-        data-icon-name="demoFlagUs1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#flag-us"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+        
+
+        <span
+          class="fi fi-us inline-block flex-shrink-0 w-5 h-5"
+          role="img"
+          aria-label="United States flag"
+          title="United States flag"
+          data-icon-name="demoFlagUs1"
+          data-icon-type="flag"
+          data-icon-variant="md"
+        ></span>
+
+      
+      
     
   
 
@@ -2875,21 +3413,34 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="China flag"
-        role="img"
-        data-icon-name="demoFlagCn1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#flag-cn"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+        
+
+        <span
+          class="fi fi-cn inline-block flex-shrink-0 w-5 h-5"
+          role="img"
+          aria-label="China flag"
+          title="China flag"
+          data-icon-name="demoFlagCn1"
+          data-icon-type="flag"
+          data-icon-variant="md"
+        ></span>
+
+      
+      
     
   
 
@@ -2917,21 +3468,34 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Afghanistan flag"
-        role="img"
-        data-icon-name="demoFlagAf1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#flag-af"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+        
+
+        <span
+          class="fi fi-af inline-block flex-shrink-0 w-5 h-5"
+          role="img"
+          aria-label="Afghanistan flag"
+          title="Afghanistan flag"
+          data-icon-name="demoFlagAf1"
+          data-icon-type="flag"
+          data-icon-variant="md"
+        ></span>
+
+      
+      
     
   
 
@@ -2959,21 +3523,34 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Albania flag"
-        role="img"
-        data-icon-name="demoFlagAl1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#flag-al"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+        
+
+        <span
+          class="fi fi-al inline-block flex-shrink-0 w-5 h-5"
+          role="img"
+          aria-label="Albania flag"
+          title="Albania flag"
+          data-icon-name="demoFlagAl1"
+          data-icon-type="flag"
+          data-icon-variant="md"
+        ></span>
+
+      
+      
     
   
 
@@ -3001,21 +3578,34 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Algeria flag"
-        role="img"
-        data-icon-name="demoFlagDz1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#flag-dz"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+        
+
+        <span
+          class="fi fi-dz inline-block flex-shrink-0 w-5 h-5"
+          role="img"
+          aria-label="Algeria flag"
+          title="Algeria flag"
+          data-icon-name="demoFlagDz1"
+          data-icon-type="flag"
+          data-icon-variant="md"
+        ></span>
+
+      
+      
     
   
 
@@ -3047,21 +3637,34 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="United States flag"
-        role="img"
-        data-icon-name="demoFlagUs1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#flag-us"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+        
+
+        <span
+          class="fi fi-us inline-block flex-shrink-0 w-5 h-5"
+          role="img"
+          aria-label="United States flag"
+          title="United States flag"
+          data-icon-name="demoFlagUs1"
+          data-icon-type="flag"
+          data-icon-variant="md"
+        ></span>
+
+      
+      
     
   
 
@@ -3091,21 +3694,34 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="China flag"
-        role="img"
-        data-icon-name="demoFlagCn1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#flag-cn"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+        
+
+        <span
+          class="fi fi-cn inline-block flex-shrink-0 w-5 h-5"
+          role="img"
+          aria-label="China flag"
+          title="China flag"
+          data-icon-name="demoFlagCn1"
+          data-icon-type="flag"
+          data-icon-variant="md"
+        ></span>
+
+      
+      
     
   
 
@@ -3135,21 +3751,34 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Afghanistan flag"
-        role="img"
-        data-icon-name="demoFlagAf1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#flag-af"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+        
+
+        <span
+          class="fi fi-af inline-block flex-shrink-0 w-5 h-5"
+          role="img"
+          aria-label="Afghanistan flag"
+          title="Afghanistan flag"
+          data-icon-name="demoFlagAf1"
+          data-icon-type="flag"
+          data-icon-variant="md"
+        ></span>
+
+      
+      
     
   
 
@@ -3179,21 +3808,34 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Albania flag"
-        role="img"
-        data-icon-name="demoFlagAl1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#flag-al"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+        
+
+        <span
+          class="fi fi-al inline-block flex-shrink-0 w-5 h-5"
+          role="img"
+          aria-label="Albania flag"
+          title="Albania flag"
+          data-icon-name="demoFlagAl1"
+          data-icon-type="flag"
+          data-icon-variant="md"
+        ></span>
+
+      
+      
     
   
 
@@ -3223,21 +3865,34 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Algeria flag"
-        role="img"
-        data-icon-name="demoFlagDz1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#flag-dz"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+        
+
+        <span
+          class="fi fi-dz inline-block flex-shrink-0 w-5 h-5"
+          role="img"
+          aria-label="Algeria flag"
+          title="Algeria flag"
+          data-icon-name="demoFlagDz1"
+          data-icon-type="flag"
+          data-icon-variant="md"
+        ></span>
+
+      
+      
     
   
 
@@ -3341,21 +3996,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Star rating"
-        role="img"
-        data-icon-name="demoStar1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#star"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
     
   
 
@@ -3376,21 +4047,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Star rating"
-        role="img"
-        data-icon-name="demoStar1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#star"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
     
   
 
@@ -3411,21 +4098,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Star rating"
-        role="img"
-        data-icon-name="demoStar1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#star"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
     
   
 
@@ -3446,21 +4149,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Star rating"
-        role="img"
-        data-icon-name="demoStar1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#star"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
     
   
 
@@ -3481,21 +4200,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Star rating"
-        role="img"
-        data-icon-name="demoStar1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#star"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
     
   
 
@@ -3697,8 +4432,22 @@
     
     
       
+
+      
+      
+
+      
+      
+      
+      
+        
+        
+      
+
+      
       <span
         role="status"
+        class="inline-flex items-center justify-center min-w-6 min-h-6 px-1.5 text-xs font-semibold text-white rounded-[var(--radius-pill)] bg-[var(--color-button-primary)]"
         data-chip-notification-name="demoStep1"
         data-chip-notification-type="chip-notification"
         data-chip-notification-variant="stepper"
@@ -3738,8 +4487,22 @@
     
     
       
+
+      
+      
+
+      
+      
+      
+      
+        
+        
+      
+
+      
       <span
         role="status"
+        class="inline-flex items-center justify-center min-w-6 min-h-6 px-1.5 text-xs font-semibold text-white rounded-[var(--radius-pill)] bg-[var(--color-button-primary)]"
         data-chip-notification-name="demoStep1"
         data-chip-notification-type="chip-notification"
         data-chip-notification-variant="stepper"
@@ -3779,8 +4542,22 @@
     
     
       
+
+      
+      
+
+      
+      
+      
+      
+        
+        
+      
+
+      
       <span
         role="status"
+        class="inline-flex items-center justify-center min-w-6 min-h-6 px-1.5 text-xs font-semibold text-white rounded-[var(--radius-pill)] bg-[var(--color-button-primary)]"
         data-chip-notification-name="demoStep1"
         data-chip-notification-type="chip-notification"
         data-chip-notification-variant="stepper"
@@ -3825,8 +4602,22 @@
     
     
       
+
+      
+      
+
+      
+      
+      
+      
+        
+        
+      
+
+      
       <span
         role="status"
+        class="inline-flex items-center justify-center min-w-6 min-h-6 px-1.5 text-xs font-semibold text-white rounded-[var(--radius-pill)] bg-[var(--color-button-primary)]"
         data-chip-notification-name="demoStep1"
         data-chip-notification-type="chip-notification"
         data-chip-notification-variant="stepper"
@@ -3866,8 +4657,22 @@
     
     
       
+
+      
+      
+
+      
+      
+      
+      
+        
+        
+      
+
+      
       <span
         role="status"
+        class="inline-flex items-center justify-center min-w-6 min-h-6 px-1.5 text-xs font-semibold text-white rounded-[var(--radius-pill)] bg-[var(--color-button-primary)]"
         data-chip-notification-name="demoStep1"
         data-chip-notification-type="chip-notification"
         data-chip-notification-variant="stepper"
@@ -3907,8 +4712,22 @@
     
     
       
+
+      
+      
+
+      
+      
+      
+      
+        
+        
+      
+
+      
       <span
         role="status"
+        class="inline-flex items-center justify-center min-w-6 min-h-6 px-1.5 text-xs font-semibold text-white rounded-[var(--radius-pill)] bg-[var(--color-button-primary)]"
         data-chip-notification-name="demoStep1"
         data-chip-notification-type="chip-notification"
         data-chip-notification-variant="stepper"
@@ -3976,21 +4795,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Information"
-        role="img"
-        data-icon-name="demoInfo1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#info"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Information"
+          role="img"
+          data-icon-name="demoInfo1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#info"></use>
+        </svg>
+      
     
   
 
@@ -4063,9 +4898,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"     data-link-active="true" aria-current="page"  >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        data-link-active="true" aria-current="page"
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4085,9 +4957,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4107,9 +5016,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4129,9 +5075,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4151,9 +5134,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4173,9 +5193,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4195,9 +5252,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4252,9 +5346,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkTab" data-link-type="link" data-link-variant="tab" target="_self"    aria-label="Tab navigation link"  data-link-active="true" aria-current="page" role="tab" aria-selected="true">Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-center px-4 py-2.5 text-base text-[var(--color-global-default)] border-b-2 border-transparent hover:border-[var(--color-global-accent)] hover:text-[var(--color-global-accent)] hover:no-underline active:border-[var(--color-button-primary)] active:text-[var(--color-button-primary)] aria-selected:border-[var(--color-button-primary)] aria-selected:text-[var(--color-button-primary)] aria-selected:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkTab"
+        data-link-type="link"
+        data-link-variant="tab"
+        target="_self"
+        
+        
+        
+        aria-label="Tab navigation link"
+        
+        data-link-active="true" aria-current="page"
+        role="tab"
+        aria-selected="true"
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4278,9 +5409,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkTab" data-link-type="link" data-link-variant="tab" target="_self"    aria-label="Tab navigation link"   role="tab" aria-selected="false">Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-center px-4 py-2.5 text-base text-[var(--color-global-default)] border-b-2 border-transparent hover:border-[var(--color-global-accent)] hover:text-[var(--color-global-accent)] hover:no-underline active:border-[var(--color-button-primary)] active:text-[var(--color-button-primary)] aria-selected:border-[var(--color-button-primary)] aria-selected:text-[var(--color-button-primary)] aria-selected:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkTab"
+        data-link-type="link"
+        data-link-variant="tab"
+        target="_self"
+        
+        
+        
+        aria-label="Tab navigation link"
+        
+        
+        role="tab"
+        aria-selected="false"
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4304,9 +5472,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkTab" data-link-type="link" data-link-variant="tab" target="_self"    aria-label="Tab navigation link"   role="tab" aria-selected="false">Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-center px-4 py-2.5 text-base text-[var(--color-global-default)] border-b-2 border-transparent hover:border-[var(--color-global-accent)] hover:text-[var(--color-global-accent)] hover:no-underline active:border-[var(--color-button-primary)] active:text-[var(--color-button-primary)] aria-selected:border-[var(--color-button-primary)] aria-selected:text-[var(--color-button-primary)] aria-selected:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkTab"
+        data-link-type="link"
+        data-link-variant="tab"
+        target="_self"
+        
+        
+        
+        aria-label="Tab navigation link"
+        
+        
+        role="tab"
+        aria-selected="false"
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4330,9 +5535,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkTab" data-link-type="link" data-link-variant="tab" target="_self"    aria-label="Tab navigation link"   role="tab" aria-selected="false">Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-center px-4 py-2.5 text-base text-[var(--color-global-default)] border-b-2 border-transparent hover:border-[var(--color-global-accent)] hover:text-[var(--color-global-accent)] hover:no-underline active:border-[var(--color-button-primary)] active:text-[var(--color-button-primary)] aria-selected:border-[var(--color-button-primary)] aria-selected:text-[var(--color-button-primary)] aria-selected:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkTab"
+        data-link-type="link"
+        data-link-variant="tab"
+        target="_self"
+        
+        
+        
+        aria-label="Tab navigation link"
+        
+        
+        role="tab"
+        aria-selected="false"
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4356,9 +5598,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkTab" data-link-type="link" data-link-variant="tab" target="_self"    aria-label="Tab navigation link"   role="tab" aria-selected="false">Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-center px-4 py-2.5 text-base text-[var(--color-global-default)] border-b-2 border-transparent hover:border-[var(--color-global-accent)] hover:text-[var(--color-global-accent)] hover:no-underline active:border-[var(--color-button-primary)] active:text-[var(--color-button-primary)] aria-selected:border-[var(--color-button-primary)] aria-selected:text-[var(--color-button-primary)] aria-selected:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkTab"
+        data-link-type="link"
+        data-link-variant="tab"
+        target="_self"
+        
+        
+        
+        aria-label="Tab navigation link"
+        
+        
+        role="tab"
+        aria-selected="false"
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4416,8 +5695,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h6
+          class="text-[var(--color-global-heading)] text-base font-medium leading-normal"
           data-heading-name="demoListT1"
           data-heading-type="heading"
           data-heading-tag="h6"
@@ -4463,9 +5755,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4485,9 +5814,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4507,9 +5873,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4529,9 +5932,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4551,9 +5991,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4573,9 +6050,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4609,8 +6123,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h6
+          class="text-[var(--color-global-heading)] text-base font-medium leading-normal"
           data-heading-name="demoListT1"
           data-heading-type="heading"
           data-heading-tag="h6"
@@ -4656,9 +6183,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4678,9 +6242,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4700,9 +6301,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4722,9 +6360,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4744,9 +6419,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4766,9 +6478,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4802,8 +6551,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h6
+          class="text-[var(--color-global-heading)] text-base font-medium leading-normal"
           data-heading-name="demoListT1"
           data-heading-type="heading"
           data-heading-tag="h6"
@@ -4849,9 +6611,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4871,9 +6670,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4893,9 +6729,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4915,9 +6788,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4937,9 +6847,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4959,9 +6906,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -4995,8 +6979,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h6
+          class="text-[var(--color-global-heading)] text-base font-medium leading-normal"
           data-heading-name="demoListT1"
           data-heading-type="heading"
           data-heading-tag="h6"
@@ -5042,9 +7039,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5064,9 +7098,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5086,9 +7157,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5108,9 +7216,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5130,9 +7275,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5152,9 +7334,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5188,8 +7407,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h6
+          class="text-[var(--color-global-heading)] text-base font-medium leading-normal"
           data-heading-name="demoListT1"
           data-heading-type="heading"
           data-heading-tag="h6"
@@ -5235,9 +7467,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5257,9 +7526,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5279,9 +7585,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5301,9 +7644,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5323,9 +7703,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5345,9 +7762,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5381,8 +7835,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h6
+          class="text-[var(--color-global-heading)] text-base font-medium leading-normal"
           data-heading-name="demoListT1"
           data-heading-type="heading"
           data-heading-tag="h6"
@@ -5428,9 +7895,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5450,9 +7954,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5472,9 +8013,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5494,9 +8072,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5516,9 +8131,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5538,9 +8190,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5574,8 +8263,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h6
+          class="text-[var(--color-global-heading)] text-base font-medium leading-normal"
           data-heading-name="demoListT1"
           data-heading-type="heading"
           data-heading-tag="h6"
@@ -5621,9 +8323,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5643,9 +8382,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5665,9 +8441,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5687,9 +8500,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5709,9 +8559,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5731,9 +8618,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5767,8 +8691,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h6
+          class="text-[var(--color-global-heading)] text-base font-medium leading-normal"
           data-heading-name="demoListT1"
           data-heading-type="heading"
           data-heading-tag="h6"
@@ -5814,9 +8751,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5836,9 +8810,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5858,9 +8869,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5880,9 +8928,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5902,9 +8987,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5924,9 +9046,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkM1" data-link-type="link" data-link-variant="menu-link" target="_self"    aria-label="Menu navigation link"    >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkM1"
+        data-link-type="link"
+        data-link-variant="menu-link"
+        target="_self"
+        
+        
+        
+        aria-label="Menu navigation link"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -5991,8 +9150,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h3
+          class="text-[var(--color-global-heading)] text-2xl font-semibold leading-snug"
           data-heading-name="demoHead3"
           data-heading-type="heading"
           data-heading-tag="h3"
@@ -6023,8 +9195,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h2
+          class="text-[var(--color-global-heading)] text-3xl font-semibold leading-snug"
           data-heading-name="demoLong1"
           data-heading-type="heading"
           data-heading-tag="h2"
@@ -6096,7 +9281,7 @@
       
       <button
         type="button"
-        class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
         data-button-name="demoLabel1"
         data-button-type="button"
         data-button-icon-position="left"
@@ -6176,7 +9361,7 @@
       
       <button
         type="button"
-        class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent border-2 border-[var(--color-button-secondary)] text-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
         data-button-name="demoLabel2"
         data-button-type="button"
         data-button-icon-position="left"
@@ -6262,8 +9447,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h3
+          class="text-[var(--color-global-heading)] text-2xl font-semibold leading-snug"
           data-heading-name="demoHead3"
           data-heading-type="heading"
           data-heading-tag="h3"
@@ -6368,7 +9566,7 @@
       
       <button
         type="button"
-        class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
         data-button-name="demoLabel1"
         data-button-type="button"
         data-button-icon-position="left"
@@ -6448,7 +9646,7 @@
       
       <button
         type="button"
-        class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent border-2 border-[var(--color-button-secondary)] text-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
         data-button-name="demoLabel2"
         data-button-type="button"
         data-button-icon-position="left"
@@ -6570,8 +9768,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h2
+          class="text-[var(--color-global-heading)] text-3xl font-semibold leading-snug"
           data-heading-name="demoLong1"
           data-heading-type="heading"
           data-heading-tag="h2"
@@ -6637,8 +9848,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h2
+          class="text-[var(--color-global-heading)] text-3xl font-semibold leading-snug"
           data-heading-name="demoLong1"
           data-heading-type="heading"
           data-heading-tag="h2"
@@ -6724,8 +9948,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h2
+          class="text-[var(--color-global-heading)] text-3xl font-semibold leading-snug"
           data-heading-name="demoHead2"
           data-heading-type="heading"
           data-heading-tag="h2"
@@ -6798,7 +10035,7 @@
       
       <button
         type="button"
-        class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed "
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed "
         data-button-name="demoCont1"
         data-button-type="button"
         
@@ -6874,7 +10111,7 @@
       
       <button
         type="button"
-        class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent border-2 border-[var(--color-button-secondary)] text-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed "
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed "
         data-button-name="demoClose1"
         data-button-type="button"
         
@@ -6963,8 +10200,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h3
+          class="text-[var(--color-global-heading)] text-2xl font-semibold leading-snug"
           data-heading-name="demoHead3"
           data-heading-type="heading"
           data-heading-tag="h3"
@@ -6995,8 +10245,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h2
+          class="text-[var(--color-global-heading)] text-3xl font-semibold leading-snug"
           data-heading-name="demoLong1"
           data-heading-type="heading"
           data-heading-tag="h2"
@@ -7076,7 +10339,7 @@
       
       <button
         type="button"
-        class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
         data-button-name="demoLabel1"
         data-button-type="button"
         data-button-icon-position="left"
@@ -7156,7 +10419,7 @@
       
       <button
         type="button"
-        class="inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent border-2 border-[var(--color-button-secondary)] text-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
         data-button-name="demoLabel2"
         data-button-type="button"
         data-button-icon-position="left"
@@ -7251,8 +10514,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h3
+          class="text-[var(--color-global-heading)] text-2xl font-semibold leading-snug"
           data-heading-name="demoHead3"
           data-heading-type="heading"
           data-heading-tag="h3"
@@ -7283,8 +10559,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h2
+          class="text-[var(--color-global-heading)] text-3xl font-semibold leading-snug"
           data-heading-name="demoLong1"
           data-heading-type="heading"
           data-heading-tag="h2"
@@ -7394,8 +10683,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h2
+          class="text-[var(--color-global-heading)] text-3xl font-semibold leading-snug"
           data-heading-name="demoHead2"
           data-heading-type="heading"
           data-heading-tag="h2"
@@ -7671,9 +10973,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkTab" data-link-type="link" data-link-variant="tab" target="_self"    aria-label="Tab navigation link"   role="tab" aria-selected="false">Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-center px-4 py-2.5 text-base text-[var(--color-global-default)] border-b-2 border-transparent hover:border-[var(--color-global-accent)] hover:text-[var(--color-global-accent)] hover:no-underline active:border-[var(--color-button-primary)] active:text-[var(--color-button-primary)] aria-selected:border-[var(--color-button-primary)] aria-selected:text-[var(--color-button-primary)] aria-selected:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkTab"
+        data-link-type="link"
+        data-link-variant="tab"
+        target="_self"
+        
+        
+        
+        aria-label="Tab navigation link"
+        
+        
+        role="tab"
+        aria-selected="false"
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -7697,9 +11036,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkTab" data-link-type="link" data-link-variant="tab" target="_self"    aria-label="Tab navigation link"   role="tab" aria-selected="false">Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-center px-4 py-2.5 text-base text-[var(--color-global-default)] border-b-2 border-transparent hover:border-[var(--color-global-accent)] hover:text-[var(--color-global-accent)] hover:no-underline active:border-[var(--color-button-primary)] active:text-[var(--color-button-primary)] aria-selected:border-[var(--color-button-primary)] aria-selected:text-[var(--color-button-primary)] aria-selected:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkTab"
+        data-link-type="link"
+        data-link-variant="tab"
+        target="_self"
+        
+        
+        
+        aria-label="Tab navigation link"
+        
+        
+        role="tab"
+        aria-selected="false"
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -7723,9 +11099,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkTab" data-link-type="link" data-link-variant="tab" target="_self"    aria-label="Tab navigation link"   role="tab" aria-selected="false">Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-center px-4 py-2.5 text-base text-[var(--color-global-default)] border-b-2 border-transparent hover:border-[var(--color-global-accent)] hover:text-[var(--color-global-accent)] hover:no-underline active:border-[var(--color-button-primary)] active:text-[var(--color-button-primary)] aria-selected:border-[var(--color-button-primary)] aria-selected:text-[var(--color-button-primary)] aria-selected:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkTab"
+        data-link-type="link"
+        data-link-variant="tab"
+        target="_self"
+        
+        
+        
+        aria-label="Tab navigation link"
+        
+        
+        role="tab"
+        aria-selected="false"
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -7763,21 +11176,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Open menu"
-        role="img"
-        data-icon-name="demoBurger1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#hamburger"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Open menu"
+          role="img"
+          data-icon-name="demoBurger1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#hamburger"></use>
+        </svg>
+      
     
   
 
@@ -7799,21 +11228,37 @@
 
       
       
-      
-        
-      
+
       
 
       
-      <svg
-        class="icon icon-md"
-        aria-label="Close"
-        role="img"
-        data-icon-name="demoClose1"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#x"></use>
-      </svg>
+      
+      
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+        
+
+        
+        <svg
+          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          aria-label="Close"
+          role="img"
+          data-icon-name="demoClose1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#x"></use>
+        </svg>
+      
     
   
 
@@ -7903,9 +11348,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkTab" data-link-type="link" data-link-variant="tab" target="_self"    aria-label="Tab navigation link"   role="tab" aria-selected="false">Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-center px-4 py-2.5 text-base text-[var(--color-global-default)] border-b-2 border-transparent hover:border-[var(--color-global-accent)] hover:text-[var(--color-global-accent)] hover:no-underline active:border-[var(--color-button-primary)] active:text-[var(--color-button-primary)] aria-selected:border-[var(--color-button-primary)] aria-selected:text-[var(--color-button-primary)] aria-selected:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkTab"
+        data-link-type="link"
+        data-link-variant="tab"
+        target="_self"
+        
+        
+        
+        aria-label="Tab navigation link"
+        
+        
+        role="tab"
+        aria-selected="false"
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -7929,9 +11411,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkTab" data-link-type="link" data-link-variant="tab" target="_self"    aria-label="Tab navigation link"   role="tab" aria-selected="false">Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-center px-4 py-2.5 text-base text-[var(--color-global-default)] border-b-2 border-transparent hover:border-[var(--color-global-accent)] hover:text-[var(--color-global-accent)] hover:no-underline active:border-[var(--color-button-primary)] active:text-[var(--color-button-primary)] aria-selected:border-[var(--color-button-primary)] aria-selected:text-[var(--color-button-primary)] aria-selected:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkTab"
+        data-link-type="link"
+        data-link-variant="tab"
+        target="_self"
+        
+        
+        
+        aria-label="Tab navigation link"
+        
+        
+        role="tab"
+        aria-selected="false"
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -7955,9 +11474,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLinkTab" data-link-type="link" data-link-variant="tab" target="_self"    aria-label="Tab navigation link"   role="tab" aria-selected="false">Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 justify-center px-4 py-2.5 text-base text-[var(--color-global-default)] border-b-2 border-transparent hover:border-[var(--color-global-accent)] hover:text-[var(--color-global-accent)] hover:no-underline active:border-[var(--color-button-primary)] active:text-[var(--color-button-primary)] aria-selected:border-[var(--color-button-primary)] aria-selected:text-[var(--color-button-primary)] aria-selected:font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkTab"
+        data-link-type="link"
+        data-link-variant="tab"
+        target="_self"
+        
+        
+        
+        aria-label="Tab navigation link"
+        
+        
+        role="tab"
+        aria-selected="false"
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8060,8 +11616,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h6
+          class="text-[var(--color-global-heading)] text-base font-medium leading-normal"
           data-heading-name="demoHead6"
           data-heading-type="heading"
           data-heading-tag="h6"
@@ -8107,9 +11676,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"     data-link-active="true" aria-current="page"  >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        data-link-active="true" aria-current="page"
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8129,9 +11735,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8151,9 +11794,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8173,9 +11853,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8195,9 +11912,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8217,9 +11971,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8239,9 +12030,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8274,8 +12102,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h6
+          class="text-[var(--color-global-heading)] text-base font-medium leading-normal"
           data-heading-name="demoHead6"
           data-heading-type="heading"
           data-heading-tag="h6"
@@ -8321,9 +12162,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"     data-link-active="true" aria-current="page"  >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        data-link-active="true" aria-current="page"
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8343,9 +12221,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8365,9 +12280,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8387,9 +12339,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8409,9 +12398,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8431,9 +12457,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8453,9 +12516,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8488,8 +12588,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h6
+          class="text-[var(--color-global-heading)] text-base font-medium leading-normal"
           data-heading-name="demoHead6"
           data-heading-type="heading"
           data-heading-tag="h6"
@@ -8535,9 +12648,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"     data-link-active="true" aria-current="page"  >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        data-link-active="true" aria-current="page"
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8557,9 +12707,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8579,9 +12766,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8601,9 +12825,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8623,9 +12884,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8645,9 +12943,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8667,9 +13002,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="#" data-link-name="demoLink1" data-link-type="link" data-link-variant="default" target="_blank" rel="noopener noreferrer"       >Label</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="#"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLink1"
+        data-link-type="link"
+        data-link-variant="default"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Label
+      </a>
     
   
 
@@ -8702,8 +13074,21 @@
       
 
       
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+
+      
       
         <h6
+          class="text-[var(--color-global-heading)] text-base font-medium leading-normal"
           data-heading-name="demoSocial1"
           data-heading-type="heading"
           data-heading-tag="h6"
@@ -8749,9 +13134,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="https://facebook.com" data-link-name="demoFacebook" data-link-type="link" data-link-variant="social" target="_blank" rel="noopener noreferrer"   aria-label="Visit our Facebook page"    >facebook</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="https://facebook.com"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 gap-2 px-3 py-2.5 text-sm text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoFacebook"
+        data-link-type="link"
+        data-link-variant="social"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        aria-label="Visit our Facebook page"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        facebook
+      </a>
     
   
 
@@ -8771,9 +13193,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="https://linkedin.com" data-link-name="demoLinkedin" data-link-type="link" data-link-variant="social" target="_blank" rel="noopener noreferrer"   aria-label="Visit our LinkedIn page"    >LinkedIn</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="https://linkedin.com"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 gap-2 px-3 py-2.5 text-sm text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoLinkedin"
+        data-link-type="link"
+        data-link-variant="social"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        aria-label="Visit our LinkedIn page"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        LinkedIn
+      </a>
     
   
 
@@ -8793,9 +13252,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="https://twitter.com" data-link-name="demoTwitter" data-link-type="link" data-link-variant="social" target="_blank" rel="noopener noreferrer"   aria-label="Visit our Twitter page"    >twitter</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="https://twitter.com"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 gap-2 px-3 py-2.5 text-sm text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoTwitter"
+        data-link-type="link"
+        data-link-variant="social"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        aria-label="Visit our Twitter page"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        twitter
+      </a>
     
   
 
@@ -8815,9 +13311,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="https://instagram.com" data-link-name="demoInstagram" data-link-type="link" data-link-variant="social" target="_blank" rel="noopener noreferrer"   aria-label="Visit our Instagram page"    >Instagram</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="https://instagram.com"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 gap-2 px-3 py-2.5 text-sm text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoInstagram"
+        data-link-type="link"
+        data-link-variant="social"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        aria-label="Visit our Instagram page"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Instagram
+      </a>
     
   
 
@@ -8859,9 +13392,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="/accessibilite" data-link-name="demoAccess1" data-link-type="link" data-link-variant="footer" target="_self"    aria-label="Accessibility statement"    >Accessibilité</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="/accessibilite"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-sm text-[var(--color-global-contrast-light-02)] hover:text-[var(--color-global-default)] hover:no-underline active:text-[var(--color-global-accent)] disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoAccess1"
+        data-link-type="link"
+        data-link-variant="footer"
+        target="_self"
+        
+        
+        
+        aria-label="Accessibility statement"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Accessibilité
+      </a>
     
   
 
@@ -8880,9 +13450,46 @@
       
       
       
+      
+      
+      
 
       
-      <a href="https://hat.com" data-link-name="demoWebsite1" data-link-type="link" data-link-variant="footer" target="_blank" rel="noopener noreferrer"   aria-label="Website created by hat"    >Website by hat</a>
+
+      
+      
+
+      
+      
+      
+      
+        
+      
+      
+
+      
+      <a
+        href="https://hat.com"
+        class="inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1 text-sm text-[var(--color-global-contrast-light-02)] hover:text-[var(--color-global-default)] hover:no-underline active:text-[var(--color-global-accent)] disabled:opacity-50 disabled:cursor-not-allowed"
+        data-link-name="demoWebsite1"
+        data-link-type="link"
+        data-link-variant="footer"
+        target="_blank"
+        rel="noopener noreferrer"
+        
+        
+        aria-label="Website created by hat"
+        
+        
+        
+        
+      >
+        
+        
+
+        
+        Website by hat
+      </a>
     
   
 

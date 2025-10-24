@@ -23,6 +23,7 @@
     - Google Fonts integration with preconnect
     - Critical images preload for LCP optimization
     - Icon sprite preload
+    - Flag icons library (flag-icons via CDN)
     - Cookie consent (Axeptio) with Google Consent Mode v2
     - Google Analytics 4 integration
     - Netlify Identity redirect for Decap CMS
@@ -56,6 +57,7 @@
     - site.analytics.ga4: GA4 measurement ID
 
   @created 2025-01-15
+  @updated 2025-01-24 - Added flag-icons CDN for country flags
 #}
 
 <!DOCTYPE html>
@@ -116,6 +118,9 @@
 
     {# ----- Stylesheets ----- #}
     <link rel="stylesheet" href="/output.css"/>
+
+    {# ----- Flag Icons Library (CDN) ----- #}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"/>
 
     {% if site.iconLibrary.fontAwesome %}
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>

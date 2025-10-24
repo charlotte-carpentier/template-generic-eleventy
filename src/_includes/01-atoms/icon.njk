@@ -17,7 +17,14 @@
         datas: atoms.icon.icons
     }) }}
 
+  Country Flags:
+    Country flags use the flag-icons library (loaded via CDN in base.njk).
+    When spriteId contains a 2-letter country code (e.g., "us", "fr", "de"),
+    the component renders a <span class="fi fi-xx"> instead of an SVG sprite.
+
   @created 2025-01-15
+  @updated 2025-01-17 - Added Tailwind CSS styles (Phase 4)
+  @updated 2025-01-24 - Added flag-icons support for country flags
 #}
 
 {% macro renderIcon(options) %}
@@ -38,25 +45,83 @@
       {% set spriteId = iconData.spriteId | default(options.name) %}
       {% set iconAlt = iconData.alt | default('Icon') %}
 
-      {# Build CSS classes #}
-      {% set cssClasses = 'icon' %}
-      {% if iconData.variant %}
-        {% set cssClasses = cssClasses ~ ' icon-' ~ iconData.variant %}
-      {% endif %}
-      {% if options.class %}
-        {% set cssClasses = cssClasses ~ ' ' ~ options.class %}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         Detect if this is a country flag (2-letter ISO code)
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set isCountryFlag = spriteId | length == 2 %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         CSS Classes - Tailwind Utilities
+         Best practices from Adam Wathan (Tailwind CSS creator)
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# Size classes - Based on variant
+         Standard Tailwind sizing: w-3 (12px), w-4 (16px), w-5 (20px), w-6 (24px), w-8 (32px), w-10 (40px) #}
+      {% set sizeClasses = "" %}
+      
+      {% if iconData.variant == 'xs' %}
+        {% set sizeClasses = "w-3 h-3" %}
+      {% elif iconData.variant == 'sm' %}
+        {% set sizeClasses = "w-4 h-4" %}
+      {% elif iconData.variant == 'md' %}
+        {% set sizeClasses = "w-5 h-5" %}
+      {% elif iconData.variant == 'lg' %}
+        {% set sizeClasses = "w-6 h-6" %}
+      {% elif iconData.variant == 'xl' %}
+        {% set sizeClasses = "w-8 h-8" %}
+      {% elif iconData.variant == '2xl' %}
+        {% set sizeClasses = "w-10 h-10" %}
+      {% else %}
+        {# Default size if no variant specified #}
+        {% set sizeClasses = "w-6 h-6" %}
       {% endif %}
 
-      {# Render SVG sprite #}
-      <svg
-        class="{{ cssClasses }}"
-        aria-label="{{ iconAlt }}"
-        role="img"
-        data-icon-name="{{ iconData.name }}"
-        data-icon-type="icon"
-      >
-        <use href="/assets/icons/sprites/sprite.svg#{{ spriteId }}"></use>
-      </svg>
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         Render country flag using flag-icons CSS classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% if isCountryFlag %}
+        {# Country flags use flag-icons library (fi fi-xx) #}
+        {% set flagClasses = "fi fi-" ~ spriteId ~ " inline-block flex-shrink-0 " ~ sizeClasses %}
+        {% if options.class %}
+          {% set flagClasses = flagClasses ~ ' ' ~ options.class %}
+        {% endif %}
+
+        <span
+          class="{{ flagClasses }}"
+          role="img"
+          aria-label="{{ iconAlt }}"
+          title="{{ iconAlt }}"
+          data-icon-name="{{ iconData.name }}"
+          data-icon-type="flag"
+          {% if iconData.variant %}data-icon-variant="{{ iconData.variant }}"{% endif %}
+        ></span>
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         Render regular icon using SVG sprite
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% else %}
+        {# Base classes - Common to all icons
+           fill-current inherits color from text-* utilities #}
+        {% set baseClasses = "inline-block flex-shrink-0 fill-current" %}
+
+        {# Combine all classes #}
+        {% set finalClasses = baseClasses ~ ' ' ~ sizeClasses %}
+        {% if options.class %}
+          {% set finalClasses = finalClasses ~ ' ' ~ options.class %}
+        {% endif %}
+
+        {# Render SVG sprite #}
+        <svg
+          class="{{ finalClasses }}"
+          aria-label="{{ iconAlt }}"
+          role="img"
+          data-icon-name="{{ iconData.name }}"
+          data-icon-type="icon"
+          {% if iconData.variant %}data-icon-variant="{{ iconData.variant }}"{% endif %}
+        >
+          <use href="/assets/icons/sprites/sprite.svg#{{ spriteId }}"></use>
+        </svg>
+      {% endif %}
     {% endif %}
   {% endif %}
 {% endmacro %}

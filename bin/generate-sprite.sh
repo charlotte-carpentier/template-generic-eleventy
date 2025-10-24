@@ -12,6 +12,9 @@
 # Features:
 # - Normalizes colors to currentColor for theming
 # - Wraps icons in <symbol> tags with unique IDs
+# - PRESERVES original viewBox from source SVGs
+# - CONVERTS xlink:href to href (SVG 1.1 → SVG 2.0)
+# - REMOVES xmlns:xlink namespace declarations
 # - Validates output with symbol and path counts
 #
 
@@ -29,11 +32,12 @@ echo "Generating SVG sprite..."
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 # Normalize SVG colors to currentColor for theme compatibility
+# Also converts deprecated xlink:href to modern href (SVG 2.0)
 normalize_svg_colors() {
     local file="$1"
     local temp_file=$(mktemp)
     
-    # Replace various color formats with currentColor
+    # Replace various color formats with currentColor + remove xlink namespace
     sed 's/fill="#[0-9a-fA-F]\{6\}"/fill="currentColor"/g' "$file" | \
     sed 's/fill="#[0-9a-fA-F]\{3\}"/fill="currentColor"/g' | \
     sed 's/stroke="#[0-9a-fA-F]\{6\}"/stroke="currentColor"/g' | \
@@ -43,9 +47,24 @@ normalize_svg_colors() {
     sed 's/fill="#000"/fill="currentColor"/g' | \
     sed 's/stroke="black"/stroke="currentColor"/g' | \
     sed 's/stroke="#000000"/stroke="currentColor"/g' | \
-    sed 's/stroke="#000"/stroke="currentColor"/g' > "$temp_file"
+    sed 's/stroke="#000"/stroke="currentColor"/g' | \
+    sed 's/xlink:href=/href=/g' | \
+    sed 's/xmlns:xlink="[^"]*"//g' > "$temp_file"
     
     echo "$temp_file"
+}
+
+# Extract viewBox from SVG file
+extract_viewbox() {
+    local file="$1"
+    local viewbox=$(grep -oP 'viewBox="\K[^"]+' "$file" | head -1)
+    
+    # Fallback to default if no viewBox found
+    if [ -z "$viewbox" ]; then
+        echo "0 0 24 24"
+    else
+        echo "$viewbox"
+    fi
 }
 
 # Process individual SVG file and wrap in <symbol>
@@ -56,8 +75,11 @@ process_svg() {
     # Normalize colors first
     local normalized_file=$(normalize_svg_colors "$file")
     
-    # Extract SVG content and wrap in symbol
-    echo "    <symbol id=\"$id\" viewBox=\"0 0 256 256\">"
+    # Extract original viewBox
+    local viewbox=$(extract_viewbox "$file")
+    
+    # Wrap in symbol with original viewBox
+    echo "    <symbol id=\"$id\" viewBox=\"$viewbox\">"
     
     # Extract content between <svg> tags, remove wrapper, indent properly
     sed -n '/<svg/,/<\/svg>/p' "$normalized_file" | \
@@ -89,7 +111,8 @@ for file in "$ICONS_DIR"/*.svg; do
     if [ -f "$file" ] && [[ "$file" != *"sprite.svg" ]]; then
         filename=$(basename "$file" .svg)
         id="$filename"
-        echo "  Processing: $id"
+        viewbox=$(extract_viewbox "$file")
+        echo "  Processing: $id (viewBox: $viewbox)"
         process_svg "$file" "$id" >> "$SPRITE_FILE"
     fi
 done
@@ -122,3 +145,17 @@ if [ "$total_paths" -eq 0 ]; then
     echo "Sample SVG content:"
     head -5 "$ICONS_DIR"/*.svg | head -10
 fi
+
+echo ""
+echo "Checking for xlink references..."
+xlink_count=$(grep -c "xlink" "$SPRITE_FILE" || echo "0")
+if [ "$xlink_count" -eq 0 ]; then
+    echo "No xlink references found - All converted to modern SVG 2.0"
+else
+    echo "Warning: Found $xlink_count xlink references"
+    echo "Lines with xlink:"
+    grep -n "xlink" "$SPRITE_FILE" | head -5
+fi
+
+echo ""
+echo "Sprite generation complete!"
