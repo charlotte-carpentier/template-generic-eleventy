@@ -5,20 +5,21 @@
     "component": "icon",
     "type": "atom",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "updated": "2025-01-24"
   },
   
   "icons": {
     "smiles": [
       {
         "name": "demoSmile1",
-        "spriteId": "smile",
+        "spriteId": "smiley",
         "alt": "Smile icon",
         "variants": ["xs-filled", "sm-filled", "md-filled", "lg-filled", "xl-filled", "xxl-filled"]
       },
       {
         "name": "demoSmile2",
-        "spriteId": "smile",
+        "spriteId": "smiley",
         "alt": "Smile icon",
         "variants": ["xs-outline", "sm-outline", "md-outline", "lg-outline", "xl-outline", "xxl-outline"]
       }
@@ -32,37 +33,37 @@
       },
       {
         "name": "demoFlagUs1",
-        "spriteId": "flag-us",
+        "spriteId": "us",
         "alt": "United States flag",
         "variant": "md"
       },
       {
         "name": "demoFlagCn1",
-        "spriteId": "flag-cn",
+        "spriteId": "cn",
         "alt": "China flag",
         "variant": "md"
       },
       {
         "name": "demoFlagAf1",
-        "spriteId": "flag-af",
+        "spriteId": "af",
         "alt": "Afghanistan flag",
         "variant": "md"
       },
       {
         "name": "demoFlagAl1",
-        "spriteId": "flag-al",
+        "spriteId": "al",
         "alt": "Albania flag",
         "variant": "md"
       },
       {
         "name": "demoFlagDz1",
-        "spriteId": "flag-dz",
+        "spriteId": "dz",
         "alt": "Algeria flag",
         "variant": "md"
       },
       {
         "name": "demoFlagIm1",
-        "spriteId": "flag-im",
+        "spriteId": "im",
         "alt": "Isle of Man flag",
         "variant": "md"
       }
