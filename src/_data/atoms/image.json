@@ -1,6 +1,4 @@
 {
-  "// Component": "Image - Responsive images with variants and avatar support",
-  
   "_meta": {
     "component": "image",
     "type": "atom",
@@ -11,19 +9,30 @@
   "images": [
     {
       "name": "demoImage1",
-      "src": "/assets/images/placeholders/placeholder-large.png",
-      "alt": "Image description",
-      "variants": ["large", "medium", "small"]
+      "src": "/assets/images/placeholders/placeholder-square.png",
+      "alt": "Square placeholder image",
+      "variant": "square"
     },
     {
       "name": "demoImage2",
-      "iconName": "demoSmile3",
-      "alt": "Avatar with smile icon",
-      "variant": "avatar",
-      "backgroundColors": ["black", "blue", "green", "orange", "red"]
+      "src": "/assets/images/placeholders/placeholder-landscape.png",
+      "alt": "Landscape placeholder image",
+      "variant": "landscape"
     },
     {
       "name": "demoImage3",
+      "src": "/assets/images/placeholders/placeholder-wide.png",
+      "alt": "Wide placeholder image",
+      "variant": "wide"
+    },
+    {
+      "name": "demoAvatar1",
+      "iconName": "demoSmile3",
+      "alt": "Avatar with smile icon",
+      "variant": "avatar"
+    },
+    {
+      "name": "demoAvatar2",
       "src": "/assets/images/placeholders/avatar-photo.png",
       "alt": "Avatar photo",
       "variant": "avatar"
