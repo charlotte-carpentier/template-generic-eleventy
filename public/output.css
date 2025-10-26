@@ -93,9 +93,11 @@
     --color-button-secondary: var(--color-brand-primary-40);
     --color-button-secondary-hover: var(--color-brand-primary-30);
     --color-button-secondary-hover-light: var(--color-neutral-95);
+    --color-form-active: var(--color-neutral-00);
     --color-form-hover: var(--color-neutral-10);
     --color-form: var(--color-neutral-30);
     --color-form-control-checked: var(--color-brand-primary-40);
+    --color-semantic-critical: var(--color-semantic-critical-40);
     --color-semantic-information-focus: var(--color-semantic-information-30);
     --shadow-short: 0 1px 3px rgba(0, 0, 0, 0.1);
     --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.15);
@@ -109,6 +111,7 @@
     --radius-32: 32px;
     --radius-button: var(--radius-8);
     --radius-card: var(--radius-12);
+    --radius-input: var(--radius-6);
     --radius-pill: var(--radius-32);
     --spacing-1: 4px;
     --spacing-2: 8px;
@@ -355,6 +358,15 @@
   .mt-1 {
     margin-top: var(--spacing-1);
   }
+  .mt-1\.5 {
+    margin-top: calc(var(--spacing) * 1.5);
+  }
+  .mt-2 {
+    margin-top: var(--spacing-2);
+  }
+  .mb-1\.5 {
+    margin-bottom: calc(var(--spacing) * 1.5);
+  }
   .mb-2 {
     margin-bottom: var(--spacing-2);
   }
@@ -454,9 +466,6 @@
   .w-11 {
     width: calc(var(--spacing) * 11);
   }
-  .w-40 {
-    width: calc(var(--spacing) * 40);
-  }
   .w-64 {
     width: calc(var(--spacing) * 64);
   }
@@ -497,6 +506,9 @@
   }
   .resize {
     resize: both;
+  }
+  .resize-none {
+    resize: none;
   }
   .appearance-none {
     -webkit-appearance: none;
@@ -552,6 +564,9 @@
   .rounded-\[var\(--radius-card\)\] {
     border-radius: var(--radius-card);
   }
+  .rounded-\[var\(--radius-input\)\] {
+    border-radius: var(--radius-input);
+  }
   .rounded-\[var\(--radius-pill\)\] {
     border-radius: var(--radius-pill);
   }
@@ -573,6 +588,9 @@
   .border-b-2 {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 2px;
+  }
+  .\!border-\[var\(--color-semantic-critical\)\] {
+    border-color: var(--color-semantic-critical) !important;
   }
   .border-\[var\(--color-button-secondary\)\] {
     border-color: var(--color-button-secondary);
@@ -609,6 +627,9 @@
   }
   .bg-transparent {
     background-color: transparent;
+  }
+  .bg-white {
+    background-color: var(--color-white);
   }
   .fill-current {
     fill: currentcolor;
@@ -649,6 +670,9 @@
   }
   .py-10 {
     padding-block: var(--spacing-10);
+  }
+  .text-right {
+    text-align: right;
   }
   .text-2xl {
     font-size: var(--text-2xl);
@@ -729,6 +753,9 @@
   .text-\[var\(--color-neutral-50\)\] {
     color: var(--color-neutral-50);
   }
+  .text-\[var\(--color-semantic-critical\)\] {
+    color: var(--color-semantic-critical);
+  }
   .text-\[var\(--font-size-4xl\)\] {
     color: var(--font-size-4xl);
   }
@@ -793,6 +820,22 @@
   .peer-checked\:opacity-100 {
     &:is(:where(.peer):checked ~ *) {
       opacity: 100%;
+    }
+  }
+  .placeholder\:text-\[var\(--color-global-contrast-light-02\)\] {
+    &::-moz-placeholder {
+      color: var(--color-global-contrast-light-02);
+    }
+    &::placeholder {
+      color: var(--color-global-contrast-light-02);
+    }
+  }
+  .placeholder\:italic {
+    &::-moz-placeholder {
+      font-style: italic;
+    }
+    &::placeholder {
+      font-style: italic;
     }
   }
   .checked\:border-\[var\(--color-form-control-checked\)\] {
@@ -912,9 +955,20 @@
       box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
     }
   }
+  .focus\:ring-\[var\(--color-form-active\)\] {
+    &:focus {
+      --tw-ring-color: var(--color-form-active);
+    }
+  }
   .focus\:ring-\[var\(--color-semantic-information-focus\)\] {
     &:focus {
       --tw-ring-color: var(--color-semantic-information-focus);
+    }
+  }
+  .focus\:ring-offset-0 {
+    &:focus {
+      --tw-ring-offset-width: 0px;
+      --tw-ring-offset-shadow: var(--tw-ring-inset,) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
     }
   }
   .focus\:ring-offset-2 {
@@ -982,6 +1036,11 @@
   .disabled\:cursor-not-allowed {
     &:disabled {
       cursor: not-allowed;
+    }
+  }
+  .disabled\:bg-\[var\(--color-global-contrast-light-04\)\] {
+    &:disabled {
+      background-color: var(--color-global-contrast-light-04);
     }
   }
   .disabled\:opacity-50 {
