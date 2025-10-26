@@ -570,6 +570,9 @@
   .rounded-\[var\(--radius-pill\)\] {
     border-radius: var(--radius-pill);
   }
+  .rounded-full {
+    border-radius: calc(infinity * 1px);
+  }
   .rounded-lg {
     border-radius: var(--radius-lg);
   }
@@ -741,6 +744,9 @@
   .text-\[var\(--color-button-secondary\)\] {
     color: var(--color-button-secondary);
   }
+  .text-\[var\(--color-form\)\] {
+    color: var(--color-form);
+  }
   .text-\[var\(--color-global-contrast-light-02\)\] {
     color: var(--color-global-contrast-light-02);
   }
@@ -817,6 +823,18 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
+  .select-none {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+         user-select: none;
+  }
+  .group-hover\:text-\[var\(--color-form-hover\)\] {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        color: var(--color-form-hover);
+      }
+    }
+  }
   .peer-checked\:opacity-100 {
     &:is(:where(.peer):checked ~ *) {
       opacity: 100%;
@@ -846,6 +864,120 @@
   .checked\:bg-\[var\(--color-form-control-checked\)\] {
     &:checked {
       background-color: var(--color-form-control-checked);
+    }
+  }
+  .checked\:after\:absolute {
+    &:checked {
+      &::after {
+        content: var(--tw-content);
+        position: absolute;
+      }
+    }
+  }
+  .checked\:after\:top-1\/2 {
+    &:checked {
+      &::after {
+        content: var(--tw-content);
+        top: calc(1/2 * 100%);
+      }
+    }
+  }
+  .checked\:after\:left-1\/2 {
+    &:checked {
+      &::after {
+        content: var(--tw-content);
+        left: calc(1/2 * 100%);
+      }
+    }
+  }
+  .checked\:after\:h-2 {
+    &:checked {
+      &::after {
+        content: var(--tw-content);
+        height: var(--spacing-2);
+      }
+    }
+  }
+  .checked\:after\:h-2\.5 {
+    &:checked {
+      &::after {
+        content: var(--tw-content);
+        height: calc(var(--spacing) * 2.5);
+      }
+    }
+  }
+  .checked\:after\:h-3 {
+    &:checked {
+      &::after {
+        content: var(--tw-content);
+        height: var(--spacing-3);
+      }
+    }
+  }
+  .checked\:after\:w-2 {
+    &:checked {
+      &::after {
+        content: var(--tw-content);
+        width: var(--spacing-2);
+      }
+    }
+  }
+  .checked\:after\:w-2\.5 {
+    &:checked {
+      &::after {
+        content: var(--tw-content);
+        width: calc(var(--spacing) * 2.5);
+      }
+    }
+  }
+  .checked\:after\:w-3 {
+    &:checked {
+      &::after {
+        content: var(--tw-content);
+        width: var(--spacing-3);
+      }
+    }
+  }
+  .checked\:after\:-translate-x-1\/2 {
+    &:checked {
+      &::after {
+        content: var(--tw-content);
+        --tw-translate-x: calc(calc(1/2 * 100%) * -1);
+        translate: var(--tw-translate-x) var(--tw-translate-y);
+      }
+    }
+  }
+  .checked\:after\:-translate-y-1\/2 {
+    &:checked {
+      &::after {
+        content: var(--tw-content);
+        --tw-translate-y: calc(calc(1/2 * 100%) * -1);
+        translate: var(--tw-translate-x) var(--tw-translate-y);
+      }
+    }
+  }
+  .checked\:after\:rounded-full {
+    &:checked {
+      &::after {
+        content: var(--tw-content);
+        border-radius: calc(infinity * 1px);
+      }
+    }
+  }
+  .checked\:after\:bg-\[var\(--color-form-control-checked\)\] {
+    &:checked {
+      &::after {
+        content: var(--tw-content);
+        background-color: var(--color-form-control-checked);
+      }
+    }
+  }
+  .checked\:after\:content-\[\'\'\] {
+    &:checked {
+      &::after {
+        --tw-content: '';
+        content: var(--tw-content);
+      }
     }
   }
   .hover\:border-\[var\(--color-form-hover\)\] {
@@ -1337,6 +1469,11 @@ body {
   syntax: "*";
   inherits: false;
 }
+@property --tw-content {
+  syntax: "*";
+  initial-value: "";
+  inherits: false;
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -1380,6 +1517,7 @@ body {
       --tw-drop-shadow-color: initial;
       --tw-drop-shadow-alpha: 100%;
       --tw-drop-shadow-size: initial;
+      --tw-content: "";
     }
   }
 }

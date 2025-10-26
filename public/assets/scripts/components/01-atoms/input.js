@@ -1,7 +1,7 @@
 /* ┌─────────────────────────────────────────────────────────┐
    │ ATOM › Input                                            │
    │ Input validation using Constraint Validation API        │
-   │ Path: src/assets/scripts/components/01-atoms/          │
+   │ Path: src/assets/scripts/components/01-atoms/           │
    └─────────────────────────────────────────────────────────┘ */
 
 /**
