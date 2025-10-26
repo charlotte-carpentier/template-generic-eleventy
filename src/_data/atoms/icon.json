@@ -6,7 +6,7 @@
     "type": "atom",
     "version": "1.0.0",
     "created": "2025-01-15",
-    "updated": "2025-01-24"
+    "updated": "2025-10-26"
   },
   
   "icons": {
@@ -97,6 +97,12 @@
         "name": "demoForward1",
         "spriteId": "forward-fast-solid-full",
         "alt": "Last page",
+        "variant": "md"
+      },
+      {
+        "name": "demoSortDown1",
+        "spriteId": "sort-down-solid-full",
+        "alt": "Dropdown arrow",
         "variant": "md"
       },
       {
