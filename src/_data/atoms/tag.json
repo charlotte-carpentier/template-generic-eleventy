@@ -15,43 +15,78 @@
       "variant": "default",
       "title": "Tag tooltip",
       "role": "status",
-      "isInteractive": false,
       "screenReaderText": "Screen reader description"
     },
     {
       "name": "demoTag2",
       "text": "LABEL",
-      "variant": "primary",
+      "variant": "default-filled",
       "title": "Tag tooltip",
       "role": "status",
-      "isInteractive": false,
       "screenReaderText": "Screen reader description"
     },
     {
       "name": "demoTag3",
       "text": "LABEL",
-      "variant": "success",
+      "variant": "primary",
       "title": "Tag tooltip",
       "role": "status",
-      "isInteractive": false,
       "screenReaderText": "Screen reader description"
     },
     {
       "name": "demoTag4",
       "text": "LABEL",
-      "variant": "warning",
+      "variant": "primary-filled",
       "title": "Tag tooltip",
       "role": "status",
-      "isInteractive": false,
       "screenReaderText": "Screen reader description"
     },
     {
       "name": "demoTag5",
       "text": "LABEL",
+      "variant": "success",
+      "title": "Tag tooltip",
+      "role": "status",
+      "screenReaderText": "Screen reader description"
+    },
+    {
+      "name": "demoTag6",
+      "text": "LABEL",
+      "variant": "success-filled",
+      "title": "Tag tooltip",
+      "role": "status",
+      "screenReaderText": "Screen reader description"
+    },
+    {
+      "name": "demoTag7",
+      "text": "LABEL",
+      "variant": "warning",
+      "title": "Tag tooltip",
+      "role": "status",
+      "screenReaderText": "Screen reader description"
+    },
+    {
+      "name": "demoTag8",
+      "text": "LABEL",
+      "variant": "warning-filled",
+      "title": "Tag tooltip",
+      "role": "status",
+      "screenReaderText": "Screen reader description"
+    },
+    {
+      "name": "demoTag9",
+      "text": "LABEL",
       "variant": "danger",
       "title": "Tag tooltip",
       "role": "status",
-      "isInteractive": false,
+      "screenReaderText": "Screen reader description"
+    },
+    {
+      "name": "demoTag10",
+      "text": "LABEL",
+      "variant": "danger-filled",
+      "title": "Tag tooltip",
+      "role": "status",
       "screenReaderText": "Screen reader description"
     }
   ]

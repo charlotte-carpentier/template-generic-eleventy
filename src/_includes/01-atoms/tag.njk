@@ -39,17 +39,32 @@
       {% if tagData.variant == 'default' %}
         {% set variantClasses = "text-[var(--color-neutral-30)] bg-[var(--color-neutral-90)] border border-[var(--color-neutral-60)]" %}
       
+      {% elif tagData.variant == 'default-filled' %}
+        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-neutral-30)]" %}
+      
       {% elif tagData.variant == 'primary' %}
         {% set variantClasses = "text-[var(--color-semantic-information-40)] bg-[var(--color-semantic-information-90)] border border-[var(--color-semantic-information-60)]" %}
+      
+      {% elif tagData.variant == 'primary-filled' %}
+        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-information-40)]" %}
       
       {% elif tagData.variant == 'success' %}
         {% set variantClasses = "text-[var(--color-semantic-success-20)] bg-[var(--color-semantic-success-90)] border border-[var(--color-semantic-success-60)]" %}
       
+      {% elif tagData.variant == 'success-filled' %}
+        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-success-20)]" %}
+      
       {% elif tagData.variant == 'warning' %}
         {% set variantClasses = "text-[var(--color-semantic-warning-40)] bg-[var(--color-semantic-warning-90)] border border-[var(--color-semantic-warning-60)]" %}
       
+      {% elif tagData.variant == 'warning-filled' %}
+        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-warning-40)]" %}
+      
       {% elif tagData.variant == 'danger' %}
         {% set variantClasses = "text-[var(--color-semantic-critical-40)] bg-[var(--color-semantic-critical-90)] border border-[var(--color-semantic-critical-60)]" %}
+      
+      {% elif tagData.variant == 'danger-filled' %}
+        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-critical-40)]" %}
       
       {% else %}
         {# Fallback to default #}
