@@ -11,7 +11,7 @@
   "sectArtHero": [
     {
       "name": "demoSectAH1",
-      "imageName": "demoImage1",
+      "imageName": "demoImage2",
       "headingName": "demoLong1",
       "ariaLabel": "Article hero section"
     }

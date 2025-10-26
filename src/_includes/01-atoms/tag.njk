@@ -7,22 +7,13 @@
   Props:
     - options.name (string): Tag identifier
     - options.datas (object): Tag configuration data
-    - options.isInteractive (boolean): Enable interactive behavior
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/tag.njk" import renderTag %}
 
-    Static tag:
     {{ renderTag({
         name: "demoTag1",
         datas: atoms.tag.tags
-    }) }}
-
-    Interactive tag:
-    {{ renderTag({
-        name: "demoTag1",
-        datas: atoms.tag.tags,
-        isInteractive: true
     }) }}
 
   @created 2025-01-15
@@ -42,14 +33,53 @@
     {% if not tagData %}
       <span class="error" role="alert">Tag not found: {{ options.name }}</span>
     {% else %}
+      {# Variant color mapping #}
+      {% set variantClasses = "" %}
+      
+      {% if tagData.variant == 'default' %}
+        {% set variantClasses = "text-[var(--color-neutral-30)] bg-[var(--color-neutral-90)] border border-[var(--color-neutral-60)]" %}
+      
+      {% elif tagData.variant == 'default-filled' %}
+        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-neutral-30)]" %}
+      
+      {% elif tagData.variant == 'primary' %}
+        {% set variantClasses = "text-[var(--color-semantic-information-40)] bg-[var(--color-semantic-information-90)] border border-[var(--color-semantic-information-60)]" %}
+      
+      {% elif tagData.variant == 'primary-filled' %}
+        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-information-40)]" %}
+      
+      {% elif tagData.variant == 'success' %}
+        {% set variantClasses = "text-[var(--color-semantic-success-20)] bg-[var(--color-semantic-success-90)] border border-[var(--color-semantic-success-60)]" %}
+      
+      {% elif tagData.variant == 'success-filled' %}
+        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-success-20)]" %}
+      
+      {% elif tagData.variant == 'warning' %}
+        {% set variantClasses = "text-[var(--color-semantic-warning-40)] bg-[var(--color-semantic-warning-90)] border border-[var(--color-semantic-warning-60)]" %}
+      
+      {% elif tagData.variant == 'warning-filled' %}
+        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-warning-40)]" %}
+      
+      {% elif tagData.variant == 'danger' %}
+        {% set variantClasses = "text-[var(--color-semantic-critical-40)] bg-[var(--color-semantic-critical-90)] border border-[var(--color-semantic-critical-60)]" %}
+      
+      {% elif tagData.variant == 'danger-filled' %}
+        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-critical-40)]" %}
+      
+      {% else %}
+        {# Fallback to default #}
+        {% set variantClasses = "text-[var(--color-neutral-30)] bg-[var(--color-neutral-90)] border border-[var(--color-neutral-60)]" %}
+      {% endif %}
+
       {# Render tag element #}
       <span
         data-tag-name="{{ tagData.name }}"
         data-tag-type="tag"
         data-tag-variant="{{ tagData.variant }}"
-        {% if options.isInteractive or tagData.isInteractive %}data-tag-interactive="true"{% endif %}
+        {% if tagData.isInteractive %}data-tag-interactive="true"{% endif %}
         {% if tagData.role %}role="{{ tagData.role }}"{% endif %}
         {% if tagData.title %}title="{{ tagData.title }}"{% endif %}
+        class="inline-flex items-center px-1 py-0.5 rounded-[var(--radius-8)] text-sm font-semibold uppercase tracking-wide {{ variantClasses }}"
       >
         {{ tagData.text }}
         {% if tagData.screenReaderText %}

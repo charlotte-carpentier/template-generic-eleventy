@@ -71,13 +71,34 @@
   {% set isChecked = radioData.checked | default(false) %}
   {% set isDisabled = radioData.disabled | default(false) %}
 
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     CSS Classes - Tailwind Utilities
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+  {# Label wrapper classes
+     Flexbox layout for radio + text alignment #}
+  {% set labelClasses = "inline-flex items-center gap-2 cursor-pointer group" %}
+
+  {# Radio input classes
+     1px border, relative for ::after pseudo-element (WCAG 2.2 AA) #}
+  {% set radioClasses = "relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+
+  {# Checked state indicator - Colored dot (same color as border)
+     12px dot centered inside 20px circle #}
+  {% set checkedIndicatorClasses = "checked:after:content-[''] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]" %}
+
+  {# Label text classes
+     Typography and color matching border state (default + hover) #}
+  {% set textClasses = "text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors" %}
+
   {# Render radio button with label #}
-  <label for="{{ radioButton.id }}">
+  <label for="{{ radioButton.id }}" class="{{ labelClasses }}">
     <input
       type="radio"
       id="{{ radioButton.id }}"
       name="{{ radioButton.name | default('radio-group') }}"
       value="{{ radioValue }}"
+      class="{{ radioClasses }} {{ checkedIndicatorClasses }}"
       data-radio-id="{{ radioButton.id }}"
       data-radio-type="radio-button"
       {% if isChecked %}checked{% endif %}
@@ -86,7 +107,7 @@
     />
 
     {% if radioButton.label %}
-      <span>{{ radioButton.label }}</span>
+      <span class="{{ textClasses }}">{{ radioButton.label }}</span>
     {% endif %}
   </label>
 {% endmacro %}

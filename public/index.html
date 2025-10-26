@@ -480,23 +480,34 @@
       
       
       
+      
+      
+
+      
+
+      
+      
 
       
       
       
+      
+        
+      
+      
 
       
-      <img
-        src="/assets/images/placeholders/placeholder-large.png"
-        alt="Image description"
-        class="image"
-        loading="lazy"
-        decoding="async"
-        data-image-name="demoImage1"
-        data-image-type="image"
-        
-        
-      />
+      
+        <img
+          src="/assets/images/placeholders/placeholder-square.png"
+          alt="Square placeholder image"
+          class="block max-w-full h-auto object-cover w-full max-w-2xl aspect-square"
+          loading="lazy"
+          decoding="async"
+          data-image-name="demoImage1"
+          data-image-type="image"
+        />
+      
     
   
 
@@ -520,12 +531,25 @@
       
 
       
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
       <div class="input-wrapper">
         
         
-          <label for="demoInput1" class="input-label">
-            Label
-            <span class="input-required">*</span>
+          <label for="demoInput1" class="block mb-1.5 text-sm font-medium text-[var(--color-global-default)]">
+            Label*
           </label>
         
 
@@ -535,10 +559,11 @@
             type="text"
             id="demoInput1"
             name="demoInput1"
-            class="input-field"
+            class="block w-full px-3 py-2.5 text-base text-[var(--color-global-default)] placeholder:italic placeholder:text-[var(--color-global-contrast-light-02)] bg-white border border-[var(--color-form)] rounded-[var(--radius-input)] transition-colors hover:border-[var(--color-form-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0 disabled:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed"
             placeholder="Placeholder"
             data-input-name="demoInput1"
             data-input-type="input"
+            data-error-message="Label"
             required
             maxlength="100"
             pattern="^[a-zA-Z0-9]*$"
@@ -551,15 +576,8 @@
 
         
         
-          <div id="demoInput1-help" class="input-help">
+          <div id="demoInput1-help" class="mt-1.5 text-sm text-[var(--color-global-contrast-light-02)]">
             Pattern validation message
-          </div>
-        
-
-        
-        
-          <div id="demoInput1-error" class="input-error" role="alert">
-            Label
           </div>
         
       </div>
@@ -646,12 +664,27 @@
   
 
   
-  <label for="demoRadio1">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <label for="demoRadio1" class="inline-flex items-center gap-2 cursor-pointer group">
     <input
       type="radio"
       id="demoRadio1"
       name="radio-group"
       value="demoValue1"
+      class="relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed checked:after:content-[&#39;&#39;] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]"
       data-radio-id="demoRadio1"
       data-radio-type="radio-button"
       
@@ -660,7 +693,7 @@
     />
 
     
-      <span>Label</span>
+      <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">Label</span>
     
   </label>
 
@@ -685,12 +718,29 @@
       
 
       
-      <div data-select-wrapper>
+
+      
+      
+
+      
+      
+
+      
+      
+      
+        
+      
+
+      
+      
+
+      
+      <div class="relative inline-block w-full">
         <select
           name="demoSelect1"
+          class="block w-full appearance-none bg-white border border-[var(--color-form)] rounded-[var(--radius-input)] text-[var(--color-global-default)] transition-colors cursor-pointer hover:border-[var(--color-form-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0 disabled:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed h-10 px-3 py-2 pr-8 text-sm leading-5"
           data-select-name="demoSelect1"
           data-select-type="select"
-          data-select-variant=""
           
           
         >
@@ -707,11 +757,10 @@
         </select>
 
         
-        <div data-select-arrow aria-hidden="true">
+        <div class="absolute top-1/2 right-3 -translate-y-1/2 pointer-events-none text-[var(--color-global-default)]" aria-hidden="true">
           
-            
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+            <svg class="w-3 h-3 fill-current" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M6 9L1.5 3h9L6 9z"/>
             </svg>
           
         </div>
@@ -733,6 +782,14 @@
     
     
       
+      
+      
+      
+        
+      
+      
+
+      
       <span
         data-tag-name="demoTag1"
         data-tag-type="tag"
@@ -740,6 +797,7 @@
         
         role="status"
         title="Tag tooltip"
+        class="inline-flex items-center px-1 py-0.5 rounded-[var(--radius-8)] text-sm font-semibold uppercase tracking-wide text-[var(--color-neutral-30)] bg-[var(--color-neutral-90)] border border-[var(--color-neutral-60)]"
       >
         LABEL
         
@@ -1861,12 +1919,27 @@
   
 
   
-  <label for="demoRadio1">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <label for="demoRadio1" class="inline-flex items-center gap-2 cursor-pointer group">
     <input
       type="radio"
       id="demoRadio1"
       name="radio-group"
       value="demoValue1"
+      class="relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed checked:after:content-[&#39;&#39;] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]"
       data-radio-id="demoRadio1"
       data-radio-type="radio-button"
       
@@ -1875,7 +1948,7 @@
     />
 
     
-      <span>Label</span>
+      <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">Label</span>
     
   </label>
 
@@ -1904,12 +1977,27 @@
   
 
   
-  <label for="demoRadio1">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <label for="demoRadio1" class="inline-flex items-center gap-2 cursor-pointer group">
     <input
       type="radio"
       id="demoRadio1"
       name="radio-group"
       value="demoValue1"
+      class="relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed checked:after:content-[&#39;&#39;] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]"
       data-radio-id="demoRadio1"
       data-radio-type="radio-button"
       
@@ -1918,7 +2006,7 @@
     />
 
     
-      <span>Label</span>
+      <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">Label</span>
     
   </label>
 
@@ -1947,12 +2035,27 @@
   
 
   
-  <label for="demoRadio1">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  <label for="demoRadio1" class="inline-flex items-center gap-2 cursor-pointer group">
     <input
       type="radio"
       id="demoRadio1"
       name="radio-group"
       value="demoValue1"
+      class="relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed checked:after:content-[&#39;&#39;] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]"
       data-radio-id="demoRadio1"
       data-radio-type="radio-button"
       
@@ -1961,7 +2064,7 @@
     />
 
     
-      <span>Label</span>
+      <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">Label</span>
     
   </label>
 
@@ -2011,12 +2114,25 @@
       
 
       
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
       <div class="input-wrapper">
         
         
-          <label for="demoInput1" class="input-label">
-            Label
-            <span class="input-required">*</span>
+          <label for="demoInput1" class="block mb-1.5 text-sm font-medium text-[var(--color-global-default)]">
+            Label*
           </label>
         
 
@@ -2026,10 +2142,11 @@
             type="text"
             id="demoInput1"
             name="demoInput1"
-            class="input-field"
+            class="block w-full px-3 py-2.5 text-base text-[var(--color-global-default)] placeholder:italic placeholder:text-[var(--color-global-contrast-light-02)] bg-white border border-[var(--color-form)] rounded-[var(--radius-input)] transition-colors hover:border-[var(--color-form-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0 disabled:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed"
             placeholder="Placeholder"
             data-input-name="demoInput1"
             data-input-type="input"
+            data-error-message="Label"
             required
             maxlength="100"
             pattern="^[a-zA-Z0-9]*$"
@@ -2042,15 +2159,8 @@
 
         
         
-          <div id="demoInput1-help" class="input-help">
+          <div id="demoInput1-help" class="mt-1.5 text-sm text-[var(--color-global-contrast-light-02)]">
             Pattern validation message
-          </div>
-        
-
-        
-        
-          <div id="demoInput1-error" class="input-error" role="alert">
-            Label
           </div>
         
       </div>
@@ -2076,12 +2186,25 @@
       
 
       
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
       <div class="input-wrapper">
         
         
-          <label for="demoInput1" class="input-label">
-            Label
-            <span class="input-required">*</span>
+          <label for="demoInput1" class="block mb-1.5 text-sm font-medium text-[var(--color-global-default)]">
+            Label*
           </label>
         
 
@@ -2091,10 +2214,11 @@
             type="text"
             id="demoInput1"
             name="demoInput1"
-            class="input-field"
+            class="block w-full px-3 py-2.5 text-base text-[var(--color-global-default)] placeholder:italic placeholder:text-[var(--color-global-contrast-light-02)] bg-white border border-[var(--color-form)] rounded-[var(--radius-input)] transition-colors hover:border-[var(--color-form-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0 disabled:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed"
             placeholder="Placeholder"
             data-input-name="demoInput1"
             data-input-type="input"
+            data-error-message="Label"
             required
             maxlength="100"
             pattern="^[a-zA-Z0-9]*$"
@@ -2107,15 +2231,8 @@
 
         
         
-          <div id="demoInput1-help" class="input-help">
+          <div id="demoInput1-help" class="mt-1.5 text-sm text-[var(--color-global-contrast-light-02)]">
             Pattern validation message
-          </div>
-        
-
-        
-        
-          <div id="demoInput1-error" class="input-error" role="alert">
-            Label
           </div>
         
       </div>
@@ -2141,12 +2258,25 @@
       
 
       
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
+      
+
+      
       <div class="input-wrapper">
         
         
-          <label for="demoInput1" class="input-label">
-            Label
-            <span class="input-required">*</span>
+          <label for="demoInput1" class="block mb-1.5 text-sm font-medium text-[var(--color-global-default)]">
+            Label*
           </label>
         
 
@@ -2156,10 +2286,11 @@
             type="text"
             id="demoInput1"
             name="demoInput1"
-            class="input-field"
+            class="block w-full px-3 py-2.5 text-base text-[var(--color-global-default)] placeholder:italic placeholder:text-[var(--color-global-contrast-light-02)] bg-white border border-[var(--color-form)] rounded-[var(--radius-input)] transition-colors hover:border-[var(--color-form-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0 disabled:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed"
             placeholder="Placeholder"
             data-input-name="demoInput1"
             data-input-type="input"
+            data-error-message="Label"
             required
             maxlength="100"
             pattern="^[a-zA-Z0-9]*$"
@@ -2172,15 +2303,8 @@
 
         
         
-          <div id="demoInput1-help" class="input-help">
+          <div id="demoInput1-help" class="mt-1.5 text-sm text-[var(--color-global-contrast-light-02)]">
             Pattern validation message
-          </div>
-        
-
-        
-        
-          <div id="demoInput1-error" class="input-error" role="alert">
-            Label
           </div>
         
       </div>
@@ -9726,23 +9850,34 @@
       
       
       
+      
+      
+
+      
+
+      
+      
 
       
       
       
+      
+        
+      
+      
 
       
-      <img
-        src="/assets/images/placeholders/placeholder-large.png"
-        alt="Image description"
-        class="image"
-        loading="lazy"
-        decoding="async"
-        data-image-name="demoImage1"
-        data-image-type="image"
-        
-        
-      />
+      
+        <img
+          src="/assets/images/placeholders/placeholder-landscape.png"
+          alt="Landscape placeholder image"
+          class="block max-w-full h-auto object-cover w-80"
+          loading="lazy"
+          decoding="async"
+          data-image-name="demoImage2"
+          data-image-type="image"
+        />
+      
     
   
 

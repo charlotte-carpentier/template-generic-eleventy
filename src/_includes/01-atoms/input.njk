@@ -18,14 +18,8 @@
         datas: atoms.input.inputs
     }) }}
 
-    Input with select dropdown:
-    {{ renderInput({
-        name: "demoInput2",
-        datas: atoms.input.inputs,
-        selectDatas: atoms.select.selects
-    }) }}
-
   @created 2025-01-15
+  @updated 2025-10-26
 #}
 
 {% macro renderInput(options) %}
@@ -42,19 +36,34 @@
     {% if not inputData %}
       <span class="error" role="alert">Input not found: {{ options.name }}</span>
     {% else %}
-      {# Compute final values with fallback cascade #}
+      {# Compute final values #}
       {% set inputId = inputData.id | default(options.name) %}
       {% set inputName = inputData.name | default(inputId) %}
       {% set inputType = inputData.type | default('text') %}
       {% set isDisabled = options.disabled or inputData.disabled %}
 
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         CSS Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# Base classes - Common to all inputs #}
+      {% set baseClasses = "block w-full px-3 py-2.5 text-base text-[var(--color-global-default)] placeholder:italic placeholder:text-[var(--color-global-contrast-light-02)] bg-white border border-[var(--color-form)] rounded-[var(--radius-input)] transition-colors hover:border-[var(--color-form-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0 disabled:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+
+      {# Label classes #}
+      {% set labelClasses = "block mb-1.5 text-sm font-medium text-[var(--color-global-default)]" %}
+
+      {# Help text classes #}
+      {% set helpClasses = "mt-1.5 text-sm text-[var(--color-global-contrast-light-02)]" %}
+
+      {# Counter classes #}
+      {% set counterClasses = "mt-1.5 text-sm text-right text-[var(--color-global-contrast-light-02)]" %}
+
       {# Input container #}
       <div class="input-wrapper">
         {# Label #}
         {% if inputData.label %}
-          <label for="{{ inputId }}" class="input-label">
-            {{ inputData.label }}
-            {% if inputData.required %}<span class="input-required">*</span>{% endif %}
+          <label for="{{ inputId }}" class="{{ labelClasses }}">
+            {{ inputData.label }}{% if inputData.required %}*{% endif %}
           </label>
         {% endif %}
 
@@ -64,15 +73,16 @@
             type="{{ inputType }}"
             id="{{ inputId }}"
             name="{{ inputName }}"
-            class="input-field"
+            class="{{ baseClasses }}"
             placeholder="{{ inputData.placeholder }}"
             data-input-name="{{ inputData.name }}"
             data-input-type="input"
+            data-error-message="{{ inputData.errorMessage }}"
             {% if inputData.required %}required{% endif %}
             {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
             {% if inputData.pattern %}pattern="{{ inputData.pattern }}"{% endif %}
             {% if isDisabled %}disabled{% endif %}
-            aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help{% endif %} {% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
+            aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
           />
 
         {# Textarea #}
@@ -80,41 +90,41 @@
           <textarea
             id="{{ inputId }}"
             name="{{ inputName }}"
-            class="input-field input-textarea"
+            class="{{ baseClasses }} resize-none"
             placeholder="{{ inputData.placeholder }}"
             rows="{{ inputData.rows | default(3) }}"
             data-input-name="{{ inputData.name }}"
             data-input-type="textarea"
+            data-error-message="{{ inputData.errorMessage }}"
             {% if inputData.required %}required{% endif %}
             {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
             {% if isDisabled %}disabled{% endif %}
-            aria-describedby="{% if inputData.maxLength %}{{ inputId }}-count{% endif %} {% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
+            aria-describedby="{% if inputData.maxLength %}{{ inputId }}-count {% endif %}{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
           ></textarea>
 
-          {# Character counter for textarea #}
+          {# Character counter #}
           {% if inputData.maxLength %}
-            <div id="{{ inputId }}-count" class="input-counter">
+            <div id="{{ inputId }}-count" class="{{ counterClasses }}">
               0/{{ inputData.maxLength }}
             </div>
           {% endif %}
 
-        {# Select dropdown - Integrate with select atom #}
+        {# Select dropdown #}
         {% elif inputType == 'select' %}
           {% if inputData.selectName and options.selectDatas %}
-            {# Find the select data by name #}
             {% set selectData = options.selectDatas | findByName(inputData.selectName) %}
             {% if selectData %}
               <select
                 id="{{ inputId }}"
                 name="{{ inputName }}"
-                class="input-field input-select"
+                class="{{ baseClasses }}"
                 data-input-name="{{ inputData.name }}"
                 data-input-type="select"
+                data-error-message="{{ inputData.errorMessage }}"
                 {% if inputData.required %}required{% endif %}
                 {% if isDisabled %}disabled{% endif %}
-                aria-describedby="{% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
+                aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
               >
-                {# Render options from select data #}
                 {% for opt in selectData.options %}
                   <option 
                     value="{{ opt.value }}"
@@ -131,36 +141,29 @@
             <span class="error" role="alert">Missing selectDatas prop or selectName in input data</span>
           {% endif %}
 
-        {# Multiselect with chips #}
+        {# Multiselect #}
         {% elif inputType == 'multiselect' %}
           <div class="input-multiselect" data-input-type="multiselect">
             <select
               id="{{ inputId }}"
               name="{{ inputName }}"
               multiple
-              class="input-field input-multiselect-field"
+              class="{{ baseClasses }}"
               data-input-name="{{ inputData.name }}"
+              data-error-message="{{ inputData.errorMessage }}"
               {% if inputData.required %}required{% endif %}
               {% if isDisabled %}disabled{% endif %}
-              aria-describedby="{% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
+              aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
             >
-              {# Options will be populated via JavaScript or server-side #}
               <option value="">Select options</option>
             </select>
 
-            {# Display selected chips - JavaScript will populate this dynamically #}
             {% if inputData.chipMulti %}
               <div 
-                class="input-multiselect-chips" 
+                class="flex flex-wrap gap-2 mt-2" 
                 data-chip-container="{{ inputId }}"
                 data-chip-template="{{ inputData.chipMulti | dump | escape }}"
               >
-                {# Chips rendered dynamically by JavaScript:
-                   - Read options from select element
-                   - Create chip elements with text, variant, removable button
-                   - Handle chip removal events
-                   - Update select element state
-                   See: /assets/scripts/components/multiselect.js #}
               </div>
             {% endif %}
           </div>
@@ -171,62 +174,57 @@
             type="date"
             id="{{ inputId }}"
             name="{{ inputName }}"
-            class="input-field input-date"
+            class="{{ baseClasses }}"
             placeholder="{{ inputData.placeholder | default('dd/mm/yyyy') }}"
             data-input-name="{{ inputData.name }}"
             data-input-type="date"
+            data-error-message="{{ inputData.errorMessage }}"
             {% if inputData.required %}required{% endif %}
             {% if isDisabled %}disabled{% endif %}
-            aria-describedby="{% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
+            aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
           />
 
-        {# Phone input with formatting #}
+        {# Phone input #}
         {% elif inputType == 'phone' %}
           <input
             type="tel"
             id="{{ inputId }}"
             name="{{ inputName }}"
-            class="input-field input-phone"
+            class="{{ baseClasses }}"
             placeholder="{{ inputData.placeholder }}"
             data-input-name="{{ inputData.name }}"
             data-input-type="phone"
+            data-error-message="{{ inputData.errorMessage }}"
             {% if inputData.required %}required{% endif %}
             {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
             {% if isDisabled %}disabled{% endif %}
-            aria-describedby="{% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
+            aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
           />
 
-        {# Panel input (special type) #}
+        {# Panel input #}
         {% elif inputType == 'panel' %}
           <textarea
             id="{{ inputId }}"
             name="{{ inputName }}"
-            class="input-field input-panel"
+            class="{{ baseClasses }} resize-none"
             placeholder="{{ inputData.placeholder }}"
             rows="{{ inputData.rows | default(4) }}"
             data-input-name="{{ inputData.name }}"
             data-input-type="panel"
+            data-error-message="{{ inputData.errorMessage }}"
             {% if inputData.required %}required{% endif %}
             {% if isDisabled %}disabled{% endif %}
-            aria-describedby="{% if inputData.errorMessage %}{{ inputId }}-error{% endif %}"
+            aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
           ></textarea>
 
-        {# Unknown input type #}
         {% else %}
           <span class="error" role="alert">Unsupported input type: {{ inputType }}</span>
         {% endif %}
 
-        {# Help text #}
+        {# Help text - Pattern message #}
         {% if inputData.patternMessage %}
-          <div id="{{ inputId }}-help" class="input-help">
+          <div id="{{ inputId }}-help" class="{{ helpClasses }}">
             {{ inputData.patternMessage }}
-          </div>
-        {% endif %}
-
-        {# Error message container #}
-        {% if inputData.errorMessage %}
-          <div id="{{ inputId }}-error" class="input-error" role="alert">
-            {{ inputData.errorMessage }}
           </div>
         {% endif %}
       </div>
