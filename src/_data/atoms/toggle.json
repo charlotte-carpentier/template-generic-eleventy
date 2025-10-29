@@ -16,22 +16,22 @@
         "variant": "default",
         "size": "medium",
         "checked": false,
-        "disabled": false,
-        "ariaLabel": "Switch description"
+        "disabled": false
       },
       "label": "Label",
-      "description": "Toggle description"
+      "description": "Toggle description",
+      "ariaLabel": "Switch description"
     },
     {
       "id": "demoToggle2",
       "switch": {
-        "value": "demoValue1", 
+        "value": "demoValue2", 
         "variant": "default",
         "size": "medium",
         "checked": false,
-        "disabled": false,
-        "ariaLabel": "Toggle for list item"
-      }
+        "disabled": false
+      },
+      "ariaLabel": "Toggle for list item"
     }
   ]
 }

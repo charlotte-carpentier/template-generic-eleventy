@@ -21,7 +21,7 @@
     {
       "id": "demoCheck2",
       "box": {
-        "value": "demoValue1",
+        "value": "demoValue2",
         "checked": false,
         "disabled": false
       },

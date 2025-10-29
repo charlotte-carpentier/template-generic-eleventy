@@ -16,7 +16,6 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 // Atoms
-import { initToggle } from './components/01-atoms/toggle.js';
 import { initTooltip } from './components/01-atoms/tooltip.js';
 import { initInput } from './components/01-atoms/input.js';
 import { initErrorLinks } from './components/01-atoms/error-link.js';

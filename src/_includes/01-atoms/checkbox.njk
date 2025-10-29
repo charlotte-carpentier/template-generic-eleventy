@@ -135,7 +135,7 @@
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
   {# Label wrapper - Flex layout for checkbox + text #}
-  {% set labelClasses = "inline-flex items-start gap-2 cursor-pointer" %}
+  {% set labelClasses = "inline-flex items-start gap-2 cursor-pointer group" %}
 
   {# Input wrapper - Position relative for absolute checkmark positioning #}
   {% set inputWrapperClasses = "relative flex items-center" %}
@@ -152,7 +152,7 @@
   {% set textContainerClasses = "flex flex-col" %}
 
   {# Label text - Primary text with required indicator #}
-  {% set labelTextClasses = "text-base text-[var(--color-global-default)]" %}
+  {% set labelTextClasses = "text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors" %}
 
   {# Description text - Secondary help text #}
   {% set descriptionClasses = "mt-0.5 text-sm text-[var(--color-neutral-50)]" %}
