@@ -922,40 +922,64 @@
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Tooltip</h2>
     
   
-  
-    
     
 
-    
     
       
-      <div
-        data-tooltip-name="demoTooltip1"
-        data-tooltip-type="tooltip"
-        role="tooltip"
-        aria-live="polite"
-      >
-        
-        <div role="heading" aria-level="3">
-          This is a long label
-        </div>
+      
+      
+      
+      
+      
 
+      
+      
         
-        
-          <div>First part of description</div>
-        
+      
 
-        
-        <div data-tooltip-separator aria-hidden="true">
-          <div data-separator-line></div>
-          <div data-separator-diamond></div>
-          <div data-separator-line></div>
-        </div>
+      
 
-        
-        <div>
+      <div class="relative inline-block">
+        <button 
+          type="button"
+          class="inline-flex items-center justify-center w-10 h-10 text-[var(--color-global-default)] hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 rounded-full"
+          aria-describedby="tooltip-demotooltip1"
+          data-tooltip="This is a long label"
+          data-tooltip-position="top"
+        >
           
-            Second part of description
+            <span class="sr-only">More information</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 16v-4"></path>
+              <path d="M12 8h.01"></path>
+            </svg>
+          
+        </button>
+
+        <div
+          id="tooltip-demotooltip1"
+          role="tooltip"
+          class="hidden absolute p-4 bg-[var(--color-global-white)] text-[var(--color-global-default)] shadow-[var(--elevation-tooltip)] rounded-[var(--radius-8)] min-w-[280px] max-w-xs z-[var(--z-tooltip)]"
+        >
+          
+            <div class="text-[var(--color-global-heading)] text-base font-medium">This is a long label</div>
+          
+
+          
+            <div class="text-sm text-[var(--color-global-contrast-light-01)] mt-2">Tooltip description text</div>
+          
+
+          
+            <div class="mt-2 space-y-2">
+              
+                <div class="text-sm text-[var(--color-global-contrast-light-01)]">First part of description</div>
+              
+              
+              
+                <div class="text-sm text-[var(--color-global-contrast-light-01)]">Second part of description</div>
+              
+            </div>
           
         </div>
       </div>

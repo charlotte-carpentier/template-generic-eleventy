@@ -1,68 +1,109 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ATOM › Tooltip                                          │
-   │ Contextual information with title and description       │
+   │ Contextual help tooltip with interactive behavior       │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
   Props:
     - options.name (string): Tooltip identifier
-    - options.datas (array): Tooltip configuration data
+    - options.datas (array): Tooltip configuration
+    - options.position (string): Tooltip position override (top, right, bottom, left)
+    - options.triggerType (string): Type of trigger (icon, text, button)
+    - options.iconDatas (array): Icon atom data (required if triggerType is 'icon')
+    - options.triggerLabel (string): Accessibility label for trigger element
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/tooltip.njk" import renderTooltip %}
 
     {{ renderTooltip({
         name: "demoTooltip1",
-        datas: atoms.tooltip.tooltips
+        datas: atoms.tooltip.tooltips,
+        position: "top",
+        iconDatas: atoms.icon.icons
     }) }}
 
   @created 2025-01-15
 #}
 
+{% from "01-atoms/icon.njk" import renderIcon %}
+
 {% macro renderTooltip(options) %}
-  {# Validate required props #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
     <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Find tooltip using universal filter #}
     {% set tooltipData = options.datas | findByName(options.name) %}
 
-    {# Render tooltip or error message #}
     {% if not tooltipData %}
       <span class="error" role="alert">Tooltip not found: {{ options.name }}</span>
     {% else %}
-      {# Render tooltip element #}
-      <div
-        data-tooltip-name="{{ tooltipData.name }}"
-        data-tooltip-type="tooltip"
-        role="tooltip"
-        aria-live="polite"
-      >
-        {# Title #}
-        <div role="heading" aria-level="3">
-          {{ tooltipData.title }}
-        </div>
+      {% set finalPosition = options.position | default(tooltipData.position) | default('top') %}
+      {% set tooltipId = 'tooltip-' + tooltipData.name | slugify %}
+      {% set triggerType = options.triggerType | default(tooltipData.triggerType) | default('icon') %}
+      {% set triggerLabel = options.triggerLabel | default(tooltipData.triggerLabel) | default('More information') %}
+      
+      {% set wrapperClasses = "relative inline-block" %}
 
-        {# Description part 1 (above bar) #}
-        {% if tooltipData.descriptionPart1 %}
-          <div>{{ tooltipData.descriptionPart1 }}</div>
-        {% endif %}
+      {% set triggerClasses = "" %}
+      {% if triggerType == 'icon' %}
+        {% set triggerClasses = "inline-flex items-center justify-center w-10 h-10 text-[var(--color-global-default)] hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 rounded-full" %}
+      {% elif triggerType == 'text' %}
+        {% set triggerClasses = "inline-flex items-center text-sm text-[var(--color-global-default)] underline hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
+      {% else %}
+        {% set triggerClasses = "inline-flex items-center justify-center min-w-10 h-10 px-3 text-[var(--color-global-default)] bg-[var(--color-global-contrast-light-04)] hover:bg-[var(--color-global-contrast-light-03)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 rounded-[var(--radius-button)]" %}
+      {% endif %}
 
-        {# Decorative bar with diamond #}
-        <div data-tooltip-separator aria-hidden="true">
-          <div data-separator-line></div>
-          <div data-separator-diamond></div>
-          <div data-separator-line></div>
-        </div>
+      {% set tooltipClasses = "hidden absolute p-4 bg-[var(--color-global-white)] text-[var(--color-global-default)] shadow-[var(--elevation-tooltip)] rounded-[var(--radius-8)] min-w-[280px] max-w-xs z-[var(--z-tooltip)]" %}
 
-        {# Description part 2 (below bar) or regular description #}
-        <div>
-          {% if tooltipData.descriptionPart2 %}
-            {{ tooltipData.descriptionPart2 }}
+      <div class="{{ wrapperClasses }}">
+        <button 
+          type="button"
+          class="{{ triggerClasses }}"
+          aria-describedby="{{ tooltipId }}"
+          data-tooltip="{{ tooltipData.title }}"
+          data-tooltip-position="{{ finalPosition }}"
+        >
+          {% if triggerType == 'icon' and options.iconDatas %}
+            {{ renderIcon({
+                name: "info",
+                datas: options.iconDatas
+            }) }}
+          {% elif triggerType == 'text' %}
+            {{ triggerLabel }}
           {% else %}
-            {{ tooltipData.description }}
+            <span class="sr-only">{{ triggerLabel }}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 16v-4"></path>
+              <path d="M12 8h.01"></path>
+            </svg>
+          {% endif %}
+        </button>
+
+        <div
+          id="{{ tooltipId }}"
+          role="tooltip"
+          class="{{ tooltipClasses }}"
+        >
+          {% if tooltipData.title %}
+            <div class="text-[var(--color-global-heading)] text-base font-medium">{{ tooltipData.title }}</div>
+          {% endif %}
+
+          {% if tooltipData.description %}
+            <div class="text-sm text-[var(--color-global-contrast-light-01)] mt-2">{{ tooltipData.description }}</div>
+          {% endif %}
+
+          {% if tooltipData.descriptionPart1 or tooltipData.descriptionPart2 %}
+            <div class="mt-2 space-y-2">
+              {% if tooltipData.descriptionPart1 %}
+                <div class="text-sm text-[var(--color-global-contrast-light-01)]">{{ tooltipData.descriptionPart1 }}</div>
+              {% endif %}
+              
+              {% if tooltipData.descriptionPart2 %}
+                <div class="text-sm text-[var(--color-global-contrast-light-01)]">{{ tooltipData.descriptionPart2 }}</div>
+              {% endif %}
+            </div>
           {% endif %}
         </div>
       </div>
