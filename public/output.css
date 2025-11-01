@@ -35,6 +35,7 @@
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
     --tracking-wide: 0.025em;
     --leading-tight: 1.25;
     --leading-snug: 1.375;
@@ -66,6 +67,7 @@
     --color-neutral-10: #1A1A1A;
     --color-neutral-20: #333333;
     --color-neutral-30: #4D4D4D;
+    --color-neutral-40: #666666;
     --color-neutral-60: #999999;
     --color-neutral-85: #E0E0E0;
     --color-neutral-90: #E5E5E5;
@@ -564,6 +566,9 @@
   .flex-col {
     flex-direction: column;
   }
+  .flex-row {
+    flex-direction: row;
+  }
   .flex-wrap {
     flex-wrap: wrap;
   }
@@ -829,6 +834,10 @@
     --tw-leading: var(--spacing-5);
     line-height: var(--spacing-5);
   }
+  .leading-6 {
+    --tw-leading: var(--spacing-6);
+    line-height: var(--spacing-6);
+  }
   .leading-normal {
     --tw-leading: var(--leading-normal);
     line-height: var(--leading-normal);
@@ -848,6 +857,10 @@
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
+  }
+  .font-extrabold {
+    --tw-font-weight: var(--font-weight-extrabold);
+    font-weight: var(--font-weight-extrabold);
   }
   .font-medium {
     --tw-font-weight: var(--font-weight-medium);
@@ -885,6 +898,9 @@
   }
   .text-\[var\(--color-neutral-30\)\] {
     color: var(--color-neutral-30);
+  }
+  .text-\[var\(--color-neutral-40\)\] {
+    color: var(--color-neutral-40);
   }
   .text-\[var\(--color-neutral-50\)\] {
     color: var(--color-neutral-50);
