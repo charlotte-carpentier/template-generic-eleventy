@@ -7,6 +7,7 @@
   Props:
     - options.name (string): Vector identifier
     - options.datas (array): Vector configuration data
+    - options.className (string): Additional CSS classes
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/vector.njk" import renderVector %}
@@ -33,22 +34,38 @@
     {% if not vectorData %}
       <span class="error" role="alert">Vector not found: {{ options.name }}</span>
     {% else %}
-      {# Render vector element based on variant #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         CSS Classes - Tailwind Utilities
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      
+      {# Container classes based on variant 
+         Using standards for logo containers with proper alignment #}
+      {% set containerClasses = "inline-flex items-center" %}
+      {% if vectorData.variant == 'horizontal' %}
+        {% set containerClasses = containerClasses ~ " gap-3" %}
+      {% endif %}
+      
+      {# Custom classes #}
+      {% set customClasses = options.className | default('') %}
+
+      {# Render vector element #}
       <div
+        class="{{ containerClasses }} {{ customClasses }}"
         data-vector-name="{{ vectorData.name }}"
         data-vector-type="vector"
         data-vector-variant="{{ vectorData.variant }}"
       >
-        {# Logo image #}
+        {# Logo image - Standard sizes with proper scaling #}
         <img
+          class="{% if vectorData.variant == 'logo-only' %}w-10 h-10{% else %}w-6 h-6{% endif %} flex-shrink-0"
           src="{{ vectorData.logoPath }}"
           alt="{{ vectorData.logoAlt }}"
           data-vector-logo
         />
 
-        {# Text (if present and not logo-only variant) #}
+        {# Text - Size adjusted to match logo height exactly #}
         {% if vectorData.text and vectorData.variant != 'logo-only' %}
-          <span data-vector-text>{{ vectorData.text }}</span>
+          <span class="text-[var(--color-neutral-40)] text-2xl leading-6 font-bold" data-vector-text>{{ vectorData.text }}</span>
         {% endif %}
       </div>
     {% endif %}
