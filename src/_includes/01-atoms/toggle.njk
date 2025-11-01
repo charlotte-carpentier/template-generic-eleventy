@@ -39,15 +39,27 @@
     {% if not options.groupLabel %}
       <span class="error" role="alert">Error: Missing required prop (groupLabel) for group mode</span>
     {% else %}
-      {# Render fieldset group #}
-      <fieldset data-toggle-group-type="toggle">
-        <legend {% if options.groupSrOnly %}class="sr-only"{% endif %}>
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         CSS Classes - Fieldset/Legend
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {% set fieldsetClasses = "border-0 p-0 m-0" %}
+      {% set legendClasses = "mb-3 text-base font-semibold text-[var(--color-global-default)]" %}
+      {% set containerClasses = "flex flex-col gap-2" %}
+
+      <fieldset
+        class="{{ fieldsetClasses }}"
+        data-toggle-group-type="toggle"
+      >
+        <legend class="{{ legendClasses }} {% if options.groupSrOnly %}sr-only{% endif %}">
           {{ options.groupLabel }}
         </legend>
 
-        {% for toggle in options.datas %}
-          {{ renderSingleToggle(toggle) }}
-        {% endfor %}
+        <div class="{{ containerClasses }}">
+          {% for toggle in options.datas %}
+            {{ renderSingleToggle(toggle) }}
+          {% endfor %}
+        </div>
       </fieldset>
     {% endif %}
   {% elif not options.id %}
@@ -65,45 +77,77 @@
 {% endmacro %}
 
 {% macro renderSingleToggle(toggle) %}
-  {# Read nested structure with fallbacks #}
+  {# Compute final values with fallback cascade #}
   {% set switchData = toggle.switch | default({}) %}
   {% set switchValue = switchData.value | default(toggle.id) %}
   {% set isChecked = switchData.checked | default(false) %}
   {% set isDisabled = switchData.disabled | default(false) %}
   {% set switchSize = switchData.size | default('medium') %}
   {% set switchVariant = switchData.variant | default('default') %}
+  {% set hasLabel = toggle.label %}
+  {% set hasDescription = toggle.description %}
 
-  {# Render toggle with label #}
-  <label for="{{ toggle.id }}">
-    <input
-      type="checkbox"
-      id="{{ toggle.id }}"
-      name="{{ toggle.id }}"
-      value="{{ switchValue }}"
-      class="sr-only peer"
-      data-toggle-id="{{ toggle.id }}"
-      data-toggle-type="toggle"
-      data-toggle-size="{{ switchSize }}"
-      data-toggle-variant="{{ switchVariant }}"
-      {% if isChecked %}checked{% endif %}
-      {% if isDisabled %}disabled{% endif %}
-      {% if switchData.ariaLabel %}aria-label="{{ switchData.ariaLabel }}"{% endif %}
-    />
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     CSS Classes - Tailwind Utilities
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-    {# Toggle visual container #}
-    <div data-toggle-container>
-      <div data-toggle-thumb></div>
+  {% set labelWrapperClasses = "inline-flex items-start gap-3 cursor-pointer relative group" %}
+  
+  {% set toggleWrapperClasses = "relative flex items-start" %}
+  
+  {% set inputClasses = "sr-only peer" %}
+
+  {# Track: 44px × 24px with ::after for thumb #}
+  {% set trackClasses = "relative inline-flex h-6 w-11 items-center rounded-full border-2 border-[var(--color-form)] bg-transparent transition-all peer-hover:border-[var(--color-form-hover)] peer-checked:border-[var(--color-form-control-checked)] peer-checked:bg-[var(--color-form-control-checked)] peer-checked:peer-hover:border-[var(--color-form-control-checked)] peer-checked:peer-hover:brightness-110 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[var(--color-semantic-information-focus)] peer-disabled:opacity-50 peer-disabled:cursor-not-allowed after:content-[''] after:absolute after:left-0.5 after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-4 after:rounded-full after:bg-[var(--color-form)] after:transition-all peer-hover:after:bg-[var(--color-form-hover)] peer-checked:after:translate-x-[1.125rem] peer-checked:after:bg-white peer-checked:peer-hover:after:bg-white" %}
+
+  {# Off indicator: small circle visible when unchecked, positioned absolutely in label #}
+  {% set offIndicatorClasses = "absolute left-[1.5rem] top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full border border-[var(--color-form)] transition-opacity peer-checked:opacity-0 pointer-events-none" %}
+
+  {# On indicator: vertical line visible when checked, positioned absolutely in label #}
+  {% set onIndicatorClasses = "absolute left-[0.7rem] top-1/2 h-2.5 w-0.5 -translate-y-1/2 rounded-full bg-white opacity-0 transition-opacity peer-checked:opacity-100 pointer-events-none" %}
+
+  {% set textContainerClasses = "flex flex-col" %}
+  {% set labelTextClasses = "text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors" %}
+  {% set descriptionClasses = "mt-0.5 text-sm text-[var(--color-neutral-50)]" %}
+
+  <label
+    for="{{ toggle.id }}"
+    class="{{ labelWrapperClasses }}"
+    data-toggle-label
+  >
+    <div class="{{ toggleWrapperClasses }}">
+      <input
+        type="checkbox"
+        id="{{ toggle.id }}"
+        name="{{ toggle.id }}"
+        value="{{ switchValue }}"
+        class="{{ inputClasses }}"
+        data-toggle-id="{{ toggle.id }}"
+        data-toggle-type="toggle"
+        data-toggle-size="{{ switchSize }}"
+        data-toggle-variant="{{ switchVariant }}"
+        {% if isChecked %}checked{% endif %}
+        {% if isDisabled %}disabled{% endif %}
+        {% if toggle.ariaLabel %}aria-label="{{ toggle.ariaLabel }}"{% endif %}
+        {% if hasDescription %}aria-describedby="{{ toggle.id }}-description"{% endif %}
+      />
+  
+      <div class="{{ trackClasses }}" data-toggle-container></div>
+  
+      <span class="{{ offIndicatorClasses }}"></span>
+      <span class="{{ onIndicatorClasses }}"></span>
     </div>
 
-    {# Label and description #}
-    {% if toggle.label or toggle.description %}
-      <div>
-        {% if toggle.label %}
-          <span>{{ toggle.label }}</span>
+    {% if hasLabel or hasDescription %}
+      <div class="{{ textContainerClasses }}">
+        {% if hasLabel %}
+          <span class="{{ labelTextClasses }}">{{ toggle.label }}</span>
         {% endif %}
 
-        {% if toggle.description %}
-          <p>{{ toggle.description }}</p>
+        {% if hasDescription %}
+          <p id="{{ toggle.id }}-description" class="{{ descriptionClasses }}">
+            {{ toggle.description }}
+          </p>
         {% endif %}
       </div>
     {% endif %}

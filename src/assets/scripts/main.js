@@ -8,7 +8,7 @@
  * @fileoverview Main JavaScript entry point for site-wide functionality
  * @module core/main
  * @created 2025-01-15
- * @updated 2025-10-17
+ * @updated 2025-10-30
  */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -16,7 +16,6 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 // Atoms
-import { initToggle } from './components/01-atoms/toggle.js';
 import { initTooltip } from './components/01-atoms/tooltip.js';
 import { initInput } from './components/01-atoms/input.js';
 import { initErrorLinks } from './components/01-atoms/error-link.js';
@@ -45,8 +44,7 @@ import { initTabBar } from './components/03-organisms/tab-bar.js';
 
 const COMPONENT_SELECTORS = {
   // Atoms
-  TOGGLE: '[data-toggle-type="toggle"]',
-  TOOLTIP: '[data-tooltip]',
+  TOOLTIP: '[data-tooltip][aria-describedby]',
   INPUT: '[data-input-type="input"]',
   ERROR_LINK: '[data-error-link]',
   
@@ -79,11 +77,7 @@ const COMPONENT_SELECTORS = {
  * @returns {void}
  */
 function initComponents() {
-  // Atoms
-  if (document.querySelector(COMPONENT_SELECTORS.TOGGLE)) {
-    initToggle();
-  }
-  
+  // Atoms  
   if (document.querySelector(COMPONENT_SELECTORS.TOOLTIP)) {
     initTooltip();
   }

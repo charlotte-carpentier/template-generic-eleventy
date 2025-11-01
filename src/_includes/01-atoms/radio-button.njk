@@ -39,15 +39,27 @@
     {% if not options.groupLabel %}
       <span class="error" role="alert">Error: Missing required prop (groupLabel) for group mode</span>
     {% else %}
-      {# Render fieldset group #}
-      <fieldset data-radio-group-type="radio-button">
-        <legend {% if options.groupSrOnly %}class="sr-only"{% endif %}>
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         CSS Classes - Fieldset/Legend
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {% set fieldsetClasses = "border-0 p-0 m-0" %}
+      {% set legendClasses = "mb-3 text-base font-semibold text-[var(--color-global-default)]" %}
+      {% set containerClasses = "flex flex-col gap-2" %}
+
+      <fieldset
+        class="{{ fieldsetClasses }}"
+        data-radio-group-type="radio-button"
+      >
+        <legend class="{{ legendClasses }} {% if options.groupSrOnly %}sr-only{% endif %}">
           {{ options.groupLabel }}
         </legend>
 
-        {% for radioButton in options.datas.radioButtons %}
-          {{ renderSingleRadio(radioButton) }}
-        {% endfor %}
+        <div class="{{ containerClasses }}">
+          {% for radioButton in options.datas.radioButtons %}
+            {{ renderSingleRadio(radioButton) }}
+          {% endfor %}
+        </div>
       </fieldset>
     {% endif %}
   {% elif not options.id %}
@@ -70,44 +82,58 @@
   {% set radioValue = radioData.value | default(radioButton.id) %}
   {% set isChecked = radioData.checked | default(false) %}
   {% set isDisabled = radioData.disabled | default(false) %}
+  {% set hasDescription = radioButton.description %}
 
   {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
      CSS Classes - Tailwind Utilities
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-  {# Label wrapper classes
-     Flexbox layout for radio + text alignment #}
-  {% set labelClasses = "inline-flex items-center gap-2 cursor-pointer group" %}
+  {# Label wrapper classes - Flex layout for radio + text alignment #}
+  {% set labelClasses = "inline-flex items-start gap-2 cursor-pointer group" %}
 
-  {# Radio input classes
-     1px border, relative for ::after pseudo-element (WCAG 2.2 AA) #}
+  {# Radio wrapper - Position relative for proper alignment #}
+  {% set radioWrapperClasses = "relative flex items-start" %}
+
+  {# Radio input classes - 1px border, relative for ::after pseudo-element #}
   {% set radioClasses = "relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed" %}
 
-  {# Checked state indicator - Colored dot (same color as border)
-     12px dot centered inside 20px circle #}
+  {# Checked state indicator #}
   {% set checkedIndicatorClasses = "checked:after:content-[''] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]" %}
 
-  {# Label text classes
-     Typography and color matching border state (default + hover) #}
-  {% set textClasses = "text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors" %}
+  {# Text container - Vertical stack for label + description #}
+  {% set textContainerClasses = "flex flex-col" %}
+  {% set labelTextClasses = "text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors" %}
+  {% set descriptionClasses = "mt-0.5 text-sm text-[var(--color-neutral-50)]" %}
 
-  {# Render radio button with label #}
   <label for="{{ radioButton.id }}" class="{{ labelClasses }}">
-    <input
-      type="radio"
-      id="{{ radioButton.id }}"
-      name="{{ radioButton.name | default('radio-group') }}"
-      value="{{ radioValue }}"
-      class="{{ radioClasses }} {{ checkedIndicatorClasses }}"
-      data-radio-id="{{ radioButton.id }}"
-      data-radio-type="radio-button"
-      {% if isChecked %}checked{% endif %}
-      {% if isDisabled %}disabled{% endif %}
-      {% if radioButton.ariaLabel %}aria-label="{{ radioButton.ariaLabel }}"{% endif %}
-    />
+    <div class="{{ radioWrapperClasses }}">
+      <input
+        type="radio"
+        id="{{ radioButton.id }}"
+        name="{{ radioButton.name | default('radio-group') }}"
+        value="{{ radioValue }}"
+        class="{{ radioClasses }} {{ checkedIndicatorClasses }}"
+        data-radio-id="{{ radioButton.id }}"
+        data-radio-type="radio-button"
+        {% if isChecked %}checked{% endif %}
+        {% if isDisabled %}disabled{% endif %}
+        {% if radioButton.ariaLabel %}aria-label="{{ radioButton.ariaLabel }}"{% endif %}
+        {% if hasDescription %}aria-describedby="{{ radioButton.id }}-description"{% endif %}
+      />
+    </div>
 
-    {% if radioButton.label %}
-      <span class="{{ textClasses }}">{{ radioButton.label }}</span>
+    {% if radioButton.label or hasDescription %}
+      <div class="{{ textContainerClasses }}">
+        {% if radioButton.label %}
+          <span class="{{ labelTextClasses }}">{{ radioButton.label }}</span>
+        {% endif %}
+
+        {% if hasDescription %}
+          <p id="{{ radioButton.id }}-description" class="{{ descriptionClasses }}">
+            {{ radioButton.description }}
+          </p>
+        {% endif %}
+      </div>
     {% endif %}
   </label>
 {% endmacro %}

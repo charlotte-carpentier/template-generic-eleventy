@@ -280,7 +280,7 @@
 
   <label
     for="demoCheck1"
-    class="inline-flex items-start gap-2 cursor-pointer"
+    class="inline-flex items-start gap-2 cursor-pointer group"
     data-checkbox-label
   >
     <div class="relative flex items-center">
@@ -308,7 +308,7 @@
     </div>
 
     <div class="flex flex-col">
-      <span class="text-base text-[var(--color-global-default)]">
+      <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">
         Label
         
       </span>
@@ -662,13 +662,8 @@
   
   
   
-
   
 
-  
-  
-
-  
   
 
   
@@ -678,22 +673,45 @@
   
 
   
-  <label for="demoRadio1" class="inline-flex items-center gap-2 cursor-pointer group">
-    <input
-      type="radio"
-      id="demoRadio1"
-      name="radio-group"
-      value="demoValue1"
-      class="relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed checked:after:content-[&#39;&#39;] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]"
-      data-radio-id="demoRadio1"
-      data-radio-type="radio-button"
-      
-      
-      
-    />
+  
+
+  
+  
+
+  
+  
+  
+  
+
+  <label for="demoRadio1" class="inline-flex items-start gap-2 cursor-pointer group">
+    <div class="relative flex items-start">
+      <input
+        type="radio"
+        id="demoRadio1"
+        name="radio-group"
+        value="demoValue1"
+        class="relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed checked:after:content-[&#39;&#39;] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]"
+        data-radio-id="demoRadio1"
+        data-radio-type="radio-button"
+        
+        
+        aria-label="Aria label for this radio button"
+        aria-describedby="demoRadio1-description"
+      />
+    </div>
 
     
-      <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">Label</span>
+      <div class="flex flex-col">
+        
+          <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">Label</span>
+        
+
+        
+          <p id="demoRadio1-description" class="mt-0.5 text-sm text-[var(--color-neutral-50)]">
+            Description of this radio option
+          </p>
+        
+      </div>
     
   </label>
 
@@ -827,38 +845,68 @@
   
   
   
+  
+  
 
   
-  <label for="demoToggle1">
-    <input
-      type="checkbox"
-      id="demoToggle1"
-      name="demoToggle1"
-      value="demoValue1"
-      class="sr-only peer"
-      data-toggle-id="demoToggle1"
-      data-toggle-type="toggle"
-      data-toggle-size="medium"
-      data-toggle-variant="default"
-      
-      
-      aria-label="Switch description"
-    />
 
-    
-    <div data-toggle-container>
-      <div data-toggle-thumb></div>
+  
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+  
+
+  <label
+    for="demoToggle1"
+    class="inline-flex items-start gap-3 cursor-pointer relative group"
+    data-toggle-label
+  >
+    <div class="relative flex items-start">
+      <input
+        type="checkbox"
+        id="demoToggle1"
+        name="demoToggle1"
+        value="demoValue1"
+        class="sr-only peer"
+        data-toggle-id="demoToggle1"
+        data-toggle-type="toggle"
+        data-toggle-size="medium"
+        data-toggle-variant="default"
+        
+        
+        aria-label="Switch description"
+        aria-describedby="demoToggle1-description"
+      />
+  
+      <div class="relative inline-flex h-6 w-11 items-center rounded-full border-2 border-[var(--color-form)] bg-transparent transition-all peer-hover:border-[var(--color-form-hover)] peer-checked:border-[var(--color-form-control-checked)] peer-checked:bg-[var(--color-form-control-checked)] peer-checked:peer-hover:border-[var(--color-form-control-checked)] peer-checked:peer-hover:brightness-110 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[var(--color-semantic-information-focus)] peer-disabled:opacity-50 peer-disabled:cursor-not-allowed after:content-[&#39;&#39;] after:absolute after:left-0.5 after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-4 after:rounded-full after:bg-[var(--color-form)] after:transition-all peer-hover:after:bg-[var(--color-form-hover)] peer-checked:after:translate-x-[1.125rem] peer-checked:after:bg-white peer-checked:peer-hover:after:bg-white" data-toggle-container></div>
+  
+      <span class="absolute left-[1.5rem] top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full border border-[var(--color-form)] transition-opacity peer-checked:opacity-0 pointer-events-none"></span>
+      <span class="absolute left-[0.7rem] top-1/2 h-2.5 w-0.5 -translate-y-1/2 rounded-full bg-white opacity-0 transition-opacity peer-checked:opacity-100 pointer-events-none"></span>
     </div>
 
     
-    
-      <div>
+      <div class="flex flex-col">
         
-          <span>Label</span>
+          <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">Label</span>
         
 
         
-          <p>Toggle description</p>
+          <p id="demoToggle1-description" class="mt-0.5 text-sm text-[var(--color-neutral-50)]">
+            Toggle description
+          </p>
         
       </div>
     
@@ -874,40 +922,64 @@
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Tooltip</h2>
     
   
-  
-    
     
 
-    
     
       
-      <div
-        data-tooltip-name="demoTooltip1"
-        data-tooltip-type="tooltip"
-        role="tooltip"
-        aria-live="polite"
-      >
-        
-        <div role="heading" aria-level="3">
-          This is a long label
-        </div>
+      
+      
+      
+      
+      
 
+      
+      
         
-        
-          <div>First part of description</div>
-        
+      
 
-        
-        <div data-tooltip-separator aria-hidden="true">
-          <div data-separator-line></div>
-          <div data-separator-diamond></div>
-          <div data-separator-line></div>
-        </div>
+      
 
-        
-        <div>
+      <div class="relative inline-block">
+        <button 
+          type="button"
+          class="inline-flex items-center justify-center w-10 h-10 text-[var(--color-global-default)] hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 rounded-full"
+          aria-describedby="tooltip-demotooltip1"
+          data-tooltip="This is a long label"
+          data-tooltip-position="top"
+        >
           
-            Second part of description
+            <span class="sr-only">More information</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 16v-4"></path>
+              <path d="M12 8h.01"></path>
+            </svg>
+          
+        </button>
+
+        <div
+          id="tooltip-demotooltip1"
+          role="tooltip"
+          class="hidden absolute p-4 bg-[var(--color-global-white)] text-[var(--color-global-default)] shadow-[var(--elevation-tooltip)] rounded-[var(--radius-8)] min-w-[280px] max-w-xs z-[var(--z-tooltip)]"
+        >
+          
+            <div class="text-[var(--color-global-heading)] text-base font-medium">This is a long label</div>
+          
+
+          
+            <div class="text-sm text-[var(--color-global-contrast-light-01)] mt-2">Tooltip description text</div>
+          
+
+          
+            <div class="mt-2 space-y-2">
+              
+                <div class="text-sm text-[var(--color-global-contrast-light-01)]">First part of description</div>
+              
+              
+              
+                <div class="text-sm text-[var(--color-global-contrast-light-01)]">Second part of description</div>
+              
+            </div>
           
         </div>
       </div>
@@ -1917,13 +1989,8 @@
   
   
   
-
   
 
-  
-  
-
-  
   
 
   
@@ -1933,22 +2000,45 @@
   
 
   
-  <label for="demoRadio1" class="inline-flex items-center gap-2 cursor-pointer group">
-    <input
-      type="radio"
-      id="demoRadio1"
-      name="radio-group"
-      value="demoValue1"
-      class="relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed checked:after:content-[&#39;&#39;] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]"
-      data-radio-id="demoRadio1"
-      data-radio-type="radio-button"
-      
-      
-      
-    />
+  
+
+  
+  
+
+  
+  
+  
+  
+
+  <label for="demoRadio1" class="inline-flex items-start gap-2 cursor-pointer group">
+    <div class="relative flex items-start">
+      <input
+        type="radio"
+        id="demoRadio1"
+        name="radio-group"
+        value="demoValue1"
+        class="relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed checked:after:content-[&#39;&#39;] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]"
+        data-radio-id="demoRadio1"
+        data-radio-type="radio-button"
+        
+        
+        aria-label="Aria label for this radio button"
+        aria-describedby="demoRadio1-description"
+      />
+    </div>
 
     
-      <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">Label</span>
+      <div class="flex flex-col">
+        
+          <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">Label</span>
+        
+
+        
+          <p id="demoRadio1-description" class="mt-0.5 text-sm text-[var(--color-neutral-50)]">
+            Description of this radio option
+          </p>
+        
+      </div>
     
   </label>
 
@@ -1975,13 +2065,8 @@
   
   
   
-
   
 
-  
-  
-
-  
   
 
   
@@ -1991,22 +2076,45 @@
   
 
   
-  <label for="demoRadio1" class="inline-flex items-center gap-2 cursor-pointer group">
-    <input
-      type="radio"
-      id="demoRadio1"
-      name="radio-group"
-      value="demoValue1"
-      class="relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed checked:after:content-[&#39;&#39;] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]"
-      data-radio-id="demoRadio1"
-      data-radio-type="radio-button"
-      
-      
-      
-    />
+  
+
+  
+  
+
+  
+  
+  
+  
+
+  <label for="demoRadio1" class="inline-flex items-start gap-2 cursor-pointer group">
+    <div class="relative flex items-start">
+      <input
+        type="radio"
+        id="demoRadio1"
+        name="radio-group"
+        value="demoValue1"
+        class="relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed checked:after:content-[&#39;&#39;] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]"
+        data-radio-id="demoRadio1"
+        data-radio-type="radio-button"
+        
+        
+        aria-label="Aria label for this radio button"
+        aria-describedby="demoRadio1-description"
+      />
+    </div>
 
     
-      <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">Label</span>
+      <div class="flex flex-col">
+        
+          <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">Label</span>
+        
+
+        
+          <p id="demoRadio1-description" class="mt-0.5 text-sm text-[var(--color-neutral-50)]">
+            Description of this radio option
+          </p>
+        
+      </div>
     
   </label>
 
@@ -2033,13 +2141,8 @@
   
   
   
-
   
 
-  
-  
-
-  
   
 
   
@@ -2049,22 +2152,45 @@
   
 
   
-  <label for="demoRadio1" class="inline-flex items-center gap-2 cursor-pointer group">
-    <input
-      type="radio"
-      id="demoRadio1"
-      name="radio-group"
-      value="demoValue1"
-      class="relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed checked:after:content-[&#39;&#39;] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]"
-      data-radio-id="demoRadio1"
-      data-radio-type="radio-button"
-      
-      
-      
-    />
+  
+
+  
+  
+
+  
+  
+  
+  
+
+  <label for="demoRadio1" class="inline-flex items-start gap-2 cursor-pointer group">
+    <div class="relative flex items-start">
+      <input
+        type="radio"
+        id="demoRadio1"
+        name="radio-group"
+        value="demoValue1"
+        class="relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed checked:after:content-[&#39;&#39;] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]"
+        data-radio-id="demoRadio1"
+        data-radio-type="radio-button"
+        
+        
+        aria-label="Aria label for this radio button"
+        aria-describedby="demoRadio1-description"
+      />
+    </div>
 
     
-      <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">Label</span>
+      <div class="flex flex-col">
+        
+          <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">Label</span>
+        
+
+        
+          <p id="demoRadio1-description" class="mt-0.5 text-sm text-[var(--color-neutral-50)]">
+            Description of this radio option
+          </p>
+        
+      </div>
     
   </label>
 
@@ -3005,7 +3131,7 @@
 
   <label
     for="demoCheck1"
-    class="inline-flex items-start gap-2 cursor-pointer"
+    class="inline-flex items-start gap-2 cursor-pointer group"
     data-checkbox-label
   >
     <div class="relative flex items-center">
@@ -3033,7 +3159,7 @@
     </div>
 
     <div class="flex flex-col">
-      <span class="text-base text-[var(--color-global-default)]">
+      <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">
         Label
         
       </span>
@@ -3106,7 +3232,7 @@
 
   <label
     for="demoCheck1"
-    class="inline-flex items-start gap-2 cursor-pointer"
+    class="inline-flex items-start gap-2 cursor-pointer group"
     data-checkbox-label
   >
     <div class="relative flex items-center">
@@ -3134,7 +3260,7 @@
     </div>
 
     <div class="flex flex-col">
-      <span class="text-base text-[var(--color-global-default)]">
+      <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">
         Label
         
       </span>
@@ -3207,7 +3333,7 @@
 
   <label
     for="demoCheck1"
-    class="inline-flex items-start gap-2 cursor-pointer"
+    class="inline-flex items-start gap-2 cursor-pointer group"
     data-checkbox-label
   >
     <div class="relative flex items-center">
@@ -3235,7 +3361,7 @@
     </div>
 
     <div class="flex flex-col">
-      <span class="text-base text-[var(--color-global-default)]">
+      <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">
         Label
         
       </span>
@@ -3308,7 +3434,7 @@
 
   <label
     for="demoCheck1"
-    class="inline-flex items-start gap-2 cursor-pointer"
+    class="inline-flex items-start gap-2 cursor-pointer group"
     data-checkbox-label
   >
     <div class="relative flex items-center">
@@ -3336,7 +3462,7 @@
     </div>
 
     <div class="flex flex-col">
-      <span class="text-base text-[var(--color-global-default)]">
+      <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">
         Label
         
       </span>
@@ -3409,7 +3535,7 @@
 
   <label
     for="demoCheck1"
-    class="inline-flex items-start gap-2 cursor-pointer"
+    class="inline-flex items-start gap-2 cursor-pointer group"
     data-checkbox-label
   >
     <div class="relative flex items-center">
@@ -3437,7 +3563,7 @@
     </div>
 
     <div class="flex flex-col">
-      <span class="text-base text-[var(--color-global-default)]">
+      <span class="text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors">
         Label
         
       </span>

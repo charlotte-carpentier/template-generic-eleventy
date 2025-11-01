@@ -1,5 +1,5 @@
 {
-  "// Component": "Radio Button - Radio inputs with label and accessibility support",
+  "// Component": "Radio Button - Radio inputs with label and description support",
   
   "_meta": {
     "component": "radio-button",
@@ -16,12 +16,14 @@
         "checked": false,
         "disabled": false
       },
-      "label": "Label"
+      "label": "Label",
+      "description": "Description of this radio option",
+      "ariaLabel": "Aria label for this radio button"
     },
     {
       "id": "demoRadio2",
       "radio": {
-        "value": "demoValue1",
+        "value": "demoValue2",
         "checked": false,
         "disabled": false
       },
