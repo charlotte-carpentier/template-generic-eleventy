@@ -44,7 +44,7 @@ import { initTabBar } from './components/03-organisms/tab-bar.js';
 
 const COMPONENT_SELECTORS = {
   // Atoms
-  TOOLTIP: '[aria-describedby]',
+  TOOLTIP: '[data-tooltip][aria-describedby]',
   INPUT: '[data-input-type="input"]',
   ERROR_LINK: '[data-error-link]',
   
