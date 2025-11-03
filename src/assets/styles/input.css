@@ -372,6 +372,10 @@ body {
    Use cases: complex animations, :target navigation, pseudo-elements
    Naming: BEM convention (.block__element--modifier) */
 
+/* Atoms */
+@import "./01-atoms/icon.css";
+
+/* Organisms */
 @import "./03-organisms/error-layout.css";
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

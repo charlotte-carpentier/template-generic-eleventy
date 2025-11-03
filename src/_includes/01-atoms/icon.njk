@@ -7,7 +7,8 @@
   Props:
     - options.name (string): Icon identifier
     - options.datas (object): Icon configuration data (nested by category)
-    - options.class (string): Additional CSS classes
+    - options.class (string): Additional CSS classes (e.g. "icon-duotone" for dual-color styling)
+    - options.fillColor (string): Optional fill color class (e.g. "fill-red-500" or "fill-[var(--color-button-primary)]")
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/icon.njk" import renderIcon %}
@@ -15,6 +16,12 @@
     {{ renderIcon({
         name: "demoSmile1",
         datas: atoms.icon.icons
+    }) }}
+
+    {{ renderIcon({
+        name: "demoFileUp1", 
+        datas: atoms.icon.icons,
+        class: "icon-duotone"
     }) }}
 
   Country Flags:
@@ -98,12 +105,14 @@
          Render regular icon using SVG sprite
       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% else %}
-        {# Base classes - Common to all icons
-           fill-current inherits color from text-* utilities #}
-        {% set baseClasses = "inline-block flex-shrink-0 fill-current" %}
-
+        {# Base classes - Common to all icons #}
+        {% set baseClasses = "inline-block flex-shrink-0" %}
+        
+        {# Fill color - Default to currentColor if not specified #}
+        {% set fillColorClass = options.fillColor | default("fill-current") %}
+        
         {# Combine all classes #}
-        {% set finalClasses = baseClasses ~ ' ' ~ sizeClasses %}
+        {% set finalClasses = baseClasses ~ ' ' ~ sizeClasses ~ ' ' ~ fillColorClass %}
         {% if options.class %}
           {% set finalClasses = finalClasses ~ ' ' ~ options.class %}
         {% endif %}

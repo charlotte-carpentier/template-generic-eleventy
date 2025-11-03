@@ -444,14 +444,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-6 h-6"
+          class="inline-block flex-shrink-0 w-6 h-6 fill-current"
           aria-label="Smile icon"
           role="img"
           data-icon-name="demoSmile1"
@@ -1262,14 +1265,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Information"
           role="img"
           data-icon-name="demoInfo1"
@@ -1298,19 +1304,32 @@
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Block Drag and Drop</h2>
     
   
-  
-    
     
 
     
-    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
       <div
+        class="flex flex-col p-5 bg-white rounded-[var(--radius-card)] shadow-[var(--elevation-card)] border border-[var(--color-global-contrast-light-03)] w-full max-w-md"
         data-drag-drop-name="demoDragDrop1"
         data-drag-drop-type="block-drag-and-drop"
-        data-drag-drop-variant="default"
+        data-drag-drop="true"
+        data-allowed-types="xls,xlsx"
+        data-max-size="maximumfilesize:10mb"
       >
-        
-        
+        <div class="mb-5 text-left font-serif text-2xl text-[var(--color-global-default)]">
+          
   
   
     
@@ -1349,16 +1368,17 @@
     
   
 
+        </div>
 
-        
         <div
+          class="flex flex-col items-start justify-center p-8 border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-6)] bg-white min-h-[160px] cursor-pointer hover:bg-[var(--color-global-contrast-light-04)] transition-colors mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2"
           data-drag-drop-zone="true"
           tabindex="0"
           role="button"
           aria-label="Upload file by dropping it here or by clicking"
         >
-          
-          
+          <div class="flex mb-3">
+            
   
   
     
@@ -1386,14 +1406,19 @@
       
         
         
-
         
         
+        
+        
+        
+        
+        
+          
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current w-10 h-10 text-[var(--color-button-primary)]"
           aria-label="Upload file"
           role="img"
           data-icon-name="demoFileUp1"
@@ -1406,33 +1431,17 @@
     
   
 
+          </div>
 
-          
-          <p data-drag-drop-text="true">
+          <p class="text-left text-base font-semibold text-[var(--color-global-default)]" data-drag-drop-text="true">
             Drag and drop file here
           </p>
         </div>
 
-        
-        
-          <div
-            data-drag-drop-error="true"
-            role="alert"
-          >
-            <p>Error message text</p>
-            
-          </div>
-        
+        <span class="block my-4 text-base font-semibold text-[var(--color-global-default)]">Or</span>
 
-        
-        <div data-drag-drop-separator="true">
-          <div data-separator-line="true"></div>
-          <span data-separator-text="true">Or</span>
-          <div data-separator-line="true"></div>
-        </div>
-
-        
-        
+        <div class="flex mb-5">
+          
   
   
     
@@ -1504,24 +1513,25 @@
     
   
 
+        </div>
 
-        
-        <div data-drag-drop-info="true">
+        <div class="flex flex-col gap-1 mt-2" data-drag-drop-info="true">
           <p>
-            <span>Supported formats:</span>
-            <span>Supported formats: JPG, PNG, PDF</span>
+            <span class="text-xs text-[var(--color-global-contrast-light-02)]">Supported formats: </span>
+            <span class="text-xs text-[var(--color-global-default)]">XLS, XLSX</span>
           </p>
           <p>
-            <span>Maximum file size:</span>
-            <span>Maximum file size: 10 MB</span>
+            <span class="text-xs text-[var(--color-global-contrast-light-02)]">Maximum file size: </span>
+            <span class="text-xs text-[var(--color-global-default)]">10 MB</span>
           </p>
         </div>
 
-        
         <input
           type="file"
           id="file-demoDragDrop1"
-          accept="supportedformats:jpg,png,pdf"
+          class="sr-only"
+          data-drag-drop-input="true"
+          accept="xls,xlsx"
           aria-hidden="true"
           tabindex="-1"
         >
@@ -1735,14 +1745,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Information"
           role="img"
           data-icon-name="demoInfo1"
@@ -1798,14 +1811,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Close"
           role="img"
           data-icon-name="demoClose1"
@@ -2504,14 +2520,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Settings"
           role="img"
           data-icon-name="demoSlider1"
@@ -2564,14 +2583,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Settings"
           role="img"
           data-icon-name="demoSlider1"
@@ -2624,14 +2646,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Settings"
           role="img"
           data-icon-name="demoSlider1"
@@ -2684,14 +2709,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Settings"
           role="img"
           data-icon-name="demoSlider1"
@@ -2744,14 +2772,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Settings"
           role="img"
           data-icon-name="demoSlider1"
@@ -2804,14 +2835,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Settings"
           role="img"
           data-icon-name="demoSlider1"
@@ -4273,14 +4307,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Star rating"
           role="img"
           data-icon-name="demoStar1"
@@ -4324,14 +4361,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Star rating"
           role="img"
           data-icon-name="demoStar1"
@@ -4375,14 +4415,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Star rating"
           role="img"
           data-icon-name="demoStar1"
@@ -4426,14 +4469,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Star rating"
           role="img"
           data-icon-name="demoStar1"
@@ -4477,14 +4523,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Star rating"
           role="img"
           data-icon-name="demoStar1"
@@ -5072,14 +5121,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Information"
           role="img"
           data-icon-name="demoInfo1"
@@ -11477,14 +11529,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Open menu"
           role="img"
           data-icon-name="demoBurger1"
@@ -11529,14 +11584,17 @@
       
         
         
-
+        
+        
+        
+        
         
         
         
 
         
         <svg
-          class="inline-block flex-shrink-0 fill-current w-5 h-5"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
           aria-label="Close"
           role="img"
           data-icon-name="demoClose1"

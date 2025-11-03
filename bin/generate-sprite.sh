@@ -10,7 +10,8 @@
 # Output: src/assets/icons/sprites/sprite.svg
 #
 # Features:
-# - Normalizes colors to currentColor for theming
+# - Normalizes colors to preserve fill/stroke attributes for CSS control
+# - Adds stroke="none" to path elements without stroke attribute
 # - Wraps icons in <symbol> tags with unique IDs
 # - PRESERVES original viewBox from source SVGs
 # - CONVERTS xlink:href to href (SVG 1.1 → SVG 2.0)
@@ -31,25 +32,27 @@ echo "Generating SVG sprite..."
 # Helper Functions
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-# Normalize SVG colors to currentColor for theme compatibility
+# Normalize SVG to allow separate fill/stroke control
 # Also converts deprecated xlink:href to modern href (SVG 2.0)
 normalize_svg_colors() {
     local file="$1"
     local temp_file=$(mktemp)
     
-    # Replace various color formats with currentColor + remove xlink namespace
-    sed 's/fill="#[0-9a-fA-F]\{6\}"/fill="currentColor"/g' "$file" | \
-    sed 's/fill="#[0-9a-fA-F]\{3\}"/fill="currentColor"/g' | \
-    sed 's/stroke="#[0-9a-fA-F]\{6\}"/stroke="currentColor"/g' | \
-    sed 's/stroke="#[0-9a-fA-F]\{3\}"/stroke="currentColor"/g' | \
-    sed 's/fill="black"/fill="currentColor"/g' | \
-    sed 's/fill="#000000"/fill="currentColor"/g' | \
-    sed 's/fill="#000"/fill="currentColor"/g' | \
-    sed 's/stroke="black"/stroke="currentColor"/g' | \
-    sed 's/stroke="#000000"/stroke="currentColor"/g' | \
-    sed 's/stroke="#000"/stroke="currentColor"/g' | \
-    sed 's/xlink:href=/href=/g' | \
-    sed 's/xmlns:xlink="[^"]*"//g' > "$temp_file"
+    # Replace colors with currentColor and add stroke="none" only where missing
+    sed -e 's/fill="#[0-9a-fA-F]\{6\}"/fill="currentColor"/g' \
+        -e 's/fill="#[0-9a-fA-F]\{3\}"/fill="currentColor"/g' \
+        -e 's/fill="black"/fill="currentColor"/g' \
+        -e 's/fill="#000000"/fill="currentColor"/g' \
+        -e 's/fill="#000"/fill="currentColor"/g' \
+        -e 's/stroke="#[0-9a-fA-F]\{6\}"/stroke="currentColor"/g' \
+        -e 's/stroke="#[0-9a-fA-F]\{3\}"/stroke="currentColor"/g' \
+        -e 's/stroke="black"/stroke="currentColor"/g' \
+        -e 's/stroke="#000000"/stroke="currentColor"/g' \
+        -e 's/stroke="#000"/stroke="currentColor"/g' \
+        -e '/<path[^>]*stroke=/! s/<path /<path stroke="none" /g' \
+        -e 's/xlink:href=/href=/g' \
+        -e 's/xmlns:xlink="[^"]*"//g' \
+        "$file" > "$temp_file"
     
     echo "$temp_file"
 }
@@ -156,6 +159,11 @@ else
     echo "Lines with xlink:"
     grep -n "xlink" "$SPRITE_FILE" | head -5
 fi
+
+echo ""
+echo "Checking for added stroke attributes..."
+stroke_count=$(grep -c "stroke=\"none\"" "$SPRITE_FILE" || echo "0")
+echo "Added $stroke_count stroke=\"none\" attributes to path elements"
 
 echo ""
 echo "Sprite generation complete!"
