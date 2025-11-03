@@ -44,16 +44,16 @@
          CSS Classes - Tailwind Utilities
       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       
-      {% set containerClasses = "flex flex-col p-5 bg-white rounded-[var(--radius-card)] shadow-[var(--elevation-card)] border border-[var(--color-global-contrast-light-03)] w-full max-w-md" %}
-      {% set headingClasses = "mb-5 text-left font-serif text-2xl text-[var(--color-global-default)]" %}
+      {% set containerClasses = "flex flex-col p-5 bg-white rounded-[var(--radius-card)] shadow-[var(--elevation-card)] w-full max-w-md" %}
+      {% set headingClasses = "mb-8 text-left font-serif text-3xl text-[var(--color-global-default)]" %}
       {% set dropzoneClasses = "flex flex-col items-start justify-center p-8 border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-6)] bg-white min-h-[160px] cursor-pointer hover:bg-[var(--color-global-contrast-light-04)] transition-colors mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
       {% set iconContainerClasses = "flex mb-3" %}
-      {% set dropzoneTextClasses = "text-left text-base font-semibold text-[var(--color-global-default)]" %}
-      {% set orTextClasses = "block my-4 text-base font-semibold text-[var(--color-global-default)]" %}
+      {% set dropzoneTextClasses = "text-left text-base font-normal text-[var(--color-global-default)]" %}
+      {% set orTextClasses = "block my-4 text-base font-normal text-[var(--color-global-default)]" %}
       {% set buttonContainerClasses = "flex mb-5" %}
       {% set fileInfoClasses = "flex flex-col gap-1 mt-2" %}
-      {% set fileInfoLabelClasses = "text-xs text-[var(--color-global-contrast-light-02)]" %}
-      {% set fileInfoValueClasses = "text-xs text-[var(--color-global-default)]" %}
+      {% set fileInfoLabelClasses = "text-sm text-[var(--color-global-contrast-light-02)]" %}
+      {% set fileInfoValueClasses = "text-sm text-[var(--color-global-default)]" %}
 
       <div
         class="{{ containerClasses }}"
@@ -81,7 +81,7 @@
             {{ renderIcon({
                 name: blockData.iconName,
                 datas: options.iconDatas,
-                class: "w-10 h-10 text-[var(--color-button-primary)]"
+                class: "w-14 h-14 text-[var(--color-global-contrast-light-03)]"
             }) }}
           </div>
 
@@ -92,7 +92,7 @@
 
         <span class="{{ orTextClasses }}">{{ blockData.separator }}</span>
 
-        <div class="{{ buttonContainerClasses }}">
+        <div class="{{ buttonContainerClasses }}" data-drag-drop-button="true">
           {{ renderButton({
               name: blockData.buttonName,
               datas: options.buttonDatas,

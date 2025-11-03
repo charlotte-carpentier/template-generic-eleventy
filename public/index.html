@@ -1321,14 +1321,14 @@
       
 
       <div
-        class="flex flex-col p-5 bg-white rounded-[var(--radius-card)] shadow-[var(--elevation-card)] border border-[var(--color-global-contrast-light-03)] w-full max-w-md"
+        class="flex flex-col p-5 bg-white rounded-[var(--radius-card)] shadow-[var(--elevation-card)] w-full max-w-md"
         data-drag-drop-name="demoDragDrop1"
         data-drag-drop-type="block-drag-and-drop"
         data-drag-drop="true"
-        data-allowed-types="xls,xlsx"
-        data-max-size="maximumfilesize:10mb"
+        
+        
       >
-        <div class="mb-5 text-left font-serif text-2xl text-[var(--color-global-default)]">
+        <div class="mb-8 text-left font-serif text-3xl text-[var(--color-global-default)]">
           
   
   
@@ -1418,7 +1418,7 @@
 
         
         <svg
-          class="inline-block flex-shrink-0 w-5 h-5 fill-current w-10 h-10 text-[var(--color-button-primary)]"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current w-14 h-14 text-[var(--color-global-contrast-light-03)]"
           aria-label="Upload file"
           role="img"
           data-icon-name="demoFileUp1"
@@ -1433,14 +1433,14 @@
 
           </div>
 
-          <p class="text-left text-base font-semibold text-[var(--color-global-default)]" data-drag-drop-text="true">
+          <p class="text-left text-base font-normal text-[var(--color-global-default)]" data-drag-drop-text="true">
             Drag and drop file here
           </p>
         </div>
 
-        <span class="block my-4 text-base font-semibold text-[var(--color-global-default)]">Or</span>
+        <span class="block my-4 text-base font-normal text-[var(--color-global-default)]">Or</span>
 
-        <div class="flex mb-5">
+        <div class="flex mb-5" data-drag-drop-button="true">
           
   
   
@@ -1517,12 +1517,12 @@
 
         <div class="flex flex-col gap-1 mt-2" data-drag-drop-info="true">
           <p>
-            <span class="text-xs text-[var(--color-global-contrast-light-02)]">Supported formats: </span>
-            <span class="text-xs text-[var(--color-global-default)]">XLS, XLSX</span>
+            <span class="text-sm text-[var(--color-global-contrast-light-02)]">Supported formats: </span>
+            <span class="text-sm text-[var(--color-global-default)]"></span>
           </p>
           <p>
-            <span class="text-xs text-[var(--color-global-contrast-light-02)]">Maximum file size: </span>
-            <span class="text-xs text-[var(--color-global-default)]">10 MB</span>
+            <span class="text-sm text-[var(--color-global-contrast-light-02)]">Maximum file size: </span>
+            <span class="text-sm text-[var(--color-global-default)]"></span>
           </p>
         </div>
 
@@ -1531,7 +1531,7 @@
           id="file-demoDragDrop1"
           class="sr-only"
           data-drag-drop-input="true"
-          accept="xls,xlsx"
+          accept=""
           aria-hidden="true"
           tabindex="-1"
         >

@@ -138,7 +138,7 @@
     --spacing-9: 36px;
     --spacing-10: 40px;
     --spacing-12: 48px;
-    --spacing-20: 80px;
+    --spacing-14: 56px;
     --spacing-component-padding: var(--spacing-4);
     --z-tooltip: 1070;
   }
@@ -415,6 +415,9 @@
   .mb-6 {
     margin-bottom: var(--spacing-6);
   }
+  .mb-8 {
+    margin-bottom: var(--spacing-8);
+  }
   .mb-12 {
     margin-bottom: var(--spacing-12);
   }
@@ -478,6 +481,9 @@
   .h-12 {
     height: var(--spacing-12);
   }
+  .h-14 {
+    height: var(--spacing-14);
+  }
   .h-auto {
     height: auto;
   }
@@ -519,6 +525,9 @@
   }
   .w-11 {
     width: calc(var(--spacing) * 11);
+  }
+  .w-14 {
+    width: var(--spacing-14);
   }
   .w-64 {
     width: calc(var(--spacing) * 64);
@@ -910,9 +919,6 @@
     --tw-tracking: var(--tracking-wide);
     letter-spacing: var(--tracking-wide);
   }
-  .text-\[var\(--color-button-primary\)\] {
-    color: var(--color-button-primary);
-  }
   .text-\[var\(--color-button-secondary\)\] {
     color: var(--color-button-secondary);
   }
@@ -924,6 +930,9 @@
   }
   .text-\[var\(--color-global-contrast-light-02\)\] {
     color: var(--color-global-contrast-light-02);
+  }
+  .text-\[var\(--color-global-contrast-light-03\)\] {
+    color: var(--color-global-contrast-light-03);
   }
   .text-\[var\(--color-global-default\)\] {
     color: var(--color-global-default);
