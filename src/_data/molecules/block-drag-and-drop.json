@@ -16,8 +16,10 @@
       "iconName": "demoFileUp1",
       "separator": "Or",
       "buttonName": "demoBrowse1",
-      "supportedFormats": "Supported formats: JPG, PNG, PDF",
-      "maxFileSize": "Maximum file size: 10 MB",
+      "supportedFormatsLabel": "Supported formats",
+      "supportedFormatsValue": "XLS, XLSX",
+      "maxFileSizeLabel": "Maximum file size",
+      "maxFileSizeValue": "10 MB",
       "variant": "default",
       "dismissible": false,
       "errorMessage": "Error message text"

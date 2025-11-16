@@ -30,101 +30,93 @@
 {% from "01-atoms/button.njk" import renderButton %}
 
 {% macro renderBlockDragAndDrop(options) %}
-  {# Validate required props #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
     <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Find block drag and drop using universal filter #}
     {% set blockData = options.datas | findByName(options.name) %}
 
-    {# Render or error #}
     {% if not blockData %}
       <span class="error" role="alert">Block drag and drop not found: {{ options.name }}</span>
     {% else %}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+         CSS Classes - Tailwind Utilities
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      
+      {% set containerClasses = "flex flex-col p-5 bg-white rounded-[var(--radius-card)] shadow-[var(--elevation-card)] w-full max-w-xl" %}
+      {% set headingClasses = "mb-8 text-left font-serif text-[var(--color-global-default)]" %}
+      {% set dropzoneClasses = "flex flex-col items-start justify-center p-8 border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-12)] bg-white min-h-[160px] cursor-pointer hover:bg-[var(--color-global-contrast-light-04)] transition-colors mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
+      {% set iconContainerClasses = "flex mb-3" %}
+      {% set dropzoneTextClasses = "text-left text-base font-normal text-[var(--color-global-default)]" %}
+      {% set orTextClasses = "block my-4 text-base font-normal text-[var(--color-global-default)]" %}
+      {% set buttonContainerClasses = "flex mb-5" %}
+      {% set fileInfoClasses = "flex flex-col gap-1 mt-2" %}
+      {% set fileInfoLabelClasses = "text-sm text-[var(--color-global-contrast-light-02)]" %}
+      {% set fileInfoValueClasses = "text-sm text-[var(--color-global-default)]" %}
+
       <div
+        class="{{ containerClasses }}"
         data-drag-drop-name="{{ blockData.name }}"
         data-drag-drop-type="block-drag-and-drop"
-        data-drag-drop-variant="{{ blockData.variant }}"
+        data-drag-drop="true"
+        {% if blockData.supportedFormatsValue %}data-allowed-types="{{ blockData.supportedFormatsValue | lower | replace(' ', '') }}"{% endif %}
+        {% if blockData.maxFileSizeValue %}data-max-size="{{ blockData.maxFileSizeValue | lower | replace(' ', '') }}"{% endif %}
       >
-        {# Heading #}
-        {{ renderHeading({
-            name: blockData.headingName,
-            datas: options.headingDatas
-        }) }}
+        <div class="{{ headingClasses }}">
+          {{ renderHeading({
+              name: blockData.headingName,
+              datas: options.headingDatas
+          }) }}
+        </div>
 
-        {# Dropzone area #}
         <div
+          class="{{ dropzoneClasses }}"
           data-drag-drop-zone="true"
           tabindex="0"
           role="button"
           aria-label="Upload file by dropping it here or by clicking"
         >
-          {# Icon #}
-          {{ renderIcon({
-              name: blockData.iconName,
-              datas: options.iconDatas
-          }) }}
+          <div class="{{ iconContainerClasses }}">
+            {{ renderIcon({
+                name: blockData.iconName,
+                datas: options.iconDatas,
+                class: "w-14 h-14 text-[var(--color-global-contrast-light-02)]"
+            }) }}
+          </div>
 
-          {# Dropzone text #}
-          <p data-drag-drop-text="true">
+          <p class="{{ dropzoneTextClasses }}" data-drag-drop-text="true">
             {{ blockData.dropzoneText }}
           </p>
         </div>
 
-        {# Error message (if present) #}
-        {% if blockData.errorMessage %}
-          <div
-            data-drag-drop-error="true"
-            role="alert"
-          >
-            <p>{{ blockData.errorMessage }}</p>
-            {% if blockData.dismissible %}
-              <button
-                type="button"
-                data-drag-drop-dismiss="true"
-                aria-label="Dismiss error message"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-              </button>
-            {% endif %}
-          </div>
-        {% endif %}
+        <span class="{{ orTextClasses }}">{{ blockData.separator }}</span>
 
-        {# Separator #}
-        <div data-drag-drop-separator="true">
-          <div data-separator-line="true"></div>
-          <span data-separator-text="true">{{ blockData.separator }}</span>
-          <div data-separator-line="true"></div>
+        <div class="{{ buttonContainerClasses }}" data-drag-drop-button="true">
+          {{ renderButton({
+              name: blockData.buttonName,
+              datas: options.buttonDatas,
+              disabled: blockData.variant == "loading"
+          }) }}
         </div>
 
-        {# Browse button #}
-        {{ renderButton({
-            name: blockData.buttonName,
-            datas: options.buttonDatas,
-            disabled: blockData.variant == "loading"
-        }) }}
-
-        {# File info #}
-        <div data-drag-drop-info="true">
+        <div class="{{ fileInfoClasses }}" data-drag-drop-info="true">
           <p>
-            <span>Supported formats:</span>
-            <span>{{ blockData.supportedFormats }}</span>
+            <span class="{{ fileInfoLabelClasses }}">{{ blockData.supportedFormatsLabel }} </span>
+            <span class="{{ fileInfoValueClasses }}">{{ blockData.supportedFormatsValue }}</span>
           </p>
           <p>
-            <span>Maximum file size:</span>
-            <span>{{ blockData.maxFileSize }}</span>
+            <span class="{{ fileInfoLabelClasses }}">{{ blockData.maxFileSizeLabel }} </span>
+            <span class="{{ fileInfoValueClasses }}">{{ blockData.maxFileSizeValue }}</span>
           </p>
         </div>
 
-        {# Hidden file input #}
         <input
           type="file"
           id="file-{{ blockData.name }}"
-          accept="{{ blockData.supportedFormats | replace(' ', '') | lower }}"
+          class="sr-only"
+          data-drag-drop-input="true"
+          {% if blockData.supportedFormatsValue %}accept="{{ blockData.supportedFormatsValue | lower | replace(' ', '') }}"{% endif %}
           aria-hidden="true"
           tabindex="-1"
         >

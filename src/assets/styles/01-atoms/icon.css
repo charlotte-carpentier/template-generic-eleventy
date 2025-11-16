@@ -1,0 +1,22 @@
+/* ┌─────────────────────────────────────────────────────────┐
+   │ ATOM › Icon                                             │
+   │ Custom styles for SVG icons with special styling needs  │
+   └─────────────────────────────────────────────────────────┘ */
+
+/*
+ * @fileoverview CSS for dual-color icons (fill + stroke control)
+ * @usage Add class="icon-duotone" to renderIcon call in templates
+ * @created 2025-10-30
+ */
+
+/* Dual-color control for icons with both fill and stroke */
+.icon-duotone use {
+    fill: var(--color-button-primary);
+    stroke: white;
+    stroke-width: 1px;
+  }
+  
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     May your bugs be forever exiled to the shadow realm ✦
+     Charlotte Carpentier · 2025
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
