@@ -1321,14 +1321,14 @@
       
 
       <div
-        class="flex flex-col p-5 bg-white rounded-[var(--radius-card)] shadow-[var(--elevation-card)] w-full max-w-md"
+        class="flex flex-col p-5 bg-white rounded-[var(--radius-card)] shadow-[var(--elevation-card)] w-full max-w-xl"
         data-drag-drop-name="demoDragDrop1"
         data-drag-drop-type="block-drag-and-drop"
         data-drag-drop="true"
-        
-        
+        data-allowed-types="xls,xlsx"
+        data-max-size="10mb"
       >
-        <div class="mb-8 text-left font-serif text-3xl text-[var(--color-global-default)]">
+        <div class="mb-8 text-left font-serif text-[var(--color-global-default)]">
           
   
   
@@ -1358,12 +1358,12 @@
 
       
       
-        <h3
-          class="text-[var(--color-global-heading)] text-2xl font-semibold leading-snug"
+        <h2
+          class="text-[var(--color-global-heading)] text-3xl font-semibold leading-snug"
           data-heading-name="demoHeadUp1"
           data-heading-type="heading"
-          data-heading-tag="h3"
-        >Upload file</h3>
+          data-heading-tag="h2"
+        >Upload file</h2>
       
     
   
@@ -1371,7 +1371,7 @@
         </div>
 
         <div
-          class="flex flex-col items-start justify-center p-8 border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-6)] bg-white min-h-[160px] cursor-pointer hover:bg-[var(--color-global-contrast-light-04)] transition-colors mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2"
+          class="flex flex-col items-start justify-center p-8 border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-12)] bg-white min-h-[160px] cursor-pointer hover:bg-[var(--color-global-contrast-light-04)] transition-colors mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2"
           data-drag-drop-zone="true"
           tabindex="0"
           role="button"
@@ -1418,7 +1418,7 @@
 
         
         <svg
-          class="inline-block flex-shrink-0 w-5 h-5 fill-current w-14 h-14 text-[var(--color-global-contrast-light-03)]"
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current w-14 h-14 text-[var(--color-global-contrast-light-02)]"
           aria-label="Upload file"
           role="img"
           data-icon-name="demoFileUp1"
@@ -1517,12 +1517,12 @@
 
         <div class="flex flex-col gap-1 mt-2" data-drag-drop-info="true">
           <p>
-            <span class="text-sm text-[var(--color-global-contrast-light-02)]">Supported formats: </span>
-            <span class="text-sm text-[var(--color-global-default)]"></span>
+            <span class="text-sm text-[var(--color-global-contrast-light-02)]">Supported formats </span>
+            <span class="text-sm text-[var(--color-global-default)]">XLS, XLSX</span>
           </p>
           <p>
-            <span class="text-sm text-[var(--color-global-contrast-light-02)]">Maximum file size: </span>
-            <span class="text-sm text-[var(--color-global-default)]"></span>
+            <span class="text-sm text-[var(--color-global-contrast-light-02)]">Maximum file size </span>
+            <span class="text-sm text-[var(--color-global-default)]">10 MB</span>
           </p>
         </div>
 
@@ -1531,7 +1531,7 @@
           id="file-demoDragDrop1"
           class="sr-only"
           data-drag-drop-input="true"
-          accept=""
+          accept="xls,xlsx"
           aria-hidden="true"
           tabindex="-1"
         >

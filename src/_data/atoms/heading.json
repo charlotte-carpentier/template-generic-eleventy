@@ -48,8 +48,8 @@
     {
       "name": "demoHeadUp1",
       "text": "Upload file",
-      "tag": "h3",
-      "variant": "h3"
+      "tag": "h2",
+      "variant": "h2"
     },
     {
       "name": "demoLong1",

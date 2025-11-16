@@ -44,9 +44,9 @@
          CSS Classes - Tailwind Utilities
       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       
-      {% set containerClasses = "flex flex-col p-5 bg-white rounded-[var(--radius-card)] shadow-[var(--elevation-card)] w-full max-w-md" %}
-      {% set headingClasses = "mb-8 text-left font-serif text-3xl text-[var(--color-global-default)]" %}
-      {% set dropzoneClasses = "flex flex-col items-start justify-center p-8 border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-6)] bg-white min-h-[160px] cursor-pointer hover:bg-[var(--color-global-contrast-light-04)] transition-colors mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
+      {% set containerClasses = "flex flex-col p-5 bg-white rounded-[var(--radius-card)] shadow-[var(--elevation-card)] w-full max-w-xl" %}
+      {% set headingClasses = "mb-8 text-left font-serif text-[var(--color-global-default)]" %}
+      {% set dropzoneClasses = "flex flex-col items-start justify-center p-8 border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-12)] bg-white min-h-[160px] cursor-pointer hover:bg-[var(--color-global-contrast-light-04)] transition-colors mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
       {% set iconContainerClasses = "flex mb-3" %}
       {% set dropzoneTextClasses = "text-left text-base font-normal text-[var(--color-global-default)]" %}
       {% set orTextClasses = "block my-4 text-base font-normal text-[var(--color-global-default)]" %}
@@ -60,8 +60,8 @@
         data-drag-drop-name="{{ blockData.name }}"
         data-drag-drop-type="block-drag-and-drop"
         data-drag-drop="true"
-        {% if blockData.supportedFormats %}data-allowed-types="{{ blockData.supportedFormats | lower | replace('supported formats: ', '') | replace(' ', '') }}"{% endif %}
-        {% if blockData.maxFileSize %}data-max-size="{{ blockData.maxFileSize | replace('maximum file size: ', '') | lower | replace(' ', '') }}"{% endif %}
+        {% if blockData.supportedFormatsValue %}data-allowed-types="{{ blockData.supportedFormatsValue | lower | replace(' ', '') }}"{% endif %}
+        {% if blockData.maxFileSizeValue %}data-max-size="{{ blockData.maxFileSizeValue | lower | replace(' ', '') }}"{% endif %}
       >
         <div class="{{ headingClasses }}">
           {{ renderHeading({
@@ -81,7 +81,7 @@
             {{ renderIcon({
                 name: blockData.iconName,
                 datas: options.iconDatas,
-                class: "w-14 h-14 text-[var(--color-global-contrast-light-03)]"
+                class: "w-14 h-14 text-[var(--color-global-contrast-light-02)]"
             }) }}
           </div>
 
@@ -102,12 +102,12 @@
 
         <div class="{{ fileInfoClasses }}" data-drag-drop-info="true">
           <p>
-            <span class="{{ fileInfoLabelClasses }}">Supported formats: </span>
-            <span class="{{ fileInfoValueClasses }}">{{ blockData.supportedFormats | replace('Supported formats: ', '') }}</span>
+            <span class="{{ fileInfoLabelClasses }}">{{ blockData.supportedFormatsLabel }} </span>
+            <span class="{{ fileInfoValueClasses }}">{{ blockData.supportedFormatsValue }}</span>
           </p>
           <p>
-            <span class="{{ fileInfoLabelClasses }}">Maximum file size: </span>
-            <span class="{{ fileInfoValueClasses }}">{{ blockData.maxFileSize | replace('Maximum file size: ', '') }}</span>
+            <span class="{{ fileInfoLabelClasses }}">{{ blockData.maxFileSizeLabel }} </span>
+            <span class="{{ fileInfoValueClasses }}">{{ blockData.maxFileSizeValue }}</span>
           </p>
         </div>
 
@@ -116,7 +116,7 @@
           id="file-{{ blockData.name }}"
           class="sr-only"
           data-drag-drop-input="true"
-          accept="{{ blockData.supportedFormats | replace('Supported formats: ', '') | replace(' ', '') | lower }}"
+          {% if blockData.supportedFormatsValue %}accept="{{ blockData.supportedFormatsValue | lower | replace(' ', '') }}"{% endif %}
           aria-hidden="true"
           tabindex="-1"
         >
