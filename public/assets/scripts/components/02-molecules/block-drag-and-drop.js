@@ -285,5 +285,5 @@ function formatBytes(bytes, decimals = 2) {
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
-// Charlotte Carpentier · 2025
+// HAT · 2025
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -53,18 +53,18 @@
       <span class="error" role="alert">Section not found: {{ options.name }}</span>
     {% else %}
       {# Render section element - Value proposition pattern #}
-      <section 
+      <section
         aria-label="{{ sectionData.ariaLabel }}"
         data-section-name="{{ sectionData.name }}"
         data-section-type="section-value"
         data-section-variant="{{ sectionData.type }}"
       >
-        
+
         <div data-section-container>
-          
+
           {# Heading area - Common to both types #}
           <div data-section-header>
-            
+
             {# Super heading - Optional secondary title #}
             {% if sectionData.superHeadingName %}
               <div data-section-super-heading>
@@ -74,7 +74,7 @@
                 }) }}
               </div>
             {% endif %}
-            
+
             {# Main heading #}
             {% if sectionData.headingName %}
               <div data-section-heading>
@@ -84,26 +84,26 @@
                 }) }}
               </div>
             {% endif %}
-            
+
           </div>
-          
+
           {# Content area - Depends on type #}
           {% if sectionData.type == "simple" %}
-            
+
             {# Simple type: content + buttons #}
             <div data-section-content>
-              
+
               {# Content text #}
               {% if sectionData.content %}
                 <div data-section-text>
                   <p>{{ sectionData.content }}</p>
                 </div>
               {% endif %}
-              
+
               {# Call-to-action buttons #}
               {% if sectionData.primaryButtonName or sectionData.secondaryButtonName %}
                 <div data-section-buttons>
-                  
+
                   {# Primary button #}
                   {% if sectionData.primaryButtonName %}
                     {{ renderButton({
@@ -111,7 +111,7 @@
                         datas: options.buttonDatas
                     }) }}
                   {% endif %}
-                  
+
                   {# Secondary button #}
                   {% if sectionData.secondaryButtonName %}
                     {{ renderButton({
@@ -119,14 +119,14 @@
                         datas: options.buttonDatas
                     }) }}
                   {% endif %}
-                  
+
                 </div>
               {% endif %}
-              
+
             </div>
-            
+
           {% elif sectionData.type == "cards" %}
-            
+
             {# Cards type: grid of cards filtered by tags #}
             <div data-section-cards>
               {% if sectionData.cardTags and options.cardDatas %}
@@ -148,11 +148,11 @@
                 {% endfor %}
               {% endif %}
             </div>
-            
+
           {% endif %}
-          
+
         </div>
-        
+
       </section>
     {% endif %}
   {% endif %}
@@ -161,6 +161,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

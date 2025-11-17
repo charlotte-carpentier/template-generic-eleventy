@@ -53,15 +53,15 @@
       <span class="error" role="alert">Error layout not found: {{ options.name }}</span>
     {% else %}
       {# Main error layout container - Full screen absolute positioning #}
-      <div 
+      <div
         data-error-layout-name="{{ layoutData.name }}"
         data-error-layout-type="error-layout"
         data-error-layout-variant="{{ layoutData.variant }}"
       >
-        
+
         {# Desktop Layout - Cross formation with centered triptych #}
         <div data-error-layout-desktop>
-          
+
           {# Fragment group - Covers entire space in cross formation #}
           <div data-error-layout-fragments>
             {{ renderErrorFragmentGroup({
@@ -72,10 +72,10 @@
                 headingDatas: options.headingDatas
             }) }}
           </div>
-          
+
           {# Triptych - Centered overlay (title + subtitle + CTA) #}
           <div data-error-layout-triptych>
-            
+
             {# Title #}
             <div data-triptych-title>
               {{ renderHeading({
@@ -83,7 +83,7 @@
                   datas: options.headingDatas
               }) }}
             </div>
-            
+
             {# Subtitle #}
             <div data-triptych-subtitle>
               {{ renderHeading({
@@ -91,7 +91,7 @@
                   datas: options.headingDatas
               }) }}
             </div>
-            
+
             {# CTA - Link or Button #}
             <div data-triptych-cta>
               {% if layoutData.linkName %}
@@ -106,10 +106,10 @@
                 }) }}
               {% endif %}
             </div>
-            
+
             {# Accessibility controls #}
             <div data-triptych-accessibility>
-              
+
               {# Accessibility text #}
               <div data-a11y-text>
                 {{ renderHeading({
@@ -117,7 +117,7 @@
                     datas: options.headingDatas
                 }) }}
               </div>
-              
+
               {# Accessibility toggle button #}
               <div data-a11y-button>
                 {{ renderButton({
@@ -125,19 +125,19 @@
                     datas: options.buttonDatas
                 }) }}
               </div>
-              
+
             </div>
-            
+
           </div>
-          
+
         </div>
-        
+
         {# Mobile Layout - Vertical scrollable stack #}
         <div data-error-layout-mobile>
-          
+
           {# Triptych first - Always visible at top #}
           <div data-error-layout-triptych-mobile>
-            
+
             {# Title #}
             <div data-triptych-title>
               {{ renderHeading({
@@ -145,7 +145,7 @@
                   datas: options.headingDatas
               }) }}
             </div>
-            
+
             {# Subtitle #}
             <div data-triptych-subtitle>
               {{ renderHeading({
@@ -153,7 +153,7 @@
                   datas: options.headingDatas
               }) }}
             </div>
-            
+
             {# CTA #}
             <div data-triptych-cta>
               {% if layoutData.linkName %}
@@ -168,7 +168,7 @@
                 }) }}
               {% endif %}
             </div>
-            
+
             {# Accessibility controls #}
             <div data-triptych-accessibility>
               <div data-a11y-text>
@@ -184,26 +184,26 @@
                 }) }}
               </div>
             </div>
-            
+
           </div>
-          
+
           {# Fragments - Stacked vertically below triptych #}
           <div data-error-layout-fragments-mobile>
             {# Find fragment group to get fragment names #}
             {% set groupData = options.groupDatas | findByName(layoutData.groupName) %}
-            
+
             {% if groupData and groupData.fragmentNames %}
               {% for fragmentName in groupData.fragmentNames %}
-                <div 
+                <div
                   data-fragment-mobile-item
                   data-fragment-index="{{ loop.index }}"
                 >
                   {# Fragment 6 clickable logic #}
                   {% set isFragment6 = loop.index == 6 %}
                   {% if isFragment6 and not groupData.disableFragment6Click %}
-                    <div 
-                      tabindex="0" 
-                      role="button" 
+                    <div
+                      tabindex="0"
+                      role="button"
                       aria-label="Return to previous page or home"
                       data-fragment-clickable
                     >
@@ -226,9 +226,9 @@
               {% endfor %}
             {% endif %}
           </div>
-          
+
         </div>
-        
+
       </div>
     {% endif %}
   {% endif %}
@@ -237,6 +237,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

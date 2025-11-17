@@ -42,14 +42,14 @@
       <span class="error" role="alert">Section not found: {{ options.name }}</span>
     {% else %}
       {# Render section element - Semantic HTML hero pattern #}
-      <section 
+      <section
         aria-label="{{ sectionData.ariaLabel }}"
         data-section-name="{{ sectionData.name }}"
         data-section-type="section-article-hero"
       >
-        
+
         <div data-section-container>
-          
+
           {# Hero image - Centered layout #}
           {% if sectionData.imageName %}
             <div data-section-image>
@@ -59,7 +59,7 @@
               }) }}
             </div>
           {% endif %}
-          
+
           {# Hero heading - Main title centered below image #}
           {% if sectionData.headingName %}
             <div data-section-heading>
@@ -69,9 +69,9 @@
               }) }}
             </div>
           {% endif %}
-          
+
         </div>
-        
+
       </section>
     {% endif %}
   {% endif %}
@@ -80,6 +80,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

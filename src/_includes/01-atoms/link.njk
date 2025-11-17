@@ -54,7 +54,7 @@
       {% set finalAriaLabel = options.ariaLabel | default(linkData.ariaLabel) %}
       {% set isDisabled = options.disabled | default(linkData.disabled) | default(false) %}
       {% set isActive = options.active | default(false) %}
-      
+
       {# Check if link has icon #}
       {% set hasIcon = linkData.iconName %}
 
@@ -69,22 +69,22 @@
       {# Variant classes - Visual style mapping
          Hover removes underline per Figma specs #}
       {% set variantClasses = "" %}
-      
+
       {% if linkData.variant == 'default' %}
         {% set variantClasses = "text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed" %}
-      
+
       {% elif linkData.variant == 'tab' %}
         {% set variantClasses = "justify-center px-4 py-2.5 text-base text-[var(--color-global-default)] border-b-2 border-transparent hover:border-[var(--color-global-accent)] hover:text-[var(--color-global-accent)] hover:no-underline active:border-[var(--color-button-primary)] active:text-[var(--color-button-primary)] aria-selected:border-[var(--color-button-primary)] aria-selected:text-[var(--color-button-primary)] aria-selected:font-semibold disabled:opacity-50 disabled:cursor-not-allowed" %}
-      
+
       {% elif linkData.variant == 'menu-link' %}
         {% set variantClasses = "justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed" %}
-      
+
       {% elif linkData.variant == 'social' %}
         {% set variantClasses = "gap-2 px-3 py-2.5 text-sm text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed" %}
-      
+
       {% elif linkData.variant == 'footer' %}
         {% set variantClasses = "text-sm text-[var(--color-global-contrast-light-02)] hover:text-[var(--color-global-default)] hover:no-underline active:text-[var(--color-global-accent)] disabled:opacity-50 disabled:cursor-not-allowed" %}
-      
+
       {% else %}
         {% set variantClasses = "text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed" %}
       {% endif %}
@@ -108,9 +108,9 @@
       >
         {# Icon (for social links) #}
         {% if hasIcon and options.iconDatas %}
-          {{ renderIcon({ 
-              name: linkData.iconName, 
-              datas: options.iconDatas 
+          {{ renderIcon({
+              name: linkData.iconName,
+              datas: options.iconDatas
           }) }}
         {% endif %}
 
@@ -124,6 +124,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

@@ -56,7 +56,7 @@ export { initTooltips };
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
-// Charlotte Carpentier · 2025
+// HAT · 2025
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -204,4 +204,4 @@ May your bugs be forever exiled to the shadow realm ✦
 ---
 
 **May your bugs be forever exiled to the shadow realm ✦**  
-Charlotte Carpentier · 2025
+HAT · 2025

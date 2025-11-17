@@ -47,17 +47,17 @@
       <span class="error" role="alert">Section not found: {{ options.name }}</span>
     {% else %}
       {# Render section element - Two-column layout pattern #}
-      <section 
+      <section
         aria-label="{{ sectionData.ariaLabel }}"
         data-section-name="{{ sectionData.name }}"
         data-section-type="section-contact"
       >
-        
+
         <div data-section-container>
-          
+
           {# Left column - Contact form #}
           <div data-section-column="left">
-            
+
             {% if sectionData.leftForm %}
               {# Form with submit button #}
               {% set submitButtonHtml %}
@@ -67,19 +67,19 @@
                     type: "submit"
                 }) }}
               {% endset %}
-              
+
               {{ renderListForm({
                   name: sectionData.leftForm,
                   datas: options.formDatas,
                   submitButton: submitButtonHtml | safe
               }) }}
             {% endif %}
-            
+
           </div>
-          
+
           {# Right column - Nested section-about organism #}
           <div data-section-column="right">
-            
+
             {% if sectionData.rightSection %}
               {{ renderSectionAbout({
                   name: sectionData.rightSection,
@@ -88,11 +88,11 @@
                   buttonDatas: options.buttonDatas
               }) }}
             {% endif %}
-            
+
           </div>
-          
+
         </div>
-        
+
       </section>
     {% endif %}
   {% endif %}
@@ -101,6 +101,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

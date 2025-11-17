@@ -44,35 +44,35 @@
       <span class="error" role="alert">Menu not found: {{ options.name }}</span>
     {% else %}
       {# Render nav element - Semantic HTML best practice #}
-      <nav 
+      <nav
         aria-label="{{ menuData.ariaLabel }}"
         data-menu-name="{{ menuData.name }}"
         data-menu-type="menu"
       >
-        
+
         {# Menu items - Column layout pattern #}
         <div data-menu-columns>
           {% for item in menuData.items %}
             <div data-menu-column>
-              
+
               {# Column heading - DRY: Use renderHeading atom (not direct HTML) #}
               {# Source: The Pragmatic Programmer - Don't Repeat Yourself principle #}
               {{ renderHeading({
                   name: item.headingName,
                   datas: options.headingDatas
               }) }}
-              
+
               {# Column navigation - Navigation secondary organism #}
               {{ renderNavigationSecondary({
                   name: item.navSecondaryName,
                   datas: options.navSecondaryDatas,
                   linkDatas: options.linkDatas
               }) }}
-              
+
             </div>
           {% endfor %}
         </div>
-        
+
       </nav>
     {% endif %}
   {% endif %}
@@ -81,6 +81,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

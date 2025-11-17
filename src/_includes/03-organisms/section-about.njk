@@ -42,14 +42,14 @@
       <span class="error" role="alert">Section not found: {{ options.name }}</span>
     {% else %}
       {# Render section element - Semantic HTML with ARIA #}
-      <section 
+      <section
         aria-label="{{ sectionData.ariaLabel }}"
         data-section-name="{{ sectionData.name }}"
         data-section-type="section-about"
       >
-        
+
         <div data-section-container>
-          
+
           {# Super heading - Secondary heading (e.g., "About Us") #}
           {% if sectionData.superHeadingName %}
             <div data-section-super-heading>
@@ -59,7 +59,7 @@
               }) }}
             </div>
           {% endif %}
-          
+
           {# Main heading - Primary heading (e.g., large title) #}
           {% if sectionData.headingName %}
             <div data-section-heading>
@@ -69,18 +69,18 @@
               }) }}
             </div>
           {% endif %}
-          
+
           {# Content - Direct text from JSON (not an atom) #}
           {% if sectionData.content %}
             <div data-section-content>
               <p>{{ sectionData.content }}</p>
             </div>
           {% endif %}
-          
+
           {# Call-to-action buttons #}
           {% if sectionData.primaryButtonName or sectionData.secondaryButtonName %}
             <div data-section-buttons>
-              
+
               {# Primary button (e.g., "Get Started") #}
               {% if sectionData.primaryButtonName %}
                 {{ renderButton({
@@ -88,7 +88,7 @@
                     datas: options.buttonDatas
                 }) }}
               {% endif %}
-              
+
               {# Secondary button (e.g., "Learn More") #}
               {% if sectionData.secondaryButtonName %}
                 {{ renderButton({
@@ -96,12 +96,12 @@
                     datas: options.buttonDatas
                 }) }}
               {% endif %}
-              
+
             </div>
           {% endif %}
-          
+
         </div>
-        
+
       </section>
     {% endif %}
   {% endif %}
@@ -110,6 +110,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

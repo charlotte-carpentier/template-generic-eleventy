@@ -43,30 +43,30 @@
       <span class="error" role="alert">Error fragment group not found: {{ options.name }}</span>
     {% else %}
       {# Render grid container - 2x3 grid layout for error pages #}
-      <div 
+      <div
         data-error-group-name="{{ groupData.name }}"
         data-error-group-type="error-fragment-group"
         data-error-group-variant="{{ groupData.variant }}"
       >
-        
+
         {# Loop through fragment names and render each #}
         {% for fragmentName in groupData.fragmentNames %}
           {# Calculate column position (left = even index, right = odd) #}
           {% set isLeftColumn = loop.index0 % 2 == 0 %}
           {# Fragment 6 is special - can be clickable #}
           {% set isFragment6 = loop.index == 6 %}
-          
-          <div 
+
+          <div
             data-fragment-item
             data-fragment-position="{{ 'left' if isLeftColumn else 'right' }}"
             data-fragment-index="{{ loop.index }}"
           >
-            
+
             {% if isFragment6 and not groupData.disableFragment6Click %}
               {# Fragment 6 - Clickable with ARIA for navigation back #}
-              <div 
-                tabindex="0" 
-                role="button" 
+              <div
+                tabindex="0"
+                role="button"
                 aria-label="Return to previous page or home"
                 data-fragment-clickable
               >
@@ -86,10 +86,10 @@
                   headingDatas: options.headingDatas
               }) }}
             {% endif %}
-            
+
           </div>
         {% endfor %}
-        
+
       </div>
     {% endif %}
   {% endif %}
@@ -98,6 +98,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

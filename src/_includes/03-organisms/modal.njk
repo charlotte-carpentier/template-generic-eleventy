@@ -43,15 +43,15 @@
     {% else %}
       {# Backdrop overlay - Optional based on JSON config #}
       {% if modalData.backdrop %}
-        <div 
+        <div
           data-modal-backdrop
           aria-hidden="true"
         ></div>
       {% endif %}
-      
+
       {# Modal dialog - WCAG 2.2 AA Dialog pattern #}
       {# Source: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/ #}
-      <div 
+      <div
         role="dialog"
         aria-modal="true"
         aria-label="{{ modalData.ariaLabel }}"
@@ -60,9 +60,9 @@
         data-modal-type="modal"
         data-modal-variant="{{ modalData.variant }}"
       >
-        
+
         <div data-modal-container>
-          
+
           {# Modal header with heading #}
           {% if modalData.headingName %}
             <div data-modal-header>
@@ -72,21 +72,21 @@
               }) }}
             </div>
           {% endif %}
-          
+
           {# Modal content - Direct text from JSON #}
           {% if modalData.content %}
-            <div 
+            <div
               data-modal-content
               {% if modalData.ariaDescribedBy %}id="{{ modalData.ariaDescribedBy }}"{% endif %}
             >
               <p>{{ modalData.content }}</p>
             </div>
           {% endif %}
-          
+
           {# Modal footer with action buttons #}
           {% if modalData.primaryButton or modalData.secondaryButton %}
             <div data-modal-footer>
-              
+
               {# Primary action button (e.g., "Continue") #}
               {% if modalData.primaryButton %}
                 {{ renderButton({
@@ -94,7 +94,7 @@
                     datas: options.buttonDatas
                 }) }}
               {% endif %}
-              
+
               {# Secondary action button (e.g., "Close") #}
               {% if modalData.secondaryButton %}
                 {{ renderButton({
@@ -102,12 +102,12 @@
                     datas: options.buttonDatas
                 }) }}
               {% endif %}
-              
+
             </div>
           {% endif %}
-          
+
         </div>
-        
+
       </div>
     {% endif %}
   {% endif %}
@@ -116,6 +116,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

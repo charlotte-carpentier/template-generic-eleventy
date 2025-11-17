@@ -45,14 +45,14 @@
       <span class="error" role="alert">Section not found: {{ options.name }}</span>
     {% else %}
       {# Render section element - Listing pattern with semantic HTML #}
-      <section 
+      <section
         aria-label="{{ sectionData.ariaLabel }}"
         data-section-name="{{ sectionData.name }}"
         data-section-type="section-listing"
       >
-        
+
         <div data-section-container>
-          
+
           {# Section heading #}
           {% if sectionData.headingName %}
             <div data-section-heading>
@@ -62,9 +62,9 @@
               }) }}
             </div>
           {% endif %}
-          
+
           {# Cards grid - Filter by tags if specified #}
-          <div 
+          <div
             data-section-cards
             data-items-per-page="{{ sectionData.itemsPerPage }}"
           >
@@ -87,7 +87,7 @@
               {% endfor %}
             {% endif %}
           </div>
-          
+
           {# Pagination - Optional #}
           {% if sectionData.paginationName %}
             <div data-section-pagination>
@@ -97,9 +97,9 @@
               }) }}
             </div>
           {% endif %}
-          
+
         </div>
-        
+
       </section>
     {% endif %}
   {% endif %}
@@ -108,6 +108,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

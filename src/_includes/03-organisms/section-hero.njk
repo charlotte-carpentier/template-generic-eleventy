@@ -45,14 +45,14 @@
       <span class="error" role="alert">Section not found: {{ options.name }}</span>
     {% else %}
       {# Render section element - Hero pattern with semantic HTML #}
-      <section 
+      <section
         aria-label="{{ sectionData.ariaLabel }}"
         data-section-name="{{ sectionData.name }}"
         data-section-type="section-hero"
       >
-        
+
         <div data-section-container>
-          
+
           {# Super heading - Optional secondary title #}
           {% if sectionData.superHeadingName %}
             <div data-section-super-heading>
@@ -62,7 +62,7 @@
               }) }}
             </div>
           {% endif %}
-          
+
           {# Lockup - Key value proposition (label + value pair) #}
           {% if sectionData.lockupName %}
             <div data-section-lockup>
@@ -72,11 +72,11 @@
               }) }}
             </div>
           {% endif %}
-          
+
           {# Call-to-action buttons #}
           {% if sectionData.primaryButtonName or sectionData.secondaryButtonName %}
             <div data-section-buttons>
-              
+
               {# Primary button (e.g., "Get Started") #}
               {% if sectionData.primaryButtonName %}
                 {{ renderButton({
@@ -84,7 +84,7 @@
                     datas: options.buttonDatas
                 }) }}
               {% endif %}
-              
+
               {# Secondary button (e.g., "Learn More") #}
               {% if sectionData.secondaryButtonName %}
                 {{ renderButton({
@@ -92,12 +92,12 @@
                     datas: options.buttonDatas
                 }) }}
               {% endif %}
-              
+
             </div>
           {% endif %}
-          
+
         </div>
-        
+
       </section>
     {% endif %}
   {% endif %}
@@ -106,6 +106,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

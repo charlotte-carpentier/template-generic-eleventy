@@ -41,16 +41,16 @@
       {# Render section element - Accessibility statement semantic pattern #}
       {# WCAG 2.2 AA: Accessibility statements should be in a region landmark #}
       {# Source: https://www.w3.org/WAI/WCAG22/Understanding/parsing.html #}
-      <section 
+      <section
         role="{{ sectionData.role }}"
         aria-label="{{ sectionData.ariaLabel }}"
         data-section-name="{{ sectionData.name }}"
         data-section-type="section-accessibility"
         data-section-variant="{{ sectionData.variant }}"
       >
-        
+
         <div data-section-container>
-          
+
           {# Section heading - Main accessibility statement title #}
           {% if sectionData.headingName %}
             <div data-section-heading>
@@ -60,7 +60,7 @@
               }) }}
             </div>
           {% endif %}
-          
+
           {# Section content - Direct text from JSON #}
           {# For real accessibility statements, content would be more structured #}
           {% if sectionData.content %}
@@ -68,9 +68,9 @@
               <p>{{ sectionData.content }}</p>
             </div>
           {% endif %}
-          
+
         </div>
-        
+
       </section>
     {% endif %}
   {% endif %}
@@ -79,6 +79,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}
