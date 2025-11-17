@@ -52,19 +52,19 @@
 
       {# Variant classes - Visual style mapping #}
       {% set variantClasses = "" %}
-      
+
       {% if imageVariant == 'avatar' %}
         {% set variantClasses = "w-11 h-11 rounded-[var(--radius-6)]" %}
-      
+
       {% elif imageVariant == 'square' %}
         {% set variantClasses = "w-full max-w-2xl aspect-square" %}
-      
+
       {% elif imageVariant == 'landscape' %}
         {% set variantClasses = "w-80" %}
-      
+
       {% elif imageVariant == 'wide' %}
         {% set variantClasses = "w-64" %}
-      
+
       {% else %}
         {% set variantClasses = "w-full" %}
       {% endif %}
@@ -80,9 +80,9 @@
             aria-label="{{ imageAlt }}"
           >
             {% if options.iconDatas %}
-              {{ renderIcon({ 
-                  name: imageData.iconName, 
-                  datas: options.iconDatas 
+              {{ renderIcon({
+                  name: imageData.iconName,
+                  datas: options.iconDatas
               }) }}
             {% endif %}
           </div>
@@ -115,6 +115,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

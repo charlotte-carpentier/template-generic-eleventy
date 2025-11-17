@@ -126,7 +126,7 @@
                 aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
               >
                 {% for opt in selectData.options %}
-                  <option 
+                  <option
                     value="{{ opt.value }}"
                     {% if opt.selected %}selected{% endif %}
                   >
@@ -159,8 +159,8 @@
             </select>
 
             {% if inputData.chipMulti %}
-              <div 
-                class="flex flex-wrap gap-2 mt-2" 
+              <div
+                class="flex flex-wrap gap-2 mt-2"
                 data-chip-container="{{ inputId }}"
                 data-chip-template="{{ inputData.chipMulti | dump | escape }}"
               >
@@ -235,6 +235,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

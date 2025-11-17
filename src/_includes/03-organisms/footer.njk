@@ -48,13 +48,13 @@
       <span class="error" role="alert">Footer not found: {{ options.name }}</span>
     {% else %}
       {# Render footer element #}
-      <footer 
-        role="contentinfo" 
+      <footer
+        role="contentinfo"
         aria-label="{{ footerData.ariaLabel }}"
         data-footer-name="{{ footerData.name }}"
         data-footer-type="footer"
       >
-        
+
         {# Logo branding section #}
         <div data-footer-section="branding">
           {{ renderVector({
@@ -62,38 +62,38 @@
               datas: options.vectorDatas
           }) }}
         </div>
-        
+
         {# Navigation columns section #}
         <div data-footer-section="navigation">
           {% for item in footerData.items %}
             <div data-footer-column>
-              
+
               {# Column heading #}
               {{ renderHeading({
                   name: item.headingName,
                   datas: options.headingDatas
               }) }}
-              
+
               {# Column navigation #}
               {{ renderNavigationSecondary({
                   name: item.navSecondaryName,
                   datas: options.navSecondaryDatas,
                   linkDatas: options.linkDatas
               }) }}
-              
+
             </div>
           {% endfor %}
         </div>
-        
+
         {# Copyright and legal section #}
         <div data-footer-section="legal">
-          
+
           {# Copyright text - Direct text in semantic element (MDN best practice) #}
           <p data-footer-copyright>&copy; {{ footerData.copyright.text }}</p>
-          
+
           {# Version info #}
           <p data-footer-version>{{ footerData.copyright.version }}</p>
-          
+
           {# Legal links navigation - W3C Navigation Lists pattern #}
           <nav aria-label="Legal links">
             <ul>
@@ -107,9 +107,9 @@
               {% endfor %}
             </ul>
           </nav>
-          
+
         </div>
-        
+
       </footer>
     {% endif %}
   {% endif %}
@@ -118,6 +118,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

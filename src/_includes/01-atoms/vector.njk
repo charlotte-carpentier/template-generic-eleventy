@@ -37,14 +37,14 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
          CSS Classes - Tailwind Utilities
       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      
-      {# Container classes based on variant 
+
+      {# Container classes based on variant
          Using standards for logo containers with proper alignment #}
       {% set containerClasses = "inline-flex items-center" %}
       {% if vectorData.variant == 'horizontal' %}
         {% set containerClasses = containerClasses ~ " gap-3" %}
       {% endif %}
-      
+
       {# Custom classes #}
       {% set customClasses = options.className | default('') %}
 
@@ -75,6 +75,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

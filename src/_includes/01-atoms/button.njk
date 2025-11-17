@@ -58,7 +58,7 @@
       {% set isDisabled = options.disabled or buttonData.disabled %}
       {% set finalAriaLabel = options.ariaLabel | default(buttonData.ariaLabel) %}
       {% set finalAriaDescribedby = options.ariaDescribedby | default(buttonData.ariaDescribedby) %}
-      
+
       {# Check if button has icon #}
       {% set hasIcon = buttonData.iconName %}
       {% set iconPosition = buttonData.iconPosition | default('left') %}
@@ -84,25 +84,25 @@
       {# Variant classes - Visual style mapping
          Uses design tokens from input.css @theme #}
       {% set variantClasses = "" %}
-      
+
       {% if buttonData.variant == 'primary' %}
         {% set variantClasses = "bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed" %}
-      
+
       {% elif buttonData.variant == 'secondary' %}
         {% set variantClasses = "bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed" %}
-      
+
       {% elif buttonData.variant == 'ghost' %}
         {% set variantClasses = "bg-transparent text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-04)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed" %}
-      
+
       {% elif buttonData.variant == 'icon' %}
         {% set variantClasses = "bg-transparent text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-04)] active:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed" %}
-      
+
       {% elif buttonData.variant == 'segmented' %}
         {% set variantClasses = "bg-transparent border border-[var(--color-global-contrast-light-03)] text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-04)] active:bg-[var(--color-button-primary)] active:text-white aria-selected:bg-[var(--color-button-primary)] aria-selected:text-white disabled:opacity-50 disabled:cursor-not-allowed" %}
-      
+
       {% elif buttonData.variant == 'fixed' %}
         {% set variantClasses = "bg-[var(--color-global-contrast-light-04)] text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-03)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed" %}
-      
+
       {% else %}
         {# Default fallback = primary variant #}
         {% set variantClasses = "bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed" %}
@@ -131,9 +131,9 @@
         {# Icon left position #}
         {% if hasIcon and (iconPosition == 'left' or iconPosition == 'both') %}
           {% if options.iconDatas %}
-            {{ renderIcon({ 
-                name: buttonData.iconName, 
-                datas: options.iconDatas 
+            {{ renderIcon({
+                name: buttonData.iconName,
+                datas: options.iconDatas
             }) }}
           {% endif %}
         {% endif %}
@@ -141,9 +141,9 @@
         {# Icon center position (icon-only button) #}
         {% if hasIcon and iconPosition == 'center' %}
           {% if options.iconDatas %}
-            {{ renderIcon({ 
-                name: buttonData.iconName, 
-                datas: options.iconDatas 
+            {{ renderIcon({
+                name: buttonData.iconName,
+                datas: options.iconDatas
             }) }}
           {% endif %}
         {% endif %}
@@ -156,9 +156,9 @@
         {# Icon right position #}
         {% if hasIcon and (iconPosition == 'right' or iconPosition == 'both') %}
           {% if options.iconDatas %}
-            {{ renderIcon({ 
-                name: buttonData.iconName, 
-                datas: options.iconDatas 
+            {{ renderIcon({
+                name: buttonData.iconName,
+                datas: options.iconDatas
             }) }}
           {% endif %}
         {% endif %}
@@ -170,6 +170,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

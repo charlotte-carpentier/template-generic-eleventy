@@ -47,15 +47,15 @@
       <span class="error" role="alert">Header not found: {{ options.name }}</span>
     {% else %}
       {# Render header element #}
-      <header 
+      <header
         id="main-header"
         aria-label="{{ headerData.ariaLabel }}"
         data-header-name="{{ headerData.name }}"
         data-header-type="header"
       >
-        
+
         <div data-header-container>
-          
+
           {# Desktop branding - Vector logo #}
           <div data-header-section="desktop-branding">
             {{ renderVector({
@@ -63,7 +63,7 @@
                 datas: options.vectorDatas
             }) }}
           </div>
-          
+
           {# Desktop navigation - Tab bar #}
           <div data-header-section="desktop-navigation">
             {{ renderTabBar({
@@ -72,9 +72,9 @@
                 linkDatas: options.linkDatas
             }) }}
           </div>
-          
+
           {# Mobile burger button - WCAG 2.2 AA compliant #}
-          <button 
+          <button
             id="burger-toggle"
             type="button"
             aria-label="Toggle mobile menu"
@@ -89,7 +89,7 @@
                   datas: options.iconDatas
               }) }}
             </span>
-            
+
             {# Burger close icon #}
             <span data-burger-icon="close">
               {{ renderIcon({
@@ -98,18 +98,18 @@
               }) }}
             </span>
           </button>
-          
+
         </div>
-        
+
         {# Mobile overlay menu - Conditional render based on JSON config #}
         {% if headerData.mobile.overlay %}
-          <div 
+          <div
             id="mobile-overlay"
             data-header-overlay
             aria-hidden="true"
           >
             <div data-overlay-content>
-              
+
               {# Mobile branding #}
               <div data-overlay-section="branding">
                 {{ renderVector({
@@ -117,7 +117,7 @@
                     datas: options.vectorDatas
                 }) }}
               </div>
-              
+
               {# Mobile navigation - Same tab bar data, different presentation #}
               <div data-overlay-section="navigation">
                 {{ renderTabBar({
@@ -126,11 +126,11 @@
                     linkDatas: options.linkDatas
                 }) }}
               </div>
-              
+
             </div>
           </div>
         {% endif %}
-        
+
       </header>
     {% endif %}
   {% endif %}
@@ -139,6 +139,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

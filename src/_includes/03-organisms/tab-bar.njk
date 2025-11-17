@@ -40,7 +40,7 @@
     {% else %}
       {# Render nav element - WCAG 2.2 AA ARIA Tabs pattern #}
       {# Source: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/ #}
-      <nav 
+      <nav
         role="tablist"
         aria-label="{{ tabBarData.ariaLabel }}"
         data-tabbar-name="{{ tabBarData.name }}"
@@ -48,7 +48,7 @@
       >
         <ul data-tabbar-list>
           {% for item in tabBarData.items %}
-            <li 
+            <li
               role="presentation"
               data-tabbar-item
             >
@@ -72,6 +72,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

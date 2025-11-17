@@ -28,6 +28,22 @@ Custom CSS only when Tailwind is insufficient:
 ## File Structure
 
 ```text
+
+## Component Styling Responsibilities
+
+Define clear boundaries for styling at each component level:
+
+| Level | Responsibilities | Does NOT Handle |
+|-------|-----------------|-----------------|
+| **Atoms** | Intrinsic appearance (colors, typography, padding), states (hover, focus, disabled), variants (primary, secondary, outline) | External margin, positioning relative to other components |
+| **Molecules** | Internal layout (flexbox, grid), spacing between child atoms (gap, mb-*), container padding | External margin of the molecule itself |
+| **Organisms** | Complex section layouts, spacing between child molecules, responsive breakpoints (md:, lg:) | External margin of the organism itself |
+
+**Key principle**: Components manage their internal spacing (padding), but never their external spacing (margin). The parent component controls spacing between children using `gap`, `flex`, or `grid` utilities.
+
+**Workflow**: Define design tokens in `input.css` first, then apply them to components. This ensures consistency and maintainability.
+
+---
 src/assets/styles/
 ├── input.css                    # Entry point + @theme design tokens
 ├── 01-atoms/                    # Empty (use Tailwind)
@@ -174,7 +190,7 @@ Output: `public/output.css` (auto-included in `base.njk`)
 
 Each component follows the OMA pattern:
 
-```
+```txt
 Component Example: button
 ├── src/_data/atoms/button.json          # Content data
 ├── src/_includes/01-atoms/button.njk    # Presentation (macro with Tailwind classes)
@@ -263,7 +279,7 @@ Only create custom CSS when Tailwind utilities are insufficient:
 
 **File structure:**
 
-```
+```txt
 src/assets/styles/
 ├── input.css                           # Main entry (imports components)
 ├── 01-atoms/
@@ -335,6 +351,7 @@ npm install -D prettier prettier-plugin-tailwindcss
 ---
 
 **See also:**
+
 - [Coding Style Guide](./coding-style.md) - General conventions
 - [Code Examples](./examples.md) - Complete component examples
 

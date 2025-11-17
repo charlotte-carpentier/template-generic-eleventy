@@ -103,7 +103,7 @@ tags: [coding-style, conventions, guidelines]
 ```javascript
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
-// Charlotte Carpentier · 2025
+// HAT · 2025
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
@@ -154,7 +154,7 @@ tags: [coding-style, conventions, guidelines]
 
 **Structure (one line only):**
 
-```
+```txt
 [emoji] [type]: [Subject starting with verb and capital letter]
 ```
 

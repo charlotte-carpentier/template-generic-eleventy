@@ -42,7 +42,7 @@
       {% set tooltipId = 'tooltip-' + tooltipData.name | slugify %}
       {% set triggerType = options.triggerType | default(tooltipData.triggerType) | default('icon') %}
       {% set triggerLabel = options.triggerLabel | default(tooltipData.triggerLabel) | default('More information') %}
-      
+
       {% set wrapperClasses = "relative inline-block" %}
 
       {% set triggerClasses = "" %}
@@ -57,7 +57,7 @@
       {% set tooltipClasses = "hidden absolute p-4 bg-[var(--color-global-white)] text-[var(--color-global-default)] shadow-[var(--elevation-tooltip)] rounded-[var(--radius-8)] min-w-[280px] max-w-xs z-[var(--z-tooltip)]" %}
 
       <div class="{{ wrapperClasses }}">
-        <button 
+        <button
           type="button"
           class="{{ triggerClasses }}"
           aria-describedby="{{ tooltipId }}"
@@ -99,7 +99,7 @@
               {% if tooltipData.descriptionPart1 %}
                 <div class="text-sm text-[var(--color-global-contrast-light-01)]">{{ tooltipData.descriptionPart1 }}</div>
               {% endif %}
-              
+
               {% if tooltipData.descriptionPart2 %}
                 <div class="text-sm text-[var(--color-global-contrast-light-01)]">{{ tooltipData.descriptionPart2 }}</div>
               {% endif %}
@@ -114,6 +114,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-Charlotte Carpentier · 2025
+HAT · 2025
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

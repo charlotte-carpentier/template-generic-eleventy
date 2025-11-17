@@ -68,5 +68,5 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
-// Charlotte Carpentier · 2025
+// HAT · 2025
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
