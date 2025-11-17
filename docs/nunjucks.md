@@ -50,6 +50,59 @@ tags: [nunjucks, templates, templating]
 
 ---
 
+## Component Navigation
+
+### Pattern
+
+```njk
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+  3. Tailwind Classes
+  Index:
+  3.1 Base Classes
+  3.2 Size Classes
+  3.3 Variant Classes
+  3.4 Icon Classes
+━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{# --------------------------
+    3.1 Base Classes
+    Description: Layout, typography, transition, focus states
+--------------------------#}
+{% set baseClasses = "inline-flex items-center ..." %}
+```
+
+### Standard Sections
+
+1. Validate Props
+2. Compute Final Values
+3. Tailwind Classes (with index if >3 subsections)
+4. Render HTML
+
+---
+
+## Default Values
+
+### Pattern bis
+
+Apply `| default()` once at variable initialization, then use variable in conditions:
+
+```njk
+{# Section 2: Compute Final Values #}
+{% set buttonSize = buttonData.size | default('medium') %}
+{% set buttonVariant = buttonData.variant | default('primary') %}
+
+{# Section 3: Use variables in conditions #}
+{% if buttonSize == 'small' %}
+  {% set sizeClasses = "..." %}
+{% elif buttonSize == 'medium' %}
+  {% set sizeClasses = "..." %}
+{% endif %}
+```
+
+**Never duplicate code in `{% else %}`** - maintain single source of truth.
+
+---
+
 ## Universal Filter
 
 **Since Phase 3**, all components use the `findByName` custom filter for optimal performance.
