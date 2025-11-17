@@ -40,7 +40,10 @@
 {% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderButton(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -51,10 +54,16 @@
 
     {# Render button or error message #}
     {% if not buttonData %}
-      <span class="error" role="alert">Button not found: {{ options.name }}</span>
+      <span class="error" role="alert">Button not found:
+        {{ options.name }}</span>
     {% else %}
-      {# Compute final values with fallback cascade #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute final values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set buttonType = options.type | default(buttonData.type) | default('button') %}
+      {% set buttonSize = buttonData.size | default('medium') %}
+      {% set buttonVariant = buttonData.variant | default('primary') %}
       {% set isDisabled = options.disabled or buttonData.disabled %}
       {% set finalAriaLabel = options.ariaLabel | default(buttonData.ariaLabel) %}
       {% set finalAriaDescribedby = options.ariaDescribedby | default(buttonData.ariaDescribedby) %}
@@ -63,71 +72,82 @@
       {% set hasIcon = buttonData.iconName %}
       {% set iconPosition = buttonData.iconPosition | default('left') %}
 
-      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         CSS Classes - Tailwind Utilities
-      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Base Classes
+        3.2 Size Classes
+        3.3 Variant Classes
+        3.4 Icon Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {# --------------------------
+          3.1 Base Classes
+          Description: Layout, typography, transition, focus states
+        --------------------------#}
+      {% set baseClasses = "inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
 
-      {# Base classes - Common to all buttons
-         Layout, typography, transitions, focus states (WCAG 2.2 AA compliant) #}
-      {% set baseClasses = "inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-semantic-information-focus)]" %}
-
-      {# Size classes - Padding and text size
-         Based on Material Design standards + WCAG 44px minimum touch target #}
+      {# --------------------------
+        3.2 Size Classes
+        Description: Padding, text size, rounded corners
+        --------------------------#}
       {% set sizeClasses = "" %}
-      {% if buttonData.size == 'small' %}
+
+      {% if buttonSize == 'small' %}
         {% set sizeClasses = "px-4 py-2 text-sm rounded-[var(--radius-6)]" %}
-      {% else %}
-        {# Default size #}
+      {% elif buttonSize == 'medium' %}
         {% set sizeClasses = "px-6 py-3 text-base rounded-[var(--radius-button)]" %}
       {% endif %}
 
-      {# Variant classes - Visual style mapping
-         Uses design tokens from input.css @theme #}
+      {# --------------------------
+        3.3 Variant Classes
+        Description: Color, background, border, hover/active/disabled
+        --------------------------#}
       {% set variantClasses = "" %}
 
-      {% if buttonData.variant == 'primary' %}
+      {% if buttonVariant == 'primary' %}
         {% set variantClasses = "bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed" %}
 
-      {% elif buttonData.variant == 'secondary' %}
+      {% elif buttonVariant == 'secondary' %}
         {% set variantClasses = "bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed" %}
 
-      {% elif buttonData.variant == 'ghost' %}
+      {% elif buttonVariant == 'ghost' %}
         {% set variantClasses = "bg-transparent text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-04)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed" %}
 
-      {% elif buttonData.variant == 'icon' %}
+      {% elif buttonVariant == 'icon' %}
         {% set variantClasses = "bg-transparent text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-04)] active:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed" %}
 
-      {% elif buttonData.variant == 'segmented' %}
+      {% elif buttonVariant == 'segmented' %}
         {% set variantClasses = "bg-transparent border border-[var(--color-global-contrast-light-03)] text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-04)] active:bg-[var(--color-button-primary)] active:text-white aria-selected:bg-[var(--color-button-primary)] aria-selected:text-white disabled:opacity-50 disabled:cursor-not-allowed" %}
 
-      {% elif buttonData.variant == 'fixed' %}
+      {% elif buttonVariant == 'fixed' %}
         {% set variantClasses = "bg-[var(--color-global-contrast-light-04)] text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-03)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed" %}
 
-      {% else %}
-        {# Default fallback = primary variant #}
-        {% set variantClasses = "bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed" %}
       {% endif %}
 
-      {# Icon spacing - Gap between icon and text
-         Material Design standard: 8px gap #}
+      {# --------------------------
+        3.4 Icon Classes
+        Description: Gap between icon and text
+        --------------------------#}
       {% set iconClasses = "" %}
+
       {% if hasIcon and iconPosition != 'center' %}
         {% set iconClasses = "gap-2" %}
       {% endif %}
 
-      {# Render button element #}
-      <button
-        type="{{ buttonType }}"
-        class="{{ baseClasses }} {{ sizeClasses }} {{ variantClasses }} {{ iconClasses }}"
-        data-button-name="{{ buttonData.name }}"
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      <button 
+        type="{{ buttonType }}" 
+        class="{{ baseClasses }} {{ sizeClasses }} {{ variantClasses }} {{ iconClasses }}" 
+        data-button-name="{{ buttonData.name }}" 
         data-button-type="button"
         {% if hasIcon %}data-button-icon-position="{{ iconPosition }}"{% endif %}
         {% if isDisabled %}disabled{% endif %}
         {% if options.onclick %}onclick="{{ options.onclick | escape }}"{% endif %}
         {% if options.id %}id="{{ options.id }}"{% endif %}
         {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
-        {% if finalAriaDescribedby %}aria-describedby="{{ finalAriaDescribedby }}"{% endif %}
-      >
+        {% if finalAriaDescribedby %}aria-describedby="{{ finalAriaDescribedby }}"{% endif %}>
         {# Icon left position #}
         {% if hasIcon and (iconPosition == 'left' or iconPosition == 'both') %}
           {% if options.iconDatas %}
