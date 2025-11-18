@@ -5,31 +5,14 @@
 
 {#
   Props:
-    - options.id (string): Checkbox identifier for single rendering
-    - options.group (boolean): Render as group if true
-    - options.groupName (string): Specific group name to render
-    - options.groupSrOnly (boolean): Hide group label visually
+    - options.id (string): Checkbox identifier
     - options.datas (array): Checkbox configuration data
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/checkbox.njk" import renderCheckbox %}
 
-    Single checkbox:
     {{ renderCheckbox({
        id: "demoCheck1",
-       datas: atoms.checkbox.checkboxes
-    }) }}
-
-    Specific group:
-    {{ renderCheckbox({
-       group: true,
-       groupName: "rpgStyles",
-       datas: atoms.checkbox.checkboxes
-    }) }}
-
-    All groups:
-    {{ renderCheckbox({
-       group: true,
        datas: atoms.checkbox.checkboxes
     }) }}
 
@@ -37,91 +20,32 @@
 #}
 
 {% macro renderCheckbox(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.id %}
+    <span class="error" role="alert">Error: Missing required prop (id)</span>
   {% else %}
-    {# Group rendering #}
-    {% if options.group %}
-      {% if options.groupName and options.datas[options.groupName] %}
-        {# Render specific group #}
-        {{ renderCheckboxGroup(
-          options.datas[options.groupName],
-          options.datas[options.groupName].groupLabel | default(options.groupName)
-        ) }}
-      {% else %}
-        {# Render all groups #}
-        {% for groupName, groupConfig in options.datas %}
-          {% if groupConfig.checkboxes %}
-            {{ renderCheckboxGroup(
-              groupConfig,
-              groupConfig.groupLabel | default(groupName)
-            ) }}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
+    {# Find checkbox using universal filter #}
+    {% set targetCheckbox = options.datas | findByName(options.id) %}
 
-    {# Single checkbox rendering #}
+    {# Render or show error #}
+    {% if targetCheckbox %}
+      {{ renderSingleCheckbox(targetCheckbox) }}
     {% else %}
-      {% if not options.id %}
-        <span class="error" role="alert">Error: Missing required prop (id) for single checkbox</span>
-      {% else %}
-        {# Find checkbox using universal filter #}
-        {% set targetCheckbox = options.datas | findByName(options.id) %}
-
-        {# Render or show error #}
-        {% if targetCheckbox %}
-          {{ renderSingleCheckbox(targetCheckbox) }}
-        {% else %}
-          <span class="error" role="alert">Checkbox not found: {{ options.id }}</span>
-        {% endif %}
-      {% endif %}
+      <span class="error" role="alert">Checkbox not found: {{ options.id }}</span>
     {% endif %}
   {% endif %}
 {% endmacro %}
 
-{% macro renderCheckboxGroup(groupConfig, groupLabel) %}
-  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     CSS Classes - Fieldset/Legend
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-
-  {# Fieldset classes - Semantic grouping with minimal styling #}
-  {% set fieldsetClasses = "border-0 p-0 m-0" %}
-
-  {# Legend classes - Group label typography #}
-  {% set legendClasses = "mb-3 text-base font-semibold text-[var(--color-global-default)]" %}
-
-  {# Description classes - Help text for group #}
-  {% set descriptionClasses = "mt-1 mb-3 text-sm text-[var(--color-neutral-50)]" %}
-
-  {# Checkbox container - Vertical stack with spacing #}
-  {% set containerClasses = "flex flex-col gap-2" %}
-
-  <fieldset
-    class="{{ fieldsetClasses }}"
-    data-checkbox-group
-    {% if groupConfig.ariaGroupLabel %}aria-label="{{ groupConfig.ariaGroupLabel }}"{% endif %}
-  >
-    {% if groupLabel %}
-      <legend class="{{ legendClasses }} {% if groupConfig.groupSrOnly %}sr-only{% endif %}">
-        {{ groupLabel }}
-      </legend>
-    {% endif %}
-
-    {% if groupConfig.groupDescription %}
-      <p class="{{ descriptionClasses }}">{{ groupConfig.groupDescription }}</p>
-    {% endif %}
-
-    <div class="{{ containerClasses }}">
-      {% for checkbox in groupConfig.checkboxes %}
-        {{ renderSingleCheckbox(checkbox) }}
-      {% endfor %}
-    </div>
-  </fieldset>
-{% endmacro %}
-
 {% macro renderSingleCheckbox(checkbox) %}
-  {# Compute final values from nested box structure #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    2. Compute Final Values
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% set boxData = checkbox.box | default({}) %}
   {% set isChecked = boxData.checked | default(false) %}
   {% set isDisabled = boxData.disabled | default(false) %}
@@ -130,33 +54,63 @@
   {% set finalAriaLabel = checkbox.ariaLabel | default(checkbox.label) %}
   {% set hasDescription = checkbox.description %}
 
-  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     CSS Classes - Tailwind Utilities
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    3. Tailwind Classes
+    Index:
+    3.1 Label Wrapper Classes
+    3.2 Input Wrapper Classes
+    3.3 Input Classes
+    3.4 Checkmark Classes
+    3.5 Text Container Classes
+    3.6 Label Text Classes
+    3.7 Description Classes
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-  {# Label wrapper - Flex layout for checkbox + text #}
+  {# --------------------------
+      3.1 Label Wrapper Classes
+      Description: Layout, spacing, states
+  -------------------------- #}
   {% set labelClasses = "inline-flex items-start gap-2 cursor-pointer group" %}
 
-  {# Input wrapper - Position relative for absolute checkmark positioning #}
+  {# --------------------------
+      3.2 Input Wrapper Classes
+      Description: Layout, positioning
+  -------------------------- #}
   {% set inputWrapperClasses = "relative flex items-center" %}
 
-  {# Input base - Custom styled checkbox using appearance-none
-     Peer class enables styling checkmark based on checked state #}
+  {# --------------------------
+      3.3 Input Classes
+      Description: Sizing, borders, colors, effects, states
+  -------------------------- #}
   {% set inputClasses = "peer h-5 w-5 cursor-pointer appearance-none rounded-[var(--radius-4)] border-2 transition-all border-[var(--color-form)] hover:border-[var(--color-form-hover)] checked:bg-[var(--color-form-control-checked)] checked:border-[var(--color-form-control-checked)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] disabled:opacity-50 disabled:cursor-not-allowed" %}
 
-  {# Checkmark - Standard Material Tailwind approach
-     Absolute positioned with transform translate for perfect centering #}
+  {# --------------------------
+      3.4 Checkmark Classes
+      Description: Positioning, effects, states
+  -------------------------- #}
   {% set checkmarkClasses = "absolute text-white opacity-0 pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 peer-checked:opacity-100 transition-opacity" %}
 
-  {# Text container - Vertical stack for label + description #}
+  {# --------------------------
+      3.5 Text Container Classes
+      Description: Layout
+  -------------------------- #}
   {% set textContainerClasses = "flex flex-col" %}
 
-  {# Label text - Primary text with required indicator #}
+  {# --------------------------
+      3.6 Label Text Classes
+      Description: Typography, colors, states
+  -------------------------- #}
   {% set labelTextClasses = "text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors" %}
 
-  {# Description text - Secondary help text #}
+  {# --------------------------
+      3.7 Description Classes
+      Description: Typography, colors
+  -------------------------- #}
   {% set descriptionClasses = "mt-0.5 text-sm text-[var(--color-neutral-50)]" %}
 
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    4. Render HTML
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   <label
     for="{{ checkbox.id }}"
     class="{{ labelClasses }}"

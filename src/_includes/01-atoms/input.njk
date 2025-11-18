@@ -23,7 +23,9 @@
 #}
 
 {% macro renderInput(options) %}
-  {# Validate required props #}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -36,29 +38,52 @@
     {% if not inputData %}
       <span class="error" role="alert">Input not found: {{ options.name }}</span>
     {% else %}
-      {# Compute final values #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set inputId = inputData.id | default(options.name) %}
       {% set inputName = inputData.name | default(inputId) %}
       {% set inputType = inputData.type | default('text') %}
+      {% set inputRows = inputData.rows | default(3) %}
+      {% set inputPlaceholder = inputData.placeholder | default('') %}
       {% set isDisabled = options.disabled or inputData.disabled %}
 
-      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         CSS Classes
-      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Base Classes
+        3.2 Label Classes
+        3.3 Help Classes
+        3.4 Counter Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-      {# Base classes - Common to all inputs #}
+      {# --------------------------
+          3.1 Base Classes
+          Description: Layout, sizing, spacing, typography, colors, borders, effects, states
+      -------------------------- #}
       {% set baseClasses = "block w-full px-3 py-2.5 text-base text-[var(--color-global-default)] placeholder:italic placeholder:text-[var(--color-global-contrast-light-02)] bg-white border border-[var(--color-form)] rounded-[var(--radius-input)] transition-colors hover:border-[var(--color-form-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0 disabled:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed" %}
 
-      {# Label classes #}
+      {# --------------------------
+          3.2 Label Classes
+          Description: Layout, spacing, typography, colors
+      -------------------------- #}
       {% set labelClasses = "block mb-1.5 text-sm font-medium text-[var(--color-global-default)]" %}
 
-      {# Help text classes #}
+      {# --------------------------
+          3.3 Help Classes
+          Description: Spacing, typography, colors
+      -------------------------- #}
       {% set helpClasses = "mt-1.5 text-sm text-[var(--color-global-contrast-light-02)]" %}
 
-      {# Counter classes #}
+      {# --------------------------
+          3.4 Counter Classes
+          Description: Spacing, typography, colors
+      -------------------------- #}
       {% set counterClasses = "mt-1.5 text-sm text-right text-[var(--color-global-contrast-light-02)]" %}
 
-      {# Input container #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div class="input-wrapper">
         {# Label #}
         {% if inputData.label %}
@@ -74,7 +99,7 @@
             id="{{ inputId }}"
             name="{{ inputName }}"
             class="{{ baseClasses }}"
-            placeholder="{{ inputData.placeholder }}"
+            placeholder="{{ inputPlaceholder }}"
             data-input-name="{{ inputData.name }}"
             data-input-type="input"
             data-error-message="{{ inputData.errorMessage }}"
@@ -91,8 +116,8 @@
             id="{{ inputId }}"
             name="{{ inputName }}"
             class="{{ baseClasses }} resize-none"
-            placeholder="{{ inputData.placeholder }}"
-            rows="{{ inputData.rows | default(3) }}"
+            placeholder="{{ inputPlaceholder }}"
+            rows="{{ inputRows }}"
             data-input-name="{{ inputData.name }}"
             data-input-type="textarea"
             data-error-message="{{ inputData.errorMessage }}"
@@ -175,7 +200,7 @@
             id="{{ inputId }}"
             name="{{ inputName }}"
             class="{{ baseClasses }}"
-            placeholder="{{ inputData.placeholder | default('dd/mm/yyyy') }}"
+            placeholder="{{ inputPlaceholder }}"
             data-input-name="{{ inputData.name }}"
             data-input-type="date"
             data-error-message="{{ inputData.errorMessage }}"
@@ -191,7 +216,7 @@
             id="{{ inputId }}"
             name="{{ inputName }}"
             class="{{ baseClasses }}"
-            placeholder="{{ inputData.placeholder }}"
+            placeholder="{{ inputPlaceholder }}"
             data-input-name="{{ inputData.name }}"
             data-input-type="phone"
             data-error-message="{{ inputData.errorMessage }}"
@@ -207,8 +232,8 @@
             id="{{ inputId }}"
             name="{{ inputName }}"
             class="{{ baseClasses }} resize-none"
-            placeholder="{{ inputData.placeholder }}"
-            rows="{{ inputData.rows | default(4) }}"
+            placeholder="{{ inputPlaceholder }}"
+            rows="{{ inputRows }}"
             data-input-name="{{ inputData.name }}"
             data-input-type="panel"
             data-error-message="{{ inputData.errorMessage }}"

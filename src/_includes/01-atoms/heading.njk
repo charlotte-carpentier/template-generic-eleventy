@@ -21,7 +21,10 @@
 #}
 
 {% macro renderHeading(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -34,7 +37,10 @@
     {% if not headingData %}
       <span class="error" role="alert">Heading not found: {{ options.name }}</span>
     {% else %}
-      {# Compute final tag with fallback cascade #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set finalTag = options.tag | default(headingData.tag) | default('p') %}
 
       {# Security: Add rel="noopener noreferrer" to external links with target="_blank" #}
@@ -43,36 +49,47 @@
         {% set secureContent = secureContent | replace('target="_blank"', 'target="_blank" rel="noopener noreferrer"') %}
       {% endif %}
 
-      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         CSS Classes - Typography Tokens
-      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Base Classes
+        3.2 Typography Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-      {# Base classes - Common to all headings #}
+      {# --------------------------
+          3.1 Base Classes
+          Description: Colors
+      -------------------------- #}
       {% set baseClasses = "text-[var(--color-global-heading)]" %}
 
-      {# Typography classes - Uses design tokens from input.css
-         Each heading level has predefined font/weight/line-height #}
+      {# --------------------------
+          3.2 Typography Classes
+          Description: Typography
+      -------------------------- #}
       {% set typographyClasses = "" %}
+      {% set isSerif = headingData.variant == 'serif' %}
 
       {% if finalTag == 'h1' %}
-        {% set typographyClasses = "text-4xl font-bold leading-tight" %}
+        {% set typographyClasses = "typography-h1-serif" if isSerif else "typography-h1" %}
       {% elif finalTag == 'h2' %}
-        {% set typographyClasses = "text-3xl font-semibold leading-snug" %}
+        {% set typographyClasses = "typography-h2-serif" if isSerif else "typography-h2" %}
       {% elif finalTag == 'h3' %}
-        {% set typographyClasses = "text-2xl font-semibold leading-snug" %}
+        {% set typographyClasses = "typography-h3-serif" if isSerif else "typography-h3" %}
       {% elif finalTag == 'h4' %}
-        {% set typographyClasses = "text-xl font-medium leading-normal" %}
+        {% set typographyClasses = "typography-h4-serif" if isSerif else "typography-h4" %}
       {% elif finalTag == 'h5' %}
-        {% set typographyClasses = "text-lg font-medium leading-normal" %}
+        {% set typographyClasses = "typography-h5-serif" if isSerif else "typography-h5" %}
       {% elif finalTag == 'h6' %}
-        {% set typographyClasses = "text-base font-medium leading-normal" %}
+        {% set typographyClasses = "typography-h6-serif" if isSerif else "typography-h6" %}
       {% elif finalTag == 'small' %}
-        {% set typographyClasses = "text-sm font-normal leading-normal" %}
+        {% set typographyClasses = "typography-body-small" %}
       {% elif finalTag == 'span' or finalTag == 'p' %}
-        {% set typographyClasses = "text-base font-normal leading-normal" %}
+        {% set typographyClasses = "typography-body-regular" %}
       {% endif %}
 
-      {# Render heading element #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% if finalTag == 'h1' %}
         <h1
           class="{{ baseClasses }} {{ typographyClasses }}"

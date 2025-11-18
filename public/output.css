@@ -26,29 +26,20 @@
     --text-base--line-height: calc(1.5 / 1);
     --text-lg: 1.125rem;
     --text-lg--line-height: calc(1.75 / 1.125);
-    --text-xl: 1.25rem;
-    --text-xl--line-height: calc(1.75 / 1.25);
     --text-2xl: 1.5rem;
     --text-2xl--line-height: calc(2 / 1.5);
-    --text-3xl: 1.875rem;
-    --text-3xl--line-height: calc(2.25 / 1.875);
-    --text-4xl: 2.25rem;
-    --text-4xl--line-height: calc(2.5 / 2.25);
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
     --tracking-wide: 0.025em;
-    --leading-tight: 1.25;
-    --leading-snug: 1.375;
-    --leading-normal: 1.5;
     --radius-lg: 0.5rem;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --font-family-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-    --font-size-xs: 0.75rem;
+    --font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
     --font-size-sm: 0.875rem;
     --font-size-base: 1rem;
     --font-size-lg: 1.125rem;
@@ -56,11 +47,24 @@
     --font-size-2xl: 1.5rem;
     --font-size-3xl: 1.875rem;
     --font-size-4xl: 2.25rem;
-    --font-size-5xl: 3rem;
-    --font-size-6xl: 3.75rem;
     --line-height-tight: 1.25;
     --line-height-snug: 1.375;
     --line-height-normal: 1.5;
+    --typography-heading-h1: var(--font-weight-bold) var(--font-size-4xl) / var(--line-height-tight) var(--font-family-sans);
+    --typography-heading-h2: var(--font-weight-semibold) var(--font-size-3xl) / var(--line-height-snug) var(--font-family-sans);
+    --typography-heading-h3: var(--font-weight-semibold) var(--font-size-2xl) / var(--line-height-snug) var(--font-family-sans);
+    --typography-heading-h4: var(--font-weight-medium) var(--font-size-xl) / var(--line-height-normal) var(--font-family-sans);
+    --typography-heading-h5: var(--font-weight-medium) var(--font-size-lg) / var(--line-height-normal) var(--font-family-sans);
+    --typography-heading-h6: var(--font-weight-medium) var(--font-size-base) / var(--line-height-normal) var(--font-family-sans);
+    --typography-heading-h1-serif: var(--font-weight-bold) var(--font-size-4xl) / var(--line-height-tight) var(--font-family-serif);
+    --typography-heading-h2-serif: var(--font-weight-semibold) var(--font-size-3xl) / var(--line-height-snug) var(--font-family-serif);
+    --typography-heading-h3-serif: var(--font-weight-semibold) var(--font-size-2xl) / var(--line-height-snug) var(--font-family-serif);
+    --typography-heading-h4-serif: var(--font-weight-medium) var(--font-size-xl) / var(--line-height-normal) var(--font-family-serif);
+    --typography-heading-h5-serif: var(--font-weight-medium) var(--font-size-lg) / var(--line-height-normal) var(--font-family-serif);
+    --typography-heading-h6-serif: var(--font-weight-medium) var(--font-size-base) / var(--line-height-normal) var(--font-family-serif);
+    --typography-body-small: var(--font-weight-normal) var(--font-size-sm) / var(--line-height-normal) var(--font-family-sans);
+    --typography-body-regular: var(--font-weight-normal) var(--font-size-base) / var(--line-height-normal) var(--font-family-sans);
+    --typography-body-large: var(--font-weight-normal) var(--font-size-lg) / var(--line-height-normal) var(--font-family-sans);
     --color-brand-primary-10: #3F3927;
     --color-brand-primary-20: #514C3F;
     --color-brand-primary-30: #6D6755;
@@ -387,9 +391,6 @@
   }
   .mt-0\.5 {
     margin-top: calc(var(--spacing) * 0.5);
-  }
-  .mt-1 {
-    margin-top: var(--spacing-1);
   }
   .mt-1\.5 {
     margin-top: calc(var(--spacing) * 1.5);
@@ -850,14 +851,6 @@
     font-size: var(--text-2xl);
     line-height: var(--tw-leading, var(--text-2xl--line-height));
   }
-  .text-3xl {
-    font-size: var(--text-3xl);
-    line-height: var(--tw-leading, var(--text-3xl--line-height));
-  }
-  .text-4xl {
-    font-size: var(--text-4xl);
-    line-height: var(--tw-leading, var(--text-4xl--line-height));
-  }
   .text-base {
     font-size: var(--text-base);
     line-height: var(--tw-leading, var(--text-base--line-height));
@@ -870,10 +863,6 @@
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
   }
-  .text-xl {
-    font-size: var(--text-xl);
-    line-height: var(--tw-leading, var(--text-xl--line-height));
-  }
   .text-xs {
     font-size: var(--text-xs);
     line-height: var(--tw-leading, var(--text-xs--line-height));
@@ -885,18 +874,6 @@
   .leading-6 {
     --tw-leading: var(--spacing-6);
     line-height: var(--spacing-6);
-  }
-  .leading-normal {
-    --tw-leading: var(--leading-normal);
-    line-height: var(--leading-normal);
-  }
-  .leading-snug {
-    --tw-leading: var(--leading-snug);
-    line-height: var(--leading-snug);
-  }
-  .leading-tight {
-    --tw-leading: var(--leading-tight);
-    line-height: var(--leading-tight);
   }
   .font-\[var\(--font-weight-bold\)\] {
     --tw-font-weight: var(--font-weight-bold);
@@ -1039,6 +1016,48 @@
     -webkit-user-select: none;
     -moz-user-select: none;
          user-select: none;
+  }
+  .typography-body-regular {
+    font: var(--typography-body-regular);
+  }
+  .typography-body-small {
+    font: var(--typography-body-small);
+  }
+  .typography-h1 {
+    font: var(--typography-heading-h1);
+  }
+  .typography-h1-serif {
+    font: var(--typography-heading-h1-serif);
+  }
+  .typography-h2 {
+    font: var(--typography-heading-h2);
+  }
+  .typography-h2-serif {
+    font: var(--typography-heading-h2-serif);
+  }
+  .typography-h3 {
+    font: var(--typography-heading-h3);
+  }
+  .typography-h3-serif {
+    font: var(--typography-heading-h3-serif);
+  }
+  .typography-h4 {
+    font: var(--typography-heading-h4);
+  }
+  .typography-h4-serif {
+    font: var(--typography-heading-h4-serif);
+  }
+  .typography-h5 {
+    font: var(--typography-heading-h5);
+  }
+  .typography-h5-serif {
+    font: var(--typography-heading-h5-serif);
+  }
+  .typography-h6 {
+    font: var(--typography-heading-h6);
+  }
+  .typography-h6-serif {
+    font: var(--typography-heading-h6-serif);
   }
   .group-hover\:text-\[var\(--color-form-hover\)\] {
     &:is(:where(.group):hover *) {

@@ -59,7 +59,7 @@
     {% else %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
-        2. Compute final values
+        2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set buttonType = options.type | default(buttonData.type) | default('button') %}
       {% set buttonSize = buttonData.size | default('medium') %}
@@ -137,10 +137,10 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      <button 
-        type="{{ buttonType }}" 
-        class="{{ baseClasses }} {{ sizeClasses }} {{ variantClasses }} {{ iconClasses }}" 
-        data-button-name="{{ buttonData.name }}" 
+      <button
+        type="{{ buttonType }}"
+        class="{{ baseClasses }} {{ sizeClasses }} {{ variantClasses }} {{ iconClasses }}"
+        data-button-name="{{ buttonData.name }}"
         data-button-type="button"
         {% if hasIcon %}data-button-icon-position="{{ iconPosition }}"{% endif %}
         {% if isDisabled %}disabled{% endif %}

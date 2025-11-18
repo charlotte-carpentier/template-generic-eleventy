@@ -70,23 +70,26 @@
   --letter-spacing-wide: 0.025em;
   --letter-spacing-wider: 0.05em;
 
-  /* Typography tokens */
-  --typography-display-large: var(--font-weight-bold) var(--font-size-6xl) / var(--line-height-tight) var(--font-family-sans);
-  --typography-display-small: var(--font-weight-bold) var(--font-size-5xl) / var(--line-height-tight) var(--font-family-sans);
+  /* Typography tokens - Sans variants (default) */
   --typography-heading-h1: var(--font-weight-bold) var(--font-size-4xl) / var(--line-height-tight) var(--font-family-sans);
   --typography-heading-h2: var(--font-weight-semibold) var(--font-size-3xl) / var(--line-height-snug) var(--font-family-sans);
   --typography-heading-h3: var(--font-weight-semibold) var(--font-size-2xl) / var(--line-height-snug) var(--font-family-sans);
   --typography-heading-h4: var(--font-weight-medium) var(--font-size-xl) / var(--line-height-normal) var(--font-family-sans);
   --typography-heading-h5: var(--font-weight-medium) var(--font-size-lg) / var(--line-height-normal) var(--font-family-sans);
   --typography-heading-h6: var(--font-weight-medium) var(--font-size-base) / var(--line-height-normal) var(--font-family-sans);
-  --typography-body-large: var(--font-weight-normal) var(--font-size-lg) / var(--line-height-normal) var(--font-family-sans);
-  --typography-body-regular: var(--font-weight-normal) var(--font-size-base) / var(--line-height-normal) var(--font-family-sans);
+
+  /* Typography tokens - Serif variants */
+  --typography-heading-h1-serif: var(--font-weight-bold) var(--font-size-4xl) / var(--line-height-tight) var(--font-family-serif);
+  --typography-heading-h2-serif: var(--font-weight-semibold) var(--font-size-3xl) / var(--line-height-snug) var(--font-family-serif);
+  --typography-heading-h3-serif: var(--font-weight-semibold) var(--font-size-2xl) / var(--line-height-snug) var(--font-family-serif);
+  --typography-heading-h4-serif: var(--font-weight-medium) var(--font-size-xl) / var(--line-height-normal) var(--font-family-serif);
+  --typography-heading-h5-serif: var(--font-weight-medium) var(--font-size-lg) / var(--line-height-normal) var(--font-family-serif);
+  --typography-heading-h6-serif: var(--font-weight-medium) var(--font-size-base) / var(--line-height-normal) var(--font-family-serif);
+
+  /* Body variants */
   --typography-body-small: var(--font-weight-normal) var(--font-size-sm) / var(--line-height-normal) var(--font-family-sans);
-  --typography-label-large: var(--font-weight-medium) var(--font-size-base) / var(--line-height-normal) var(--font-family-sans);
-  --typography-label-small: var(--font-weight-medium) var(--font-size-sm) / var(--line-height-normal) var(--font-family-sans);
-  --typography-label-small-caps: var(--font-weight-medium) var(--font-size-xs) / var(--line-height-normal) var(--font-family-sans);
-  --typography-placeholder: var(--font-weight-normal) var(--font-size-base) / var(--line-height-normal) var(--font-family-sans);
-  --typography-component-small-tag: var(--font-weight-medium) var(--font-size-xs) / var(--line-height-tight) var(--font-family-sans);
+  --typography-body-regular: var(--font-weight-normal) var(--font-size-base) / var(--line-height-normal) var(--font-family-sans);
+  --typography-body-large: var(--font-weight-normal) var(--font-size-lg) / var(--line-height-normal) var(--font-family-sans);
 
   /* ─────────────────────────────
      Colors - Primitives
@@ -334,6 +337,73 @@
   --column-width-192: 192px;
   --column-width-80: 80px;
 
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Custom Utilities
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Typography utilities - Sans (default) */
+@utility typography-h1 {
+  font: var(--typography-heading-h1);
+}
+
+@utility typography-h2 {
+  font: var(--typography-heading-h2);
+}
+
+@utility typography-h3 {
+  font: var(--typography-heading-h3);
+}
+
+@utility typography-h4 {
+  font: var(--typography-heading-h4);
+}
+
+@utility typography-h5 {
+  font: var(--typography-heading-h5);
+}
+
+@utility typography-h6 {
+  font: var(--typography-heading-h6);
+}
+
+/* Typography utilities - Serif variants */
+@utility typography-h1-serif {
+  font: var(--typography-heading-h1-serif);
+}
+
+@utility typography-h2-serif {
+  font: var(--typography-heading-h2-serif);
+}
+
+@utility typography-h3-serif {
+  font: var(--typography-heading-h3-serif);
+}
+
+@utility typography-h4-serif {
+  font: var(--typography-heading-h4-serif);
+}
+
+@utility typography-h5-serif {
+  font: var(--typography-heading-h5-serif);
+}
+
+@utility typography-h6-serif {
+  font: var(--typography-heading-h6-serif);
+}
+
+/* Body variants */
+@utility typography-body-small {
+  font: var(--typography-body-small);
+}
+
+@utility typography-body-regular {
+  font: var(--typography-body-regular);
+}
+
+@utility typography-body-large {
+  font: var(--typography-body-large);
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
