@@ -24,7 +24,10 @@
 {% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderImage(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -37,39 +40,49 @@
     {% if not imageData %}
       <span class="error" role="alert">Image not found: {{ options.name }}</span>
     {% else %}
-      {# Compute final values with fallback cascade #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set imageSrc = imageData.src | default('') %}
       {% set imageAlt = imageData.alt | default('') %}
       {% set imageVariant = imageData.variant | default('') %}
       {% set hasIcon = imageData.iconName %}
 
-      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         CSS Classes - Tailwind Utilities
-      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Base Classes
+        3.2 Variant Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-      {# Base classes - Common to all images #}
+      {# --------------------------
+          3.1 Base Classes
+          Description: Layout, sizing
+      -------------------------- #}
       {% set baseClasses = "block max-w-full h-auto object-cover" %}
 
-      {# Variant classes - Visual style mapping #}
+      {# --------------------------
+          3.2 Variant Classes
+          Description: Sizing, borders
+      -------------------------- #}
       {% set variantClasses = "" %}
 
       {% if imageVariant == 'avatar' %}
         {% set variantClasses = "w-11 h-11 rounded-[var(--radius-6)]" %}
-
       {% elif imageVariant == 'square' %}
         {% set variantClasses = "w-full max-w-2xl aspect-square" %}
-
       {% elif imageVariant == 'landscape' %}
         {% set variantClasses = "w-80" %}
-
       {% elif imageVariant == 'wide' %}
         {% set variantClasses = "w-64" %}
-
       {% else %}
         {% set variantClasses = "w-full" %}
       {% endif %}
 
-      {# Render based on variant type #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% if imageVariant == 'avatar' %}
         {% if hasIcon %}
           <div
