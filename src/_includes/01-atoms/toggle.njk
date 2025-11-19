@@ -5,25 +5,14 @@
 
 {#
   Props:
-    - options.id (string): Toggle identifier for single rendering
-    - options.group (boolean): Render as group if true
-    - options.groupLabel (string): Group label text for fieldset legend
-    - options.groupSrOnly (boolean): Hide group label visually
+    - options.id (string): Toggle identifier
     - options.datas (array): Toggle configuration data
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/toggle.njk" import renderToggle %}
 
-    Single toggle:
     {{ renderToggle({
         id: "demoToggle1",
-        datas: atoms.toggle.toggles
-    }) }}
-
-    Group of toggles:
-    {{ renderToggle({
-        group: true,
-        groupLabel: "Options",
         datas: atoms.toggle.toggles
     }) }}
 
@@ -31,41 +20,16 @@
 #}
 
 {% macro renderToggle(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
-  {% elif options.group %}
-    {# Group mode validation #}
-    {% if not options.groupLabel %}
-      <span class="error" role="alert">Error: Missing required prop (groupLabel) for group mode</span>
-    {% else %}
-      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         CSS Classes - Fieldset/Legend
-      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-
-      {% set fieldsetClasses = "border-0 p-0 m-0" %}
-      {% set legendClasses = "mb-3 text-base font-semibold text-[var(--color-global-default)]" %}
-      {% set containerClasses = "flex flex-col gap-2" %}
-
-      <fieldset
-        class="{{ fieldsetClasses }}"
-        data-toggle-group-type="toggle"
-      >
-        <legend class="{{ legendClasses }} {% if options.groupSrOnly %}sr-only{% endif %}">
-          {{ options.groupLabel }}
-        </legend>
-
-        <div class="{{ containerClasses }}">
-          {% for toggle in options.datas %}
-            {{ renderSingleToggle(toggle) }}
-          {% endfor %}
-        </div>
-      </fieldset>
-    {% endif %}
   {% elif not options.id %}
-    <span class="error" role="alert">Error: Missing required prop (id) for single mode</span>
+    <span class="error" role="alert">Error: Missing required prop (id)</span>
   {% else %}
-    {# Single mode - find toggle using universal filter #}
+    {# Find toggle using universal filter #}
     {% set toggleData = options.datas | findByName(options.id) %}
 
     {% if not toggleData %}
@@ -77,7 +41,10 @@
 {% endmacro %}
 
 {% macro renderSingleToggle(toggle) %}
-  {# Compute final values with fallback cascade #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    2. Compute Final Values
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% set switchData = toggle.switch | default({}) %}
   {% set switchValue = switchData.value | default(toggle.id) %}
   {% set isChecked = switchData.checked | default(false) %}
@@ -87,29 +54,77 @@
   {% set hasLabel = toggle.label %}
   {% set hasDescription = toggle.description %}
 
-  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     CSS Classes - Tailwind Utilities
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    3. Tailwind Classes
+    Index:
+    3.1 Label Wrapper Classes
+    3.2 Toggle Wrapper Classes
+    3.3 Input Classes
+    3.4 Track Classes
+    3.5 Off Indicator Classes
+    3.6 On Indicator Classes
+    3.7 Text Container Classes
+    3.8 Label Text Classes
+    3.9 Description Classes
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
+  {# --------------------------
+      3.1 Label Wrapper Classes
+      Description: Layout, spacing, positioning, states
+  -------------------------- #}
   {% set labelWrapperClasses = "inline-flex items-start gap-3 cursor-pointer relative group" %}
 
+  {# --------------------------
+      3.2 Toggle Wrapper Classes
+      Description: Layout, positioning
+  -------------------------- #}
   {% set toggleWrapperClasses = "relative flex items-start" %}
 
+  {# --------------------------
+      3.3 Input Classes
+      Description: Positioning
+  -------------------------- #}
   {% set inputClasses = "sr-only peer" %}
 
-  {# Track: 44px × 24px with ::after for thumb #}
+  {# --------------------------
+      3.4 Track Classes
+      Description: Layout, positioning, sizing, borders, colors, effects, states
+  -------------------------- #}
   {% set trackClasses = "relative inline-flex h-6 w-11 items-center rounded-full border-2 border-[var(--color-form)] bg-transparent transition-all peer-hover:border-[var(--color-form-hover)] peer-checked:border-[var(--color-form-control-checked)] peer-checked:bg-[var(--color-form-control-checked)] peer-checked:peer-hover:border-[var(--color-form-control-checked)] peer-checked:peer-hover:brightness-110 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[var(--color-semantic-information-focus)] peer-disabled:opacity-50 peer-disabled:cursor-not-allowed after:content-[''] after:absolute after:left-0.5 after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-4 after:rounded-full after:bg-[var(--color-form)] after:transition-all peer-hover:after:bg-[var(--color-form-hover)] peer-checked:after:translate-x-[1.125rem] peer-checked:after:bg-white peer-checked:peer-hover:after:bg-white" %}
 
-  {# Off indicator: small circle visible when unchecked, positioned absolutely in label #}
+  {# --------------------------
+      3.5 Off Indicator Classes
+      Description: Positioning, sizing, borders, effects, states
+  -------------------------- #}
   {% set offIndicatorClasses = "absolute left-[1.5rem] top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full border border-[var(--color-form)] transition-opacity peer-checked:opacity-0 pointer-events-none" %}
 
-  {# On indicator: vertical line visible when checked, positioned absolutely in label #}
+  {# --------------------------
+      3.6 On Indicator Classes
+      Description: Positioning, sizing, borders, colors, effects, states
+  -------------------------- #}
   {% set onIndicatorClasses = "absolute left-[0.7rem] top-1/2 h-2.5 w-0.5 -translate-y-1/2 rounded-full bg-white opacity-0 transition-opacity peer-checked:opacity-100 pointer-events-none" %}
 
+  {# --------------------------
+      3.7 Text Container Classes
+      Description: Layout
+  -------------------------- #}
   {% set textContainerClasses = "flex flex-col" %}
+
+  {# --------------------------
+      3.8 Label Text Classes
+      Description: Typography, colors, states
+  -------------------------- #}
   {% set labelTextClasses = "text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors" %}
+
+  {# --------------------------
+      3.9 Description Classes
+      Description: Spacing, typography, colors
+  -------------------------- #}
   {% set descriptionClasses = "mt-0.5 text-sm text-[var(--color-neutral-50)]" %}
 
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    4. Render HTML
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   <label
     for="{{ toggle.id }}"
     class="{{ labelWrapperClasses }}"

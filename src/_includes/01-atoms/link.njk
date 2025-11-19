@@ -37,7 +37,10 @@
 {% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderLink(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -50,46 +53,52 @@
     {% if not linkData %}
       <span class="error" role="alert">Link not found: {{ options.name }}</span>
     {% else %}
-      {# Compute final values with fallback cascade #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set finalAriaLabel = options.ariaLabel | default(linkData.ariaLabel) %}
       {% set isDisabled = options.disabled | default(linkData.disabled) | default(false) %}
       {% set isActive = options.active | default(false) %}
-
-      {# Check if link has icon #}
       {% set hasIcon = linkData.iconName %}
+      {% set linkVariant = linkData.variant | default('default') %}
 
-      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         CSS Classes - Tailwind Utilities
-      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Base Classes
+        3.2 Variant Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-      {# Base classes - Common to all links
-         Layout, typography, transitions, focus with rounded border (Figma specs) #}
+      {# --------------------------
+          3.1 Base Classes
+          Description: Layout, typography, effects, states
+      -------------------------- #}
       {% set baseClasses = "inline-flex items-center font-medium transition-all focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] focus:rounded-[var(--radius-6)] focus:px-2 focus:py-1 focus:-m-1" %}
 
-      {# Variant classes - Visual style mapping
-         Hover removes underline per Figma specs #}
+      {# --------------------------
+          3.2 Variant Classes
+          Description: Layout, spacing, typography, colors, borders, states
+      -------------------------- #}
       {% set variantClasses = "" %}
 
-      {% if linkData.variant == 'default' %}
+      {% if linkVariant == 'default' %}
         {% set variantClasses = "text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed" %}
-
-      {% elif linkData.variant == 'tab' %}
+      {% elif linkVariant == 'tab' %}
         {% set variantClasses = "justify-center px-4 py-2.5 text-base text-[var(--color-global-default)] border-b-2 border-transparent hover:border-[var(--color-global-accent)] hover:text-[var(--color-global-accent)] hover:no-underline active:border-[var(--color-button-primary)] active:text-[var(--color-button-primary)] aria-selected:border-[var(--color-button-primary)] aria-selected:text-[var(--color-button-primary)] aria-selected:font-semibold disabled:opacity-50 disabled:cursor-not-allowed" %}
-
-      {% elif linkData.variant == 'menu-link' %}
+      {% elif linkVariant == 'menu-link' %}
         {% set variantClasses = "justify-start w-full px-4 py-2.5 text-base text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] hover:no-underline active:bg-[var(--color-global-contrast-light-03)] active:text-[var(--color-button-primary)] aria-current:bg-[var(--color-button-primary)] aria-current:text-white aria-current:font-semibold disabled:opacity-50 disabled:cursor-not-allowed" %}
-
-      {% elif linkData.variant == 'social' %}
+      {% elif linkVariant == 'social' %}
         {% set variantClasses = "gap-2 px-3 py-2.5 text-sm text-[var(--color-global-default)] rounded-[var(--radius-6)] hover:bg-[var(--color-global-contrast-light-04)] hover:text-[var(--color-global-accent)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed" %}
-
-      {% elif linkData.variant == 'footer' %}
+      {% elif linkVariant == 'footer' %}
         {% set variantClasses = "text-sm text-[var(--color-global-contrast-light-02)] hover:text-[var(--color-global-default)] hover:no-underline active:text-[var(--color-global-accent)] disabled:opacity-50 disabled:cursor-not-allowed" %}
-
       {% else %}
         {% set variantClasses = "text-[var(--color-global-default)] underline decoration-1 underline-offset-2 hover:text-[var(--color-global-accent)] hover:no-underline active:text-[var(--color-button-primary)] active:no-underline disabled:opacity-50 disabled:cursor-not-allowed" %}
       {% endif %}
 
-      {# Render link element #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <a
         href="{{ linkData.href }}"
         class="{{ baseClasses }} {{ variantClasses }}"

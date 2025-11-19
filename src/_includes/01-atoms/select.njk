@@ -27,7 +27,10 @@
 {% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderSelect(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -40,32 +43,55 @@
     {% if not selectData %}
       <span class="error" role="alert">Select not found: {{ options.name }}</span>
     {% else %}
-      {# Compute final values #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set isDisabled = options.disabled | default(selectData.disabled) | default(false) %}
       {% set finalAriaLabel = options.ariaLabel | default(selectData.ariaLabel) %}
+      {% set hasSmallVariant = selectData.variants and 'small' in selectData.variants %}
 
-      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         CSS Classes
-      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Wrapper Classes
+        3.2 Base Classes
+        3.3 Size Classes
+        3.4 Icon Wrapper Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-      {# Wrapper classes #}
+      {# --------------------------
+          3.1 Wrapper Classes
+          Description: Layout, positioning, sizing
+      -------------------------- #}
       {% set wrapperClasses = "relative inline-block w-full" %}
 
-      {# Base classes - Common to all selects #}
+      {# --------------------------
+          3.2 Base Classes
+          Description: Layout, sizing, typography, colors, borders, effects, states
+      -------------------------- #}
       {% set baseClasses = "block w-full appearance-none bg-white border border-[var(--color-form)] rounded-[var(--radius-input)] text-[var(--color-global-default)] transition-colors cursor-pointer hover:border-[var(--color-form-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0 disabled:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed" %}
 
-      {# Size variants #}
+      {# --------------------------
+          3.3 Size Classes
+          Description: Sizing, spacing, typography
+      -------------------------- #}
       {% set sizeClasses = "" %}
-      {% if selectData.variants and 'small' in selectData.variants %}
+      {% if hasSmallVariant %}
         {% set sizeClasses = "h-10 px-3 py-2 pr-8 text-sm leading-5" %}
       {% else %}
         {% set sizeClasses = "h-12 px-4 py-3 pr-9 text-base leading-5" %}
       {% endif %}
 
-      {# Icon wrapper classes #}
+      {# --------------------------
+          3.4 Icon Wrapper Classes
+          Description: Positioning, colors
+      -------------------------- #}
       {% set iconWrapperClasses = "absolute top-1/2 right-3 -translate-y-1/2 pointer-events-none text-[var(--color-global-default)]" %}
 
-      {# Render select with wrapper #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div class="{{ wrapperClasses }}">
         <select
           name="{{ selectData.name }}"
