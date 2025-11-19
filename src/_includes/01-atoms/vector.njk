@@ -21,7 +21,10 @@
 #}
 
 {% macro renderVector(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -34,38 +37,66 @@
     {% if not vectorData %}
       <span class="error" role="alert">Vector not found: {{ options.name }}</span>
     {% else %}
-      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         CSS Classes - Tailwind Utilities
-      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-      {# Container classes based on variant
-         Using standards for logo containers with proper alignment #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set vectorVariant = vectorData.variant | default('horizontal') %}
+      {% set customClasses = options.className | default('') %}
+      {% set hasText = vectorData.text and vectorVariant != 'logo-only' %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 Logo Classes
+        3.3 Text Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Layout, spacing
+      -------------------------- #}
       {% set containerClasses = "inline-flex items-center" %}
-      {% if vectorData.variant == 'horizontal' %}
+      {% if vectorVariant == 'horizontal' %}
         {% set containerClasses = containerClasses ~ " gap-3" %}
       {% endif %}
 
-      {# Custom classes #}
-      {% set customClasses = options.className | default('') %}
+      {# --------------------------
+          3.2 Logo Classes
+          Description: Sizing
+      -------------------------- #}
+      {% set logoClasses = "" %}
+      {% if vectorVariant == 'logo-only' %}
+        {% set logoClasses = "w-10 h-10 flex-shrink-0" %}
+      {% else %}
+        {% set logoClasses = "w-6 h-6 flex-shrink-0" %}
+      {% endif %}
 
-      {# Render vector element #}
+      {# --------------------------
+          3.3 Text Classes
+          Description: Typography, colors
+      -------------------------- #}
+      {% set textClasses = "text-[var(--color-neutral-40)] text-2xl leading-6 font-bold" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
         class="{{ containerClasses }} {{ customClasses }}"
         data-vector-name="{{ vectorData.name }}"
         data-vector-type="vector"
         data-vector-variant="{{ vectorData.variant }}"
       >
-        {# Logo image - Standard sizes with proper scaling #}
         <img
-          class="{% if vectorData.variant == 'logo-only' %}w-10 h-10{% else %}w-6 h-6{% endif %} flex-shrink-0"
+          class="{{ logoClasses }}"
           src="{{ vectorData.logoPath }}"
           alt="{{ vectorData.logoAlt }}"
           data-vector-logo
         />
 
-        {# Text - Size adjusted to match logo height exactly #}
-        {% if vectorData.text and vectorData.variant != 'logo-only' %}
-          <span class="text-[var(--color-neutral-40)] text-2xl leading-6 font-bold" data-vector-text>{{ vectorData.text }}</span>
+        {% if hasText %}
+          <span class="{{ textClasses }}" data-vector-text>{{ vectorData.text }}</span>
         {% endif %}
       </div>
     {% endif %}
