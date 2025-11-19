@@ -28,6 +28,10 @@
 {% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderTooltip(options) %}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -38,13 +42,35 @@
     {% if not tooltipData %}
       <span class="error" role="alert">Tooltip not found: {{ options.name }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set finalPosition = options.position | default(tooltipData.position) | default('top') %}
       {% set tooltipId = 'tooltip-' + tooltipData.name | slugify %}
       {% set triggerType = options.triggerType | default(tooltipData.triggerType) | default('icon') %}
       {% set triggerLabel = options.triggerLabel | default(tooltipData.triggerLabel) | default('More information') %}
 
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Wrapper Classes
+        3.2 Trigger Classes
+        3.3 Tooltip Classes
+        3.4 Title Classes
+        3.5 Description Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Wrapper Classes
+          Description: Layout, positioning
+      -------------------------- #}
       {% set wrapperClasses = "relative inline-block" %}
 
+      {# --------------------------
+          3.2 Trigger Classes
+          Description: Layout, sizing, spacing, typography, colors, borders, effects, states
+      -------------------------- #}
       {% set triggerClasses = "" %}
       {% if triggerType == 'icon' %}
         {% set triggerClasses = "inline-flex items-center justify-center w-10 h-10 text-[var(--color-global-default)] hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 rounded-full" %}
@@ -54,8 +80,27 @@
         {% set triggerClasses = "inline-flex items-center justify-center min-w-10 h-10 px-3 text-[var(--color-global-default)] bg-[var(--color-global-contrast-light-04)] hover:bg-[var(--color-global-contrast-light-03)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 rounded-[var(--radius-button)]" %}
       {% endif %}
 
+      {# --------------------------
+          3.3 Tooltip Classes
+          Description: Positioning, spacing, typography, colors, effects, borders
+      -------------------------- #}
       {% set tooltipClasses = "hidden absolute p-4 bg-[var(--color-global-white)] text-[var(--color-global-default)] shadow-[var(--elevation-tooltip)] rounded-[var(--radius-8)] min-w-[280px] max-w-xs z-[var(--z-tooltip)]" %}
 
+      {# --------------------------
+          3.4 Title Classes
+          Description: Typography, colors
+      -------------------------- #}
+      {% set titleClasses = "text-[var(--color-global-heading)] text-base font-medium" %}
+
+      {# --------------------------
+          3.5 Description Classes
+          Description: Typography, colors, spacing
+      -------------------------- #}
+      {% set descriptionClasses = "text-sm text-[var(--color-global-contrast-light-01)] mt-2" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div class="{{ wrapperClasses }}">
         <button
           type="button"
@@ -87,21 +132,21 @@
           class="{{ tooltipClasses }}"
         >
           {% if tooltipData.title %}
-            <div class="text-[var(--color-global-heading)] text-base font-medium">{{ tooltipData.title }}</div>
+            <div class="{{ titleClasses }}">{{ tooltipData.title }}</div>
           {% endif %}
 
           {% if tooltipData.description %}
-            <div class="text-sm text-[var(--color-global-contrast-light-01)] mt-2">{{ tooltipData.description }}</div>
+            <div class="{{ descriptionClasses }}">{{ tooltipData.description }}</div>
           {% endif %}
 
           {% if tooltipData.descriptionPart1 or tooltipData.descriptionPart2 %}
             <div class="mt-2 space-y-2">
               {% if tooltipData.descriptionPart1 %}
-                <div class="text-sm text-[var(--color-global-contrast-light-01)]">{{ tooltipData.descriptionPart1 }}</div>
+                <div class="{{ descriptionClasses }}">{{ tooltipData.descriptionPart1 }}</div>
               {% endif %}
 
               {% if tooltipData.descriptionPart2 %}
-                <div class="text-sm text-[var(--color-global-contrast-light-01)]">{{ tooltipData.descriptionPart2 }}</div>
+                <div class="{{ descriptionClasses }}">{{ tooltipData.descriptionPart2 }}</div>
               {% endif %}
             </div>
           {% endif %}
