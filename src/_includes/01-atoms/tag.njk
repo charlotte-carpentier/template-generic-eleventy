@@ -20,7 +20,10 @@
 #}
 
 {% macro renderTag(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -33,45 +36,56 @@
     {% if not tagData %}
       <span class="error" role="alert">Tag not found: {{ options.name }}</span>
     {% else %}
-      {# Variant color mapping #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set tagVariant = tagData.variant | default('default') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Base Classes
+        3.2 Variant Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Base Classes
+          Description: Layout, spacing, borders, typography
+      -------------------------- #}
+      {% set baseClasses = "inline-flex items-center px-1 py-0.5 rounded-[var(--radius-8)] text-sm font-semibold uppercase tracking-wide" %}
+
+      {# --------------------------
+          3.2 Variant Classes
+          Description: Colors, borders
+      -------------------------- #}
       {% set variantClasses = "" %}
 
-      {% if tagData.variant == 'default' %}
+      {% if tagVariant == 'default' %}
         {% set variantClasses = "text-[var(--color-neutral-30)] bg-[var(--color-neutral-90)] border border-[var(--color-neutral-60)]" %}
-
-      {% elif tagData.variant == 'default-filled' %}
+      {% elif tagVariant == 'default-filled' %}
         {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-neutral-30)]" %}
-
-      {% elif tagData.variant == 'primary' %}
+      {% elif tagVariant == 'primary' %}
         {% set variantClasses = "text-[var(--color-semantic-information-40)] bg-[var(--color-semantic-information-90)] border border-[var(--color-semantic-information-60)]" %}
-
-      {% elif tagData.variant == 'primary-filled' %}
+      {% elif tagVariant == 'primary-filled' %}
         {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-information-40)]" %}
-
-      {% elif tagData.variant == 'success' %}
+      {% elif tagVariant == 'success' %}
         {% set variantClasses = "text-[var(--color-semantic-success-20)] bg-[var(--color-semantic-success-90)] border border-[var(--color-semantic-success-60)]" %}
-
-      {% elif tagData.variant == 'success-filled' %}
+      {% elif tagVariant == 'success-filled' %}
         {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-success-20)]" %}
-
-      {% elif tagData.variant == 'warning' %}
+      {% elif tagVariant == 'warning' %}
         {% set variantClasses = "text-[var(--color-semantic-warning-40)] bg-[var(--color-semantic-warning-90)] border border-[var(--color-semantic-warning-60)]" %}
-
-      {% elif tagData.variant == 'warning-filled' %}
+      {% elif tagVariant == 'warning-filled' %}
         {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-warning-40)]" %}
-
-      {% elif tagData.variant == 'danger' %}
+      {% elif tagVariant == 'danger' %}
         {% set variantClasses = "text-[var(--color-semantic-critical-40)] bg-[var(--color-semantic-critical-90)] border border-[var(--color-semantic-critical-60)]" %}
-
-      {% elif tagData.variant == 'danger-filled' %}
+      {% elif tagVariant == 'danger-filled' %}
         {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-critical-40)]" %}
-
-      {% else %}
-        {# Fallback to default #}
-        {% set variantClasses = "text-[var(--color-neutral-30)] bg-[var(--color-neutral-90)] border border-[var(--color-neutral-60)]" %}
       {% endif %}
 
-      {# Render tag element #}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <span
         data-tag-name="{{ tagData.name }}"
         data-tag-type="tag"
@@ -79,7 +93,7 @@
         {% if tagData.isInteractive %}data-tag-interactive="true"{% endif %}
         {% if tagData.role %}role="{{ tagData.role }}"{% endif %}
         {% if tagData.title %}title="{{ tagData.title }}"{% endif %}
-        class="inline-flex items-center px-1 py-0.5 rounded-[var(--radius-8)] text-sm font-semibold uppercase tracking-wide {{ variantClasses }}"
+        class="{{ baseClasses }} {{ variantClasses }}"
       >
         {{ tagData.text }}
         {% if tagData.screenReaderText %}

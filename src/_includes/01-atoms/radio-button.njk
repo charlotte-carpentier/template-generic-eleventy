@@ -5,25 +5,14 @@
 
 {#
   Props:
-    - options.id (string): Radio button identifier for single rendering
-    - options.group (boolean): Render as group if true
-    - options.groupLabel (string): Group label text for fieldset legend
-    - options.groupSrOnly (boolean): Hide group label visually
+    - options.id (string): Radio button identifier
     - options.datas (object): Radio button configuration data
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/radio-button.njk" import renderRadioButton %}
 
-    Single radio button:
     {{ renderRadioButton({
         id: "demoRadio1",
-        datas: atoms["radio-button"].radioButtons
-    }) }}
-
-    Group of radio buttons:
-    {{ renderRadioButton({
-        group: true,
-        groupLabel: "Choose an option",
         datas: atoms["radio-button"].radioButtons
     }) }}
 
@@ -31,41 +20,16 @@
 #}
 
 {% macro renderRadioButton(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
-  {% elif options.group %}
-    {# Group mode validation #}
-    {% if not options.groupLabel %}
-      <span class="error" role="alert">Error: Missing required prop (groupLabel) for group mode</span>
-    {% else %}
-      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         CSS Classes - Fieldset/Legend
-      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-
-      {% set fieldsetClasses = "border-0 p-0 m-0" %}
-      {% set legendClasses = "mb-3 text-base font-semibold text-[var(--color-global-default)]" %}
-      {% set containerClasses = "flex flex-col gap-2" %}
-
-      <fieldset
-        class="{{ fieldsetClasses }}"
-        data-radio-group-type="radio-button"
-      >
-        <legend class="{{ legendClasses }} {% if options.groupSrOnly %}sr-only{% endif %}">
-          {{ options.groupLabel }}
-        </legend>
-
-        <div class="{{ containerClasses }}">
-          {% for radioButton in options.datas.radioButtons %}
-            {{ renderSingleRadio(radioButton) }}
-          {% endfor %}
-        </div>
-      </fieldset>
-    {% endif %}
   {% elif not options.id %}
-    <span class="error" role="alert">Error: Missing required prop (id) for single mode</span>
+    <span class="error" role="alert">Error: Missing required prop (id)</span>
   {% else %}
-    {# Single mode - find radio button using universal filter #}
+    {# Find radio button using universal filter #}
     {% set radioButtonData = options.datas | findByName(options.id) %}
 
     {% if not radioButtonData %}
@@ -77,40 +41,80 @@
 {% endmacro %}
 
 {% macro renderSingleRadio(radioButton) %}
-  {# Read nested structure with fallbacks #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    2. Compute Final Values
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% set radioData = radioButton.radio | default({}) %}
   {% set radioValue = radioData.value | default(radioButton.id) %}
+  {% set radioName = radioButton.name | default('radio-group') %}
   {% set isChecked = radioData.checked | default(false) %}
   {% set isDisabled = radioData.disabled | default(false) %}
   {% set hasDescription = radioButton.description %}
 
-  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     CSS Classes - Tailwind Utilities
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    3. Tailwind Classes
+    Index:
+    3.1 Label Wrapper Classes
+    3.2 Radio Wrapper Classes
+    3.3 Radio Classes
+    3.4 Checked Indicator Classes
+    3.5 Text Container Classes
+    3.6 Label Text Classes
+    3.7 Description Classes
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-  {# Label wrapper classes - Flex layout for radio + text alignment #}
+  {# --------------------------
+      3.1 Label Wrapper Classes
+      Description: Layout, spacing, states
+  -------------------------- #}
   {% set labelClasses = "inline-flex items-start gap-2 cursor-pointer group" %}
 
-  {# Radio wrapper - Position relative for proper alignment #}
+  {# --------------------------
+      3.2 Radio Wrapper Classes
+      Description: Layout, positioning
+  -------------------------- #}
   {% set radioWrapperClasses = "relative flex items-start" %}
 
-  {# Radio input classes - 1px border, relative for ::after pseudo-element #}
+  {# --------------------------
+      3.3 Radio Classes
+      Description: Positioning, sizing, borders, colors, effects, states
+  -------------------------- #}
   {% set radioClasses = "relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed" %}
 
-  {# Checked state indicator #}
+  {# --------------------------
+      3.4 Checked Indicator Classes
+      Description: Positioning, sizing, borders, colors, states
+  -------------------------- #}
   {% set checkedIndicatorClasses = "checked:after:content-[''] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]" %}
 
-  {# Text container - Vertical stack for label + description #}
+  {# --------------------------
+      3.5 Text Container Classes
+      Description: Layout
+  -------------------------- #}
   {% set textContainerClasses = "flex flex-col" %}
+
+  {# --------------------------
+      3.6 Label Text Classes
+      Description: Typography, colors, states
+  -------------------------- #}
   {% set labelTextClasses = "text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors" %}
+
+  {# --------------------------
+      3.7 Description Classes
+      Description: Spacing, typography, colors
+  -------------------------- #}
   {% set descriptionClasses = "mt-0.5 text-sm text-[var(--color-neutral-50)]" %}
 
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    4. Render HTML
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   <label for="{{ radioButton.id }}" class="{{ labelClasses }}">
     <div class="{{ radioWrapperClasses }}">
       <input
         type="radio"
         id="{{ radioButton.id }}"
-        name="{{ radioButton.name | default('radio-group') }}"
+        name="{{ radioName }}"
         value="{{ radioValue }}"
         class="{{ radioClasses }} {{ checkedIndicatorClasses }}"
         data-radio-id="{{ radioButton.id }}"
