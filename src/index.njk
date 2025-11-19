@@ -113,7 +113,7 @@ permalink: "/"
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Icon</h2>
     {{ renderIcon({
-        name: "demoSmile1",
+        name: "demoSmile2",
         datas: atoms.icon.icons
     }) }}
   </section>
@@ -220,35 +220,53 @@ permalink: "/"
   {# Caption #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Caption</h2>
-    {{ renderCaption({
-        name: "demoCaption1",
-        datas: molecules.caption.captions,
-        iconDatas: atoms.icon.icons
-    }) }}
-  </section>
-
-  {# Block Drag and Drop #}
-  <section style="border: 1px solid #ccc; padding: 1rem;">
-    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Block Drag and Drop</h2>
-    {{ renderBlockDragAndDrop({
-        name: "demoDragDrop1",
-        datas: molecules["block-drag-and-drop"].blockDragAndDrops,
-        headingDatas: atoms.heading.headings,
-        iconDatas: atoms.icon.icons,
-        buttonDatas: atoms.button.buttons
-    }) }}
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      {{ renderCaption({
+          name: "demoCaption1",
+          datas: molecules.caption.captions,
+          iconDatas: atoms.icon.icons
+      }) }}
+      {{ renderCaption({
+          name: "demoCaption2",
+          datas: molecules.caption.captions,
+          iconDatas: atoms.icon.icons
+      }) }}
+      {{ renderCaption({
+          name: "demoCaption3",
+          datas: molecules.caption.captions,
+          iconDatas: atoms.icon.icons
+      }) }}
+      {{ renderCaption({
+          name: "demoCaption4",
+          datas: molecules.caption.captions,
+          iconDatas: atoms.icon.icons
+      }) }}
+    </div>
   </section>
 
   {# Card #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Card</h2>
-    {{ renderCard({
-        name: "demoCard1",
-        datas: molecules.card.cards,
-        lockupDatas: molecules["lock-up"].lockUps,
-        headingDatas: atoms.heading.headings,
-        buttonDatas: atoms.button.buttons
-    }) }}
+    <div class="flex gap-[var(--spacing-4)]">
+      {{ renderCard({
+          name: "demoCard1",
+          datas: molecules.card.cards,
+          lockupDatas: molecules["lock-up"].lockUps,
+          imageDatas: atoms.image.images,
+          headingDatas: atoms.heading.headings,
+          buttonDatas: atoms.button.buttons,
+          iconDatas: atoms.icon.icons
+      }) }}
+      {{ renderCard({
+          name: "demoCard1",
+          datas: molecules.card.cards,
+          lockupDatas: molecules["lock-up"].lockUps,
+          imageDatas: atoms.image.images,
+          headingDatas: atoms.heading.headings,
+          buttonDatas: atoms.button.buttons,
+          iconDatas: atoms.icon.icons
+      }) }}
+    </div>
   </section>
 
   {# Disclaimer #}
@@ -314,10 +332,23 @@ permalink: "/"
   {# Lockup #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Lockup</h2>
-    {{ renderLockup({
-        name: "demoLock1",
-        datas: molecules["lock-up"].lockUps
-    }) }}
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      {{ renderLockup({
+          name: "demoLock1",
+          datas: molecules["lock-up"].lockUps
+      }) }}
+      {{ renderLockup({
+          name: "demoLock2",
+          datas: molecules["lock-up"].lockUps
+      }) }}
+      {{ renderLockup({
+          name: "demoLock3",
+          datas: molecules["lock-up"].lockUps,
+          imageDatas: atoms.image.images,
+          headingDatas: atoms.heading.headings,
+          iconDatas: atoms.icon.icons
+      }) }}
+    </div>
   </section>
 
   {# Pagination #}

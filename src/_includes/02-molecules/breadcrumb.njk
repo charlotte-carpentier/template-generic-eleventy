@@ -24,7 +24,10 @@
 {% from "01-atoms/link.njk" import renderLink %}
 
 {% macro renderBreadcrumb(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -33,21 +36,77 @@
     {# Find breadcrumb using universal filter #}
     {% set breadcrumbData = options.datas | findByName(options.name) %}
 
-    {# Render or error #}
+    {# Render breadcrumb or error message #}
     {% if not breadcrumbData %}
       <span class="error" role="alert">Breadcrumb not found: {{ options.name }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set breadcrumbLinks = breadcrumbData.breadcrumbLinks | default([]) %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Navigation Classes
+        3.2 List Classes
+        3.3 List Item Classes
+        3.4 Separator Classes
+        3.5 Current Page Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Navigation Classes
+          Description: Layout
+        --------------------------#}
+      {% set navClasses = "" %}
+
+      {# --------------------------
+          3.2 List Classes
+          Description: Layout, Spacing
+        --------------------------#}
+      {% set listClasses = "flex flex-wrap items-center gap-[var(--spacing-2)]" %}
+
+      {# --------------------------
+          3.3 List Item Classes
+          Description: Layout
+        --------------------------#}
+      {% set listItemClasses = "flex items-center gap-[var(--spacing-2)]" %}
+
+      {# --------------------------
+          3.4 Separator Classes
+          Description: Typography, Colors
+        --------------------------#}
+      {% set separatorClasses = "typography-body-regular text-[var(--color-global-default)]" %}
+
+      {# --------------------------
+          3.5 Current Page Classes
+          Description: Typography, Colors, States
+        --------------------------#}
+      {% set currentPageClasses = "typography-body-regular text-[var(--color-global-contrast-light-02)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <nav
+        class="{{ navClasses }}"
         aria-label="Breadcrumb"
         data-breadcrumb-name="{{ breadcrumbData.name }}"
         data-breadcrumb-type="breadcrumb"
       >
-        <ol>
-          {% for item in breadcrumbData.breadcrumbLinks %}
-            <li>
+        <ol class="{{ listClasses }}">
+          {% for item in breadcrumbLinks %}
+            <li class="{{ listItemClasses }}">
               {# Separator (skip for first item) #}
               {% if not loop.first %}
-                <span data-breadcrumb-separator="true" aria-hidden="true">/</span>
+                <span
+                  class="{{ separatorClasses }}"
+                  data-breadcrumb-separator="true"
+                  aria-hidden="true"
+                >
+                  /
+                </span>
               {% endif %}
 
               {# Link item #}
@@ -60,6 +119,7 @@
               {# Current page (no link) #}
               {% elif item.type == "current" %}
                 <span
+                  class="{{ currentPageClasses }}"
                   data-breadcrumb-current="true"
                   aria-current="page"
                 >

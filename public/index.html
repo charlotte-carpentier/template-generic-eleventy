@@ -455,13 +455,13 @@
 
         <svg
           class="inline-block flex-shrink-0 w-6 h-6 fill-current"
-          aria-label="Smile icon"
+          aria-label="Smile icon (filled)"
           role="img"
-          data-icon-name="demoSmile1"
+          data-icon-name="demoSmile2"
           data-icon-type="icon"
           
         >
-          <use href="/assets/icons/sprites/sprite.svg#smiley"></use>
+          <use href="/assets/icons/sprites/sprite.svg#smiley-fill"></use>
         </svg>
       
     
@@ -1109,6 +1109,7 @@
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Breadcrumb</h2>
     
+
   
   
     
@@ -1116,14 +1117,32 @@
 
     
     
+
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
       <nav
+        class=""
         aria-label="Breadcrumb"
         data-breadcrumb-name="demoBreadcrm1"
         data-breadcrumb-type="breadcrumb"
       >
-        <ol>
+        <ol class="flex flex-wrap items-center gap-[var(--spacing-2)]">
           
-            <li>
+            <li class="flex items-center gap-[var(--spacing-2)]">
               
               
 
@@ -1189,10 +1208,16 @@
               
             </li>
           
-            <li>
+            <li class="flex items-center gap-[var(--spacing-2)]">
               
               
-                <span data-breadcrumb-separator="true" aria-hidden="true">/</span>
+                <span
+                  class="typography-body-regular text-[var(--color-global-default)]"
+                  data-breadcrumb-separator="true"
+                  aria-hidden="true"
+                >
+                  /
+                </span>
               
 
               
@@ -1257,15 +1282,22 @@
               
             </li>
           
-            <li>
+            <li class="flex items-center gap-[var(--spacing-2)]">
               
               
-                <span data-breadcrumb-separator="true" aria-hidden="true">/</span>
+                <span
+                  class="typography-body-regular text-[var(--color-global-default)]"
+                  data-breadcrumb-separator="true"
+                  aria-hidden="true"
+                >
+                  /
+                </span>
               
 
               
               
                 <span
+                  class="typography-body-regular text-[var(--color-global-contrast-light-02)]"
                   data-breadcrumb-current="true"
                   aria-current="page"
                 >
@@ -1284,7 +1316,9 @@
   
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Caption</h2>
-    
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      
+
   
   
     
@@ -1292,13 +1326,45 @@
 
     
     
+
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+      
+        
+      
+
+      
+
+      
+
+      
+      
+        
+      
+
+      
+
+      
       <div
+        class="inline-flex items-center gap-[var(--spacing-1)]"
         data-caption-name="demoCaption1"
         data-caption-type="caption"
         data-caption-variant="info"
       >
         
         
+          <span class="inline-flex items-center text-[var(--color-semantic-information-40)]">
+            
 
   
   
@@ -1340,32 +1406,369 @@
           data-icon-type="icon"
           data-icon-variant="md"
         >
-          <use href="/assets/icons/sprites/sprite.svg#info"></use>
+          <use href="/assets/icons/sprites/sprite.svg#info-fill"></use>
         </svg>
       
     
   
 
+          </span>
+        
 
         
-        <span data-caption-text="true">
+        <span
+          class="typography-body-regular text-[var(--color-global-default)]"
+          data-caption-text="true"
+        >
           Label
         </span>
       </div>
     
   
 
+      
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+      
+        
+      
+
+      
+
+      
+
+      
+      
+        
+      
+
+      
+
+      
+      <div
+        class="inline-flex items-center gap-[var(--spacing-1)]"
+        data-caption-name="demoCaption2"
+        data-caption-type="caption"
+        data-caption-variant="success"
+      >
+        
+        
+          <span class="inline-flex items-center text-[var(--color-semantic-success-20)]">
+            
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Success"
+          role="img"
+          data-icon-name="demoCheck1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#check-circle-fill"></use>
+        </svg>
+      
+    
+  
+
+          </span>
+        
+
+        
+        <span
+          class="typography-body-regular text-[var(--color-global-default)]"
+          data-caption-text="true"
+        >
+          Label
+        </span>
+      </div>
+    
+  
+
+      
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+      
+        
+      
+
+      
+
+      
+
+      
+      
+        
+      
+
+      
+
+      
+      <div
+        class="inline-flex items-center gap-[var(--spacing-1)]"
+        data-caption-name="demoCaption3"
+        data-caption-type="caption"
+        data-caption-variant="warning"
+      >
+        
+        
+          <span class="inline-flex items-center text-[var(--color-semantic-warning-40)]">
+            
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Warning"
+          role="img"
+          data-icon-name="demoWarn1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#warning-fill"></use>
+        </svg>
+      
+    
+  
+
+          </span>
+        
+
+        
+        <span
+          class="typography-body-regular text-[var(--color-global-default)]"
+          data-caption-text="true"
+        >
+          Label
+        </span>
+      </div>
+    
+  
+
+      
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+      
+        
+      
+
+      
+
+      
+
+      
+      
+        
+      
+
+      
+
+      
+      <div
+        class="inline-flex items-center gap-[var(--spacing-1)]"
+        data-caption-name="demoCaption4"
+        data-caption-type="caption"
+        data-caption-variant="error"
+      >
+        
+        
+          <span class="inline-flex items-center text-[var(--color-semantic-critical-40)]">
+            
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Error"
+          role="img"
+          data-icon-name="demoWarnCir1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#warning-circle-fill"></use>
+        </svg>
+      
+    
+  
+
+          </span>
+        
+
+        
+        <span
+          class="typography-body-regular text-[var(--color-semantic-critical-40)]"
+          data-caption-text="true"
+        >
+          Label
+        </span>
+      </div>
+    
+  
+
+    </div>
   </section>
 
   
   <section style="border: 1px solid #ccc; padding: 1rem;">
-    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Block Drag and Drop</h2>
-    
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Card</h2>
+    <div class="flex gap-[var(--spacing-4)]">
+      
+
+  
   
     
+    
 
     
-      
+    
 
       
       
@@ -1374,20 +1777,151 @@
       
       
       
-      
-      
+
       
 
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
       <div
-        class="flex flex-col p-5 bg-white rounded-[var(--radius-card)] shadow-[var(--elevation-card)] w-full max-w-xl"
-        data-drag-drop-name="demoDragDrop1"
-        data-drag-drop-type="block-drag-and-drop"
-        data-drag-drop="true"
-        data-allowed-types="xls,xlsx"
-        data-max-size="10mb"
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        data-card-id="demoCard1"
+        data-card-type="card"
       >
-        <div class="mb-8 text-left font-serif text-[var(--color-global-default)]">
+        
+        
+          <div
+            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-0-5)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-6)] [&amp;_[data-lockup-text]]:line-clamp-2"
+            data-card-lockup="true"
+          >
+            
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div
+        class="flex gap-[var(--spacing-4)]"
+        data-lockup-id="demoLock3"
+        data-lockup-type="block-content"
+      >
+        
+        
           
+          
+            <div
+              class="flex-shrink-0 w-20 h-20 [&amp;_img]:w-full [&amp;_img]:h-full [&amp;_img]:object-cover"
+              data-lockup-image="true"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        <img
+          src="/assets/images/placeholders/placeholder-landscape.png"
+          alt="Landscape placeholder image"
+          class="block max-w-full h-auto object-cover w-80"
+          loading="lazy"
+          decoding="async"
+          data-image-name="demoImage2"
+          data-image-type="image"
+        />
+      
+    
+  
+
+            </div>
+          
+
+          
+          <div
+            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            data-lockup-content="true"
+          >
+            
+            
+              
 
   
   
@@ -1421,226 +1955,23 @@
       
         <h2
           class="text-[var(--color-global-heading)] typography-h2-serif"
-          data-heading-name="demoHeadUp1"
+          data-heading-name="demoHead2"
           data-heading-type="heading"
           data-heading-tag="h2"
-        >Upload file</h2>
+        >Heading</h2>
       
     
   
 
-        </div>
-
-        <div
-          class="flex flex-col items-start justify-center p-8 border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-12)] bg-white min-h-[160px] cursor-pointer hover:bg-[var(--color-global-contrast-light-04)] transition-colors mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2"
-          data-drag-drop-zone="true"
-          tabindex="0"
-          role="button"
-          aria-label="Upload file by dropping it here or by clicking"
-        >
-          <div class="flex mb-3">
-            
-
-  
-  
-    
-    
-
-    
-    
-
-      
-      
-      
-      
-      
-      
-
-      
-
-      
-      
-
-      
-        
-      
-
-      
-      
-        
-        
-
-        
-        
-          
-        
-
-        <svg
-          class="inline-block flex-shrink-0 w-5 h-5 fill-current w-14 h-14 text-[var(--color-global-contrast-light-02)]"
-          aria-label="Upload file"
-          role="img"
-          data-icon-name="demoFileUp1"
-          data-icon-type="icon"
-          data-icon-variant="md"
-        >
-          <use href="/assets/icons/sprites/sprite.svg#file-arrow-up"></use>
-        </svg>
-      
-    
-  
-
-          </div>
-
-          <p class="text-left text-base font-normal text-[var(--color-global-default)]" data-drag-drop-text="true">
-            Drag and drop file here
-          </p>
-        </div>
-
-        <span class="block my-4 text-base font-normal text-[var(--color-global-default)]">Or</span>
-
-        <div class="flex mb-5" data-drag-drop-button="true">
-          
-
-  
-  
-    
-    
-
-    
-    
-
-      
-      
-      
-      
-      
-      
-      
-
-      
-      
-      
-
-      
-      
-
-      
-
-      
-        
-      
-
-      
-
-      
-        
-
-      
-
-      
-
-      
-
-      
-      <button
-        type="button"
-        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed "
-        data-button-name="demoBrowse1"
-        data-button-type="button"
-        
-        
-        
-        
-        aria-label="Browse files to upload"
-        >
-        
-        
-
-        
-        
-
-        
-        
-          Browse files
-        
-
-        
-        
-      </button>
-    
-  
-
-        </div>
-
-        <div class="flex flex-col gap-1 mt-2" data-drag-drop-info="true">
-          <p>
-            <span class="text-sm text-[var(--color-global-contrast-light-02)]">Supported formats </span>
-            <span class="text-sm text-[var(--color-global-default)]">XLS, XLSX</span>
-          </p>
-          <p>
-            <span class="text-sm text-[var(--color-global-contrast-light-02)]">Maximum file size </span>
-            <span class="text-sm text-[var(--color-global-default)]">10 MB</span>
-          </p>
-        </div>
-
-        <input
-          type="file"
-          id="file-demoDragDrop1"
-          class="sr-only"
-          data-drag-drop-input="true"
-          accept="xls,xlsx"
-          aria-hidden="true"
-          tabindex="-1"
-        >
-      </div>
-    
-  
-
-  </section>
-
-  
-  <section style="border: 1px solid #ccc; padding: 1rem;">
-    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Card</h2>
-    
-  
-  
-    
-    
-
-    
-    
-      <div
-        data-card-id="demoCard1"
-        data-card-type="card"
-      >
-        
-        
-          <div data-card-lockup="true">
-            
-  
-  
-    
-    
-
-    
-    
-      <div
-        data-lockup-id="demoLock3"
-        data-lockup-type="block-content"
-      >
-        
-        
-          
-          
-
-          
-          <div data-lockup-content="true">
-            
             
 
             
             
-              <p data-lockup-text="true" data-lockup-content-variant="default">
+              <p
+                class="typography-body-regular text-[var(--color-global-default)]"
+                data-lockup-text="true"
+                data-lockup-content-variant="default"
+              >
                 Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
               </p>
             
@@ -1654,7 +1985,10 @@
         
 
         
-        <div data-card-content="true">
+        <div
+          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          data-card-content="true"
+        >
           
           
 
@@ -1663,6 +1997,132 @@
 
           
           
+            <div class="mt-0 [&amp;_button]:w-full">
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+        
+
+      
+
+      
+
+      
+
+      
+      <button
+        type="button"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed "
+        data-button-name="demoCard"
+        data-button-type="button"
+        
+        
+        
+        
+        aria-label="Button description for accessibility"
+        >
+        
+        
+
+        
+        
+
+        
+        
+          Label
+        
+
+        
+        
+      </button>
+    
+  
+
+            </div>
+          
+
+          
+          
+        </div>
+      </div>
+    
+  
+
+      
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        data-card-id="demoCard1"
+        data-card-type="card"
+      >
+        
+        
+          <div
+            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-0-5)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-6)] [&amp;_[data-lockup-text]]:line-clamp-2"
+            data-card-lockup="true"
+          >
             
 
   
@@ -1676,6 +2136,200 @@
       
       
       
+
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div
+        class="flex gap-[var(--spacing-4)]"
+        data-lockup-id="demoLock3"
+        data-lockup-type="block-content"
+      >
+        
+        
+          
+          
+            <div
+              class="flex-shrink-0 w-20 h-20 [&amp;_img]:w-full [&amp;_img]:h-full [&amp;_img]:object-cover"
+              data-lockup-image="true"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        <img
+          src="/assets/images/placeholders/placeholder-landscape.png"
+          alt="Landscape placeholder image"
+          class="block max-w-full h-auto object-cover w-80"
+          loading="lazy"
+          decoding="async"
+          data-image-name="demoImage2"
+          data-image-type="image"
+        />
+      
+    
+  
+
+            </div>
+          
+
+          
+          <div
+            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            data-lockup-content="true"
+          >
+            
+            
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+
+      
+      
+      
+
+      
+
+      
+      
+
+      
+      
+      
+
+      
+        
+      
+
+      
+      
+        <h2
+          class="text-[var(--color-global-heading)] typography-h2-serif"
+          data-heading-name="demoHead2"
+          data-heading-type="heading"
+          data-heading-tag="h2"
+        >Heading</h2>
+      
+    
+  
+
+            
+
+            
+            
+              <p
+                class="typography-body-regular text-[var(--color-global-default)]"
+                data-lockup-text="true"
+                data-lockup-content-variant="default"
+              >
+                Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
+              </p>
+            
+          </div>
+        
+      </div>
+    
+  
+
+          </div>
+        
+
+        
+        <div
+          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          data-card-content="true"
+        >
+          
+          
+
+          
+          
+
+          
+          
+            <div class="mt-0 [&amp;_button]:w-full">
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
       
       
       
@@ -1703,25 +2357,21 @@
 
       
 
-      
-        
       
 
       
       <button
         type="button"
-        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed gap-2"
-        data-button-name="demoButton1"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed "
+        data-button-name="demoCard"
         data-button-type="button"
-        data-button-icon-position="both"
+        
         
         
         
         aria-label="Button description for accessibility"
         >
         
-        
-          
         
 
         
@@ -1734,12 +2384,11 @@
 
         
         
-          
-        
       </button>
     
   
 
+            </div>
           
 
           
@@ -1749,6 +2398,7 @@
     
   
 
+    </div>
   </section>
 
   
@@ -1815,7 +2465,7 @@
           data-icon-type="icon"
           data-icon-variant="md"
         >
-          <use href="/assets/icons/sprites/sprite.svg#info"></use>
+          <use href="/assets/icons/sprites/sprite.svg#info-fill"></use>
         </svg>
       
     
@@ -1919,6 +2569,7 @@
           <div data-list-content-item="true">
             
             
+
   
   
     
@@ -1926,7 +2577,50 @@
 
     
     
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
       <div
+        class="flex gap-[var(--spacing-4)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -1936,13 +2630,20 @@
           
 
           
-          <div data-lockup-content="true">
+          <div
+            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            data-lockup-content="true"
+          >
             
             
 
             
             
-              <p data-lockup-text="true" data-lockup-content-variant="default">
+              <p
+                class="typography-body-regular text-[var(--color-global-default)]"
+                data-lockup-text="true"
+                data-lockup-content-variant="default"
+              >
                 Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
               </p>
             
@@ -1957,6 +2658,7 @@
           <div data-list-content-item="true">
             
             
+
   
   
     
@@ -1964,7 +2666,50 @@
 
     
     
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
       <div
+        class="flex gap-[var(--spacing-4)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -1974,13 +2719,20 @@
           
 
           
-          <div data-lockup-content="true">
+          <div
+            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            data-lockup-content="true"
+          >
             
             
 
             
             
-              <p data-lockup-text="true" data-lockup-content-variant="default">
+              <p
+                class="typography-body-regular text-[var(--color-global-default)]"
+                data-lockup-text="true"
+                data-lockup-content-variant="default"
+              >
                 Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
               </p>
             
@@ -1995,6 +2747,7 @@
           <div data-list-content-item="true">
             
             
+
   
   
     
@@ -2002,7 +2755,50 @@
 
     
     
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
       <div
+        class="flex gap-[var(--spacing-4)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -2012,13 +2808,20 @@
           
 
           
-          <div data-lockup-content="true">
+          <div
+            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            data-lockup-content="true"
+          >
             
             
 
             
             
-              <p data-lockup-text="true" data-lockup-content-variant="default">
+              <p
+                class="typography-body-regular text-[var(--color-global-default)]"
+                data-lockup-text="true"
+                data-lockup-content-variant="default"
+              >
                 Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
               </p>
             
@@ -2955,6 +3758,7 @@
           <div data-list-value-item="true">
             
             
+
   
   
     
@@ -2962,17 +3766,70 @@
 
     
     
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
       <div
+        class="flex flex-col gap-[var(--spacing-1)]"
         data-lockup-id="demoLock1"
         data-lockup-type="default"
       >
         
         
           
-            <span data-lockup-label="true" data-lockup-label-variant="default">
+            <span
+              class="typography-body-small text-[var(--color-global-contrast-light-02)]"
+              data-lockup-label="true"
+              data-lockup-label-variant="default"
+            >
               Label
             </span>
-            <span data-lockup-value="true" data-lockup-value-variant="default">
+          
+          
+            <span
+              class="typography-body-regular text-[var(--color-global-default)]"
+              data-lockup-value="true"
+              data-lockup-value-variant="default"
+            >
               Label
             </span>
           
@@ -2988,6 +3845,7 @@
           <div data-list-value-item="true">
             
             
+
   
   
     
@@ -2995,17 +3853,70 @@
 
     
     
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
       <div
+        class="flex flex-col gap-[var(--spacing-1)]"
         data-lockup-id="demoLock1"
         data-lockup-type="default"
       >
         
         
           
-            <span data-lockup-label="true" data-lockup-label-variant="default">
+            <span
+              class="typography-body-small text-[var(--color-global-contrast-light-02)]"
+              data-lockup-label="true"
+              data-lockup-label-variant="default"
+            >
               Label
             </span>
-            <span data-lockup-value="true" data-lockup-value-variant="default">
+          
+          
+            <span
+              class="typography-body-regular text-[var(--color-global-default)]"
+              data-lockup-value="true"
+              data-lockup-value-variant="default"
+            >
               Label
             </span>
           
@@ -3021,6 +3932,7 @@
           <div data-list-value-item="true">
             
             
+
   
   
     
@@ -3028,17 +3940,70 @@
 
     
     
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
       <div
+        class="flex flex-col gap-[var(--spacing-1)]"
         data-lockup-id="demoLock1"
         data-lockup-type="default"
       >
         
         
           
-            <span data-lockup-label="true" data-lockup-label-variant="default">
+            <span
+              class="typography-body-small text-[var(--color-global-contrast-light-02)]"
+              data-lockup-label="true"
+              data-lockup-label-variant="default"
+            >
               Label
             </span>
-            <span data-lockup-value="true" data-lockup-value-variant="default">
+          
+          
+            <span
+              class="typography-body-regular text-[var(--color-global-default)]"
+              data-lockup-value="true"
+              data-lockup-value-variant="default"
+            >
               Label
             </span>
           
@@ -3060,7 +4025,9 @@
   
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Lockup</h2>
-    
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      
+
   
   
     
@@ -3068,17 +4035,70 @@
 
     
     
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
       <div
+        class="flex flex-col gap-[var(--spacing-1)]"
         data-lockup-id="demoLock1"
         data-lockup-type="default"
       >
         
         
           
-            <span data-lockup-label="true" data-lockup-label-variant="default">
+            <span
+              class="typography-body-small text-[var(--color-global-contrast-light-02)]"
+              data-lockup-label="true"
+              data-lockup-label-variant="default"
+            >
               Label
             </span>
-            <span data-lockup-value="true" data-lockup-value-variant="default">
+          
+          
+            <span
+              class="typography-body-regular text-[var(--color-global-default)]"
+              data-lockup-value="true"
+              data-lockup-value-variant="default"
+            >
               Label
             </span>
           
@@ -3089,6 +4109,259 @@
     
   
 
+      
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div
+        class="flex flex-col gap-[var(--spacing-1)]"
+        data-lockup-id="demoLock2"
+        data-lockup-type="value-legend"
+      >
+        
+        
+          
+          
+            <span
+              class="typography-body-small text-[var(--color-global-contrast-light-02)]"
+              data-lockup-legend="true"
+              data-lockup-legend-variant="default"
+            >
+              This is the longest label in the world
+            </span>
+          
+
+        
+        
+      </div>
+    
+  
+
+      
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div
+        class="flex gap-[var(--spacing-4)]"
+        data-lockup-id="demoLock3"
+        data-lockup-type="block-content"
+      >
+        
+        
+          
+          
+            <div
+              class="flex-shrink-0 w-20 h-20 [&amp;_img]:w-full [&amp;_img]:h-full [&amp;_img]:object-cover"
+              data-lockup-image="true"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        <img
+          src="/assets/images/placeholders/placeholder-landscape.png"
+          alt="Landscape placeholder image"
+          class="block max-w-full h-auto object-cover w-80"
+          loading="lazy"
+          decoding="async"
+          data-image-name="demoImage2"
+          data-image-type="image"
+        />
+      
+    
+  
+
+            </div>
+          
+
+          
+          <div
+            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            data-lockup-content="true"
+          >
+            
+            
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+
+      
+      
+      
+
+      
+
+      
+      
+
+      
+      
+      
+
+      
+        
+      
+
+      
+      
+        <h2
+          class="text-[var(--color-global-heading)] typography-h2-serif"
+          data-heading-name="demoHead2"
+          data-heading-type="heading"
+          data-heading-tag="h2"
+        >Heading</h2>
+      
+    
+  
+
+            
+
+            
+            
+              <p
+                class="typography-body-regular text-[var(--color-global-default)]"
+                data-lockup-text="true"
+                data-lockup-content-variant="default"
+              >
+                Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
+              </p>
+            
+          </div>
+        
+      </div>
+    
+  
+
+    </div>
   </section>
 
   
@@ -5206,7 +6479,7 @@
           data-icon-type="icon"
           data-icon-variant="md"
         >
-          <use href="/assets/icons/sprites/sprite.svg#info"></use>
+          <use href="/assets/icons/sprites/sprite.svg#info-fill"></use>
         </svg>
       
     
@@ -9891,6 +11164,7 @@
           
             <div data-section-lockup>
               
+
   
   
     
@@ -9898,7 +11172,50 @@
 
     
     
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
       <div
+        class="flex gap-[var(--spacing-4)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -9908,13 +11225,20 @@
           
 
           
-          <div data-lockup-content="true">
+          <div
+            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            data-lockup-content="true"
+          >
             
             
 
             
             
-              <p data-lockup-text="true" data-lockup-content-variant="default">
+              <p
+                class="typography-body-regular text-[var(--color-global-default)]"
+                data-lockup-text="true"
+                data-lockup-content-variant="default"
+              >
                 Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
               </p>
             
@@ -11056,6 +12380,7 @@
                       
                         <div data-card-item>
                           
+
   
   
     <span class="error" role="alert">Error: Missing required prop (name)</span>
@@ -11167,6 +12492,7 @@
                     
                       <div data-card-item>
                         
+
   
   
     <span class="error" role="alert">Error: Missing required prop (name)</span>
@@ -11183,6 +12509,7 @@
                     
                       <div data-card-item>
                         
+
   
   
     <span class="error" role="alert">Error: Missing required prop (name)</span>

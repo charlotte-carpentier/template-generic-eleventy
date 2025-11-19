@@ -24,7 +24,10 @@
 {% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderCaption(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -33,24 +36,91 @@
     {# Find caption using universal filter #}
     {% set captionData = options.datas | findByName(options.name) %}
 
-    {# Render or error #}
+    {# Render caption or error message #}
     {% if not captionData %}
       <span class="error" role="alert">Caption not found: {{ options.name }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set variant = captionData.variant | default('info') %}
+      {% set iconName = captionData.iconName | default('') %}
+      {% set captionText = captionData.text | default('') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 Icon Wrapper Classes
+        3.3 Text Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Layout, Spacing
+        --------------------------#}
+      {% set containerClasses = "inline-flex items-center gap-[var(--spacing-1)]" %}
+
+      {# --------------------------
+          3.2 Icon Wrapper Classes
+          Description: Layout, Colors by variant
+        --------------------------#}
+      {% set iconWrapperBaseClasses = "inline-flex items-center" %}
+
+      {% set iconColorClasses = "" %}
+      {% if variant == 'info' %}
+        {% set iconColorClasses = "text-[var(--color-semantic-information-40)]" %}
+      {% elif variant == 'success' %}
+        {% set iconColorClasses = "text-[var(--color-semantic-success-20)]" %}
+      {% elif variant == 'warning' %}
+        {% set iconColorClasses = "text-[var(--color-semantic-warning-40)]" %}
+      {% elif variant == 'error' %}
+        {% set iconColorClasses = "text-[var(--color-semantic-critical-40)]" %}
+      {% endif %}
+
+      {% set iconWrapperClasses = iconWrapperBaseClasses ~ " " ~ iconColorClasses %}
+
+      {# --------------------------
+          3.3 Text Classes
+          Description: Typography, Colors by variant
+        --------------------------#}
+      {% set textBaseClasses = "typography-body-regular" %}
+
+      {% set textColorClasses = "" %}
+      {% if variant == 'error' %}
+        {% set textColorClasses = "text-[var(--color-semantic-critical-40)]" %}
+      {% else %}
+        {% set textColorClasses = "text-[var(--color-global-default)]" %}
+      {% endif %}
+
+      {% set textClasses = textBaseClasses ~ " " ~ textColorClasses %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
+        class="{{ containerClasses }}"
         data-caption-name="{{ captionData.name }}"
         data-caption-type="caption"
-        data-caption-variant="{{ captionData.variant }}"
+        data-caption-variant="{{ variant }}"
       >
-        {# Icon #}
-        {{ renderIcon({
-            name: captionData.iconName,
-            datas: options.iconDatas
-        }) }}
+        {# Icon with semantic color #}
+        {% if iconName %}
+          <span class="{{ iconWrapperClasses }}">
+            {{ renderIcon({
+                name: iconName,
+                datas: options.iconDatas
+            }) }}
+          </span>
+        {% endif %}
 
-        {# Text #}
-        <span data-caption-text="true">
-          {{ captionData.text }}
+        {# Text - colored only for error variant #}
+        <span
+          class="{{ textClasses }}"
+          data-caption-text="true"
+        >
+          {{ captionText }}
         </span>
       </div>
     {% endif %}

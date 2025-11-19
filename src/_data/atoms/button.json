@@ -1,20 +1,21 @@
 {
   "// Component": "Button - Interactive button with variants and states",
-  
   "_meta": {
     "component": "button",
     "type": "atom",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "buttons": [
     {
       "name": "demoButton1",
       "text": "Label",
       "iconName": "demoSmile3",
       "iconPosition": "both",
-      "variants": ["primary", "secondary"],
+      "variants": [
+        "primary",
+        "secondary"
+      ],
       "ariaLabel": "Button description for accessibility"
     },
     {
@@ -37,7 +38,10 @@
       "text": "Label",
       "iconName": "demoSmile3",
       "iconPosition": "both",
-      "variants": ["ghost", "secondary"],
+      "variants": [
+        "ghost",
+        "secondary"
+      ],
       "size": "small",
       "ariaLabel": "Button description for accessibility"
     },
@@ -62,7 +66,7 @@
     {
       "name": "demoClose1",
       "text": "Close",
-      "variant": "secondary", 
+      "variant": "secondary",
       "ariaLabel": "Close modal"
     },
     {
@@ -80,12 +84,18 @@
       "ariaLabel": "Primary label action"
     },
     {
-      "name": "demoLabel2", 
+      "name": "demoLabel2",
       "text": "Label",
       "iconName": "demoSmile3",
       "iconPosition": "left",
       "variant": "secondary",
       "ariaLabel": "Secondary label action"
+    },
+    {
+      "name": "demoCard",
+      "text": "Label",
+      "variant": "secondary",
+      "ariaLabel": "Button description for accessibility"
     }
   ]
 }

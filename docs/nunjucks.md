@@ -78,7 +78,7 @@ tags: [nunjucks, templates, templating]
 3. Tailwind Classes (with index if >3 subsections)
 4. Render HTML
 
-**Note 1:** Numbering is continuous across macros for integration mapping. Do not restart numbering at 1 for each macro.
+**Note 1:** Section numbering is continuous throughout the entire file. If a file contains multiple macros, continue numbering sequentially. Never restart numbering at 1 within the same file.
 
 **Note 2:** Standard description keywords for consistency: Layout, Positioning, Sizing, Spacing, Typography, Colors, Borders, Effects, Responsive, States. Combine with specific details when needed (e.g., "Layout: flex container", "Positioning: absolute checkmark", "Effects: transition, shadow").
 

@@ -1,6 +1,5 @@
 {
   "// Component": "Icon - SVG sprite icons organized by category",
-  
   "_meta": {
     "component": "icon",
     "type": "atom",
@@ -8,20 +7,33 @@
     "created": "2025-01-15",
     "updated": "2025-10-30"
   },
-  
   "icons": {
     "smiles": [
       {
         "name": "demoSmile1",
         "spriteId": "smiley",
-        "alt": "Smile icon",
-        "variants": ["xs-filled", "sm-filled", "md-filled", "lg-filled", "xl-filled", "xxl-filled"]
+        "alt": "Smile icon (outline)",
+        "variants": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "xxl"
+        ]
       },
       {
         "name": "demoSmile2",
-        "spriteId": "smiley",
-        "alt": "Smile icon",
-        "variants": ["xs-outline", "sm-outline", "md-outline", "lg-outline", "xl-outline", "xxl-outline"]
+        "spriteId": "smiley-fill",
+        "alt": "Smile icon (filled)",
+        "variants": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "xxl"
+        ]
       }
     ],
     "flags": [
@@ -29,7 +41,14 @@
         "name": "demoFlag1",
         "spriteId": "flag",
         "alt": "Flag icon",
-        "variants": ["xs", "sm", "md", "lg", "xl", "xxl"]
+        "variants": [
+          "xs",
+          "sm",
+          "md",
+          "lg",
+          "xl",
+          "xxl"
+        ]
       },
       {
         "name": "demoFlagUs1",
@@ -77,7 +96,7 @@
       },
       {
         "name": "demoLeft1",
-        "spriteId": "caret-left-solid-full", 
+        "spriteId": "caret-left-solid-full",
         "alt": "Previous page",
         "variant": "md"
       },
@@ -90,7 +109,7 @@
       {
         "name": "demoRight1",
         "spriteId": "caret-right-solid-full",
-        "alt": "Next page", 
+        "alt": "Next page",
         "variant": "md"
       },
       {
@@ -115,25 +134,25 @@
     "status": [
       {
         "name": "demoInfo1",
-        "spriteId": "info",
+        "spriteId": "info-fill",
         "alt": "Information",
         "variant": "md"
       },
       {
         "name": "demoCheck1",
-        "spriteId": "check-circle",
+        "spriteId": "check-circle-fill",
         "alt": "Success",
         "variant": "md"
       },
       {
         "name": "demoWarn1",
-        "spriteId": "warning",
+        "spriteId": "warning-fill",
         "alt": "Warning",
         "variant": "md"
       },
       {
         "name": "demoWarnCir1",
-        "spriteId": "warning-circle",
+        "spriteId": "warning-circle-fill",
         "alt": "Error",
         "variant": "md"
       },
@@ -147,7 +166,7 @@
         "name": "demoFileUp1",
         "spriteId": "file-arrow-up",
         "alt": "Upload file",
-        "variant": "md"
+        "variant": "xxl"
       },
       {
         "name": "demoStar1",
@@ -156,7 +175,7 @@
         "variant": "md"
       },
       {
-        "name": "demoSlider1", 
+        "name": "demoSlider1",
         "spriteId": "sliders-horizontal",
         "alt": "Settings",
         "variant": "md"
