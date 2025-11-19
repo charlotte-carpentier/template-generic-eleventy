@@ -8,9 +8,11 @@
     - options.name (string): Card identifier
     - options.datas (array): Card configuration data
     - options.lockupDatas (array): Lockup atom data (optional)
+    - options.imageDatas (array): Image atom data (optional)
     - options.headingDatas (array): Heading atom data (optional)
     - options.buttonDatas (array): Button atom data (optional)
     - options.tagDatas (array): Tag atom data (optional)
+    - options.iconDatas (array): Icon atom data (required if button has icons)
 
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/card.njk" import renderCard %}
@@ -19,9 +21,11 @@
         name: "demoCard1",
         datas: molecules.card.cards,
         lockupDatas: molecules.lockup.lockups,
+        imageDatas: atoms.image.images,
         headingDatas: atoms.heading.headings,
         buttonDatas: atoms.button.buttons,
-        tagDatas: atoms.tag.tags
+        tagDatas: atoms.tag.tags,
+        iconDatas: atoms.icon.icons
     }) }}
 
   @created 2025-01-15
@@ -33,7 +37,10 @@
 {% from "01-atoms/tag.njk" import renderTag %}
 
 {% macro renderCard(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -42,53 +49,133 @@
     {# Find card using universal filter (supports both name and id) #}
     {% set cardData = options.datas | findByName(options.name) %}
 
-    {# Render or error #}
+    {# Render card or error message #}
     {% if not cardData %}
       <span class="error" role="alert">Card not found: {{ options.name }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set cardId = cardData.id | default(options.name) %}
+      {% set lockupName = cardData.lockupName | default('') %}
+      {% set headingName = cardData.headingName | default('') %}
+      {% set content = cardData.content | default('') %}
+      {% set buttonName = cardData.buttonName | default('') %}
+      {% set tags = cardData.tags | default([]) %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Card Container Classes
+        3.2 Lockup Wrapper Classes
+        3.3 Content Wrapper Classes
+        3.4 Text Classes
+        3.5 Button Wrapper Classes
+        3.6 Tags Container Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Card Container Classes
+          Description: Layout, Background, Borders, Effects, States
+        --------------------------#}
+      {% set cardClasses = "flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]" %}
+
+      {# --------------------------
+          3.2 Lockup Wrapper Classes
+          Description: Layout override for full-width image, text truncation
+        --------------------------#}
+      {% set lockupClasses = "[&>div]:flex-col [&>div]:gap-[var(--spacing-0-5)] [&_[data-lockup-image]]:w-full [&_[data-lockup-image]]:h-40 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-t-[var(--radius-card)] [&_img]:rounded-b-none [&_[data-lockup-content]]:p-[var(--spacing-6)] [&_[data-lockup-text]]:line-clamp-2" %}
+
+      {# --------------------------
+          3.3 Content Wrapper Classes
+          Description: Layout, Spacing
+        --------------------------#}
+      {% set contentClasses = "flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]" %}
+
+      {# --------------------------
+          3.4 Text Classes
+          Description: Typography, Colors, Text truncation (2 lines)
+        --------------------------#}
+      {% set textClasses = "typography-body-regular text-[var(--color-global-default)] line-clamp-2" %}
+
+      {# --------------------------
+          3.5 Button Wrapper Classes
+          Description: Layout (full-width button)
+        --------------------------#}
+      {% set buttonWrapperClasses = "mt-0 [&_button]:w-full" %}
+
+      {# --------------------------
+          3.6 Tags Container Classes
+          Description: Layout, Spacing
+        --------------------------#}
+      {% set tagsClasses = "flex flex-wrap gap-[var(--spacing-2)] mt-[var(--spacing-2)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
-        data-card-id="{{ cardData.id }}"
+        class="{{ cardClasses }}"
+        data-card-id="{{ cardId }}"
         data-card-type="card"
       >
         {# Lockup (if present and lockupDatas provided) #}
-        {% if cardData.lockupName and options.lockupDatas %}
-          <div data-card-lockup="true">
+        {% if lockupName and options.lockupDatas %}
+          <div
+            class="{{ lockupClasses }}"
+            data-card-lockup="true"
+          >
             {{ renderLockup({
-                name: cardData.lockupName,
-                datas: options.lockupDatas
+                name: lockupName,
+                datas: options.lockupDatas,
+                imageDatas: options.imageDatas,
+                headingDatas: options.headingDatas,
+                iconDatas: options.iconDatas
             }) }}
           </div>
         {% endif %}
 
         {# Content wrapper #}
-        <div data-card-content="true">
+        <div
+          class="{{ contentClasses }}"
+          data-card-content="true"
+        >
           {# Heading (if present) #}
-          {% if cardData.headingName and options.headingDatas %}
+          {% if headingName and options.headingDatas %}
             {{ renderHeading({
-                name: cardData.headingName,
+                name: headingName,
                 datas: options.headingDatas
             }) }}
           {% endif %}
 
           {# Content text (if present) #}
-          {% if cardData.content %}
-            <p data-card-text="true">
-              {{ cardData.content }}
+          {% if content %}
+            <p
+              class="{{ textClasses }}"
+              data-card-text="true"
+            >
+              {{ content }}
             </p>
           {% endif %}
 
           {# Button (if present) #}
-          {% if cardData.buttonName and options.buttonDatas %}
-            {{ renderButton({
-                name: cardData.buttonName,
-                datas: options.buttonDatas
-            }) }}
+          {% if buttonName and options.buttonDatas %}
+            <div class="{{ buttonWrapperClasses }}">
+              {{ renderButton({
+                  name: buttonName,
+                  datas: options.buttonDatas,
+                  iconDatas: options.iconDatas
+              }) }}
+            </div>
           {% endif %}
 
           {# Tags (if present) #}
-          {% if cardData.tags and options.tagDatas %}
-            <div data-card-tags="true">
-              {% for tagName in cardData.tags %}
+          {% if tags and tags | length > 0 and options.tagDatas %}
+            <div
+              class="{{ tagsClasses }}"
+              data-card-tags="true"
+            >
+              {% for tagName in tags %}
                 {{ renderTag({
                     name: tagName,
                     datas: options.tagDatas

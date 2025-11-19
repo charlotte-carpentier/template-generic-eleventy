@@ -9,6 +9,7 @@
     - options.datas (array): Lockup configuration data
     - options.imageDatas (array): Image atom data (for block-content type)
     - options.headingDatas (array): Heading atom data (for block-content type)
+    - options.iconDatas (array): Icon atom data (for avatar images with icons)
 
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/lock-up.njk" import renderLockup %}
@@ -17,7 +18,8 @@
         name: "demoLock1",
         datas: molecules["lock-up"].lockUps,
         imageDatas: atoms.image.images,
-        headingDatas: atoms.heading.headings
+        headingDatas: atoms.heading.headings,
+        iconDatas: atoms.icon.icons
     }) }}
 
   @created 2025-01-15
@@ -27,7 +29,10 @@
 {% from "01-atoms/heading.njk" import renderHeading %}
 
 {% macro renderLockup(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -36,62 +41,182 @@
     {# Find lockup using universal filter (works with both name and id) #}
     {% set lockupData = options.datas | findByName(options.name) %}
 
-    {# Render or error #}
+    {# Render lockup or error message #}
     {% if not lockupData %}
       <span class="error" role="alert">Lockup not found: {{ options.name }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set lockupId = lockupData.id | default(options.name) %}
+      {% set lockupType = lockupData.type | default('default') %}
+
+      {# Default type values #}
+      {% set labelText = lockupData.label.text | default('') if lockupData.label else '' %}
+      {% set labelVariant = lockupData.label.variant | default('default') if lockupData.label else 'default' %}
+      {% set valueText = lockupData.value.text | default('') if lockupData.value else '' %}
+      {% set valueVariant = lockupData.value.variant | default('default') if lockupData.value else 'default' %}
+
+      {# Value-legend type values #}
+      {% set legendText = lockupData.legend.text | default('') if lockupData.legend else '' %}
+      {% set legendVariant = lockupData.legend.variant | default('default') if lockupData.legend else 'default' %}
+
+      {# Block-content type values #}
+      {% set imageName = lockupData.imageName | default('') %}
+      {% set headingName = lockupData.headingName | default('') %}
+      {% set contentText = lockupData.content.text | default('') if lockupData.content else '' %}
+      {% set contentVariant = lockupData.content.variant | default('default') if lockupData.content else 'default' %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes (by type)
+        3.2 Label Classes (default type)
+        3.3 Value Classes (default + value-legend types)
+        3.4 Legend Classes (value-legend type)
+        3.5 Image Wrapper Classes (block-content type)
+        3.6 Content Wrapper Classes (block-content type)
+        3.7 Text Classes (block-content type)
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes (by type)
+          Description: Layout by lockup type
+        --------------------------#}
+      {% set containerClasses = "" %}
+
+      {% if lockupType == 'default' %}
+        {% set containerClasses = "flex flex-col gap-[var(--spacing-1)]" %}
+      {% elif lockupType == 'value-legend' %}
+        {% set containerClasses = "flex flex-col gap-[var(--spacing-1)]" %}
+      {% elif lockupType == 'block-content' %}
+        {% set containerClasses = "flex gap-[var(--spacing-4)]" %}
+      {% endif %}
+
+      {# --------------------------
+          3.2 Label Classes (default type)
+          Description: Typography, Colors
+        --------------------------#}
+      {% set labelClasses = "typography-body-small text-[var(--color-global-contrast-light-02)]" %}
+
+      {# --------------------------
+          3.3 Value Classes (default + value-legend types)
+          Description: Typography, Colors
+        --------------------------#}
+      {% set valueClasses = "typography-body-regular text-[var(--color-global-default)]" %}
+
+      {# --------------------------
+          3.4 Legend Classes (value-legend type)
+          Description: Typography, Colors
+        --------------------------#}
+      {% set legendClasses = "typography-body-small text-[var(--color-global-contrast-light-02)]" %}
+
+      {# --------------------------
+          3.5 Image Wrapper Classes (block-content type)
+          Description: Sizing, Layout, Child image styling override
+        --------------------------#}
+      {% set imageWrapperClasses = "flex-shrink-0 w-20 h-20 [&_img]:w-full [&_img]:h-full [&_img]:object-cover" %}
+
+      {# --------------------------
+          3.6 Content Wrapper Classes (block-content type)
+          Description: Layout, Spacing
+        --------------------------#}
+      {% set contentWrapperClasses = "flex flex-col gap-[var(--spacing-2)] flex-1" %}
+
+      {# --------------------------
+          3.7 Text Classes (block-content type)
+          Description: Typography, Colors
+        --------------------------#}
+      {% set textClasses = "typography-body-regular text-[var(--color-global-default)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
-        data-lockup-id="{{ lockupData.id }}"
-        data-lockup-type="{{ lockupData.type }}"
+        class="{{ containerClasses }}"
+        data-lockup-id="{{ lockupId }}"
+        data-lockup-type="{{ lockupType }}"
       >
-        {# Default type (was label-value in old JSON) #}
-        {% if lockupData.type == "default" %}
-          {% if lockupData.label and lockupData.value %}
-            <span data-lockup-label="true" data-lockup-label-variant="{{ lockupData.label.variant }}">
-              {{ lockupData.label.text }}
+        {# Default type (label-value) #}
+        {% if lockupType == "default" %}
+          {% if labelText %}
+            <span
+              class="{{ labelClasses }}"
+              data-lockup-label="true"
+              data-lockup-label-variant="{{ labelVariant }}"
+            >
+              {{ labelText }}
             </span>
-            <span data-lockup-value="true" data-lockup-value-variant="{{ lockupData.value.variant }}">
-              {{ lockupData.value.text }}
+          {% endif %}
+          {% if valueText %}
+            <span
+              class="{{ valueClasses }}"
+              data-lockup-value="true"
+              data-lockup-value-variant="{{ valueVariant }}"
+            >
+              {{ valueText }}
             </span>
           {% endif %}
 
         {# Value-Legend type #}
-        {% elif lockupData.type == "value-legend" %}
-          {% if lockupData.value and lockupData.legend %}
-            <span data-lockup-value="true" data-lockup-value-variant="{{ lockupData.value.variant }}">
-              {{ lockupData.value.text }}
+        {% elif lockupType == "value-legend" %}
+          {% if valueText %}
+            <span
+              class="{{ valueClasses }}"
+              data-lockup-value="true"
+              data-lockup-value-variant="{{ valueVariant }}"
+            >
+              {{ valueText }}
             </span>
-            <span data-lockup-legend="true" data-lockup-legend-variant="{{ lockupData.legend.variant }}">
-              {{ lockupData.legend.text }}
+          {% endif %}
+          {% if legendText %}
+            <span
+              class="{{ legendClasses }}"
+              data-lockup-legend="true"
+              data-lockup-legend-variant="{{ legendVariant }}"
+            >
+              {{ legendText }}
             </span>
           {% endif %}
 
         {# Block-Content type #}
-        {% elif lockupData.type == "block-content" %}
+        {% elif lockupType == "block-content" %}
           {# Image column #}
-          {% if lockupData.imageName and options.imageDatas %}
-            <div data-lockup-image="true">
+          {% if imageName and options.imageDatas %}
+            <div
+              class="{{ imageWrapperClasses }}"
+              data-lockup-image="true"
+            >
               {{ renderImage({
-                  name: lockupData.imageName,
-                  datas: options.imageDatas
+                  name: imageName,
+                  datas: options.imageDatas,
+                  iconDatas: options.iconDatas
               }) }}
             </div>
           {% endif %}
 
           {# Content column #}
-          <div data-lockup-content="true">
+          <div
+            class="{{ contentWrapperClasses }}"
+            data-lockup-content="true"
+          >
             {# Heading #}
-            {% if lockupData.headingName and options.headingDatas %}
+            {% if headingName and options.headingDatas %}
               {{ renderHeading({
-                  name: lockupData.headingName,
+                  name: headingName,
                   datas: options.headingDatas
               }) }}
             {% endif %}
 
             {# Content text #}
-            {% if lockupData.content %}
-              <p data-lockup-text="true" data-lockup-content-variant="{{ lockupData.content.variant }}">
-                {{ lockupData.content.text }}
+            {% if contentText %}
+              <p
+                class="{{ textClasses }}"
+                data-lockup-text="true"
+                data-lockup-content-variant="{{ contentVariant }}"
+              >
+                {{ contentText }}
               </p>
             {% endif %}
           </div>

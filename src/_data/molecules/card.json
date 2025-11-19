@@ -1,32 +1,38 @@
 {
   "// Component": "Card - Content cards with lockup, heading, and action support",
-  
   "_meta": {
     "component": "card",
     "type": "molecule",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "cards": [
     {
       "id": "demoCard1",
       "lockupName": "demoLock3",
-      "buttonName": "demoButton1",
-      "tags": ["demo", "example"]
+      "buttonName": "demoCard",
+      "tags": [
+        "demo",
+        "example"
+      ]
     },
     {
       "id": "demoCard2",
-      "lockupName": "demoLock3", 
-      "buttonName": "demoButton1",
-      "tags": ["demo", "template"]
+      "lockupName": "demoLock3",
+      "buttonName": "demoCard",
+      "tags": [
+        "demo",
+        "template"
+      ]
     },
     {
       "id": "demoCard3",
-      "headingName": "demoHead4", 
+      "headingName": "demoHead4",
       "content": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
-      "buttonName": "demoButton1",
-      "tags": ["value"]
+      "buttonName": "demoCard",
+      "tags": [
+        "value"
+      ]
     }
   ]
 }

@@ -134,25 +134,25 @@
     "status": [
       {
         "name": "demoInfo1",
-        "spriteId": "info",
+        "spriteId": "info-fill",
         "alt": "Information",
         "variant": "md"
       },
       {
         "name": "demoCheck1",
-        "spriteId": "check-circle",
+        "spriteId": "check-circle-fill",
         "alt": "Success",
         "variant": "md"
       },
       {
         "name": "demoWarn1",
-        "spriteId": "warning",
+        "spriteId": "warning-fill",
         "alt": "Warning",
         "variant": "md"
       },
       {
         "name": "demoWarnCir1",
-        "spriteId": "warning-circle",
+        "spriteId": "warning-circle-fill",
         "alt": "Error",
         "variant": "md"
       },
