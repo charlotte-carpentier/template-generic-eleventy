@@ -8,6 +8,9 @@
     - options.id (string): List content identifier
     - options.datas (array): List content configuration data
     - options.lockupDatas (array): Lockup molecule data
+    - options.imageDatas (array): Image atom data (for lockup images)
+    - options.headingDatas (array): Heading atom data (for lockup headings)
+    - options.iconDatas (array): Icon atom data (for lockup icons)
 
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/list-content.njk" import renderListContent %}
@@ -15,7 +18,10 @@
     {{ renderListContent({
         id: "demoList1",
         datas: molecules["list-content"].listContents,
-        lockupDatas: molecules.lockup.lockups
+        lockupDatas: molecules["lock-up"].lockUps,
+        imageDatas: atoms.image.images,
+        headingDatas: atoms.heading.headings,
+        iconDatas: atoms.icon.icons
     }) }}
 
   @created 2025-01-15
@@ -24,7 +30,10 @@
 {% from "02-molecules/lock-up.njk" import renderLockup %}
 
 {% macro renderListContent(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.id %}
@@ -33,20 +42,63 @@
     {# Find list content using universal filter #}
     {% set listData = options.datas | findByName(options.id) %}
 
-    {# Render or error #}
+    {# Render list content or error message #}
     {% if not listData %}
       <span class="error" role="alert">List content not found: {{ options.id }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set listId = listData.id | default(options.id) %}
+      {% set items = listData.items | default([]) %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 Item Classes
+        3.3 Lockup Override Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Layout vertical, Spacing
+        --------------------------#}
+      {% set containerClasses = "flex flex-col gap-[var(--spacing-8)]" %}
+
+      {# --------------------------
+          3.2 Item Classes
+          Description: Layout
+        --------------------------#}
+      {% set itemClasses = "w-full" %}
+
+      {# --------------------------
+          3.3 Lockup Override Classes
+          Description: Image sizing override for list display
+        --------------------------#}
+      {% set lockupOverrideClasses = "[&_[data-lockup-image]]:w-52 [&_[data-lockup-image]]:h-52 [&_img]:w-full [&_img]:h-full [&_img]:object-cover" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
-        data-list-content-id="{{ listData.id }}"
+        class="{{ containerClasses }}"
+        data-list-content-id="{{ listId }}"
         data-list-content-type="list-content"
       >
-        {% for item in listData.items %}
-          <div data-list-content-item="true">
+        {% for item in items %}
+          <div
+            class="{{ itemClasses }} {{ lockupOverrideClasses }}"
+            data-list-content-item="true"
+          >
             {# Render lockup #}
             {{ renderLockup({
                 name: item.lockupName,
-                datas: options.lockupDatas
+                datas: options.lockupDatas,
+                imageDatas: options.imageDatas,
+                headingDatas: options.headingDatas,
+                iconDatas: options.iconDatas
             }) }}
           </div>
         {% endfor %}
