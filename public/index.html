@@ -455,13 +455,13 @@
 
         <svg
           class="inline-block flex-shrink-0 w-6 h-6 fill-current"
-          aria-label="Smile icon"
+          aria-label="Smile icon (filled)"
           role="img"
-          data-icon-name="demoSmile1"
+          data-icon-name="demoSmile2"
           data-icon-type="icon"
           
         >
-          <use href="/assets/icons/sprites/sprite.svg#smiley"></use>
+          <use href="/assets/icons/sprites/sprite.svg#smiley-fill"></use>
         </svg>
       
     
@@ -1361,11 +1361,14 @@
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Block Drag and Drop</h2>
     
+
+  
   
     
+    
 
     
-      
+    
 
       
       
@@ -1377,16 +1380,47 @@
       
       
       
+      
+      
+      
 
+      
+
+      
+
+      
+
+      
+      
+
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      
+      
+
+      
       <div
-        class="flex flex-col p-5 bg-white rounded-[var(--radius-card)] shadow-[var(--elevation-card)] w-full max-w-xl"
+        class="flex flex-col p-[var(--spacing-5)] bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] w-full max-w-xl"
         data-drag-drop-name="demoDragDrop1"
         data-drag-drop-type="block-drag-and-drop"
         data-drag-drop="true"
         data-allowed-types="xls,xlsx"
         data-max-size="10mb"
       >
-        <div class="mb-8 text-left font-serif text-[var(--color-global-default)]">
+        
+        <div class="mb-[var(--spacing-8)]">
           
 
   
@@ -1431,14 +1465,17 @@
 
         </div>
 
+        
         <div
-          class="flex flex-col items-start justify-center p-8 border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-12)] bg-white min-h-[160px] cursor-pointer hover:bg-[var(--color-global-contrast-light-04)] transition-colors mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2"
+          class="flex flex-col items-start justify-center p-[var(--spacing-8)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-12)] bg-[var(--color-global-white)] min-h-[160px] cursor-pointer transition-colors mb-[var(--spacing-4)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 hover:bg-[var(--color-global-contrast-light-03)] "
           data-drag-drop-zone="true"
           tabindex="0"
           role="button"
           aria-label="Upload file by dropping it here or by clicking"
+          
         >
-          <div class="flex mb-3">
+          
+          <div class="mb-[var(--spacing-3)] text-[var(--color-global-contrast-light-02)]">
             
 
   
@@ -1472,16 +1509,14 @@
 
         
         
-          
-        
 
         <svg
-          class="inline-block flex-shrink-0 w-5 h-5 fill-current w-14 h-14 text-[var(--color-global-contrast-light-02)]"
+          class="inline-block flex-shrink-0 w-10 h-10 fill-current"
           aria-label="Upload file"
           role="img"
           data-icon-name="demoFileUp1"
           data-icon-type="icon"
-          data-icon-variant="md"
+          data-icon-variant="xxl"
         >
           <use href="/assets/icons/sprites/sprite.svg#file-arrow-up"></use>
         </svg>
@@ -1491,14 +1526,17 @@
 
           </div>
 
-          <p class="text-left text-base font-normal text-[var(--color-global-default)]" data-drag-drop-text="true">
+          
+          <p class="typography-body-regular text-[var(--color-global-default)]" data-drag-drop-text="true">
             Drag and drop file here
           </p>
         </div>
 
-        <span class="block my-4 text-base font-normal text-[var(--color-global-default)]">Or</span>
+        
+        <span class="block my-[var(--spacing-4)] typography-body-regular text-[var(--color-global-default)]">Or</span>
 
-        <div class="flex mb-5" data-drag-drop-button="true">
+        
+        <div class="flex mb-[var(--spacing-5)]" data-drag-drop-button="true">
           
 
   
@@ -1572,7 +1610,8 @@
 
         </div>
 
-        <div class="flex flex-col gap-1 mt-2" data-drag-drop-info="true">
+        
+        <div class="flex flex-col gap-[var(--spacing-1)] mt-[var(--spacing-2)]" data-drag-drop-info="true">
           <p>
             <span class="text-sm text-[var(--color-global-contrast-light-02)]">Supported formats </span>
             <span class="text-sm text-[var(--color-global-default)]">XLS, XLSX</span>
@@ -1583,6 +1622,7 @@
           </p>
         </div>
 
+        
         <input
           type="file"
           id="file-demoDragDrop1"

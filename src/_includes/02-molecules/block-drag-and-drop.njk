@@ -30,93 +30,186 @@
 {% from "01-atoms/button.njk" import renderButton %}
 
 {% macro renderBlockDragAndDrop(options) %}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
     <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
+    {# Find block using universal filter #}
     {% set blockData = options.datas | findByName(options.name) %}
 
+    {# Render block or error message #}
     {% if not blockData %}
       <span class="error" role="alert">Block drag and drop not found: {{ options.name }}</span>
     {% else %}
-      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-         CSS Classes - Tailwind Utilities
-      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-      {% set containerClasses = "flex flex-col p-5 bg-white rounded-[var(--radius-card)] shadow-[var(--elevation-card)] w-full max-w-xl" %}
-      {% set headingClasses = "mb-8 text-left font-serif text-[var(--color-global-default)]" %}
-      {% set dropzoneClasses = "flex flex-col items-start justify-center p-8 border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-12)] bg-white min-h-[160px] cursor-pointer hover:bg-[var(--color-global-contrast-light-04)] transition-colors mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
-      {% set iconContainerClasses = "flex mb-3" %}
-      {% set dropzoneTextClasses = "text-left text-base font-normal text-[var(--color-global-default)]" %}
-      {% set orTextClasses = "block my-4 text-base font-normal text-[var(--color-global-default)]" %}
-      {% set buttonContainerClasses = "flex mb-5" %}
-      {% set fileInfoClasses = "flex flex-col gap-1 mt-2" %}
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set headingName = blockData.headingName | default('') %}
+      {% set iconName = blockData.iconName | default('') %}
+      {% set buttonName = blockData.buttonName | default('') %}
+      {% set dropzoneText = blockData.dropzoneText | default('Drag and drop file here') %}
+      {% set separator = blockData.separator | default('Or') %}
+      {% set variant = blockData.variant | default('default') %}
+      {% set dismissible = blockData.dismissible | default(false) %}
+      {% set errorMessage = blockData.errorMessage | default('') %}
+      {% set supportedFormatsLabel = blockData.supportedFormatsLabel | default('Supported formats') %}
+      {% set supportedFormatsValue = blockData.supportedFormatsValue | default('') %}
+      {% set maxFileSizeLabel = blockData.maxFileSizeLabel | default('Maximum file size') %}
+      {% set maxFileSizeValue = blockData.maxFileSizeValue | default('') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 Heading Container Classes
+        3.3 Dropzone Classes
+        3.4 Icon Container Classes
+        3.5 Dropzone Text Classes
+        3.6 Separator Classes
+        3.7 Button Container Classes
+        3.8 File Info Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Layout, Composition, Spacing
+        --------------------------#}
+      {% set containerClasses = "flex flex-col p-[var(--spacing-5)] bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] w-full max-w-xl" %}
+
+      {# --------------------------
+          3.2 Heading Container Classes
+          Description: Spacing, Layout
+        --------------------------#}
+      {% set headingContainerClasses = "mb-[var(--spacing-8)]" %}
+
+      {# --------------------------
+          3.3 Dropzone Classes
+          Description: Layout, Spacing, Colors, Borders, Effects, States
+        --------------------------#}
+      {% set dropzoneBaseClasses = "flex flex-col items-start justify-center p-[var(--spacing-8)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-12)] bg-[var(--color-global-white)] min-h-[160px] cursor-pointer transition-colors mb-[var(--spacing-4)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
+      {% set dropzoneHoverClasses = "hover:bg-[var(--color-global-contrast-light-03)]" %}
+
+      {% set dropzoneVariantClasses = "" %}
+      {% if variant == 'loading' %}
+        {% set dropzoneVariantClasses = "pointer-events-none opacity-60" %}
+      {% elif variant == 'error' %}
+        {% set dropzoneVariantClasses = "border-[var(--color-semantic-critical)]" %}
+      {% endif %}
+
+      {% set dropzoneClasses = dropzoneBaseClasses ~ " " ~ dropzoneHoverClasses ~ " " ~ dropzoneVariantClasses %}
+
+      {# --------------------------
+          3.4 Icon Container Classes
+          Description: Spacing, Colors
+        --------------------------#}
+      {% set iconContainerClasses = "mb-[var(--spacing-3)] text-[var(--color-global-contrast-light-02)]" %}
+
+      {# --------------------------
+          3.5 Dropzone Text Classes
+          Description: Typography, Colors
+        --------------------------#}
+      {% set dropzoneTextClasses = "typography-body-regular text-[var(--color-global-default)]" %}
+
+      {# --------------------------
+          3.6 Separator Classes
+          Description: Spacing, Typography, Colors
+        --------------------------#}
+      {% set separatorClasses = "block my-[var(--spacing-4)] typography-body-regular text-[var(--color-global-default)]" %}
+
+      {# --------------------------
+          3.7 Button Container Classes
+          Description: Spacing, Layout
+        --------------------------#}
+      {% set buttonContainerClasses = "flex mb-[var(--spacing-5)]" %}
+
+      {# --------------------------
+          3.8 File Info Classes
+          Description: Layout, Spacing, Typography, Colors
+        --------------------------#}
+      {% set fileInfoContainerClasses = "flex flex-col gap-[var(--spacing-1)] mt-[var(--spacing-2)]" %}
       {% set fileInfoLabelClasses = "text-sm text-[var(--color-global-contrast-light-02)]" %}
       {% set fileInfoValueClasses = "text-sm text-[var(--color-global-default)]" %}
 
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
         class="{{ containerClasses }}"
         data-drag-drop-name="{{ blockData.name }}"
         data-drag-drop-type="block-drag-and-drop"
         data-drag-drop="true"
-        {% if blockData.supportedFormatsValue %}data-allowed-types="{{ blockData.supportedFormatsValue | lower | replace(' ', '') }}"{% endif %}
-        {% if blockData.maxFileSizeValue %}data-max-size="{{ blockData.maxFileSizeValue | lower | replace(' ', '') }}"{% endif %}
+        {% if supportedFormatsValue %}data-allowed-types="{{ supportedFormatsValue | lower | replace(' ', '') }}"{% endif %}
+        {% if maxFileSizeValue %}data-max-size="{{ maxFileSizeValue | lower | replace(' ', '') }}"{% endif %}
       >
-        <div class="{{ headingClasses }}">
+        {# Heading #}
+        <div class="{{ headingContainerClasses }}">
           {{ renderHeading({
-              name: blockData.headingName,
+              name: headingName,
               datas: options.headingDatas
           }) }}
         </div>
 
+        {# Dropzone #}
         <div
           class="{{ dropzoneClasses }}"
           data-drag-drop-zone="true"
           tabindex="0"
           role="button"
           aria-label="Upload file by dropping it here or by clicking"
+          {% if variant == 'loading' %}aria-busy="true"{% endif %}
         >
+          {# Icon #}
           <div class="{{ iconContainerClasses }}">
             {{ renderIcon({
-                name: blockData.iconName,
-                datas: options.iconDatas,
-                class: "w-14 h-14 text-[var(--color-global-contrast-light-02)]"
+                name: iconName,
+                datas: options.iconDatas
             }) }}
           </div>
 
+          {# Dropzone text #}
           <p class="{{ dropzoneTextClasses }}" data-drag-drop-text="true">
-            {{ blockData.dropzoneText }}
+            {{ dropzoneText }}
           </p>
         </div>
 
-        <span class="{{ orTextClasses }}">{{ blockData.separator }}</span>
+        {# Separator #}
+        <span class="{{ separatorClasses }}">{{ separator }}</span>
 
+        {# Button #}
         <div class="{{ buttonContainerClasses }}" data-drag-drop-button="true">
           {{ renderButton({
-              name: blockData.buttonName,
+              name: buttonName,
               datas: options.buttonDatas,
-              disabled: blockData.variant == "loading"
+              iconDatas: options.iconDatas,
+              disabled: variant == 'loading'
           }) }}
         </div>
 
-        <div class="{{ fileInfoClasses }}" data-drag-drop-info="true">
+        {# File info #}
+        <div class="{{ fileInfoContainerClasses }}" data-drag-drop-info="true">
           <p>
-            <span class="{{ fileInfoLabelClasses }}">{{ blockData.supportedFormatsLabel }} </span>
-            <span class="{{ fileInfoValueClasses }}">{{ blockData.supportedFormatsValue }}</span>
+            <span class="{{ fileInfoLabelClasses }}">{{ supportedFormatsLabel }} </span>
+            <span class="{{ fileInfoValueClasses }}">{{ supportedFormatsValue }}</span>
           </p>
           <p>
-            <span class="{{ fileInfoLabelClasses }}">{{ blockData.maxFileSizeLabel }} </span>
-            <span class="{{ fileInfoValueClasses }}">{{ blockData.maxFileSizeValue }}</span>
+            <span class="{{ fileInfoLabelClasses }}">{{ maxFileSizeLabel }} </span>
+            <span class="{{ fileInfoValueClasses }}">{{ maxFileSizeValue }}</span>
           </p>
         </div>
 
+        {# Hidden file input #}
         <input
           type="file"
           id="file-{{ blockData.name }}"
           class="sr-only"
           data-drag-drop-input="true"
-          {% if blockData.supportedFormatsValue %}accept="{{ blockData.supportedFormatsValue | lower | replace(' ', '') }}"{% endif %}
+          {% if supportedFormatsValue %}accept="{{ supportedFormatsValue | lower | replace(' ', '') }}"{% endif %}
           aria-hidden="true"
           tabindex="-1"
         >
