@@ -7,7 +7,7 @@
   Props:
     - options.id (string): Segmented control identifier
     - options.datas (array): Segmented control configuration data
-    - options.buttonDatas (array): Button atom data (optional)
+    - options.buttonDatas (array): Button atom data
 
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/segmented-control.njk" import renderSegmentedControl %}
@@ -24,47 +24,94 @@
 {% from "01-atoms/button.njk" import renderButton %}
 
 {% macro renderSegmentedControl(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.id %}
     <span class="error" role="alert">Error: Missing required prop (id)</span>
+  {% elif not options.buttonDatas %}
+    <span class="error" role="alert">Error: Missing required prop (buttonDatas)</span>
   {% else %}
-    {# Find segmented control using universal filter (works with both name and id) #}
+    {# Find segmented control using universal filter #}
     {% set segmentedData = options.datas | findByName(options.id) %}
 
-    {# Render or error #}
+    {# Render segmented control or error message #}
     {% if not segmentedData %}
       <span class="error" role="alert">Segmented control not found: {{ options.id }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set segmentedId = segmentedData.id | default(options.id) %}
+      {% set items = segmentedData.items | default([]) %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 Segment Position Classes
+        3.3 Active State Override Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Layout horizontal, No gap
+        --------------------------#}
+      {% set containerClasses = "inline-flex" %}
+
+      {# --------------------------
+          3.2 Segment Position Classes
+          Description: Border management, Rounded corners
+        --------------------------#}
+      {% set segmentFirstClasses = "[&_button]:rounded-l-[var(--radius-8)] [&_button]:rounded-r-none [&_button]:border-r-0" %}
+      {% set segmentMiddleClasses = "-ml-px [&_button]:rounded-none [&_button]:border-x-0" %}
+      {% set segmentLastClasses = "-ml-px [&_button]:rounded-l-none [&_button]:rounded-r-[var(--radius-8)] [&_button]:border-l-0" %}
+
+      {# --------------------------
+          3.3 Active State Override Classes
+          Description: Apply primary button style for active segments
+        --------------------------#}
+      {% set activeOverrideClasses = "[&_button]:bg-[var(--color-button-primary)] [&_button]:text-white [&_button]:border-[var(--color-button-primary)] [&_button]:hover:bg-[var(--color-button-primary-hover)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
-        data-segmented-id="{{ segmentedData.id }}"
+        class="{{ containerClasses }}"
+        data-segmented-id="{{ segmentedId }}"
         data-segmented-type="segmented-control"
         role="tablist"
-        aria-label="Segmented control {{ segmentedData.id }}"
+        aria-label="Segmented control {{ segmentedId }}"
       >
-        {# Items (boucle inévitable sur array items) #}
-        {% for item in segmentedData.items %}
-          <button
-            type="button"
-            role="tab"
-            data-segmented-segment="true"
-            data-segmented-variant="{{ item.variant }}"
-            data-segmented-position="{% if loop.first %}first{% elif loop.last %}last{% else %}middle{% endif %}"
-            {% if item.isActive %}data-segmented-active="true" aria-selected="true"{% else %}aria-selected="false"{% endif %}
-          >
-            {# Get button text from buttonDatas #}
-            {% if item.buttonName and options.buttonDatas %}
-              {% set buttonData = options.buttonDatas | findByName(item.buttonName) %}
-              {% if buttonData %}
-                {{ buttonData.text }}
-              {% else %}
-                Segment {{ loop.index }}
-              {% endif %}
-            {% else %}
-              Segment {{ loop.index }}
-            {% endif %}
-          </button>
+        {# Segments - compose button atoms #}
+        {% for item in items %}
+          {# Determine position classes #}
+          {% set positionClasses = "" %}
+          {% if loop.first %}
+            {% set positionClasses = segmentFirstClasses %}
+          {% elif loop.last %}
+            {% set positionClasses = segmentLastClasses %}
+          {% else %}
+            {% set positionClasses = segmentMiddleClasses %}
+          {% endif %}
+
+          {# Determine active state #}
+          {% set isActive = item.isActive | default(false) %}
+          {% set stateClasses = "" %}
+          {% if isActive %}
+            {% set stateClasses = activeOverrideClasses %}
+          {% endif %}
+
+          <div class="{{ positionClasses }} {{ stateClasses }}">
+            {{ renderButton({
+                name: item.buttonName,
+                datas: options.buttonDatas
+            }) }}
+          </div>
         {% endfor %}
       </div>
     {% endif %}

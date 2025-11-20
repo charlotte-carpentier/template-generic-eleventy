@@ -1,5 +1,5 @@
 {
-  "// Component": "Segmented Control - Button groups with left/center/right segments",
+  "// Component": "Segmented Control - Button groups with active state",
   "_meta": {
     "component": "segmented-control",
     "type": "molecule",
@@ -9,25 +9,17 @@
   "segmentedControls": [
     {
       "id": "demoSeg1",
-      "variants": [
-        "default",
-        "false",
-        "large"
-      ],
       "items": [
         {
           "buttonName": "demoSeg1",
-          "variant": "left",
           "isActive": true
         },
         {
           "buttonName": "demoSeg1",
-          "variant": "center",
           "isActive": false
         },
         {
           "buttonName": "demoSeg1",
-          "variant": "right",
           "isActive": false
         }
       ]

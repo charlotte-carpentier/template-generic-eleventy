@@ -54,7 +54,7 @@
     {
       "name": "demoSeg1",
       "text": "Label",
-      "variant": "segmented",
+      "variant": "secondary",
       "ariaLabel": "Segment button"
     },
     {

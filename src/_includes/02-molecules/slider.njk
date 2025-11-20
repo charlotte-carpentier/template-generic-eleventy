@@ -16,11 +16,19 @@
         datas: molecules.slider.sliders
     }) }}
 
+    {{ renderSlider({
+        name: "demoRange1",
+        datas: molecules.slider.sliders
+    }) }}
+
   @created 2025-01-15
 #}
 
 {% macro renderSlider(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -29,95 +37,205 @@
     {# Find slider using universal filter #}
     {% set sliderData = options.datas | findByName(options.name) %}
 
-    {# Render or error #}
+    {# Render slider or error message #}
     {% if not sliderData %}
       <span class="error" role="alert">Slider not found: {{ options.name }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set sliderName = sliderData.name | default(options.name) %}
+      {% set sliderType = sliderData.type | default('single') %}
+      {% set label = sliderData.label | default('') %}
+      {% set minValue = sliderData.min | default(0) %}
+      {% set maxValue = sliderData.max | default(100) %}
+      {% set step = sliderData.step | default(1) %}
+      {% set values = sliderData.values | default([0]) %}
+      {% set disabled = sliderData.disabled | default(false) %}
+      {% set handleIndicator = sliderData.handleIndicator | default({}) %}
+      {% set showIndicator = handleIndicator.show | default(false) %}
+      {% set indicatorVariant = handleIndicator.variant | default('outline') %}
+
+      {# Calculate positions (percentage) #}
+      {% set range = maxValue - minValue %}
+      {% set value1 = values[0] | default(0) %}
+      {% set value1Percent = ((value1 - minValue) / range * 100) | round(2) %}
+
+      {% if sliderType == 'range' %}
+        {% set value2 = values[1] | default(maxValue) %}
+        {% set value2Percent = ((value2 - minValue) / range * 100) | round(2) %}
+        {% set fillWidth = (value2Percent - value1Percent) | round(2) %}
+      {% else %}
+        {% set fillWidth = value1Percent %}
+      {% endif %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 Label Text Classes
+        3.3 Track Wrapper Classes
+        3.4 Track Classes
+        3.5 Fill Classes
+        3.6 Handle Classes
+        3.7 Indicator Outline Classes
+        3.8 Indicator Solid Classes
+        3.9 Min/Max Wrapper Classes
+        3.10 Min/Max Text Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Layout vertical, Spacing
+        --------------------------#}
+      {% set containerClasses = "flex flex-col gap-[var(--spacing-2)]" %}
+
+      {# --------------------------
+          3.2 Label Text Classes
+          Description: Typography, Colors
+        --------------------------#}
+      {% set labelTextClasses = "typography-body-regular text-[var(--color-global-default)]" %}
+
+      {# --------------------------
+          3.3 Track Wrapper Classes
+          Description: Relative positioning for handles
+        --------------------------#}
+      {% set trackWrapperClasses = "relative w-full py-[var(--spacing-2)]" %}
+
+      {# --------------------------
+          3.4 Track Classes
+          Description: Background bar, Colors, Borders
+        --------------------------#}
+      {% set trackClasses = "relative w-full h-2 bg-[var(--color-global-contrast-light-03)] rounded-full" %}
+
+      {# --------------------------
+          3.5 Fill Classes
+          Description: Filled portion, Colors, Position
+        --------------------------#}
+      {% set fillClasses = "absolute top-0 h-full bg-[var(--color-form-control-checked)] rounded-full transition-all duration-300" %}
+
+      {# --------------------------
+          3.6 Handle Classes
+          Description: Draggable handle, Position, Colors, Size
+        --------------------------#}
+      {% set handleClasses = "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 bg-[var(--color-global-white)] border-2 border-[var(--color-form-control-checked)] rounded-full cursor-pointer shadow-md transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+
+      {# --------------------------
+          3.7 Indicator Outline Classes
+          Description: Handle indicator bubble (outline variant)
+        --------------------------#}
+      {% set indicatorOutlineClasses = "absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-2)] py-[var(--spacing-1)] typography-body-small text-[var(--color-global-default)] bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-4)] shadow-sm whitespace-nowrap" %}
+
+      {# --------------------------
+          3.8 Indicator Solid Classes
+          Description: Handle indicator bubble (solid variant)
+        --------------------------#}
+      {% set indicatorSolidClasses = "absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-2)] py-[var(--spacing-1)] typography-body-small text-[var(--color-global-white)] bg-[var(--color-form-control-checked)] rounded-[var(--radius-4)] shadow-sm whitespace-nowrap" %}
+
+      {# --------------------------
+          3.9 Min/Max Wrapper Classes
+          Description: Layout horizontal, Space between
+        --------------------------#}
+      {% set minMaxWrapperClasses = "flex items-center justify-between" %}
+
+      {# --------------------------
+          3.10 Min/Max Text Classes
+          Description: Typography, Colors
+        --------------------------#}
+      {% set minMaxTextClasses = "typography-body-small text-[var(--color-global-contrast-light-01)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
-        data-slider-name="{{ sliderData.name }}"
-        data-slider-type="{{ sliderData.type }}"
+        class="{{ containerClasses }}"
+        data-slider-name="{{ sliderName }}"
+        data-slider-type="{{ sliderType }}"
+        {% if disabled %}data-slider-disabled="true"{% endif %}
       >
-        {# Label #}
-        {% if sliderData.label %}
-          <label data-slider-label="true">
-            {{ sliderData.label }}
+        {# Label only #}
+        {% if label %}
+          <label
+            class="{{ labelTextClasses }}"
+            data-slider-label="true"
+          >
+            {{ label }}
           </label>
         {% endif %}
 
-        {# Values display #}
-        <div data-slider-values="true">
-          {% for value in sliderData.values %}
-            <span data-slider-value="{{ loop.index0 }}">{{ value }}</span>
-          {% endfor %}
-        </div>
-
-        {# Slider track and handles #}
+        {# Track with handles #}
         <div
-          data-slider-track="true"
-          role="slider"
-          aria-valuemin="{{ sliderData.min }}"
-          aria-valuemax="{{ sliderData.max }}"
-          aria-valuenow="{{ sliderData.values[0] }}"
-          {% if sliderData.disabled %}aria-disabled="true"{% endif %}
+          class="{{ trackWrapperClasses }}"
+          data-slider-track-wrapper="true"
         >
-          {# Single slider #}
-          {% if sliderData.type == "single" %}
+          <div
+            class="{{ trackClasses }}"
+            data-slider-track="true"
+            role="slider"
+            aria-valuemin="{{ minValue }}"
+            aria-valuemax="{{ maxValue }}"
+            aria-valuenow="{{ value1 }}"
+            {% if disabled %}aria-disabled="true"{% endif %}
+          >
+            {# Fill #}
             <div
+              class="{{ fillClasses }}"
+              style="left: {% if sliderType == 'range' %}{{ value1Percent }}%{% else %}0{% endif %}; width: {{ fillWidth }}%;"
+              data-slider-fill="true"
+            ></div>
+
+            {# Handle(s) #}
+            <div
+              class="{{ handleClasses }}"
+              style="left: {{ value1Percent }}%;"
               data-slider-handle="true"
               data-slider-handle-index="0"
-              data-slider-value="{{ sliderData.values[0] }}"
+              tabindex="0"
             >
-              {# Handle indicator #}
-              {% if sliderData.handleIndicator and sliderData.handleIndicator.show %}
+              {# Indicator for handle 1 #}
+              {% if showIndicator %}
                 <span
+                  class="{% if indicatorVariant == 'solid' %}{{ indicatorSolidClasses }}{% else %}{{ indicatorOutlineClasses }}{% endif %}"
                   data-slider-indicator="true"
-                  data-slider-indicator-variant="{{ sliderData.handleIndicator.variant }}"
+                  data-slider-indicator-variant="{{ indicatorVariant }}"
                 >
-                  {{ sliderData.values[0] }}
+                  {{ value1 }}
                 </span>
               {% endif %}
             </div>
 
-          {# Range slider #}
-          {% elif sliderData.type == "range" %}
-            <div
-              data-slider-handle="true"
-              data-slider-handle-index="0"
-              data-slider-value="{{ sliderData.values[0] }}"
-            >
-              {# Handle indicator (start) #}
-              {% if sliderData.handleIndicator and sliderData.handleIndicator.show %}
-                <span
-                  data-slider-indicator="true"
-                  data-slider-indicator-variant="{{ sliderData.handleIndicator.variant }}"
-                >
-                  {{ sliderData.values[0] }}
-                </span>
-              {% endif %}
-            </div>
-
-            <div
-              data-slider-handle="true"
-              data-slider-handle-index="1"
-              data-slider-value="{{ sliderData.values[1] }}"
-            >
-              {# Handle indicator (end) #}
-              {% if sliderData.handleIndicator and sliderData.handleIndicator.show %}
-                <span
-                  data-slider-indicator="true"
-                  data-slider-indicator-variant="{{ sliderData.handleIndicator.variant }}"
-                >
-                  {{ sliderData.values[1] }}
-                </span>
-              {% endif %}
-            </div>
-          {% endif %}
+            {# Second handle for range slider #}
+            {% if sliderType == 'range' %}
+              <div
+                class="{{ handleClasses }}"
+                style="left: {{ value2Percent }}%;"
+                data-slider-handle="true"
+                data-slider-handle-index="1"
+                tabindex="0"
+              >
+                {# Indicator for handle 2 #}
+                {% if showIndicator %}
+                  <span
+                    class="{% if indicatorVariant == 'solid' %}{{ indicatorSolidClasses }}{% else %}{{ indicatorOutlineClasses }}{% endif %}"
+                    data-slider-indicator="true"
+                    data-slider-indicator-variant="{{ indicatorVariant }}"
+                  >
+                    {{ value2 }}
+                  </span>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
         </div>
 
         {# Min/Max labels #}
-        <div data-slider-labels="true">
-          <span data-slider-min="true">{{ sliderData.min }}</span>
-          <span data-slider-max="true">{{ sliderData.max }}</span>
+        <div
+          class="{{ minMaxWrapperClasses }}"
+          data-slider-labels="true"
+        >
+          <span class="{{ minMaxTextClasses }}" data-slider-min="true">{{ minValue }}</span>
+          <span class="{{ minMaxTextClasses }}" data-slider-max="true">{{ maxValue }}</span>
         </div>
       </div>
     {% endif %}

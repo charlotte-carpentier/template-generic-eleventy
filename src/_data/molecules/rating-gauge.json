@@ -1,54 +1,58 @@
 {
   "// Component": "Rating Gauge - Star rating display with customizable max rating",
-  
   "_meta": {
     "component": "rating-gauge",
     "type": "molecule",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "ratingGauges": [
     {
       "name": "demoRating1",
       "rating": 0,
       "maxRating": 5,
-      "iconName": "demoStar1",
+      "iconNameFilled": "demoStar2",
+      "iconNameEmpty": "demoStar1",
       "variant": "default"
     },
     {
-      "name": "demoRating2", 
+      "name": "demoRating2",
       "rating": 1,
       "maxRating": 5,
-      "iconName": "demoStar1",
+      "iconNameFilled": "demoStar2",
+      "iconNameEmpty": "demoStar1",
       "variant": "default"
     },
     {
       "name": "demoRating3",
       "rating": 2,
       "maxRating": 5,
-      "iconName": "demoStar1", 
+      "iconNameFilled": "demoStar2",
+      "iconNameEmpty": "demoStar1",
       "variant": "default"
     },
     {
       "name": "demoRating4",
       "rating": 3,
       "maxRating": 5,
-      "iconName": "demoStar1",
+      "iconNameFilled": "demoStar2",
+      "iconNameEmpty": "demoStar1",
       "variant": "default"
     },
     {
       "name": "demoRating5",
       "rating": 4,
       "maxRating": 5,
-      "iconName": "demoStar1",
+      "iconNameFilled": "demoStar2",
+      "iconNameEmpty": "demoStar1",
       "variant": "default"
     },
     {
       "name": "demoRating6",
       "rating": 5,
       "maxRating": 5,
-      "iconName": "demoStar1",
+      "iconNameFilled": "demoStar2",
+      "iconNameEmpty": "demoStar1",
       "variant": "default"
     }
   ]
