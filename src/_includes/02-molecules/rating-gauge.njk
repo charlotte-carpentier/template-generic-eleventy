@@ -19,13 +19,23 @@
         iconDatas: atoms.icon.icons
     }) }}
 
+    {{ renderRatingGauge({
+        name: "demoRating4",
+        datas: molecules["rating-gauge"].ratingGauges,
+        iconDatas: atoms.icon.icons,
+        showValue: true
+    }) }}
+
   @created 2025-01-15
 #}
 
 {% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderRatingGauge(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -34,22 +44,86 @@
     {# Find rating gauge using universal filter #}
     {% set ratingData = options.datas | findByName(options.name) %}
 
-    {# Render or error #}
+    {# Render rating gauge or error message #}
     {% if not ratingData %}
       <span class="error" role="alert">Rating gauge not found: {{ options.name }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set ratingName = ratingData.name | default(options.name) %}
+      {% set rating = ratingData.rating | default(0) %}
+      {% set maxRating = ratingData.maxRating | default(5) %}
+      {% set iconNameFilled = ratingData.iconNameFilled | default('demoStar2') %}
+      {% set iconNameEmpty = ratingData.iconNameEmpty | default('demoStar1') %}
+      {% set variant = ratingData.variant | default('default') %}
+      {% set showValue = options.showValue | default(false) %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 Stars Wrapper Classes
+        3.3 Star Filled Classes
+        3.4 Star Empty Classes
+        3.5 Value Text Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Layout, Alignment, Spacing
+        --------------------------#}
+      {% set containerClasses = "flex items-center gap-[var(--spacing-2)]" %}
+
+      {# --------------------------
+          3.2 Stars Wrapper Classes
+          Description: Layout horizontal, Spacing between stars
+        --------------------------#}
+      {% set starsWrapperClasses = "flex items-center gap-[var(--spacing-0-5)]" %}
+
+      {# --------------------------
+          3.3 Star Filled Classes
+          Description: Colors for filled stars
+        --------------------------#}
+      {% set starFilledClasses = "inline-flex text-[var(--color-global-default)]" %}
+
+      {# --------------------------
+          3.4 Star Empty Classes
+          Description: Colors for empty stars
+        --------------------------#}
+      {% set starEmptyClasses = "inline-flex text-[var(--color-global-contrast-light-02)]" %}
+
+      {# --------------------------
+          3.5 Value Text Classes
+          Description: Typography, Colors
+        --------------------------#}
+      {% set valueTextClasses = "typography-body-regular text-[var(--color-global-default)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
-        data-rating-name="{{ ratingData.name }}"
+        class="{{ containerClasses }}"
+        data-rating-name="{{ ratingName }}"
         data-rating-type="rating-gauge"
-        data-rating-value="{{ ratingData.rating }}"
-        data-rating-max="{{ ratingData.maxRating }}"
+        data-rating-value="{{ rating }}"
+        data-rating-max="{{ maxRating }}"
+        role="img"
+        aria-label="Rating: {{ rating }} out of {{ maxRating }} stars"
       >
         {# Stars - generate based on rating and maxRating #}
-        <div data-rating-stars="true">
-          {% for i in range(0, ratingData.maxRating) %}
-            <span data-rating-star="{% if i < ratingData.rating %}filled{% else %}empty{% endif %}">
+        <div
+          class="{{ starsWrapperClasses }}"
+          data-rating-stars="true"
+        >
+          {% for i in range(0, maxRating) %}
+            <span
+              class="{% if i < rating %}{{ starFilledClasses }}{% else %}{{ starEmptyClasses }}{% endif %}"
+              data-rating-star="{% if i < rating %}filled{% else %}empty{% endif %}"
+            >
               {{ renderIcon({
-                  name: ratingData.iconName,
+                  name: iconNameFilled if i < rating else iconNameEmpty,
                   datas: options.iconDatas
               }) }}
             </span>
@@ -57,9 +131,12 @@
         </div>
 
         {# Numeric value (if showValue enabled) #}
-        {% if options.showValue %}
-          <span data-rating-value="true">
-            {{ ratingData.rating }}/{{ ratingData.maxRating }}
+        {% if showValue %}
+          <span
+            class="{{ valueTextClasses }}"
+            data-rating-value="true"
+          >
+            {{ rating }}/{{ maxRating }}
           </span>
         {% endif %}
       </div>

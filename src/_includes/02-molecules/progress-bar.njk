@@ -20,7 +20,10 @@
 #}
 
 {% macro renderProgressBar(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -29,37 +32,124 @@
     {# Find progress bar using universal filter #}
     {% set progressData = options.datas | findByName(options.name) %}
 
-    {# Render or error #}
+    {# Render progress bar or error message #}
     {% if not progressData %}
       <span class="error" role="alert">Progress bar not found: {{ options.name }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set progressName = progressData.name | default(options.name) %}
+      {% set label = progressData.label | default('') %}
+      {% set value = progressData.value | default(0) %}
+      {% set minValue = progressData.min | default(0) %}
+      {% set maxValue = progressData.max | default(100) %}
+      {% set showLabels = progressData.showLabels | default(false) %}
+      {% set showPercentage = progressData.showPercentage | default(false) %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 Labels Wrapper Classes
+        3.3 Label Text Classes
+        3.4 Track Classes
+        3.5 Fill Classes
+        3.6 Min/Max Wrapper Classes
+        3.7 Min/Max Text Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Layout vertical, Spacing
+        --------------------------#}
+      {% set containerClasses = "flex flex-col gap-[var(--spacing-2)]" %}
+
+      {# --------------------------
+          3.2 Labels Wrapper Classes
+          Description: Layout horizontal, Space between label and percentage
+        --------------------------#}
+      {% set labelsWrapperClasses = "flex items-center justify-between" %}
+
+      {# --------------------------
+          3.3 Label Text Classes
+          Description: Typography, Colors
+        --------------------------#}
+      {% set labelTextClasses = "typography-body-regular text-[var(--color-global-default)]" %}
+
+      {# --------------------------
+          3.4 Track Classes
+          Description: Background bar (full width), Colors, Borders
+        --------------------------#}
+      {% set trackClasses = "relative w-full h-2 bg-[var(--color-global-contrast-light-03)] rounded-full overflow-hidden" %}
+
+      {# --------------------------
+          3.5 Fill Classes
+          Description: Progress fill (dynamic width), Colors, Transitions
+        --------------------------#}
+      {% set fillClasses = "absolute top-0 left-0 h-full bg-[var(--color-form-control-checked)] rounded-full transition-all duration-300" %}
+
+      {# --------------------------
+          3.6 Min/Max Wrapper Classes
+          Description: Layout horizontal, Space between min and max
+        --------------------------#}
+      {% set minMaxWrapperClasses = "flex items-center justify-between" %}
+
+      {# --------------------------
+          3.7 Min/Max Text Classes
+          Description: Typography, Colors
+        --------------------------#}
+      {% set minMaxTextClasses = "typography-body-small text-[var(--color-global-contrast-light-01)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
-        data-progress-name="{{ progressData.name }}"
+        class="{{ containerClasses }}"
+        data-progress-name="{{ progressName }}"
         data-progress-type="progress-bar"
       >
-        {# Label and percentage #}
-        {% if progressData.showLabels %}
-          <div data-progress-labels="true">
-            <span data-progress-label="true">{{ progressData.label }}</span>
-            {% if progressData.showPercentage %}
-              <span data-progress-percentage="true">{{ progressData.value }}%</span>
-            {% endif %}
+        {# Label #}
+        {% if showLabels %}
+          <div
+            class="{{ labelsWrapperClasses }}"
+            data-progress-labels="true"
+          >
+            <span
+              class="{{ labelTextClasses }}"
+              data-progress-label="true"
+            >
+              {{ label }}
+            </span>
           </div>
         {% endif %}
 
         {# Progress bar visual #}
         <div
+          class="{{ trackClasses }}"
           data-progress-track="true"
           role="progressbar"
-          aria-valuenow="{{ progressData.value }}"
-          aria-valuemin="{{ progressData.min }}"
-          aria-valuemax="{{ progressData.max }}"
-          aria-label="Progress: {{ progressData.value }}%"
+          aria-valuenow="{{ value }}"
+          aria-valuemin="{{ minValue }}"
+          aria-valuemax="{{ maxValue }}"
+          aria-label="Progress: {{ value }}%"
         >
           <div
+            class="{{ fillClasses }}"
+            style="width: {{ value }}%;"
             data-progress-fill="true"
-            data-progress-value="{{ progressData.value }}"
+            data-progress-value="{{ value }}"
           ></div>
+        </div>
+
+        {# Min/Max values #}
+        <div
+          class="{{ minMaxWrapperClasses }}"
+          data-progress-minmax="true"
+        >
+          <span class="{{ minMaxTextClasses }}">{{ minValue }}</span>
+          <span class="{{ minMaxTextClasses }}">{{ maxValue }}%</span>
         </div>
       </div>
     {% endif %}

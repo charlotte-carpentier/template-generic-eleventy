@@ -175,6 +175,12 @@
         "variant": "md"
       },
       {
+        "name": "demoStar2",
+        "spriteId": "star-fill",
+        "alt": "Star rating",
+        "variant": "md"
+      },
+      {
         "name": "demoSlider1",
         "spriteId": "sliders-horizontal",
         "alt": "Settings",

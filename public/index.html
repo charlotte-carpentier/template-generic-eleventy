@@ -7874,6 +7874,7 @@
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Progress Bar</h2>
     
+
   
   
     
@@ -7881,22 +7882,56 @@
 
     
     
+
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
       <div
+        class="flex flex-col gap-[var(--spacing-2)]"
         data-progress-name="demoProgr1"
         data-progress-type="progress-bar"
       >
         
         
-          <div data-progress-labels="true">
-            <span data-progress-label="true">Label</span>
-            
-              <span data-progress-percentage="true">25%</span>
-            
+          <div
+            class="flex items-center justify-between"
+            data-progress-labels="true"
+          >
+            <span
+              class="typography-body-regular text-[var(--color-global-default)]"
+              data-progress-label="true"
+            >
+              Label
+            </span>
           </div>
         
 
         
         <div
+          class="relative w-full h-2 bg-[var(--color-global-contrast-light-03)] rounded-full overflow-hidden"
           data-progress-track="true"
           role="progressbar"
           aria-valuenow="25"
@@ -7905,9 +7940,20 @@
           aria-label="Progress: 25%"
         >
           <div
+            class="absolute top-0 left-0 h-full bg-[var(--color-form-control-checked)] rounded-full transition-all duration-300"
+            style="width: 25%;"
             data-progress-fill="true"
             data-progress-value="25"
           ></div>
+        </div>
+
+        
+        <div
+          class="flex items-center justify-between"
+          data-progress-minmax="true"
+        >
+          <span class="typography-body-small text-[var(--color-global-contrast-light-01)]">0</span>
+          <span class="typography-body-small text-[var(--color-global-contrast-light-01)]">100%</span>
         </div>
       </div>
     
@@ -7919,6 +7965,7 @@
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Rating Gauge</h2>
     
+
   
   
     
@@ -7926,16 +7973,48 @@
 
     
     
+
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
       <div
+        class="flex items-center gap-[var(--spacing-2)]"
         data-rating-name="demoRating1"
         data-rating-type="rating-gauge"
         data-rating-value="0"
         data-rating-max="5"
+        role="img"
+        aria-label="Rating: 0 out of 5 stars"
       >
         
-        <div data-rating-stars="true">
+        <div
+          class="flex items-center gap-[var(--spacing-0-5)]"
+          data-rating-stars="true"
+        >
           
-            <span data-rating-star="empty">
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
               
 
   
@@ -7986,7 +8065,10 @@
 
             </span>
           
-            <span data-rating-star="empty">
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
               
 
   
@@ -8037,7 +8119,10 @@
 
             </span>
           
-            <span data-rating-star="empty">
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
               
 
   
@@ -8088,7 +8173,10 @@
 
             </span>
           
-            <span data-rating-star="empty">
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
               
 
   
@@ -8139,7 +8227,10 @@
 
             </span>
           
-            <span data-rating-star="empty">
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
               
 
   
@@ -8183,6 +8274,1631 @@
           data-icon-variant="md"
         >
           <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+        </div>
+
+        
+        
+      </div>
+    
+  
+
+    
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div
+        class="flex items-center gap-[var(--spacing-2)]"
+        data-rating-name="demoRating2"
+        data-rating-type="rating-gauge"
+        data-rating-value="1"
+        data-rating-max="5"
+        role="img"
+        aria-label="Rating: 1 out of 5 stars"
+      >
+        
+        <div
+          class="flex items-center gap-[var(--spacing-0-5)]"
+          data-rating-stars="true"
+        >
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+        </div>
+
+        
+        
+      </div>
+    
+  
+
+    
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div
+        class="flex items-center gap-[var(--spacing-2)]"
+        data-rating-name="demoRating3"
+        data-rating-type="rating-gauge"
+        data-rating-value="2"
+        data-rating-max="5"
+        role="img"
+        aria-label="Rating: 2 out of 5 stars"
+      >
+        
+        <div
+          class="flex items-center gap-[var(--spacing-0-5)]"
+          data-rating-stars="true"
+        >
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+        </div>
+
+        
+        
+      </div>
+    
+  
+
+    
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div
+        class="flex items-center gap-[var(--spacing-2)]"
+        data-rating-name="demoRating4"
+        data-rating-type="rating-gauge"
+        data-rating-value="3"
+        data-rating-max="5"
+        role="img"
+        aria-label="Rating: 3 out of 5 stars"
+      >
+        
+        <div
+          class="flex items-center gap-[var(--spacing-0-5)]"
+          data-rating-stars="true"
+        >
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+        </div>
+
+        
+        
+      </div>
+    
+  
+
+    
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div
+        class="flex items-center gap-[var(--spacing-2)]"
+        data-rating-name="demoRating5"
+        data-rating-type="rating-gauge"
+        data-rating-value="4"
+        data-rating-max="5"
+        role="img"
+        aria-label="Rating: 4 out of 5 stars"
+      >
+        
+        <div
+          class="flex items-center gap-[var(--spacing-0-5)]"
+          data-rating-stars="true"
+        >
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-contrast-light-02)]"
+              data-rating-star="empty"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+        </div>
+
+        
+        
+      </div>
+    
+  
+
+    
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div
+        class="flex items-center gap-[var(--spacing-2)]"
+        data-rating-name="demoRating6"
+        data-rating-type="rating-gauge"
+        data-rating-value="5"
+        data-rating-max="5"
+        role="img"
+        aria-label="Rating: 5 out of 5 stars"
+      >
+        
+        <div
+          class="flex items-center gap-[var(--spacing-0-5)]"
+          data-rating-stars="true"
+        >
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
+        </svg>
+      
+    
+  
+
+            </span>
+          
+            <span
+              class="inline-flex text-[var(--color-global-default)]"
+              data-rating-star="filled"
+            >
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Star rating"
+          role="img"
+          data-icon-name="demoStar2"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#star-fill"></use>
         </svg>
       
     
@@ -8204,6 +9920,7 @@
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Segmented Control</h2>
     
+
   
   
     
@@ -8211,7 +9928,24 @@
 
     
     
+
+      
+      
+      
+
+      
+
+      
+
+      
+      
+      
+
+      
+
+      
       <div
+        class="inline-flex"
         data-segmented-id="demoSeg1"
         data-segmented-type="segmented-control"
         role="tablist"
@@ -8219,56 +9953,262 @@
       >
         
         
-          <button
-            type="button"
-            role="tab"
-            data-segmented-segment="true"
-            data-segmented-variant="left"
-            data-segmented-position="first"
-            data-segmented-active="true" aria-selected="true"
-          >
+          
+          
+          
             
+          
+
+          
+          
+          
+          
             
-              
-              
-                Label
-              
+          
+
+          <div class="[&amp;_button]:rounded-l-[var(--radius-8)] [&amp;_button]:rounded-r-none [&amp;_button]:border-r-0 [&amp;_button]:bg-[var(--color-button-primary)] [&amp;_button]:text-white [&amp;_button]:border-[var(--color-button-primary)] [&amp;_button]:hover:bg-[var(--color-button-primary-hover)]">
             
-          </button>
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+
+      
+
+      
         
-          <button
-            type="button"
-            role="tab"
-            data-segmented-segment="true"
-            data-segmented-variant="center"
-            data-segmented-position="middle"
-            aria-selected="false"
-          >
-            
-            
-              
-              
-                Label
-              
-            
-          </button>
+      
+
+      
+
+      
         
-          <button
-            type="button"
-            role="tab"
-            data-segmented-segment="true"
-            data-segmented-variant="right"
-            data-segmented-position="last"
-            aria-selected="false"
-          >
+
+      
+
+      
+
+      
+
+      
+      <button
+        type="button"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed "
+        data-button-name="demoSeg1"
+        data-button-type="button"
+        
+        
+        
+        
+        aria-label="Segment button"
+        >
+        
+        
+
+        
+        
+
+        
+        
+          Label
+        
+
+        
+        
+      </button>
+    
+  
+
+          </div>
+        
+          
+          
+          
             
+          
+
+          
+          
+          
+          
+
+          <div class="-ml-px [&amp;_button]:rounded-none [&amp;_button]:border-x-0 ">
             
-              
-              
-                Label
-              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+        
+
+      
+
+      
+
+      
+
+      
+      <button
+        type="button"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed "
+        data-button-name="demoSeg1"
+        data-button-type="button"
+        
+        
+        
+        
+        aria-label="Segment button"
+        >
+        
+        
+
+        
+        
+
+        
+        
+          Label
+        
+
+        
+        
+      </button>
+    
+  
+
+          </div>
+        
+          
+          
+          
             
-          </button>
+          
+
+          
+          
+          
+          
+
+          <div class="-ml-px [&amp;_button]:rounded-l-none [&amp;_button]:rounded-r-[var(--radius-8)] [&amp;_button]:border-l-0 ">
+            
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+        
+
+      
+
+      
+
+      
+
+      
+      <button
+        type="button"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed "
+        data-button-name="demoSeg1"
+        data-button-type="button"
+        
+        
+        
+        
+        aria-label="Segment button"
+        >
+        
+        
+
+        
+        
+
+        
+        
+          Label
+        
+
+        
+        
+      </button>
+    
+  
+
+          </div>
         
       </div>
     
@@ -8280,6 +10220,7 @@
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Slider</h2>
     
+
   
   
     
@@ -8287,43 +10228,101 @@
 
     
     
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
       <div
+        class="flex flex-col gap-[var(--spacing-2)]"
         data-slider-name="demoSlider1"
         data-slider-type="single"
+        
       >
         
         
-          <label data-slider-label="true">
+          <label
+            class="typography-body-regular text-[var(--color-global-default)]"
+            data-slider-label="true"
+          >
             Experience
           </label>
         
 
         
-        <div data-slider-values="true">
-          
-            <span data-slider-value="0">8</span>
-          
-        </div>
-
-        
         <div
-          data-slider-track="true"
-          role="slider"
-          aria-valuemin="0"
-          aria-valuemax="20"
-          aria-valuenow="8"
-          
+          class="relative w-full py-[var(--spacing-2)]"
+          data-slider-track-wrapper="true"
         >
-          
-          
+          <div
+            class="relative w-full h-2 bg-[var(--color-global-contrast-light-03)] rounded-full"
+            data-slider-track="true"
+            role="slider"
+            aria-valuemin="0"
+            aria-valuemax="20"
+            aria-valuenow="8"
+            
+          >
+            
             <div
+              class="absolute top-0 h-full bg-[var(--color-form-control-checked)] rounded-full transition-all duration-300"
+              style="left: 0; width: 40%;"
+              data-slider-fill="true"
+            ></div>
+
+            
+            <div
+              class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 bg-[var(--color-global-white)] border-2 border-[var(--color-form-control-checked)] rounded-full cursor-pointer shadow-md transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+              style="left: 40%;"
               data-slider-handle="true"
               data-slider-handle-index="0"
-              data-slider-value="8"
+              tabindex="0"
             >
               
               
                 <span
+                  class="absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-2)] py-[var(--spacing-1)] typography-body-small text-[var(--color-global-default)] bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-4)] shadow-sm whitespace-nowrap"
                   data-slider-indicator="true"
                   data-slider-indicator-variant="outline"
                 >
@@ -8332,14 +10331,18 @@
               
             </div>
 
-          
-          
+            
+            
+          </div>
         </div>
 
         
-        <div data-slider-labels="true">
-          <span data-slider-min="true">0</span>
-          <span data-slider-max="true">20</span>
+        <div
+          class="flex items-center justify-between"
+          data-slider-labels="true"
+        >
+          <span class="typography-body-small text-[var(--color-global-contrast-light-01)]" data-slider-min="true">0</span>
+          <span class="typography-body-small text-[var(--color-global-contrast-light-01)]" data-slider-max="true">20</span>
         </div>
       </div>
     
