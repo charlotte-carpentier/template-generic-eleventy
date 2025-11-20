@@ -46,7 +46,10 @@
 {% from "01-atoms/toggle.njk" import renderToggle %}
 
 {% macro renderListGroup(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.id %}
@@ -55,32 +58,100 @@
     {# Find list group using universal filter #}
     {% set listData = options.datas | findByName(options.id) %}
 
-    {# Render or error #}
+    {# Render list group or error message #}
     {% if not listData %}
       <span class="error" role="alert">List group not found: {{ options.id }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set listId = listData.id | default(options.id) %}
+      {% set listType = listData.type | default('default') %}
+      {% set items = listData.items | default([]) %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 Item Classes
+        3.3 Icon Wrapper Classes
+        3.4 Text Classes
+        3.5 Close Button Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Layout vertical, Background, Borders
+        --------------------------#}
+      {% set containerClasses = "flex flex-col bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-8)] overflow-hidden" %}
+
+      {# --------------------------
+          3.2 Item Classes
+          Description: Layout horizontal, Spacing, Borders (separator)
+        --------------------------#}
+      {% set itemBaseClasses = "flex items-center gap-[var(--spacing-3)] px-[var(--spacing-4)] py-[var(--spacing-3)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0" %}
+
+      {% set itemInteractiveClasses = "" %}
+      {% if listType != "default" %}
+        {% set itemInteractiveClasses = "transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer" %}
+      {% endif %}
+
+      {% set itemClasses = itemBaseClasses ~ " " ~ itemInteractiveClasses %}
+
+      {# --------------------------
+          3.3 Icon Wrapper Classes
+          Description: Layout, Colors
+        --------------------------#}
+      {% set iconWrapperClasses = "flex-shrink-0 inline-flex items-center text-[var(--color-semantic-information)]" %}
+
+      {# --------------------------
+          3.4 Text Classes
+          Description: Typography, Layout, Spacing
+        --------------------------#}
+      {% set textClasses = "typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-10)]" %}
+
+      {# --------------------------
+          3.5 Close Button Classes
+          Description: Layout, Colors, States
+        --------------------------#}
+      {% set closeButtonClasses = "flex-shrink-0 inline-flex items-center justify-center w-6 h-6 text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
-        data-list-group-id="{{ listData.id }}"
-        data-list-group-type="{{ listData.type }}"
+        class="{{ containerClasses }}"
+        data-list-group-id="{{ listId }}"
+        data-list-group-type="{{ listType }}"
       >
-        {% for item in listData.items %}
-          <div data-list-group-item="true">
+        {% for item in items %}
+          <div
+            class="{{ itemClasses }}"
+            data-list-group-item="true"
+          >
             {# Icon (always present) #}
-            {{ renderIcon({
-                name: item.iconName,
-                datas: options.iconDatas
-            }) }}
+            <div class="{{ iconWrapperClasses }}">
+              {{ renderIcon({
+                  name: item.iconName,
+                  datas: options.iconDatas
+              }) }}
+            </div>
 
             {# Text #}
-            <span data-list-group-text="true">
+            <span
+              class="{{ textClasses }}"
+              data-list-group-text="true"
+            >
               {{ item.text }}
             </span>
 
             {# Type-specific elements #}
-            {% if listData.type == "closable" %}
+            {% if listType == "closable" %}
               {# Close icon #}
               <button
                 type="button"
+                class="{{ closeButtonClasses }}"
                 data-list-group-close="true"
                 aria-label="Close"
               >
@@ -90,28 +161,28 @@
                 }) }}
               </button>
 
-            {% elif listData.type == "link" %}
+            {% elif listType == "link" %}
               {# Link #}
               {{ renderLink({
                   name: item.linkName,
                   datas: options.linkDatas
               }) }}
 
-            {% elif listData.type == "radio" %}
+            {% elif listType == "radio" %}
               {# Radio button #}
               {{ renderRadioButton({
                   id: item.radioName,
                   datas: options.radioDatas
               }) }}
 
-            {% elif listData.type == "checkbox" %}
+            {% elif listType == "checkbox" %}
               {# Checkbox #}
               {{ renderCheckbox({
                   id: item.checkboxName,
                   datas: options.checkboxDatas
               }) }}
 
-            {% elif listData.type == "toggle" %}
+            {% elif listType == "toggle" %}
               {# Toggle #}
               {{ renderToggle({
                   id: item.toggleName,

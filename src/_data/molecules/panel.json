@@ -1,100 +1,166 @@
 {
   "// Component": "Panel - Dropdown panels with default, date, and list variants",
-  
   "_meta": {
     "component": "panel",
     "type": "molecule",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "panels": [
     {
       "name": "demoPanel1",
       "type": "default",
-      "variants": [
+      "variant": "simple",
+      "items": [
         {
-          "name": "simple",
-          "items": [
-            { "text": "Label" },
-            { "text": "Label" },
-            { "text": "Label" },
-            { "text": "Label" },
-            { "text": "Label" }
-          ]
+          "text": "Label"
         },
         {
-          "name": "multiselect",
-          "items": [
-            { "checkboxName": "demoCheck1", "text": "Label" },
-            { "checkboxName": "demoCheck1", "text": "Label" },
-            { "checkboxName": "demoCheck1", "text": "Label" },
-            { "checkboxName": "demoCheck1", "text": "Label" },
-            { "checkboxName": "demoCheck1", "text": "Label" }
-          ]
+          "text": "Label"
         },
         {
-          "name": "country",
-          "items": [
-            { "iconName": "demoFlagUs1", "text": "United States" },
-            { "iconName": "demoFlagCn1", "text": "China" },
-            { "iconName": "demoFlagAf1", "text": "Afghanistan" },
-            { "iconName": "demoFlagAl1", "text": "Albania" },
-            { "iconName": "demoFlagDz1", "text": "Algeria" }
-          ]
+          "text": "Label"
         },
         {
-          "name": "phone",
-          "items": [
-            { "iconName": "demoFlagUs1", "text": "United States", "code": "+1" },
-            { "iconName": "demoFlagCn1", "text": "China", "code": "+86" },
-            { "iconName": "demoFlagAf1", "text": "Afghanistan", "code": "+93" },
-            { "iconName": "demoFlagAl1", "text": "Albania", "code": "+355" },
-            { "iconName": "demoFlagDz1", "text": "Algeria", "code": "+213" }
-          ]
+          "text": "Label"
+        },
+        {
+          "text": "Label"
         }
       ]
     },
     {
-      "name": "demoPanel2", 
-      "type": "date",
-      "variants": [
+      "name": "demoPanel2",
+      "type": "default",
+      "variant": "multiselect",
+      "items": [
         {
-          "name": "single",
-          "dateRange": {
-            "month": "November 2025",
-            "selectedDates": ["2025-11-27"]
-          },
-          "navigation": {
-            "prevIcon": "demoLeft1",
-            "nextIcon": "demoRight1"
-          }
+          "checkboxName": "demoCheck1"
         },
         {
-          "name": "double",
-          "dateRange": {
-            "startMonth": "November 2025",
-            "endMonth": "December 2025",
-            "selectedDates": ["2025-11-27", "2025-12-04", "2025-12-05"]
-          },
-          "navigation": {
-            "prevIcon": "demoLeft1", 
-            "nextIcon": "demoRight1"
-          }
+          "checkboxName": "demoCheck1"
+        },
+        {
+          "checkboxName": "demoCheck1"
+        },
+        {
+          "checkboxName": "demoCheck1"
+        },
+        {
+          "checkboxName": "demoCheck1"
         }
       ]
     },
     {
       "name": "demoPanel3",
-      "type": "list-item",
-      "variants": [
+      "type": "default",
+      "variant": "country",
+      "items": [
         {
-          "name": "default",
-          "items": [
-            { "type": "label", "text": "Label" },
-            { "type": "label-icon", "iconName": "demoFlagIm1", "text": "Label" },
-            { "type": "checkbox", "checkboxName": "demoCheck1", "text": "Label" }
-          ]
+          "iconName": "demoFlagUs1",
+          "text": "United States"
+        },
+        {
+          "iconName": "demoFlagCn1",
+          "text": "China"
+        },
+        {
+          "iconName": "demoFlagAf1",
+          "text": "Afghanistan"
+        },
+        {
+          "iconName": "demoFlagAl1",
+          "text": "Albania"
+        },
+        {
+          "iconName": "demoFlagDz1",
+          "text": "Algeria"
+        }
+      ]
+    },
+    {
+      "name": "demoPanel4",
+      "type": "default",
+      "variant": "phone",
+      "items": [
+        {
+          "iconName": "demoFlagUs1",
+          "text": "United States",
+          "code": "+1"
+        },
+        {
+          "iconName": "demoFlagCn1",
+          "text": "China",
+          "code": "+86"
+        },
+        {
+          "iconName": "demoFlagAf1",
+          "text": "Afghanistan",
+          "code": "+93"
+        },
+        {
+          "iconName": "demoFlagAl1",
+          "text": "Albania",
+          "code": "+355"
+        },
+        {
+          "iconName": "demoFlagDz1",
+          "text": "Algeria",
+          "code": "+213"
+        }
+      ]
+    },
+    {
+      "name": "demoPanel5",
+      "type": "date",
+      "variant": "single",
+      "dateRange": {
+        "month": "November 2025",
+        "selectedDates": [
+          "2025-11-27"
+        ]
+      },
+      "navigation": {
+        "prevIcon": "demoLeft1",
+        "nextIcon": "demoRight1"
+      }
+    },
+    {
+      "name": "demoPanel6",
+      "type": "date",
+      "variant": "double",
+      "dateRange": {
+        "startMonth": "November 2025",
+        "endMonth": "December 2025",
+        "selectedDates": [
+          "2025-11-27",
+          "2025-12-04",
+          "2025-12-05"
+        ]
+      },
+      "navigation": {
+        "prevIcon": "demoLeft1",
+        "nextIcon": "demoRight1"
+      }
+    },
+    {
+      "name": "demoPanel7",
+      "type": "list-item",
+      "variant": "default",
+      "items": [
+        {
+          "type": "label",
+          "text": "Label"
+        },
+        {
+          "type": "label-icon",
+          "iconName": "demoFlagIm1",
+          "text": "Label"
+        },
+        {
+          "type": "checkbox",
+          "checkboxName": "demoCheck1",
+          "text": "Label"
         }
       ]
     }

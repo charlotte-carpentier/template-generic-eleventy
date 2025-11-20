@@ -342,10 +342,17 @@ permalink: "/"
   {# List Group #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Group</h2>
-    {{ renderListGroup({
-        id: "demoGroup1",
+    <div style="display: flex; gap: 1rem;">
+      {{ renderListGroup({
+          id: "demoGroup1",
+          datas: molecules["list-group"].listGroups,
+          iconDatas: atoms.icon.icons
+      }) }}
+      {{ renderListGroup({
+        id: "demoGroup3",
         datas: molecules["list-group"].listGroups,
-        iconDatas: atoms.icon.icons
+        iconDatas: atoms.icon.icons,
+        linkDatas: atoms.link.links
     }) }}
   </section>
 
@@ -385,7 +392,7 @@ permalink: "/"
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Pagination</h2>
     {{ renderPagination({
-        name: "demoPager1",
+        name: "demoPreview",
         datas: molecules.pagination.paginations,
         selectDatas: atoms.select.selects,
         buttonDatas: atoms.button.buttons,
@@ -401,7 +408,7 @@ permalink: "/"
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Panel</h2>
     {{ renderPanel({
-        name: "demoPanel1",
+        name: "demoPanel4",
         datas: molecules.panel.panels,
         checkboxDatas: atoms.checkbox.checkboxes,
         iconDatas: atoms.icon.icons
