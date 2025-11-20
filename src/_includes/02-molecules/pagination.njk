@@ -38,7 +38,10 @@
 {% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderPagination(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -47,38 +50,117 @@
     {# Find pagination using universal filter #}
     {% set paginationData = options.datas | findByName(options.name) %}
 
-    {# Render or error #}
+    {# Render pagination or error message #}
     {% if not paginationData %}
       <span class="error" role="alert">Pagination not found: {{ options.name }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set paginationName = paginationData.name | default(options.name) %}
+      {% set itemsPerPageData = paginationData.itemsPerPage | default({}) %}
+      {% set selectName = itemsPerPageData.selectName | default('') %}
+      {% set navigationData = paginationData.navigationPager | default({}) %}
+      {% set pages = paginationData.pages | default([]) %}
+      {% set totalCountData = paginationData.totalCount | default({}) %}
+      {% set showCounter = totalCountData.show | default(false) %}
+      {% set currentPage = options.currentPage | default(1) %}
+      {% set totalPages = options.totalPages | default(1) %}
+      {% set itemsPerPage = options.itemsPerPage | default(10) %}
+      {% set totalItems = options.totalItems | default(0) %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 Select Wrapper Classes
+        3.3 Nav Wrapper Classes
+        3.4 Nav List Classes
+        3.5 Nav Item Classes
+        3.6 Nav Link Classes
+        3.7 Counter Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Layout horizontal, Spacing, Alignment
+        --------------------------#}
+      {% set containerClasses = "flex items-center justify-between gap-[var(--spacing-12)] w-full" %}
+
+      {# --------------------------
+          3.2 Select Wrapper Classes
+          Description: Layout
+        --------------------------#}
+      {% set selectWrapperClasses = "flex-shrink-0" %}
+
+      {# --------------------------
+          3.3 Nav Wrapper Classes
+          Description: Layout
+        --------------------------#}
+      {% set navWrapperClasses = "flex-1 flex justify-center" %}
+
+      {# --------------------------
+          3.4 Nav List Classes
+          Description: Layout horizontal, Spacing
+        --------------------------#}
+      {% set navListClasses = "flex items-center gap-[var(--spacing-0-5)]" %}
+
+      {# --------------------------
+          3.5 Nav Item Classes
+          Description: Layout
+        --------------------------#}
+      {% set navItemClasses = "" %}
+
+      {# --------------------------
+          3.6 Nav Link Classes
+          Description: Layout, Typography, Colors, Borders, States
+        --------------------------#}
+      {% set navLinkBaseClasses = "inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-6)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-neutral-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+
+      {# --------------------------
+          3.7 Counter Classes
+          Description: Typography, Colors
+        --------------------------#}
+      {% set counterClasses = "flex-shrink-0 typography-body-regular text-[var(--color-brand-primary-30)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
-        data-pagination-name="{{ paginationData.name }}"
+        class="{{ containerClasses }}"
+        data-pagination-name="{{ paginationName }}"
         data-pagination-type="pagination"
       >
         {# Items per page selector (if selectName provided) #}
-        {% if paginationData.selectName and options.selectDatas %}
-          <div data-pagination-selector="true">
+        {% if selectName and options.selectDatas %}
+          <div
+            class="{{ selectWrapperClasses }}"
+            data-pagination-selector="true"
+          >
             {{ renderSelect({
-                name: paginationData.selectName,
+                name: selectName,
                 datas: options.selectDatas
             }) }}
           </div>
         {% endif %}
 
         {# Navigation #}
-        {% if paginationData.pages %}
+        {% if pages and pages | length > 0 %}
           <nav
+            class="{{ navWrapperClasses }}"
             role="navigation"
             aria-label="Pagination"
             data-pagination-nav="true"
           >
-            <ul>
-              {% for page in paginationData.pages %}
-                <li>
-                  {# Icon button (first, prev, next, last) #}
+            <ul class="{{ navListClasses }}">
+              {% for page in pages %}
+                <li class="{{ navItemClasses }}">
+                  {# Icon button (first, prev, next, last) or page number #}
                   {% if page.iconName %}
-                    <a
-                      href="{{ page.url | default('#') }}"
+
+                    <a href="{{ page.url | default('#') }}"
+                      class="{{ navLinkBaseClasses }}"
                       data-pagination-link="true"
                       data-pagination-action="{{ page.action }}"
                       aria-label="{{ page.ariaLabel | default('Navigate') }}"
@@ -89,11 +171,10 @@
                           datas: options.iconDatas
                       }) }}
                     </a>
-
-                  {# Page number #}
                   {% else %}
-                    <a
-                      href="{{ page.url | default('#') }}"
+
+                    <a href="{{ page.url | default('#') }}"
+                      class="{{ navLinkBaseClasses }} {% if page.current %}{{ navLinkActiveClasses }}{% endif %}"
                       data-pagination-link="true"
                       {% if page.current %}data-pagination-current="true" aria-current="page"{% endif %}
                       rel="nofollow"
@@ -107,17 +188,20 @@
           </nav>
         {% endif %}
 
-        {# Items counter (if totalItems provided) #}
-        {% if options.totalItems and options.currentPage and options.itemsPerPage %}
-          {% set firstItem = (options.currentPage - 1) * options.itemsPerPage + 1 %}
-          {% set lastItem = options.currentPage * options.itemsPerPage %}
-          {% if lastItem > options.totalItems %}
-            {% set lastItem = options.totalItems %}
+        {# Items counter (if enabled and data provided) #}
+        {% if showCounter and totalItems > 0 and currentPage and itemsPerPage %}
+          {% set firstItem = (currentPage - 1) * itemsPerPage + 1 %}
+          {% set lastItem = currentPage * itemsPerPage %}
+          {% if lastItem > totalItems %}
+            {% set lastItem = totalItems %}
           {% endif %}
 
-          <div data-pagination-counter="true">
+          <div
+            class="{{ counterClasses }}"
+            data-pagination-counter="true"
+          >
             <span>
-              {{ firstItem }} - {{ lastItem }} of {{ options.totalItems }}
+              {{ firstItem }}-{{ lastItem }} of {{ totalItems }}
             </span>
           </div>
         {% endif %}

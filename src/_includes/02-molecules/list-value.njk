@@ -8,6 +8,7 @@
     - options.id (string): List value identifier
     - options.datas (array): List value configuration data
     - options.lockupDatas (array): Lockup molecule data
+    - options.variant (string): Override layout variant ("default" or "horizontal")
 
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/list-value.njk" import renderListValue %}
@@ -15,7 +16,14 @@
     {{ renderListValue({
         id: "demoList1",
         datas: molecules["list-value"].listValues,
-        lockupDatas: molecules.lockup.lockups
+        lockupDatas: molecules["lock-up"].lockUps
+    }) }}
+
+    {{ renderListValue({
+        id: "demoList1",
+        datas: molecules["list-value"].listValues,
+        lockupDatas: molecules["lock-up"].lockUps,
+        variant: "horizontal"
     }) }}
 
   @created 2025-01-15
@@ -24,7 +32,10 @@
 {% from "02-molecules/lock-up.njk" import renderLockup %}
 
 {% macro renderListValue(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.id %}
@@ -33,16 +44,57 @@
     {# Find list value using universal filter #}
     {% set listData = options.datas | findByName(options.id) %}
 
-    {# Render or error #}
+    {# Render list value or error message #}
     {% if not listData %}
       <span class="error" role="alert">List value not found: {{ options.id }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set listId = listData.id | default(options.id) %}
+      {% set variant = options.variant | default(listData.variant) | default('default') %}
+      {% set items = listData.items | default([]) %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 Item Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Layout by variant, Spacing
+        --------------------------#}
+      {% set containerClasses = "" %}
+
+      {% if variant == 'horizontal' %}
+        {% set containerClasses = "flex flex-row gap-[var(--spacing-8)]" %}
+      {% else %}
+        {% set containerClasses = "flex flex-col gap-[var(--spacing-4)]" %}
+      {% endif %}
+
+      {# --------------------------
+          3.2 Item Classes
+          Description: Layout
+        --------------------------#}
+      {% set itemClasses = "" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
-        data-list-value-id="{{ listData.id }}"
+        class="{{ containerClasses }}"
+        data-list-value-id="{{ listId }}"
         data-list-value-type="list-value"
+        data-list-value-variant="{{ variant }}"
       >
-        {% for item in listData.items %}
-          <div data-list-value-item="true">
+        {% for item in items %}
+          <div
+            class="{{ itemClasses }}"
+            data-list-value-item="true"
+          >
             {# Render lockup #}
             {{ renderLockup({
                 name: item.lockupName,

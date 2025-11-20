@@ -277,6 +277,21 @@ permalink: "/"
         datas: molecules.disclaimer.disclaimers,
         iconDatas: atoms.icon.icons
     }) }}
+    {{ renderDisclaimer({
+        name: "demoDiscla2",
+        datas: molecules.disclaimer.disclaimers,
+        iconDatas: atoms.icon.icons
+    }) }}
+    {{ renderDisclaimer({
+        name: "demoDiscla3",
+        datas: molecules.disclaimer.disclaimers,
+        iconDatas: atoms.icon.icons
+    }) }}
+    {{ renderDisclaimer({
+        name: "demoDiscla4",
+        datas: molecules.disclaimer.disclaimers,
+        iconDatas: atoms.icon.icons
+    }) }}
   </section>
 
 {# List Content #}
@@ -285,18 +300,33 @@ permalink: "/"
     {{ renderListContent({
         id: "demoList1",
         datas: molecules["list-content"].listContents,
-        lockupDatas: molecules["lock-up"].lockUps
+        lockupDatas: molecules["lock-up"].lockUps,
+        imageDatas: atoms.image.images,
+        headingDatas: atoms.heading.headings,
+        iconDatas: atoms.icon.icons
     }) }}
   </section>
 
-  {# List Control #}
+{# List Control #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Control</h2>
-    {{ renderListControl({
-        id: "demoList1",
-        datas: molecules["list-control"].listControls,
-        radioDatas: atoms["radio-button"].radioButtons
-    }) }}
+    <div class="flex gap-[var(--spacing-8)]">
+      {{ renderListControl({
+          id: "demoList1",
+          datas: molecules["list-control"].listControls,
+          radioDatas: atoms["radio-button"].radioButtons
+      }) }}
+      {{ renderListControl({
+          id: "demoList2",
+          datas: molecules["list-control"].listControls,
+          checkboxDatas: atoms.checkbox.checkboxes
+      }) }}
+      {{ renderListControl({
+          id: "demoList3",
+          datas: molecules["list-control"].listControls,
+          toggleDatas: atoms.toggle.toggles
+      }) }}
+    </div>
   </section>
 
   {# List Form #}
@@ -312,10 +342,17 @@ permalink: "/"
   {# List Group #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Group</h2>
-    {{ renderListGroup({
-        id: "demoGroup1",
+    <div style="display: flex; gap: 1rem;">
+      {{ renderListGroup({
+          id: "demoGroup1",
+          datas: molecules["list-group"].listGroups,
+          iconDatas: atoms.icon.icons
+      }) }}
+      {{ renderListGroup({
+        id: "demoGroup3",
         datas: molecules["list-group"].listGroups,
-        iconDatas: atoms.icon.icons
+        iconDatas: atoms.icon.icons,
+        linkDatas: atoms.link.links
     }) }}
   </section>
 
@@ -355,7 +392,7 @@ permalink: "/"
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Pagination</h2>
     {{ renderPagination({
-        name: "demoPager1",
+        name: "demoPreview",
         datas: molecules.pagination.paginations,
         selectDatas: atoms.select.selects,
         buttonDatas: atoms.button.buttons,
@@ -371,7 +408,7 @@ permalink: "/"
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Panel</h2>
     {{ renderPanel({
-        name: "demoPanel1",
+        name: "demoPanel4",
         datas: molecules.panel.panels,
         checkboxDatas: atoms.checkbox.checkboxes,
         iconDatas: atoms.icon.icons

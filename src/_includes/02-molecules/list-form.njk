@@ -24,7 +24,10 @@
 {% from "01-atoms/input.njk" import renderInput %}
 
 {% macro renderListForm(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.id %}
@@ -33,16 +36,50 @@
     {# Find list form using universal filter #}
     {% set listFormData = options.datas | findByName(options.id) %}
 
-    {# Render or error #}
+    {# Render list form or error message #}
     {% if not listFormData %}
       <span class="error" role="alert">List form not found: {{ options.id }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set listId = listFormData.id | default(options.id) %}
+      {% set listType = listFormData.type | default('input-list') %}
+      {% set items = listFormData.items | default([]) %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 Item Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Layout vertical, Spacing
+        --------------------------#}
+      {% set containerClasses = "flex flex-col gap-[var(--spacing-6)]" %}
+
+      {# --------------------------
+          3.2 Item Classes
+          Description: Layout
+        --------------------------#}
+      {% set itemClasses = "w-full" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
-        data-list-form-id="{{ listFormData.id }}"
-        data-list-form-type="{{ listFormData.type }}"
+        class="{{ containerClasses }}"
+        data-list-form-id="{{ listId }}"
+        data-list-form-type="{{ listType }}"
       >
-        {% for item in listFormData.items %}
-          <div data-list-form-item="{{ item.order }}">
+        {% for item in items %}
+          <div
+            class="{{ itemClasses }}"
+            data-list-form-item="{{ item.order }}"
+          >
             {# Render input #}
             {{ renderInput({
                 name: item.inputName,

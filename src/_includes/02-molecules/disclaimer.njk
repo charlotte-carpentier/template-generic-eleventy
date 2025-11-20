@@ -24,7 +24,10 @@
 {% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderDisclaimer(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -33,54 +36,137 @@
     {# Find disclaimer using universal filter #}
     {% set disclaimerData = options.datas | findByName(options.name) %}
 
-    {# Render or error #}
+    {# Render disclaimer or error message #}
     {% if not disclaimerData %}
       <span class="error" role="alert">Disclaimer not found: {{ options.name }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set variant = disclaimerData.variant | default('info') %}
+      {% set message = disclaimerData.message | default('') %}
+      {% set iconName = disclaimerData.iconName | default('') %}
+      {% set closeIconName = disclaimerData.closeIconName | default('') %}
+      {% set dismissLabel = disclaimerData.dismissLabel | default('Dismiss alert') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 Content Wrapper Classes
+        3.3 Icon Wrapper Classes
+        3.4 Message Classes
+        3.5 Close Button Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Layout, Background, Borders by variant
+        --------------------------#}
+      {% set containerBaseClasses = "flex flex-col w-full rounded-[var(--radius-12)] border-2 p-[var(--spacing-4)]" %}
+
+      {% set containerVariantClasses = "" %}
+      {% if variant == 'info' %}
+        {% set containerVariantClasses = "bg-[var(--color-semantic-information-contrast-light-02)] border-[var(--color-semantic-information)]" %}
+      {% elif variant == 'success' %}
+        {% set containerVariantClasses = "bg-[var(--color-semantic-success-contrast-light-02)] border-[var(--color-semantic-success)]" %}
+      {% elif variant == 'warning' %}
+        {% set containerVariantClasses = "bg-[var(--color-semantic-warning-contrast-light-02)] border-[var(--color-semantic-warning)]" %}
+      {% elif variant == 'error' %}
+        {% set containerVariantClasses = "bg-[var(--color-semantic-critical-contrast-light-02)] border-[var(--color-semantic-critical)]" %}
+      {% endif %}
+
+      {% set containerClasses = containerBaseClasses ~ " " ~ containerVariantClasses %}
+
+      {# --------------------------
+          3.2 Content Wrapper Classes
+          Description: Layout horizontal, Spacing, Alignment
+        --------------------------#}
+      {% set contentWrapperClasses = "flex items-center gap-[var(--spacing-2)]" %}
+
+      {# --------------------------
+          3.3 Icon Wrapper Classes
+          Description: Layout, Colors by variant
+        --------------------------#}
+      {% set iconWrapperBaseClasses = "flex-shrink-0 inline-flex items-center" %}
+
+      {% set iconColorClasses = "" %}
+      {% if variant == 'info' %}
+        {% set iconColorClasses = "text-[var(--color-semantic-information)]" %}
+      {% elif variant == 'success' %}
+        {% set iconColorClasses = "text-[var(--color-semantic-success)]" %}
+      {% elif variant == 'warning' %}
+        {% set iconColorClasses = "text-[var(--color-semantic-warning)]" %}
+      {% elif variant == 'error' %}
+        {% set iconColorClasses = "text-[var(--color-semantic-critical)]" %}
+      {% endif %}
+
+      {% set iconWrapperClasses = iconWrapperBaseClasses ~ " " ~ iconColorClasses %}
+
+      {# --------------------------
+          3.4 Message Classes
+          Description: Typography, Colors, Layout
+        --------------------------#}
+      {% set messageClasses = "typography-body-regular text-[var(--color-global-default)] flex-1" %}
+
+      {# --------------------------
+          3.5 Close Button Classes
+          Description: Layout, Colors, States, Spacing
+        --------------------------#}
+      {% set closeButtonClasses = "flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-10)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
+        class="{{ containerClasses }}"
         data-disclaimer-name="{{ disclaimerData.name }}"
         data-disclaimer-type="disclaimer"
-        data-disclaimer-variant="{{ disclaimerData.variant }}"
+        data-disclaimer-variant="{{ variant }}"
         role="alert"
         aria-live="polite"
       >
-        <div data-disclaimer-content="true">
+        <div
+          class="{{ contentWrapperClasses }}"
+          data-disclaimer-content="true"
+        >
           {# Icon (if present) #}
-          {% if disclaimerData.iconName and options.iconDatas %}
-            <div data-disclaimer-icon="true">
+          {% if iconName and options.iconDatas %}
+            <div
+              class="{{ iconWrapperClasses }}"
+              data-disclaimer-icon="true"
+            >
               {{ renderIcon({
-                  name: disclaimerData.iconName,
+                  name: iconName,
                   datas: options.iconDatas
               }) }}
             </div>
           {% endif %}
 
           {# Message #}
-          <span data-disclaimer-message="true">
-            {{ disclaimerData.message }}
+          <span
+            class="{{ messageClasses }}"
+            data-disclaimer-message="true"
+          >
+            {{ message }}
           </span>
 
           {# Close button (if present) #}
-          {% if disclaimerData.closeIconName and options.iconDatas %}
+          {% if closeIconName and options.iconDatas %}
             <button
               type="button"
+              class="{{ closeButtonClasses }}"
               data-disclaimer-dismiss="true"
-              aria-label="{{ disclaimerData.dismissLabel | default('Dismiss alert') }}"
+              aria-label="{{ dismissLabel }}"
             >
               {{ renderIcon({
-                  name: disclaimerData.closeIconName,
+                  name: closeIconName,
                   datas: options.iconDatas
               }) }}
             </button>
           {% endif %}
         </div>
-
-        {# Action button label (for future Phase 4 if needed) #}
-        {% if disclaimerData.actionLabel %}
-          <div data-disclaimer-action="true" aria-hidden="true">
-            {{ disclaimerData.actionLabel }}
-          </div>
-        {% endif %}
       </div>
     {% endif %}
   {% endif %}

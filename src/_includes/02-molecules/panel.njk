@@ -27,7 +27,10 @@
 {% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderPanel(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -36,134 +39,322 @@
     {# Find panel using universal filter #}
     {% set panelData = options.datas | findByName(options.name) %}
 
-    {# Render or error #}
+    {# Render panel or error message #}
     {% if not panelData %}
       <span class="error" role="alert">Panel not found: {{ options.name }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set panelName = panelData.name | default(options.name) %}
+      {% set panelType = panelData.type | default('default') %}
+      {% set variant = panelData.variant | default('simple') %}
+      {% set items = panelData.items | default([]) %}
+      {% set dateRange = panelData.dateRange | default({}) %}
+      {% set navigation = panelData.navigation | default({}) %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 Item Classes (default/list-item)
+        3.3 Icon Wrapper Classes
+        3.4 Text Classes
+        3.5 Code Classes (phone variant)
+        3.6 Date Navigation Classes
+        3.7 Calendar Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Layout, Background, Borders, Shadow
+        --------------------------#}
+      {% set containerClasses = "flex flex-col bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-8)] shadow-md p-[var(--spacing-2)]" %}
+
+      {# --------------------------
+          3.2 Item Classes (default/list-item)
+          Description: Layout horizontal, Spacing, States
+        --------------------------#}
+      {% set itemClasses = "flex items-center gap-[var(--spacing-3)] px-[var(--spacing-3)] py-[var(--spacing-2)] rounded-[var(--radius-4)] transition-colors cursor-pointer hover:[&>span]:text-[var(--color-global-accent)] hover:[&_svg]:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] disabled:bg-[var(--color-global-contrast-light-04)] disabled:text-[var(--color-global-contrast-light-02)] disabled:cursor-not-allowed" %}
+
+      {# --------------------------
+          3.3 Icon Wrapper Classes
+          Description: Layout, Size
+        --------------------------#}
+      {% set iconWrapperClasses = "flex-shrink-0 inline-flex items-center w-6 h-6" %}
+
+      {# --------------------------
+          3.4 Text Classes
+          Description: Typography, Layout
+        --------------------------#}
+      {% set textClasses = "typography-body-regular text-[var(--color-global-default)] flex-1" %}
+
+      {# --------------------------
+          3.5 Code Classes (phone variant)
+          Description: Typography, Colors
+        --------------------------#}
+      {% set codeClasses = "typography-body-small text-[var(--color-global-contrast-light-01)] ml-auto" %}
+
+      {# --------------------------
+          3.6 Date Navigation Classes
+          Description: Layout horizontal, Spacing, Alignment
+        --------------------------#}
+      {% set dateNavClasses = "flex items-center justify-between px-[var(--spacing-4)] py-[var(--spacing-3)] border-b border-[var(--color-global-contrast-light-03)]" %}
+      {% set dateNavButtonClasses = "inline-flex items-center justify-center w-8 h-8 text-[var(--color-form-control-checked)] bg-transparent border-0 rounded-[var(--radius-4)] cursor-pointer transition-colors hover:bg-[var(--color-global-contrast-light-04)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]" %}
+      {% set dateMonthClasses = "typography-body-semibold text-[var(--color-global-default)]" %}
+
+      {# --------------------------
+          3.7 Calendar Classes
+          Description: Calendar grid layout
+        --------------------------#}
+      {% set calendarClasses = "p-[var(--spacing-4)]" %}
+      {% set calendarHeaderClasses = "grid grid-cols-7 gap-1 mb-2" %}
+      {% set calendarDayHeaderClasses = "text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2" %}
+      {% set calendarGridClasses = "grid grid-cols-7 gap-1" %}
+      {% set calendarDateClasses = "flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-4)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]" %}
+      {% set calendarDateSelectedClasses = "bg-[var(--color-form-control-checked)] text-[var(--color-global-white)] hover:bg-[var(--color-form-control-checked)] hover:text-[var(--color-global-white)]" %}
+      {% set calendarDateOutsideClasses = "flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-4)] cursor-default" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
-        data-panel-name="{{ panelData.name }}"
-        data-panel-type="{{ panelData.type }}"
-        role="dialog"
-        aria-label="Panel {{ panelData.name }}"
+        class="{{ containerClasses }}"
+        data-panel-name="{{ panelName }}"
+        data-panel-type="{{ panelType }}"
+        data-panel-variant="{{ variant }}"
+        role="listbox"
+        aria-label="Panel {{ panelName }}"
       >
         {# Default type panels #}
-        {% if panelData.type == "default" %}
-          {% for variant in panelData.variants %}
-            <div data-panel-variant="{{ variant.name }}">
-              {% for item in variant.items %}
-                <div data-panel-item="true">
-                  {# Checkbox variant #}
-                  {% if item.checkboxName and options.checkboxDatas %}
-                    {{ renderCheckbox({
-                        id: item.checkboxName,
-                        datas: options.checkboxDatas
-                    }) }}
-                    <span>{{ item.text }}</span>
+        {% if panelType == "default" %}
+          {% for item in items %}
+            <div
+              class="{{ itemClasses }}"
+              data-panel-item="true"
+              role="option"
+              tabindex="0"
+            >
+              {# Checkbox variant - checkbox gère son propre label #}
+              {% if item.checkboxName and options.checkboxDatas %}
+                {{ renderCheckbox({
+                    id: item.checkboxName,
+                    datas: options.checkboxDatas
+                }) }}
 
-                  {# Icon variant #}
-                  {% elif item.iconName and options.iconDatas %}
-                    {{ renderIcon({
-                        name: item.iconName,
-                        datas: options.iconDatas
-                    }) }}
-                    <span>{{ item.text }}</span>
-                    {% if item.code %}
-                      <span data-panel-code="true">{{ item.code }}</span>
-                    {% endif %}
-
-                  {# Simple text variant #}
-                  {% else %}
-                    <span>{{ item.text }}</span>
-                  {% endif %}
+              {# Icon variant #}
+              {% elif item.iconName and options.iconDatas %}
+                <div class="{{ iconWrapperClasses }}">
+                  {{ renderIcon({
+                      name: item.iconName,
+                      datas: options.iconDatas
+                  }) }}
                 </div>
-              {% endfor %}
+                <span class="{{ textClasses }}">{{ item.text }}</span>
+                {% if item.code %}
+                  <span
+                    class="{{ codeClasses }}"
+                    data-panel-code="true"
+                  >
+                    {{ item.code }}
+                  </span>
+                {% endif %}
+
+              {# Simple text variant #}
+              {% else %}
+                <span class="{{ textClasses }}">{{ item.text }}</span>
+              {% endif %}
             </div>
           {% endfor %}
 
         {# Date type panels #}
-        {% elif panelData.type == "date" %}
-          {% for variant in panelData.variants %}
-            <div data-panel-variant="{{ variant.name }}">
-              {# Navigation #}
-              {% if variant.navigation %}
-                <div data-panel-nav="true">
-                  <button
-                    type="button"
-                    data-panel-nav-prev="true"
-                    aria-label="Previous month"
-                  >
-                    {{ renderIcon({
-                        name: variant.navigation.prevIcon,
-                        datas: options.iconDatas
-                    }) }}
-                  </button>
+        {% elif panelType == "date" %}
+          {# Navigation #}
+          {% if navigation %}
+            <div class="{{ dateNavClasses }}" data-panel-nav="true">
+              <button
+                type="button"
+                class="{{ dateNavButtonClasses }}"
+                data-panel-nav-prev="true"
+                aria-label="Previous month"
+              >
+                {{ renderIcon({
+                    name: navigation.prevIcon,
+                    datas: options.iconDatas
+                }) }}
+              </button>
 
-                  {# Month display #}
-                  {% if variant.dateRange.month %}
-                    <span data-panel-month="true">{{ variant.dateRange.month }}</span>
-                  {% elif variant.dateRange.startMonth %}
-                    <span data-panel-month="true">{{ variant.dateRange.startMonth }}</span>
-                    <span data-panel-month="true">{{ variant.dateRange.endMonth }}</span>
-                  {% endif %}
-
-                  <button
-                    type="button"
-                    data-panel-nav-next="true"
-                    aria-label="Next month"
-                  >
-                    {{ renderIcon({
-                        name: variant.navigation.nextIcon,
-                        datas: options.iconDatas
-                    }) }}
-                  </button>
-                </div>
-              {% endif %}
-
-              {# Calendar grid (placeholder for Phase 4) #}
-              <div data-panel-calendar="true">
-                {% if variant.dateRange.selectedDates %}
-                  {% for date in variant.dateRange.selectedDates %}
-                    <time
-                      datetime="{{ date }}"
-                      data-panel-date="{{ date }}"
-                      data-panel-selected="true"
-                    >
-                      {{ date }}
-                    </time>
-                  {% endfor %}
+              {# Month labels centered #}
+              <div class="flex gap-60 flex-1 justify-center">
+                {% if dateRange.month %}
+                  <span class="{{ dateMonthClasses }}" data-panel-month="true">
+                    {{ dateRange.month }}
+                  </span>
+                {% elif dateRange.startMonth %}
+                  <span class="{{ dateMonthClasses }}" data-panel-month="true">
+                    {{ dateRange.startMonth }}
+                  </span>
+                  <span class="{{ dateMonthClasses }}" data-panel-month="true">
+                    {{ dateRange.endMonth }}
+                  </span>
                 {% endif %}
               </div>
+
+              <button
+                type="button"
+                class="{{ dateNavButtonClasses }}"
+                data-panel-nav-next="true"
+                aria-label="Next month"
+              >
+                {{ renderIcon({
+                    name: navigation.nextIcon,
+                    datas: options.iconDatas
+                }) }}
+              </button>
             </div>
-          {% endfor %}
+          {% endif %}
+
+          {# Calendar grid(s) #}
+          <div class="{% if variant == 'double' %}flex gap-[var(--spacing-4)]{% endif %}">
+            {# First calendar - November 2025 #}
+            <div
+              class="{{ calendarClasses }}"
+              data-panel-calendar="true"
+            >
+              {# Days header #}
+              <div class="{{ calendarHeaderClasses }}">
+                <div class="{{ calendarDayHeaderClasses }}">SU</div>
+                <div class="{{ calendarDayHeaderClasses }}">MO</div>
+                <div class="{{ calendarDayHeaderClasses }}">TU</div>
+                <div class="{{ calendarDayHeaderClasses }}">WE</div>
+                <div class="{{ calendarDayHeaderClasses }}">TH</div>
+                <div class="{{ calendarDayHeaderClasses }}">FR</div>
+                <div class="{{ calendarDayHeaderClasses }}">SA</div>
+              </div>
+
+              {# Dates grid - November 2025 starts on Saturday #}
+              <div class="{{ calendarGridClasses }}">
+                {# Previous month days (October 26-31) #}
+                {% for day in range(26, 32) %}
+                  <button
+                    type="button"
+                    class="{{ calendarDateOutsideClasses }}"
+                    data-panel-date="prev-{{ day }}"
+                  >
+                    {{ day }}
+                  </button>
+                {% endfor %}
+
+                {# Current month days (November 1-30) #}
+                {% for day in range(1, 31) %}
+                  <button
+                    type="button"
+                    class="{{ calendarDateClasses }} {% if day == 27 %}{{ calendarDateSelectedClasses }}{% endif %}"
+                    data-panel-date="{{ day }}"
+                  >
+                    {{ day }}
+                  </button>
+                {% endfor %}
+
+                {# Next month days (December 1-6) to complete grid #}
+                {% for day in range(1, 7) %}
+                  <button
+                    type="button"
+                    class="{{ calendarDateOutsideClasses }}"
+                    data-panel-date="next-{{ day }}"
+                  >
+                    {{ day }}
+                  </button>
+                {% endfor %}
+              </div>
+            </div>
+
+            {# Second calendar - December 2025 (only for double variant) #}
+            {% if variant == 'double' %}
+              <div
+                class="{{ calendarClasses }}"
+                data-panel-calendar="true"
+              >
+                {# Days header #}
+                <div class="{{ calendarHeaderClasses }}">
+                  <div class="{{ calendarDayHeaderClasses }}">SU</div>
+                  <div class="{{ calendarDayHeaderClasses }}">MO</div>
+                  <div class="{{ calendarDayHeaderClasses }}">TU</div>
+                  <div class="{{ calendarDayHeaderClasses }}">WE</div>
+                  <div class="{{ calendarDayHeaderClasses }}">TH</div>
+                  <div class="{{ calendarDayHeaderClasses }}">FR</div>
+                  <div class="{{ calendarDayHeaderClasses }}">SA</div>
+                </div>
+
+                {# Dates grid - December 2025 starts on Monday #}
+                <div class="{{ calendarGridClasses }}">
+                  {# Previous month day (November 30) #}
+                  <button
+                    type="button"
+                    class="{{ calendarDateOutsideClasses }}"
+                    data-panel-date="prev-30"
+                  >
+                    30
+                  </button>
+
+                  {# Current month days (December 1-31) #}
+                  {% for day in range(1, 32) %}
+                    <button
+                      type="button"
+                      class="{{ calendarDateClasses }} {% if day == 5 %}{{ calendarDateSelectedClasses }}{% endif %}"
+                      data-panel-date="{{ day }}"
+                    >
+                      {{ day }}
+                    </button>
+                  {% endfor %}
+
+                  {# Next month days (January 1-3) to complete grid #}
+                  {% for day in range(1, 4) %}
+                    <button
+                      type="button"
+                      class="{{ calendarDateOutsideClasses }}"
+                      data-panel-date="next-{{ day }}"
+                    >
+                      {{ day }}
+                    </button>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+          </div>
 
         {# List-item type panels #}
-        {% elif panelData.type == "list-item" %}
-          {% for variant in panelData.variants %}
-            <div data-panel-variant="{{ variant.name }}">
-              {% for item in variant.items %}
-                <div data-panel-item="true" data-panel-item-type="{{ item.type }}">
-                  {# Checkbox type #}
-                  {% if item.type == "checkbox" and item.checkboxName and options.checkboxDatas %}
-                    {{ renderCheckbox({
-                        id: item.checkboxName,
-                        datas: options.checkboxDatas
-                    }) }}
-                    <span>{{ item.text }}</span>
+        {% elif panelType == "list-item" %}
+          {% for item in items %}
+            <div
+              class="{{ itemClasses }}"
+              data-panel-item="true"
+              data-panel-item-type="{{ item.type }}"
+              role="option"
+              tabindex="0"
+            >
+              {# Checkbox type - checkbox gère son propre label #}
+              {% if item.type == "checkbox" and item.checkboxName and options.checkboxDatas %}
+                {{ renderCheckbox({
+                    id: item.checkboxName,
+                    datas: options.checkboxDatas
+                }) }}
 
-                  {# Label-icon type #}
-                  {% elif item.type == "label-icon" and item.iconName and options.iconDatas %}
-                    {{ renderIcon({
-                        name: item.iconName,
-                        datas: options.iconDatas
-                    }) }}
-                    <span>{{ item.text }}</span>
-
-                  {# Simple label type #}
-                  {% elif item.type == "label" %}
-                    <span>{{ item.text }}</span>
-                  {% endif %}
+              {# Label-icon type #}
+              {% elif item.type == "label-icon" and item.iconName and options.iconDatas %}
+                <div class="{{ iconWrapperClasses }}">
+                  {{ renderIcon({
+                      name: item.iconName,
+                      datas: options.iconDatas
+                  }) }}
                 </div>
-              {% endfor %}
+                <span class="{{ textClasses }}">{{ item.text }}</span>
+
+              {# Simple label type #}
+              {% elif item.type == "label" %}
+                <span class="{{ textClasses }}">{{ item.text }}</span>
+              {% endif %}
             </div>
           {% endfor %}
         {% endif %}

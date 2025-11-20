@@ -1,13 +1,11 @@
 {
   "// Component": "Pagination - Page navigation with items per page and total count",
-  
   "_meta": {
     "component": "pagination",
     "type": "molecule",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "paginations": [
     {
       "name": "demoPager1",
@@ -20,7 +18,83 @@
         "icons": {
           "first": "demoBack1",
           "prev": "demoLeft1",
-          "dots": "demoDots1", 
+          "dots": "demoDots1",
+          "next": "demoRight1",
+          "last": "demoForward1"
+        }
+      },
+      "totalCount": {
+        "show": true
+      }
+    },
+    {
+      "name": "demoPreview",
+      "itemsPerPage": {
+        "selectName": "demoSelect1"
+      },
+      "pages": [
+        {
+          "iconName": "demoBack1",
+          "action": "first",
+          "url": "#",
+          "ariaLabel": "First page"
+        },
+        {
+          "iconName": "demoLeft1",
+          "action": "prev",
+          "url": "#",
+          "ariaLabel": "Previous page"
+        },
+        {
+          "label": "1",
+          "url": "#",
+          "current": true
+        },
+        {
+          "label": "2",
+          "url": "#"
+        },
+        {
+          "label": "3",
+          "url": "#"
+        },
+        {
+          "label": "4",
+          "url": "#"
+        },
+        {
+          "label": "5",
+          "url": "#"
+        },
+        {
+          "label": "6",
+          "url": "#"
+        },
+        {
+          "iconName": "demoDots1",
+          "action": "dots",
+          "ariaLabel": "More pages"
+        },
+        {
+          "iconName": "demoRight1",
+          "action": "next",
+          "url": "#",
+          "ariaLabel": "Next page"
+        },
+        {
+          "iconName": "demoForward1",
+          "action": "last",
+          "url": "#",
+          "ariaLabel": "Last page"
+        }
+      ],
+      "navigationPager": {
+        "name": "demoNavPager1",
+        "siblingCount": 2,
+        "icons": {
+          "first": "demoBack1",
+          "prev": "demoLeft1",
+          "dots": "demoDots1",
           "next": "demoRight1",
           "last": "demoForward1"
         }

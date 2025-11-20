@@ -1,13 +1,11 @@
 {
   "// Component": "Disclaimer - Alert messages with semantic variants and actions",
-  
   "_meta": {
     "component": "disclaimer",
     "type": "molecule",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "disclaimers": [
     {
       "name": "demoDiscla1",
@@ -15,7 +13,6 @@
       "variant": "info",
       "iconName": "demoInfo1",
       "closeIconName": "demoClose1",
-      "actionLabel": "Action button text",
       "dismissLabel": "Dismiss button text"
     },
     {
@@ -24,7 +21,6 @@
       "variant": "success",
       "iconName": "demoCheck1",
       "closeIconName": "demoClose1",
-      "actionLabel": "Action button text", 
       "dismissLabel": "Dismiss button text"
     },
     {
@@ -33,7 +29,6 @@
       "variant": "warning",
       "iconName": "demoWarn1",
       "closeIconName": "demoClose1",
-      "actionLabel": "Action button text",
       "dismissLabel": "Dismiss button text"
     },
     {
@@ -42,7 +37,6 @@
       "variant": "error",
       "iconName": "demoWarnCir1",
       "closeIconName": "demoClose1",
-      "actionLabel": "Action button text",
       "dismissLabel": "Dismiss button text"
     }
   ]
