@@ -24,7 +24,10 @@
 {% from "01-atoms/chip-notification.njk" import renderChipNotification %}
 
 {% macro renderStepper(options) %}
-  {# Validate required props #}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.id %}
@@ -33,51 +36,194 @@
     {# Find stepper using universal filter #}
     {% set stepperData = options.datas | findByName(options.id) %}
 
-    {# Render or error #}
+    {# Render stepper or error message #}
     {% if not stepperData %}
       <span class="error" role="alert">Stepper not found: {{ options.id }}</span>
     {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set stepperId = stepperData.id | default(options.id) %}
+      {% set variant = stepperData.variant | default('default') %}
+      {% set items = stepperData.items | default([]) %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Container Classes
+        3.2 List Classes
+        3.3 Connector Classes
+        3.4 Block Step Classes
+        3.5 Chip Wrapper Classes
+        3.6 Chip Override Classes (by status)
+        3.7 Number Fallback Classes
+        3.8 Label Classes (by status)
+        3.9 Vertical Wrapper Classes
+        3.10 Chip Column Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Container Classes
+          Description: Base container
+        --------------------------#}
+      {% set containerClasses = "" %}
+
+      {# --------------------------
+          3.2 List Classes
+          Description: Layout by variant
+        --------------------------#}
+      {% if variant == 'vertical' %}
+        {% set listClasses = "flex flex-col gap-[var(--spacing-1)]" %}
+      {% else %}
+        {% set listClasses = "flex flex-row items-center gap-[var(--spacing-2)]" %}
+      {% endif %}
+
+      {# --------------------------
+          3.3 Connector Classes
+          Description: Line between steps
+        --------------------------#}
+      {% if variant == 'vertical' %}
+        {% set connectorClasses = "mt-[var(--spacing-2)] w-px h-[var(--spacing-6)] bg-[var(--color-global-contrast-light-02)]" %}
+      {% else %}
+        {% set connectorClasses = "flex-shrink-0 h-px w-[var(--spacing-12)] bg-[var(--color-global-contrast-light-02)]" %}
+      {% endif %}
+
+      {# --------------------------
+          3.4 Block Step Classes
+          Description: Layout horizontal (chip + label)
+        --------------------------#}
+      {% set blockStepClasses = "flex items-center gap-[var(--spacing-3)]" %}
+
+      {# --------------------------
+          3.5 Chip Wrapper Classes
+          Description: Wrapper for chip
+        --------------------------#}
+      {% set chipWrapperClasses = "flex-shrink-0" %}
+
+      {# --------------------------
+          3.6 Chip Override Classes (by status)
+          Description: Color overrides for chip based on step status
+        --------------------------#}
+      {% set chipOverrideActive = "[&_span]:bg-[var(--color-button-primary)]" %}
+      {% set chipOverrideUpcoming = "[&_span]:text-[var(--color-global-contrast-light-02)] [&_span]:bg-[var(--color-global-contrast-light-04)]" %}
+      {% set chipOverrideDone = "[&_span]:bg-[var(--color-semantic-success)]" %}
+
+      {# --------------------------
+          3.7 Number Fallback Classes
+          Description: Fallback number when no chip
+        --------------------------#}
+      {% set numberFallbackClasses = "flex items-center justify-center w-8 h-8 typography-body-semibold text-[var(--color-global-default)] bg-[var(--color-global-contrast-light-03)] rounded-full" %}
+
+      {# --------------------------
+          3.8 Label Classes (by status)
+          Description: Typography, Colors by status
+        --------------------------#}
+      {% set labelActiveClasses = "typography-body-regular text-[var(--color-global-default)]" %}
+      {% set labelUpcomingClasses = "typography-body-regular text-[var(--color-global-contrast-light-02)]" %}
+      {% set labelDoneClasses = "typography-body-regular text-[var(--color-semantic-success)]" %}
+
+      {# --------------------------
+          3.9 Vertical Wrapper Classes
+          Description: Wrapper for vertical layout (chip column + label)
+        --------------------------#}
+      {% set verticalWrapperClasses = "flex gap-[var(--spacing-3)]" %}
+
+      {# --------------------------
+          3.10 Chip Column Classes
+          Description: Column for chip + connector in vertical layout
+        --------------------------#}
+      {% set chipColumnClasses = "flex flex-col items-center flex-shrink-0" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
-        data-stepper-id="{{ stepperData.id }}"
+        class="{{ containerClasses }}"
+        data-stepper-id="{{ stepperId }}"
         data-stepper-type="stepper"
+        data-stepper-variant="{{ variant }}"
         role="navigation"
         aria-label="Progress stepper"
       >
-        {# Variants wrapper #}
-        {% for variant in stepperData.variants %}
-          <div data-stepper-variant="{{ variant }}">
-            {# Steps list #}
-            <ol data-stepper-list="true">
-              {% for item in stepperData.items %}
-                <li
-                  data-stepper-item="true"
-                  data-stepper-status="{{ item.status }}"
-                  data-stepper-index="{{ loop.index }}"
-                >
-                  {# Chip indicator #}
-                  {% if item.chipName and options.chipDatas %}
+        {# Steps list #}
+        <div
+          class="{{ listClasses }}"
+          data-stepper-list="true"
+        >
+          {% for item in items %}
+            {# Compute item values #}
+            {% set status = item.status | default('upcoming') %}
+            {% set label = item.label | default('') %}
+            {% set chipName = item.chipName | default('') %}
+
+            {# Select classes based on status #}
+            {% set chipOverride = chipOverrideUpcoming %}
+            {% set labelClasses = labelUpcomingClasses %}
+            {% if status == 'active' %}
+              {% set chipOverride = chipOverrideActive %}
+              {% set labelClasses = labelActiveClasses %}
+            {% elif status == 'done' %}
+              {% set chipOverride = chipOverrideDone %}
+              {% set labelClasses = labelDoneClasses %}
+            {% endif %}
+
+            {# VERTICAL LAYOUT #}
+            {% if variant == 'vertical' %}
+              <div
+                class="{{ verticalWrapperClasses }}"
+                data-block-step="true"
+                data-block-step-status="{{ status }}"
+                data-block-step-index="{{ loop.index }}"
+              >
+                {# Chip column #}
+                <div class="{{ chipColumnClasses }}">
+                  <div class="{{ chipWrapperClasses }} {{ chipOverride }}">
                     {{ renderChipNotification({
-                        name: item.chipName,
+                        name: chipName,
                         datas: options.chipDatas
                     }) }}
-                  {% else %}
-                    <span data-stepper-number="true">{{ loop.index }}</span>
-                  {% endif %}
-
-                  {# Step label #}
-                  <span data-stepper-label="true">
-                    {{ item.label }}
-                  </span>
-
-                  {# Connector line (except last item) #}
+                  </div>
                   {% if not loop.last %}
-                    <div data-stepper-connector="true"></div>
+                    <div class="{{ connectorClasses }}" data-stepper-connector="true"></div>
                   {% endif %}
-                </li>
-              {% endfor %}
-            </ol>
-          </div>
-        {% endfor %}
+                </div>
+                {# Label #}
+                <span
+                  class="{{ labelClasses }}"
+                  data-block-step-label="true"
+                >
+                  {{ label }}
+                </span>
+              </div>
+
+            {# HORIZONTAL LAYOUT #}
+            {% else %}
+              <div
+                class="{{ blockStepClasses }}"
+                data-block-step="true"
+                data-block-step-status="{{ status }}"
+                data-block-step-index="{{ loop.index }}"
+              >
+                <div class="{{ chipWrapperClasses }} {{ chipOverride }}">
+                  {{ renderChipNotification({
+                      name: chipName,
+                      datas: options.chipDatas
+                  }) }}
+                </div>
+                <span
+                  class="{{ labelClasses }}"
+                  data-block-step-label="true"
+                >
+                  {{ label }}
+                </span>
+              </div>
+              {% if not loop.last %}
+                <div class="{{ connectorClasses }}" data-stepper-connector="true"></div>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
     {% endif %}
   {% endif %}

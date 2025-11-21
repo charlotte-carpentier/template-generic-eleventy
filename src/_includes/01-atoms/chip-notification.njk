@@ -41,6 +41,7 @@
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set chipVariant = chipData.variant | default('default') %}
+      {% set chipContent = chipData.content | default('') %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
@@ -78,7 +79,7 @@
         {% if chipData.variant %}data-chip-notification-variant="{{ chipData.variant }}"{% endif %}
         {% if chipData.ariaLabel %}aria-label="{{ chipData.ariaLabel }}"{% endif %}
       >
-        {# Content will be injected dynamically via JavaScript #}
+        {{ chipContent }}
       </span>
     {% endif %}
   {% endif %}
