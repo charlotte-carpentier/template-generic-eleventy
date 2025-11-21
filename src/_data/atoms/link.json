@@ -1,13 +1,11 @@
 {
   "// Component": "Link - Hyperlinks with variants and accessibility support",
-  
   "_meta": {
     "component": "link",
     "type": "atom",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "links": [
     {
       "name": "demoLink1",
@@ -22,10 +20,22 @@
       "ariaLabel": ""
     },
     {
+      "name": "demoLink2",
+      "href": "#",
+      "text": "Label",
+      "variant": "small",
+      "iconName": "",
+      "target": "_self",
+      "rel": "",
+      "download": false,
+      "onclick": "",
+      "ariaLabel": ""
+    },
+    {
       "name": "demoLinkTab",
       "href": "#",
       "text": "Label",
-      "variant": "tab",
+      "variant": "default",
       "iconName": "",
       "target": "_self",
       "rel": "",
@@ -37,7 +47,7 @@
       "name": "demoLinkM1",
       "href": "#",
       "text": "Label",
-      "variant": "menu-link",
+      "variant": "default",
       "iconName": "",
       "target": "_self",
       "rel": "",
@@ -48,8 +58,8 @@
     {
       "name": "demoFacebook",
       "href": "https://facebook.com",
-      "text": "facebook",
-      "variant": "social",
+      "text": "Facebook",
+      "variant": "default",
       "iconName": "demoIconFB",
       "target": "_blank",
       "rel": "noopener noreferrer",
@@ -61,7 +71,7 @@
       "name": "demoLinkedin",
       "href": "https://linkedin.com",
       "text": "LinkedIn",
-      "variant": "social",
+      "variant": "default",
       "iconName": "demoIconLI",
       "target": "_blank",
       "rel": "noopener noreferrer",
@@ -72,8 +82,8 @@
     {
       "name": "demoTwitter",
       "href": "https://twitter.com",
-      "text": "twitter",
-      "variant": "social",
+      "text": "Twitter",
+      "variant": "default",
       "iconName": "demoIconTW",
       "target": "_blank",
       "rel": "noopener noreferrer",
@@ -85,7 +95,7 @@
       "name": "demoInstagram",
       "href": "https://instagram.com",
       "text": "Instagram",
-      "variant": "social",
+      "variant": "default",
       "iconName": "demoIconIG",
       "target": "_blank",
       "rel": "noopener noreferrer",
@@ -97,7 +107,7 @@
       "name": "demoAccess1",
       "href": "/accessibilite",
       "text": "Accessibilité",
-      "variant": "footer",
+      "variant": "small",
       "iconName": "",
       "target": "_self",
       "rel": "",
@@ -109,7 +119,7 @@
       "name": "demoWebsite1",
       "href": "https://hat.com",
       "text": "Website by hat",
-      "variant": "footer",
+      "variant": "small",
       "iconName": "",
       "target": "_blank",
       "rel": "noopener noreferrer",

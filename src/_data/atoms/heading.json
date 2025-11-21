@@ -58,8 +58,8 @@
     {
       "name": "demoSocial1",
       "text": "Socials",
-      "tag": "h6",
-      "variant": "sans"
+      "tag": "h5",
+      "variant": "serif"
     },
     {
       "name": "demoListT1",

@@ -25,35 +25,89 @@
   {# Import sub-component #}
   {% from "01-atoms/link.njk" import renderLink %}
 
-  {# Validate required props #}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
     <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Find tab bar using universal filter - DRY principle, performance optimized #}
+    {# Find tab bar using universal filter #}
     {% set tabBarData = options.datas | findByName(options.name) %}
 
     {# Render tab bar or error message #}
     {% if not tabBarData %}
       <span class="error" role="alert">Tab bar not found: {{ options.name }}</span>
     {% else %}
-      {# Render nav element - WCAG 2.2 AA ARIA Tabs pattern #}
-      {# Source: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/ #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set tabBarName = tabBarData.name | default(options.name) %}
+      {% set items = tabBarData.items | default([]) %}
+      {% set ariaLabel = tabBarData.ariaLabel | default('Navigation tabs') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Nav Container Classes
+        3.2 List Classes
+        3.3 List Item Classes
+        3.4 Link Override Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Nav Container Classes
+          Description: Layout
+        --------------------------#}
+      {% set navClasses = "flex" %}
+
+      {# --------------------------
+          3.2 List Classes
+          Description: Layout horizontal, Spacing
+        --------------------------#}
+      {% set listClasses = "flex gap-[var(--spacing-6)]" %}
+
+      {# --------------------------
+          3.3 List Item Classes
+          Description: Layout
+        --------------------------#}
+      {% set listItemClasses = "flex" %}
+
+      {# --------------------------
+          3.4 Link Override Classes
+          Description: Colors, States, Pseudo-elements for tabs
+        --------------------------#}
+
+      {% set linkBaseClasses = "[&_a]:relative [&_a]:px-[var(--spacing-2)] [&_a]:py-[var(--spacing-2)] [&_a]:pb-[var(--spacing-2)] [&_a]:typography-body-regular [&_a]:text-[var(--color-global-default)] [&_a]:no-underline [&_a]:transition-colors" %}
+
+      {% set linkHoverClasses = "[&_a:hover]:text-[var(--color-global-contrast-light-01)] [&_a:hover]:after:content-['•'] [&_a:hover]:after:absolute [&_a:hover]:after:bottom-0 [&_a:hover]:after:translate-y-[8px] [&_a:hover]:after:left-1/2 [&_a:hover]:after:-translate-x-1/2" %}
+
+      {% set linkFocusClasses = "[&_a:focus]:outline [&_a:focus]:outline-2 [&_a:focus]:outline-[var(--color-semantic-information-focus)] [&_a:focus]:rounded-[var(--radius-input)]" %}
+
+      {% set linkActiveClasses = "[&_a[aria-selected='true']]:text-[var(--color-global-contrast-light-02)] [&_a[aria-selected='true']]:cursor-not-allowed [&_a[aria-selected='true']]:pointer-events-none [&_a[aria-selected='true']]:after:content-[''] [&_a[aria-selected='true']]:after:absolute [&_a[aria-selected='true']]:after:bottom-[calc(var(--spacing-0-5))] [&_a[aria-selected='true']]:after:left-1/2 [&_a[aria-selected='true']]:after:-translate-x-1/2 [&_a[aria-selected='true']]:after:h-1 [&_a[aria-selected='true']]:after:w-4 [&_a[aria-selected='true']]:after:bg-[var(--color-global-contrast-light-02)] [&_a[aria-selected='true']]:after:rounded-[var(--radius-input)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <nav
+        class="{{ navClasses }}"
         role="tablist"
-        aria-label="{{ tabBarData.ariaLabel }}"
-        data-tabbar-name="{{ tabBarData.name }}"
+        aria-label="{{ ariaLabel }}"
+        data-tabbar-name="{{ tabBarName }}"
         data-tabbar-type="tab-bar"
       >
-        <ul data-tabbar-list>
-          {% for item in tabBarData.items %}
+        <ul
+          class="{{ listClasses }} {{ linkBaseClasses }} {{ linkHoverClasses }} {{ linkFocusClasses }} {{ linkActiveClasses }}"
+          data-tabbar-list
+        >
+          {% for item in items %}
             <li
+              class="{{ listItemClasses }}"
               role="presentation"
               data-tabbar-item
             >
-              {# Tab link with ARIA role and active state #}
-              {# WCAG: aria-selected indicates current tab #}
               {{ renderLink({
                   name: item.linkName,
                   datas: options.linkDatas,

@@ -5,12 +5,13 @@
 
 {#
   Props:
-    - options.name (string): Footer identifier
-    - options.datas (array): Footer configuration data
-    - options.headingDatas (array): Heading atom data
-    - options.linkDatas (array): Link atom data
-    - options.vectorDatas (array): Vector atom data
-    - options.navSecondaryDatas (array): Navigation secondary organism data
+      - options.name (string): Footer identifier
+      - options.datas (array): Footer configuration data
+      - options.headingDatas (array): Heading atom data
+      - options.linkDatas (array): Link atom data
+      - options.vectorDatas (array): Vector atom data
+      - options.navSecondaryDatas (array): Navigation secondary organism data
+      - options.iconDatas (array): Icon atom data (optional, required if links have icons)
 
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/footer.njk" import renderFooter %}
@@ -34,7 +35,9 @@
   {% from "01-atoms/vector.njk" import renderVector %}
   {% from "03-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
 
-  {# Validate required props #}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -47,26 +50,127 @@
     {% if not footerData %}
       <span class="error" role="alert">Footer not found: {{ options.name }}</span>
     {% else %}
-      {# Render footer element #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set footerName = footerData.name | default(options.name) %}
+      {% set vectorName = footerData.vectorName | default('') %}
+      {% set items = footerData.items | default([]) %}
+      {% set copyright = footerData.copyright | default({}) %}
+      {% set copyrightText = copyright.text | default('') %}
+      {% set copyrightVersion = copyright.version | default('') %}
+      {% set copyrightLinks = copyright.links | default([]) %}
+      {% set ariaLabel = footerData.ariaLabel | default('Site footer') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Footer Container Classes
+        3.2 Branding Section Classes
+        3.3 Navigation Section Classes
+        3.4 Column Classes
+        3.5 Legal Section Classes
+        3.6 Legal Nav Classes
+        3.7 Copyright/Version Wrapper Classes
+        3.8 Copyright Classes
+        3.9 Version Classes
+        3.10 Separator Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Footer Container Classes
+          Description: Layout, Spacing, Background, Responsive
+        --------------------------#}
+      {% set footerClasses = "flex flex-col gap-[var(--spacing-8)] p-[var(--spacing-6)] bg-[var(--color-global-contrast-light-04)] md:p-[var(--spacing-10)]" %}
+
+      {# --------------------------
+          3.2 Branding Section Classes
+          Description: Layout
+        --------------------------#}
+      {% set brandingClasses = "flex" %}
+
+      {# --------------------------
+          3.3 Navigation Section Classes
+          Description: Layout grid responsive, Gap
+        --------------------------#}
+      {% set navigationClasses = "grid grid-cols-1 gap-[var(--spacing-8)] md:grid-cols-2 lg:grid-cols-4" %}
+
+      {# --------------------------
+          3.4 Column Classes
+          Description: Layout, Spacing
+        --------------------------#}
+      {% set columnClasses = "flex flex-col gap-[var(--spacing-4)]" %}
+
+      {# --------------------------
+          3.5 Legal Section Classes
+          Description: Layout responsive, Spacing, Borders
+        --------------------------#}
+      {% set legalClasses = "flex flex-col gap-[var(--spacing-4)] pt-[var(--spacing-8)] md:flex-row md:items-center" %}
+
+      {# --------------------------
+          3.6 Legal Nav Classes
+          Description: Layout responsive, Spacing, Responsive order
+        --------------------------#}
+      {% set legalNavClasses = "flex order-first md:order-last" %}
+      {% set legalListClasses = "flex flex-col gap-[var(--spacing-2)] md:flex-row md:gap-[var(--spacing-4)]" %}
+
+      {# --------------------------
+          3.7 Copyright/Version Wrapper Classes
+          Description: Layout responsive, Spacing
+        --------------------------#}
+      {% set copyrightVersionWrapperClasses = "flex flex-wrap items-center gap-[var(--spacing-2)]" %}
+
+      {# --------------------------
+          3.8 Copyright Classes
+          Description: Typography, Colors
+        --------------------------#}
+      {% set copyrightClasses = "typography-body-small text-[var(--color-global-contrast-light-01)]" %}
+
+      {# --------------------------
+          3.9 Version Classes
+          Description: Typography, Colors, Responsive visibility
+        --------------------------#}
+      {% set versionClasses = "typography-body-small text-[var(--color-global-contrast-light-02)] hidden md:inline" %}
+
+      {# --------------------------
+          3.10 Separator Classes
+          Description: Typography, Colors, Responsive visibility
+        --------------------------#}
+      {% set separatorClasses = "typography-body-small text-[var(--color-global-contrast-light-02)] hidden md:inline" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <footer
+        class="{{ footerClasses }}"
         role="contentinfo"
-        aria-label="{{ footerData.ariaLabel }}"
-        data-footer-name="{{ footerData.name }}"
+        aria-label="{{ ariaLabel }}"
+        data-footer-name="{{ footerName }}"
         data-footer-type="footer"
       >
 
         {# Logo branding section #}
-        <div data-footer-section="branding">
+        <div
+          class="{{ brandingClasses }}"
+          data-footer-section="branding"
+        >
           {{ renderVector({
-              name: footerData.vectorName,
+              name: vectorName,
               datas: options.vectorDatas
           }) }}
         </div>
 
         {# Navigation columns section #}
-        <div data-footer-section="navigation">
-          {% for item in footerData.items %}
-            <div data-footer-column>
+        <div
+          class="{{ navigationClasses }}"
+          data-footer-section="navigation"
+        >
+          {% for item in items %}
+            <div
+              class="{{ columnClasses }}"
+              data-footer-column
+            >
 
               {# Column heading #}
               {{ renderHeading({
@@ -78,7 +182,8 @@
               {{ renderNavigationSecondary({
                   name: item.navSecondaryName,
                   datas: options.navSecondaryDatas,
-                  linkDatas: options.linkDatas
+                  linkDatas: options.linkDatas,
+                  iconDatas: options.iconDatas
               }) }}
 
             </div>
@@ -86,18 +191,18 @@
         </div>
 
         {# Copyright and legal section #}
-        <div data-footer-section="legal">
+        <div
+          class="{{ legalClasses }}"
+          data-footer-section="legal"
+        >
 
-          {# Copyright text - Direct text in semantic element (MDN best practice) #}
-          <p data-footer-copyright>&copy; {{ footerData.copyright.text }}</p>
-
-          {# Version info #}
-          <p data-footer-version>{{ footerData.copyright.version }}</p>
-
-          {# Legal links navigation - W3C Navigation Lists pattern #}
-          <nav aria-label="Legal links">
-            <ul>
-              {% for linkName in footerData.copyright.links %}
+          {# Legal links navigation - First on mobile, last on desktop #}
+          <nav
+            class="{{ legalNavClasses }}"
+            aria-label="Legal links"
+          >
+            <ul class="{{ legalListClasses }}">
+              {% for linkName in copyrightLinks %}
                 <li>
                   {{ renderLink({
                       name: linkName,
@@ -107,6 +212,44 @@
               {% endfor %}
             </ul>
           </nav>
+
+          {# Copyright and version wrapper #}
+          <div
+            class="{{ copyrightVersionWrapperClasses }}"
+            data-footer-info
+          >
+            {# Copyright text #}
+            <p
+              class="{{ copyrightClasses }}"
+              data-footer-copyright
+            >
+              {{ copyrightText }}
+            </p>
+
+            {# Separator (desktop only) #}
+            <span
+              class="{{ separatorClasses }}"
+              aria-hidden="true"
+            >
+              •
+            </span>
+
+            {# Version info (desktop only) #}
+            <p
+              class="{{ versionClasses }}"
+              data-footer-version
+            >
+              {{ copyrightVersion }}
+            </p>
+
+            {# Separator (desktop only) #}
+            <span
+              class="{{ separatorClasses }}"
+              aria-hidden="true"
+            >
+              •
+            </span>
+          </div>
 
         </div>
 

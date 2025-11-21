@@ -527,7 +527,8 @@ permalink: "/"
     {{ renderNavigationSecondary({
         name: "demoNavSec1",
         datas: organisms["navigation-secondary"].navSecondary,
-        linkDatas: atoms.link.links
+        linkDatas: atoms.link.links,
+        iconDatas: atoms.icon.icons
     }) }}
   </section>
 
@@ -599,15 +600,16 @@ permalink: "/"
 
   {# Modal #}
   <section style="border: 1px solid #ccc; padding: 1rem; min-width: 400px;">
-    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Modal (structure only)</h2>
-    <p style="font-size: 0.75rem; margin: 0;">Note: Modal requires JavaScript to show/hide</p>
-    <div style="position: relative; height: 200px; background: #f5f5f5; padding: 1rem;">
-      {{ renderModal({
-          name: "demoModal1",
-          datas: organisms.modal.modals,
-          headingDatas: atoms.heading.headings,
-          buttonDatas: atoms.button.buttons
-      }) }}
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Modal (preview)</h2>
+    <div style="position: relative; height: 300px; overflow: hidden;">
+      <div data-modal-demo>
+        {{ renderModal({
+            name: "demoModal1",
+            datas: organisms.modal.modals,
+            headingDatas: atoms.heading.headings,
+            buttonDatas: atoms.button.buttons
+        }) }}
+      </div>
     </div>
   </section>
 
@@ -664,7 +666,6 @@ permalink: "/"
   {# Header #}
   <section style="border: 1px solid #ccc; padding: 1rem; width: 100%;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Header</h2>
-    <p style="font-size: 0.75rem; margin: 0;">Note: Responsive desktop/mobile with burger menu</p>
     {{ renderHeader({
         name: "demoHeader1",
         datas: organisms.header.headers,
@@ -684,7 +685,8 @@ permalink: "/"
         headingDatas: atoms.heading.headings,
         linkDatas: atoms.link.links,
         vectorDatas: atoms.vector.vectors,
-        navSecondaryDatas: organisms["navigation-secondary"].navSecondary
+        navSecondaryDatas: organisms["navigation-secondary"].navSecondary,
+        iconDatas: atoms.icon.icons
     }) }}
   </section>
 </div>
