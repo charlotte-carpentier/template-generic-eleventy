@@ -30,39 +30,90 @@
   {% from "01-atoms/heading.njk" import renderHeading %}
   {% from "03-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
 
-  {# Validate required props #}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
     <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Find menu using universal filter - DRY principle, performance optimized #}
+    {# Find menu using universal filter #}
     {% set menuData = options.datas | findByName(options.name) %}
 
     {# Render menu or error message #}
     {% if not menuData %}
       <span class="error" role="alert">Menu not found: {{ options.name }}</span>
     {% else %}
-      {# Render nav element - Semantic HTML best practice #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set menuName = menuData.name | default(options.name) %}
+      {% set items = menuData.items | default([]) %}
+      {% set ariaLabel = menuData.ariaLabel | default('Navigation menu') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Nav Container Classes
+        3.2 Columns Container Classes
+        3.3 Column Classes
+        3.4 Link Override Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Nav Container Classes
+          Description: Layout, Spacing, Background
+        --------------------------#}
+      {% set navClasses = "flex p-[var(--spacing-12)] bg-[var(--color-global-white)]" %}
+
+      {# --------------------------
+          3.2 Columns Container Classes
+          Description: Layout grid responsive, Gap
+        --------------------------#}
+      {% set columnsClasses = "grid grid-cols-1 gap-y-[var(--spacing-12)] gap-x-[var(--spacing-12)] w-full md:grid-cols-2 lg:grid-cols-4" %}
+
+      {# --------------------------
+          3.3 Column Classes
+          Description: Layout, Spacing
+        --------------------------#}
+      {% set columnClasses = "flex flex-col gap-[var(--spacing-3)] px-[var(--spacing-6)]" %}
+
+      {# --------------------------
+          3.4 Link Override Classes
+          Description: Colors, States for links (remove bullet from nav-secondary)
+        --------------------------#}
+      {% set linkOverrideClasses = "[&_a]:text-[var(--color-global-default)] [&_a:hover]:text-[var(--color-global-contrast-light-01)] [&_a:hover]:before:content-none [&_a:focus]:text-[var(--color-global-contrast-light-01)] [&_a:focus]:underline [&_a[aria-current]]:text-[var(--color-global-contrast-light-03)] [&_a[aria-disabled='true']]:text-[var(--color-global-contrast-light-03)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <nav
-        aria-label="{{ menuData.ariaLabel }}"
-        data-menu-name="{{ menuData.name }}"
+        class="{{ navClasses }}"
+        aria-label="{{ ariaLabel }}"
+        data-menu-name="{{ menuName }}"
         data-menu-type="menu"
       >
 
         {# Menu items - Column layout pattern #}
-        <div data-menu-columns>
-          {% for item in menuData.items %}
-            <div data-menu-column>
+        <div
+          class="{{ columnsClasses }} {{ linkOverrideClasses }}"
+          data-menu-columns
+        >
+          {% for item in items %}
+            <div
+              class="{{ columnClasses }}"
+              data-menu-column
+            >
 
-              {# Column heading - DRY: Use renderHeading atom (not direct HTML) #}
-              {# Source: The Pragmatic Programmer - Don't Repeat Yourself principle #}
+              {# Column heading #}
               {{ renderHeading({
                   name: item.headingName,
                   datas: options.headingDatas
               }) }}
 
-              {# Column navigation - Navigation secondary organism #}
+              {# Column navigation #}
               {{ renderNavigationSecondary({
                   name: item.navSecondaryName,
                   datas: options.navSecondaryDatas,

@@ -1,39 +1,32 @@
 {
   "// Component": "Tab Bar - Navigation tab bars with active state management",
-  
   "_meta": {
     "component": "tab-bar",
     "type": "organism",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "tabBars": [
     {
       "name": "demoTabBar1",
       "items": [
         {
-          "name": "demoTab1",
           "linkName": "demoLinkTab",
           "active": true
         },
         {
-          "name": "demoTab2", 
           "linkName": "demoLinkTab",
           "active": false
         },
         {
-          "name": "demoTab3",
           "linkName": "demoLinkTab",
           "active": false
         },
         {
-          "name": "demoTab4",
           "linkName": "demoLinkTab",
           "active": false
         },
         {
-          "name": "demoTab5",
           "linkName": "demoLinkTab",
           "active": false
         }
@@ -44,17 +37,14 @@
       "name": "demoTabBar2",
       "items": [
         {
-          "name": "demoTabH1",
           "linkName": "demoLinkTab",
           "active": false
         },
         {
-          "name": "demoTabH2",
           "linkName": "demoLinkTab",
           "active": false
         },
         {
-          "name": "demoTabH3",
           "linkName": "demoLinkTab",
           "active": false
         }

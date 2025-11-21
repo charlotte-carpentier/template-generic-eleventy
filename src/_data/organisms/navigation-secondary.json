@@ -1,58 +1,42 @@
 {
   "// Component": "Navigation Secondary - Secondary navigation menus for footer, social, and menu",
-  
   "_meta": {
     "component": "navigation-secondary",
     "type": "organism",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "navSecondary": [
     {
       "name": "demoNavSec1",
       "items": [
         {
-          "name": "demoNavS1",
           "linkName": "demoLink1",
-          "active": true,
-          "disabled": false
+          "active": true
         },
         {
-          "name": "demoNavS2",
           "linkName": "demoLink1",
-          "active": false,
-          "disabled": false
+          "active": false
         },
         {
-          "name": "demoNavS3",
           "linkName": "demoLink1",
-          "active": false,
-          "disabled": false
+          "active": false
         },
         {
-          "name": "demoNavS4",
           "linkName": "demoLink1",
-          "active": false,
-          "disabled": false
+          "active": false
         },
         {
-          "name": "demoNavS5",
           "linkName": "demoLink1",
-          "active": false,
-          "disabled": false
+          "active": false
         },
         {
-          "name": "demoNavS6",
           "linkName": "demoLink1",
-          "active": false,
-          "disabled": false
+          "active": false
         },
         {
-          "name": "demoNavS7",
           "linkName": "demoLink1",
-          "active": false,
-          "disabled": false
+          "active": false
         }
       ],
       "ariaLabel": "Secondary navigation menu"
@@ -61,28 +45,20 @@
       "name": "demoNavSec2",
       "items": [
         {
-          "name": "demoNavF1",
-          "linkName": "demoLink1",
-          "active": false,
-          "disabled": false
+          "linkName": "demoLink2",
+          "active": false
         },
         {
-          "name": "demoNavF2",
-          "linkName": "demoLink1",
-          "active": false,
-          "disabled": false
+          "linkName": "demoLink2",
+          "active": false
         },
         {
-          "name": "demoNavF3",
-          "linkName": "demoLink1",
-          "active": false,
-          "disabled": false
+          "linkName": "demoLink2",
+          "active": false
         },
         {
-          "name": "demoNavF4",
-          "linkName": "demoLink1",
-          "active": false,
-          "disabled": false
+          "linkName": "demoLink2",
+          "active": false
         }
       ],
       "ariaLabel": "Footer navigation"
@@ -91,28 +67,20 @@
       "name": "demoNavSocial",
       "items": [
         {
-          "name": "demoSocFB",
           "linkName": "demoFacebook",
-          "active": false,
-          "disabled": false
+          "active": false
         },
         {
-          "name": "demoSocLI",
           "linkName": "demoLinkedin",
-          "active": false,
-          "disabled": false
+          "active": false
         },
         {
-          "name": "demoSocTW",
           "linkName": "demoTwitter",
-          "active": false,
-          "disabled": false
+          "active": false
         },
         {
-          "name": "demoSocIG",
           "linkName": "demoInstagram",
-          "active": false,
-          "disabled": false
+          "active": false
         }
       ],
       "ariaLabel": "Social media links"
@@ -121,40 +89,28 @@
       "name": "demoNavMenu1",
       "items": [
         {
-          "name": "demoMenuL1",
           "linkName": "demoLinkM1",
-          "active": false,
-          "disabled": false
+          "active": false
         },
         {
-          "name": "demoMenuL2",
           "linkName": "demoLinkM1",
-          "active": false,
-          "disabled": false
+          "active": false
         },
         {
-          "name": "demoMenuL3",
           "linkName": "demoLinkM1",
-          "active": false,
-          "disabled": false
+          "active": false
         },
         {
-          "name": "demoMenuL4",
           "linkName": "demoLinkM1",
-          "active": false,
-          "disabled": false
+          "active": false
         },
         {
-          "name": "demoMenuL5",
           "linkName": "demoLinkM1",
-          "active": false,
-          "disabled": false
+          "active": false
         },
         {
-          "name": "demoMenuL6",
           "linkName": "demoLinkM1",
-          "active": false,
-          "disabled": false
+          "active": false
         }
       ],
       "ariaLabel": "Menu navigation"

@@ -33,48 +33,176 @@
   {% from "01-atoms/icon.njk" import renderIcon %}
   {% from "03-organisms/tab-bar.njk" import renderTabBar %}
 
-  {# Validate required props #}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
     <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Find header using universal filter - Performance: O(n/2) average with early return #}
+    {# Find header using universal filter #}
     {% set headerData = options.datas | findByName(options.name) %}
 
     {# Render header or error message #}
     {% if not headerData %}
       <span class="error" role="alert">Header not found: {{ options.name }}</span>
     {% else %}
-      {# Render header element #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set headerName = headerData.name | default(options.name) %}
+      {% set desktopVectorName = headerData.desktop.vectorName | default('') %}
+      {% set desktopTabBarName = headerData.desktop.tabBarName | default('') %}
+      {% set mobileVectorName = headerData.mobile.vectorName | default('') %}
+      {% set burgerOpenIcon = headerData.mobile.burgerOpenIcon | default('') %}
+      {% set burgerCloseIcon = headerData.mobile.burgerCloseIcon | default('') %}
+      {% set hasOverlay = headerData.mobile.overlay | default(false) %}
+      {% set ariaLabel = headerData.ariaLabel | default('Site header') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Header Container Classes
+        3.2 Header Inner Container Classes
+        3.3 Desktop Branding Classes
+        3.4 Desktop Navigation Classes
+        3.5 Mobile Branding Header Classes
+        3.6 Burger Button Classes
+        3.7 Burger Icon Open Classes
+        3.8 Burger Icon Close Classes
+        3.9 Mobile Overlay Classes
+        3.10 Overlay Content Classes
+        3.11 Mobile Branding Overlay Classes
+        3.12 Mobile Navigation Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Header Container Classes
+          Description: Layout, Spacing, Background, Borders, Responsive
+        --------------------------#}
+      {% set headerClasses = "flex flex-col px-[var(--spacing-6)] py-[var(--spacing-4)] bg-[var(--color-global-white)] border-b border-[var(--color-global-contrast-light-03)] md:px-[var(--spacing-10)]" %}
+
+      {# --------------------------
+          3.2 Header Inner Container Classes
+          Description: Layout flex horizontal, Space-between, Alignment
+        --------------------------#}
+      {% set innerContainerClasses = "flex items-center justify-between w-full" %}
+
+      {# --------------------------
+          3.3 Desktop Branding Classes
+          Description: Layout, Responsive visibility (hidden on mobile)
+        --------------------------#}
+      {% set desktopBrandingClasses = "hidden md:flex" %}
+
+      {# --------------------------
+          3.4 Desktop Navigation Classes
+          Description: Layout, Responsive visibility (hidden on mobile)
+        --------------------------#}
+      {% set desktopNavClasses = "hidden md:flex" %}
+
+      {# --------------------------
+          3.5 Mobile Branding Header Classes
+          Description: Layout, Responsive visibility (visible on mobile only)
+        --------------------------#}
+      {% set mobileBrandingHeaderClasses = "flex md:hidden" %}
+
+      {# --------------------------
+          3.6 Burger Button Classes
+          Description: Layout, Spacing, States, Responsive visibility (hidden on desktop)
+        --------------------------#}
+      {% set burgerClasses = "flex items-center justify-center p-[var(--spacing-2)] bg-transparent border-none cursor-pointer transition-colors hover:bg-[var(--color-global-contrast-light-04)] focus:outline focus:outline-2 focus:outline-[var(--color-semantic-information-focus)] rounded-[var(--radius-input)] md:hidden" %}
+
+      {# --------------------------
+          3.7 Burger Icon Open Classes
+          Description: States visibility (visible by default, hidden when expanded)
+        --------------------------#}
+      {% set burgerOpenClasses = "flex" %}
+
+      {# --------------------------
+          3.8 Burger Icon Close Classes
+          Description: States visibility (hidden by default, visible when expanded)
+        --------------------------#}
+      {% set burgerCloseClasses = "hidden" %}
+
+      {# --------------------------
+          3.9 Mobile Overlay Classes
+          Description: Layout fixed fullscreen, Background, Z-index, States (hidden by default)
+        --------------------------#}
+      {% set overlayClasses = "hidden fixed inset-0 z-[var(--z-modal)] bg-[var(--color-global-white)] md:hidden" %}
+
+      {# --------------------------
+          3.10 Overlay Content Classes
+          Description: Layout, Spacing
+        --------------------------#}
+      {% set overlayContentClasses = "flex flex-col gap-[var(--spacing-8)] p-[var(--spacing-6)]" %}
+
+      {# --------------------------
+          3.11 Mobile Branding Overlay Classes
+          Description: Layout
+        --------------------------#}
+      {% set mobileBrandingOverlayClasses = "flex" %}
+
+      {# --------------------------
+          3.12 Mobile Navigation Classes
+          Description: Layout vertical override, Tab-bar override for vertical
+        --------------------------#}
+      {% set mobileNavClasses = "[&_ul]:flex-col [&_li]:w-full" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <header
+        class="{{ headerClasses }}"
         id="main-header"
-        aria-label="{{ headerData.ariaLabel }}"
-        data-header-name="{{ headerData.name }}"
+        aria-label="{{ ariaLabel }}"
+        data-header-name="{{ headerName }}"
         data-header-type="header"
       >
 
-        <div data-header-container>
+        <div
+          class="{{ innerContainerClasses }}"
+          data-header-container
+        >
 
           {# Desktop branding - Vector logo #}
-          <div data-header-section="desktop-branding">
+          <div
+            class="{{ desktopBrandingClasses }}"
+            data-header-section="desktop-branding"
+          >
             {{ renderVector({
-                name: headerData.desktop.vectorName,
+                name: desktopVectorName,
                 datas: options.vectorDatas
             }) }}
           </div>
 
           {# Desktop navigation - Tab bar #}
-          <div data-header-section="desktop-navigation">
+          <div
+            class="{{ desktopNavClasses }}"
+            data-header-section="desktop-navigation"
+          >
             {{ renderTabBar({
-                name: headerData.desktop.tabBarName,
+                name: desktopTabBarName,
                 datas: options.tabBarDatas,
                 linkDatas: options.linkDatas
             }) }}
           </div>
 
-          {# Mobile burger button - WCAG 2.2 AA compliant #}
+          {# Mobile branding - Vector logo (visible on mobile only) #}
+          <div
+            class="{{ mobileBrandingHeaderClasses }}"
+            data-header-section="mobile-branding"
+          >
+            {{ renderVector({
+                name: mobileVectorName,
+                datas: options.vectorDatas
+            }) }}
+          </div>
+
+          {# Mobile burger button #}
           <button
+            class="{{ burgerClasses }}"
             id="burger-toggle"
             type="button"
             aria-label="Toggle mobile menu"
@@ -83,17 +211,23 @@
             data-header-burger
           >
             {# Burger open icon #}
-            <span data-burger-icon="open">
+            <span
+              class="{{ burgerOpenClasses }}"
+              data-burger-icon="open"
+            >
               {{ renderIcon({
-                  name: headerData.mobile.burgerOpenIcon,
+                  name: burgerOpenIcon,
                   datas: options.iconDatas
               }) }}
             </span>
 
             {# Burger close icon #}
-            <span data-burger-icon="close">
+            <span
+              class="{{ burgerCloseClasses }}"
+              data-burger-icon="close"
+            >
               {{ renderIcon({
-                  name: headerData.mobile.burgerCloseIcon,
+                  name: burgerCloseIcon,
                   datas: options.iconDatas
               }) }}
             </span>
@@ -101,27 +235,37 @@
 
         </div>
 
-        {# Mobile overlay menu - Conditional render based on JSON config #}
-        {% if headerData.mobile.overlay %}
+        {# Mobile overlay menu #}
+        {% if hasOverlay %}
           <div
+            class="{{ overlayClasses }}"
             id="mobile-overlay"
             data-header-overlay
             aria-hidden="true"
           >
-            <div data-overlay-content>
+            <div
+              class="{{ overlayContentClasses }}"
+              data-overlay-content
+            >
 
               {# Mobile branding #}
-              <div data-overlay-section="branding">
+              <div
+                class="{{ mobileBrandingOverlayClasses }}"
+                data-overlay-section="branding"
+              >
                 {{ renderVector({
-                    name: headerData.mobile.vectorName,
+                    name: mobileVectorName,
                     datas: options.vectorDatas
                 }) }}
               </div>
 
-              {# Mobile navigation - Same tab bar data, different presentation #}
-              <div data-overlay-section="navigation">
+              {# Mobile navigation #}
+              <div
+                class="{{ mobileNavClasses }}"
+                data-overlay-section="navigation"
+              >
                 {{ renderTabBar({
-                    name: headerData.desktop.tabBarName,
+                    name: desktopTabBarName,
                     datas: options.tabBarDatas,
                     linkDatas: options.linkDatas
                 }) }}

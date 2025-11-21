@@ -1,29 +1,27 @@
 {
   "// Component": "Footer - Site footer with branding, navigation, and copyright",
-  
   "_meta": {
     "component": "footer",
     "type": "organism",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "footers": [
     {
       "name": "demoFooter1",
       "vectorName": "demoVector1",
       "items": [
         {
-          "headingName": "demoHead6",
-          "navSecondaryName": "demoNavSec1"
+          "headingName": "demoHead5",
+          "navSecondaryName": "demoNavSec2"
         },
         {
-          "headingName": "demoHead6",
-          "navSecondaryName": "demoNavSec1"
+          "headingName": "demoHead5",
+          "navSecondaryName": "demoNavSec2"
         },
         {
-          "headingName": "demoHead6",
-          "navSecondaryName": "demoNavSec1"
+          "headingName": "demoHead5",
+          "navSecondaryName": "demoNavSec2"
         },
         {
           "headingName": "demoSocial1",
@@ -33,7 +31,10 @@
       "copyright": {
         "text": "© 2025 Starter kit tous droits réservés",
         "version": "v1.0.0",
-        "links": ["demoAccess1", "demoWebsite1"]
+        "links": [
+          "demoAccess1",
+          "demoWebsite1"
+        ]
       },
       "ariaLabel": "Site footer"
     }

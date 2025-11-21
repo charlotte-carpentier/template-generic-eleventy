@@ -28,7 +28,9 @@
   {% from "01-atoms/heading.njk" import renderHeading %}
   {% from "01-atoms/button.njk" import renderButton %}
 
-  {# Validate required props #}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -41,64 +43,140 @@
     {% if not modalData %}
       <span class="error" role="alert">Modal not found: {{ options.name }}</span>
     {% else %}
-      {# Backdrop overlay - Optional based on JSON config #}
-      {% if modalData.backdrop %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set modalName = modalData.name | default(options.name) %}
+      {% set variant = modalData.variant | default('centered') %}
+      {% set headingName = modalData.headingName | default('') %}
+      {% set content = modalData.content | default('') %}
+      {% set primaryButton = modalData.primaryButton | default('') %}
+      {% set secondaryButton = modalData.secondaryButton | default('') %}
+      {% set hasBackdrop = modalData.backdrop | default(true) %}
+      {% set ariaLabel = modalData.ariaLabel | default('Modal dialog') %}
+      {% set ariaDescribedBy = modalData.ariaDescribedBy | default('') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Backdrop Classes
+        3.2 Modal Dialog Classes
+        3.3 Modal Container Classes
+        3.4 Modal Header Classes
+        3.5 Modal Content Classes
+        3.6 Modal Footer Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Backdrop Classes
+          Description: Layout fixed fullscreen, Background semi-transparent, Z-index, States
+        --------------------------#}
+      {% set backdropClasses = "hidden [div[data-modal-demo]_&]:block [div[data-modal-demo]_&]:absolute fixed inset-0 bg-black/50 z-[var(--z-modal-backdrop)]" %}
+
+      {# --------------------------
+          3.2 Modal Dialog Classes
+          Description: Layout fixed centered, Background, Shadow, Borders, Z-index, Sizing, States
+        --------------------------#}
+      {% set dialogClasses = "hidden [div[data-modal-demo]_&]:block [div[data-modal-demo]_&]:absolute fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-modal)] shadow-[var(--elevation-modal)] z-[var(--z-modal)] mx-[var(--spacing-4)]" %}
+
+      {# --------------------------
+          3.3 Modal Container Classes
+          Description: Layout, Spacing
+        --------------------------#}
+      {% set containerClasses = "flex flex-col p-[var(--spacing-6)]" %}
+
+      {# --------------------------
+          3.4 Modal Header Classes
+          Description: Layout, Spacing bottom
+        --------------------------#}
+      {% set headerClasses = "flex mb-[var(--spacing-4)]" %}
+
+      {# --------------------------
+          3.5 Modal Content Classes
+          Description: Typography, Colors, Spacing bottom
+        --------------------------#}
+      {% set contentClasses = "typography-body-regular text-[var(--color-global-default)] mb-[var(--spacing-6)]" %}
+
+      {# --------------------------
+          3.6 Modal Footer Classes
+          Description: Layout horizontal, Spacing
+        --------------------------#}
+      {% set footerClasses = "flex gap-[var(--spacing-4)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# Backdrop overlay #}
+      {% if hasBackdrop %}
         <div
+          class="{{ backdropClasses }}"
           data-modal-backdrop
           aria-hidden="true"
         ></div>
       {% endif %}
 
-      {# Modal dialog - WCAG 2.2 AA Dialog pattern #}
-      {# Source: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/ #}
+      {# Modal dialog #}
       <div
+        class="{{ dialogClasses }}"
         role="dialog"
         aria-modal="true"
-        aria-label="{{ modalData.ariaLabel }}"
-        {% if modalData.ariaDescribedBy %}aria-describedby="{{ modalData.ariaDescribedBy }}"{% endif %}
-        data-modal-name="{{ modalData.name }}"
+        aria-label="{{ ariaLabel }}"
+        {% if ariaDescribedBy %}aria-describedby="{{ ariaDescribedBy }}"{% endif %}
+        data-modal-name="{{ modalName }}"
         data-modal-type="modal"
-        data-modal-variant="{{ modalData.variant }}"
+        data-modal-variant="{{ variant }}"
       >
 
-        <div data-modal-container>
+        <div
+          class="{{ containerClasses }}"
+          data-modal-container
+        >
 
           {# Modal header with heading #}
-          {% if modalData.headingName %}
-            <div data-modal-header>
+          {% if headingName %}
+            <div
+              class="{{ headerClasses }}"
+              data-modal-header
+            >
               {{ renderHeading({
-                  name: modalData.headingName,
+                  name: headingName,
                   datas: options.headingDatas
               }) }}
             </div>
           {% endif %}
 
-          {# Modal content - Direct text from JSON #}
-          {% if modalData.content %}
+          {# Modal content #}
+          {% if content %}
             <div
+              class="{{ contentClasses }}"
               data-modal-content
-              {% if modalData.ariaDescribedBy %}id="{{ modalData.ariaDescribedBy }}"{% endif %}
+              {% if ariaDescribedBy %}id="{{ ariaDescribedBy }}"{% endif %}
             >
-              <p>{{ modalData.content }}</p>
+              <p>{{ content }}</p>
             </div>
           {% endif %}
 
           {# Modal footer with action buttons #}
-          {% if modalData.primaryButton or modalData.secondaryButton %}
-            <div data-modal-footer>
+          {% if primaryButton or secondaryButton %}
+            <div
+              class="{{ footerClasses }}"
+              data-modal-footer
+            >
 
-              {# Primary action button (e.g., "Continue") #}
-              {% if modalData.primaryButton %}
+              {# Primary action button #}
+              {% if primaryButton %}
                 {{ renderButton({
-                    name: modalData.primaryButton,
+                    name: primaryButton,
                     datas: options.buttonDatas
                 }) }}
               {% endif %}
 
-              {# Secondary action button (e.g., "Close") #}
-              {% if modalData.secondaryButton %}
+              {# Secondary action button #}
+              {% if secondaryButton %}
                 {{ renderButton({
-                    name: modalData.secondaryButton,
+                    name: secondaryButton,
                     datas: options.buttonDatas
                 }) }}
               {% endif %}
