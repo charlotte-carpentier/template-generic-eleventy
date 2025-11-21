@@ -1,23 +1,35 @@
 {
   "// Component": "Chip Notification - Notification chips with default and stepper variants",
-  
   "_meta": {
     "component": "chip-notification",
     "type": "atom",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "chipNotifs": [
     {
       "name": "demoChip1",
       "variant": "default",
-      "ariaLabel": "Aria label for accessibility"
+      "content": "5",
+      "ariaLabel": "5 notifications"
     },
     {
       "name": "demoStep1",
       "variant": "stepper",
-      "ariaLabel": "Step number"
+      "content": "01",
+      "ariaLabel": "Step 1"
+    },
+    {
+      "name": "demoStep2",
+      "variant": "stepper",
+      "content": "02",
+      "ariaLabel": "Step 2"
+    },
+    {
+      "name": "demoStep3",
+      "variant": "stepper",
+      "content": "03",
+      "ariaLabel": "Step 3"
     }
   ]
 }
