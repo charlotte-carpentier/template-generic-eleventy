@@ -572,7 +572,7 @@ permalink: "/"
         name: "demoSectH1",
         datas: organisms["section-hero"].sectHeroes,
         headingDatas: atoms.heading.headings,
-        lockupDatas: molecules["lock-up"].lockUps,
+        imageDatas: atoms.image.images,
         buttonDatas: atoms.button.buttons
     }) }}
   </section>
@@ -599,7 +599,7 @@ permalink: "/"
   </section>
 
   {# Modal #}
-  <section style="border: 1px solid #ccc; padding: 1rem; min-width: 400px;">
+  <section style="border: 1px solid #ccc; padding: 1rem; width: 100%;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Modal (preview)</h2>
     <div style="position: relative; height: 300px; overflow: hidden;">
       <div data-modal-demo>
@@ -639,27 +639,31 @@ permalink: "/"
   {# Section Listing #}
   <section style="border: 1px solid #ccc; padding: 1rem; width: 100%;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Section Listing</h2>
-    <p style="font-size: 0.75rem; margin: 0;">Note: Requires card molecule data with tags + pagination</p>
     {{ renderSectionListing({
         name: "demoSectL1",
         datas: organisms["section-listing"].sectListings,
         headingDatas: atoms.heading.headings,
         cardDatas: molecules.card.cards,
-        paginationDatas: molecules.pagination.paginations
+        paginationDatas: molecules.pagination.paginations,
+        selectDatas: atoms.select.selects,
+        buttonDatas: atoms.button.buttons,
+        iconDatas: atoms.icon.icons,
+        lockupDatas: molecules["lock-up"].lockUps,
+        imageDatas: atoms.image.images
     }) }}
   </section>
 
   {# Section Contact #}
   <section style="border: 1px solid #ccc; padding: 1rem; width: 100%;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Section Contact</h2>
-    <p style="font-size: 0.75rem; margin: 0;">Note: Two-column layout with form + nested section-about</p>
     {{ renderSectionContact({
         name: "demoSectC1",
         datas: organisms["section-contact"].sectContacts,
         formDatas: molecules["list-form"].listForms,
-        sectionAboutDatas: organisms["section-about"].sectAbouts,
+        sectionA11yDatas: organisms["section-accessibility"].sectionsA11y,
         buttonDatas: atoms.button.buttons,
-        headingDatas: atoms.heading.headings
+        headingDatas: atoms.heading.headings,
+        inputDatas: atoms.input.inputs
     }) }}
   </section>
 

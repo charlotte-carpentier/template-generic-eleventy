@@ -1,13 +1,11 @@
 {
   "// Component": "Section Contact - Contact section with form and content split layout",
-  
   "_meta": {
     "component": "section-contact",
     "type": "organism",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "sectContacts": [
     {
       "name": "demoSectC1",

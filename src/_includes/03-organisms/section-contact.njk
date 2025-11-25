@@ -7,10 +7,11 @@
   Props:
     - options.name (string): Section identifier
     - options.datas (array): Section configuration data
-    - options.formDatas (array): Form organism/molecule data
-    - options.sectionAboutDatas (array): Section about organism data
+    - options.formDatas (array): Form molecule data
+    - options.inputDatas (array): Input atom data
+    - options.sectionA11yDatas (array): Section accessibility organism data
+    - options.headingDatas (array): Heading atom data
     - options.buttonDatas (array): Button atom data
-    - options.headingDatas (array): Heading atom data (for nested section-about)
 
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/section-contact.njk" import renderSectionContact %}
@@ -18,10 +19,11 @@
     {{ renderSectionContact({
         name: "demoSectC1",
         datas: organisms["section-contact"].sectContacts,
-        formDatas: molecules["list-form"]["list-forms"],
-        sectionAboutDatas: organisms["section-about"].sectAbouts,
-        buttonDatas: atoms.button.buttons,
-        headingDatas: atoms.heading.headings
+        formDatas: molecules["list-form"].listForms,
+        inputDatas: atoms.input.inputs,
+        sectionA11yDatas: organisms["section-accessibility"].sectionsA11y,
+        headingDatas: atoms.heading.headings,
+        buttonDatas: atoms.button.buttons
     }) }}
 
   @created 2025-01-15
@@ -30,10 +32,12 @@
 {% macro renderSectionContact(options) %}
   {# Import sub-components #}
   {% from "02-molecules/list-form.njk" import renderListForm %}
-  {% from "03-organisms/section-about.njk" import renderSectionAbout %}
+  {% from "03-organisms/section-accessibility.njk" import renderSectionAccessibility %}
   {% from "01-atoms/button.njk" import renderButton %}
 
-  {# Validate required props #}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -46,46 +50,99 @@
     {% if not sectionData %}
       <span class="error" role="alert">Section not found: {{ options.name }}</span>
     {% else %}
-      {# Render section element - Two-column layout pattern #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set sectionName = sectionData.name | default(options.name) %}
+      {% set leftForm = sectionData.leftForm | default('') %}
+      {% set rightSection = sectionData.rightSection | default('') %}
+      {% set buttonName = sectionData.buttonName | default('') %}
+      {% set ariaLabel = sectionData.ariaLabel | default('Contact section') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Section Container Classes
+        3.2 Grid Container Classes
+        3.3 Left Column Classes
+        3.4 Right Column Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Section Container Classes
+          Description: Layout, Spacing, Background
+        --------------------------#}
+      {% set sectionClasses = "flex flex-col px-[var(--spacing-6)] py-[var(--spacing-8)] bg-[var(--color-global-white)] md:px-[var(--spacing-10)] md:py-[var(--spacing-12)]" %}
+
+      {# --------------------------
+          3.2 Grid Container Classes
+          Description: Layout responsive grid 2 columns, Spacing, Alignment top
+      --------------------------#}
+      {% set gridClasses = "flex flex-col gap-[var(--spacing-8)] md:grid md:grid-cols-2 md:gap-[var(--spacing-10)] md:items-start" %}
+
+      {# --------------------------
+          3.3 Left Column Classes
+          Description: Layout vertical, Spacing
+      --------------------------#}
+      {% set leftColClasses = "flex flex-col gap-[var(--spacing-4)]" %}
+
+      {# --------------------------
+          3.4 Right Column Classes
+          Description: Layout, Override nested section padding for alignment with left column
+      --------------------------#}
+      {% set rightColClasses = "flex [&_section]:p-0 [&_section]:bg-transparent [&_section]:items-start [&_section>div]:mx-0 [&_section>div]:max-w-none [&_section>div]:w-full" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <section
-        aria-label="{{ sectionData.ariaLabel }}"
-        data-section-name="{{ sectionData.name }}"
+        class="{{ sectionClasses }}"
+        aria-label="{{ ariaLabel }}"
+        data-section-name="{{ sectionName }}"
         data-section-type="section-contact"
       >
 
-        <div data-section-container>
+        <div
+          class="{{ gridClasses }}"
+          data-section-container
+        >
 
           {# Left column - Contact form #}
-          <div data-section-column="left">
+          <div
+            class="{{ leftColClasses }}"
+            data-section-column="left"
+          >
 
-            {% if sectionData.leftForm %}
-              {# Form with submit button #}
-              {% set submitButtonHtml %}
+            {% if leftForm %}
+              {{ renderListForm({
+                  id: leftForm,
+                  datas: options.formDatas,
+                  inputDatas: options.inputDatas
+              }) }}
+
+              <div class="self-start">
                 {{ renderButton({
-                    name: sectionData.buttonName,
+                    name: buttonName,
                     datas: options.buttonDatas,
                     type: "submit"
                 }) }}
-              {% endset %}
-
-              {{ renderListForm({
-                  name: sectionData.leftForm,
-                  datas: options.formDatas,
-                  submitButton: submitButtonHtml | safe
-              }) }}
+              </div>
             {% endif %}
 
           </div>
 
-          {# Right column - Nested section-about organism #}
-          <div data-section-column="right">
+          {# Right column - Nested section-accessibility organism #}
+          <div
+            class="{{ rightColClasses }}"
+            data-section-column="right"
+          >
 
-            {% if sectionData.rightSection %}
-              {{ renderSectionAbout({
-                  name: sectionData.rightSection,
-                  datas: options.sectionAboutDatas,
-                  headingDatas: options.headingDatas,
-                  buttonDatas: options.buttonDatas
+            {% if rightSection %}
+              {{ renderSectionAccessibility({
+                  name: rightSection,
+                  datas: options.sectionA11yDatas,
+                  headingDatas: options.headingDatas
               }) }}
             {% endif %}
 

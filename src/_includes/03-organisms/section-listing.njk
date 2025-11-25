@@ -9,7 +9,12 @@
     - options.datas (array): Section configuration data
     - options.headingDatas (array): Heading atom data
     - options.cardDatas (array): Card molecule data
+    - options.lockupDatas (array): Lockup molecule data (for cards)
+    - options.imageDatas (array): Image atom data (for cards)
+    - options.buttonDatas (array): Button atom data (for cards and pagination)
+    - options.iconDatas (array): Icon atom data (for cards and pagination)
     - options.paginationDatas (array): Pagination molecule data
+    - options.selectDatas (array): Select atom data (for pagination)
 
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/section-listing.njk" import renderSectionListing %}
@@ -19,7 +24,12 @@
         datas: organisms["section-listing"].sectListings,
         headingDatas: atoms.heading.headings,
         cardDatas: molecules.card.cards,
-        paginationDatas: molecules.pagination.paginations
+        lockupDatas: molecules["lock-up"].lockUps,
+        imageDatas: atoms.image.images,
+        buttonDatas: atoms.button.buttons,
+        iconDatas: atoms.icon.icons,
+        paginationDatas: molecules.pagination.paginations,
+        selectDatas: atoms.select.selects
     }) }}
 
   @created 2025-01-15
@@ -31,7 +41,9 @@
   {% from "02-molecules/card.njk" import renderCard %}
   {% from "02-molecules/pagination.njk" import renderPagination %}
 
-  {# Validate required props #}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -44,56 +56,133 @@
     {% if not sectionData %}
       <span class="error" role="alert">Section not found: {{ options.name }}</span>
     {% else %}
-      {# Render section element - Listing pattern with semantic HTML #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set sectionName = sectionData.name | default(options.name) %}
+      {% set headingName = sectionData.headingName | default('') %}
+      {% set cardTags = sectionData.cardTags | default([]) %}
+      {% set itemsPerPage = sectionData.itemsPerPage | default(8) %}
+      {% set paginationName = sectionData.paginationName | default('') %}
+      {% set ariaLabel = sectionData.ariaLabel | default('Listing section') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Section Container Classes
+        3.2 Content Container Classes
+        3.3 Heading Container Classes
+        3.4 Cards Grid Classes
+        3.5 Pagination Container Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Section Container Classes
+          Description: Layout, Spacing, Background
+        --------------------------#}
+      {% set sectionClasses = "flex flex-col px-[var(--spacing-6)] py-[var(--spacing-8)] bg-[var(--color-global-white)] md:px-[var(--spacing-10)] md:py-[var(--spacing-12)]" %}
+
+      {# --------------------------
+          3.2 Content Container Classes
+          Description: Layout vertical, Spacing between sections
+        --------------------------#}
+      {% set containerClasses = "flex flex-col gap-[var(--spacing-8)]" %}
+
+      {# --------------------------
+          3.3 Heading Container Classes
+          Description: Layout
+        --------------------------#}
+      {% set headingClasses = "flex" %}
+
+      {# --------------------------
+    3.4 Cards Grid Classes
+    Description: Layout responsive grid with breakpoints, Spacing, Override card width
+--------------------------#}
+{% set cardsGridClasses = "grid grid-cols-1 gap-[var(--spacing-6)] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-[var(--spacing-8)] [&>*]:w-full [&>*]:max-w-none" %}
+
+      {# --------------------------
+          3.5 Pagination Container Classes
+          Description: Layout, Alignment centered
+        --------------------------#}
+      {% set paginationClasses = "flex justify-center" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <section
-        aria-label="{{ sectionData.ariaLabel }}"
-        data-section-name="{{ sectionData.name }}"
+        class="{{ sectionClasses }}"
+        aria-label="{{ ariaLabel }}"
+        data-section-name="{{ sectionName }}"
         data-section-type="section-listing"
       >
 
-        <div data-section-container>
+        <div
+          class="{{ containerClasses }}"
+          data-section-container
+        >
 
           {# Section heading #}
-          {% if sectionData.headingName %}
-            <div data-section-heading>
+          {% if headingName %}
+            <div
+              class="{{ headingClasses }}"
+              data-section-heading
+            >
               {{ renderHeading({
-                  name: sectionData.headingName,
+                  name: headingName,
                   datas: options.headingDatas
               }) }}
             </div>
           {% endif %}
 
-          {# Cards grid - Filter by tags if specified #}
+          {# Cards grid - Filter by tags and repeat to fill itemsPerPage #}
           <div
+            class="{{ cardsGridClasses }}"
             data-section-cards
-            data-items-per-page="{{ sectionData.itemsPerPage }}"
+            data-items-per-page="{{ itemsPerPage }}"
           >
-            {% if sectionData.cardTags and options.cardDatas %}
-              {# Filter cards by tags - Loop through all cards and check tags #}
-              {% for card in options.cardDatas %}
-                {# Check if card has matching tags #}
-                {% if card.tags %}
-                  {% for tag in sectionData.cardTags %}
-                    {% if tag in card.tags %}
-                      <div data-card-item>
+            {% if cardTags and options.cardDatas %}
+              {% set displayedCards = 0 %}
+              {# Repeat loop to fill the grid with itemsPerPage cards #}
+              {% for n in range(0, 4) %}
+                {% for card in options.cardDatas %}
+                  {% if card.tags and displayedCards < itemsPerPage %}
+                    {% for tag in cardTags %}
+                      {% if tag in card.tags and displayedCards < itemsPerPage %}
                         {{ renderCard({
-                            name: card.name,
-                            datas: options.cardDatas
+                            name: card.id,
+                            datas: options.cardDatas,
+                            lockupDatas: options.lockupDatas,
+                            imageDatas: options.imageDatas,
+                            headingDatas: options.headingDatas,
+                            buttonDatas: options.buttonDatas,
+                            iconDatas: options.iconDatas
                         }) }}
-                      </div>
-                    {% endif %}
-                  {% endfor %}
-                {% endif %}
+                        {% set displayedCards = displayedCards + 1 %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
               {% endfor %}
             {% endif %}
           </div>
 
           {# Pagination - Optional #}
-          {% if sectionData.paginationName %}
-            <div data-section-pagination>
+          {% if paginationName %}
+            <div
+              class="{{ paginationClasses }}"
+              data-section-pagination
+            >
               {{ renderPagination({
-                  name: sectionData.paginationName,
-                  datas: options.paginationDatas
+                  name: paginationName,
+                  datas: options.paginationDatas,
+                  selectDatas: options.selectDatas,
+                  buttonDatas: options.buttonDatas,
+                  iconDatas: options.iconDatas,
+                  currentPage: 1,
+                  totalPages: 10,
+                  itemsPerPage: itemsPerPage,
+                  totalItems: 98
               }) }}
             </div>
           {% endif %}

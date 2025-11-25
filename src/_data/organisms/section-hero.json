@@ -1,18 +1,18 @@
 {
-  "// Component": "Section Hero - Hero section with lockup content and call-to-action buttons",
-  
+  "// Component": "Section Hero - Hero section with heading, content and call-to-action buttons",
   "_meta": {
     "component": "section-hero",
     "type": "organism",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "sectHeroes": [
     {
       "name": "demoSectH1",
+      "mainHeadingName": "demoLong1",
       "superHeadingName": "demoHead3",
-      "lockupName": "demoLock3",
+      "content": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
+      "imageName": "demoImage2",
       "primaryButtonName": "demoLabel1",
       "secondaryButtonName": "demoLabel2",
       "ariaLabel": "Hero section"

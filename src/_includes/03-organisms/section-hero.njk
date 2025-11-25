@@ -1,6 +1,6 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ORGANISM › Section Hero                                 │
-   │ Hero section with lockup and call-to-action buttons     │
+   │ Hero section with heading, content and call-to-action   │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
@@ -8,7 +8,7 @@
     - options.name (string): Section identifier
     - options.datas (array): Section configuration data
     - options.headingDatas (array): Heading atom data
-    - options.lockupDatas (array): Lockup molecule data
+    - options.imageDatas (array): Image atom data
     - options.buttonDatas (array): Button atom data
 
   Usage — Summon HAT Components Wisely:
@@ -18,7 +18,7 @@
         name: "demoSectH1",
         datas: organisms["section-hero"].sectHeroes,
         headingDatas: atoms.heading.headings,
-        lockupDatas: molecules["lock-up"].lockups,
+        imageDatas: atoms.image.images,
         buttonDatas: atoms.button.buttons
     }) }}
 
@@ -28,10 +28,12 @@
 {% macro renderSectionHero(options) %}
   {# Import sub-components #}
   {% from "01-atoms/heading.njk" import renderHeading %}
-  {% from "02-molecules/lock-up.njk" import renderLockup %}
+  {% from "01-atoms/image.njk" import renderImage %}
   {% from "01-atoms/button.njk" import renderButton %}
 
-  {# Validate required props #}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -44,57 +46,191 @@
     {% if not sectionData %}
       <span class="error" role="alert">Section not found: {{ options.name }}</span>
     {% else %}
-      {# Render section element - Hero pattern with semantic HTML #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set sectionName = sectionData.name | default(options.name) %}
+      {% set mainHeadingName = sectionData.mainHeadingName | default('') %}
+      {% set superHeadingName = sectionData.superHeadingName | default('') %}
+      {% set content = sectionData.content | default('') %}
+      {% set imageName = sectionData.imageName | default('') %}
+      {% set primaryButtonName = sectionData.primaryButtonName | default('') %}
+      {% set secondaryButtonName = sectionData.secondaryButtonName | default('') %}
+      {% set ariaLabel = sectionData.ariaLabel | default('Hero section') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Section Container Classes
+        3.2 Grid Container Classes
+        3.3 Left Column Classes
+        3.4 Right Column Classes
+        3.5 Main Heading Container Classes
+        3.6 Super Heading Container Classes
+        3.7 Content Container Classes
+        3.8 Buttons Container Classes
+        3.9 Image Container Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Section Container Classes
+          Description: Layout, Spacing, Background
+        --------------------------#}
+      {% set sectionClasses = "flex flex-col px-[var(--spacing-6)] py-[var(--spacing-8)] bg-[var(--color-global-white)] md:px-[var(--spacing-10)] md:py-[var(--spacing-12)]" %}
+
+      {# --------------------------
+          3.2 Grid Container Classes
+          Description: Layout responsive grid 2 columns, Spacing
+        --------------------------#}
+      {% set gridClasses = "flex flex-col gap-[var(--spacing-8)] md:grid md:grid-cols-2 md:gap-[var(--spacing-10)] md:items-start" %}
+
+      {# --------------------------
+          3.3 Left Column Classes
+          Description: Layout vertical, Spacing
+        --------------------------#}
+      {% set leftColClasses = "flex flex-col gap-[var(--spacing-4)]" %}
+
+      {# --------------------------
+          3.4 Right Column Classes
+          Description: Layout, Self-stretch, Offset top to align with main heading
+      --------------------------#}
+      {% set rightColClasses = "flex self-stretch md:mt-[calc(var(--spacing-4)+2rem)]" %}
+
+      {# --------------------------
+          3.5 Main Heading Container Classes
+          Description: Layout, Typography override serif
+      --------------------------#}
+      {% set mainHeadingClasses = "flex [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif" %}
+
+      {# --------------------------
+          3.6 Super Heading Container Classes
+          Description: Layout
+        --------------------------#}
+      {% set superHeadingClasses = "flex" %}
+
+      {# --------------------------
+          3.7 Content Container Classes
+          Description: Typography, Colors
+        --------------------------#}
+      {% set contentClasses = "typography-body-regular text-[var(--color-global-default)]" %}
+
+      {# --------------------------
+          3.8 Buttons Container Classes
+          Description: Layout horizontal, Spacing, Alignment centered mobile
+      --------------------------#}
+      {% set buttonsClasses = "flex gap-[var(--spacing-4)] justify-center md:justify-start" %}
+
+      {# --------------------------
+          3.9 Image Container Classes
+          Description: Layout full height, Image cover without deformation
+      --------------------------#}
+      {% set imageClasses = "flex h-full w-full overflow-hidden [&_img]:w-full [&_img]:h-full [&_img]:object-cover" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <section
-        aria-label="{{ sectionData.ariaLabel }}"
-        data-section-name="{{ sectionData.name }}"
+        class="{{ sectionClasses }}"
+        aria-label="{{ ariaLabel }}"
+        data-section-name="{{ sectionName }}"
         data-section-type="section-hero"
       >
 
-        <div data-section-container>
+        <div
+          class="{{ gridClasses }}"
+          data-section-container
+        >
 
-          {# Super heading - Optional secondary title #}
-          {% if sectionData.superHeadingName %}
-            <div data-section-super-heading>
-              {{ renderHeading({
-                  name: sectionData.superHeadingName,
-                  datas: options.headingDatas
-              }) }}
-            </div>
-          {% endif %}
+          {# Left column - Content #}
+          <div
+            class="{{ leftColClasses }}"
+            data-section-column="left"
+          >
 
-          {# Lockup - Key value proposition (label + value pair) #}
-          {% if sectionData.lockupName %}
-            <div data-section-lockup>
-              {{ renderLockup({
-                  name: sectionData.lockupName,
-                  datas: options.lockupDatas
-              }) }}
-            </div>
-          {% endif %}
-
-          {# Call-to-action buttons #}
-          {% if sectionData.primaryButtonName or sectionData.secondaryButtonName %}
-            <div data-section-buttons>
-
-              {# Primary button (e.g., "Get Started") #}
-              {% if sectionData.primaryButtonName %}
-                {{ renderButton({
-                    name: sectionData.primaryButtonName,
-                    datas: options.buttonDatas
+            {# Super heading #}
+            {% if superHeadingName %}
+              <div
+                class="{{ superHeadingClasses }}"
+                data-section-super-heading
+              >
+                {{ renderHeading({
+                    name: superHeadingName,
+                    datas: options.headingDatas
                 }) }}
-              {% endif %}
+              </div>
+            {% endif %}
 
-              {# Secondary button (e.g., "Learn More") #}
-              {% if sectionData.secondaryButtonName %}
-                {{ renderButton({
-                    name: sectionData.secondaryButtonName,
-                    datas: options.buttonDatas
+            {# Main heading #}
+            {% if mainHeadingName %}
+              <div
+                class="{{ mainHeadingClasses }}"
+                data-section-main-heading
+              >
+                {{ renderHeading({
+                    name: mainHeadingName,
+                    datas: options.headingDatas
                 }) }}
-              {% endif %}
+              </div>
+            {% endif %}
 
-            </div>
-          {% endif %}
+            {# Content text #}
+            {% if content %}
+              <div
+                class="{{ contentClasses }}"
+                data-section-content
+              >
+                <p>{{ content }}</p>
+              </div>
+            {% endif %}
+
+            {# Call-to-action buttons #}
+            {% if primaryButtonName or secondaryButtonName %}
+              <div
+                class="{{ buttonsClasses }}"
+                data-section-buttons
+              >
+
+                {# Primary button #}
+                {% if primaryButtonName %}
+                  {{ renderButton({
+                      name: primaryButtonName,
+                      datas: options.buttonDatas
+                  }) }}
+                {% endif %}
+
+                {# Secondary button #}
+                {% if secondaryButtonName %}
+                  {{ renderButton({
+                      name: secondaryButtonName,
+                      datas: options.buttonDatas
+                  }) }}
+                {% endif %}
+
+              </div>
+            {% endif %}
+
+          </div>
+
+          {# Right column - Image #}
+          <div
+            class="{{ rightColClasses }}"
+            data-section-column="right"
+          >
+
+            {% if imageName %}
+              <div
+                class="{{ imageClasses }}"
+                data-section-image
+              >
+                {{ renderImage({
+                    name: imageName,
+                    datas: options.imageDatas
+                }) }}
+              </div>
+            {% endif %}
+
+          </div>
 
         </div>
 
