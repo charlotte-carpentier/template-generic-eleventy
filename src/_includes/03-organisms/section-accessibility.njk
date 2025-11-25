@@ -25,7 +25,9 @@
   {# Import sub-component #}
   {% from "01-atoms/heading.njk" import renderHeading %}
 
-  {# Validate required props #}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -38,34 +40,89 @@
     {% if not sectionData %}
       <span class="error" role="alert">Section not found: {{ options.name }}</span>
     {% else %}
-      {# Render section element - Accessibility statement semantic pattern #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set sectionName = sectionData.name | default(options.name) %}
+      {% set variant = sectionData.variant | default('default') %}
+      {% set headingName = sectionData.headingName | default('') %}
+      {% set content = sectionData.content | default('') %}
+      {% set ariaLabel = sectionData.ariaLabel | default('Accessibility section') %}
+      {% set role = sectionData.role | default('region') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Section Container Classes
+        3.2 Content Container Classes
+        3.3 Heading Container Classes
+        3.4 Content Text Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Section Container Classes
+          Description: Layout, Spacing, Background
+        --------------------------#}
+      {% set sectionClasses = "flex flex-col px-[var(--spacing-6)] py-[var(--spacing-8)] bg-[var(--color-global-white)] md:px-[var(--spacing-10)] md:py-[var(--spacing-12)]" %}
+
+      {# --------------------------
+          3.2 Content Container Classes
+          Description: Layout, Sizing max-width centered desktop, Spacing
+        --------------------------#}
+      {% set containerClasses = "flex flex-col gap-[var(--spacing-4)] w-full md:max-w-[var(--column-width-640)] md:mx-auto" %}
+
+      {# --------------------------
+          3.3 Heading Container Classes
+          Description: Layout, Typography override serif
+      --------------------------#}
+      {% set headingClasses = "flex [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif" %}
+
+      {# --------------------------
+          3.4 Content Text Classes
+          Description: Typography, Colors
+        --------------------------#}
+      {% set contentClasses = "typography-body-regular text-[var(--color-global-default)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {# WCAG 2.2 AA: Accessibility statements should be in a region landmark #}
       {# Source: https://www.w3.org/WAI/WCAG22/Understanding/parsing.html #}
       <section
-        role="{{ sectionData.role }}"
-        aria-label="{{ sectionData.ariaLabel }}"
-        data-section-name="{{ sectionData.name }}"
+        class="{{ sectionClasses }}"
+        role="{{ role }}"
+        aria-label="{{ ariaLabel }}"
+        data-section-name="{{ sectionName }}"
         data-section-type="section-accessibility"
-        data-section-variant="{{ sectionData.variant }}"
+        data-section-variant="{{ variant }}"
       >
 
-        <div data-section-container>
+        <div
+          class="{{ containerClasses }}"
+          data-section-container
+        >
 
-          {# Section heading - Main accessibility statement title #}
-          {% if sectionData.headingName %}
-            <div data-section-heading>
+          {# Section heading #}
+          {% if headingName %}
+            <div
+              class="{{ headingClasses }}"
+              data-section-heading
+            >
               {{ renderHeading({
-                  name: sectionData.headingName,
+                  name: headingName,
                   datas: options.headingDatas
               }) }}
             </div>
           {% endif %}
 
-          {# Section content - Direct text from JSON #}
-          {# For real accessibility statements, content would be more structured #}
-          {% if sectionData.content %}
-            <div data-section-content>
-              <p>{{ sectionData.content }}</p>
+          {# Section content #}
+          {% if content %}
+            <div
+              class="{{ contentClasses }}"
+              data-section-content
+            >
+              <p>{{ content }}</p>
             </div>
           {% endif %}
 
