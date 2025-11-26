@@ -627,12 +627,15 @@ permalink: "/"
   {# Section Value - Type Cards #}
   <section style="border: 1px solid #ccc; padding: 1rem; width: 100%;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Section Value (Cards)</h2>
-    <p style="font-size: 0.75rem; margin: 0;">Note: Requires card molecule data with tags</p>
     {{ renderSectionValue({
         name: "demoSectV2",
         datas: organisms["section-value"].sectValues,
         headingDatas: atoms.heading.headings,
-        cardDatas: molecules.card.cards
+        cardDatas: molecules.card.cards,
+        lockupDatas: molecules["lock-up"].lockUps,
+        imageDatas: atoms.image.images,
+        buttonDatas: atoms.button.buttons,
+        iconDatas: atoms.icon.icons
     }) }}
   </section>
 
