@@ -6943,7 +6943,7 @@
         
         
           <div
-            class="flex-shrink-0"
+            class="hidden md:flex flex-shrink-0"
             data-pagination-selector="true"
           >
             
@@ -7441,7 +7441,7 @@
           
 
           <div
-            class="flex-shrink-0 typography-body-regular text-[var(--color-brand-primary-30)]"
+            class="hidden md:flex flex-shrink-0 typography-body-regular text-[var(--color-brand-primary-30)]"
             data-pagination-counter="true"
           >
             <span>
@@ -17431,22 +17431,70 @@
 
     
     
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+        
+      
+
+      
+        
+      
+
+      
+        
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
       
       <section
+        class="flex flex-col px-[var(--spacing-6)] py-[var(--spacing-8)] bg-[var(--color-global-white)] md:px-[var(--spacing-10)] md:py-[var(--spacing-12)]"
         aria-label="Value section simple"
         data-section-name="demoSectV1"
         data-section-type="section-value"
         data-section-variant="simple"
       >
 
-        <div data-section-container>
+        <div
+          class="flex flex-col gap-[var(--spacing-8)] mx-auto max-w-[800px]"
+          data-section-container
+        >
 
           
-          <div data-section-header>
+          <div
+            class="flex flex-col gap-[var(--spacing-2)]"
+            data-section-header
+          >
 
             
             
-              <div data-section-super-heading>
+              <div
+                class="flex flex-col items-center"
+                data-section-super-heading
+              >
                 
 
   
@@ -17494,7 +17542,10 @@
 
             
             
-              <div data-section-heading>
+              <div
+                class="flex flex-col items-center mt-[var(--spacing-6)] [&amp;_h1]:typography-h1-serif [&amp;_h2]:typography-h2-serif [&amp;_h3]:typography-h3-serif"
+                data-section-main-heading
+              >
                 
 
   
@@ -17546,18 +17597,27 @@
           
 
             
-            <div data-section-content>
+            <div
+              class="flex flex-col gap-[var(--spacing-6)]"
+              data-section-content
+            >
 
               
               
-                <div data-section-text>
+                <div
+                  class="typography-body-regular text-[var(--color-global-default)] text-center"
+                  data-section-text
+                >
                   <p>Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</p>
                 </div>
               
 
               
               
-                <div data-section-buttons>
+                <div
+                  class="flex gap-[var(--spacing-4)] justify-center"
+                  data-section-buttons
+                >
 
                   
                   
@@ -17735,7 +17795,6 @@
   
   <section style="border: 1px solid #ccc; padding: 1rem; width: 100%;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Section Value (Cards)</h2>
-    <p style="font-size: 0.75rem; margin: 0;">Note: Requires card molecule data with tags</p>
     
   
   
@@ -17749,22 +17808,70 @@
 
     
     
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+        
+      
+
+      
+        
+      
+
+      
+        
+      
+
+      
+        
+      
+
+      
+
+      
+
+      
+
       
       <section
+        class="flex flex-col px-[var(--spacing-6)] py-[var(--spacing-8)] bg-[var(--color-global-white)] md:px-[var(--spacing-10)] md:py-[var(--spacing-12)]"
         aria-label="Value section with cards"
         data-section-name="demoSectV2"
         data-section-type="section-value"
         data-section-variant="cards"
       >
 
-        <div data-section-container>
+        <div
+          class="flex flex-col gap-[var(--spacing-8)]"
+          data-section-container
+        >
 
           
-          <div data-section-header>
+          <div
+            class="flex flex-col gap-[var(--spacing-4)]"
+            data-section-header
+          >
 
             
             
-              <div data-section-super-heading>
+              <div
+                class="flex flex-col items-start md:items-center"
+                data-section-super-heading
+              >
                 
 
   
@@ -17812,7 +17919,10 @@
 
             
             
-              <div data-section-heading>
+              <div
+                class="flex flex-col items-start mt-[var(--spacing-6)] md:items-center [&amp;_h1]:typography-h1-serif [&amp;_h2]:typography-h2-serif [&amp;_h3]:typography-h3-serif"
+                data-section-main-heading
+              >
                 
 
   
@@ -17864,37 +17974,634 @@
           
 
             
-            <div data-section-cards>
+            <div
+              class="grid grid-cols-1 gap-[var(--spacing-6)] md:grid-cols-3 md:gap-[var(--spacing-8)] [&amp;&gt;*]:w-full [&amp;&gt;*]:max-w-none [&amp;_[data-card-text]]:line-clamp-none [&amp;_[data-card-content]]:gap-[var(--spacing-4)] [&amp;_div[class*=&#39;mt-0&#39;]]:mt-0 [&amp;_div[class*=&#39;mt-0&#39;]_button]:w-auto [&amp;_div[class*=&#39;mt-0&#39;]_button]:max-w-fit [&amp;_button]:bg-[var(--color-button-primary)] [&amp;_button]:text-white [&amp;_button]:border-0 [&amp;_button:hover]:bg-[var(--color-button-primary-hover)]"
+              data-section-cards
+            >
               
                 
                 
-                  
-                  
-                    
-                      
-                    
-                  
                 
                   
-                  
                     
+                      
+                        
                       
                     
                   
-                
-                  
+                    
+                      
+                        
+                      
+                    
                   
                     
                       
-                        <div data-card-item>
+                        
                           
 
   
   
-    <span class="error" role="alert">Error: Missing required prop (name)</span>
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        data-card-id="demoCard3"
+        data-card-type="card"
+      >
+        
+        
+
+        
+        <div
+          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          data-card-content="true"
+        >
+          
+          
+            
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+
+      
+      
+      
+
+      
+
+      
+      
+
+      
+      
+      
+
+      
+        
+      
+
+      
+      
+        <h4
+          class="text-[var(--color-global-heading)] typography-h4-serif"
+          data-heading-name="demoHead4"
+          data-heading-type="heading"
+          data-heading-tag="h4"
+        >Heading</h4>
+      
+    
   
 
-                        </div>
+          
+
+          
+          
+            <p
+              class="typography-body-regular text-[var(--color-global-default)] line-clamp-2"
+              data-card-text="true"
+            >
+              Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
+            </p>
+          
+
+          
+          
+            <div class="mt-0 [&amp;_button]:w-full">
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+        
+
+      
+
+      
+
+      
+
+      
+      <button
+        type="button"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed "
+        data-button-name="demoCard"
+        data-button-type="button"
+        
+        
+        
+        
+        aria-label="Button description for accessibility"
+        >
+        
+        
+
+        
+        
+
+        
+        
+          Label
+        
+
+        
+        
+      </button>
+    
+  
+
+            </div>
+          
+
+          
+          
+        </div>
+      </div>
+    
+  
+
+                          
+                        
+                      
+                    
+                  
+                
+                  
+                    
+                      
+                        
+                      
+                    
+                  
+                    
+                      
+                        
+                      
+                    
+                  
+                    
+                      
+                        
+                          
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        data-card-id="demoCard3"
+        data-card-type="card"
+      >
+        
+        
+
+        
+        <div
+          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          data-card-content="true"
+        >
+          
+          
+            
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+
+      
+      
+      
+
+      
+
+      
+      
+
+      
+      
+      
+
+      
+        
+      
+
+      
+      
+        <h4
+          class="text-[var(--color-global-heading)] typography-h4-serif"
+          data-heading-name="demoHead4"
+          data-heading-type="heading"
+          data-heading-tag="h4"
+        >Heading</h4>
+      
+    
+  
+
+          
+
+          
+          
+            <p
+              class="typography-body-regular text-[var(--color-global-default)] line-clamp-2"
+              data-card-text="true"
+            >
+              Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
+            </p>
+          
+
+          
+          
+            <div class="mt-0 [&amp;_button]:w-full">
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+        
+
+      
+
+      
+
+      
+
+      
+      <button
+        type="button"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed "
+        data-button-name="demoCard"
+        data-button-type="button"
+        
+        
+        
+        
+        aria-label="Button description for accessibility"
+        >
+        
+        
+
+        
+        
+
+        
+        
+          Label
+        
+
+        
+        
+      </button>
+    
+  
+
+            </div>
+          
+
+          
+          
+        </div>
+      </div>
+    
+  
+
+                          
+                        
+                      
+                    
+                  
+                
+                  
+                    
+                      
+                        
+                      
+                    
+                  
+                    
+                      
+                        
+                      
+                    
+                  
+                    
+                      
+                        
+                          
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      <div
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        data-card-id="demoCard3"
+        data-card-type="card"
+      >
+        
+        
+
+        
+        <div
+          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          data-card-content="true"
+        >
+          
+          
+            
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+
+      
+      
+      
+
+      
+
+      
+      
+
+      
+      
+      
+
+      
+        
+      
+
+      
+      
+        <h4
+          class="text-[var(--color-global-heading)] typography-h4-serif"
+          data-heading-name="demoHead4"
+          data-heading-type="heading"
+          data-heading-tag="h4"
+        >Heading</h4>
+      
+    
+  
+
+          
+
+          
+          
+            <p
+              class="typography-body-regular text-[var(--color-global-default)] line-clamp-2"
+              data-card-text="true"
+            >
+              Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
+            </p>
+          
+
+          
+          
+            <div class="mt-0 [&amp;_button]:w-full">
+              
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+        
+
+      
+
+      
+
+      
+
+      
+      <button
+        type="button"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-button)] bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed "
+        data-button-name="demoCard"
+        data-button-type="button"
+        
+        
+        
+        
+        aria-label="Button description for accessibility"
+        >
+        
+        
+
+        
+        
+
+        
+        
+          Label
+        
+
+        
+        
+      </button>
+    
+  
+
+            </div>
+          
+
+          
+          
+        </div>
+      </div>
+    
+  
+
+                          
+                        
                       
                     
                   
@@ -20718,13 +21425,13 @@
       
       <div
         class="flex items-center justify-between gap-[var(--spacing-12)] w-full"
-        data-pagination-name="demoPager1"
+        data-pagination-name="demoPreview"
         data-pagination-type="pagination"
       >
         
         
           <div
-            class="flex-shrink-0"
+            class="hidden md:flex flex-shrink-0"
             data-pagination-selector="true"
           >
             
@@ -20798,6 +21505,422 @@
 
         
         
+          <nav
+            class="flex-1 flex justify-center"
+            role="navigation"
+            aria-label="Pagination"
+            data-pagination-nav="true"
+          >
+            <ul class="flex items-center gap-[var(--spacing-0-5)]">
+              
+                <li class="">
+                  
+                  
+
+                    <a href="#"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-6)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-neutral-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      data-pagination-link="true"
+                      data-pagination-action="first"
+                      aria-label="First page"
+                      rel="nofollow"
+                    >
+                      
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="First page"
+          role="img"
+          data-icon-name="demoBack1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#backward-fast-solid-full"></use>
+        </svg>
+      
+    
+  
+
+                    </a>
+                  
+                </li>
+              
+                <li class="">
+                  
+                  
+
+                    <a href="#"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-6)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-neutral-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      data-pagination-link="true"
+                      data-pagination-action="prev"
+                      aria-label="Previous page"
+                      rel="nofollow"
+                    >
+                      
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Previous page"
+          role="img"
+          data-icon-name="demoLeft1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#caret-left-solid-full"></use>
+        </svg>
+      
+    
+  
+
+                    </a>
+                  
+                </li>
+              
+                <li class="">
+                  
+                  
+
+                    <a href="#"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-6)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-neutral-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      data-pagination-link="true"
+                      data-pagination-current="true" aria-current="page"
+                      rel="nofollow"
+                    >
+                      1
+                    </a>
+                  
+                </li>
+              
+                <li class="">
+                  
+                  
+
+                    <a href="#"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-6)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-neutral-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      data-pagination-link="true"
+                      
+                      rel="nofollow"
+                    >
+                      2
+                    </a>
+                  
+                </li>
+              
+                <li class="">
+                  
+                  
+
+                    <a href="#"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-6)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-neutral-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      data-pagination-link="true"
+                      
+                      rel="nofollow"
+                    >
+                      3
+                    </a>
+                  
+                </li>
+              
+                <li class="">
+                  
+                  
+
+                    <a href="#"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-6)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-neutral-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      data-pagination-link="true"
+                      
+                      rel="nofollow"
+                    >
+                      4
+                    </a>
+                  
+                </li>
+              
+                <li class="">
+                  
+                  
+
+                    <a href="#"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-6)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-neutral-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      data-pagination-link="true"
+                      
+                      rel="nofollow"
+                    >
+                      5
+                    </a>
+                  
+                </li>
+              
+                <li class="">
+                  
+                  
+
+                    <a href="#"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-6)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-neutral-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      data-pagination-link="true"
+                      
+                      rel="nofollow"
+                    >
+                      6
+                    </a>
+                  
+                </li>
+              
+                <li class="">
+                  
+                  
+
+                    <a href="#"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-6)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-neutral-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      data-pagination-link="true"
+                      data-pagination-action="dots"
+                      aria-label="More pages"
+                      rel="nofollow"
+                    >
+                      
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="More pages"
+          role="img"
+          data-icon-name="demoDots1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#dots-three"></use>
+        </svg>
+      
+    
+  
+
+                    </a>
+                  
+                </li>
+              
+                <li class="">
+                  
+                  
+
+                    <a href="#"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-6)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-neutral-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      data-pagination-link="true"
+                      data-pagination-action="next"
+                      aria-label="Next page"
+                      rel="nofollow"
+                    >
+                      
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Next page"
+          role="img"
+          data-icon-name="demoRight1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#caret-right-solid-full"></use>
+        </svg>
+      
+    
+  
+
+                    </a>
+                  
+                </li>
+              
+                <li class="">
+                  
+                  
+
+                    <a href="#"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-6)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-neutral-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      data-pagination-link="true"
+                      data-pagination-action="last"
+                      aria-label="Last page"
+                      rel="nofollow"
+                    >
+                      
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Last page"
+          role="img"
+          data-icon-name="demoForward1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#forward-fast-solid-full"></use>
+        </svg>
+      
+    
+  
+
+                    </a>
+                  
+                </li>
+              
+            </ul>
+          </nav>
+        
 
         
         
@@ -20806,7 +21929,7 @@
           
 
           <div
-            class="flex-shrink-0 typography-body-regular text-[var(--color-brand-primary-30)]"
+            class="hidden md:flex flex-shrink-0 typography-body-regular text-[var(--color-brand-primary-30)]"
             data-pagination-counter="true"
           >
             <span>

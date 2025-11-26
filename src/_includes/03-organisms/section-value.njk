@@ -10,6 +10,9 @@
     - options.headingDatas (array): Heading atom data
     - options.buttonDatas (array): Button atom data
     - options.cardDatas (array): Card molecule data (for type="cards")
+    - options.lockupDatas (array): Lockup molecule data (for cards)
+    - options.imageDatas (array): Image atom data (for cards)
+    - options.iconDatas (array): Icon atom data (for cards)
 
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/section-value.njk" import renderSectionValue %}
@@ -27,7 +30,11 @@
         name: "demoSectV2",
         datas: organisms["section-value"].sectValues,
         headingDatas: atoms.heading.headings,
-        cardDatas: molecules.card.cards
+        cardDatas: molecules.card.cards,
+        lockupDatas: molecules["lock-up"].lockUps,
+        imageDatas: atoms.image.images,
+        buttonDatas: atoms.button.buttons,
+        iconDatas: atoms.icon.icons
     }) }}
 
   @created 2025-01-15
@@ -39,7 +46,9 @@
   {% from "01-atoms/button.njk" import renderButton %}
   {% from "02-molecules/card.njk" import renderCard %}
 
-  {# Validate required props #}
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -52,34 +61,140 @@
     {% if not sectionData %}
       <span class="error" role="alert">Section not found: {{ options.name }}</span>
     {% else %}
-      {# Render section element - Value proposition pattern #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set sectionName = sectionData.name | default(options.name) %}
+      {% set sectionType = sectionData.type | default('simple') %}
+      {% set superHeadingName = sectionData.superHeadingName | default('') %}
+      {% set mainHeadingName = sectionData.mainHeadingName | default('') %}
+      {% set content = sectionData.content | default('') %}
+      {% set primaryButtonName = sectionData.primaryButtonName | default('') %}
+      {% set secondaryButtonName = sectionData.secondaryButtonName | default('') %}
+      {% set cardTags = sectionData.cardTags | default([]) %}
+      {% set ariaLabel = sectionData.ariaLabel | default('Value section') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Section Container Classes
+        3.2 Content Container Classes
+        3.3 Header Container Classes
+        3.4 Super Heading Container Classes
+        3.5 Main Heading Container Classes
+        3.6 Text Container Classes
+        3.7 Buttons Container Classes
+        3.8 Cards Grid Container Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Section Container Classes
+          Description: Layout, Spacing, Background
+        --------------------------#}
+      {% set sectionClasses = "flex flex-col px-[var(--spacing-6)] py-[var(--spacing-8)] bg-[var(--color-global-white)] md:px-[var(--spacing-10)] md:py-[var(--spacing-12)]" %}
+
+      {# --------------------------
+          3.2 Content Container Classes
+          Description: Layout vertical, Spacing, Max-width centered for simple type
+        --------------------------#}
+      {% if sectionType == 'simple' %}
+        {% set containerClasses = "flex flex-col gap-[var(--spacing-8)] mx-auto max-w-[800px]" %}
+      {% else %}
+        {% set containerClasses = "flex flex-col gap-[var(--spacing-8)]" %}
+      {% endif %}
+
+      {# --------------------------
+          3.3 Header Container Classes
+          Description: Layout vertical, Spacing between headings
+      --------------------------#}
+      {% if sectionType == 'simple' %}
+        {% set headerClasses = "flex flex-col gap-[var(--spacing-2)]" %}
+      {% else %}
+        {% set headerClasses = "flex flex-col gap-[var(--spacing-4)]" %}
+      {% endif %}
+
+      {# --------------------------
+          3.4 Super Heading Container Classes
+          Description: Layout, Alignment
+      --------------------------#}
+      {% if sectionType == 'simple' %}
+        {% set superHeadingClasses = "flex flex-col items-center" %}
+      {% else %}
+        {% set superHeadingClasses = "flex flex-col items-start md:items-center" %}
+      {% endif %}
+
+      {# --------------------------
+          3.5 Main Heading Container Classes
+          Description: Layout, Typography override serif, Alignment, Spacing bottom
+      --------------------------#}
+      {% if sectionType == 'simple' %}
+        {% set mainHeadingClasses = "flex flex-col items-center mt-[var(--spacing-6)] [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif" %}
+      {% else %}
+        {% set mainHeadingClasses = "flex flex-col items-start mt-[var(--spacing-6)] md:items-center [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif" %}
+      {% endif %}
+
+      {# --------------------------
+          3.6 Text Container Classes
+          Description: Typography, Colors, Alignment centered
+        --------------------------#}
+      {% set textClasses = "typography-body-regular text-[var(--color-global-default)] text-center" %}
+
+      {# --------------------------
+          3.7 Buttons Container Classes
+          Description: Layout horizontal, Spacing, Alignment centered
+        --------------------------#}
+      {% set buttonsClasses = "flex gap-[var(--spacing-4)] justify-center" %}
+
+      {# --------------------------
+          3.8 Cards Grid Container Classes
+          Description: Layout responsive grid, Spacing, Override card gaps, text, button wrapper and button style
+      --------------------------#}
+      {% set cardsGridClasses = "grid grid-cols-1 gap-[var(--spacing-6)] md:grid-cols-3 md:gap-[var(--spacing-8)] [&>*]:w-full [&>*]:max-w-none [&_[data-card-text]]:line-clamp-none [&_[data-card-content]]:gap-[var(--spacing-4)] [&_div[class*='mt-0']]:mt-0 [&_div[class*='mt-0']_button]:w-auto [&_div[class*='mt-0']_button]:max-w-fit [&_button]:bg-[var(--color-button-primary)] [&_button]:text-white [&_button]:border-0 [&_button:hover]:bg-[var(--color-button-primary-hover)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <section
-        aria-label="{{ sectionData.ariaLabel }}"
-        data-section-name="{{ sectionData.name }}"
+        class="{{ sectionClasses }}"
+        aria-label="{{ ariaLabel }}"
+        data-section-name="{{ sectionName }}"
         data-section-type="section-value"
-        data-section-variant="{{ sectionData.type }}"
+        data-section-variant="{{ sectionType }}"
       >
 
-        <div data-section-container>
+        <div
+          class="{{ containerClasses }}"
+          data-section-container
+        >
 
-          {# Heading area - Common to both types #}
-          <div data-section-header>
+          {# Header area - Common to both types #}
+          <div
+            class="{{ headerClasses }}"
+            data-section-header
+          >
 
-            {# Super heading - Optional secondary title #}
-            {% if sectionData.superHeadingName %}
-              <div data-section-super-heading>
+            {# Super heading - Small title #}
+            {% if superHeadingName %}
+              <div
+                class="{{ superHeadingClasses }}"
+                data-section-super-heading
+              >
                 {{ renderHeading({
-                    name: sectionData.superHeadingName,
+                    name: superHeadingName,
                     datas: options.headingDatas
                 }) }}
               </div>
             {% endif %}
 
-            {# Main heading #}
-            {% if sectionData.headingName %}
-              <div data-section-heading>
+            {# Main heading - Large serif title #}
+            {% if mainHeadingName %}
+              <div
+                class="{{ mainHeadingClasses }}"
+                data-section-main-heading
+              >
                 {{ renderHeading({
-                    name: sectionData.headingName,
+                    name: mainHeadingName,
                     datas: options.headingDatas
                 }) }}
               </div>
@@ -88,34 +203,43 @@
           </div>
 
           {# Content area - Depends on type #}
-          {% if sectionData.type == "simple" %}
+          {% if sectionType == "simple" %}
 
-            {# Simple type: content + buttons #}
-            <div data-section-content>
+            {# Simple type: content + buttons centered #}
+            <div
+              class="flex flex-col gap-[var(--spacing-6)]"
+              data-section-content
+            >
 
               {# Content text #}
-              {% if sectionData.content %}
-                <div data-section-text>
-                  <p>{{ sectionData.content }}</p>
+              {% if content %}
+                <div
+                  class="{{ textClasses }}"
+                  data-section-text
+                >
+                  <p>{{ content }}</p>
                 </div>
               {% endif %}
 
               {# Call-to-action buttons #}
-              {% if sectionData.primaryButtonName or sectionData.secondaryButtonName %}
-                <div data-section-buttons>
+              {% if primaryButtonName or secondaryButtonName %}
+                <div
+                  class="{{ buttonsClasses }}"
+                  data-section-buttons
+                >
 
                   {# Primary button #}
-                  {% if sectionData.primaryButtonName %}
+                  {% if primaryButtonName %}
                     {{ renderButton({
-                        name: sectionData.primaryButtonName,
+                        name: primaryButtonName,
                         datas: options.buttonDatas
                     }) }}
                   {% endif %}
 
                   {# Secondary button #}
-                  {% if sectionData.secondaryButtonName %}
+                  {% if secondaryButtonName %}
                     {{ renderButton({
-                        name: sectionData.secondaryButtonName,
+                        name: secondaryButtonName,
                         datas: options.buttonDatas
                     }) }}
                   {% endif %}
@@ -125,26 +249,35 @@
 
             </div>
 
-          {% elif sectionData.type == "cards" %}
+          {% elif sectionType == "cards" %}
 
-            {# Cards type: grid of cards filtered by tags #}
-            <div data-section-cards>
-              {% if sectionData.cardTags and options.cardDatas %}
-                {# Filter cards by tags - Loop through all cards and check tags #}
-                {% for card in options.cardDatas %}
-                  {# Check if card has matching tags #}
-                  {% if card.tags %}
-                    {% for tag in sectionData.cardTags %}
-                      {% if tag in card.tags %}
-                        <div data-card-item>
+            {# Cards type: grid of 3 cards #}
+            <div
+              class="{{ cardsGridClasses }}"
+              data-section-cards
+            >
+              {% if cardTags and options.cardDatas %}
+                {# Display 3 cards for demo - Repeat cards to fill grid #}
+                {% set displayedCards = 0 %}
+                {% for n in range(0, 3) %}
+                  {% for card in options.cardDatas %}
+                    {% if card.tags and displayedCards < 3 %}
+                      {% for tag in cardTags %}
+                        {% if tag in card.tags and displayedCards < 3 %}
                           {{ renderCard({
-                              name: card.name,
-                              datas: options.cardDatas
+                              name: card.id,
+                              datas: options.cardDatas,
+                              lockupDatas: options.lockupDatas,
+                              imageDatas: options.imageDatas,
+                              headingDatas: options.headingDatas,
+                              buttonDatas: options.buttonDatas,
+                              iconDatas: options.iconDatas
                           }) }}
-                        </div>
-                      {% endif %}
-                    {% endfor %}
-                  {% endif %}
+                          {% set displayedCards = displayedCards + 1 %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                  {% endfor %}
                 {% endfor %}
               {% endif %}
             </div>
