@@ -28,7 +28,7 @@
 
 @theme {
   /* ─────────────────────────────
-     Typography
+     Typography - Primitives
   ───────────────────────────── */
 
   /* Font families */
@@ -70,7 +70,11 @@
   --letter-spacing-wide: 0.025em;
   --letter-spacing-wider: 0.05em;
 
-  /* Typography tokens - Sans variants (default) */
+  /* ─────────────────────────────
+     Typography - Tokens
+  ───────────────────────────── */
+
+  /* Sans variants (default) */
   --typography-heading-h1: var(--font-weight-bold) var(--font-size-4xl) / var(--line-height-tight) var(--font-family-sans);
   --typography-heading-h2: var(--font-weight-semibold) var(--font-size-3xl) / var(--line-height-snug) var(--font-family-sans);
   --typography-heading-h3: var(--font-weight-semibold) var(--font-size-2xl) / var(--line-height-snug) var(--font-family-sans);
@@ -78,7 +82,7 @@
   --typography-heading-h5: var(--font-weight-medium) var(--font-size-lg) / var(--line-height-normal) var(--font-family-sans);
   --typography-heading-h6: var(--font-weight-medium) var(--font-size-base) / var(--line-height-normal) var(--font-family-sans);
 
-  /* Typography tokens - Serif variants */
+  /* Serif variants */
   --typography-heading-h1-serif: var(--font-weight-bold) var(--font-size-4xl) / var(--line-height-tight) var(--font-family-serif);
   --typography-heading-h2-serif: var(--font-weight-semibold) var(--font-size-3xl) / var(--line-height-snug) var(--font-family-serif);
   --typography-heading-h3-serif: var(--font-weight-semibold) var(--font-size-2xl) / var(--line-height-snug) var(--font-family-serif);
@@ -205,9 +209,9 @@
   --color-button-tertiary-hover: var(--color-semantic-success-10);
 
   /* Form */
+  --color-form: var(--color-neutral-30);
   --color-form-active: var(--color-neutral-00);
   --color-form-hover: var(--color-neutral-10);
-  --color-form: var(--color-neutral-30);
   --color-form-control-checked: var(--color-brand-primary-40);
 
   /* Semantic Critical */
@@ -233,19 +237,23 @@
   --color-semantic-information-contrast-light-02: var(--color-semantic-information-100);
 
   /* ─────────────────────────────
-     Gradients
+     Gradients - Tokens
   ───────────────────────────── */
 
   --gradient-header: linear-gradient(0deg, var(--color-brand-primary-30), var(--color-brand-primary-10));
   --gradient-delete-cell: linear-gradient(-90deg, var(--color-semantic-critical-100), rgba(255,240,241,0));
 
   /* ─────────────────────────────
-     Elevation
+     Elevation - Primitives
   ───────────────────────────── */
 
   --shadow-short: 0 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.15);
   --shadow-tall: 0 10px 25px rgba(0, 0, 0, 0.2);
+
+  /* ─────────────────────────────
+     Elevation - Tokens
+  ───────────────────────────── */
 
   --elevation-card: var(--shadow-short);
   --elevation-dropdown: var(--shadow-medium);
@@ -254,7 +262,7 @@
   --elevation-tooltip: var(--shadow-medium);
 
   /* ─────────────────────────────
-     Border Radius
+     Border Radius - Primitives
   ───────────────────────────── */
 
   --radius-3: 3px;
@@ -266,17 +274,21 @@
   --radius-24: 24px;
   --radius-32: 32px;
 
-  --radius-button: var(--radius-8);
+  /* ─────────────────────────────
+     Border Radius - Tokens
+  ───────────────────────────── */
+
+  --radius-default: var(--radius-8);
   --radius-card: var(--radius-12);
-  --radius-input: var(--radius-6);
   --radius-badge: var(--radius-16);
   --radius-modal: var(--radius-16);
   --radius-pill: var(--radius-32);
 
   /* ─────────────────────────────
-     Spacing
+     Spacing - Primitives
   ───────────────────────────── */
 
+  --spacing-0: 0;
   --spacing-0-5: 2px;
   --spacing-1: 4px;
   --spacing-1-5: 6px;
@@ -296,14 +308,18 @@
   --spacing-20: 80px;
   --spacing-24: 96px;
 
+  /* ─────────────────────────────
+     Spacing - Tokens
+  ───────────────────────────── */
+
+  --spacing-inline: var(--spacing-1);
   --spacing-component-padding: var(--spacing-4);
   --spacing-section-margin: var(--spacing-8);
   --spacing-page-margin: var(--spacing-6);
-  --spacing-element-gap: var(--spacing-3);
   --spacing-content-padding: var(--spacing-6);
 
   /* ─────────────────────────────
-     Z-Index
+     Z-Index - Tokens
   ───────────────────────────── */
 
   --z-base: 0;
@@ -317,7 +333,7 @@
   --z-notification: 1080;
 
   /* ─────────────────────────────
-     Layout
+     Layout - Tokens
   ───────────────────────────── */
 
   --container-desktop: 1440px;

@@ -77,20 +77,20 @@
       {% elif triggerType == 'text' %}
         {% set triggerClasses = "inline-flex items-center text-sm text-[var(--color-global-default)] underline hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
       {% else %}
-        {% set triggerClasses = "inline-flex items-center justify-center min-w-10 h-10 px-3 text-[var(--color-global-default)] bg-[var(--color-global-contrast-light-04)] hover:bg-[var(--color-global-contrast-light-03)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 rounded-[var(--radius-button)]" %}
+        {% set triggerClasses = "inline-flex items-center justify-center min-w-10 h-10 px-3 text-[var(--color-global-default)] bg-[var(--color-global-contrast-light-04)] hover:bg-[var(--color-global-contrast-light-03)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 rounded-[var(--radius-default)]" %}
       {% endif %}
 
       {# --------------------------
           3.3 Tooltip Classes
           Description: Positioning, spacing, typography, colors, effects, borders
       -------------------------- #}
-      {% set tooltipClasses = "hidden absolute p-4 bg-[var(--color-global-white)] text-[var(--color-global-default)] shadow-[var(--elevation-tooltip)] rounded-[var(--radius-8)] min-w-[280px] max-w-xs z-[var(--z-tooltip)]" %}
+      {% set tooltipClasses = "hidden absolute p-4 bg-[var(--color-global-white)] text-[var(--color-global-default)] shadow-[var(--elevation-tooltip)] rounded-[var(--radius-default)] min-w-[280px] max-w-xs z-[var(--z-tooltip)]" %}
 
       {# --------------------------
           3.4 Title Classes
           Description: Typography, colors
       -------------------------- #}
-      {% set titleClasses = "text-[var(--color-global-heading)] text-base font-medium" %}
+      {% set titleClasses = "text-[var(--color-global-contrast-light-01)] text-base font-medium" %}
 
       {# --------------------------
           3.5 Description Classes
