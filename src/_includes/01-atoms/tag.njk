@@ -53,7 +53,7 @@
           3.1 Base Classes
           Description: Layout, spacing, borders, typography
       -------------------------- #}
-      {% set baseClasses = "inline-flex items-center px-1 py-0.5 rounded-[var(--radius-8)] text-sm font-semibold uppercase tracking-wide" %}
+      {% set baseClasses = "inline-flex items-center px-1 py-0.5 rounded-[var(--radius-default)] text-sm font-semibold uppercase tracking-wide" %}
 
       {# --------------------------
           3.2 Variant Classes
@@ -62,25 +62,25 @@
       {% set variantClasses = "" %}
 
       {% if tagVariant == 'default' %}
-        {% set variantClasses = "text-[var(--color-neutral-30)] bg-[var(--color-neutral-90)] border border-[var(--color-neutral-60)]" %}
+        {% set variantClasses = "text-[var(--color-global-contrast-light-01)] bg-[var(--color-global-contrast-light-04)] border border-[var(--color-global-contrast-light-02)]" %}
       {% elif tagVariant == 'default-filled' %}
-        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-neutral-30)]" %}
+        {% set variantClasses = "text-[var(--color-global-white)] bg-[var(--color-global-contrast-light-01)]" %}
       {% elif tagVariant == 'primary' %}
-        {% set variantClasses = "text-[var(--color-semantic-information-40)] bg-[var(--color-semantic-information-90)] border border-[var(--color-semantic-information-60)]" %}
+        {% set variantClasses = "text-[var(--color-semantic-information)] bg-[var(--color-semantic-information-contrast-light-01)] border border-[var(--color-semantic-information)]" %}
       {% elif tagVariant == 'primary-filled' %}
-        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-information-40)]" %}
+        {% set variantClasses = "text-[var(--color-global-white)] bg-[var(--color-semantic-information)]" %}
       {% elif tagVariant == 'success' %}
-        {% set variantClasses = "text-[var(--color-semantic-success-20)] bg-[var(--color-semantic-success-90)] border border-[var(--color-semantic-success-60)]" %}
+        {% set variantClasses = "text-[var(--color-semantic-success)] bg-[var(--color-semantic-success-contrast-light-02)] border border-[var(--color-semantic-success)]" %}
       {% elif tagVariant == 'success-filled' %}
-        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-success-20)]" %}
+        {% set variantClasses = "text-[var(--color-global-white)] bg-[var(--color-semantic-success)]" %}
       {% elif tagVariant == 'warning' %}
-        {% set variantClasses = "text-[var(--color-semantic-warning-40)] bg-[var(--color-semantic-warning-90)] border border-[var(--color-semantic-warning-60)]" %}
+        {% set variantClasses = "text-[var(--color-semantic-warning)] bg-[var(--color-semantic-warning-contrast-light-01)] border border-[var(--color-semantic-warning)]" %}
       {% elif tagVariant == 'warning-filled' %}
-        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-warning-40)]" %}
+        {% set variantClasses = "text-[var(--color-global-white)] bg-[var(--color-semantic-warning)]" %}
       {% elif tagVariant == 'danger' %}
-        {% set variantClasses = "text-[var(--color-semantic-critical-40)] bg-[var(--color-semantic-critical-90)] border border-[var(--color-semantic-critical-60)]" %}
+        {% set variantClasses = "text-[var(--color-semantic-critical)] bg-[var(--color-semantic-critical-contrast-light-01)] border border-[var(--color-semantic-critical)]" %}
       {% elif tagVariant == 'danger-filled' %}
-        {% set variantClasses = "text-[var(--color-neutral-white)] bg-[var(--color-semantic-critical-40)]" %}
+        {% set variantClasses = "text-[var(--color-global-white)] bg-[var(--color-semantic-critical)]" %}
       {% endif %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
