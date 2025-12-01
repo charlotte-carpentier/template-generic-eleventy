@@ -66,24 +66,24 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Container Classes
-        3.2 Heading Container Classes
+        3.1 Wrapper Classes
+        3.2 Heading Wrapper Classes
         3.3 Dropzone Classes
-        3.4 Icon Container Classes
+        3.4 Icon Wrapper Classes
         3.5 Dropzone Text Classes
         3.6 Separator Classes
-        3.7 Button Container Classes
+        3.7 Button Wrapper Classes
         3.8 File Info Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Container Classes
+          3.1 Wrapper Classes
           Description: Layout, Composition, Spacing
         --------------------------#}
       {% set containerClasses = "flex flex-col p-[var(--spacing-5)] bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] w-full max-w-xl" %}
 
       {# --------------------------
-          3.2 Heading Container Classes
+          3.2 Heading Wrapper Classes
           Description: Spacing, Layout
         --------------------------#}
       {% set headingContainerClasses = "mb-[var(--spacing-8)]" %}
@@ -105,7 +105,7 @@
       {% set dropzoneClasses = dropzoneBaseClasses ~ " " ~ dropzoneHoverClasses ~ " " ~ dropzoneVariantClasses %}
 
       {# --------------------------
-          3.4 Icon Container Classes
+          3.4 Icon Wrapper Classes
           Description: Spacing, Colors
         --------------------------#}
       {% set iconContainerClasses = "mb-[var(--spacing-3)] text-[var(--color-global-contrast-light-02)]" %}
@@ -123,7 +123,7 @@
       {% set separatorClasses = "block my-[var(--spacing-4)] typography-body-regular text-[var(--color-global-default)]" %}
 
       {# --------------------------
-          3.7 Button Container Classes
+          3.7 Button Wrapper Classes
           Description: Spacing, Layout
         --------------------------#}
       {% set buttonContainerClasses = "flex mb-[var(--spacing-5)]" %}

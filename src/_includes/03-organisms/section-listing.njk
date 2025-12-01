@@ -70,27 +70,27 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Section Container Classes
-        3.2 Content Container Classes
-        3.3 Heading Container Classes
+        3.1 Section Wrapper Classes
+        3.2 Content Wrapper Classes
+        3.3 Heading Wrapper Classes
         3.4 Cards Grid Classes
-        3.5 Pagination Container Classes
+        3.5 Pagination Wrapper Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Section Container Classes
+          3.1 Section Wrapper Classes
           Description: Layout, Spacing, Background
         --------------------------#}
       {% set sectionClasses = "flex flex-col px-[var(--spacing-6)] py-[var(--spacing-8)] bg-[var(--color-global-white)] md:px-[var(--spacing-10)] md:py-[var(--spacing-12)]" %}
 
       {# --------------------------
-          3.2 Content Container Classes
+          3.2 Content Wrapper Classes
           Description: Layout vertical, Spacing between sections
         --------------------------#}
       {% set containerClasses = "flex flex-col gap-[var(--spacing-8)]" %}
 
       {# --------------------------
-          3.3 Heading Container Classes
+          3.3 Heading Wrapper Classes
           Description: Layout
         --------------------------#}
       {% set headingClasses = "flex" %}
@@ -102,7 +102,7 @@
 {% set cardsGridClasses = "grid grid-cols-1 gap-[var(--spacing-6)] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-[var(--spacing-8)] [&>*]:w-full [&>*]:max-w-none" %}
 
       {# --------------------------
-          3.5 Pagination Container Classes
+          3.5 Pagination Wrapper Classes
           Description: Layout, Alignment centered
         --------------------------#}
       {% set paginationClasses = "flex justify-center" %}

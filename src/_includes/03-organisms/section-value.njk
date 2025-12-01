@@ -78,24 +78,24 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Section Container Classes
-        3.2 Content Container Classes
-        3.3 Header Container Classes
-        3.4 Super Heading Container Classes
-        3.5 Main Heading Container Classes
-        3.6 Text Container Classes
-        3.7 Buttons Container Classes
-        3.8 Cards Grid Container Classes
+        3.1 Section Wrapper Classes
+        3.2 Content Wrapper Classes
+        3.3 Header Wrapper Classes
+        3.4 Super Heading Wrapper Classes
+        3.5 Main Heading Wrapper Classes
+        3.6 Text Wrapper Classes
+        3.7 Buttons Wrapper Classes
+        3.8 Cards Grid Wrapper Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Section Container Classes
+          3.1 Section Wrapper Classes
           Description: Layout, Spacing, Background
         --------------------------#}
       {% set sectionClasses = "flex flex-col px-[var(--spacing-6)] py-[var(--spacing-8)] bg-[var(--color-global-white)] md:px-[var(--spacing-10)] md:py-[var(--spacing-12)]" %}
 
       {# --------------------------
-          3.2 Content Container Classes
+          3.2 Content Wrapper Classes
           Description: Layout vertical, Spacing, Max-width centered for simple type
         --------------------------#}
       {% if sectionType == 'simple' %}
@@ -105,7 +105,7 @@
       {% endif %}
 
       {# --------------------------
-          3.3 Header Container Classes
+          3.3 Header Wrapper Classes
           Description: Layout vertical, Spacing between headings
       --------------------------#}
       {% if sectionType == 'simple' %}
@@ -115,7 +115,7 @@
       {% endif %}
 
       {# --------------------------
-          3.4 Super Heading Container Classes
+          3.4 Super Heading Wrapper Classes
           Description: Layout, Alignment
       --------------------------#}
       {% if sectionType == 'simple' %}
@@ -125,7 +125,7 @@
       {% endif %}
 
       {# --------------------------
-          3.5 Main Heading Container Classes
+          3.5 Main Heading Wrapper Classes
           Description: Layout, Typography override serif, Alignment, Spacing bottom
       --------------------------#}
       {% if sectionType == 'simple' %}
@@ -135,19 +135,19 @@
       {% endif %}
 
       {# --------------------------
-          3.6 Text Container Classes
+          3.6 Text Wrapper Classes
           Description: Typography, Colors, Alignment centered
         --------------------------#}
       {% set textClasses = "typography-body-regular text-[var(--color-global-default)] text-center" %}
 
       {# --------------------------
-          3.7 Buttons Container Classes
+          3.7 Buttons Wrapper Classes
           Description: Layout horizontal, Spacing, Alignment centered
         --------------------------#}
       {% set buttonsClasses = "flex gap-[var(--spacing-4)] justify-center" %}
 
       {# --------------------------
-          3.8 Cards Grid Container Classes
+          3.8 Cards Grid Wrapper Classes
           Description: Layout responsive grid, Spacing, Override card gaps, text, button wrapper and button style
       --------------------------#}
       {% set cardsGridClasses = "grid grid-cols-1 gap-[var(--spacing-6)] md:grid-cols-3 md:gap-[var(--spacing-8)] [&>*]:w-full [&>*]:max-w-none [&_[data-card-text]]:line-clamp-none [&_[data-card-content]]:gap-[var(--spacing-4)] [&_div[class*='mt-0']]:mt-0 [&_div[class*='mt-0']_button]:w-auto [&_div[class*='mt-0']_button]:max-w-fit [&_button]:bg-[var(--color-button-primary)] [&_button]:text-white [&_button]:border-0 [&_button:hover]:bg-[var(--color-button-primary-hover)]" %}
