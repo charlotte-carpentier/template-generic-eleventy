@@ -75,29 +75,22 @@
     --color-neutral-10: #1A1A1A;
     --color-neutral-20: #333333;
     --color-neutral-30: #4D4D4D;
-    --color-neutral-40: #666666;
-    --color-neutral-60: #999999;
     --color-neutral-85: #E0E0E0;
-    --color-neutral-90: #E5E5E5;
     --color-neutral-95: #F2F2F2;
     --color-neutral-white: #FFFFFF;
     --color-semantic-critical-40: #D20319;
-    --color-semantic-critical-60: #F0384B;
     --color-semantic-critical-90: #FFD6DB;
     --color-semantic-critical-100: #FFF0F1;
     --color-semantic-warning-30: #A43C00;
     --color-semantic-warning-40: #C74900;
-    --color-semantic-warning-60: #FF711F;
     --color-semantic-warning-90: #FFE0CC;
     --color-semantic-warning-100: #FFEFE4;
     --color-semantic-success-10: #005122;
     --color-semantic-success-20: #00692A;
-    --color-semantic-success-60: #4FED8F;
     --color-semantic-success-80: #A2F6C4;
     --color-semantic-success-90: #DAFBE7;
     --color-semantic-information-30: #003AAD;
     --color-semantic-information-40: #0047D3;
-    --color-semantic-information-60: #3377FF;
     --color-semantic-information-90: #D0E2FF;
     --color-semantic-information-100: #EBF7FF;
     --color-global-default: var(--color-neutral-00);
@@ -136,7 +129,6 @@
     --elevation-dropdown: var(--shadow-medium);
     --elevation-modal: var(--shadow-tall);
     --elevation-tooltip: var(--shadow-medium);
-    --radius-6: 6px;
     --radius-8: 8px;
     --radius-12: 12px;
     --radius-16: 16px;
@@ -868,32 +860,17 @@
   .border-\[var\(--color-global-contrast-light-03\)\] {
     border-color: var(--color-global-contrast-light-03);
   }
-  .border-\[var\(--color-neutral-60\)\] {
-    border-color: var(--color-neutral-60);
-  }
   .border-\[var\(--color-semantic-critical\)\] {
     border-color: var(--color-semantic-critical);
-  }
-  .border-\[var\(--color-semantic-critical-60\)\] {
-    border-color: var(--color-semantic-critical-60);
   }
   .border-\[var\(--color-semantic-information\)\] {
     border-color: var(--color-semantic-information);
   }
-  .border-\[var\(--color-semantic-information-60\)\] {
-    border-color: var(--color-semantic-information-60);
-  }
   .border-\[var\(--color-semantic-success\)\] {
     border-color: var(--color-semantic-success);
   }
-  .border-\[var\(--color-semantic-success-60\)\] {
-    border-color: var(--color-semantic-success-60);
-  }
   .border-\[var\(--color-semantic-warning\)\] {
     border-color: var(--color-semantic-warning);
-  }
-  .border-\[var\(--color-semantic-warning-60\)\] {
-    border-color: var(--color-semantic-warning-60);
   }
   .border-transparent {
     border-color: transparent;
@@ -928,17 +905,8 @@
   .bg-\[var\(--color-global-white\)\] {
     background-color: var(--color-global-white);
   }
-  .bg-\[var\(--color-neutral-30\)\] {
-    background-color: var(--color-neutral-30);
-  }
-  .bg-\[var\(--color-neutral-90\)\] {
-    background-color: var(--color-neutral-90);
-  }
   .bg-\[var\(--color-semantic-critical\)\] {
     background-color: var(--color-semantic-critical);
-  }
-  .bg-\[var\(--color-semantic-critical-90\)\] {
-    background-color: var(--color-semantic-critical-90);
   }
   .bg-\[var\(--color-semantic-critical-contrast-light-01\)\] {
     background-color: var(--color-semantic-critical-contrast-light-01);
@@ -949,12 +917,6 @@
   .bg-\[var\(--color-semantic-information\)\] {
     background-color: var(--color-semantic-information);
   }
-  .bg-\[var\(--color-semantic-information-40\)\] {
-    background-color: var(--color-semantic-information-40);
-  }
-  .bg-\[var\(--color-semantic-information-90\)\] {
-    background-color: var(--color-semantic-information-90);
-  }
   .bg-\[var\(--color-semantic-information-contrast-light-01\)\] {
     background-color: var(--color-semantic-information-contrast-light-01);
   }
@@ -964,23 +926,11 @@
   .bg-\[var\(--color-semantic-success\)\] {
     background-color: var(--color-semantic-success);
   }
-  .bg-\[var\(--color-semantic-success-20\)\] {
-    background-color: var(--color-semantic-success-20);
-  }
-  .bg-\[var\(--color-semantic-success-90\)\] {
-    background-color: var(--color-semantic-success-90);
-  }
   .bg-\[var\(--color-semantic-success-contrast-light-02\)\] {
     background-color: var(--color-semantic-success-contrast-light-02);
   }
   .bg-\[var\(--color-semantic-warning\)\] {
     background-color: var(--color-semantic-warning);
-  }
-  .bg-\[var\(--color-semantic-warning-40\)\] {
-    background-color: var(--color-semantic-warning-40);
-  }
-  .bg-\[var\(--color-semantic-warning-90\)\] {
-    background-color: var(--color-semantic-warning-90);
   }
   .bg-\[var\(--color-semantic-warning-contrast-light-01\)\] {
     background-color: var(--color-semantic-warning-contrast-light-01);
@@ -1196,35 +1146,17 @@
   .text-\[var\(--color-global-white\)\] {
     color: var(--color-global-white);
   }
-  .text-\[var\(--color-neutral-30\)\] {
-    color: var(--color-neutral-30);
-  }
-  .text-\[var\(--color-neutral-40\)\] {
-    color: var(--color-neutral-40);
-  }
-  .text-\[var\(--color-neutral-white\)\] {
-    color: var(--color-neutral-white);
-  }
   .text-\[var\(--color-semantic-critical\)\] {
     color: var(--color-semantic-critical);
   }
   .text-\[var\(--color-semantic-information\)\] {
     color: var(--color-semantic-information);
   }
-  .text-\[var\(--color-semantic-information-40\)\] {
-    color: var(--color-semantic-information-40);
-  }
   .text-\[var\(--color-semantic-success\)\] {
     color: var(--color-semantic-success);
   }
-  .text-\[var\(--color-semantic-success-20\)\] {
-    color: var(--color-semantic-success-20);
-  }
   .text-\[var\(--color-semantic-warning\)\] {
     color: var(--color-semantic-warning);
-  }
-  .text-\[var\(--color-semantic-warning-40\)\] {
-    color: var(--color-semantic-warning-40);
   }
   .text-\[var\(--font-size-4xl\)\] {
     color: var(--font-size-4xl);
@@ -1752,13 +1684,6 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-global-white);
-      }
-    }
-  }
-  .hover\:text-\[var\(--color-neutral-white\)\] {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-neutral-white);
       }
     }
   }

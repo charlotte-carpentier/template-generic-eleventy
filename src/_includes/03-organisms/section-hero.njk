@@ -62,25 +62,25 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Section Container Classes
-        3.2 Grid Container Classes
+        3.1 Section Wrapper Classes
+        3.2 Grid Wrapper Classes
         3.3 Left Column Classes
         3.4 Right Column Classes
-        3.5 Main Heading Container Classes
-        3.6 Super Heading Container Classes
-        3.7 Content Container Classes
-        3.8 Buttons Container Classes
-        3.9 Image Container Classes
+        3.5 Main Heading Wrapper Classes
+        3.6 Super Heading Wrapper Classes
+        3.7 Content Wrapper Classes
+        3.8 Buttons Wrapper Classes
+        3.9 Image Wrapper Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Section Container Classes
+          3.1 Section Wrapper Classes
           Description: Layout, Spacing, Background
         --------------------------#}
       {% set sectionClasses = "flex flex-col px-[var(--spacing-6)] py-[var(--spacing-8)] bg-[var(--color-global-white)] md:px-[var(--spacing-10)] md:py-[var(--spacing-12)]" %}
 
       {# --------------------------
-          3.2 Grid Container Classes
+          3.2 Grid Wrapper Classes
           Description: Layout responsive grid 2 columns, Spacing
         --------------------------#}
       {% set gridClasses = "flex flex-col gap-[var(--spacing-8)] md:grid md:grid-cols-2 md:gap-[var(--spacing-10)] md:items-start" %}
@@ -98,31 +98,31 @@
       {% set rightColClasses = "flex self-stretch md:mt-[calc(var(--spacing-4)+2rem)]" %}
 
       {# --------------------------
-          3.5 Main Heading Container Classes
+          3.5 Main Heading Wrapper Classes
           Description: Layout, Typography override serif
       --------------------------#}
       {% set mainHeadingClasses = "flex [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif" %}
 
       {# --------------------------
-          3.6 Super Heading Container Classes
+          3.6 Super Heading Wrapper Classes
           Description: Layout
         --------------------------#}
       {% set superHeadingClasses = "flex" %}
 
       {# --------------------------
-          3.7 Content Container Classes
+          3.7 Content Wrapper Classes
           Description: Typography, Colors
         --------------------------#}
       {% set contentClasses = "typography-body-regular text-[var(--color-global-default)]" %}
 
       {# --------------------------
-          3.8 Buttons Container Classes
+          3.8 Buttons Wrapper Classes
           Description: Layout horizontal, Spacing, Alignment centered mobile
       --------------------------#}
       {% set buttonsClasses = "flex gap-[var(--spacing-4)] justify-center md:justify-start" %}
 
       {# --------------------------
-          3.9 Image Container Classes
+          3.9 Image Wrapper Classes
           Description: Layout full height, Image cover without deformation
       --------------------------#}
       {% set imageClasses = "flex h-full w-full overflow-hidden [&_img]:w-full [&_img]:h-full [&_img]:object-cover" %}

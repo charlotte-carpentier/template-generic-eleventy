@@ -54,26 +54,26 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Section Container Classes
-        3.2 Content Container Classes
-        3.3 Heading Container Classes
+        3.1 Section Wrapper Classes
+        3.2 Content Wrapper Classes
+        3.3 Heading Wrapper Classes
         3.4 Content Text Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Section Container Classes
+          3.1 Section Wrapper Classes
           Description: Layout, Spacing, Background
         --------------------------#}
       {% set sectionClasses = "flex flex-col px-[var(--spacing-6)] py-[var(--spacing-8)] bg-[var(--color-global-white)] md:px-[var(--spacing-10)] md:py-[var(--spacing-12)]" %}
 
       {# --------------------------
-          3.2 Content Container Classes
+          3.2 Content Wrapper Classes
           Description: Layout, Sizing max-width centered desktop, Spacing
         --------------------------#}
       {% set containerClasses = "flex flex-col gap-[var(--spacing-4)] w-full md:max-w-[var(--column-width-640)] md:mx-auto" %}
 
       {# --------------------------
-          3.3 Heading Container Classes
+          3.3 Heading Wrapper Classes
           Description: Layout, Typography override serif
       --------------------------#}
       {% set headingClasses = "flex [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif" %}
