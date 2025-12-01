@@ -207,6 +207,18 @@ permalink: "/"
 <h1>Molecules</h1>
 
 <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start;">
+  {# Block drag and drop #}
+  <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Block drag and drop</h2>
+    {{ renderBlockDragAndDrop({
+        name: "demoDragDrop1",
+        datas: molecules["block-drag-and-drop"].blockDragAndDrops,
+        headingDatas: atoms.heading.headings,
+        iconDatas: atoms.icon.icons,
+        buttonDatas: atoms.button.buttons
+    }) }}
+  </section>
+
   {# Breadcrumb #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Breadcrumb</h2>

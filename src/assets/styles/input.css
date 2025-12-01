@@ -255,11 +255,9 @@
      Elevation - Tokens
   ───────────────────────────── */
 
-  --elevation-card: var(--shadow-short);
-  --elevation-dropdown: var(--shadow-medium);
-  --elevation-modal: var(--shadow-tall);
-  --elevation-button-hover: var(--shadow-short);
-  --elevation-tooltip: var(--shadow-medium);
+  --elevation-surface: var(--shadow-short);
+  --elevation-floating: var(--shadow-medium);
+  --elevation-interactive: var(--shadow-medium);
 
   /* ─────────────────────────────
      Border Radius - Primitives
@@ -280,7 +278,6 @@
 
   --radius-default: var(--radius-8);
   --radius-card: var(--radius-12);
-  --radius-badge: var(--radius-16);
   --radius-modal: var(--radius-16);
   --radius-pill: var(--radius-32);
 
@@ -312,11 +309,20 @@
      Spacing - Tokens
   ───────────────────────────── */
 
+  /* Padding (inset) */
+  --spacing-inset: var(--spacing-8);
+  --spacing-inset-small: var(--spacing-5);
+
+  /* Vertical (stack) */
+  --spacing-stack: var(--spacing-8);
+  --spacing-stack-medium: var(--spacing-4);
+  --spacing-stack-small: var(--spacing-3);
+  --spacing-stack-tight: var(--spacing-2);
+
+  /* Horizontal (inline) */
+  --spacing-inline-large: var(--spacing-10);
+  --spacing-inline-medium: var(--spacing-2);
   --spacing-inline: var(--spacing-1);
-  --spacing-component-padding: var(--spacing-4);
-  --spacing-section-margin: var(--spacing-8);
-  --spacing-page-margin: var(--spacing-6);
-  --spacing-content-padding: var(--spacing-6);
 
   /* ─────────────────────────────
      Z-Index - Tokens

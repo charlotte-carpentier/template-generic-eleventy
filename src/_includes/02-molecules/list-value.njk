@@ -70,9 +70,9 @@
       {% set containerClasses = "" %}
 
       {% if variant == 'horizontal' %}
-        {% set containerClasses = "flex flex-row gap-[var(--spacing-8)]" %}
+        {% set containerClasses = "flex flex-row gap-[var(--spacing-inline-large)]" %}
       {% else %}
-        {% set containerClasses = "flex flex-col gap-[var(--spacing-4)]" %}
+        {% set containerClasses = "flex flex-col gap-[var(--spacing-stack-medium)]" %}
       {% endif %}
 
       {# --------------------------
