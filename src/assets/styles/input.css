@@ -236,6 +236,10 @@
   --color-semantic-information-contrast-light-01: var(--color-semantic-information-90);
   --color-semantic-information-contrast-light-02: var(--color-semantic-information-100);
 
+  /* Interactive */
+  --color-interactive-default: var(--color-brand-primary-40);
+  --color-interactive-hover: var(--color-brand-primary-30);
+
   /* ─────────────────────────────
      Gradients - Tokens
   ───────────────────────────── */
@@ -323,6 +327,7 @@
   --spacing-inline-large: var(--spacing-10);
   --spacing-inline-medium: var(--spacing-2);
   --spacing-inline: var(--spacing-1);
+  --spacing-inline-tight: var(--spacing-0-5);
 
   /* ─────────────────────────────
      Z-Index - Tokens
