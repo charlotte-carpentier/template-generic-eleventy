@@ -66,13 +66,14 @@
           3.1 Wrapper Classes
           Description: Layout, Background, Borders, Shadow
         --------------------------#}
-      {% set containerClasses = "flex min-w-80 max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-12)] shadow-lg p-[var(--spacing-4)]" %}
+      {% set containerClasses = "flex min-w-80 max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-lg p-[var(--spacing-inset-small)]" %}
 
       {# --------------------------
           3.2 Content Wrapper Classes
           Description: Layout horizontal, Spacing, Alignment
         --------------------------#}
-      {% set contentWrapperClasses = "flex items-center gap-[var(--spacing-2)] w-full" %}
+      {% set contentWrapperClasses = "flex items-center gap-[var(--spacing-inline-medium)] w-full" %}
+
       {# --------------------------
           3.3 Icon Wrapper Classes
           Description: Layout, Colors by variant
@@ -102,7 +103,7 @@
           3.5 Close Button Classes
           Description: Layout, Colors, States
         --------------------------#}
-      {% set closeButtonClasses = "flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-12)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+      {% set closeButtonClasses = "flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
