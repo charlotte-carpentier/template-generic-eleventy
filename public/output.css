@@ -448,9 +448,6 @@
   .mt-2 {
     margin-top: var(--spacing-2);
   }
-  .mt-\[var\(--spacing-2\)\] {
-    margin-top: var(--spacing-2);
-  }
   .mt-\[var\(--spacing-6\)\] {
     margin-top: var(--spacing-6);
   }
@@ -568,9 +565,6 @@
   .h-20 {
     height: var(--spacing-20);
   }
-  .h-\[var\(--spacing-6\)\] {
-    height: var(--spacing-6);
-  }
   .h-auto {
     height: auto;
   }
@@ -619,6 +613,9 @@
   .w-11 {
     width: calc(var(--spacing) * 11);
   }
+  .w-12 {
+    width: var(--spacing-12);
+  }
   .w-20 {
     width: var(--spacing-20);
   }
@@ -627,9 +624,6 @@
   }
   .w-80 {
     width: calc(var(--spacing) * 80);
-  }
-  .w-\[var\(--spacing-12\)\] {
-    width: var(--spacing-12);
   }
   .w-full {
     width: 100%;
@@ -785,6 +779,9 @@
   .gap-\[var\(--spacing-stack-medium\)\] {
     gap: var(--spacing-stack-medium);
   }
+  .gap-\[var\(--spacing-stack-small\)\] {
+    gap: var(--spacing-stack-small);
+  }
   .gap-\[var\(--spacing-stack-tight\)\] {
     gap: var(--spacing-stack-tight);
   }
@@ -820,9 +817,6 @@
   }
   .rounded {
     border-radius: 0.25rem;
-  }
-  .rounded-\[var\(--radius-12\)\] {
-    border-radius: var(--radius-12);
   }
   .rounded-\[var\(--radius-button\)\] {
     border-radius: var(--radius-button);
@@ -871,9 +865,6 @@
   .\!border-\[var\(--color-semantic-critical\)\] {
     border-color: var(--color-semantic-critical) !important;
   }
-  .border-\[var\(--color-brand-primary-40\)\] {
-    border-color: var(--color-brand-primary-40);
-  }
   .border-\[var\(--color-button-secondary\)\] {
     border-color: var(--color-button-secondary);
   }
@@ -885,6 +876,9 @@
   }
   .border-\[var\(--color-global-contrast-light-03\)\] {
     border-color: var(--color-global-contrast-light-03);
+  }
+  .border-\[var\(--color-interactive-default\)\] {
+    border-color: var(--color-interactive-default);
   }
   .border-\[var\(--color-semantic-critical\)\] {
     border-color: var(--color-semantic-critical);
@@ -998,9 +992,6 @@
   .p-\[var\(--spacing-2\)\] {
     padding: var(--spacing-2);
   }
-  .p-\[var\(--spacing-4\)\] {
-    padding: var(--spacing-4);
-  }
   .p-\[var\(--spacing-6\)\] {
     padding: var(--spacing-6);
   }
@@ -1037,15 +1028,6 @@
   .px-6 {
     padding-inline: var(--spacing-6);
   }
-  .px-\[var\(--spacing-2\)\] {
-    padding-inline: var(--spacing-2);
-  }
-  .px-\[var\(--spacing-3\)\] {
-    padding-inline: var(--spacing-3);
-  }
-  .px-\[var\(--spacing-4\)\] {
-    padding-inline: var(--spacing-4);
-  }
   .px-\[var\(--spacing-6\)\] {
     padding-inline: var(--spacing-6);
   }
@@ -1070,20 +1052,14 @@
   .py-10 {
     padding-block: var(--spacing-10);
   }
-  .py-\[var\(--spacing-1\)\] {
-    padding-block: var(--spacing-1);
-  }
-  .py-\[var\(--spacing-2\)\] {
-    padding-block: var(--spacing-2);
-  }
-  .py-\[var\(--spacing-3\)\] {
-    padding-block: var(--spacing-3);
-  }
   .py-\[var\(--spacing-4\)\] {
     padding-block: var(--spacing-4);
   }
   .py-\[var\(--spacing-8\)\] {
     padding-block: var(--spacing-8);
+  }
+  .py-\[var\(--spacing-inline-tight\)\] {
+    padding-block: var(--spacing-inline-tight);
   }
   .py-\[var\(--spacing-stack-small\)\] {
     padding-block: var(--spacing-stack-small);
@@ -1159,9 +1135,6 @@
   }
   .whitespace-nowrap {
     white-space: nowrap;
-  }
-  .text-\[var\(--color-brand-primary-40\)\] {
-    color: var(--color-brand-primary-40);
   }
   .text-\[var\(--color-button-secondary\)\] {
     color: var(--color-button-secondary);
@@ -1648,13 +1621,6 @@
     &:hover {
       @media (hover: hover) {
         border-color: var(--color-form-hover);
-      }
-    }
-  }
-  .hover\:bg-\[var\(--color-brand-primary-40\)\] {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-brand-primary-40);
       }
     }
   }

@@ -74,9 +74,9 @@
           Description: Layout by variant
         --------------------------#}
       {% if variant == 'vertical' %}
-        {% set listClasses = "flex flex-col gap-[var(--spacing-1)]" %}
+        {% set listClasses = "flex flex-col gap-[var(--spacing-stack-tight)]" %}
       {% else %}
-        {% set listClasses = "flex flex-row items-center gap-[var(--spacing-2)]" %}
+        {% set listClasses = "flex flex-row items-center gap-[var(--spacing-inline-medium)]" %}
       {% endif %}
 
       {# --------------------------
@@ -84,16 +84,16 @@
           Description: Line between steps
         --------------------------#}
       {% if variant == 'vertical' %}
-        {% set connectorClasses = "mt-[var(--spacing-2)] w-px h-[var(--spacing-6)] bg-[var(--color-global-contrast-light-02)]" %}
+        {% set connectorClasses = "mt-[var(--spacing-stack-tight)] w-px h-6 bg-[var(--color-global-contrast-light-02)]" %}
       {% else %}
-        {% set connectorClasses = "flex-shrink-0 h-px w-[var(--spacing-12)] bg-[var(--color-global-contrast-light-02)]" %}
+        {% set connectorClasses = "flex-shrink-0 h-px w-12 bg-[var(--color-global-contrast-light-02)]" %}
       {% endif %}
 
       {# --------------------------
           3.4 Block Step Classes
           Description: Layout horizontal (chip + label)
         --------------------------#}
-      {% set blockStepClasses = "flex items-center gap-[var(--spacing-3)]" %}
+      {% set blockStepClasses = "flex items-center gap-[var(--spacing-stack-small)]" %}
 
       {# --------------------------
           3.5 Chip Wrapper Classes
@@ -127,7 +127,7 @@
           3.9 Vertical Wrapper Classes
           Description: Wrapper for vertical layout (chip column + label)
         --------------------------#}
-      {% set verticalWrapperClasses = "flex gap-[var(--spacing-3)]" %}
+      {% set verticalWrapperClasses = "flex gap-[var(--spacing-stack-small)]" %}
 
       {# --------------------------
           3.10 Chip Column Classes

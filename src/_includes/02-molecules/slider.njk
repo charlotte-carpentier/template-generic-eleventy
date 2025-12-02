@@ -89,7 +89,7 @@
           3.1 Wrapper Classes
           Description: Layout vertical, Spacing
         --------------------------#}
-      {% set containerClasses = "flex flex-col gap-[var(--spacing-2)]" %}
+      {% set containerClasses = "flex flex-col gap-[var(--spacing-stack-tight)]" %}
 
       {# --------------------------
           3.2 Label Text Classes
@@ -101,7 +101,7 @@
           3.3 Track Wrapper Classes
           Description: Relative positioning for handles
         --------------------------#}
-      {% set trackWrapperClasses = "relative w-full py-[var(--spacing-2)]" %}
+      {% set trackWrapperClasses = "relative w-full py-[var(--spacing-stack-tight)]" %}
 
       {# --------------------------
           3.4 Track Classes
@@ -113,25 +113,25 @@
           3.5 Fill Classes
           Description: Filled portion, Colors, Position
         --------------------------#}
-      {% set fillClasses = "absolute top-0 h-full bg-[var(--color-brand-primary-40)] rounded-full transition-all duration-300" %}
+      {% set fillClasses = "absolute top-0 h-full bg-[var(--color-interactive-default)] rounded-full transition-all duration-300" %}
 
       {# --------------------------
           3.6 Handle Classes
           Description: Draggable handle, Position, Colors, Size
         --------------------------#}
-      {% set handleClasses = "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 bg-[var(--color-global-white)] border-2 border-[var(--color-brand-primary-40)] rounded-full cursor-pointer shadow-md transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+      {% set handleClasses = "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 bg-[var(--color-global-white)] border-2 border-[var(--color-interactive-default)] rounded-full cursor-pointer shadow-md transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
 
       {# --------------------------
           3.7 Indicator Outline Classes
           Description: Handle indicator bubble (outline variant)
         --------------------------#}
-      {% set indicatorOutlineClasses = "absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-2)] py-[var(--spacing-1)] typography-body-small text-[var(--color-global-default)] bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] shadow-sm whitespace-nowrap" %}
+      {% set indicatorOutlineClasses = "absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-inline-medium)] py-[var(--spacing-inline-tight)] typography-body-small text-[var(--color-global-default)] bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] shadow-sm whitespace-nowrap" %}
 
       {# --------------------------
           3.8 Indicator Solid Classes
           Description: Handle indicator bubble (solid variant)
         --------------------------#}
-      {% set indicatorSolidClasses = "absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-2)] py-[var(--spacing-1)] typography-body-small text-[var(--color-global-white)] bg-[var(--color-brand-primary-40)] rounded-[var(--radius-default)] shadow-sm whitespace-nowrap" %}
+      {% set indicatorSolidClasses = "absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-inline-medium)] py-[var(--spacing-inline-tight)] typography-body-small text-[var(--color-global-white)] bg-[var(--color-interactive-default)] rounded-[var(--radius-default)] shadow-sm whitespace-nowrap" %}
 
       {# --------------------------
           3.9 Min/Max Wrapper Classes
