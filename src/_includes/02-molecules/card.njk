@@ -79,19 +79,19 @@
           3.1 Card Wrapper Classes
           Description: Layout, Background, Borders, Effects, States
         --------------------------#}
-      {% set cardClasses = "flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]" %}
+      {% set cardClasses = "flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-interactive)]" %}
 
       {# --------------------------
           3.2 Lockup Wrapper Classes
           Description: Layout override for full-width image, text truncation
         --------------------------#}
-      {% set lockupClasses = "[&>div]:flex-col [&>div]:gap-[var(--spacing-0-5)] [&_[data-lockup-image]]:w-full [&_[data-lockup-image]]:h-40 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-t-[var(--radius-card)] [&_img]:rounded-b-none [&_[data-lockup-content]]:p-[var(--spacing-6)] [&_[data-lockup-text]]:line-clamp-2" %}
+      {% set lockupClasses = "[&>div]:flex-col [&>div]:gap-[var(--spacing-stack-tight)] [&_[data-lockup-image]]:w-full [&_[data-lockup-image]]:h-40 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-t-[var(--radius-card)] [&_img]:rounded-b-none [&_[data-lockup-content]]:p-[var(--spacing-stack)] [&_[data-lockup-text]]:line-clamp-2" %}
 
       {# --------------------------
           3.3 Content Wrapper Classes
           Description: Layout, Spacing
         --------------------------#}
-      {% set contentClasses = "flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]" %}
+      {% set contentClasses = "flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-stack-medium)]" %}
 
       {# --------------------------
           3.4 Text Classes
@@ -109,7 +109,7 @@
           3.6 Tags Wrapper Classes
           Description: Layout, Spacing
         --------------------------#}
-      {% set tagsClasses = "flex flex-wrap gap-[var(--spacing-2)] mt-[var(--spacing-2)]" %}
+      {% set tagsClasses = "flex flex-wrap gap-[var(--spacing-inline)] mt-[var(--spacing-stack-tight)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML

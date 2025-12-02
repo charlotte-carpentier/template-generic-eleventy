@@ -1014,7 +1014,7 @@
         <div
           id="tooltip-demotooltip1"
           role="tooltip"
-          class="hidden absolute p-4 bg-[var(--color-global-white)] text-[var(--color-global-default)] shadow-[var(--elevation-tooltip)] rounded-[var(--radius-default)] min-w-[280px] max-w-xs z-[var(--z-tooltip)]"
+          class="hidden absolute p-4 bg-[var(--color-global-white)] text-[var(--color-global-default)] shadow-[var(--elevation-floating)] rounded-[var(--radius-default)] min-w-[280px] max-w-xs z-[var(--z-tooltip)]"
         >
           
             <div class="text-[var(--color-global-contrast-light-01)] text-base font-medium">This is a long label</div>
@@ -1108,6 +1108,287 @@
 <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start;">
   
   <section style="border: 1px solid #ccc; padding: 1rem;">
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Block drag and drop</h2>
+    
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+
+      
+
+      
+      
+
+      
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+      
+      
+
+      
+      <div
+        class="flex flex-col p-[var(--spacing-inset-small)] bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] w-full max-w-xl"
+        data-drag-drop-name="demoDragDrop1"
+        data-drag-drop-type="block-drag-and-drop"
+        data-drag-drop="true"
+        data-allowed-types="xls,xlsx"
+        data-max-size="10mb"
+      >
+        
+        <div class="mb-[var(--spacing-stack)]">
+          
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+
+      
+      
+      
+
+      
+
+      
+      
+
+      
+      
+      
+
+      
+        
+      
+
+      
+      
+        <h2
+          class="text-[var(--color-global-heading)] typography-h2-serif"
+          data-heading-name="demoHeadUp1"
+          data-heading-type="heading"
+          data-heading-tag="h2"
+        >Upload file</h2>
+      
+    
+  
+
+        </div>
+
+        
+        <div
+          class="flex flex-col items-start justify-center p-[var(--spacing-inset)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-card)] bg-[var(--color-global-white)] min-h-[160px] cursor-pointer transition-colors mb-[var(--spacing-stack-medium)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 hover:bg-[var(--color-global-contrast-light-03)] "
+          data-drag-drop-zone="true"
+          tabindex="0"
+          role="button"
+          aria-label="Upload file by dropping it here or by clicking"
+          
+        >
+          
+          <div class="mb-[var(--spacing-stack-small)] text-[var(--color-global-contrast-light-02)]">
+            
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-10 h-10 fill-current"
+          aria-label="Upload file"
+          role="img"
+          data-icon-name="demoFileUp1"
+          data-icon-type="icon"
+          data-icon-variant="xxl"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#file-arrow-up"></use>
+        </svg>
+      
+    
+  
+
+          </div>
+
+          
+          <p class="typography-body-regular text-[var(--color-global-default)]" data-drag-drop-text="true">
+            Drag and drop file here
+          </p>
+        </div>
+
+        
+        <span class="block my-[var(--spacing-stack-medium)] typography-body-regular text-[var(--color-global-default)]">Or</span>
+
+        
+        <div class="flex mb-[var(--spacing-stack-medium)]" data-drag-drop-button="true">
+          
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+
+      
+      
+
+      
+
+      
+        
+      
+
+      
+
+      
+        
+
+      
+
+      
+
+      
+
+      
+      <button
+        type="button"
+        class="inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] px-6 py-3 text-base rounded-[var(--radius-default)] bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed "
+        data-button-name="demoBrowse1"
+        data-button-type="button"
+        
+        
+        
+        
+        aria-label="Browse files to upload"
+        >
+        
+        
+
+        
+        
+
+        
+        
+          Browse files
+        
+
+        
+        
+      </button>
+    
+  
+
+        </div>
+
+        
+        <div class="flex flex-col gap-[var(--spacing-inline)] mt-[var(--spacing-stack-tight)]" data-drag-drop-info="true">
+          <p>
+            <span class="text-sm text-[var(--color-global-contrast-light-02)]">Supported formats </span>
+            <span class="text-sm text-[var(--color-global-default)]">XLS, XLSX</span>
+          </p>
+          <p>
+            <span class="text-sm text-[var(--color-global-contrast-light-02)]">Maximum file size </span>
+            <span class="text-sm text-[var(--color-global-default)]">10 MB</span>
+          </p>
+        </div>
+
+        
+        <input
+          type="file"
+          id="file-demoDragDrop1"
+          class="sr-only"
+          data-drag-drop-input="true"
+          accept="xls,xlsx"
+          aria-hidden="true"
+          tabindex="-1"
+        >
+      </div>
+    
+  
+
+  </section>
+
+  
+  <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Breadcrumb</h2>
     
 
@@ -1141,9 +1422,9 @@
         data-breadcrumb-name="demoBreadcrm1"
         data-breadcrumb-type="breadcrumb"
       >
-        <ol class="flex flex-wrap items-center gap-[var(--spacing-2)]">
+        <ol class="flex flex-wrap items-center gap-[var(--spacing-inline)]">
           
-            <li class="flex items-center gap-[var(--spacing-2)]">
+            <li class="flex items-center gap-[var(--spacing-inline)]">
               
               
 
@@ -1209,7 +1490,7 @@
               
             </li>
           
-            <li class="flex items-center gap-[var(--spacing-2)]">
+            <li class="flex items-center gap-[var(--spacing-inline)]">
               
               
                 <span
@@ -1283,7 +1564,7 @@
               
             </li>
           
-            <li class="flex items-center gap-[var(--spacing-2)]">
+            <li class="flex items-center gap-[var(--spacing-inline)]">
               
               
                 <span
@@ -1357,7 +1638,7 @@
 
       
       <div
-        class="inline-flex items-center gap-[var(--spacing-1)]"
+        class="inline-flex items-center gap-[var(--spacing-inline)]"
         data-caption-name="demoCaption1"
         data-caption-type="caption"
         data-caption-variant="info"
@@ -1466,7 +1747,7 @@
 
       
       <div
-        class="inline-flex items-center gap-[var(--spacing-1)]"
+        class="inline-flex items-center gap-[var(--spacing-inline)]"
         data-caption-name="demoCaption2"
         data-caption-type="caption"
         data-caption-variant="success"
@@ -1575,7 +1856,7 @@
 
       
       <div
-        class="inline-flex items-center gap-[var(--spacing-1)]"
+        class="inline-flex items-center gap-[var(--spacing-inline)]"
         data-caption-name="demoCaption3"
         data-caption-type="caption"
         data-caption-variant="warning"
@@ -1684,7 +1965,7 @@
 
       
       <div
-        class="inline-flex items-center gap-[var(--spacing-1)]"
+        class="inline-flex items-center gap-[var(--spacing-inline)]"
         data-caption-name="demoCaption4"
         data-caption-type="caption"
         data-caption-variant="error"
@@ -1795,14 +2076,14 @@
 
       
       <div
-        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-interactive)]"
         data-card-id="demoCard1"
         data-card-type="card"
       >
         
         
           <div
-            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-0-5)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-6)] [&amp;_[data-lockup-text]]:line-clamp-2"
+            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-stack-tight)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-stack)] [&amp;_[data-lockup-text]]:line-clamp-2"
             data-card-lockup="true"
           >
             
@@ -1857,7 +2138,7 @@
 
       
       <div
-        class="flex gap-[var(--spacing-4)]"
+        class="flex gap-[var(--spacing-inline-large)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -1917,7 +2198,7 @@
 
           
           <div
-            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            class="flex flex-col gap-[var(--spacing-stack-tight] flex-1"
             data-lockup-content="true"
           >
             
@@ -1987,7 +2268,7 @@
 
         
         <div
-          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          class="flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-stack-medium)]"
           data-card-content="true"
         >
           
@@ -2114,14 +2395,14 @@
 
       
       <div
-        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-interactive)]"
         data-card-id="demoCard1"
         data-card-type="card"
       >
         
         
           <div
-            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-0-5)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-6)] [&amp;_[data-lockup-text]]:line-clamp-2"
+            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-stack-tight)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-stack)] [&amp;_[data-lockup-text]]:line-clamp-2"
             data-card-lockup="true"
           >
             
@@ -2176,7 +2457,7 @@
 
       
       <div
-        class="flex gap-[var(--spacing-4)]"
+        class="flex gap-[var(--spacing-inline-large)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -2236,7 +2517,7 @@
 
           
           <div
-            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            class="flex flex-col gap-[var(--spacing-stack-tight] flex-1"
             data-lockup-content="true"
           >
             
@@ -2306,7 +2587,7 @@
 
         
         <div
-          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          class="flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-stack-medium)]"
           data-card-content="true"
         >
           
@@ -2450,7 +2731,7 @@
 
       
       <div
-        class="flex flex-col w-full rounded-[var(--radius-12)] border-2 p-[var(--spacing-4)] bg-[var(--color-semantic-information-contrast-light-02)] border-[var(--color-semantic-information)]"
+        class="flex flex-col w-full rounded-[var(--radius-card)] border-2 p-[var(--spacing-inset-small)] bg-[var(--color-semantic-information-contrast-light-02)] border-[var(--color-semantic-information)]"
         data-disclaimer-name="demoDiscla1"
         data-disclaimer-type="disclaimer"
         data-disclaimer-variant="info"
@@ -2458,7 +2739,7 @@
         aria-live="polite"
       >
         <div
-          class="flex items-center gap-[var(--spacing-2)]"
+          class="flex items-center gap-[var(--spacing-inline-medium)]"
           data-disclaimer-content="true"
         >
           
@@ -2530,7 +2811,7 @@
           
             <button
               type="button"
-              class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-10)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+              class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
               data-disclaimer-dismiss="true"
               aria-label="Dismiss button text"
             >
@@ -2634,7 +2915,7 @@
 
       
       <div
-        class="flex flex-col w-full rounded-[var(--radius-12)] border-2 p-[var(--spacing-4)] bg-[var(--color-semantic-success-contrast-light-02)] border-[var(--color-semantic-success)]"
+        class="flex flex-col w-full rounded-[var(--radius-card)] border-2 p-[var(--spacing-inset-small)] bg-[var(--color-semantic-success-contrast-light-02)] border-[var(--color-semantic-success)]"
         data-disclaimer-name="demoDiscla2"
         data-disclaimer-type="disclaimer"
         data-disclaimer-variant="success"
@@ -2642,7 +2923,7 @@
         aria-live="polite"
       >
         <div
-          class="flex items-center gap-[var(--spacing-2)]"
+          class="flex items-center gap-[var(--spacing-inline-medium)]"
           data-disclaimer-content="true"
         >
           
@@ -2714,7 +2995,7 @@
           
             <button
               type="button"
-              class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-10)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+              class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
               data-disclaimer-dismiss="true"
               aria-label="Dismiss button text"
             >
@@ -2818,7 +3099,7 @@
 
       
       <div
-        class="flex flex-col w-full rounded-[var(--radius-12)] border-2 p-[var(--spacing-4)] bg-[var(--color-semantic-warning-contrast-light-02)] border-[var(--color-semantic-warning)]"
+        class="flex flex-col w-full rounded-[var(--radius-card)] border-2 p-[var(--spacing-inset-small)] bg-[var(--color-semantic-warning-contrast-light-02)] border-[var(--color-semantic-warning)]"
         data-disclaimer-name="demoDiscla3"
         data-disclaimer-type="disclaimer"
         data-disclaimer-variant="warning"
@@ -2826,7 +3107,7 @@
         aria-live="polite"
       >
         <div
-          class="flex items-center gap-[var(--spacing-2)]"
+          class="flex items-center gap-[var(--spacing-inline-medium)]"
           data-disclaimer-content="true"
         >
           
@@ -2898,7 +3179,7 @@
           
             <button
               type="button"
-              class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-10)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+              class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
               data-disclaimer-dismiss="true"
               aria-label="Dismiss button text"
             >
@@ -3002,7 +3283,7 @@
 
       
       <div
-        class="flex flex-col w-full rounded-[var(--radius-12)] border-2 p-[var(--spacing-4)] bg-[var(--color-semantic-critical-contrast-light-02)] border-[var(--color-semantic-critical)]"
+        class="flex flex-col w-full rounded-[var(--radius-card)] border-2 p-[var(--spacing-inset-small)] bg-[var(--color-semantic-critical-contrast-light-02)] border-[var(--color-semantic-critical)]"
         data-disclaimer-name="demoDiscla4"
         data-disclaimer-type="disclaimer"
         data-disclaimer-variant="error"
@@ -3010,7 +3291,7 @@
         aria-live="polite"
       >
         <div
-          class="flex items-center gap-[var(--spacing-2)]"
+          class="flex items-center gap-[var(--spacing-inline-medium)]"
           data-disclaimer-content="true"
         >
           
@@ -3082,7 +3363,7 @@
           
             <button
               type="button"
-              class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-10)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+              class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
               data-disclaimer-dismiss="true"
               aria-label="Dismiss button text"
             >
@@ -3170,7 +3451,7 @@
 
       
       <div
-        class="flex flex-col gap-[var(--spacing-8)]"
+        class="flex flex-col gap-[var(--spacing-stack)]"
         data-list-content-id="demoList1"
         data-list-content-type="list-content"
       >
@@ -3232,7 +3513,7 @@
 
       
       <div
-        class="flex gap-[var(--spacing-4)]"
+        class="flex gap-[var(--spacing-inline-large)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -3292,7 +3573,7 @@
 
           
           <div
-            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            class="flex flex-col gap-[var(--spacing-stack-tight] flex-1"
             data-lockup-content="true"
           >
             
@@ -3416,7 +3697,7 @@
 
       
       <div
-        class="flex gap-[var(--spacing-4)]"
+        class="flex gap-[var(--spacing-inline-large)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -3476,7 +3757,7 @@
 
           
           <div
-            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            class="flex flex-col gap-[var(--spacing-stack-tight] flex-1"
             data-lockup-content="true"
           >
             
@@ -3600,7 +3881,7 @@
 
       
       <div
-        class="flex gap-[var(--spacing-4)]"
+        class="flex gap-[var(--spacing-inline-large)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -3660,7 +3941,7 @@
 
           
           <div
-            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            class="flex flex-col gap-[var(--spacing-stack-tight] flex-1"
             data-lockup-content="true"
           >
             
@@ -3760,7 +4041,7 @@
 
       
       <div
-        class="flex flex-col gap-[var(--spacing-4)]"
+        class="flex flex-col gap-[var(--spacing-stack-medium)]"
         data-list-control-id="demoList1"
         data-list-control-type="radio"
       >
@@ -4053,7 +4334,7 @@
 
       
       <div
-        class="flex flex-col gap-[var(--spacing-4)]"
+        class="flex flex-col gap-[var(--spacing-stack-medium)]"
         data-list-control-id="demoList2"
         data-list-control-type="checkbox"
       >
@@ -4385,7 +4666,7 @@
 
       
       <div
-        class="flex flex-col gap-[var(--spacing-4)]"
+        class="flex flex-col gap-[var(--spacing-stack-medium)]"
         data-list-control-id="demoList3"
         data-list-control-type="toggle"
       >
@@ -4738,7 +5019,7 @@
 
       
       <div
-        class="flex flex-col gap-[var(--spacing-6)]"
+        class="flex flex-col gap-[var(--spacing-stack-medium)]"
         data-list-form-id="demoForm1"
         data-list-form-type="input-list"
       >
@@ -5024,7 +5305,7 @@
       >
         
           <div
-            class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-4)] py-[var(--spacing-3)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
             data-list-group-item="true"
           >
             
@@ -5081,7 +5362,7 @@
 
             
             <span
-              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-10)]"
+              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-inline-large)]"
               data-list-group-text="true"
             >
               This is a long label
@@ -5092,7 +5373,7 @@
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-4)] py-[var(--spacing-3)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
             data-list-group-item="true"
           >
             
@@ -5149,7 +5430,7 @@
 
             
             <span
-              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-10)]"
+              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-inline-large)]"
               data-list-group-text="true"
             >
               This is a long label
@@ -5160,7 +5441,7 @@
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-4)] py-[var(--spacing-3)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
             data-list-group-item="true"
           >
             
@@ -5217,7 +5498,7 @@
 
             
             <span
-              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-10)]"
+              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-inline-large)]"
               data-list-group-text="true"
             >
               This is a long label
@@ -5228,7 +5509,7 @@
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-4)] py-[var(--spacing-3)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
             data-list-group-item="true"
           >
             
@@ -5285,7 +5566,7 @@
 
             
             <span
-              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-10)]"
+              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-inline-large)]"
               data-list-group-text="true"
             >
               This is a long label
@@ -5296,7 +5577,7 @@
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-4)] py-[var(--spacing-3)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
             data-list-group-item="true"
           >
             
@@ -5353,7 +5634,7 @@
 
             
             <span
-              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-10)]"
+              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-inline-large)]"
               data-list-group-text="true"
             >
               This is a long label
@@ -5364,7 +5645,7 @@
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-4)] py-[var(--spacing-3)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
             data-list-group-item="true"
           >
             
@@ -5421,7 +5702,7 @@
 
             
             <span
-              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-10)]"
+              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-inline-large)]"
               data-list-group-text="true"
             >
               This is a long label
@@ -5477,7 +5758,7 @@
       >
         
           <div
-            class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-4)] py-[var(--spacing-3)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
             data-list-group-item="true"
           >
             
@@ -5534,7 +5815,7 @@
 
             
             <span
-              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-10)]"
+              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-inline-large)]"
               data-list-group-text="true"
             >
               This is a long label
@@ -5603,7 +5884,7 @@
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-4)] py-[var(--spacing-3)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
             data-list-group-item="true"
           >
             
@@ -5660,7 +5941,7 @@
 
             
             <span
-              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-10)]"
+              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-inline-large)]"
               data-list-group-text="true"
             >
               This is a long label
@@ -5729,7 +6010,7 @@
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-4)] py-[var(--spacing-3)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
             data-list-group-item="true"
           >
             
@@ -5786,7 +6067,7 @@
 
             
             <span
-              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-10)]"
+              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-inline-large)]"
               data-list-group-text="true"
             >
               This is a long label
@@ -5855,7 +6136,7 @@
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-4)] py-[var(--spacing-3)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
             data-list-group-item="true"
           >
             
@@ -5912,7 +6193,7 @@
 
             
             <span
-              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-10)]"
+              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-inline-large)]"
               data-list-group-text="true"
             >
               This is a long label
@@ -5981,7 +6262,7 @@
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-4)] py-[var(--spacing-3)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
             data-list-group-item="true"
           >
             
@@ -6038,7 +6319,7 @@
 
             
             <span
-              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-10)]"
+              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-inline-large)]"
               data-list-group-text="true"
             >
               This is a long label
@@ -6107,7 +6388,7 @@
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-4)] py-[var(--spacing-3)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
             data-list-group-item="true"
           >
             
@@ -6164,7 +6445,7 @@
 
             
             <span
-              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-10)]"
+              class="typography-body-regular text-[var(--color-global-default)] flex-1 pr-[var(--spacing-inline-large)]"
               data-list-group-text="true"
             >
               This is a long label
@@ -6268,7 +6549,7 @@
 
       
       <div
-        class="flex flex-col gap-[var(--spacing-4)]"
+        class="flex flex-col gap-[var(--spacing-stack-medium)]"
         data-list-value-id="demoList1"
         data-list-value-type="list-value"
         data-list-value-variant="default"
@@ -6315,6 +6596,9 @@
 
       
         
+        
+          
+        
       
 
       
@@ -6331,8 +6615,8 @@
 
       
       <div
-        class="flex flex-col gap-[var(--spacing-1)]"
-        data-lockup-id="demoLock1"
+        class="flex flex-row items-center gap-[var(--spacing-inline-medium)]"
+        data-lockup-id="demoLock4"
         data-lockup-type="default"
       >
         
@@ -6405,6 +6689,9 @@
 
       
         
+        
+          
+        
       
 
       
@@ -6421,8 +6708,8 @@
 
       
       <div
-        class="flex flex-col gap-[var(--spacing-1)]"
-        data-lockup-id="demoLock1"
+        class="flex flex-row items-center gap-[var(--spacing-inline-medium)]"
+        data-lockup-id="demoLock4"
         data-lockup-type="default"
       >
         
@@ -6495,6 +6782,9 @@
 
       
         
+        
+          
+        
       
 
       
@@ -6511,8 +6801,8 @@
 
       
       <div
-        class="flex flex-col gap-[var(--spacing-1)]"
-        data-lockup-id="demoLock1"
+        class="flex flex-row items-center gap-[var(--spacing-inline-medium)]"
+        data-lockup-id="demoLock4"
         data-lockup-type="default"
       >
         
@@ -6590,6 +6880,9 @@
 
       
         
+        
+          
+        
       
 
       
@@ -6606,8 +6899,8 @@
 
       
       <div
-        class="flex flex-col gap-[var(--spacing-1)]"
-        data-lockup-id="demoLock1"
+        class="flex flex-row items-center gap-[var(--spacing-inline-medium)]"
+        data-lockup-id="demoLock4"
         data-lockup-type="default"
       >
         
@@ -6689,7 +6982,7 @@
 
       
       <div
-        class="flex flex-col gap-[var(--spacing-1)]"
+        class="flex flex-col gap-[var(--spacing-stack-tight)]"
         data-lockup-id="demoLock2"
         data-lockup-type="value-legend"
       >
@@ -6764,7 +7057,7 @@
 
       
       <div
-        class="flex gap-[var(--spacing-4)]"
+        class="flex gap-[var(--spacing-inline-large)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -6824,7 +7117,7 @@
 
           
           <div
-            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            class="flex flex-col gap-[var(--spacing-stack-tight] flex-1"
             data-lockup-content="true"
           >
             
@@ -6936,7 +7229,7 @@
 
       
       <div
-        class="flex items-center justify-between gap-[var(--spacing-12)] w-full"
+        class="flex items-center justify-between gap-[var(--spacing-inline-large)] w-full"
         data-pagination-name="demoPreview"
         data-pagination-type="pagination"
       >
@@ -7023,14 +7316,14 @@
             aria-label="Pagination"
             data-pagination-nav="true"
           >
-            <ul class="flex items-center gap-[var(--spacing-0-5)]">
+            <ul class="flex items-center gap-[var(--spacing-inline-tight)]">
               
                 <li class="">
                   
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
                       data-pagination-link="true"
                       data-pagination-action="first"
                       aria-label="First page"
@@ -7093,7 +7386,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
                       data-pagination-link="true"
                       data-pagination-action="prev"
                       aria-label="Previous page"
@@ -7156,7 +7449,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
                       data-pagination-link="true"
                       data-pagination-current="true" aria-current="page"
                       rel="nofollow"
@@ -7171,7 +7464,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
                       data-pagination-link="true"
                       
                       rel="nofollow"
@@ -7186,7 +7479,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
                       data-pagination-link="true"
                       
                       rel="nofollow"
@@ -7201,7 +7494,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
                       data-pagination-link="true"
                       
                       rel="nofollow"
@@ -7216,7 +7509,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
                       data-pagination-link="true"
                       
                       rel="nofollow"
@@ -7231,7 +7524,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
                       data-pagination-link="true"
                       
                       rel="nofollow"
@@ -7246,7 +7539,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
                       data-pagination-link="true"
                       data-pagination-action="dots"
                       aria-label="More pages"
@@ -7309,7 +7602,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
                       data-pagination-link="true"
                       data-pagination-action="next"
                       aria-label="Next page"
@@ -7372,7 +7665,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
                       data-pagination-link="true"
                       data-pagination-action="last"
                       aria-label="Last page"
@@ -7441,7 +7734,7 @@
           
 
           <div
-            class="hidden md:flex flex-shrink-0 typography-body-regular text-[var(--color-brand-primary-30)]"
+            class="hidden md:flex flex-shrink-0 typography-body-regular text-[var(--color-interactive-default)]"
             data-pagination-counter="true"
           >
             <span>
@@ -7502,366 +7795,820 @@
 
       
       <div
-        class="flex flex-col bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] shadow-md p-[var(--spacing-2)]"
-        data-panel-name="demoPanel4"
-        data-panel-type="default"
-        data-panel-variant="phone"
+        class="flex flex-col bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] shadow-md p-[var(--spacing-inset-tight)]"
+        data-panel-name="demoPanel6"
+        data-panel-type="date"
+        data-panel-variant="double"
         role="listbox"
-        aria-label="Panel demoPanel4"
+        aria-label="Panel demoPanel6"
       >
         
         
           
-            <div
-              class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-3)] py-[var(--spacing-2)] rounded-[var(--radius-default)] transition-colors cursor-pointer hover:[&amp;&gt;span]:text-[var(--color-global-accent)] hover:[&amp;_svg]:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] disabled:bg-[var(--color-global-contrast-light-04)] disabled:text-[var(--color-global-contrast-light-02)] disabled:cursor-not-allowed"
-              data-panel-item="true"
-              role="option"
-              tabindex="0"
-            >
-              
-              
-                <div class="flex-shrink-0 inline-flex items-center w-6 h-6">
-                  
-
-  
-  
-    
-    
-
-    
-    
-
-      
-      
-      
-      
-      
-      
-
-      
-
-      
-      
-
-      
-        
-      
-
-      
-      
-        
-        
-        
-
-        <span
-          class="fi fi-us inline-block flex-shrink-0 w-5 h-5"
-          role="img"
-          aria-label="United States flag"
-          title="United States flag"
-          data-icon-name="demoFlagUs1"
-          data-icon-type="flag"
-          data-icon-variant="md"
-        ></span>
-
-      
-    
-  
-
-                </div>
-                <span class="typography-body-regular text-[var(--color-global-default)] flex-1">United States</span>
+          
+            <div class="flex items-center justify-between px-[var(--spacing-inline-medium)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)]" data-panel-nav="true">
+              <button
+                type="button"
+                class="inline-flex items-center justify-center w-8 h-8 text-[var(--color-brand-primary-40)] bg-transparent border-0 rounded-[var(--radius-default)] cursor-pointer transition-colors hover:bg-[var(--color-global-contrast-light-04)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]"
+                data-panel-nav-prev="true"
+                aria-label="Previous month"
+              >
                 
-                  <span
-                    class="typography-body-small text-[var(--color-global-contrast-light-01)] ml-auto"
-                    data-panel-code="true"
-                  >
-                    +1
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Previous page"
+          role="img"
+          data-icon-name="demoLeft1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#caret-left-solid-full"></use>
+        </svg>
+      
+    
+  
+
+              </button>
+
+              
+              <div class="flex gap-60 flex-1 justify-center">
+                
+                  <span class="typography-body-semibold text-[var(--color-global-default)]" data-panel-month="true">
+                    November 2025
+                  </span>
+                  <span class="typography-body-semibold text-[var(--color-global-default)]" data-panel-month="true">
+                    December 2025
                   </span>
                 
+              </div>
 
-              
-              
+              <button
+                type="button"
+                class="inline-flex items-center justify-center w-8 h-8 text-[var(--color-brand-primary-40)] bg-transparent border-0 rounded-[var(--radius-default)] cursor-pointer transition-colors hover:bg-[var(--color-global-contrast-light-04)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]"
+                data-panel-nav-next="true"
+                aria-label="Next month"
+              >
+                
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+
+      
+        
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Next page"
+          role="img"
+          data-icon-name="demoRight1"
+          data-icon-type="icon"
+          data-icon-variant="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#caret-right-solid-full"></use>
+        </svg>
+      
+    
+  
+
+              </button>
             </div>
           
+
+          
+          <div class="flex gap-[var(--spacing-inset-small)]">
+            
             <div
-              class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-3)] py-[var(--spacing-2)] rounded-[var(--radius-default)] transition-colors cursor-pointer hover:[&amp;&gt;span]:text-[var(--color-global-accent)] hover:[&amp;_svg]:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] disabled:bg-[var(--color-global-contrast-light-04)] disabled:text-[var(--color-global-contrast-light-02)] disabled:cursor-not-allowed"
-              data-panel-item="true"
-              role="option"
-              tabindex="0"
+              class="p-[var(--spacing-inset-small)]"
+              data-panel-calendar="true"
             >
               
+              <div class="grid grid-cols-7 gap-1 mb-2">
+                <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">SU</div>
+                <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">MO</div>
+                <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">TU</div>
+                <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">WE</div>
+                <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">TH</div>
+                <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">FR</div>
+                <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">SA</div>
+              </div>
+
               
-                <div class="flex-shrink-0 inline-flex items-center w-6 h-6">
+              <div class="grid grid-cols-7 gap-1">
+                
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                    data-panel-date="prev-26"
+                  >
+                    26
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                    data-panel-date="prev-27"
+                  >
+                    27
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                    data-panel-date="prev-28"
+                  >
+                    28
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                    data-panel-date="prev-29"
+                  >
+                    29
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                    data-panel-date="prev-30"
+                  >
+                    30
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                    data-panel-date="prev-31"
+                  >
+                    31
+                  </button>
+                
+
+                
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="1"
+                  >
+                    1
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="2"
+                  >
+                    2
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="3"
+                  >
+                    3
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="4"
+                  >
+                    4
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="5"
+                  >
+                    5
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="6"
+                  >
+                    6
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="7"
+                  >
+                    7
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="8"
+                  >
+                    8
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="9"
+                  >
+                    9
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="10"
+                  >
+                    10
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="11"
+                  >
+                    11
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="12"
+                  >
+                    12
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="13"
+                  >
+                    13
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="14"
+                  >
+                    14
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="15"
+                  >
+                    15
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="16"
+                  >
+                    16
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="17"
+                  >
+                    17
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="18"
+                  >
+                    18
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="19"
+                  >
+                    19
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="20"
+                  >
+                    20
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="21"
+                  >
+                    21
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="22"
+                  >
+                    22
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="23"
+                  >
+                    23
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="24"
+                  >
+                    24
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="25"
+                  >
+                    25
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="26"
+                  >
+                    26
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] bg-[var(--color-interactive-default)] text-[var(--color-global-white)] hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]"
+                    data-panel-date="27"
+                  >
+                    27
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="28"
+                  >
+                    28
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="29"
+                  >
+                    29
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                    data-panel-date="30"
+                  >
+                    30
+                  </button>
+                
+
+                
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                    data-panel-date="next-1"
+                  >
+                    1
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                    data-panel-date="next-2"
+                  >
+                    2
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                    data-panel-date="next-3"
+                  >
+                    3
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                    data-panel-date="next-4"
+                  >
+                    4
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                    data-panel-date="next-5"
+                  >
+                    5
+                  </button>
+                
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                    data-panel-date="next-6"
+                  >
+                    6
+                  </button>
+                
+              </div>
+            </div>
+
+            
+            
+              <div
+                class="p-[var(--spacing-inset-small)]"
+                data-panel-calendar="true"
+              >
+                
+                <div class="grid grid-cols-7 gap-1 mb-2">
+                  <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">SU</div>
+                  <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">MO</div>
+                  <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">TU</div>
+                  <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">WE</div>
+                  <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">TH</div>
+                  <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">FR</div>
+                  <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">SA</div>
+                </div>
+
+                
+                <div class="grid grid-cols-7 gap-1">
+                  
+                  <button
+                    type="button"
+                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                    data-panel-date="prev-30"
+                  >
+                    30
+                  </button>
+
+                  
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="1"
+                    >
+                      1
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="2"
+                    >
+                      2
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="3"
+                    >
+                      3
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="4"
+                    >
+                      4
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] bg-[var(--color-interactive-default)] text-[var(--color-global-white)] hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]"
+                      data-panel-date="5"
+                    >
+                      5
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="6"
+                    >
+                      6
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="7"
+                    >
+                      7
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="8"
+                    >
+                      8
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="9"
+                    >
+                      9
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="10"
+                    >
+                      10
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="11"
+                    >
+                      11
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="12"
+                    >
+                      12
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="13"
+                    >
+                      13
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="14"
+                    >
+                      14
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="15"
+                    >
+                      15
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="16"
+                    >
+                      16
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="17"
+                    >
+                      17
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="18"
+                    >
+                      18
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="19"
+                    >
+                      19
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="20"
+                    >
+                      20
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="21"
+                    >
+                      21
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="22"
+                    >
+                      22
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="23"
+                    >
+                      23
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="24"
+                    >
+                      24
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="25"
+                    >
+                      25
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="26"
+                    >
+                      26
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="27"
+                    >
+                      27
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="28"
+                    >
+                      28
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="29"
+                    >
+                      29
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="30"
+                    >
+                      30
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
+                      data-panel-date="31"
+                    >
+                      31
+                    </button>
                   
 
-  
-  
-    
-    
-
-    
-    
-
-      
-      
-      
-      
-      
-      
-
-      
-
-      
-      
-
-      
-        
-      
-
-      
-      
-        
-        
-        
-
-        <span
-          class="fi fi-cn inline-block flex-shrink-0 w-5 h-5"
-          role="img"
-          aria-label="China flag"
-          title="China flag"
-          data-icon-name="demoFlagCn1"
-          data-icon-type="flag"
-          data-icon-variant="md"
-        ></span>
-
-      
-    
-  
-
-                </div>
-                <span class="typography-body-regular text-[var(--color-global-default)] flex-1">China</span>
-                
-                  <span
-                    class="typography-body-small text-[var(--color-global-contrast-light-01)] ml-auto"
-                    data-panel-code="true"
-                  >
-                    +86
-                  </span>
-                
-
-              
-              
-            </div>
-          
-            <div
-              class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-3)] py-[var(--spacing-2)] rounded-[var(--radius-default)] transition-colors cursor-pointer hover:[&amp;&gt;span]:text-[var(--color-global-accent)] hover:[&amp;_svg]:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] disabled:bg-[var(--color-global-contrast-light-04)] disabled:text-[var(--color-global-contrast-light-02)] disabled:cursor-not-allowed"
-              data-panel-item="true"
-              role="option"
-              tabindex="0"
-            >
-              
-              
-                <div class="flex-shrink-0 inline-flex items-center w-6 h-6">
                   
-
-  
-  
-    
-    
-
-    
-    
-
-      
-      
-      
-      
-      
-      
-
-      
-
-      
-      
-
-      
-        
-      
-
-      
-      
-        
-        
-        
-
-        <span
-          class="fi fi-af inline-block flex-shrink-0 w-5 h-5"
-          role="img"
-          aria-label="Afghanistan flag"
-          title="Afghanistan flag"
-          data-icon-name="demoFlagAf1"
-          data-icon-type="flag"
-          data-icon-variant="md"
-        ></span>
-
-      
-    
-  
-
-                </div>
-                <span class="typography-body-regular text-[var(--color-global-default)] flex-1">Afghanistan</span>
-                
-                  <span
-                    class="typography-body-small text-[var(--color-global-contrast-light-01)] ml-auto"
-                    data-panel-code="true"
-                  >
-                    +93
-                  </span>
-                
-
-              
-              
-            </div>
-          
-            <div
-              class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-3)] py-[var(--spacing-2)] rounded-[var(--radius-default)] transition-colors cursor-pointer hover:[&amp;&gt;span]:text-[var(--color-global-accent)] hover:[&amp;_svg]:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] disabled:bg-[var(--color-global-contrast-light-04)] disabled:text-[var(--color-global-contrast-light-02)] disabled:cursor-not-allowed"
-              data-panel-item="true"
-              role="option"
-              tabindex="0"
-            >
-              
-              
-                <div class="flex-shrink-0 inline-flex items-center w-6 h-6">
                   
-
-  
-  
-    
-    
-
-    
-    
-
-      
-      
-      
-      
-      
-      
-
-      
-
-      
-      
-
-      
-        
-      
-
-      
-      
-        
-        
-        
-
-        <span
-          class="fi fi-al inline-block flex-shrink-0 w-5 h-5"
-          role="img"
-          aria-label="Albania flag"
-          title="Albania flag"
-          data-icon-name="demoFlagAl1"
-          data-icon-type="flag"
-          data-icon-variant="md"
-        ></span>
-
-      
-    
-  
-
-                </div>
-                <span class="typography-body-regular text-[var(--color-global-default)] flex-1">Albania</span>
-                
-                  <span
-                    class="typography-body-small text-[var(--color-global-contrast-light-01)] ml-auto"
-                    data-panel-code="true"
-                  >
-                    +355
-                  </span>
-                
-
-              
-              
-            </div>
-          
-            <div
-              class="flex items-center gap-[var(--spacing-3)] px-[var(--spacing-3)] py-[var(--spacing-2)] rounded-[var(--radius-default)] transition-colors cursor-pointer hover:[&amp;&gt;span]:text-[var(--color-global-accent)] hover:[&amp;_svg]:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] disabled:bg-[var(--color-global-contrast-light-04)] disabled:text-[var(--color-global-contrast-light-02)] disabled:cursor-not-allowed"
-              data-panel-item="true"
-              role="option"
-              tabindex="0"
-            >
-              
-              
-                <div class="flex-shrink-0 inline-flex items-center w-6 h-6">
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                      data-panel-date="next-1"
+                    >
+                      1
+                    </button>
                   
-
-  
-  
-    
-    
-
-    
-    
-
-      
-      
-      
-      
-      
-      
-
-      
-
-      
-      
-
-      
-        
-      
-
-      
-      
-        
-        
-        
-
-        <span
-          class="fi fi-dz inline-block flex-shrink-0 w-5 h-5"
-          role="img"
-          aria-label="Algeria flag"
-          title="Algeria flag"
-          data-icon-name="demoFlagDz1"
-          data-icon-type="flag"
-          data-icon-variant="md"
-        ></span>
-
-      
-    
-  
-
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                      data-panel-date="next-2"
+                    >
+                      2
+                    </button>
+                  
+                    <button
+                      type="button"
+                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+                      data-panel-date="next-3"
+                    >
+                      3
+                    </button>
+                  
                 </div>
-                <span class="typography-body-regular text-[var(--color-global-default)] flex-1">Algeria</span>
-                
-                  <span
-                    class="typography-body-small text-[var(--color-global-contrast-light-01)] ml-auto"
-                    data-panel-code="true"
-                  >
-                    +213
-                  </span>
-                
-
-              
-              
-            </div>
-          
+              </div>
+            
+          </div>
 
         
         
@@ -7941,7 +8688,7 @@
           aria-label="Progress: 25%"
         >
           <div
-            class="absolute top-0 left-0 h-full bg-[var(--color-form-control-checked)] rounded-full transition-all duration-300"
+            class="absolute top-0 left-0 h-full bg-[var(--color-brand-primary-40)] rounded-full transition-all duration-300"
             style="width: 25%;"
             data-progress-fill="true"
             data-progress-value="25"
@@ -8008,7 +8755,7 @@
       >
         
         <div
-          class="flex items-center gap-[var(--spacing-0-5)]"
+          class="flex items-center gap-[var(--spacing-inline-tight)]"
           data-rating-stars="true"
         >
           
@@ -8333,7 +9080,7 @@
       >
         
         <div
-          class="flex items-center gap-[var(--spacing-0-5)]"
+          class="flex items-center gap-[var(--spacing-inline-tight)]"
           data-rating-stars="true"
         >
           
@@ -8658,7 +9405,7 @@
       >
         
         <div
-          class="flex items-center gap-[var(--spacing-0-5)]"
+          class="flex items-center gap-[var(--spacing-inline-tight)]"
           data-rating-stars="true"
         >
           
@@ -8983,7 +9730,7 @@
       >
         
         <div
-          class="flex items-center gap-[var(--spacing-0-5)]"
+          class="flex items-center gap-[var(--spacing-inline-tight)]"
           data-rating-stars="true"
         >
           
@@ -9308,7 +10055,7 @@
       >
         
         <div
-          class="flex items-center gap-[var(--spacing-0-5)]"
+          class="flex items-center gap-[var(--spacing-inline-tight)]"
           data-rating-stars="true"
         >
           
@@ -9633,7 +10380,7 @@
       >
         
         <div
-          class="flex items-center gap-[var(--spacing-0-5)]"
+          class="flex items-center gap-[var(--spacing-inline-tight)]"
           data-rating-stars="true"
         >
           
@@ -10307,14 +11054,14 @@
           >
             
             <div
-              class="absolute top-0 h-full bg-[var(--color-form-control-checked)] rounded-full transition-all duration-300"
+              class="absolute top-0 h-full bg-[var(--color-brand-primary-40)] rounded-full transition-all duration-300"
               style="left: 0; width: 40%;"
               data-slider-fill="true"
             ></div>
 
             
             <div
-              class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 bg-[var(--color-global-white)] border-2 border-[var(--color-form-control-checked)] rounded-full cursor-pointer shadow-md transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+              class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 bg-[var(--color-global-white)] border-2 border-[var(--color-brand-primary-40)] rounded-full cursor-pointer shadow-md transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
               style="left: 40%;"
               data-slider-handle="true"
               data-slider-handle-index="0"
@@ -17168,7 +17915,7 @@
 
       
       <div
-        class="hidden [div[data-modal-demo]_&amp;]:block [div[data-modal-demo]_&amp;]:absolute fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-modal)] shadow-[var(--elevation-modal)] z-[var(--z-modal)] mx-[var(--spacing-4)]"
+        class="hidden [div[data-modal-demo]_&amp;]:block [div[data-modal-demo]_&amp;]:absolute fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-modal)] shadow-[var(--elevation-floating)] z-[var(--z-modal)] mx-[var(--spacing-4)]"
         role="dialog"
         aria-modal="true"
         aria-label="Modal dialog"
@@ -18032,7 +18779,7 @@
 
       
       <div
-        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-interactive)]"
         data-card-id="demoCard3"
         data-card-type="card"
       >
@@ -18041,7 +18788,7 @@
 
         
         <div
-          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          class="flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-stack-medium)]"
           data-card-content="true"
         >
           
@@ -18240,7 +18987,7 @@
 
       
       <div
-        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-interactive)]"
         data-card-id="demoCard3"
         data-card-type="card"
       >
@@ -18249,7 +18996,7 @@
 
         
         <div
-          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          class="flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-stack-medium)]"
           data-card-content="true"
         >
           
@@ -18448,7 +19195,7 @@
 
       
       <div
-        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-interactive)]"
         data-card-id="demoCard3"
         data-card-type="card"
       >
@@ -18457,7 +19204,7 @@
 
         
         <div
-          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          class="flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-stack-medium)]"
           data-card-content="true"
         >
           
@@ -18768,14 +19515,14 @@
 
       
       <div
-        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-interactive)]"
         data-card-id="demoCard1"
         data-card-type="card"
       >
         
         
           <div
-            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-0-5)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-6)] [&amp;_[data-lockup-text]]:line-clamp-2"
+            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-stack-tight)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-stack)] [&amp;_[data-lockup-text]]:line-clamp-2"
             data-card-lockup="true"
           >
             
@@ -18830,7 +19577,7 @@
 
       
       <div
-        class="flex gap-[var(--spacing-4)]"
+        class="flex gap-[var(--spacing-inline-large)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -18890,7 +19637,7 @@
 
           
           <div
-            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            class="flex flex-col gap-[var(--spacing-stack-tight] flex-1"
             data-lockup-content="true"
           >
             
@@ -18960,7 +19707,7 @@
 
         
         <div
-          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          class="flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-stack-medium)]"
           data-card-content="true"
         >
           
@@ -19095,14 +19842,14 @@
 
       
       <div
-        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-interactive)]"
         data-card-id="demoCard2"
         data-card-type="card"
       >
         
         
           <div
-            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-0-5)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-6)] [&amp;_[data-lockup-text]]:line-clamp-2"
+            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-stack-tight)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-stack)] [&amp;_[data-lockup-text]]:line-clamp-2"
             data-card-lockup="true"
           >
             
@@ -19157,7 +19904,7 @@
 
       
       <div
-        class="flex gap-[var(--spacing-4)]"
+        class="flex gap-[var(--spacing-inline-large)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -19217,7 +19964,7 @@
 
           
           <div
-            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            class="flex flex-col gap-[var(--spacing-stack-tight] flex-1"
             data-lockup-content="true"
           >
             
@@ -19287,7 +20034,7 @@
 
         
         <div
-          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          class="flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-stack-medium)]"
           data-card-content="true"
         >
           
@@ -19430,14 +20177,14 @@
 
       
       <div
-        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-interactive)]"
         data-card-id="demoCard1"
         data-card-type="card"
       >
         
         
           <div
-            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-0-5)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-6)] [&amp;_[data-lockup-text]]:line-clamp-2"
+            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-stack-tight)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-stack)] [&amp;_[data-lockup-text]]:line-clamp-2"
             data-card-lockup="true"
           >
             
@@ -19492,7 +20239,7 @@
 
       
       <div
-        class="flex gap-[var(--spacing-4)]"
+        class="flex gap-[var(--spacing-inline-large)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -19552,7 +20299,7 @@
 
           
           <div
-            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            class="flex flex-col gap-[var(--spacing-stack-tight] flex-1"
             data-lockup-content="true"
           >
             
@@ -19622,7 +20369,7 @@
 
         
         <div
-          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          class="flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-stack-medium)]"
           data-card-content="true"
         >
           
@@ -19757,14 +20504,14 @@
 
       
       <div
-        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-interactive)]"
         data-card-id="demoCard2"
         data-card-type="card"
       >
         
         
           <div
-            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-0-5)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-6)] [&amp;_[data-lockup-text]]:line-clamp-2"
+            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-stack-tight)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-stack)] [&amp;_[data-lockup-text]]:line-clamp-2"
             data-card-lockup="true"
           >
             
@@ -19819,7 +20566,7 @@
 
       
       <div
-        class="flex gap-[var(--spacing-4)]"
+        class="flex gap-[var(--spacing-inline-large)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -19879,7 +20626,7 @@
 
           
           <div
-            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            class="flex flex-col gap-[var(--spacing-stack-tight] flex-1"
             data-lockup-content="true"
           >
             
@@ -19949,7 +20696,7 @@
 
         
         <div
-          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          class="flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-stack-medium)]"
           data-card-content="true"
         >
           
@@ -20092,14 +20839,14 @@
 
       
       <div
-        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-interactive)]"
         data-card-id="demoCard1"
         data-card-type="card"
       >
         
         
           <div
-            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-0-5)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-6)] [&amp;_[data-lockup-text]]:line-clamp-2"
+            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-stack-tight)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-stack)] [&amp;_[data-lockup-text]]:line-clamp-2"
             data-card-lockup="true"
           >
             
@@ -20154,7 +20901,7 @@
 
       
       <div
-        class="flex gap-[var(--spacing-4)]"
+        class="flex gap-[var(--spacing-inline-large)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -20214,7 +20961,7 @@
 
           
           <div
-            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            class="flex flex-col gap-[var(--spacing-stack-tight] flex-1"
             data-lockup-content="true"
           >
             
@@ -20284,7 +21031,7 @@
 
         
         <div
-          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          class="flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-stack-medium)]"
           data-card-content="true"
         >
           
@@ -20419,14 +21166,14 @@
 
       
       <div
-        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-interactive)]"
         data-card-id="demoCard2"
         data-card-type="card"
       >
         
         
           <div
-            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-0-5)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-6)] [&amp;_[data-lockup-text]]:line-clamp-2"
+            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-stack-tight)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-stack)] [&amp;_[data-lockup-text]]:line-clamp-2"
             data-card-lockup="true"
           >
             
@@ -20481,7 +21228,7 @@
 
       
       <div
-        class="flex gap-[var(--spacing-4)]"
+        class="flex gap-[var(--spacing-inline-large)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -20541,7 +21288,7 @@
 
           
           <div
-            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            class="flex flex-col gap-[var(--spacing-stack-tight] flex-1"
             data-lockup-content="true"
           >
             
@@ -20611,7 +21358,7 @@
 
         
         <div
-          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          class="flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-stack-medium)]"
           data-card-content="true"
         >
           
@@ -20754,14 +21501,14 @@
 
       
       <div
-        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-interactive)]"
         data-card-id="demoCard1"
         data-card-type="card"
       >
         
         
           <div
-            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-0-5)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-6)] [&amp;_[data-lockup-text]]:line-clamp-2"
+            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-stack-tight)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-stack)] [&amp;_[data-lockup-text]]:line-clamp-2"
             data-card-lockup="true"
           >
             
@@ -20816,7 +21563,7 @@
 
       
       <div
-        class="flex gap-[var(--spacing-4)]"
+        class="flex gap-[var(--spacing-inline-large)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -20876,7 +21623,7 @@
 
           
           <div
-            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            class="flex flex-col gap-[var(--spacing-stack-tight] flex-1"
             data-lockup-content="true"
           >
             
@@ -20946,7 +21693,7 @@
 
         
         <div
-          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          class="flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-stack-medium)]"
           data-card-content="true"
         >
           
@@ -21081,14 +21828,14 @@
 
       
       <div
-        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-card)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-dropdown)]"
+        class="flex flex-col bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] overflow-hidden transition-shadow hover:shadow-[var(--elevation-interactive)]"
         data-card-id="demoCard2"
         data-card-type="card"
       >
         
         
           <div
-            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-0-5)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-6)] [&amp;_[data-lockup-text]]:line-clamp-2"
+            class="[&amp;&gt;div]:flex-col [&amp;&gt;div]:gap-[var(--spacing-stack-tight)] [&amp;_[data-lockup-image]]:w-full [&amp;_[data-lockup-image]]:h-40 [&amp;_img]:w-full [&amp;_img]:h-auto [&amp;_img]:rounded-t-[var(--radius-card)] [&amp;_img]:rounded-b-none [&amp;_[data-lockup-content]]:p-[var(--spacing-stack)] [&amp;_[data-lockup-text]]:line-clamp-2"
             data-card-lockup="true"
           >
             
@@ -21143,7 +21890,7 @@
 
       
       <div
-        class="flex gap-[var(--spacing-4)]"
+        class="flex gap-[var(--spacing-inline-large)]"
         data-lockup-id="demoLock3"
         data-lockup-type="block-content"
       >
@@ -21203,7 +21950,7 @@
 
           
           <div
-            class="flex flex-col gap-[var(--spacing-2)] flex-1"
+            class="flex flex-col gap-[var(--spacing-stack-tight] flex-1"
             data-lockup-content="true"
           >
             
@@ -21273,7 +22020,7 @@
 
         
         <div
-          class="flex flex-col gap-[var(--spacing-0-5)] p-[var(--spacing-6)]"
+          class="flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-stack-medium)]"
           data-card-content="true"
         >
           
@@ -21424,7 +22171,7 @@
 
       
       <div
-        class="flex items-center justify-between gap-[var(--spacing-12)] w-full"
+        class="flex items-center justify-between gap-[var(--spacing-inline-large)] w-full"
         data-pagination-name="demoPreview"
         data-pagination-type="pagination"
       >
@@ -21511,14 +22258,14 @@
             aria-label="Pagination"
             data-pagination-nav="true"
           >
-            <ul class="flex items-center gap-[var(--spacing-0-5)]">
+            <ul class="flex items-center gap-[var(--spacing-inline-tight)]">
               
                 <li class="">
                   
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
                       data-pagination-link="true"
                       data-pagination-action="first"
                       aria-label="First page"
@@ -21581,7 +22328,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
                       data-pagination-link="true"
                       data-pagination-action="prev"
                       aria-label="Previous page"
@@ -21644,7 +22391,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
                       data-pagination-link="true"
                       data-pagination-current="true" aria-current="page"
                       rel="nofollow"
@@ -21659,7 +22406,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
                       data-pagination-link="true"
                       
                       rel="nofollow"
@@ -21674,7 +22421,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
                       data-pagination-link="true"
                       
                       rel="nofollow"
@@ -21689,7 +22436,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
                       data-pagination-link="true"
                       
                       rel="nofollow"
@@ -21704,7 +22451,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
                       data-pagination-link="true"
                       
                       rel="nofollow"
@@ -21719,7 +22466,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] "
                       data-pagination-link="true"
                       
                       rel="nofollow"
@@ -21734,7 +22481,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
                       data-pagination-link="true"
                       data-pagination-action="dots"
                       aria-label="More pages"
@@ -21797,7 +22544,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
                       data-pagination-link="true"
                       data-pagination-action="next"
                       aria-label="Next page"
@@ -21860,7 +22607,7 @@
                   
 
                     <a href="#"
-                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-2)] typography-body-regular text-[var(--color-brand-primary-40)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-brand-primary-30)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                      class="inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
                       data-pagination-link="true"
                       data-pagination-action="last"
                       aria-label="Last page"
@@ -21929,7 +22676,7 @@
           
 
           <div
-            class="hidden md:flex flex-shrink-0 typography-body-regular text-[var(--color-brand-primary-30)]"
+            class="hidden md:flex flex-shrink-0 typography-body-regular text-[var(--color-interactive-default)]"
             data-pagination-counter="true"
           >
             <span>
@@ -22029,7 +22776,7 @@
 
       
       <div
-        class="flex flex-col gap-[var(--spacing-6)]"
+        class="flex flex-col gap-[var(--spacing-stack-medium)]"
         data-list-form-id="demoForm1"
         data-list-form-type="input-list"
       >
