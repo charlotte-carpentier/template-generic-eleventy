@@ -316,6 +316,7 @@
   /* Padding (inset) */
   --spacing-inset: var(--spacing-8);
   --spacing-inset-small: var(--spacing-5);
+  --spacing-inset-tight: var(--spacing-2);
 
   /* Vertical (stack) */
   --spacing-stack: var(--spacing-8);
