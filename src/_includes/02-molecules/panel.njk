@@ -58,12 +58,12 @@
         3. Tailwind Classes
         Index:
         3.1 Wrapper Classes
-        3.2 Item Classes (default/list-item)
+        3.2 Item Classes (by type: default, list-item)
         3.3 Icon Wrapper Classes
         3.4 Text Classes
-        3.5 Code Classes (phone variant)
-        3.6 Date Navigation Classes
-        3.7 Calendar Classes
+        3.5 Code Classes (by variant: phone)
+        3.6 Date Wrapper Classes
+        3.7 Calendar Classes (by variant: simple, double)
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -73,7 +73,7 @@
       {% set containerClasses = "flex flex-col bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] shadow-md p-[var(--spacing-inset-tight)]" %}
 
       {# --------------------------
-          3.2 Item Classes (default/list-item)
+          3.2 Item Classes (by type: default, list-item)
           Description: Layout horizontal, Spacing, States
         --------------------------#}
       {% set itemClasses = "flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-tight)] rounded-[var(--radius-default)] transition-colors cursor-pointer hover:[&>span]:text-[var(--color-global-accent)] hover:[&_svg]:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] disabled:bg-[var(--color-global-contrast-light-04)] disabled:text-[var(--color-global-contrast-light-02)] disabled:cursor-not-allowed" %}
@@ -91,13 +91,13 @@
       {% set textClasses = "typography-body-regular text-[var(--color-global-default)] flex-1" %}
 
       {# --------------------------
-          3.5 Code Classes (phone variant)
+          3.5 Code Classes (by variant: phone)
           Description: Typography, Colors
         --------------------------#}
       {% set codeClasses = "typography-body-small text-[var(--color-global-contrast-light-01)] ml-auto" %}
 
       {# --------------------------
-          3.6 Date Navigation Classes
+          3.6 Date Wrapper Classes
           Description: Layout horizontal, Spacing, Alignment
         --------------------------#}
       {% set dateNavClasses = "flex items-center justify-between px-[var(--spacing-inline-medium)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)]" %}
@@ -105,7 +105,7 @@
       {% set dateMonthClasses = "typography-body-semibold text-[var(--color-global-default)]" %}
 
       {# --------------------------
-          3.7 Calendar Classes
+          3.7 Calendar Classes (by variant: simple, double)
           Description: Calendar grid layout
         --------------------------#}
       {% set calendarClasses = "p-[var(--spacing-inset-small)]" %}
