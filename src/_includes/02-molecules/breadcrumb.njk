@@ -49,15 +49,15 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Navigation Classes
+        3.1 Wrapper Classes
         3.2 List Classes
-        3.3 List Item Classes
+        3.3 Item Classes
         3.4 Separator Classes
-        3.5 Current Page Classes
+        3.5 Page Classes (by type: link, current)
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Navigation Classes
+          3.1 Wrapper Classes
           Description: Layout
         --------------------------#}
       {% set navClasses = "" %}
@@ -69,7 +69,7 @@
       {% set listClasses = "flex flex-wrap items-center gap-[var(--spacing-inline)]" %}
 
       {# --------------------------
-          3.3 List Item Classes
+          3.3 Item Classes
           Description: Layout
         --------------------------#}
       {% set listItemClasses = "flex items-center gap-[var(--spacing-inline)]" %}
@@ -81,7 +81,7 @@
       {% set separatorClasses = "typography-body-regular text-[var(--color-global-default)]" %}
 
       {# --------------------------
-          3.5 Current Page Classes
+          3.5 Page Classes (by type: link, current)
           Description: Typography, Colors, States
         --------------------------#}
       {% set currentPageClasses = "typography-body-regular text-[var(--color-global-contrast-light-02)]" %}
