@@ -76,37 +76,37 @@
           3.2 List Classes
           Description: Layout vertical, Spacing
         --------------------------#}
-      {% set listClasses = "flex flex-col gap-[var(--spacing-1)]" %}
+      {% set listClasses = "flex flex-col gap-[var(--spacing-stack-medium)]" %}
 
       {# --------------------------
           3.3 Link Base Override Classes
           Description: Typography, Colors, Effects
         --------------------------#}
-      {% set linkBaseClasses = "[&_a]:typography-body-regular [&_a]:text-[var(--color-global-default)] [&_a]:no-underline [&_a]:transition-colors" %}
+      {% set linkBaseClasses = "[&_a]:relative [&_a]:typography-body-regular [&_a]:text-[var(--color-global-default)] [&_a]:no-underline [&_a]:transition-colors [&_a]:pl-[var(--spacing-inset-small)]" %}
 
       {# --------------------------
           3.4 Link Hover Override Classes
-          Description: Pseudo-element bullet point
-        --------------------------#}
-      {% set linkHoverClasses = "[&_a:hover]:text-[var(--color-global-contrast-light-02)] [&_a:hover]:before:content-['•'] [&_a:hover]:before:mr-[var(--spacing-2)]" %}
+          Description: Pseudo-element bullet point positioned absolute
+      --------------------------#}
+      {% set linkHoverClasses = "[&_a:hover]:text-[var(--color-global-contrast-light-02)] [&_a:hover]:before:content-['•'] [&_a:hover]:before:absolute [&_a:hover]:before:left-[var(--spacing-inline-tight)] [&_a:hover]:before:top-1/2 [&_a:hover]:before:-translate-y-1/2" %}
 
       {# --------------------------
           3.5 Link Focus Override Classes
           Description: Outline, Spacing, Borders
         --------------------------#}
-      {% set linkFocusClasses = "[&_a:focus]:outline [&_a:focus]:outline-2 [&_a:focus]:outline-[var(--color-semantic-information-focus)] [&_a:focus]:rounded-[var(--radius-default)] [&_a:focus]:px-[var(--spacing-3)] [&_a:focus]:py-[var(--spacing-2)]" %}
+      {% set linkFocusClasses = "[&_a:focus]:outline [&_a:focus]:outline-2 [&_a:focus]:outline-[var(--color-semantic-information-focus)] [&_a:focus]:rounded-[var(--radius-default)] [&_a:focus]:px-[var(--spacing-inset-small)] [&_a:focus]:py-[var(--spacing-inset-small)]" %}
 
       {# --------------------------
           3.6 Link Current Override Classes
           Description: Positioning, Colors, Pseudo-element bar, States
         --------------------------#}
-      {% set linkCurrentClasses = "[&_a[aria-current='page']]:relative [&_a[aria-current='page']]:pl-[var(--spacing-4)] [&_a[aria-current='page']]:text-[var(--color-global-contrast-light-02)] [&_a[aria-current='page']]:before:content-[''] [&_a[aria-current='page']]:before:absolute [&_a[aria-current='page']]:before:left-0 [&_a[aria-current='page']]:before:top-1/2 [&_a[aria-current='page']]:before:-translate-y-1/2 [&_a[aria-current='page']]:before:h-4 [&_a[aria-current='page']]:before:w-1 [&_a[aria-current='page']]:before:bg-[var(--color-global-contrast-light-02)] [&_a[aria-current='page']]:before:rounded-[var(--radius-default)] [&_a[aria-current='page']]:cursor-not-allowed" %}
+      {% set linkCurrentClasses = "[&_a[aria-current='page']]:relative [&_a[aria-current='page']]:pl-[var(--spacing-inset-small)] [&_a[aria-current='page']]:text-[var(--color-global-contrast-light-02)] [&_a[aria-current='page']]:before:content-[''] [&_a[aria-current='page']]:before:absolute [&_a[aria-current='page']]:before:left-0 [&_a[aria-current='page']]:before:top-1/2 [&_a[aria-current='page']]:before:-translate-y-1/2 [&_a[aria-current='page']]:before:h-4 [&_a[aria-current='page']]:before:w-1 [&_a[aria-current='page']]:before:bg-[var(--color-global-contrast-light-02)] [&_a[aria-current='page']]:before:rounded-[var(--radius-default)] [&_a[aria-current='page']]:cursor-not-allowed" %}
 
       {# --------------------------
           3.7 Link Disabled Override Classes
           Description: Positioning, Colors, Pseudo-element bar, States
         --------------------------#}
-      {% set linkDisabledClasses = "[&_a[aria-disabled='true']]:relative [&_a[aria-disabled='true']]:pl-[var(--spacing-4)] [&_a[aria-disabled='true']]:text-[var(--color-global-contrast-light-02)] [&_a[aria-disabled='true']]:before:content-[''] [&_a[aria-disabled='true']]:before:absolute [&_a[aria-disabled='true']]:before:left-0 [&_a[aria-disabled='true']]:before:top-0 [&_a[aria-disabled='true']]:before:h-full [&_a[aria-disabled='true']]:before:w-1 [&_a[aria-disabled='true']]:before:bg-[var(--color-global-contrast-light-02)] [&_a[aria-disabled='true']]:before:rounded-[var(--radius-default)] [&_a[aria-disabled='true']]:cursor-not-allowed [&_a[aria-disabled='true']]:pointer-events-none" %}
+      {% set linkDisabledClasses = "[&_a[aria-disabled='true']]:relative [&_a[aria-disabled='true']]:pl-[var(--spacing-inset-small)] [&_a[aria-disabled='true']]:text-[var(--color-global-contrast-light-02)] [&_a[aria-disabled='true']]:before:content-[''] [&_a[aria-disabled='true']]:before:absolute [&_a[aria-disabled='true']]:before:left-0 [&_a[aria-disabled='true']]:before:top-0 [&_a[aria-disabled='true']]:before:h-full [&_a[aria-disabled='true']]:before:w-1 [&_a[aria-disabled='true']]:before:bg-[var(--color-global-contrast-light-02)] [&_a[aria-disabled='true']]:before:rounded-[var(--radius-default)] [&_a[aria-disabled='true']]:cursor-not-allowed [&_a[aria-disabled='true']]:pointer-events-none" %}
 
       {# --------------------------
     3.8 Item Classes

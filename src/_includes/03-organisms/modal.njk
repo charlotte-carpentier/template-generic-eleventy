@@ -78,31 +78,31 @@
           3.2 Modal Dialog Classes
           Description: Layout fixed centered, Background, Shadow, Borders, Z-index, Sizing, States
         --------------------------#}
-      {% set dialogClasses = "hidden [div[data-modal-demo]_&]:block [div[data-modal-demo]_&]:absolute fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-modal)] shadow-[var(--elevation-floating)] z-[var(--z-modal)] mx-[var(--spacing-4)]" %}
+      {% set dialogClasses = "hidden [div[data-modal-demo]_&]:block [div[data-modal-demo]_&]:absolute fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-modal)] shadow-[var(--elevation-floating)] z-[var(--z-modal)] mx-[var(--spacing-inset-small)]" %}
 
       {# --------------------------
           3.3 Modal Wrapper Classes
           Description: Layout, Spacing
         --------------------------#}
-      {% set containerClasses = "flex flex-col p-[var(--spacing-6)]" %}
+      {% set containerClasses = "flex flex-col p-[var(--spacing-inset)]" %}
 
       {# --------------------------
           3.4 Modal Header Classes
           Description: Layout, Spacing bottom
         --------------------------#}
-      {% set headerClasses = "flex mb-[var(--spacing-4)]" %}
+      {% set headerClasses = "flex mb-[var(--spacing-stack-medium)]" %}
 
       {# --------------------------
           3.5 Modal Content Classes
           Description: Typography, Colors, Spacing bottom
         --------------------------#}
-      {% set contentClasses = "typography-body-regular text-[var(--color-global-default)] mb-[var(--spacing-6)]" %}
+      {% set contentClasses = "typography-body-regular text-[var(--color-global-default)] mb-[var(--spacing-stack)]" %}
 
       {# --------------------------
           3.6 Modal Footer Classes
           Description: Layout horizontal, Spacing
         --------------------------#}
-      {% set footerClasses = "flex gap-[var(--spacing-4)]" %}
+      {% set footerClasses = "flex gap-[var(--spacing-inline-medium)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML

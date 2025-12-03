@@ -67,7 +67,7 @@
           3.2 List Classes
           Description: Layout horizontal, Spacing
         --------------------------#}
-      {% set listClasses = "flex gap-[var(--spacing-6)]" %}
+      {% set listClasses = "flex gap-[var(--spacing-inline-large)]" %}
 
       {# --------------------------
           3.3 Item Classes
@@ -80,13 +80,13 @@
           Description: Colors, States, Pseudo-elements for tabs
         --------------------------#}
 
-      {% set linkBaseClasses = "[&_a]:relative [&_a]:px-[var(--spacing-2)] [&_a]:py-[var(--spacing-2)] [&_a]:pb-[var(--spacing-2)] [&_a]:typography-body-regular [&_a]:text-[var(--color-global-default)] [&_a]:no-underline [&_a]:transition-colors" %}
+      {% set linkBaseClasses = "[&_a]:relative [&_a]:px-[var(--spacing-inset-tight)] [&_a]:py-[var(--spacing-inset-tight)] [&_a]:pb-[var(--spacing-inset-tight)] [&_a]:typography-body-regular [&_a]:text-[var(--color-global-default)] [&_a]:no-underline [&_a]:transition-colors" %}
 
-      {% set linkHoverClasses = "[&_a:hover]:text-[var(--color-global-contrast-light-01)] [&_a:hover]:after:content-['•'] [&_a:hover]:after:absolute [&_a:hover]:after:bottom-0 [&_a:hover]:after:translate-y-[8px] [&_a:hover]:after:left-1/2 [&_a:hover]:after:-translate-x-1/2" %}
+      {% set linkHoverClasses = "[&_a:hover:not([aria-selected='true'])]:text-[var(--color-global-contrast-light-01)] [&_a:hover:not([aria-selected='true'])]:after:content-['•'] [&_a:hover:not([aria-selected='true'])]:after:absolute [&_a:hover:not([aria-selected='true'])]:after:bottom-0 [&_a:hover:not([aria-selected='true'])]:after:translate-y-[8px] [&_a:hover:not([aria-selected='true'])]:after:left-1/2 [&_a:hover:not([aria-selected='true'])]:after:-translate-x-1/2" %}
 
       {% set linkFocusClasses = "[&_a:focus]:outline [&_a:focus]:outline-2 [&_a:focus]:outline-[var(--color-semantic-information-focus)] [&_a:focus]:rounded-[var(--radius-default)]" %}
 
-      {% set linkActiveClasses = "[&_a[aria-selected='true']]:text-[var(--color-global-contrast-light-02)] [&_a[aria-selected='true']]:cursor-not-allowed [&_a[aria-selected='true']]:pointer-events-none [&_a[aria-selected='true']]:after:content-[''] [&_a[aria-selected='true']]:after:absolute [&_a[aria-selected='true']]:after:bottom-[calc(var(--spacing-0-5))] [&_a[aria-selected='true']]:after:left-1/2 [&_a[aria-selected='true']]:after:-translate-x-1/2 [&_a[aria-selected='true']]:after:h-1 [&_a[aria-selected='true']]:after:w-4 [&_a[aria-selected='true']]:after:bg-[var(--color-global-contrast-light-02)] [&_a[aria-selected='true']]:after:rounded-[var(--radius-default)]" %}
+      {% set linkActiveClasses = "[&_a[aria-selected='true']]:text-[var(--color-global-contrast-light-02)] [&_a[aria-selected='true']]:cursor-not-allowed [&_a[aria-selected='true']]:after:content-[''] [&_a[aria-selected='true']]:after:absolute [&_a[aria-selected='true']]:after:bottom-[calc(var(--spacing-inline-tight)*-1)] [&_a[aria-selected='true']]:after:left-1/2 [&_a[aria-selected='true']]:after:-translate-x-1/2 [&_a[aria-selected='true']]:after:h-1 [&_a[aria-selected='true']]:after:w-4 [&_a[aria-selected='true']]:after:bg-[var(--color-global-contrast-light-02)] [&_a[aria-selected='true']]:after:rounded-[var(--radius-default)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
