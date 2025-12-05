@@ -64,28 +64,27 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Header Wrapper Classes
-        3.2 Header Inner Wrapper Classes
+        3.1 Wrapper Classes
+        3.2 Layout Classes
         3.3 Desktop Branding Classes
-        3.4 Desktop Wrapper Classes
-        3.5 Mobile Branding Header Classes
-        3.6 Burger Button Classes
-        3.7 Burger Icon Open Classes
-        3.8 Burger Icon Close Classes
-        3.9 Mobile Overlay Classes
-        3.10 Overlay Content Classes
-        3.11 Mobile Branding Overlay Classes
-        3.12 Mobile Wrapper Classes
+        3.4 Desktop Navigation Classes
+        3.5 Mobile Branding Classes
+        3.6 Mobile Burger Button Classes
+        3.7 Mobile Burger Icon Classes (by state)
+        3.8 Mobile Overlay Classes
+        3.9 Mobile Overlay Content Classes
+        3.10 Mobile Overlay Branding Classes
+        3.11 Mobile Navigation Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Header Wrapper Classes
+          3.1 Wrapper Classes
           Description: Layout, Spacing, Background, Borders, Responsive
         --------------------------#}
       {% set headerClasses = "flex flex-col px-[var(--spacing-inset-large)] py-[var(--spacing-stack-medium)] bg-[var(--color-global-white)] border-b border-[var(--color-global-contrast-light-03)] md:px-[var(--spacing-inset-large)]" %}
 
       {# --------------------------
-          3.2 Header Inner Wrapper Classes
+          3.2 Layout Classes
           Description: Layout flex horizontal, Space-between, Alignment
         --------------------------#}
       {% set innerContainerClasses = "flex items-center justify-between w-full" %}
@@ -97,55 +96,50 @@
       {% set desktopBrandingClasses = "hidden md:flex" %}
 
       {# --------------------------
-          3.4 Desktop Wrapper Classes
+          3.4 Desktop Navigation Classes
           Description: Layout, Responsive visibility (hidden on mobile)
         --------------------------#}
       {% set desktopNavClasses = "hidden md:flex" %}
 
       {# --------------------------
-          3.5 Mobile Branding Header Classes
+          3.5 Mobile Branding Classes
           Description: Layout, Responsive visibility (visible on mobile only)
         --------------------------#}
       {% set mobileBrandingHeaderClasses = "flex md:hidden" %}
 
       {# --------------------------
-          3.6 Burger Button Classes
+          3.6 Mobile Burger Button Classes
           Description: Layout, Spacing, States, Responsive visibility (hidden on desktop)
         --------------------------#}
       {% set burgerClasses = "flex items-center justify-center p-[var(--spacing-inset-small)] bg-transparent border-none cursor-pointer transition-colors hover:bg-[var(--color-global-contrast-light-04)] focus:outline focus:outline-2 focus:outline-[var(--color-semantic-information-focus)] rounded-[var(--radius-default)] md:hidden" %}
 
       {# --------------------------
-          3.7 Burger Icon Open Classes
-          Description: States visibility (visible by default, hidden when expanded)
+          3.7 Mobile Burger Icon Classes (by state)
+          Description: States visibility (open: visible by default / close: hidden by default, visible when expanded)
         --------------------------#}
       {% set burgerOpenClasses = "flex" %}
-
-      {# --------------------------
-          3.8 Burger Icon Close Classes
-          Description: States visibility (hidden by default, visible when expanded)
-        --------------------------#}
       {% set burgerCloseClasses = "hidden" %}
 
       {# --------------------------
-          3.9 Mobile Overlay Classes
+          3.8 Mobile Overlay Classes
           Description: Layout fixed fullscreen, Background, Z-index, States (hidden by default)
         --------------------------#}
       {% set overlayClasses = "hidden fixed inset-0 z-[var(--z-modal)] bg-[var(--color-global-white)] md:hidden" %}
 
       {# --------------------------
-          3.10 Overlay Content Classes
+          3.9 Mobile Overlay Content Classes
           Description: Layout, Spacing
         --------------------------#}
       {% set overlayContentClasses = "flex flex-col gap-[var(--spacing-stack-large)] p-[var(--spacing-inset-large)]" %}
 
       {# --------------------------
-          3.11 Mobile Branding Overlay Classes
+          3.10 Mobile Overlay Branding Classes
           Description: Layout
         --------------------------#}
       {% set mobileBrandingOverlayClasses = "flex" %}
 
       {# --------------------------
-          3.12 Mobile Wrapper Classes
+          3.11 Mobile Navigation Classes
           Description: Layout vertical override, Tab-bar override for vertical
         --------------------------#}
       {% set mobileNavClasses = "[&_ul]:flex-col [&_li]:w-full" %}

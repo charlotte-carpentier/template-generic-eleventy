@@ -66,20 +66,20 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Footer Wrapper Classes
+        3.1 Wrapper Classes
         3.2 Branding Section Classes
         3.3 Navigation Section Classes
         3.4 Column Classes
         3.5 Legal Section Classes
-        3.6 Legal Nav Classes
-        3.7 Copyright/Version Wrapper Classes
-        3.8 Copyright Classes
-        3.9 Version Classes
+        3.6 Legal List Classes
+        3.7 Copyright Wrapper Classes
+        3.8 Copyright Text Classes
+        3.9 Version Text Classes
         3.10 Separator Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Footer Wrapper Classes
+          3.1 Wrapper Classes
           Description: Layout, Spacing, Background, Responsive
         --------------------------#}
       {% set footerClasses = "flex flex-col gap-[var(--spacing-stack-large)] p-[var(--spacing-inset-large)] bg-[var(--color-global-contrast-light-04)] md:p-[var(--spacing-inset-large)]" %}
@@ -109,26 +109,26 @@
       {% set legalClasses = "flex flex-col gap-[var(--spacing-stack-medium)] pt-[var(--spacing-stack-large)] md:flex-row md:items-center" %}
 
       {# --------------------------
-          3.6 Legal Nav Classes
+          3.6 Legal List Classes
           Description: Layout responsive, Spacing, Responsive order
         --------------------------#}
       {% set legalNavClasses = "flex order-first md:order-last" %}
       {% set legalListClasses = "flex flex-col gap-[var(--spacing-stack-tight)] md:flex-row md:gap-[var(--spacing-inline-medium)]" %}
 
       {# --------------------------
-          3.7 Copyright/Version Wrapper Classes
+          3.7 Copyright Wrapper Classes
           Description: Layout responsive, Spacing
         --------------------------#}
       {% set copyrightVersionWrapperClasses = "flex flex-wrap items-center gap-[var(--spacing-inline-medium)]" %}
 
       {# --------------------------
-          3.8 Copyright Classes
+          3.8 Copyright Text Classes
           Description: Typography, Colors
         --------------------------#}
       {% set copyrightClasses = "typography-body-small text-[var(--color-global-contrast-light-01)]" %}
 
       {# --------------------------
-          3.9 Version Classes
+          3.9 Version Text Classes
           Description: Typography, Colors, Responsive visibility
         --------------------------#}
       {% set versionClasses = "typography-body-small text-[var(--color-global-contrast-light-02)] hidden md:inline" %}

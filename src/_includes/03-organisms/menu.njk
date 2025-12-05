@@ -57,9 +57,9 @@
         3. Tailwind Classes
         Index:
         3.1 Wrapper Classes
-        3.2 Columns Wrapper Classes
+        3.2 Grid Classes
         3.3 Column Classes
-        3.4 Link Override Classes
+        3.4 Link Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -69,7 +69,7 @@
       {% set navClasses = "flex p-[var(--spacing-inset-large)] bg-[var(--color-global-white)]" %}
 
       {# --------------------------
-          3.2 Columns Wrapper Classes
+          3.2 Grid Classes
           Description: Layout grid responsive, Gap
         --------------------------#}
       {% set columnsClasses = "grid grid-cols-1 gap-y-[var(--spacing-stack-large)] gap-x-[var(--spacing-inline-large)] w-full md:grid-cols-2 lg:grid-cols-4" %}
@@ -81,7 +81,7 @@
       {% set columnClasses = "flex flex-col gap-[var(--spacing-stack-small)] px-[var(--spacing-inset-large)] [&_[data-column-heading]]:pl-[var(--spacing-inset-small)]" %}
 
       {# --------------------------
-          3.4 Link Override Classes
+          3.4 Link Classes
           Description: Colors, States for links (remove bullet from nav-secondary)
       --------------------------#}
       {% set linkOverrideClasses = "[&_a]:text-[var(--color-global-default)] [&_a:hover]:text-[var(--color-global-contrast-light-01)] [&_a:hover]:before:content-none [&_a:focus]:text-[var(--color-global-contrast-light-01)] [&_a:focus]:underline [&_a[aria-current]]:text-[var(--color-global-contrast-light-03)] [&_a[aria-disabled='true']]:text-[var(--color-global-contrast-light-03)]" %}
