@@ -85,7 +85,8 @@
         3.5 Main Heading Wrapper Classes
         3.6 Text Wrapper Classes
         3.7 Buttons Wrapper Classes
-        3.8 Cards Grid Classes
+        3.8 Content Wrapper Classes (simple type)
+        3.9 Cards Grid Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -147,7 +148,13 @@
       {% set buttonsClasses = "flex gap-[var(--spacing-inline-large)] justify-center" %}
 
       {# --------------------------
-          3.8 Cards Grid Classes
+          3.8 Content Wrapper Classes (simple type)
+          Description: Layout vertical, Spacing
+        --------------------------#}
+      {% set contentWrapperClasses = "flex flex-col gap-[var(--spacing-stack-large)]" %}
+
+      {# --------------------------
+          3.9 Cards Grid Classes
           Description: Layout responsive grid, Spacing, Override card gaps, text, button wrapper and button style
       --------------------------#}
       {% set cardsGridClasses = "grid grid-cols-1 gap-[var(--spacing-stack-large)] md:grid-cols-3 md:gap-[var(--spacing-stack-xlarge)] [&>*]:w-full [&>*]:max-w-none [&_[data-card-text]]:line-clamp-none [&_[data-card-content]]:gap-[var(--spacing-stack-medium)] [&_div[class*='mt-0']]:mt-0 [&_div[class*='mt-0']_button]:w-auto [&_div[class*='mt-0']_button]:max-w-fit [&_button]:bg-[var(--color-button-primary)] [&_button]:text-white [&_button]:border-0 [&_button:hover]:bg-[var(--color-button-primary-hover)]" %}
@@ -207,7 +214,7 @@
 
             {# Simple type: content + buttons centered #}
             <div
-              class="flex flex-col gap-[var(--spacing-6)]"
+              class="{{ contentWrapperClasses }}"
               data-section-content
             >
 
