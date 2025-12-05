@@ -86,13 +86,13 @@
           3.2 Heading Wrapper Classes
           Description: Spacing, Layout
         --------------------------#}
-      {% set headingContainerClasses = "mb-[var(--spacing-stack)]" %}
+      {% set headingContainerClasses = "mb-[var(--spacing-stack-large)]" %}
 
       {# --------------------------
           3.3 Dropzone Classes (by variant: default, loading, error)
           Description: Layout, Spacing, Colors, Borders, Effects, States
         --------------------------#}
-      {% set dropzoneBaseClasses = "flex flex-col items-start justify-center p-[var(--spacing-inset)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-card)] bg-[var(--color-global-white)] min-h-[160px] cursor-pointer transition-colors mb-[var(--spacing-stack-medium)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
+      {% set dropzoneBaseClasses = "flex flex-col items-start justify-center p-[var(--spacing-inset-large)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-card)] bg-[var(--color-global-white)] min-h-[160px] cursor-pointer transition-colors mb-[var(--spacing-stack-medium)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
       {% set dropzoneHoverClasses = "hover:bg-[var(--color-global-contrast-light-03)]" %}
 
       {% set dropzoneVariantClasses = "" %}
@@ -132,7 +132,7 @@
           3.8 File Info Classes
           Description: Layout, Spacing, Typography, Colors
         --------------------------#}
-      {% set fileInfoContainerClasses = "flex flex-col gap-[var(--spacing-inline)] mt-[var(--spacing-stack-tight)]" %}
+      {% set fileInfoContainerClasses = "flex flex-col gap-[var(--spacing-inline-small)] mt-[var(--spacing-stack-tight)]" %}
       {% set fileInfoLabelClasses = "text-sm text-[var(--color-global-contrast-light-02)]" %}
       {% set fileInfoValueClasses = "text-sm text-[var(--color-global-default)]" %}
 
