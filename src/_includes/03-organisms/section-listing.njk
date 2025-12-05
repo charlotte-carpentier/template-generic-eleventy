@@ -81,13 +81,13 @@
           3.1 Section Wrapper Classes
           Description: Layout, Spacing, Background
         --------------------------#}
-      {% set sectionClasses = "flex flex-col px-[var(--spacing-6)] py-[var(--spacing-8)] bg-[var(--color-global-white)] md:px-[var(--spacing-10)] md:py-[var(--spacing-12)]" %}
+      {% set sectionClasses = "flex flex-col px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-large)] bg-[var(--color-global-white)] md:px-[var(--spacing-inset-xlarge)] md:py-[var(--spacing-inset-xxlarge)]" %}
 
       {# --------------------------
           3.2 Content Wrapper Classes
           Description: Layout vertical, Spacing between sections
         --------------------------#}
-      {% set containerClasses = "flex flex-col gap-[var(--spacing-8)]" %}
+      {% set containerClasses = "flex flex-col gap-[var(--spacing-stack-xlarge)]" %}
 
       {# --------------------------
           3.3 Heading Wrapper Classes
@@ -96,10 +96,10 @@
       {% set headingClasses = "flex" %}
 
       {# --------------------------
-    3.4 Cards Grid Classes
-    Description: Layout responsive grid with breakpoints, Spacing, Override card width
---------------------------#}
-{% set cardsGridClasses = "grid grid-cols-1 gap-[var(--spacing-6)] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-[var(--spacing-8)] [&>*]:w-full [&>*]:max-w-none" %}
+          3.4 Cards Grid Classes
+          Description: Layout responsive grid with breakpoints, Spacing, Override card width
+      --------------------------#}
+      {% set cardsGridClasses = "grid grid-cols-1 gap-[var(--spacing-stack-large)] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-[var(--spacing-stack-xlarge)] [&>*]:w-full [&>*]:max-w-none" %}
 
       {# --------------------------
           3.5 Pagination Wrapper Classes

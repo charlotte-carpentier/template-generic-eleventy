@@ -85,7 +85,7 @@
           3.2 Lockup Wrapper Classes
           Description: Layout override for full-width image, text truncation
         --------------------------#}
-      {% set lockupClasses = "[&>div]:flex-col [&>div]:gap-[var(--spacing-stack-tight)] [&_[data-lockup-image]]:w-full [&_[data-lockup-image]]:h-40 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-t-[var(--radius-card)] [&_img]:rounded-b-none [&_[data-lockup-content]]:p-[var(--spacing-stack)] [&_[data-lockup-text]]:line-clamp-2" %}
+      {% set lockupClasses = "[&>div]:flex-col [&>div]:gap-[var(--spacing-stack-tight)] [&_[data-lockup-image]]:w-full [&_[data-lockup-image]]:h-40 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-t-[var(--radius-card)] [&_img]:rounded-b-none [&_[data-lockup-content]]:p-[var(--spacing-stack-large)] [&_[data-lockup-text]]:line-clamp-2" %}
 
       {# --------------------------
           3.3 Content Wrapper Classes
@@ -109,7 +109,7 @@
           3.6 Tags Wrapper Classes
           Description: Layout, Spacing
         --------------------------#}
-      {% set tagsClasses = "flex flex-wrap gap-[var(--spacing-inline)] mt-[var(--spacing-stack-tight)]" %}
+      {% set tagsClasses = "flex flex-wrap gap-[var(--spacing-inline-small)] mt-[var(--spacing-stack-tight)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML

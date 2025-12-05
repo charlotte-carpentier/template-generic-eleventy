@@ -72,19 +72,19 @@
           3.1 Section Wrapper Classes
           Description: Layout, Spacing
         --------------------------#}
-      {% set sectionClasses = "flex flex-col px-[var(--spacing-6)] py-[var(--spacing-8)] md:px-[var(--spacing-10)] md:py-[var(--spacing-12)]" %}
+      {% set sectionClasses = "flex flex-col px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-large)] md:px-[var(--spacing-inset-xlarge)] md:py-[var(--spacing-inset-xxlarge)]" %}
 
       {# --------------------------
           3.2 Grid Wrapper Classes
           Description: Layout responsive grid, Spacing
         --------------------------#}
-      {% set gridClasses = "flex flex-col gap-[var(--spacing-6)] md:grid md:grid-cols-2 md:gap-[var(--spacing-10)]" %}
+      {% set gridClasses = "flex flex-col gap-[var(--spacing-stack-large)] md:grid md:grid-cols-2 md:gap-[var(--spacing-inline-xxlarge)]" %}
 
       {# --------------------------
           3.3 Left Column Classes
           Description: Layout, Spacing base with gap
       --------------------------#}
-      {% set leftColClasses = "flex flex-col gap-[var(--spacing-4)] order-2 md:order-1" %}
+      {% set leftColClasses = "flex flex-col gap-[var(--spacing-stack-medium)] order-2 md:order-1" %}
 
       {# --------------------------
           3.4 Right Column Classes
@@ -108,13 +108,13 @@
           3.7 Content Wrapper Classes
           Description: Typography, Colors, Spacing bottom override
       --------------------------#}
-      {% set contentClasses = "typography-body-regular text-[var(--color-global-default)] mb-[var(--spacing-6)]" %}
+      {% set contentClasses = "typography-body-regular text-[var(--color-global-default)] mb-[var(--spacing-stack-large)]" %}
 
       {# --------------------------
           3.8 Buttons Wrapper Classes
           Description: Layout horizontal, Spacing
         --------------------------#}
-      {% set buttonsClasses = "flex gap-[var(--spacing-4)]" %}
+      {% set buttonsClasses = "flex gap-[var(--spacing-inline-large)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
