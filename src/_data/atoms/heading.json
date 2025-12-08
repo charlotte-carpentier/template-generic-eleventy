@@ -4,7 +4,22 @@
     "component": "heading",
     "type": "atom",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableVariants": [
+      "serif",
+      "sans"
+    ],
+    "availableTags": [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "p",
+      "span",
+      "small"
+    ]
   },
   "headings": [
     {

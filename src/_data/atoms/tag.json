@@ -1,13 +1,23 @@
 {
   "// Component": "Tag - Status and label tags with semantic variants",
-  
   "_meta": {
     "component": "tag",
     "type": "atom",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableVariants": [
+      "default",
+      "default-filled",
+      "primary",
+      "primary-filled",
+      "success",
+      "success-filled",
+      "warning",
+      "warning-filled",
+      "danger",
+      "danger-filled"
+    ]
   },
-  
   "tags": [
     {
       "name": "demoTag1",

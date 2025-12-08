@@ -5,7 +5,15 @@
     "type": "atom",
     "version": "1.0.0",
     "created": "2025-01-15",
-    "updated": "2025-10-30"
+    "updated": "2025-10-30",
+    "availableVariants": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl",
+      "xxl"
+    ]
   },
   "icons": {
     "smiles": [
@@ -13,27 +21,13 @@
         "name": "demoSmile1",
         "spriteId": "smiley",
         "alt": "Smile icon (outline)",
-        "variants": [
-          "xs",
-          "sm",
-          "md",
-          "lg",
-          "xl",
-          "xxl"
-        ]
+        "variant": "md"
       },
       {
         "name": "demoSmile2",
         "spriteId": "smiley-fill",
         "alt": "Smile icon (filled)",
-        "variants": [
-          "xs",
-          "sm",
-          "md",
-          "lg",
-          "xl",
-          "xxl"
-        ]
+        "variant": "md"
       }
     ],
     "flags": [
@@ -41,14 +35,7 @@
         "name": "demoFlag1",
         "spriteId": "flag",
         "alt": "Flag icon",
-        "variants": [
-          "xs",
-          "sm",
-          "md",
-          "lg",
-          "xl",
-          "xxl"
-        ]
+        "variant": "md"
       },
       {
         "name": "demoFlagUs1",
