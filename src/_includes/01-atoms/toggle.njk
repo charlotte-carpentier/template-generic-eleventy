@@ -72,7 +72,7 @@
       3.1 Label Wrapper Classes
       Description: Layout, spacing, positioning, states
   -------------------------- #}
-  {% set labelWrapperClasses = "inline-flex items-start gap-3 cursor-pointer relative group" %}
+  {% set labelWrapperClasses = "inline-flex items-start gap-[var(--spacing-inline-large)] cursor-pointer relative group" %}
 
   {# --------------------------
       3.2 Input Wrapper Classes
@@ -90,7 +90,7 @@
       3.4 Track Classes
       Description: Layout, positioning, sizing, borders, colors, effects, states
   -------------------------- #}
-  {% set trackClasses = "relative inline-flex h-6 w-11 items-center rounded-full border-2 border-[var(--color-form)] bg-transparent transition-all peer-hover:border-[var(--color-form-hover)] peer-checked:border-[var(--color-form-control-checked)] peer-checked:bg-[var(--color-form-control-checked)] peer-checked:peer-hover:border-[var(--color-form-control-checked)] peer-checked:peer-hover:brightness-110 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[var(--color-semantic-information-focus)] peer-disabled:opacity-50 peer-disabled:cursor-not-allowed after:content-[''] after:absolute after:left-0.5 after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-4 after:rounded-full after:bg-[var(--color-form)] after:transition-all peer-hover:after:bg-[var(--color-form-hover)] peer-checked:after:translate-x-[1.125rem] peer-checked:after:bg-white peer-checked:peer-hover:after:bg-white" %}
+  {% set trackClasses = "relative inline-flex h-6 w-11 items-center rounded-full border-2 border-[var(--color-form)] bg-transparent transition-all peer-hover:border-[var(--color-form-hover)] peer-checked:border-[var(--color-form-control-checked)] peer-checked:bg-[var(--color-form-control-checked)] peer-checked:peer-hover:border-[var(--color-form-control-checked)] peer-checked:peer-hover:brightness-110 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[var(--color-semantic-information-focus)] peer-disabled:opacity-50 peer-disabled:cursor-not-allowed after:content-[''] after:absolute after:left-[var(--spacing-inline-tight)] after:top-1/2 after:-translate-y-1/2 after:h-4 after:w-4 after:rounded-full after:bg-[var(--color-form)] after:transition-all peer-hover:after:bg-[var(--color-form-hover)] peer-checked:after:translate-x-[1.125rem] peer-checked:after:bg-white peer-checked:peer-hover:after:bg-white" %}
 
   {# --------------------------
       3.5 Off Indicator Classes
@@ -120,7 +120,7 @@
       3.9 Description Classes
       Description: Spacing, typography, colors
   -------------------------- #}
-  {% set descriptionClasses = "mt-0.5 text-sm text-[var(--color-global-contrast-light-02)]" %}
+  {% set descriptionClasses = "mt-[var(--spacing-stack-tight)] text-sm text-[var(--color-global-contrast-light-02)]" %}
 
   {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
     4. Render HTML

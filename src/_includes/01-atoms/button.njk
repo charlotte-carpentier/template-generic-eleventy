@@ -93,9 +93,9 @@
       {% set sizeClasses = "" %}
 
       {% if buttonSize == 'small' %}
-        {% set sizeClasses = "px-4 py-2 text-sm rounded-[var(--radius-default)]" %}
+        {% set sizeClasses = "px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] text-sm rounded-[var(--radius-default)]" %}
       {% elif buttonSize == 'medium' %}
-        {% set sizeClasses = "px-6 py-3 text-base rounded-[var(--radius-default)]" %}
+        {% set sizeClasses = "px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-small)] text-base rounded-[var(--radius-default)]" %}
       {% endif %}
 
       {# --------------------------
@@ -128,7 +128,7 @@
       {% set iconClasses = "" %}
 
       {% if hasIcon and iconPosition != 'center' %}
-        {% set iconClasses = "gap-2" %}
+        {% set iconClasses = "gap-[var(--spacing-inline-medium)]" %}
       {% endif %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
