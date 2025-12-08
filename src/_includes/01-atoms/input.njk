@@ -55,31 +55,38 @@
         3.2 Label Classes
         3.3 Help Classes
         3.4 Counter Classes
+        3.5 Chip Container Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
           3.1 Base Classes
           Description: Layout, sizing, spacing, typography, colors, borders, effects, states
       -------------------------- #}
-      {% set baseClasses = "block w-full px-3 py-2.5 text-base text-[var(--color-global-default)] placeholder:italic placeholder:text-[var(--color-global-contrast-light-02)] bg-white border border-[var(--color-form)] rounded-[var(--radius-default)] transition-colors hover:border-[var(--color-form-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0 disabled:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+      {% set baseClasses = "block w-full px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] text-base text-[var(--color-global-default)] placeholder:italic placeholder:text-[var(--color-global-contrast-light-02)] bg-white border border-[var(--color-form)] rounded-[var(--radius-default)] transition-colors hover:border-[var(--color-form-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0 disabled:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed" %}
 
       {# --------------------------
           3.2 Label Classes
           Description: Layout, spacing, typography, colors
       -------------------------- #}
-      {% set labelClasses = "block mb-1.5 text-sm font-medium text-[var(--color-global-default)]" %}
+      {% set labelClasses = "block mb-[var(--spacing-stack-small)] text-sm font-medium text-[var(--color-global-default)]" %}
 
       {# --------------------------
           3.3 Help Classes
           Description: Spacing, typography, colors
       -------------------------- #}
-      {% set helpClasses = "mt-1.5 text-sm text-[var(--color-global-contrast-light-02)]" %}
+      {% set helpClasses = "mt-[var(--spacing-stack-small)] text-sm text-[var(--color-global-contrast-light-02)]" %}
 
       {# --------------------------
           3.4 Counter Classes
           Description: Spacing, typography, colors
       -------------------------- #}
-      {% set counterClasses = "mt-1.5 text-sm text-right text-[var(--color-global-contrast-light-02)]" %}
+      {% set counterClasses = "mt-[var(--spacing-stack-small)] text-sm text-right text-[var(--color-global-contrast-light-02)]" %}
+
+      {# --------------------------
+          3.5 Chip Container Classes
+          Description: Layout, spacing
+      -------------------------- #}
+      {% set chipContainerClasses = "flex flex-wrap gap-[var(--spacing-inline-medium)] mt-[var(--spacing-stack-medium)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
@@ -185,7 +192,7 @@
 
             {% if inputData.chipMulti %}
               <div
-                class="flex flex-wrap gap-2 mt-2"
+                class="{{ chipContainerClasses }}"
                 data-chip-container="{{ inputId }}"
                 data-chip-template="{{ inputData.chipMulti | dump | escape }}"
               >

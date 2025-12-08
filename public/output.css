@@ -381,6 +381,9 @@
   .right-3 {
     right: var(--spacing-3);
   }
+  .right-\[var\(--spacing-inset-small\)\] {
+    right: var(--spacing-inset-small);
+  }
   .-left-\[10000px\] {
     left: calc(10000px * -1);
   }
@@ -455,6 +458,12 @@
   }
   .mt-\[var\(--spacing-stack-large\)\] {
     margin-top: var(--spacing-stack-large);
+  }
+  .mt-\[var\(--spacing-stack-medium\)\] {
+    margin-top: var(--spacing-stack-medium);
+  }
+  .mt-\[var\(--spacing-stack-small\)\] {
+    margin-top: var(--spacing-stack-small);
   }
   .mt-\[var\(--spacing-stack-tight\)\] {
     margin-top: var(--spacing-stack-tight);
@@ -739,9 +748,6 @@
   .gap-\[var\(--spacing-4\)\] {
     gap: var(--spacing-4);
   }
-  .gap-\[var\(--spacing-6\)\] {
-    gap: var(--spacing-6);
-  }
   .gap-\[var\(--spacing-8\)\] {
     gap: var(--spacing-8);
   }
@@ -787,6 +793,20 @@
       --tw-space-y-reverse: 0;
       margin-block-start: calc(var(--spacing-8) * var(--tw-space-y-reverse));
       margin-block-end: calc(var(--spacing-8) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-\[var\(--spacing-stack-medium\)\] {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(var(--spacing-stack-medium) * var(--tw-space-y-reverse));
+      margin-block-end: calc(var(--spacing-stack-medium) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-\[var\(--spacing-stack-small\)\] {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(var(--spacing-stack-small) * var(--tw-space-y-reverse));
+      margin-block-end: calc(var(--spacing-stack-small) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
   .gap-x-\[var\(--spacing-inline-large\)\] {
@@ -988,14 +1008,8 @@
   .p-\[var\(--spacing-inset-tight\)\] {
     padding: var(--spacing-inset-tight);
   }
-  .p-\[var\(--spacing-stack-medium\)\] {
-    padding: var(--spacing-stack-medium);
-  }
   .px-1 {
     padding-inline: var(--spacing-1);
-  }
-  .px-1\.5 {
-    padding-inline: calc(var(--spacing) * 1.5);
   }
   .px-3 {
     padding-inline: var(--spacing-3);
@@ -1018,14 +1032,14 @@
   .px-\[var\(--spacing-inset-small\)\] {
     padding-inline: var(--spacing-inset-small);
   }
+  .px-\[var\(--spacing-inset-tight\)\] {
+    padding-inline: var(--spacing-inset-tight);
+  }
   .py-0\.5 {
     padding-block: calc(var(--spacing) * 0.5);
   }
   .py-2 {
     padding-block: var(--spacing-2);
-  }
-  .py-2\.5 {
-    padding-block: calc(var(--spacing) * 2.5);
   }
   .py-3 {
     padding-block: var(--spacing-3);
@@ -1038,6 +1052,12 @@
   }
   .py-\[var\(--spacing-inset-large\)\] {
     padding-block: var(--spacing-inset-large);
+  }
+  .py-\[var\(--spacing-inset-small\)\] {
+    padding-block: var(--spacing-inset-small);
+  }
+  .py-\[var\(--spacing-inset-tight\)\] {
+    padding-block: var(--spacing-inset-tight);
   }
   .py-\[var\(--spacing-stack-medium\)\] {
     padding-block: var(--spacing-stack-medium);
@@ -1059,6 +1079,9 @@
   }
   .pr-\[var\(--spacing-inline-large\)\] {
     padding-right: var(--spacing-inline-large);
+  }
+  .pr-\[var\(--spacing-inset-large\)\] {
+    padding-right: var(--spacing-inset-large);
   }
   .text-center {
     text-align: center;
@@ -1406,6 +1429,12 @@
       left: calc(var(--spacing) * 0.5);
     }
   }
+  .after\:left-\[var\(--spacing-inline-tight\)\] {
+    &::after {
+      content: var(--tw-content);
+      left: var(--spacing-inline-tight);
+    }
+  }
   .after\:h-4 {
     &::after {
       content: var(--tw-content);
@@ -1695,6 +1724,11 @@
       margin: calc(var(--spacing-1) * -1);
     }
   }
+  .focus\:-m-\[var\(--spacing-inline-small\)\] {
+    &:focus {
+      margin: calc(var(--spacing-inline-small) * -1);
+    }
+  }
   .focus\:rounded-\[var\(--radius-default\)\] {
     &:focus {
       border-radius: var(--radius-default);
@@ -1716,9 +1750,19 @@
       padding-inline: var(--spacing-2);
     }
   }
+  .focus\:px-\[var\(--spacing-inset-tight\)\] {
+    &:focus {
+      padding-inline: var(--spacing-inset-tight);
+    }
+  }
   .focus\:py-1 {
     &:focus {
       padding-block: var(--spacing-1);
+    }
+  }
+  .focus\:py-\[var\(--spacing-inset-tight\)\] {
+    &:focus {
+      padding-block: var(--spacing-inset-tight);
     }
   }
   .focus\:ring-2 {
