@@ -1,19 +1,23 @@
 {
-  "// Component": "Select - Dropdown select inputs with variants",
+  "// Component": "Select - Dropdown select inputs with size variants",
   "_meta": {
     "component": "select",
     "type": "atom",
     "version": "1.0.0",
     "created": "2025-01-15",
-    "availableVariants": [
+    "availableSizes": [
       "default",
       "small"
+    ],
+    "availableStates": [
+      "disabled"
     ]
   },
   "selects": [
     {
       "name": "demoSelect1",
-      "variant": "default",
+      "id": "demoSelect1",
+      "size": "default",
       "options": [
         {
           "value": "10",

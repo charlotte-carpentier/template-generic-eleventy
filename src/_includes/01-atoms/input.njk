@@ -51,39 +51,46 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Base Classes
-        3.2 Label Classes
-        3.3 Help Classes
-        3.4 Counter Classes
-        3.5 Chip Container Classes
+        3.1 Base Input Classes
+        3.2 State Classes
+        3.3 Label Classes
+        3.4 Help Classes
+        3.5 Counter Classes
+        3.6 Chip Container Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Base Classes
-          Description: Layout, sizing, spacing, typography, colors, borders, effects, states
+          3.1 Base Input Classes
+          Description: Layout, sizing, spacing, typography, borders, focus
       -------------------------- #}
-      {% set baseClasses = "block w-full px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] text-base text-[var(--color-global-default)] placeholder:italic placeholder:text-[var(--color-global-contrast-light-02)] bg-white border border-[var(--color-form)] rounded-[var(--radius-default)] transition-colors hover:border-[var(--color-form-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0 disabled:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+      {% set baseInputClasses = "block w-full px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] text-base placeholder:italic rounded-[var(--radius-default)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0" %}
 
       {# --------------------------
-          3.2 Label Classes
+          3.2 State Classes
+          Description: Colors, background, borders, hover, disabled states
+      -------------------------- #}
+      {% set stateClasses = "text-[var(--color-global-default)] placeholder:text-[var(--color-global-contrast-light-02)] bg-white border border-[var(--color-form)] hover:border-[var(--color-form-hover)] disabled:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+
+      {# --------------------------
+          3.3 Label Classes
           Description: Layout, spacing, typography, colors
       -------------------------- #}
       {% set labelClasses = "block mb-[var(--spacing-stack-small)] text-sm font-medium text-[var(--color-global-default)]" %}
 
       {# --------------------------
-          3.3 Help Classes
+          3.4 Help Classes
           Description: Spacing, typography, colors
       -------------------------- #}
       {% set helpClasses = "mt-[var(--spacing-stack-small)] text-sm text-[var(--color-global-contrast-light-02)]" %}
 
       {# --------------------------
-          3.4 Counter Classes
+          3.5 Counter Classes
           Description: Spacing, typography, colors
       -------------------------- #}
       {% set counterClasses = "mt-[var(--spacing-stack-small)] text-sm text-right text-[var(--color-global-contrast-light-02)]" %}
 
       {# --------------------------
-          3.5 Chip Container Classes
+          3.6 Chip Container Classes
           Description: Layout, spacing
       -------------------------- #}
       {% set chipContainerClasses = "flex flex-wrap gap-[var(--spacing-inline-medium)] mt-[var(--spacing-stack-medium)]" %}
@@ -105,7 +112,7 @@
             type="{{ inputType }}"
             id="{{ inputId }}"
             name="{{ inputName }}"
-            class="{{ baseClasses }}"
+            class="{{ baseInputClasses }} {{ stateClasses }}"
             placeholder="{{ inputPlaceholder }}"
             data-input-name="{{ inputData.name }}"
             data-input-type="input"
@@ -122,7 +129,7 @@
           <textarea
             id="{{ inputId }}"
             name="{{ inputName }}"
-            class="{{ baseClasses }} resize-none"
+            class="{{ baseInputClasses }} {{ stateClasses }} resize-none"
             placeholder="{{ inputPlaceholder }}"
             rows="{{ inputRows }}"
             data-input-name="{{ inputData.name }}"
@@ -149,7 +156,7 @@
               <select
                 id="{{ inputId }}"
                 name="{{ inputName }}"
-                class="{{ baseClasses }}"
+                class="{{ baseInputClasses }} {{ stateClasses }}"
                 data-input-name="{{ inputData.name }}"
                 data-input-type="select"
                 data-error-message="{{ inputData.errorMessage }}"
@@ -180,7 +187,7 @@
               id="{{ inputId }}"
               name="{{ inputName }}"
               multiple
-              class="{{ baseClasses }}"
+              class="{{ baseInputClasses }} {{ stateClasses }}"
               data-input-name="{{ inputData.name }}"
               data-error-message="{{ inputData.errorMessage }}"
               {% if inputData.required %}required{% endif %}
@@ -206,7 +213,7 @@
             type="date"
             id="{{ inputId }}"
             name="{{ inputName }}"
-            class="{{ baseClasses }}"
+            class="{{ baseInputClasses }} {{ stateClasses }}"
             placeholder="{{ inputPlaceholder }}"
             data-input-name="{{ inputData.name }}"
             data-input-type="date"
@@ -222,7 +229,7 @@
             type="tel"
             id="{{ inputId }}"
             name="{{ inputName }}"
-            class="{{ baseClasses }}"
+            class="{{ baseInputClasses }} {{ stateClasses }}"
             placeholder="{{ inputPlaceholder }}"
             data-input-name="{{ inputData.name }}"
             data-input-type="phone"
@@ -238,7 +245,7 @@
           <textarea
             id="{{ inputId }}"
             name="{{ inputName }}"
-            class="{{ baseClasses }} resize-none"
+            class="{{ baseInputClasses }} {{ stateClasses }} resize-none"
             placeholder="{{ inputPlaceholder }}"
             rows="{{ inputRows }}"
             data-input-name="{{ inputData.name }}"

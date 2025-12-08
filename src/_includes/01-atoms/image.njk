@@ -63,22 +63,16 @@
       {% set baseClasses = "block max-w-full h-auto object-cover" %}
 
       {# --------------------------
-          3.2 Variant Classes
-          Description: Sizing, borders
-      -------------------------- #}
-      {% set variantClasses = "" %}
-
-      {% if imageVariant == 'avatar' %}
-        {% set variantClasses = "w-11 h-11 rounded-[var(--radius-default)]" %}
-      {% elif imageVariant == 'square' %}
-        {% set variantClasses = "w-full max-w-2xl aspect-square" %}
-      {% elif imageVariant == 'landscape' %}
-        {% set variantClasses = "w-80" %}
-      {% elif imageVariant == 'wide' %}
-        {% set variantClasses = "w-64" %}
-      {% else %}
-        {% set variantClasses = "w-full" %}
-      {% endif %}
+          3.2 Variant Classes (Mapping)
+          Description: Sizing, aspect ratio, borders per variant
+      --------------------------- #}
+      {% set variantMap = {
+        'avatar': 'w-11 h-11 rounded-[var(--radius-default)]',
+        'square': 'w-full max-w-2xl aspect-square',
+        'landscape': 'w-80',
+        'wide': 'w-64'
+      } %}
+      {% set variantClasses = variantMap[imageVariant] or 'w-full' %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML

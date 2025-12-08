@@ -49,8 +49,6 @@
   {% set switchValue = switchData.value | default(toggle.id) %}
   {% set isChecked = switchData.checked | default(false) %}
   {% set isDisabled = switchData.disabled | default(false) %}
-  {% set switchSize = switchData.size | default('medium') %}
-  {% set switchVariant = switchData.variant | default('default') %}
   {% set hasLabel = toggle.label %}
   {% set hasDescription = toggle.description %}
 
@@ -70,7 +68,7 @@
 
   {# --------------------------
       3.1 Label Wrapper Classes
-      Description: Layout, spacing, positioning, states
+      Description: Layout, spacing, positioning, cursor
   -------------------------- #}
   {% set labelWrapperClasses = "inline-flex items-start gap-[var(--spacing-inline-large)] cursor-pointer relative group" %}
 
@@ -82,7 +80,7 @@
 
   {# --------------------------
       3.3 Input Classes
-      Description: Positioning
+      Description: Screen reader only positioning
   -------------------------- #}
   {% set inputClasses = "sr-only peer" %}
 
@@ -139,8 +137,6 @@
         class="{{ inputClasses }}"
         data-toggle-id="{{ toggle.id }}"
         data-toggle-type="toggle"
-        data-toggle-size="{{ switchSize }}"
-        data-toggle-variant="{{ switchVariant }}"
         {% if isChecked %}checked{% endif %}
         {% if isDisabled %}disabled{% endif %}
         {% if toggle.ariaLabel %}aria-label="{{ toggle.ariaLabel }}"{% endif %}

@@ -6,7 +6,7 @@
     "version": "1.0.0",
     "created": "2025-01-15",
     "updated": "2025-10-30",
-    "availableVariants": [
+    "availableSizes": [
       "xs",
       "sm",
       "md",
@@ -21,13 +21,13 @@
         "name": "demoSmile1",
         "spriteId": "smiley",
         "alt": "Smile icon (outline)",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoSmile2",
         "spriteId": "smiley-fill",
         "alt": "Smile icon (filled)",
-        "variant": "md"
+        "size": "lg"
       }
     ],
     "flags": [
@@ -35,43 +35,43 @@
         "name": "demoFlag1",
         "spriteId": "flag",
         "alt": "Flag icon",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoFlagUs1",
         "spriteId": "us",
         "alt": "United States flag",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoFlagCn1",
         "spriteId": "cn",
         "alt": "China flag",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoFlagAf1",
         "spriteId": "af",
         "alt": "Afghanistan flag",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoFlagAl1",
         "spriteId": "al",
         "alt": "Albania flag",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoFlagDz1",
         "spriteId": "dz",
         "alt": "Algeria flag",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoFlagIm1",
         "spriteId": "im",
         "alt": "Isle of Man flag",
-        "variant": "md"
+        "size": "md"
       }
     ],
     "navigation": [
@@ -79,43 +79,43 @@
         "name": "demoBack1",
         "spriteId": "backward-fast-solid-full",
         "alt": "First page",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoLeft1",
         "spriteId": "caret-left-solid-full",
         "alt": "Previous page",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoDots1",
         "spriteId": "dots-three",
         "alt": "More pages",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoRight1",
         "spriteId": "caret-right-solid-full",
         "alt": "Next page",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoForward1",
         "spriteId": "forward-fast-solid-full",
         "alt": "Last page",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoSortDown1",
         "spriteId": "sort-down-solid-full",
         "alt": "Dropdown arrow",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoBurger1",
         "spriteId": "hamburger",
         "alt": "Open menu",
-        "variant": "md"
+        "size": "md"
       }
     ],
     "status": [
@@ -123,55 +123,55 @@
         "name": "demoInfo1",
         "spriteId": "info-fill",
         "alt": "Information",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoCheck1",
         "spriteId": "check-circle-fill",
         "alt": "Success",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoWarn1",
         "spriteId": "warning-fill",
         "alt": "Warning",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoWarnCir1",
         "spriteId": "warning-circle-fill",
         "alt": "Error",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoClose1",
         "spriteId": "x",
         "alt": "Close",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoFileUp1",
         "spriteId": "file-arrow-up",
         "alt": "Upload file",
-        "variant": "xxl"
+        "size": "xxl"
       },
       {
         "name": "demoStar1",
         "spriteId": "star",
         "alt": "Star rating",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoStar2",
         "spriteId": "star-fill",
         "alt": "Star rating",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoSlider1",
         "spriteId": "sliders-horizontal",
         "alt": "Settings",
-        "variant": "md"
+        "size": "md"
       }
     ],
     "socials": [
@@ -179,25 +179,25 @@
         "name": "demoIconFB",
         "spriteId": "facebook",
         "alt": "Facebook icon",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoIconLI",
         "spriteId": "linkedin",
         "alt": "LinkedIn icon",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoIconTW",
         "spriteId": "twitter",
         "alt": "Twitter icon",
-        "variant": "md"
+        "size": "md"
       },
       {
         "name": "demoIconIG",
         "spriteId": "instagram",
         "alt": "Instagram icon",
-        "variant": "md"
+        "size": "md"
       }
     ]
   }

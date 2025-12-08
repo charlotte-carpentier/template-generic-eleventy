@@ -1,15 +1,18 @@
 {
   "// Component": "Radio Button - Radio inputs with label and description support",
-  
   "_meta": {
     "component": "radio-button",
     "type": "atom",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableStates": [
+      "checked",
+      "disabled"
+    ]
   },
-  
   "radioButtons": [
     {
+      "name": "demoRadio1",
       "id": "demoRadio1",
       "radio": {
         "value": "demoValue1",
@@ -21,6 +24,7 @@
       "ariaLabel": "Aria label for this radio button"
     },
     {
+      "name": "demoRadio2",
       "id": "demoRadio2",
       "radio": {
         "value": "demoValue2",
