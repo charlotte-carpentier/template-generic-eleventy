@@ -5,20 +5,17 @@
     "type": "atom",
     "version": "1.0.0",
     "created": "2025-01-15",
-    "availableVariants": [
-      "default"
-    ],
-    "availableSizes": [
-      "medium"
+    "availableStates": [
+      "checked",
+      "disabled"
     ]
   },
   "toggles": [
     {
+      "name": "demoToggle1",
       "id": "demoToggle1",
       "switch": {
         "value": "demoValue1",
-        "variant": "default",
-        "size": "medium",
         "checked": false,
         "disabled": false
       },
@@ -27,11 +24,10 @@
       "ariaLabel": "Switch description"
     },
     {
+      "name": "demoToggle2",
       "id": "demoToggle2",
       "switch": {
         "value": "demoValue2",
-        "variant": "default",
-        "size": "medium",
         "checked": false,
         "disabled": false
       },

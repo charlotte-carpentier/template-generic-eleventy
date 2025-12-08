@@ -996,9 +996,6 @@
   .px-\[var\(--spacing-inset-tight\)\] {
     padding-inline: var(--spacing-inset-tight);
   }
-  .py-0\.5 {
-    padding-block: calc(var(--spacing) * 0.5);
-  }
   .py-2 {
     padding-block: var(--spacing-2);
   }

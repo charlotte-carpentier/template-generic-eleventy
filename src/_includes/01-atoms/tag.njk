@@ -56,32 +56,22 @@
       {% set baseClasses = "inline-flex items-center px-[var(--spacing-inset-tight)] py-[var(--spacing-inset-tight)] rounded-[var(--radius-default)] text-sm font-semibold uppercase tracking-wide" %}
 
       {# --------------------------
-          3.2 Variant Classes
-          Description: Colors, borders
-      -------------------------- #}
-      {% set variantClasses = "" %}
-
-      {% if tagVariant == 'default' %}
-        {% set variantClasses = "text-[var(--color-global-contrast-light-01)] bg-[var(--color-global-contrast-light-04)] border border-[var(--color-global-contrast-light-02)]" %}
-      {% elif tagVariant == 'default-filled' %}
-        {% set variantClasses = "text-[var(--color-global-white)] bg-[var(--color-global-contrast-light-01)]" %}
-      {% elif tagVariant == 'primary' %}
-        {% set variantClasses = "text-[var(--color-semantic-information)] bg-[var(--color-semantic-information-contrast-light-01)] border border-[var(--color-semantic-information)]" %}
-      {% elif tagVariant == 'primary-filled' %}
-        {% set variantClasses = "text-[var(--color-global-white)] bg-[var(--color-semantic-information)]" %}
-      {% elif tagVariant == 'success' %}
-        {% set variantClasses = "text-[var(--color-semantic-success)] bg-[var(--color-semantic-success-contrast-light-02)] border border-[var(--color-semantic-success)]" %}
-      {% elif tagVariant == 'success-filled' %}
-        {% set variantClasses = "text-[var(--color-global-white)] bg-[var(--color-semantic-success)]" %}
-      {% elif tagVariant == 'warning' %}
-        {% set variantClasses = "text-[var(--color-semantic-warning)] bg-[var(--color-semantic-warning-contrast-light-01)] border border-[var(--color-semantic-warning)]" %}
-      {% elif tagVariant == 'warning-filled' %}
-        {% set variantClasses = "text-[var(--color-global-white)] bg-[var(--color-semantic-warning)]" %}
-      {% elif tagVariant == 'danger' %}
-        {% set variantClasses = "text-[var(--color-semantic-critical)] bg-[var(--color-semantic-critical-contrast-light-01)] border border-[var(--color-semantic-critical)]" %}
-      {% elif tagVariant == 'danger-filled' %}
-        {% set variantClasses = "text-[var(--color-global-white)] bg-[var(--color-semantic-critical)]" %}
-      {% endif %}
+          3.2 Variant Classes (Mapping)
+          Description: Colors, backgrounds, borders per semantic variant
+      --------------------------- #}
+      {% set variantMap = {
+        'default': 'text-[var(--color-global-contrast-light-01)] bg-[var(--color-global-contrast-light-04)] border border-[var(--color-global-contrast-light-02)]',
+        'default-filled': 'text-[var(--color-global-white)] bg-[var(--color-global-contrast-light-01)]',
+        'primary': 'text-[var(--color-semantic-information)] bg-[var(--color-semantic-information-contrast-light-01)] border border-[var(--color-semantic-information)]',
+        'primary-filled': 'text-[var(--color-global-white)] bg-[var(--color-semantic-information)]',
+        'success': 'text-[var(--color-semantic-success)] bg-[var(--color-semantic-success-contrast-light-02)] border border-[var(--color-semantic-success)]',
+        'success-filled': 'text-[var(--color-global-white)] bg-[var(--color-semantic-success)]',
+        'warning': 'text-[var(--color-semantic-warning)] bg-[var(--color-semantic-warning-contrast-light-01)] border border-[var(--color-semantic-warning)]',
+        'warning-filled': 'text-[var(--color-global-white)] bg-[var(--color-semantic-warning)]',
+        'danger': 'text-[var(--color-semantic-critical)] bg-[var(--color-semantic-critical-contrast-light-01)] border border-[var(--color-semantic-critical)]',
+        'danger-filled': 'text-[var(--color-global-white)] bg-[var(--color-semantic-critical)]'
+      } %}
+      {% set variantClasses = variantMap[tagVariant] or variantMap['default'] %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML

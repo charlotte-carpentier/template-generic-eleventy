@@ -57,16 +57,17 @@
     Index:
     3.1 Label Wrapper Classes
     3.2 Input Wrapper Classes
-    3.3 Input Classes
-    3.4 Indicator Classes
-    3.5 Text Wrapper Classes
-    3.6 Label Classes
-    3.7 Description Classes
+    3.3 Base Radio Classes
+    3.4 State Classes
+    3.5 Indicator Classes
+    3.6 Text Wrapper Classes
+    3.7 Label Classes
+    3.8 Description Classes
   ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
   {# --------------------------
       3.1 Label Wrapper Classes
-      Description: Layout, spacing, states
+      Description: Layout, spacing, cursor
   -------------------------- #}
   {% set labelClasses = "inline-flex items-start gap-[var(--spacing-inline-medium)] cursor-pointer group" %}
 
@@ -77,31 +78,37 @@
   {% set radioWrapperClasses = "relative flex items-start" %}
 
   {# --------------------------
-      3.3 Input Classes
-      Description: Positioning, sizing, borders, colors, effects, states
+      3.3 Base Radio Classes
+      Description: Layout, sizing, borders, appearance, cursor, focus
   -------------------------- #}
-  {% set radioClasses = "relative appearance-none w-5 h-5 border border-[var(--color-form)] rounded-full bg-white cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+  {% set baseRadioClasses = "relative appearance-none w-5 h-5 rounded-full cursor-pointer transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
 
   {# --------------------------
-      3.4 Indicator Classes
-      Description: Positioning, sizing, borders, colors, states
+      3.4 State Classes
+      Description: Colors, background, borders, hover, checked, disabled states
+  -------------------------- #}
+  {% set stateClasses = "border border-[var(--color-form)] bg-white hover:border-[var(--color-form-hover)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+
+  {# --------------------------
+      3.5 Indicator Classes
+      Description: Checked state pseudo-element
   -------------------------- #}
   {% set checkedIndicatorClasses = "checked:after:content-[''] checked:after:absolute checked:after:top-1/2 checked:after:left-1/2 checked:after:-translate-x-1/2 checked:after:-translate-y-1/2 checked:after:w-3 checked:after:h-3 checked:after:rounded-full checked:after:bg-[var(--color-form-control-checked)]" %}
 
   {# --------------------------
-      3.5 Text Wrapper Classes
+      3.6 Text Wrapper Classes
       Description: Layout
   -------------------------- #}
   {% set textContainerClasses = "flex flex-col" %}
 
   {# --------------------------
-      3.6 Label Classes
+      3.7 Label Classes
       Description: Typography, colors, states
   -------------------------- #}
   {% set labelTextClasses = "text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors" %}
 
   {# --------------------------
-      3.7 Description Classes
+      3.8 Description Classes
       Description: Spacing, typography, colors
   -------------------------- #}
   {% set descriptionClasses = "mt-[var(--spacing-stack-tight)] text-sm text-[var(--color-global-contrast-light-02)]" %}
@@ -116,7 +123,7 @@
         id="{{ radioButton.id }}"
         name="{{ radioName }}"
         value="{{ radioValue }}"
-        class="{{ radioClasses }} {{ checkedIndicatorClasses }}"
+        class="{{ baseRadioClasses }} {{ stateClasses }} {{ checkedIndicatorClasses }}"
         data-radio-id="{{ radioButton.id }}"
         data-radio-type="radio-button"
         {% if isChecked %}checked{% endif %}

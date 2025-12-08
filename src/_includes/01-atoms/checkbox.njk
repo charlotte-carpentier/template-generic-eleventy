@@ -59,16 +59,17 @@
     Index:
     3.1 Label Wrapper Classes
     3.2 Input Wrapper Classes
-    3.3 Input Classes
-    3.4 Indicator Classes
-    3.5 Text Wrapper Classes
-    3.6 Label Classes
-    3.7 Description Classes
+    3.3 Base Input Classes
+    3.4 State Classes
+    3.5 Indicator Classes
+    3.6 Text Wrapper Classes
+    3.7 Label Classes
+    3.8 Description Classes
   ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
   {# --------------------------
       3.1 Label Wrapper Classes
-      Description: Layout, spacing, states
+      Description: Layout, spacing, cursor
   -------------------------- #}
   {% set labelClasses = "inline-flex items-start gap-[var(--spacing-inline-medium)] cursor-pointer group" %}
 
@@ -79,31 +80,37 @@
   {% set inputWrapperClasses = "relative flex items-center" %}
 
   {# --------------------------
-      3.3 Input Classes
-      Description: Sizing, borders, colors, effects, states
+      3.3 Base Input Classes
+      Description: Sizing, borders, appearance, cursor, focus
   -------------------------- #}
-  {% set inputClasses = "peer h-5 w-5 cursor-pointer appearance-none rounded border-2 transition-all border-[var(--color-form)] hover:border-[var(--color-form-hover)] checked:bg-[var(--color-form-control-checked)] checked:border-[var(--color-form-control-checked)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+  {% set baseInputClasses = "peer h-5 w-5 cursor-pointer appearance-none rounded border-2 transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
 
   {# --------------------------
-      3.4 Indicator Classes
+      3.4 State Classes
+      Description: Colors, hover, checked, disabled states
+  -------------------------- #}
+  {% set stateClasses = "border-[var(--color-form)] hover:border-[var(--color-form-hover)] checked:bg-[var(--color-form-control-checked)] checked:border-[var(--color-form-control-checked)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+
+  {# --------------------------
+      3.5 Indicator Classes
       Description: Positioning, effects, states
   -------------------------- #}
   {% set checkmarkClasses = "absolute text-white opacity-0 pointer-events-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 peer-checked:opacity-100 transition-opacity" %}
 
   {# --------------------------
-      3.5 Text Wrapper Classes
+      3.6 Text Wrapper Classes
       Description: Layout
   -------------------------- #}
   {% set textContainerClasses = "flex flex-col" %}
 
   {# --------------------------
-      3.6 Label Classes
+      3.7 Label Classes
       Description: Typography, colors, states
   -------------------------- #}
   {% set labelTextClasses = "text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors" %}
 
   {# --------------------------
-      3.7 Description Classes
+      3.8 Description Classes
       Description: Typography, colors
   -------------------------- #}
   {% set descriptionClasses = "mt-[var(--spacing-stack-tight)] text-sm text-[var(--color-global-contrast-light-02)]" %}
@@ -122,7 +129,7 @@
         id="{{ checkbox.id }}"
         name="{{ checkbox.id }}"
         value="{{ checkboxValue }}"
-        class="{{ inputClasses }}"
+        class="{{ baseInputClasses }} {{ stateClasses }}"
         data-checkbox-id="{{ checkbox.id }}"
         data-checkbox-type="checkbox"
         {% if isChecked %}checked{% endif %}

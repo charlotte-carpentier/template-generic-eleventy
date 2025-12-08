@@ -4,10 +4,16 @@
     "component": "checkbox",
     "type": "atom",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableStates": [
+      "checked",
+      "disabled",
+      "required"
+    ]
   },
   "checkboxes": [
     {
+      "name": "demoCheck1",
       "id": "demoCheck1",
       "box": {
         "value": "demoValue1",
@@ -19,6 +25,7 @@
       "ariaLabel": "Aria label for this checkbox"
     },
     {
+      "name": "demoCheck2",
       "id": "demoCheck2",
       "box": {
         "value": "demoValue2",

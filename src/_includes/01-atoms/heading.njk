@@ -63,29 +63,36 @@
       {% set baseClasses = "text-[var(--color-global-heading)]" %}
 
       {# --------------------------
-          3.2 Typography Classes
-          Description: Typography
-      -------------------------- #}
-      {% set typographyClasses = "" %}
-      {% set isSerif = headingData.variant == 'serif' %}
+          3.2 Typography Classes (Mapping)
+          Description: Typography based on tag + variant combination
+      --------------------------- #}
+      {% set variant = headingData.variant | default('sans') %}
 
-      {% if finalTag == 'h1' %}
-        {% set typographyClasses = "typography-h1-serif" if isSerif else "typography-h1" %}
-      {% elif finalTag == 'h2' %}
-        {% set typographyClasses = "typography-h2-serif" if isSerif else "typography-h2" %}
-      {% elif finalTag == 'h3' %}
-        {% set typographyClasses = "typography-h3-serif" if isSerif else "typography-h3" %}
-      {% elif finalTag == 'h4' %}
-        {% set typographyClasses = "typography-h4-serif" if isSerif else "typography-h4" %}
-      {% elif finalTag == 'h5' %}
-        {% set typographyClasses = "typography-h5-serif" if isSerif else "typography-h5" %}
-      {% elif finalTag == 'h6' %}
-        {% set typographyClasses = "typography-h6-serif" if isSerif else "typography-h6" %}
-      {% elif finalTag == 'small' %}
-        {% set typographyClasses = "typography-body-small" %}
-      {% elif finalTag == 'span' or finalTag == 'p' %}
-        {% set typographyClasses = "typography-body-regular" %}
+      {% set typographyMap = {
+        'h1-serif': 'typography-h1-serif',
+        'h1-sans': 'typography-h1',
+        'h2-serif': 'typography-h2-serif',
+        'h2-sans': 'typography-h2',
+        'h3-serif': 'typography-h3-serif',
+        'h3-sans': 'typography-h3',
+        'h4-serif': 'typography-h4-serif',
+        'h4-sans': 'typography-h4',
+        'h5-serif': 'typography-h5-serif',
+        'h5-sans': 'typography-h5',
+        'h6-serif': 'typography-h6-serif',
+        'h6-sans': 'typography-h6',
+        'small': 'typography-body-small',
+        'span': 'typography-body-regular',
+        'p': 'typography-body-regular'
+      } %}
+
+      {% if finalTag in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] %}
+        {% set lookupKey = finalTag ~ '-' ~ variant %}
+      {% else %}
+        {% set lookupKey = finalTag %}
       {% endif %}
+
+      {% set typographyClasses = typographyMap[lookupKey] or typographyMap['p'] %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML

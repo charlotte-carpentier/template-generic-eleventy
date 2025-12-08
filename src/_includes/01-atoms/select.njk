@@ -1,6 +1,6 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ATOM › Select                                           │
-   │ Dropdown select inputs with variants and states         │
+   │ Dropdown select inputs with size variants and states    │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
@@ -49,15 +49,16 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set isDisabled = options.disabled | default(selectData.disabled) | default(false) %}
       {% set finalAriaLabel = options.ariaLabel | default(selectData.ariaLabel) %}
-      {% set hasSmallVariant = selectData.variant == 'small' %}
+      {% set selectSize = selectData.size | default('default') %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
         3.1 Wrapper Classes
-        3.2 Base Classes
-        3.3 Size Classes
-        3.4 Icon Wrapper Classes
+        3.2 Base Select Classes
+        3.3 State Classes
+        3.4 Size Classes (Mapping)
+        3.5 Icon Wrapper Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -67,24 +68,29 @@
       {% set wrapperClasses = "relative inline-block w-full" %}
 
       {# --------------------------
-          3.2 Base Classes
-          Description: Layout, sizing, typography, colors, borders, effects, states
+          3.2 Base Select Classes
+          Description: Layout, sizing, appearance, borders, cursor, focus
       -------------------------- #}
-      {% set baseClasses = "block w-full appearance-none bg-white border border-[var(--color-form)] rounded-[var(--radius-default)] text-[var(--color-global-default)] transition-colors cursor-pointer hover:border-[var(--color-form-hover)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0 disabled:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed" %}
+      {% set baseSelectClasses = "block w-full appearance-none rounded-[var(--radius-default)] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0" %}
 
       {# --------------------------
-          3.3 Size Classes
-          Description: Sizing, spacing, typography
+          3.3 State Classes
+          Description: Colors, background, borders, hover, disabled states
       -------------------------- #}
-      {% set sizeClasses = "" %}
-      {% if hasSmallVariant %}
-        {% set sizeClasses = "h-10 px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] pr-[var(--spacing-inset-large)] text-sm leading-5" %}
-      {% else %}
-        {% set sizeClasses = "h-12 px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] pr-[var(--spacing-inset-large)] text-base leading-5" %}
-      {% endif %}
+      {% set stateClasses = "bg-white border border-[var(--color-form)] text-[var(--color-global-default)] hover:border-[var(--color-form-hover)] disabled:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed" %}
 
       {# --------------------------
-          3.4 Icon Wrapper Classes
+          3.4 Size Classes (Mapping)
+          Description: Height, spacing, typography
+      -------------------------- #}
+      {% set sizeMap = {
+        'small': 'h-10 px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] pr-[var(--spacing-inset-large)] text-sm leading-5',
+        'default': 'h-12 px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] pr-[var(--spacing-inset-large)] text-base leading-5'
+      } %}
+      {% set sizeClasses = sizeMap[selectSize] or sizeMap['default'] %}
+
+      {# --------------------------
+          3.5 Icon Wrapper Classes
           Description: Positioning, colors
       -------------------------- #}
       {% set iconWrapperClasses = "absolute top-1/2 right-[var(--spacing-inset-small)] -translate-y-1/2 pointer-events-none text-[var(--color-global-default)]" %}
@@ -94,10 +100,12 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div class="{{ wrapperClasses }}">
         <select
+          id="{{ selectData.id }}"
           name="{{ selectData.name }}"
-          class="{{ baseClasses }} {{ sizeClasses }}"
+          class="{{ baseSelectClasses }} {{ stateClasses }} {{ sizeClasses }}"
           data-select-name="{{ selectData.name }}"
           data-select-type="select"
+          data-select-size="{{ selectData.size }}"
           {% if isDisabled %}disabled{% endif %}
           {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
         >

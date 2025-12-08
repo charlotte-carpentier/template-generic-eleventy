@@ -76,59 +76,47 @@
         3. Tailwind Classes
         Index:
         3.1 Base Classes
-        3.2 Size Classes
-        3.3 Variant Classes
+        3.2 Size Classes (Mapping)
+        3.3 Variant Classes (Mapping)
         3.4 Icon Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {# --------------------------
           3.1 Base Classes
-          Description: Layout, typography, transition, focus states
+          Description: Layout, typography, borders, transition, focus, cursor
         --------------------------#}
-      {% set baseClasses = "inline-flex items-center justify-center font-medium transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+      {% set baseClasses = "inline-flex items-center justify-center font-medium rounded-[var(--radius-default)] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] disabled:cursor-not-allowed" %}
 
       {# --------------------------
-        3.2 Size Classes
-        Description: Padding, text size, rounded corners
+        3.2 Size Classes (Mapping)
+        Description: Padding, text size
         --------------------------#}
-      {% set sizeClasses = "" %}
-
-      {% if buttonSize == 'small' %}
-        {% set sizeClasses = "px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] text-sm rounded-[var(--radius-default)]" %}
-      {% elif buttonSize == 'medium' %}
-        {% set sizeClasses = "px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-small)] text-base rounded-[var(--radius-default)]" %}
-      {% endif %}
+      {% set sizeMap = {
+        'small': 'px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] text-sm',
+        'medium': 'px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-small)] text-base'
+      } %}
+      {% set sizeClasses = sizeMap[buttonSize] or sizeMap['medium'] %}
 
       {# --------------------------
-        3.3 Variant Classes
+        3.3 Variant Classes (Mapping)
         Description: Color, background, border, hover/active/disabled
         --------------------------#}
-      {% set variantClasses = "" %}
-
-      {% if buttonVariant == 'primary' %}
-        {% set variantClasses = "bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed" %}
-
-      {% elif buttonVariant == 'secondary' %}
-        {% set variantClasses = "bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50 disabled:cursor-not-allowed" %}
-
-      {% elif buttonVariant == 'ghost' %}
-        {% set variantClasses = "bg-transparent text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-04)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed" %}
-
-      {% elif buttonVariant == 'icon' %}
-        {% set variantClasses = "bg-transparent text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-04)] active:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50 disabled:cursor-not-allowed" %}
-
-      {% elif buttonVariant == 'fixed' %}
-        {% set variantClasses = "bg-[var(--color-global-contrast-light-04)] text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-03)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50 disabled:cursor-not-allowed" %}
-
-      {% endif %}
+      {% set variantMap = {
+        'primary': 'bg-[var(--color-button-primary)] text-white hover:bg-[var(--color-button-primary-hover)] active:bg-[var(--color-button-primary-hover)] disabled:opacity-50',
+        'secondary': 'bg-transparent text-[var(--color-button-secondary)] border-2 border-[var(--color-button-secondary)] hover:bg-[var(--color-button-secondary-hover-light)] active:bg-[var(--color-button-secondary-hover-light)] disabled:opacity-50',
+        'ghost': 'bg-transparent text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-04)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50',
+        'icon': 'bg-transparent text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-04)] active:bg-[var(--color-global-contrast-light-04)] disabled:opacity-50',
+        'fixed': 'bg-[var(--color-global-contrast-light-04)] text-[var(--color-global-default)] hover:bg-[var(--color-global-contrast-light-03)] active:bg-[var(--color-global-contrast-light-03)] disabled:opacity-50'
+      } %}
+      {% set variantClasses = variantMap[buttonVariant] or variantMap['primary'] %}
 
       {# --------------------------
         3.4 Icon Classes
         Description: Gap between icon and text
         --------------------------#}
-      {% set iconClasses = "" %}
-
       {% if hasIcon and iconPosition != 'center' %}
-        {% set iconClasses = "gap-[var(--spacing-inline-medium)]" %}
+        {% set iconClasses = 'gap-[var(--spacing-inline-medium)]' %}
+      {% else %}
+        {% set iconClasses = '' %}
       {% endif %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
