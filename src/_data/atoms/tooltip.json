@@ -1,13 +1,22 @@
 {
   "// Component": "Tooltip - Contextual help tooltips with multi-part descriptions",
-  
   "_meta": {
     "component": "tooltip",
     "type": "atom",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availablePositions": [
+      "top",
+      "right",
+      "bottom",
+      "left"
+    ],
+    "availableTriggerTypes": [
+      "icon",
+      "text",
+      "button"
+    ]
   },
-  
   "tooltips": [
     {
       "name": "demoTooltip1",

@@ -1,13 +1,15 @@
 {
   "// Component": "Vector - SVG logos and branding with layout variants",
-  
   "_meta": {
     "component": "vector",
     "type": "atom",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableVariants": [
+      "horizontal",
+      "logo-only"
+    ]
   },
-  
   "vectors": [
     {
       "name": "demoVector1",

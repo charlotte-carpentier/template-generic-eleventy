@@ -3,9 +3,14 @@
     "component": "image",
     "type": "atom",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableVariants": [
+      "square",
+      "landscape",
+      "wide",
+      "avatar"
+    ]
   },
-  
   "images": [
     {
       "name": "demoImage1",
