@@ -145,7 +145,6 @@
     --spacing-5: 20px;
     --spacing-6: 24px;
     --spacing-8: 32px;
-    --spacing-9: 36px;
     --spacing-10: 40px;
     --spacing-12: 48px;
     --spacing-20: 80px;
@@ -996,6 +995,9 @@
   }
   .px-\[var\(--spacing-inset-tight\)\] {
     padding-inline: var(--spacing-inset-tight);
+  }
+  .py-0\.5 {
+    padding-block: calc(var(--spacing) * 0.5);
   }
   .py-2 {
     padding-block: var(--spacing-2);

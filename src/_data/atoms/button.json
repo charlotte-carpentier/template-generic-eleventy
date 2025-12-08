@@ -4,7 +4,24 @@
     "component": "button",
     "type": "atom",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableVariants": [
+      "primary",
+      "secondary",
+      "ghost",
+      "icon",
+      "fixed"
+    ],
+    "availableSizes": [
+      "small",
+      "medium"
+    ],
+    "availableIconPositions": [
+      "left",
+      "right",
+      "center",
+      "both"
+    ]
   },
   "buttons": [
     {
@@ -12,10 +29,7 @@
       "text": "Label",
       "iconName": "demoSmile3",
       "iconPosition": "both",
-      "variants": [
-        "primary",
-        "secondary"
-      ],
+      "variant": "primary",
       "ariaLabel": "Button description for accessibility"
     },
     {
@@ -38,10 +52,7 @@
       "text": "Label",
       "iconName": "demoSmile3",
       "iconPosition": "both",
-      "variants": [
-        "ghost",
-        "secondary"
-      ],
+      "variant": "ghost",
       "size": "small",
       "ariaLabel": "Button description for accessibility"
     },
