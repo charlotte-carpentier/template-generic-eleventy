@@ -64,6 +64,7 @@
         3.5 Code Classes (by variant: phone)
         3.6 Date Wrapper Classes
         3.7 Calendar Classes (by variant: simple, double)
+        3.8 Month Labels Wrapper Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -115,6 +116,12 @@
       {% set calendarDateClasses = "flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]" %}
       {% set calendarDateSelectedClasses = "bg-[var(--color-interactive-default)] text-[var(--color-global-white)] hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]" %}
       {% set calendarDateOutsideClasses = "flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default" %}
+
+      {# --------------------------
+          3.8 Month Labels Wrapper Classes
+          Description: Layout, Spacing
+        --------------------------#}
+      {% set monthLabelsWrapperClasses = "flex gap-60 flex-1 justify-center" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
@@ -186,7 +193,7 @@
               </button>
 
               {# Month labels centered #}
-              <div class="flex gap-60 flex-1 justify-center">
+              <div class="{{ monthLabelsWrapperClasses }}">
                 {% if dateRange.month %}
                   <span class="{{ dateMonthClasses }}" data-panel-month="true">
                     {{ dateRange.month }}
