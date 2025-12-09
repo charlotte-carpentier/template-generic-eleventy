@@ -56,7 +56,6 @@
       {% set dropzoneText = blockData.dropzoneText | default('Drag and drop file here') %}
       {% set separator = blockData.separator | default('Or') %}
       {% set variant = blockData.variant | default('default') %}
-      {% set dismissible = blockData.dismissible | default(false) %}
       {% set errorMessage = blockData.errorMessage | default('') %}
       {% set supportedFormatsLabel = blockData.supportedFormatsLabel | default('Supported formats') %}
       {% set supportedFormatsValue = blockData.supportedFormatsValue | default('') %}
@@ -74,6 +73,7 @@
         3.6 Separator Classes
         3.7 Button Wrapper Classes
         3.8 File Info Classes
+        3.9 Error Message Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -95,12 +95,12 @@
       {% set dropzoneBaseClasses = "flex flex-col items-start justify-center p-[var(--spacing-inset-large)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-card)] bg-[var(--color-global-white)] min-h-[160px] cursor-pointer transition-colors mb-[var(--spacing-stack-medium)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
       {% set dropzoneHoverClasses = "hover:bg-[var(--color-global-contrast-light-03)]" %}
 
-      {% set dropzoneVariantClasses = "" %}
-      {% if variant == 'loading' %}
-        {% set dropzoneVariantClasses = "pointer-events-none opacity-60" %}
-      {% elif variant == 'error' %}
-        {% set dropzoneVariantClasses = "border-[var(--color-semantic-critical)]" %}
-      {% endif %}
+      {% set variantMap = {
+        'default': '',
+        'loading': 'pointer-events-none opacity-60',
+        'error': 'border-[var(--color-semantic-critical)]'
+      } %}
+      {% set dropzoneVariantClasses = variantMap[variant] | default('') %}
 
       {% set dropzoneClasses = dropzoneBaseClasses ~ " " ~ dropzoneHoverClasses ~ " " ~ dropzoneVariantClasses %}
 
@@ -135,6 +135,12 @@
       {% set fileInfoContainerClasses = "flex flex-col gap-[var(--spacing-inline-small)] mt-[var(--spacing-stack-tight)]" %}
       {% set fileInfoLabelClasses = "text-sm text-[var(--color-global-contrast-light-02)]" %}
       {% set fileInfoValueClasses = "text-sm text-[var(--color-global-default)]" %}
+
+      {# --------------------------
+          3.9 Error Message Classes
+          Description: Typography, Colors, Spacing
+        --------------------------#}
+      {% set errorMessageClasses = "typography-body-small text-[var(--color-semantic-critical)] mt-[var(--spacing-stack-tight)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
@@ -202,6 +208,13 @@
             <span class="{{ fileInfoValueClasses }}">{{ maxFileSizeValue }}</span>
           </p>
         </div>
+
+        {# Error message #}
+        {% if variant == 'error' and errorMessage %}
+          <p class="{{ errorMessageClasses }}" role="alert" data-drag-drop-error="true">
+            {{ errorMessage }}
+          </p>
+        {% endif %}
 
         {# Hidden file input #}
         <input

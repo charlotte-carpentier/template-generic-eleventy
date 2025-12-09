@@ -57,7 +57,6 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      {% set cardId = cardData.id | default(options.name) %}
       {% set lockupName = cardData.lockupName | default('') %}
       {% set headingName = cardData.headingName | default('') %}
       {% set content = cardData.content | default('') %}
@@ -116,7 +115,7 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
         class="{{ cardClasses }}"
-        data-card-id="{{ cardId }}"
+        data-card-name="{{ cardData.name }}"
         data-card-type="card"
       >
         {# Lockup (if present and lockupDatas provided) #}

@@ -4,15 +4,16 @@
     "component": "list-value",
     "type": "molecule",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableVariants": [
+      "default",
+      "horizontal"
+    ]
   },
   "listValues": [
     {
-      "id": "demoList1",
-      "variants": [
-        "default",
-        "horizontal"
-      ],
+      "name": "demoList1",
+      "variant": "default",
       "items": [
         {
           "lockupName": "demoLock4"

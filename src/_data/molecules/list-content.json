@@ -1,16 +1,14 @@
 {
   "// Component": "List Content - Content lists with lockup items",
-  
   "_meta": {
     "component": "list-content",
     "type": "molecule",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "listContents": [
     {
-      "id": "demoList1",
+      "name": "demoList1",
       "items": [
         {
           "lockupName": "demoLock3"

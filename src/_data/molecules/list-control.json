@@ -1,16 +1,19 @@
 {
   "// Component": "List Control - Lists with radio, checkbox, and toggle controls",
-  
   "_meta": {
     "component": "list-control",
     "type": "molecule",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableTypes": [
+      "radio",
+      "checkbox",
+      "toggle"
+    ]
   },
-  
   "listControls": [
     {
-      "id": "demoList1",
+      "name": "demoList1",
       "type": "radio",
       "items": [
         {
@@ -18,7 +21,7 @@
           "checked": true
         },
         {
-          "radioName": "demoRadio1", 
+          "radioName": "demoRadio1",
           "checked": false
         },
         {
@@ -28,7 +31,7 @@
       ]
     },
     {
-      "id": "demoList2", 
+      "name": "demoList2",
       "type": "checkbox",
       "items": [
         {
@@ -40,14 +43,14 @@
           "checked": false
         },
         {
-          "checkboxName": "demoCheck1", 
+          "checkboxName": "demoCheck1",
           "checked": false
         }
       ]
     },
     {
-      "id": "demoList3",
-      "type": "toggle", 
+      "name": "demoList3",
+      "type": "toggle",
       "items": [
         {
           "toggleName": "demoToggle1",

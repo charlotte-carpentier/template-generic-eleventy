@@ -53,29 +53,26 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Wrapper Classes (by variant: info, success, warning, error)
+        3.1 Wrapper Classes
         3.2 Content Wrapper Classes
-        3.3 Icon Wrapper Classes (by variant: info, success, warning, error)
+        3.3 Icon Wrapper Classes
         3.4 Message Classes
         3.5 Close Button Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Wrapper Classes (by variant: info, success, warning, error)
-          Description: Layout, Background, Borders by variant
+          3.1 Wrapper Classes
+          Description: Layout, Background, Borders
         --------------------------#}
       {% set containerBaseClasses = "flex flex-col w-full rounded-[var(--radius-card)] border-2 p-[var(--spacing-inset-small)]" %}
 
-      {% set containerVariantClasses = "" %}
-      {% if variant == 'info' %}
-        {% set containerVariantClasses = "bg-[var(--color-semantic-information-contrast-light-02)] border-[var(--color-semantic-information)]" %}
-      {% elif variant == 'success' %}
-        {% set containerVariantClasses = "bg-[var(--color-semantic-success-contrast-light-02)] border-[var(--color-semantic-success)]" %}
-      {% elif variant == 'warning' %}
-        {% set containerVariantClasses = "bg-[var(--color-semantic-warning-contrast-light-02)] border-[var(--color-semantic-warning)]" %}
-      {% elif variant == 'error' %}
-        {% set containerVariantClasses = "bg-[var(--color-semantic-critical-contrast-light-02)] border-[var(--color-semantic-critical)]" %}
-      {% endif %}
+      {% set containerVariantMap = {
+        'info': 'bg-[var(--color-semantic-information-contrast-light-02)] border-[var(--color-semantic-information)]',
+        'success': 'bg-[var(--color-semantic-success-contrast-light-02)] border-[var(--color-semantic-success)]',
+        'warning': 'bg-[var(--color-semantic-warning-contrast-light-02)] border-[var(--color-semantic-warning)]',
+        'error': 'bg-[var(--color-semantic-critical-contrast-light-02)] border-[var(--color-semantic-critical)]'
+      } %}
+      {% set containerVariantClasses = containerVariantMap[variant] | default(containerVariantMap['info']) %}
 
       {% set containerClasses = containerBaseClasses ~ " " ~ containerVariantClasses %}
 
@@ -87,20 +84,17 @@
 
       {# --------------------------
           3.3 Icon Wrapper Classes
-          Description: Layout, Colors by variant
+          Description: Layout, Colors
         --------------------------#}
       {% set iconWrapperBaseClasses = "flex-shrink-0 inline-flex items-center" %}
 
-      {% set iconColorClasses = "" %}
-      {% if variant == 'info' %}
-        {% set iconColorClasses = "text-[var(--color-semantic-information)]" %}
-      {% elif variant == 'success' %}
-        {% set iconColorClasses = "text-[var(--color-semantic-success)]" %}
-      {% elif variant == 'warning' %}
-        {% set iconColorClasses = "text-[var(--color-semantic-warning)]" %}
-      {% elif variant == 'error' %}
-        {% set iconColorClasses = "text-[var(--color-semantic-critical)]" %}
-      {% endif %}
+      {% set iconColorMap = {
+        'info': 'text-[var(--color-semantic-information)]',
+        'success': 'text-[var(--color-semantic-success)]',
+        'warning': 'text-[var(--color-semantic-warning)]',
+        'error': 'text-[var(--color-semantic-critical)]'
+      } %}
+      {% set iconColorClasses = iconColorMap[variant] | default(iconColorMap['info']) %}
 
       {% set iconWrapperClasses = iconWrapperBaseClasses ~ " " ~ iconColorClasses %}
 

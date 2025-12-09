@@ -5,7 +5,7 @@
 
 {#
   Props:
-    - options.id (string): List content identifier
+    - options.name (string): List content identifier
     - options.datas (array): List content configuration data
     - options.lockupDatas (array): Lockup molecule data
     - options.imageDatas (array): Image atom data (for lockup images)
@@ -16,7 +16,7 @@
     {% from "02-molecules/list-content.njk" import renderListContent %}
 
     {{ renderListContent({
-        id: "demoList1",
+        name: "demoList1",
         datas: molecules["list-content"].listContents,
         lockupDatas: molecules["lock-up"].lockUps,
         imageDatas: atoms.image.images,
@@ -36,21 +36,20 @@
   ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
-  {% elif not options.id %}
-    <span class="error" role="alert">Error: Missing required prop (id)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
     {# Find list content using universal filter #}
-    {% set listData = options.datas | findByName(options.id) %}
+    {% set listData = options.datas | findByName(options.name) %}
 
     {# Render list content or error message #}
     {% if not listData %}
-      <span class="error" role="alert">List content not found: {{ options.id }}</span>
+      <span class="error" role="alert">List content not found: {{ options.name }}</span>
     {% else %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      {% set listId = listData.id | default(options.id) %}
       {% set items = listData.items | default([]) %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -84,7 +83,7 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
         class="{{ containerClasses }}"
-        data-list-content-id="{{ listId }}"
+        data-list-content-name="{{ listData.name }}"
         data-list-content-type="list-content"
       >
         {% for item in items %}

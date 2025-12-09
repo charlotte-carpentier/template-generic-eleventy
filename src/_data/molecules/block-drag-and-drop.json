@@ -1,13 +1,16 @@
 {
   "// Component": "Block Drag and Drop - File upload with drag and drop support",
-  
   "_meta": {
     "component": "block-drag-and-drop",
     "type": "molecule",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableVariants": [
+      "default",
+      "loading",
+      "error"
+    ]
   },
-  
   "blockDragAndDrops": [
     {
       "name": "demoDragDrop1",
@@ -21,7 +24,6 @@
       "maxFileSizeLabel": "Maximum file size",
       "maxFileSizeValue": "10 MB",
       "variant": "default",
-      "dismissible": false,
       "errorMessage": "Error message text"
     }
   ]

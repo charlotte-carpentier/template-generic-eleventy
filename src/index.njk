@@ -310,7 +310,7 @@ permalink: "/"
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Content</h2>
     {{ renderListContent({
-        id: "demoList1",
+        name: "demoList1",
         datas: molecules["list-content"].listContents,
         lockupDatas: molecules["lock-up"].lockUps,
         imageDatas: atoms.image.images,
@@ -323,21 +323,21 @@ permalink: "/"
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Control</h2>
     <div class="flex gap-[var(--spacing-8)]">
-      {{ renderListControl({
-          id: "demoList1",
-          datas: molecules["list-control"].listControls,
-          radioDatas: atoms["radio-button"].radioButtons
-      }) }}
-      {{ renderListControl({
-          id: "demoList2",
-          datas: molecules["list-control"].listControls,
-          checkboxDatas: atoms.checkbox.checkboxes
-      }) }}
-      {{ renderListControl({
-          id: "demoList3",
-          datas: molecules["list-control"].listControls,
-          toggleDatas: atoms.toggle.toggles
-      }) }}
+    {{ renderListControl({
+        name: "demoList1",
+        datas: molecules["list-control"].listControls,
+        radioDatas: atoms["radio-button"].radioButtons
+    }) }}
+    {{ renderListControl({
+        name: "demoList2",
+        datas: molecules["list-control"].listControls,
+        checkboxDatas: atoms.checkbox.checkboxes
+    }) }}
+    {{ renderListControl({
+        name: "demoList3",
+        datas: molecules["list-control"].listControls,
+        toggleDatas: atoms.toggle.toggles
+    }) }}
     </div>
   </section>
 
@@ -345,7 +345,7 @@ permalink: "/"
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Form</h2>
     {{ renderListForm({
-        id: "demoForm1",
+        name: "demoForm1",
         datas: molecules["list-form"].listForms,
         inputDatas: atoms.input.inputs
     }) }}
@@ -355,13 +355,14 @@ permalink: "/"
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Group</h2>
     <div style="display: flex; gap: 1rem;">
-      {{ renderListGroup({
-          id: "demoGroup1",
-          datas: molecules["list-group"].listGroups,
-          iconDatas: atoms.icon.icons
-      }) }}
-      {{ renderListGroup({
-        id: "demoGroup3",
+    {{ renderListGroup({
+        name: "demoGroup1",
+        datas: molecules["list-group"].listGroups,
+        iconDatas: atoms.icon.icons
+    }) }}
+
+    {{ renderListGroup({
+        name: "demoGroup3",
         datas: molecules["list-group"].listGroups,
         iconDatas: atoms.icon.icons,
         linkDatas: atoms.link.links
@@ -372,7 +373,7 @@ permalink: "/"
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Value</h2>
     {{ renderListValue({
-        id: "demoList1",
+        name: "demoList1",
         datas: molecules["list-value"].listValues,
         lockupDatas: molecules["lock-up"].lockUps
     }) }}

@@ -52,8 +52,8 @@
         3. Tailwind Classes
         Index:
         3.1 Wrapper Classes
-        3.2 Icon Wrapper Classes (by variant: info, success, warning, error)
-        3.3 Text Classes (by variant: default, error)
+        3.2 Icon Wrapper Classes
+        3.3 Text Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -63,36 +63,34 @@
       {% set containerClasses = "inline-flex items-center gap-[var(--spacing-inline-small)]" %}
 
       {# --------------------------
-          3.2 Icon Wrapper Classes (by variant: info, success, warning, error)
-          Description: Layout, Colors by variant
+          3.2 Icon Wrapper Classes
+          Description: Layout, Colors
         --------------------------#}
       {% set iconWrapperBaseClasses = "inline-flex items-center" %}
 
-      {% set iconColorClasses = "" %}
-      {% if variant == 'info' %}
-        {% set iconColorClasses = "text-[var(--color-semantic-information)]" %}
-      {% elif variant == 'success' %}
-        {% set iconColorClasses = "text-[var(--color-semantic-success)]" %}
-      {% elif variant == 'warning' %}
-        {% set iconColorClasses = "text-[var(--color-semantic-warning)]" %}
-      {% elif variant == 'error' %}
-        {% set iconColorClasses = "text-[var(--color-semantic-critical)]" %}
-      {% endif %}
+      {% set iconColorMap = {
+        'info': 'text-[var(--color-semantic-information)]',
+        'success': 'text-[var(--color-semantic-success)]',
+        'warning': 'text-[var(--color-semantic-warning)]',
+        'error': 'text-[var(--color-semantic-critical)]'
+      } %}
+      {% set iconColorClasses = iconColorMap[variant] | default(iconColorMap['info']) %}
 
       {% set iconWrapperClasses = iconWrapperBaseClasses ~ " " ~ iconColorClasses %}
 
       {# --------------------------
-          3.3 Text Classes (by variant: default, error)
-          Description: Typography, Colors by variant
+          3.3 Text Classes
+          Description: Typography, Colors
         --------------------------#}
       {% set textBaseClasses = "typography-body-regular" %}
 
-      {% set textColorClasses = "" %}
-      {% if variant == 'error' %}
-        {% set textColorClasses = "text-[var(--color-semantic-critical)]" %}
-      {% else %}
-        {% set textColorClasses = "text-[var(--color-global-default)]" %}
-      {% endif %}
+      {% set textColorMap = {
+        'info': 'text-[var(--color-global-default)]',
+        'success': 'text-[var(--color-global-default)]',
+        'warning': 'text-[var(--color-global-default)]',
+        'error': 'text-[var(--color-semantic-critical)]'
+      } %}
+      {% set textColorClasses = textColorMap[variant] | default(textColorMap['info']) %}
 
       {% set textClasses = textBaseClasses ~ " " ~ textColorClasses %}
 

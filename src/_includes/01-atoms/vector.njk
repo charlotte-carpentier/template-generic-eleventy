@@ -49,8 +49,8 @@
         3. Tailwind Classes
         Index:
         3.1 Base Wrapper Classes
-        3.2 Container Gap Classes (Mapping)
-        3.3 Logo Size Classes (Mapping)
+        3.2 Container Gap Classes
+        3.3 Logo Size Classes
         3.4 Label Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
@@ -61,7 +61,7 @@
       {% set baseContainerClasses = "inline-flex items-center" %}
 
       {# --------------------------
-          3.2 Container Gap Classes (Mapping)
+          3.2 Container Gap Classes
           Description: Spacing per variant
       -------------------------- #}
       {% set containerGapMap = {
@@ -71,7 +71,7 @@
       {% set containerGap = containerGapMap[vectorVariant] or '' %}
 
       {# --------------------------
-          3.3 Logo Size Classes (Mapping)
+          3.3 Logo Size Classes
           Description: Sizing per variant
       -------------------------- #}
       {% set logoSizeMap = {

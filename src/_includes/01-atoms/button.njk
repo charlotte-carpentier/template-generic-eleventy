@@ -76,8 +76,8 @@
         3. Tailwind Classes
         Index:
         3.1 Base Classes
-        3.2 Size Classes (Mapping)
-        3.3 Variant Classes (Mapping)
+        3.2 Size Classes
+        3.3 Variant Classes
         3.4 Icon Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {# --------------------------
@@ -87,7 +87,7 @@
       {% set baseClasses = "inline-flex items-center justify-center font-medium rounded-[var(--radius-default)] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] disabled:cursor-not-allowed" %}
 
       {# --------------------------
-        3.2 Size Classes (Mapping)
+        3.2 Size Classes
         Description: Padding, text size
         --------------------------#}
       {% set sizeMap = {
@@ -97,7 +97,7 @@
       {% set sizeClasses = sizeMap[buttonSize] or sizeMap['medium'] %}
 
       {# --------------------------
-        3.3 Variant Classes (Mapping)
+        3.3 Variant Classes
         Description: Color, background, border, hover/active/disabled
         --------------------------#}
       {% set variantMap = {
