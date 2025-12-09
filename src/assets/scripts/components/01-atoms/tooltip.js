@@ -16,8 +16,7 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const CONFIG = {
-  TRIGGER_SELECTOR: '[data-tooltip][aria-describedby]',
-  POSITION_ATTR: 'data-tooltip-position',
+  TRIGGER_SELECTOR: '[data-tooltip-name][aria-describedby]',
   SHOW_DELAY: 200,
   HIDE_DELAY: 100,
   OFFSET: 8
@@ -39,20 +38,20 @@ const hideTimeouts = new Map();
 export function initTooltip() {
   // Find all tooltip triggers
   const triggers = document.querySelectorAll(CONFIG.TRIGGER_SELECTOR);
-  
+
   // Add event listeners to each trigger
   triggers.forEach(trigger => {
     // Basic mouse events
     trigger.addEventListener('mouseenter', handleMouseEnter);
     trigger.addEventListener('mouseleave', handleMouseLeave);
-    
+
     // Focus events for accessibility
     trigger.addEventListener('focus', handleMouseEnter);
     trigger.addEventListener('blur', handleMouseLeave);
-    
+
     // Escape key
     trigger.addEventListener('keydown', handleKeyDown);
-    
+
     // Get the tooltip element
     const tooltipId = trigger.getAttribute('aria-describedby');
     if (tooltipId) {
@@ -64,7 +63,7 @@ export function initTooltip() {
       }
     }
   });
-  
+
   // Hide tooltips on scroll and resize
   window.addEventListener('scroll', hideAllTooltips);
   window.addEventListener('resize', hideAllTooltips);
@@ -76,18 +75,18 @@ export function initTooltip() {
  */
 function handleMouseEnter(e) {
   const trigger = e.currentTarget;
-  
+
   // Clear any hide timeout
   if (hideTimeouts.has(trigger)) {
     clearTimeout(hideTimeouts.get(trigger));
     hideTimeouts.delete(trigger);
   }
-  
+
   // Set show timeout
   const showTimeout = setTimeout(() => {
     showTooltip(trigger);
   }, CONFIG.SHOW_DELAY);
-  
+
   showTimeouts.set(trigger, showTimeout);
 }
 
@@ -97,18 +96,18 @@ function handleMouseEnter(e) {
  */
 function handleMouseLeave(e) {
   const trigger = e.currentTarget;
-  
+
   // Clear any show timeout
   if (showTimeouts.has(trigger)) {
     clearTimeout(showTimeouts.get(trigger));
     showTimeouts.delete(trigger);
   }
-  
+
   // Set hide timeout
   const hideTimeout = setTimeout(() => {
     hideTooltip(trigger);
   }, CONFIG.HIDE_DELAY);
-  
+
   hideTimeouts.set(trigger, hideTimeout);
 }
 
@@ -133,7 +132,7 @@ function handleTooltipMouseLeave(trigger) {
   const hideTimeout = setTimeout(() => {
     hideTooltip(trigger);
   }, CONFIG.HIDE_DELAY);
-  
+
   hideTimeouts.set(trigger, hideTimeout);
 }
 
@@ -154,21 +153,21 @@ function handleKeyDown(e) {
 function showTooltip(trigger) {
   // Hide all other tooltips first
   hideAllTooltips();
-  
+
   // Get tooltip from aria-describedby
   const tooltipId = trigger.getAttribute('aria-describedby');
   if (!tooltipId) return;
-  
+
   const tooltip = document.getElementById(tooltipId);
   if (!tooltip) return;
-  
+
   // Show tooltip
   tooltip.classList.remove('hidden');
   tooltip.classList.add('block');
-  
+
   // Store active tooltip
   activeTooltips.set(trigger, tooltip);
-  
+
   // Position tooltip
   positionTooltip(trigger, tooltip);
 }
@@ -181,38 +180,57 @@ function hideTooltip(trigger) {
   // Get tooltip from active tooltips
   const tooltip = activeTooltips.get(trigger);
   if (!tooltip) return;
-  
+
   // Hide tooltip
   tooltip.classList.add('hidden');
   tooltip.classList.remove('block');
-  
+
   // Remove from active tooltips
   activeTooltips.delete(trigger);
 }
 
 /**
- * Position tooltip
+ * Position tooltip with automatic placement detection
  * @param {HTMLElement} trigger - Trigger element
  * @param {HTMLElement} tooltip - Tooltip element
  */
 function positionTooltip(trigger, tooltip) {
-  // Get preferred placement
-  const preferredPlacement = trigger.getAttribute(CONFIG.POSITION_ATTR) || 'top';
-  
   // Set base styles for positioning
   tooltip.style.position = 'fixed';
   tooltip.style.zIndex = '9999';
-  
+
   // Get measurements
   const triggerRect = trigger.getBoundingClientRect();
   const tooltipRect = tooltip.getBoundingClientRect();
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
-  
-  // Calculate position based on placement
+
+  // Calculate available space in each direction
+  const spaceTop = triggerRect.top;
+  const spaceRight = viewportWidth - triggerRect.right;
+  const spaceBottom = viewportHeight - triggerRect.bottom;
+  const spaceLeft = triggerRect.left;
+
+  // Determine best placement based on available space
+  let placement = 'top'; // default
+  let maxSpace = spaceTop;
+
+  if (spaceBottom > maxSpace && spaceBottom >= tooltipRect.height + CONFIG.OFFSET) {
+    placement = 'bottom';
+    maxSpace = spaceBottom;
+  }
+  if (spaceRight > maxSpace && spaceRight >= tooltipRect.width + CONFIG.OFFSET) {
+    placement = 'right';
+    maxSpace = spaceRight;
+  }
+  if (spaceLeft > maxSpace && spaceLeft >= tooltipRect.width + CONFIG.OFFSET) {
+    placement = 'left';
+  }
+
+  // Calculate position based on determined placement
   let top, left;
-  
-  switch (preferredPlacement) {
+
+  switch (placement) {
     case 'top':
       top = triggerRect.top - tooltipRect.height - CONFIG.OFFSET;
       left = triggerRect.left + (triggerRect.width / 2) - (tooltipRect.width / 2);
@@ -230,11 +248,11 @@ function positionTooltip(trigger, tooltip) {
       left = triggerRect.left - tooltipRect.width - CONFIG.OFFSET;
       break;
   }
-  
+
   // Constrain to viewport edges
   top = Math.max(CONFIG.OFFSET, Math.min(viewportHeight - tooltipRect.height - CONFIG.OFFSET, top));
   left = Math.max(CONFIG.OFFSET, Math.min(viewportWidth - tooltipRect.width - CONFIG.OFFSET, left));
-  
+
   // Set position
   tooltip.style.top = `${top}px`;
   tooltip.style.left = `${left}px`;

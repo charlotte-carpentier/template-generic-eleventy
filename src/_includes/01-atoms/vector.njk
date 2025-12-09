@@ -48,33 +48,40 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Wrapper Classes
-        3.2 Logo Classes
-        3.3 Label Classes
+        3.1 Base Wrapper Classes
+        3.2 Container Gap Classes (Mapping)
+        3.3 Logo Size Classes (Mapping)
+        3.4 Label Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Wrapper Classes
-          Description: Layout, spacing
+          3.1 Base Wrapper Classes
+          Description: Layout
       -------------------------- #}
-      {% set containerClasses = "inline-flex items-center" %}
-      {% if vectorVariant == 'horizontal' %}
-        {% set containerClasses = containerClasses ~ " gap-[var(--spacing-inline-large)]" %}
-      {% endif %}
+      {% set baseContainerClasses = "inline-flex items-center" %}
 
       {# --------------------------
-          3.2 Logo Classes
-          Description: Sizing
+          3.2 Container Gap Classes (Mapping)
+          Description: Spacing per variant
       -------------------------- #}
-      {% set logoClasses = "" %}
-      {% if vectorVariant == 'logo-only' %}
-        {% set logoClasses = "w-10 h-10 flex-shrink-0" %}
-      {% else %}
-        {% set logoClasses = "w-6 h-6 flex-shrink-0" %}
-      {% endif %}
+      {% set containerGapMap = {
+        'horizontal': 'gap-[var(--spacing-inline-large)]',
+        'logo-only': ''
+      } %}
+      {% set containerGap = containerGapMap[vectorVariant] or '' %}
 
       {# --------------------------
-          3.3 Label Classes
+          3.3 Logo Size Classes (Mapping)
+          Description: Sizing per variant
+      -------------------------- #}
+      {% set logoSizeMap = {
+        'logo-only': 'w-10 h-10 flex-shrink-0',
+        'horizontal': 'w-6 h-6 flex-shrink-0'
+      } %}
+      {% set logoClasses = logoSizeMap[vectorVariant] or logoSizeMap['horizontal'] %}
+
+      {# --------------------------
+          3.4 Label Classes
           Description: Typography, colors
       -------------------------- #}
       {% set textClasses = "text-[var(--color-global-contrast-light-01)] text-2xl leading-6 font-bold" %}
@@ -83,7 +90,7 @@
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
-        class="{{ containerClasses }} {{ customClasses }}"
+        class="{{ baseContainerClasses }} {{ containerGap }} {{ customClasses }}"
         data-vector-name="{{ vectorData.name }}"
         data-vector-type="vector"
         data-vector-variant="{{ vectorData.variant }}"
