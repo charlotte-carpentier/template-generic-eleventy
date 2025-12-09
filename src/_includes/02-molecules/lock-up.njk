@@ -38,7 +38,7 @@
   {% elif not options.name %}
     <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Find lockup using universal filter (works with both name and id) #}
+    {# Find lockup using universal filter #}
     {% set lockupData = options.datas | findByName(options.name) %}
 
     {# Render lockup or error message #}
@@ -49,88 +49,83 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      {% set lockupId = lockupData.id | default(options.name) %}
       {% set lockupType = lockupData.type | default('default') %}
+      {% set lockupVariant = lockupData.variant | default('vertical') %}
 
       {# Default type values #}
       {% set labelText = lockupData.label.text | default('') if lockupData.label else '' %}
-      {% set labelVariant = lockupData.label.variant | default('default') if lockupData.label else 'default' %}
       {% set valueText = lockupData.value.text | default('') if lockupData.value else '' %}
-      {% set valueVariant = lockupData.value.variant | default('default') if lockupData.value else 'default' %}
 
       {# Value-legend type values #}
       {% set legendText = lockupData.legend.text | default('') if lockupData.legend else '' %}
-      {% set legendVariant = lockupData.legend.variant | default('default') if lockupData.legend else 'default' %}
 
       {# Block-content type values #}
       {% set imageName = lockupData.imageName | default('') %}
       {% set headingName = lockupData.headingName | default('') %}
       {% set contentText = lockupData.content.text | default('') if lockupData.content else '' %}
-      {% set contentVariant = lockupData.content.variant | default('default') if lockupData.content else 'default' %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Wrapper Classes (by type: default, value-legend, block-content; by variant: horizontal, vertical)
-        3.2 Label Classes (by type: default)
-        3.3 Value Classes (by type: default, value-legend)
-        3.4 Legend Classes (by type: value-legend)
-        3.5 Image Wrapper Classes (by type: block-content)
-        3.6 Content Wrapper Classes (by type: block-content)
-        3.7 Text Classes (by type: block-content)
+        3.1 Wrapper Classes
+        3.2 Label Classes
+        3.3 Value Classes
+        3.4 Legend Classes
+        3.5 Image Wrapper Classes
+        3.6 Content Wrapper Classes
+        3.7 Text Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Wrapper Classes (by type: default, value-legend, block-content; by variant: horizontal, vertical)
-          Description: Layout by lockup type
+          3.1 Wrapper Classes
+          Description: Layout
         --------------------------#}
-      {% set containerClasses = "" %}
+      {% set containerDefaultMap = {
+        'horizontal': 'flex flex-row items-center gap-[var(--spacing-inline-medium)]',
+        'vertical': 'flex flex-col gap-[var(--spacing-stack-tight)]',
+        'small-horizontal': 'flex flex-row items-center gap-[var(--spacing-inline-medium)]',
+        'small-vertical': 'flex flex-col gap-[var(--spacing-stack-tight)]'
+      } %}
 
-      {% if lockupType == 'default' %}
-        {% set lockupVariant = lockupData.variant | default('vertical') %}
-        {% if lockupVariant == 'horizontal' %}
-          {% set containerClasses = "flex flex-row items-center gap-[var(--spacing-inline-medium)]" %}
-        {% else %}
-    {% set containerClasses = "flex flex-col gap-[var(--spacing-stack-tight)]" %}
-  {% endif %}
-      {% elif lockupType == 'value-legend' %}
-        {% set containerClasses = "flex flex-col gap-[var(--spacing-stack-tight)]" %}
-      {% elif lockupType == 'block-content' %}
-        {% set containerClasses = "flex gap-[var(--spacing-inline-large)]" %}
-      {% endif %}
+      {% set containerTypeMap = {
+        'default': containerDefaultMap[lockupVariant] | default(containerDefaultMap['vertical']),
+        'value-legend': 'flex flex-col gap-[var(--spacing-stack-tight)]',
+        'block-content': 'flex gap-[var(--spacing-inline-large)]'
+      } %}
+      {% set containerClasses = containerTypeMap[lockupType] | default(containerTypeMap['default']) %}
 
       {# --------------------------
-          3.2 Label Classes (by type: default)
+          3.2 Label Classes
           Description: Typography, Colors
         --------------------------#}
       {% set labelClasses = "typography-body-small text-[var(--color-global-contrast-light-02)]" %}
 
       {# --------------------------
-          3.3 Value Classes (by type: default, value-legend)
+          3.3 Value Classes
           Description: Typography, Colors
         --------------------------#}
       {% set valueClasses = "typography-body-regular text-[var(--color-global-default)]" %}
 
       {# --------------------------
-          3.4 Legend Classes (by type: value-legend)
+          3.4 Legend Classes
           Description: Typography, Colors
         --------------------------#}
       {% set legendClasses = "typography-body-small text-[var(--color-global-contrast-light-02)]" %}
 
       {# --------------------------
-          3.5 Image Wrapper Classes (by type: block-content)
+          3.5 Image Wrapper Classes
           Description: Sizing, Layout, Child image styling override
         --------------------------#}
       {% set imageWrapperClasses = "flex-shrink-0 w-20 h-20 [&_img]:w-full [&_img]:h-full [&_img]:object-cover" %}
 
       {# --------------------------
-          3.6 Content Wrapper Classes (by type: block-content)
+          3.6 Content Wrapper Classes
           Description: Layout, Spacing
         --------------------------#}
       {% set contentWrapperClasses = "flex flex-col gap-[var(--spacing-stack-tight)] flex-1" %}
 
       {# --------------------------
-          3.7 Text Classes (by type: block-content)
+          3.7 Text Classes
           Description: Typography, Colors
         --------------------------#}
       {% set textClasses = "typography-body-regular text-[var(--color-global-default)]" %}
@@ -140,7 +135,7 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
         class="{{ containerClasses }}"
-        data-lockup-id="{{ lockupId }}"
+        data-lockup-name="{{ lockupData.name }}"
         data-lockup-type="{{ lockupType }}"
       >
         {# Default type (label-value) #}
@@ -149,7 +144,6 @@
             <span
               class="{{ labelClasses }}"
               data-lockup-label="true"
-              data-lockup-label-variant="{{ labelVariant }}"
             >
               {{ labelText }}
             </span>
@@ -158,7 +152,6 @@
             <span
               class="{{ valueClasses }}"
               data-lockup-value="true"
-              data-lockup-value-variant="{{ valueVariant }}"
             >
               {{ valueText }}
             </span>
@@ -170,7 +163,6 @@
             <span
               class="{{ valueClasses }}"
               data-lockup-value="true"
-              data-lockup-value-variant="{{ valueVariant }}"
             >
               {{ valueText }}
             </span>
@@ -179,7 +171,6 @@
             <span
               class="{{ legendClasses }}"
               data-lockup-legend="true"
-              data-lockup-legend-variant="{{ legendVariant }}"
             >
               {{ legendText }}
             </span>
@@ -219,7 +210,6 @@
               <p
                 class="{{ textClasses }}"
                 data-lockup-text="true"
-                data-lockup-content-variant="{{ contentVariant }}"
               >
                 {{ contentText }}
               </p>

@@ -79,10 +79,9 @@
         3.4 Track Classes
         3.5 Fill Classes
         3.6 Handle Classes
-        3.7 Indicator Outline Classes (by variant: outline)
-        3.8 Indicator Solid Classes (by variant: solid)
-        3.9 Min/Max Wrapper Classes
-        3.10 Min/Max Text Classes
+        3.7 Indicator Classes
+        3.8 Min/Max Wrapper Classes
+        3.9 Min/Max Text Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -117,30 +116,31 @@
 
       {# --------------------------
           3.6 Handle Classes
-          Description: Draggable handle, Position, Colors, Size
+          Description: Draggable handle, Position, Size, Borders
         --------------------------#}
-      {% set handleClasses = "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 bg-[var(--color-global-white)] border-2 border-[var(--color-interactive-default)] rounded-full cursor-pointer shadow-md transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+      {% set handleBaseClasses = "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 border-2 rounded-full cursor-pointer shadow-md" %}
+      {% set handleStateClasses = "bg-[var(--color-global-white)] border-[var(--color-interactive-default)] transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
 
       {# --------------------------
-          3.7 Indicator Outline Classes (by variant: outline)
-          Description: Handle indicator bubble (outline variant)
+          3.7 Indicator Classes
+          Description: Handle indicator bubble
         --------------------------#}
-      {% set indicatorOutlineClasses = "absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-inline-medium)] py-[var(--spacing-inline-tight)] typography-body-small text-[var(--color-global-default)] bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] shadow-sm whitespace-nowrap" %}
+      {% set indicatorBaseClasses = "absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-inline-medium)] py-[var(--spacing-inline-tight)] typography-body-small rounded-[var(--radius-default)] shadow-sm whitespace-nowrap" %}
+
+      {% set indicatorVariantMap = {
+        'outline': 'text-[var(--color-global-default)] bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)]',
+        'solid': 'text-[var(--color-global-white)] bg-[var(--color-interactive-default)]'
+      } %}
+      {% set indicatorVariantClasses = indicatorVariantMap[indicatorVariant] or indicatorVariantMap['outline'] %}
 
       {# --------------------------
-          3.8 Indicator Solid Classes (by variant: solid)
-          Description: Handle indicator bubble (solid variant)
-        --------------------------#}
-      {% set indicatorSolidClasses = "absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-inline-medium)] py-[var(--spacing-inline-tight)] typography-body-small text-[var(--color-global-white)] bg-[var(--color-interactive-default)] rounded-[var(--radius-default)] shadow-sm whitespace-nowrap" %}
-
-      {# --------------------------
-          3.9 Min/Max Wrapper Classes
+          3.8 Min/Max Wrapper Classes
           Description: Layout horizontal, Space between
         --------------------------#}
       {% set minMaxWrapperClasses = "flex items-center justify-between" %}
 
       {# --------------------------
-          3.10 Min/Max Text Classes
+          3.9 Min/Max Text Classes
           Description: Typography, Colors
         --------------------------#}
       {% set minMaxTextClasses = "typography-body-small text-[var(--color-global-contrast-light-01)]" %}
@@ -187,7 +187,7 @@
 
             {# Handle(s) #}
             <div
-              class="{{ handleClasses }}"
+              class="{{ handleBaseClasses }} {{ handleStateClasses }}"
               style="left: {{ value1Percent }}%;"
               data-slider-handle="true"
               data-slider-handle-index="0"
@@ -196,7 +196,7 @@
               {# Indicator for handle 1 #}
               {% if showIndicator %}
                 <span
-                  class="{% if indicatorVariant == 'solid' %}{{ indicatorSolidClasses }}{% else %}{{ indicatorOutlineClasses }}{% endif %}"
+                  class="{{ indicatorBaseClasses }} {{ indicatorVariantClasses }}"
                   data-slider-indicator="true"
                   data-slider-indicator-variant="{{ indicatorVariant }}"
                 >
@@ -208,7 +208,7 @@
             {# Second handle for range slider #}
             {% if sliderType == 'range' %}
               <div
-                class="{{ handleClasses }}"
+                class="{{ handleBaseClasses }} {{ handleStateClasses }}"
                 style="left: {{ value2Percent }}%;"
                 data-slider-handle="true"
                 data-slider-handle-index="1"
@@ -217,7 +217,7 @@
                 {# Indicator for handle 2 #}
                 {% if showIndicator %}
                   <span
-                    class="{% if indicatorVariant == 'solid' %}{{ indicatorSolidClasses }}{% else %}{{ indicatorOutlineClasses }}{% endif %}"
+                    class="{{ indicatorBaseClasses }} {{ indicatorVariantClasses }}"
                     data-slider-indicator="true"
                     data-slider-indicator-variant="{{ indicatorVariant }}"
                   >

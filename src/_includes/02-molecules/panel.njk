@@ -57,27 +57,28 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Wrapper Classes
-        3.2 Item Classes (by type: default, list-item)
+        3.1 Container Classes
+        3.2 Item Classes
         3.3 Icon Wrapper Classes
         3.4 Text Classes
-        3.5 Code Classes (by variant: phone)
-        3.6 Date Wrapper Classes
-        3.7 Calendar Classes (by variant: simple, double)
+        3.5 Code Classes
+        3.6 Date Navigation Classes
+        3.7 Calendar Classes
         3.8 Month Labels Wrapper Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Wrapper Classes
+          3.1 Container Classes
           Description: Layout, Background, Borders, Shadow
         --------------------------#}
       {% set containerClasses = "flex flex-col bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] shadow-md p-[var(--spacing-inset-tight)]" %}
 
       {# --------------------------
-          3.2 Item Classes (by type: default, list-item)
-          Description: Layout horizontal, Spacing, States
+          3.2 Item Classes
+          Description: Layout, Spacing, Borders
         --------------------------#}
-      {% set itemClasses = "flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-tight)] rounded-[var(--radius-default)] transition-colors cursor-pointer hover:[&>span]:text-[var(--color-global-accent)] hover:[&_svg]:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] disabled:bg-[var(--color-global-contrast-light-04)] disabled:text-[var(--color-global-contrast-light-02)] disabled:cursor-not-allowed" %}
+      {% set itemBaseClasses = "flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-tight)] rounded-[var(--radius-default)] cursor-pointer" %}
+      {% set itemStateClasses = "transition-colors hover:[&>span]:text-[var(--color-global-accent)] hover:[&_svg]:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] disabled:bg-[var(--color-global-contrast-light-04)] disabled:text-[var(--color-global-contrast-light-02)] disabled:cursor-not-allowed" %}
 
       {# --------------------------
           3.3 Icon Wrapper Classes
@@ -92,28 +93,30 @@
       {% set textClasses = "typography-body-regular text-[var(--color-global-default)] flex-1" %}
 
       {# --------------------------
-          3.5 Code Classes (by variant: phone)
+          3.5 Code Classes
           Description: Typography, Colors
         --------------------------#}
       {% set codeClasses = "typography-body-small text-[var(--color-global-contrast-light-01)] ml-auto" %}
 
       {# --------------------------
-          3.6 Date Wrapper Classes
-          Description: Layout horizontal, Spacing, Alignment
+          3.6 Date Navigation Classes
+          Description: Layout, Spacing, Alignment
         --------------------------#}
       {% set dateNavClasses = "flex items-center justify-between px-[var(--spacing-inline-medium)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)]" %}
-      {% set dateNavButtonClasses = "inline-flex items-center justify-center w-8 h-8 text-[var(--color-interactive-default)] bg-transparent border-0 rounded-[var(--radius-default)] cursor-pointer transition-colors hover:bg-[var(--color-global-contrast-light-04)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]" %}
+      {% set dateNavButtonBaseClasses = "inline-flex items-center justify-center w-8 h-8 bg-transparent border-0 rounded-[var(--radius-default)] cursor-pointer" %}
+      {% set dateNavButtonStateClasses = "text-[var(--color-interactive-default)] transition-colors hover:bg-[var(--color-global-contrast-light-04)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]" %}
       {% set dateMonthClasses = "typography-body-semibold text-[var(--color-global-default)]" %}
 
       {# --------------------------
-          3.7 Calendar Classes (by variant: simple, double)
+          3.7 Calendar Classes
           Description: Calendar grid layout
         --------------------------#}
       {% set calendarClasses = "p-[var(--spacing-inset-small)]" %}
       {% set calendarHeaderClasses = "grid grid-cols-7 gap-1 mb-2" %}
       {% set calendarDayHeaderClasses = "text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2" %}
       {% set calendarGridClasses = "grid grid-cols-7 gap-1" %}
-      {% set calendarDateClasses = "flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-default)] rounded-[var(--radius-default)] cursor-pointer transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]" %}
+      {% set calendarDateBaseClasses = "flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer" %}
+      {% set calendarDateStateClasses = "text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]" %}
       {% set calendarDateSelectedClasses = "bg-[var(--color-interactive-default)] text-[var(--color-global-white)] hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]" %}
       {% set calendarDateOutsideClasses = "flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default" %}
 
@@ -138,7 +141,7 @@
         {% if panelType == "default" %}
           {% for item in items %}
             <div
-              class="{{ itemClasses }}"
+              class="{{ itemBaseClasses }} {{ itemStateClasses }}"
               data-panel-item="true"
               role="option"
               tabindex="0"
@@ -182,7 +185,7 @@
             <div class="{{ dateNavClasses }}" data-panel-nav="true">
               <button
                 type="button"
-                class="{{ dateNavButtonClasses }}"
+                class="{{ dateNavButtonBaseClasses }} {{ dateNavButtonStateClasses }}"
                 data-panel-nav-prev="true"
                 aria-label="Previous month"
               >
@@ -210,7 +213,7 @@
 
               <button
                 type="button"
-                class="{{ dateNavButtonClasses }}"
+                class="{{ dateNavButtonBaseClasses }} {{ dateNavButtonStateClasses }}"
                 data-panel-nav-next="true"
                 aria-label="Next month"
               >
@@ -257,7 +260,7 @@
                 {% for day in range(1, 31) %}
                   <button
                     type="button"
-                    class="{{ calendarDateClasses }} {% if day == 27 %}{{ calendarDateSelectedClasses }}{% endif %}"
+                    class="{{ calendarDateBaseClasses }} {{ calendarDateStateClasses }} {% if day == 27 %}{{ calendarDateSelectedClasses }}{% endif %}"
                     data-panel-date="{{ day }}"
                   >
                     {{ day }}
@@ -309,7 +312,7 @@
                   {% for day in range(1, 32) %}
                     <button
                       type="button"
-                      class="{{ calendarDateClasses }} {% if day == 5 %}{{ calendarDateSelectedClasses }}{% endif %}"
+                      class="{{ calendarDateBaseClasses }} {{ calendarDateStateClasses }} {% if day == 5 %}{{ calendarDateSelectedClasses }}{% endif %}"
                       data-panel-date="{{ day }}"
                     >
                       {{ day }}
@@ -335,21 +338,20 @@
         {% elif panelType == "list-item" %}
           {% for item in items %}
             <div
-              class="{{ itemClasses }}"
+              class="{{ itemBaseClasses }} {{ itemStateClasses }}"
               data-panel-item="true"
-              data-panel-item-type="{{ item.type }}"
               role="option"
               tabindex="0"
             >
-              {# Checkbox type - checkbox gère son propre label #}
-              {% if item.type == "checkbox" and item.checkboxName and options.checkboxDatas %}
+              {# Checkbox variant #}
+              {% if variant == "checkbox" and item.checkboxName and options.checkboxDatas %}
                 {{ renderCheckbox({
                     id: item.checkboxName,
                     datas: options.checkboxDatas
                 }) }}
 
-              {# Label-icon type #}
-              {% elif item.type == "label-icon" and item.iconName and options.iconDatas %}
+              {# Label-icon variant #}
+              {% elif variant == "label-icon" and item.iconName and options.iconDatas %}
                 <div class="{{ iconWrapperClasses }}">
                   {{ renderIcon({
                       name: item.iconName,
@@ -358,8 +360,8 @@
                 </div>
                 <span class="{{ textClasses }}">{{ item.text }}</span>
 
-              {# Simple label type #}
-              {% elif item.type == "label" %}
+              {# Label variant #}
+              {% elif variant == "label" %}
                 <span class="{{ textClasses }}">{{ item.text }}</span>
               {% endif %}
             </div>

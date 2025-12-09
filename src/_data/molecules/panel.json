@@ -4,7 +4,29 @@
     "component": "panel",
     "type": "molecule",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableTypes": [
+      "default",
+      "date",
+      "list-item"
+    ],
+    "availableVariants": {
+      "default": [
+        "simple",
+        "multiselect",
+        "country",
+        "phone"
+      ],
+      "date": [
+        "simple",
+        "double"
+      ],
+      "list-item": [
+        "label",
+        "label-icon",
+        "checkbox"
+      ]
+    }
   },
   "panels": [
     {
@@ -113,7 +135,7 @@
     {
       "name": "demoPanel5",
       "type": "date",
-      "variant": "single",
+      "variant": "simple",
       "dateRange": {
         "month": "November 2025",
         "selectedDates": [
@@ -146,21 +168,31 @@
     {
       "name": "demoPanel7",
       "type": "list-item",
-      "variant": "default",
+      "variant": "label",
       "items": [
         {
-          "type": "label",
           "text": "Label"
-        },
+        }
+      ]
+    },
+    {
+      "name": "demoPanel8",
+      "type": "list-item",
+      "variant": "label-icon",
+      "items": [
         {
-          "type": "label-icon",
           "iconName": "demoFlagIm1",
           "text": "Label"
-        },
+        }
+      ]
+    },
+    {
+      "name": "demoPanel9",
+      "type": "list-item",
+      "variant": "checkbox",
+      "items": [
         {
-          "type": "checkbox",
-          "checkboxName": "demoCheck1",
-          "text": "Label"
+          "checkboxName": "demoCheck1"
         }
       ]
     }

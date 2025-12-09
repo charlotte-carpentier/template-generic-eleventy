@@ -73,41 +73,41 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Wrapper Classes
+        3.1 Container Classes
         3.2 Select Wrapper Classes
-        3.3 Wrapper Classes
-        3.4 List Classes
-        3.5 Item Classes
+        3.3 Nav Wrapper Classes
+        3.4 Nav List Classes
+        3.5 Nav Item Classes
         3.6 Nav Link Classes
         3.7 Counter Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Wrapper Classes
+          3.1 Container Classes
           Description: Layout horizontal, Spacing, Alignment
         --------------------------#}
       {% set containerClasses = "flex items-center justify-between gap-[var(--spacing-inline-large)] w-full" %}
 
       {# --------------------------
           3.2 Select Wrapper Classes
-          Description: Layout
+          Description: Layout, Responsive
         --------------------------#}
       {% set selectWrapperClasses = "hidden md:flex flex-shrink-0" %}
 
       {# --------------------------
-          3.3 Wrapper Classes
+          3.3 Nav Wrapper Classes
           Description: Layout
         --------------------------#}
       {% set navWrapperClasses = "flex-1 flex justify-center" %}
 
       {# --------------------------
-          3.4 List Classes
+          3.4 Nav List Classes
           Description: Layout horizontal, Spacing
         --------------------------#}
       {% set navListClasses = "flex items-center gap-[var(--spacing-inline-tight)]" %}
 
       {# --------------------------
-          3.5 Item Classes
+          3.5 Nav Item Classes
           Description: Layout
         --------------------------#}
       {% set navItemClasses = "" %}
@@ -116,11 +116,12 @@
           3.6 Nav Link Classes
           Description: Layout, Typography, Colors, Borders, States
         --------------------------#}
-      {% set navLinkBaseClasses = "inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]  focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+      {% set navLinkBaseClasses = "inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+      {% set navLinkActiveClasses = "bg-[var(--color-interactive-default)] text-[var(--color-global-white)]" %}
 
       {# --------------------------
           3.7 Counter Classes
-          Description: Typography, Colors
+          Description: Typography, Colors, Responsive
         --------------------------#}
       {% set counterClasses = "hidden md:flex flex-shrink-0 typography-body-regular text-[var(--color-interactive-default)]" %}
 
@@ -159,7 +160,7 @@
                   {# Icon button (first, prev, next, last) or page number #}
                   {% if page.iconName %}
 
-                    <a href="{{ page.url | default('#') }}"
+                    <a   href="{{ page.url | default('#') }}"
                       class="{{ navLinkBaseClasses }}"
                       data-pagination-link="true"
                       data-pagination-action="{{ page.action }}"
