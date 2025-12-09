@@ -79,10 +79,10 @@
         3. Tailwind Classes
         Index:
         3.1 Wrapper Classes
-        3.2 Layout Classes
-        3.3 Header Wrapper Classes
-        3.4 Super Heading Wrapper Classes
-        3.5 Main Heading Wrapper Classes
+        3.2 Layout Classes (by type)
+        3.3 Header Wrapper Classes (by type)
+        3.4 Super Heading Wrapper Classes (by type)
+        3.5 Main Heading Wrapper Classes (by type)
         3.6 Text Wrapper Classes
         3.7 Buttons Wrapper Classes
         3.8 Content Wrapper Classes (simple type)
@@ -96,44 +96,44 @@
       {% set sectionClasses = "flex flex-col px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-large)] bg-[var(--color-global-white)] md:px-[var(--spacing-inset-xlarge)] md:py-[var(--spacing-inset-xxlarge)]" %}
 
       {# --------------------------
-          3.2 Layout Classes
-          Description: Layout vertical, Spacing, Max-width centered for simple type
+          3.2 Layout Classes (by type)
+          Description: Layout vertical, Spacing, Max-width for simple type
         --------------------------#}
-      {% if sectionType == 'simple' %}
-        {% set containerClasses = "flex flex-col gap-[var(--spacing-stack-xlarge)] mx-auto max-w-[800px]" %}
-      {% else %}
-        {% set containerClasses = "flex flex-col gap-[var(--spacing-stack-xlarge)]" %}
-      {% endif %}
+      {% set containerMap = {
+        'simple': 'flex flex-col gap-[var(--spacing-stack-xlarge)] mx-auto max-w-[800px]',
+        'cards': 'flex flex-col gap-[var(--spacing-stack-xlarge)]'
+      } %}
+      {% set containerClasses = containerMap[sectionType] or containerMap['simple'] %}
 
       {# --------------------------
-          3.3 Header Wrapper Classes
+          3.3 Header Wrapper Classes (by type)
           Description: Layout vertical, Spacing between headings
-      --------------------------#}
-      {% if sectionType == 'simple' %}
-        {% set headerClasses = "flex flex-col gap-[var(--spacing-stack-tight)]" %}
-      {% else %}
-        {% set headerClasses = "flex flex-col gap-[var(--spacing-stack-medium)]" %}
-      {% endif %}
+        --------------------------#}
+      {% set headerMap = {
+        'simple': 'flex flex-col gap-[var(--spacing-stack-tight)]',
+        'cards': 'flex flex-col gap-[var(--spacing-stack-medium)]'
+      } %}
+      {% set headerClasses = headerMap[sectionType] or headerMap['simple'] %}
 
       {# --------------------------
-          3.4 Super Heading Wrapper Classes
+          3.4 Super Heading Wrapper Classes (by type)
           Description: Layout, Alignment
-      --------------------------#}
-      {% if sectionType == 'simple' %}
-        {% set superHeadingClasses = "flex flex-col items-center" %}
-      {% else %}
-        {% set superHeadingClasses = "flex flex-col items-start md:items-center" %}
-      {% endif %}
+        --------------------------#}
+      {% set superHeadingMap = {
+        'simple': 'flex flex-col items-center',
+        'cards': 'flex flex-col items-start md:items-center'
+      } %}
+      {% set superHeadingClasses = superHeadingMap[sectionType] or superHeadingMap['simple'] %}
 
       {# --------------------------
-          3.5 Main Heading Wrapper Classes
+          3.5 Main Heading Wrapper Classes (by type)
           Description: Layout, Typography override serif, Alignment, Spacing bottom
-      --------------------------#}
-      {% if sectionType == 'simple' %}
-        {% set mainHeadingClasses = "flex flex-col items-center mt-[var(--spacing-stack-large)] [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif" %}
-      {% else %}
-        {% set mainHeadingClasses = "flex flex-col items-start mt-[var(--spacing-stack-large)] md:items-center [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif" %}
-      {% endif %}
+        --------------------------#}
+      {% set mainHeadingMap = {
+        'simple': 'flex flex-col items-center mt-[var(--spacing-stack-large)] [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif',
+        'cards': 'flex flex-col items-start mt-[var(--spacing-stack-large)] md:items-center [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif'
+      } %}
+      {% set mainHeadingClasses = mainHeadingMap[sectionType] or mainHeadingMap['simple'] %}
 
       {# --------------------------
           3.6 Text Wrapper Classes

@@ -1,17 +1,14 @@
 {
   "// Component": "Modal - Dialog modals with backdrop and action buttons",
-  
   "_meta": {
     "component": "modal",
     "type": "organism",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "modals": [
     {
       "name": "demoModal1",
-      "variant": "centered",
       "headingName": "demoHead2",
       "content": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
       "primaryButton": "demoCont1",
