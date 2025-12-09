@@ -1,13 +1,15 @@
 {
   "// Component": "Breadcrumb - Navigation breadcrumb with link hierarchy",
-  
   "_meta": {
     "component": "breadcrumb",
     "type": "molecule",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableTypes": [
+      "link",
+      "current"
+    ]
   },
-  
   "breadcrumbs": [
     {
       "name": "demoBreadcrm1",
@@ -17,7 +19,7 @@
           "linkName": "demoLink1"
         },
         {
-          "type": "link", 
+          "type": "link",
           "linkName": "demoLink1"
         },
         {

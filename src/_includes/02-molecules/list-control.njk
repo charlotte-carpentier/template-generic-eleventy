@@ -5,7 +5,7 @@
 
 {#
   Props:
-    - options.id (string): List control identifier
+    - options.name (string): List control identifier
     - options.datas (array): List control configuration data
     - options.radioDatas (array): Radio button atom data (if type is "radio")
     - options.checkboxDatas (array): Checkbox atom data (if type is "checkbox")
@@ -15,19 +15,19 @@
     {% from "02-molecules/list-control.njk" import renderListControl %}
 
     {{ renderListControl({
-        id: "demoList1",
+        name: "demoList1",
         datas: molecules["list-control"].listControls,
         radioDatas: atoms["radio-button"].radioButtons
     }) }}
 
     {{ renderListControl({
-        id: "demoList2",
+        name: "demoList2",
         datas: molecules["list-control"].listControls,
         checkboxDatas: atoms.checkbox.checkboxes
     }) }}
 
     {{ renderListControl({
-        id: "demoList3",
+        name: "demoList3",
         datas: molecules["list-control"].listControls,
         toggleDatas: atoms.toggle.toggles
     }) }}
@@ -46,21 +46,20 @@
   ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
-  {% elif not options.id %}
-    <span class="error" role="alert">Error: Missing required prop (id)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
     {# Find list control using universal filter #}
-    {% set listData = options.datas | findByName(options.id) %}
+    {% set listData = options.datas | findByName(options.name) %}
 
     {# Render list control or error message #}
     {% if not listData %}
-      <span class="error" role="alert">List control not found: {{ options.id }}</span>
+      <span class="error" role="alert">List control not found: {{ options.name }}</span>
     {% else %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      {% set listId = listData.id | default(options.id) %}
       {% set listType = listData.type | default('radio') %}
       {% set items = listData.items | default([]) %}
 
@@ -88,7 +87,7 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
         class="{{ containerClasses }}"
-        data-list-control-id="{{ listId }}"
+        data-list-control-name="{{ listData.name }}"
         data-list-control-type="{{ listType }}"
       >
         {% for item in items %}

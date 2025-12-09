@@ -1,16 +1,22 @@
 {
   "// Component": "List Group - Grouped lists with multiple interaction types",
-  
   "_meta": {
     "component": "list-group",
     "type": "molecule",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableTypes": [
+      "default",
+      "closable",
+      "link",
+      "radio",
+      "checkbox",
+      "toggle"
+    ]
   },
-  
   "listGroups": [
     {
-      "id": "demoGroup1",
+      "name": "demoGroup1",
       "type": "default",
       "items": [
         {
@@ -40,7 +46,7 @@
       ]
     },
     {
-      "id": "demoGroup2", 
+      "name": "demoGroup2",
       "type": "closable",
       "items": [
         {
@@ -76,8 +82,8 @@
       ]
     },
     {
-      "id": "demoGroup3",
-      "type": "link", 
+      "name": "demoGroup3",
+      "type": "link",
       "items": [
         {
           "iconName": "demoSlider1",
@@ -112,12 +118,12 @@
       ]
     },
     {
-      "id": "demoGroup4",
+      "name": "demoGroup4",
       "type": "radio",
       "items": [
         {
           "iconName": "demoSlider1",
-          "text": "This is a long label", 
+          "text": "This is a long label",
           "radioName": "demoRadio2"
         },
         {
@@ -126,7 +132,7 @@
           "radioName": "demoRadio2"
         },
         {
-          "iconName": "demoSlider1", 
+          "iconName": "demoSlider1",
           "text": "This is a long label",
           "radioName": "demoRadio2"
         },
@@ -148,7 +154,7 @@
       ]
     },
     {
-      "id": "demoGroup5",
+      "name": "demoGroup5",
       "type": "checkbox",
       "items": [
         {
@@ -184,7 +190,7 @@
       ]
     },
     {
-      "id": "demoGroup6",
+      "name": "demoGroup6",
       "type": "toggle",
       "items": [
         {

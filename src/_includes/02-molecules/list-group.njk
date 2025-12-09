@@ -5,7 +5,7 @@
 
 {#
   Props:
-    - options.id (string): List group identifier
+    - options.name (string): List group identifier
     - options.datas (array): List group configuration data
     - options.iconDatas (array): Icon atom data
     - options.linkDatas (array): Link atom data (if type is "link")
@@ -17,20 +17,20 @@
     {% from "02-molecules/list-group.njk" import renderListGroup %}
 
     {{ renderListGroup({
-        id: "demoGroup1",
+        name: "demoGroup1",
         datas: molecules["list-group"].listGroups,
         iconDatas: atoms.icon.icons
     }) }}
 
     {{ renderListGroup({
-        id: "demoGroup3",
+        name: "demoGroup3",
         datas: molecules["list-group"].listGroups,
         iconDatas: atoms.icon.icons,
         linkDatas: atoms.link.links
     }) }}
 
     {{ renderListGroup({
-        id: "demoGroup4",
+        name: "demoGroup4",
         datas: molecules["list-group"].listGroups,
         iconDatas: atoms.icon.icons,
         radioDatas: atoms["radio-button"].radioButtons
@@ -52,21 +52,20 @@
   ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
-  {% elif not options.id %}
-    <span class="error" role="alert">Error: Missing required prop (id)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
     {# Find list group using universal filter #}
-    {% set listData = options.datas | findByName(options.id) %}
+    {% set listData = options.datas | findByName(options.name) %}
 
     {# Render list group or error message #}
     {% if not listData %}
-      <span class="error" role="alert">List group not found: {{ options.id }}</span>
+      <span class="error" role="alert">List group not found: {{ options.name }}</span>
     {% else %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      {% set listId = listData.id | default(options.id) %}
       {% set listType = listData.type | default('default') %}
       {% set items = listData.items | default([]) %}
 
@@ -74,7 +73,7 @@
         3. Tailwind Classes
         Index:
         3.1 Wrapper Classes
-        3.2 Item Classes (by type: default, closable, link, radio, checkbox, toggle)
+        3.2 Item Classes
         3.3 Icon Wrapper Classes
         3.4 Text Classes
         3.5 Close Button Classes
@@ -87,15 +86,20 @@
       {% set containerClasses = "flex flex-col bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] overflow-hidden" %}
 
       {# --------------------------
-          3.2 Item Classes (by type: default, closable, link, radio, checkbox, toggle)
-          Description: Layout horizontal, Spacing, Borders (separator)
+          3.2 Item Classes
+          Description: Layout horizontal, Spacing, Borders, States
         --------------------------#}
       {% set itemBaseClasses = "flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0" %}
 
-      {% set itemInteractiveClasses = "" %}
-      {% if listType != "default" %}
-        {% set itemInteractiveClasses = "transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer" %}
-      {% endif %}
+      {% set itemInteractiveMap = {
+        'default': '',
+        'closable': 'transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer',
+        'link': 'transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer',
+        'radio': 'transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer',
+        'checkbox': 'transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer',
+        'toggle': 'transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer'
+      } %}
+      {% set itemInteractiveClasses = itemInteractiveMap[listType] | default('') %}
 
       {% set itemClasses = itemBaseClasses ~ " " ~ itemInteractiveClasses %}
 
@@ -122,7 +126,7 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
         class="{{ containerClasses }}"
-        data-list-group-id="{{ listId }}"
+        data-list-group-name="{{ listData.name }}"
         data-list-group-type="{{ listType }}"
       >
         {% for item in items %}

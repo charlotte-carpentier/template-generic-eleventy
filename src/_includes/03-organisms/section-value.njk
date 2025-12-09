@@ -272,7 +272,7 @@
                       {% for tag in cardTags %}
                         {% if tag in card.tags and displayedCards < 3 %}
                           {{ renderCard({
-                              name: card.id,
+                              name: card.name,
                               datas: options.cardDatas,
                               lockupDatas: options.lockupDatas,
                               imageDatas: options.imageDatas,

@@ -5,7 +5,7 @@
 
 {#
   Props:
-    - options.id (string): List form identifier
+    - options.name (string): List form identifier
     - options.datas (array): List form configuration data
     - options.inputDatas (array): Input atom data
 
@@ -13,7 +13,7 @@
     {% from "02-molecules/list-form.njk" import renderListForm %}
 
     {{ renderListForm({
-        id: "demoForm1",
+        name: "demoForm1",
         datas: molecules["list-form"].listForms,
         inputDatas: atoms.input.inputs
     }) }}
@@ -30,21 +30,20 @@
   ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
-  {% elif not options.id %}
-    <span class="error" role="alert">Error: Missing required prop (id)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
     {# Find list form using universal filter #}
-    {% set listFormData = options.datas | findByName(options.id) %}
+    {% set listFormData = options.datas | findByName(options.name) %}
 
     {# Render list form or error message #}
     {% if not listFormData %}
-      <span class="error" role="alert">List form not found: {{ options.id }}</span>
+      <span class="error" role="alert">List form not found: {{ options.name }}</span>
     {% else %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      {% set listId = listFormData.id | default(options.id) %}
       {% set listType = listFormData.type | default('input-list') %}
       {% set items = listFormData.items | default([]) %}
 
@@ -72,7 +71,7 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
         class="{{ containerClasses }}"
-        data-list-form-id="{{ listId }}"
+        data-list-form-name="{{ listFormData.name }}"
         data-list-form-type="{{ listType }}"
       >
         {% for item in items %}

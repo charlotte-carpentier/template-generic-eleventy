@@ -1,13 +1,17 @@
 {
   "// Component": "Caption - Contextual labels with semantic icon variants",
-  
   "_meta": {
     "component": "caption",
     "type": "molecule",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableVariants": [
+      "info",
+      "success",
+      "warning",
+      "error"
+    ]
   },
-  
   "captions": [
     {
       "name": "demoCaption1",
@@ -16,14 +20,14 @@
       "variant": "info"
     },
     {
-      "name": "demoCaption2", 
+      "name": "demoCaption2",
       "iconName": "demoCheck1",
       "text": "Label",
       "variant": "success"
     },
     {
       "name": "demoCaption3",
-      "iconName": "demoWarn1", 
+      "iconName": "demoWarn1",
       "text": "Label",
       "variant": "warning"
     },
