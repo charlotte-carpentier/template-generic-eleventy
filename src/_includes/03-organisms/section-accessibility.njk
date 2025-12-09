@@ -45,7 +45,6 @@
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set sectionName = sectionData.name | default(options.name) %}
-      {% set variant = sectionData.variant | default('default') %}
       {% set headingName = sectionData.headingName | default('') %}
       {% set content = sectionData.content | default('') %}
       {% set ariaLabel = sectionData.ariaLabel | default('Accessibility section') %}
@@ -95,7 +94,6 @@
         aria-label="{{ ariaLabel }}"
         data-section-name="{{ sectionName }}"
         data-section-type="section-accessibility"
-        data-section-variant="{{ variant }}"
       >
 
         <div

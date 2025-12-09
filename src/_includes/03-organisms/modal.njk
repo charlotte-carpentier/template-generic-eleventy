@@ -48,7 +48,6 @@
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set modalName = modalData.name | default(options.name) %}
-      {% set variant = modalData.variant | default('centered') %}
       {% set headingName = modalData.headingName | default('') %}
       {% set content = modalData.content | default('') %}
       {% set primaryButton = modalData.primaryButton | default('') %}
@@ -71,12 +70,14 @@
       {# --------------------------
           3.1 Backdrop Classes
           Description: Layout fixed fullscreen, Background semi-transparent, Z-index, States
+          TODO: Remove [div[data-modal-demo]_&] selectors when JS is implemented
         --------------------------#}
       {% set backdropClasses = "hidden [div[data-modal-demo]_&]:block [div[data-modal-demo]_&]:absolute fixed inset-0 bg-black/50 z-[var(--z-modal-backdrop)]" %}
 
       {# --------------------------
           3.2 Dialog Classes
           Description: Layout fixed centered, Background, Shadow, Borders, Z-index, Sizing, States
+          TODO: Remove [div[data-modal-demo]_&] selectors when JS is implemented
         --------------------------#}
       {% set dialogClasses = "hidden [div[data-modal-demo]_&]:block [div[data-modal-demo]_&]:absolute fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-modal)] shadow-[var(--elevation-floating)] z-[var(--z-modal)] mx-[var(--spacing-inset-small)]" %}
 
@@ -126,7 +127,6 @@
         {% if ariaDescribedBy %}aria-describedby="{{ ariaDescribedBy }}"{% endif %}
         data-modal-name="{{ modalName }}"
         data-modal-type="modal"
-        data-modal-variant="{{ variant }}"
       >
 
         <div
