@@ -1,21 +1,10 @@
 {
-  "// Component": "Tooltip - Contextual help tooltips with multi-part descriptions",
+  "// Component": "Tooltip - Contextual help content bubbles",
   "_meta": {
     "component": "tooltip",
     "type": "atom",
     "version": "1.0.0",
-    "created": "2025-01-15",
-    "availablePositions": [
-      "top",
-      "right",
-      "bottom",
-      "left"
-    ],
-    "availableTriggerTypes": [
-      "icon",
-      "text",
-      "button"
-    ]
+    "created": "2025-01-15"
   },
   "tooltips": [
     {
