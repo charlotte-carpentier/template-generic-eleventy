@@ -1,13 +1,17 @@
 {
   "// Component": "Toast - Notification toasts with semantic variants and auto-dismiss",
-  
   "_meta": {
     "component": "toast",
     "type": "molecule",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableVariants": [
+      "info",
+      "success",
+      "warning",
+      "error"
+    ]
   },
-  
   "toasts": [
     {
       "name": "demoToast1",
@@ -21,7 +25,7 @@
     {
       "name": "demoToast2",
       "message": "This is the longest label in the world",
-      "variant": "success", 
+      "variant": "success",
       "iconName": "demoCheck1",
       "closeIconName": "demoClose1",
       "duration": 5000,
@@ -32,7 +36,7 @@
       "message": "This is the longest label in the world",
       "variant": "warning",
       "iconName": "demoWarn1",
-      "closeIconName": "demoClose1", 
+      "closeIconName": "demoClose1",
       "duration": 5000,
       "dismissible": true
     },

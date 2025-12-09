@@ -4,60 +4,59 @@
     "component": "lock-up",
     "type": "molecule",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableTypes": [
+      "default",
+      "value-legend",
+      "block-content"
+    ],
+    "availableVariants": [
+      "horizontal",
+      "vertical",
+      "small-horizontal",
+      "small-vertical"
+    ]
   },
   "lockUps": [
     {
-      "id": "demoLock1",
+      "name": "demoLock1",
       "type": "default",
-      "variants": [
-        "horizontal",
-        "vertical",
-        "small-horizontal",
-        "small-vertical"
-      ],
+      "variant": "vertical",
       "label": {
-        "text": "Label",
-        "variant": "default"
+        "text": "Label"
       },
       "value": {
-        "text": "Label",
-        "variant": "default"
+        "text": "Label"
       }
     },
     {
-      "id": "demoLock2",
+      "name": "demoLock2",
       "type": "value-legend",
       "value": {
-        "text": "",
-        "variant": "default"
+        "text": ""
       },
       "legend": {
-        "text": "This is the longest label in the world",
-        "variant": "default"
+        "text": "This is the longest label in the world"
       }
     },
     {
-      "id": "demoLock3",
+      "name": "demoLock3",
       "type": "block-content",
       "imageName": "demoImage2",
       "headingName": "demoHead2",
       "content": {
-        "text": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
-        "variant": "default"
+        "text": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups."
       }
     },
     {
-      "id": "demoLock4",
+      "name": "demoLock4",
       "type": "default",
       "variant": "horizontal",
       "label": {
-        "text": "Label",
-        "variant": "default"
+        "text": "Label"
       },
       "value": {
-        "text": "Label",
-        "variant": "default"
+        "text": "Label"
       }
     }
   ]

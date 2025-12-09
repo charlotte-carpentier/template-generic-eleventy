@@ -1,13 +1,21 @@
 {
   "// Component": "Slider - Single value and range sliders with handle indicators",
-  
   "_meta": {
     "component": "slider",
     "type": "molecule",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableTypes": [
+      "single",
+      "range"
+    ],
+    "availableVariants": {
+      "handleIndicator": [
+        "outline",
+        "solid"
+      ]
+    }
   },
-  
   "sliders": [
     {
       "name": "demoSlider1",
@@ -16,7 +24,9 @@
       "min": 0,
       "max": 20,
       "step": 1,
-      "values": [8],
+      "values": [
+        8
+      ],
       "disabled": false,
       "handleIndicator": {
         "show": true,
@@ -24,13 +34,16 @@
       }
     },
     {
-      "name": "demoRange1", 
+      "name": "demoRange1",
       "type": "range",
       "label": "Range",
       "min": 0,
       "max": 20,
       "step": 1,
-      "values": [8, 18],
+      "values": [
+        8,
+        18
+      ],
       "disabled": false,
       "handleIndicator": {
         "show": true,

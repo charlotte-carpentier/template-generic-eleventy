@@ -12,48 +12,42 @@
       "rating": 0,
       "maxRating": 5,
       "iconNameFilled": "demoStar2",
-      "iconNameEmpty": "demoStar1",
-      "variant": "default"
+      "iconNameEmpty": "demoStar1"
     },
     {
       "name": "demoRating2",
       "rating": 1,
       "maxRating": 5,
       "iconNameFilled": "demoStar2",
-      "iconNameEmpty": "demoStar1",
-      "variant": "default"
+      "iconNameEmpty": "demoStar1"
     },
     {
       "name": "demoRating3",
       "rating": 2,
       "maxRating": 5,
       "iconNameFilled": "demoStar2",
-      "iconNameEmpty": "demoStar1",
-      "variant": "default"
+      "iconNameEmpty": "demoStar1"
     },
     {
       "name": "demoRating4",
       "rating": 3,
       "maxRating": 5,
       "iconNameFilled": "demoStar2",
-      "iconNameEmpty": "demoStar1",
-      "variant": "default"
+      "iconNameEmpty": "demoStar1"
     },
     {
       "name": "demoRating5",
       "rating": 4,
       "maxRating": 5,
       "iconNameFilled": "demoStar2",
-      "iconNameEmpty": "demoStar1",
-      "variant": "default"
+      "iconNameEmpty": "demoStar1"
     },
     {
       "name": "demoRating6",
       "rating": 5,
       "maxRating": 5,
       "iconNameFilled": "demoStar2",
-      "iconNameEmpty": "demoStar1",
-      "variant": "default"
+      "iconNameEmpty": "demoStar1"
     }
   ]
 }

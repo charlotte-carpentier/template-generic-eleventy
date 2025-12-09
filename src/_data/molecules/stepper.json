@@ -4,11 +4,20 @@
     "component": "stepper",
     "type": "molecule",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "availableVariants": [
+      "default",
+      "vertical"
+    ],
+    "availableStatuses": [
+      "upcoming",
+      "active",
+      "done"
+    ]
   },
   "steppers": [
     {
-      "id": "demoStep1",
+      "name": "demoStep1",
       "variant": "default",
       "items": [
         {
@@ -29,7 +38,7 @@
       ]
     },
     {
-      "id": "demoStep2",
+      "name": "demoStep2",
       "variant": "vertical",
       "items": [
         {

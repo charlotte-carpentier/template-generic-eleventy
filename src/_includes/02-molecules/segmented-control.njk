@@ -5,7 +5,7 @@
 
 {#
   Props:
-    - options.id (string): Segmented control identifier
+    - options.name (string): Segmented control identifier
     - options.datas (array): Segmented control configuration data
     - options.buttonDatas (array): Button atom data
 
@@ -13,7 +13,7 @@
     {% from "02-molecules/segmented-control.njk" import renderSegmentedControl %}
 
     {{ renderSegmentedControl({
-        id: "demoSeg1",
+        name: "demoSeg1",
         datas: molecules["segmented-control"].segmentedControls,
         buttonDatas: atoms.button.buttons
     }) }}
@@ -30,23 +30,23 @@
   ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
-  {% elif not options.id %}
-    <span class="error" role="alert">Error: Missing required prop (id)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% elif not options.buttonDatas %}
     <span class="error" role="alert">Error: Missing required prop (buttonDatas)</span>
   {% else %}
     {# Find segmented control using universal filter #}
-    {% set segmentedData = options.datas | findByName(options.id) %}
+    {% set segmentedData = options.datas | findByName(options.name) %}
 
     {# Render segmented control or error message #}
     {% if not segmentedData %}
-      <span class="error" role="alert">Segmented control not found: {{ options.id }}</span>
+      <span class="error" role="alert">Segmented control not found: {{ options.name }}</span>
     {% else %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      {% set segmentedId = segmentedData.id | default(options.id) %}
+      {% set segmentedName = segmentedData.name | default(options.name) %}
       {% set items = segmentedData.items | default([]) %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -82,10 +82,10 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
         class="{{ containerClasses }}"
-        data-segmented-id="{{ segmentedId }}"
+        data-segmented-name="{{ segmentedName }}"
         data-segmented-type="segmented-control"
         role="tablist"
-        aria-label="Segmented control {{ segmentedId }}"
+        aria-label="Segmented control {{ segmentedName }}"
       >
         {# Segments - compose button atoms #}
         {% for item in items %}

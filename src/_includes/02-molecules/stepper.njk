@@ -5,7 +5,7 @@
 
 {#
   Props:
-    - options.id (string): Stepper identifier
+    - options.name (string): Stepper identifier
     - options.datas (array): Stepper configuration data
     - options.chipDatas (array): Chip notification atom data (optional)
 
@@ -13,7 +13,7 @@
     {% from "02-molecules/stepper.njk" import renderStepper %}
 
     {{ renderStepper({
-        id: "demoStep1",
+        name: "demoStep1",
         datas: molecules.stepper.steppers,
         chipDatas: atoms["chip-notification"].chipNotifs
     }) }}
@@ -30,21 +30,21 @@
   ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
-  {% elif not options.id %}
-    <span class="error" role="alert">Error: Missing required prop (id)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
     {# Find stepper using universal filter #}
-    {% set stepperData = options.datas | findByName(options.id) %}
+    {% set stepperData = options.datas | findByName(options.name) %}
 
     {# Render stepper or error message #}
     {% if not stepperData %}
-      <span class="error" role="alert">Stepper not found: {{ options.id }}</span>
+      <span class="error" role="alert">Stepper not found: {{ options.name }}</span>
     {% else %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      {% set stepperId = stepperData.id | default(options.id) %}
+      {% set stepperName = stepperData.name | default(options.name) %}
       {% set variant = stepperData.variant | default('default') %}
       {% set items = stepperData.items | default([]) %}
 
@@ -56,9 +56,9 @@
         3.3 Connector Classes
         3.4 Block Step Classes
         3.5 Chip Wrapper Classes
-        3.6 Chip Override Classes (by status)
+        3.6 Chip Override Classes
         3.7 Number Fallback Classes
-        3.8 Label Classes (by status)
+        3.8 Label Classes
         3.9 Vertical Wrapper Classes
         3.10 Chip Column Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
@@ -73,21 +73,21 @@
           3.2 List Classes
           Description: Layout by variant
         --------------------------#}
-      {% if variant == 'vertical' %}
-        {% set listClasses = "flex flex-col gap-[var(--spacing-stack-tight)]" %}
-      {% else %}
-        {% set listClasses = "flex flex-row items-center gap-[var(--spacing-inline-medium)]" %}
-      {% endif %}
+      {% set listVariantMap = {
+        'vertical': 'flex flex-col gap-[var(--spacing-stack-tight)]',
+        'default': 'flex flex-row items-center gap-[var(--spacing-inline-medium)]'
+      } %}
+      {% set listClasses = listVariantMap[variant] or listVariantMap['default'] %}
 
       {# --------------------------
           3.3 Connector Classes
           Description: Line between steps
         --------------------------#}
-      {% if variant == 'vertical' %}
-        {% set connectorClasses = "mt-[var(--spacing-stack-tight)] w-px h-6 bg-[var(--color-global-contrast-light-02)]" %}
-      {% else %}
-        {% set connectorClasses = "flex-shrink-0 h-px w-12 bg-[var(--color-global-contrast-light-02)]" %}
-      {% endif %}
+      {% set connectorVariantMap = {
+        'vertical': 'mt-[var(--spacing-stack-tight)] w-px h-6 bg-[var(--color-global-contrast-light-02)]',
+        'default': 'flex-shrink-0 h-px w-12 bg-[var(--color-global-contrast-light-02)]'
+      } %}
+      {% set connectorClasses = connectorVariantMap[variant] or connectorVariantMap['default'] %}
 
       {# --------------------------
           3.4 Block Step Classes
@@ -102,12 +102,14 @@
       {% set chipWrapperClasses = "flex-shrink-0" %}
 
       {# --------------------------
-          3.6 Chip Override Classes (by status)
+          3.6 Chip Override Classes
           Description: Color overrides for chip based on step status
         --------------------------#}
-      {% set chipOverrideActive = "[&_span]:bg-[var(--color-button-primary)]" %}
-      {% set chipOverrideUpcoming = "[&_span]:text-[var(--color-global-contrast-light-02)] [&_span]:bg-[var(--color-global-contrast-light-04)]" %}
-      {% set chipOverrideDone = "[&_span]:bg-[var(--color-semantic-success)]" %}
+      {% set chipOverrideMap = {
+        'active': '[&_span]:bg-[var(--color-button-primary)]',
+        'upcoming': '[&_span]:text-[var(--color-global-contrast-light-02)] [&_span]:bg-[var(--color-global-contrast-light-04)]',
+        'done': '[&_span]:bg-[var(--color-semantic-success)]'
+      } %}
 
       {# --------------------------
           3.7 Number Fallback Classes
@@ -116,12 +118,14 @@
       {% set numberFallbackClasses = "flex items-center justify-center w-8 h-8 typography-body-semibold text-[var(--color-global-default)] bg-[var(--color-global-contrast-light-03)] rounded-full" %}
 
       {# --------------------------
-          3.8 Label Classes (by status)
+          3.8 Label Classes
           Description: Typography, Colors by status
         --------------------------#}
-      {% set labelActiveClasses = "typography-body-regular text-[var(--color-global-default)]" %}
-      {% set labelUpcomingClasses = "typography-body-regular text-[var(--color-global-contrast-light-02)]" %}
-      {% set labelDoneClasses = "typography-body-regular text-[var(--color-semantic-success)]" %}
+      {% set labelStatusMap = {
+        'active': 'typography-body-regular text-[var(--color-global-default)]',
+        'upcoming': 'typography-body-regular text-[var(--color-global-contrast-light-02)]',
+        'done': 'typography-body-regular text-[var(--color-semantic-success)]'
+      } %}
 
       {# --------------------------
           3.9 Vertical Wrapper Classes
@@ -140,7 +144,7 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
         class="{{ containerClasses }}"
-        data-stepper-id="{{ stepperId }}"
+        data-stepper-name="{{ stepperName }}"
         data-stepper-type="stepper"
         data-stepper-variant="{{ variant }}"
         role="navigation"
@@ -157,16 +161,9 @@
             {% set label = item.label | default('') %}
             {% set chipName = item.chipName | default('') %}
 
-            {# Select classes based on status #}
-            {% set chipOverride = chipOverrideUpcoming %}
-            {% set labelClasses = labelUpcomingClasses %}
-            {% if status == 'active' %}
-              {% set chipOverride = chipOverrideActive %}
-              {% set labelClasses = labelActiveClasses %}
-            {% elif status == 'done' %}
-              {% set chipOverride = chipOverrideDone %}
-              {% set labelClasses = labelDoneClasses %}
-            {% endif %}
+            {# Get classes from mappings #}
+            {% set chipOverride = chipOverrideMap[status] or chipOverrideMap['upcoming'] %}
+            {% set labelClasses = labelStatusMap[status] or labelStatusMap['upcoming'] %}
 
             {# VERTICAL LAYOUT #}
             {% if variant == 'vertical' %}

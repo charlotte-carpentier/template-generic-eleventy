@@ -57,7 +57,7 @@
         Index:
         3.1 Wrapper Classes
         3.2 Content Wrapper Classes
-        3.3 Icon Wrapper Classes (by variant: info, success, warning, error)
+        3.3 Icon Wrapper Classes
         3.4 Message Classes
         3.5 Close Button Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
@@ -75,23 +75,18 @@
       {% set contentWrapperClasses = "flex items-center gap-[var(--spacing-inline-medium)] w-full" %}
 
       {# --------------------------
-          3.3 Icon Wrapper Classes (by variant: info, success, warning, error)
+          3.3 Icon Wrapper Classes
           Description: Layout, Colors by variant
         --------------------------#}
       {% set iconWrapperBaseClasses = "flex-shrink-0 inline-flex items-center" %}
 
-      {% set iconColorClasses = "" %}
-      {% if variant == 'info' %}
-        {% set iconColorClasses = "text-[var(--color-semantic-information)]" %}
-      {% elif variant == 'success' %}
-        {% set iconColorClasses = "text-[var(--color-semantic-success)]" %}
-      {% elif variant == 'warning' %}
-        {% set iconColorClasses = "text-[var(--color-semantic-warning)]" %}
-      {% elif variant == 'error' %}
-        {% set iconColorClasses = "text-[var(--color-semantic-critical)]" %}
-      {% endif %}
-
-      {% set iconWrapperClasses = iconWrapperBaseClasses ~ " " ~ iconColorClasses %}
+      {% set iconVariantMap = {
+        'info': 'text-[var(--color-semantic-information)]',
+        'success': 'text-[var(--color-semantic-success)]',
+        'warning': 'text-[var(--color-semantic-warning)]',
+        'error': 'text-[var(--color-semantic-critical)]'
+      } %}
+      {% set iconVariantClasses = iconVariantMap[variant] or iconVariantMap['info'] %}
 
       {# --------------------------
           3.4 Message Classes
@@ -101,9 +96,10 @@
 
       {# --------------------------
           3.5 Close Button Classes
-          Description: Layout, Colors, States
+          Description: Layout, Size, Borders
         --------------------------#}
-      {% set closeButtonClasses = "flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+      {% set closeButtonBaseClasses = "flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] bg-transparent border-0 cursor-pointer" %}
+      {% set closeButtonStateClasses = "text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
@@ -124,7 +120,7 @@
           {# Icon (if present) #}
           {% if iconName and options.iconDatas %}
             <div
-              class="{{ iconWrapperClasses }}"
+              class="{{ iconWrapperBaseClasses }} {{ iconVariantClasses }}"
               data-toast-icon="true"
             >
               {{ renderIcon({
@@ -146,7 +142,7 @@
           {% if dismissible %}
             <button
               type="button"
-              class="{{ closeButtonClasses }}"
+              class="{{ closeButtonBaseClasses }} {{ closeButtonStateClasses }}"
               data-toast-dismiss="true"
               aria-label="Dismiss notification"
             >

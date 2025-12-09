@@ -57,7 +57,6 @@
       {% set maxRating = ratingData.maxRating | default(5) %}
       {% set iconNameFilled = ratingData.iconNameFilled | default('demoStar2') %}
       {% set iconNameEmpty = ratingData.iconNameEmpty | default('demoStar1') %}
-      {% set variant = ratingData.variant | default('default') %}
       {% set showValue = options.showValue | default(false) %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -65,8 +64,8 @@
         Index:
         3.1 Wrapper Classes
         3.2 Stars Wrapper Classes
-        3.3 Star Filled Classes (by status: filled)
-        3.4 Star Empty Classes (by status: empty)
+        3.3 Star Filled Classes
+        3.4 Star Empty Classes
         3.5 Value Text Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
@@ -83,13 +82,13 @@
       {% set starsWrapperClasses = "flex items-center gap-[var(--spacing-inline-tight)]" %}
 
       {# --------------------------
-          3.3 Star Filled Classes (by status: filled)
+          3.3 Star Filled Classes
           Description: Colors for filled stars
         --------------------------#}
       {% set starFilledClasses = "inline-flex text-[var(--color-global-default)]" %}
 
       {# --------------------------
-          3.4 Star Empty Classes (by status: empty)
+          3.4 Star Empty Classes
           Description: Colors for empty stars
         --------------------------#}
       {% set starEmptyClasses = "inline-flex text-[var(--color-global-contrast-light-02)]" %}
