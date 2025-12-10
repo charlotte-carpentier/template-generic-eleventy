@@ -5,38 +5,70 @@
    └─────────────────────────────────────────────────────────┘ */
 
 /**
- * @fileoverview File upload with drag and drop
+ * @fileoverview File upload with drag and drop - WCAG 2.2 AA compliant
  * @module molecules/block-drag-and-drop
  * @created 2025-01-15
  */
 
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Configuration
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const CONFIG = {
-  DROPZONE_SELECTOR: '[data-drag-drop-zone]',
-  BUTTON_SELECTOR: '[data-drag-drop-button]',
-  INPUT_SELECTOR: '[data-drag-drop-input]',
-  ACTIVE_CLASS: 'drag-active',
-  ERROR_CLASS: 'drag-error',
-  SUCCESS_CLASS: 'drag-success',
-  MAX_FILE_SIZE: 10 * 1024 * 1024, // 10MB default
-  ALLOWED_TYPES: [] // Empty = all types allowed
+  SELECTORS: {
+    CONTAINER: '[data-drag-drop="true"]',
+    DROPZONE: '[data-drag-drop-zone]',
+    BUTTON: '[data-drag-drop-button]',
+    INPUT: '[data-drag-drop-input]',
+    STATUS: '[data-drag-drop-status]'
+  },
+  CLASSES: {
+    ACTIVE: 'drag-active',
+    ERROR: 'drag-error',
+    SUCCESS: 'drag-success'
+  },
+  DEFAULTS: {
+    MAX_FILE_SIZE: 10 * 1024 * 1024, // 10MB
+    ALLOWED_TYPES: []
+  }
 };
 
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Core Functions
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
  * Initialize drag and drop
  * @returns {void}
  */
 export function initBlockDragAndDrop() {
-  const containers = document.querySelectorAll('[data-drag-drop="true"]');
+  const containers = document.querySelectorAll(CONFIG.SELECTORS.CONTAINER);
+
+  if (containers.length === 0) return;
+
+  // Window-level event prevention (MDN 2025 best practice)
+  setupWindowEvents();
+
   containers.forEach(container => setupDropzone(container));
+}
+
+/**
+ * Setup window-level drag events
+ * @returns {void}
+ */
+function setupWindowEvents() {
+  // Prevent default file drop on window
+  window.addEventListener('dragover', (e) => {
+    if ([...e.dataTransfer.items].some((item) => item.kind === 'file')) {
+      e.preventDefault();
+    }
+  });
+
+  window.addEventListener('drop', (e) => {
+    if ([...e.dataTransfer.items].some((item) => item.kind === 'file')) {
+      e.preventDefault();
+    }
+  });
 }
 
 /**
@@ -45,47 +77,49 @@ export function initBlockDragAndDrop() {
  * @returns {void}
  */
 function setupDropzone(container) {
-  const dropzone = container.querySelector(CONFIG.DROPZONE_SELECTOR);
-  const button = container.querySelector(CONFIG.BUTTON_SELECTOR);
-  const input = container.querySelector(CONFIG.INPUT_SELECTOR);
-  
-  if (!dropzone || !input) return;
-  
+  const dropzone = container.querySelector(CONFIG.SELECTORS.DROPZONE);
+  const button = container.querySelector(CONFIG.SELECTORS.BUTTON);
+  const input = container.querySelector(CONFIG.SELECTORS.INPUT);
+  const status = container.querySelector(CONFIG.SELECTORS.STATUS);
+
+  if (!dropzone || !input || !status) return;
+
   // Get configuration from data attributes
-  const maxSize = parseInt(container.getAttribute('data-max-size')) || CONFIG.MAX_FILE_SIZE;
-  const allowedTypes = container.getAttribute('data-allowed-types')?.split(',') || CONFIG.ALLOWED_TYPES;
-  const multiple = container.hasAttribute('data-multiple');
-  
-  // Prevent default drag behaviors on dropzone only
+  const config = {
+    maxSize: parseInt(container.getAttribute('data-max-size')) || CONFIG.DEFAULTS.MAX_FILE_SIZE,
+    allowedTypes: container.getAttribute('data-allowed-types')?.split(',') || CONFIG.DEFAULTS.ALLOWED_TYPES,
+    multiple: container.hasAttribute('data-multiple')
+  };
+
+  // Prevent default on dropzone
   ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
     dropzone.addEventListener(eventName, preventDefaults, false);
   });
-  
-  // Highlight drop zone on drag
+
+  // Visual feedback on drag
   ['dragenter', 'dragover'].forEach(eventName => {
     dropzone.addEventListener(eventName, () => {
-      dropzone.classList.add(CONFIG.ACTIVE_CLASS);
+      dropzone.classList.add(CONFIG.CLASSES.ACTIVE);
     }, false);
   });
-  
+
   ['dragleave', 'drop'].forEach(eventName => {
     dropzone.addEventListener(eventName, () => {
-      dropzone.classList.remove(CONFIG.ACTIVE_CLASS);
+      dropzone.classList.remove(CONFIG.CLASSES.ACTIVE);
     }, false);
   });
-  
-  // Handle drop on dropzone only
+
+  // Handle drop
   dropzone.addEventListener('drop', (e) => {
     const files = e.dataTransfer.files;
-    handleFiles(files, container, input, maxSize, allowedTypes, multiple);
+    handleFiles({ files, container, input, status, config });
   }, false);
-  
-  // Handle click to browse - on dropzone
+
+  // Click handlers (WCAG 2.5.7 single-pointer alternative)
   dropzone.addEventListener('click', () => {
     input.click();
   });
-  
-  // Handle click to browse - on button if it exists
+
   if (button) {
     button.addEventListener('click', (e) => {
       e.preventDefault();
@@ -93,17 +127,13 @@ function setupDropzone(container) {
       input.click();
     });
   }
-  
-  // Handle file input change
+
+  // File input change
   input.addEventListener('change', (e) => {
-    handleFiles(e.target.files, container, input, maxSize, allowedTypes, multiple);
+    handleFiles({ files: e.target.files, container, input, status, config });
   });
-  
-  // Keyboard accessibility for dropzone
-  dropzone.setAttribute('tabindex', '0');
-  dropzone.setAttribute('role', 'button');
-  dropzone.setAttribute('aria-label', 'Click or drag files to upload');
-  
+
+  // Keyboard accessibility (WCAG 2.1.1 Level A)
   dropzone.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -122,52 +152,53 @@ function preventDefaults(e) {
   e.stopPropagation();
 }
 
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // File Handling
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
  * Handle dropped or selected files
- * @param {FileList} files - Files to handle
- * @param {HTMLElement} dropzone - Dropzone element
- * @param {HTMLElement} input - Input element
- * @param {number} maxSize - Max file size
- * @param {Array<string>} allowedTypes - Allowed MIME types
- * @param {boolean} multiple - Allow multiple files
+ * @param {Object} options - Handler options
+ * @param {FileList} options.files - Files to handle
+ * @param {HTMLElement} options.container - Container element
+ * @param {HTMLElement} options.input - Input element
+ * @param {HTMLElement} options.status - Status element
+ * @param {Object} options.config - Configuration
  * @returns {void}
  */
-function handleFiles(files, dropzone, input, maxSize, allowedTypes, multiple) {
+function handleFiles({ files, container, input, status, config }) {
+  const dropzone = container.querySelector(CONFIG.SELECTORS.DROPZONE);
+
   // Clear previous states
-  dropzone.classList.remove(CONFIG.ERROR_CLASS, CONFIG.SUCCESS_CLASS);
-  
+  dropzone?.classList.remove(CONFIG.CLASSES.ERROR, CONFIG.CLASSES.SUCCESS);
+
   const fileArray = Array.from(files);
-  
+
   // Check multiple files
-  if (!multiple && fileArray.length > 1) {
-    showError(dropzone, 'Un seul fichier autorisé');
+  if (!config.multiple && fileArray.length > 1) {
+    announceError({ status, message: 'Only one file allowed' });
     return;
   }
-  
-  // Validate each file
+
+  // Validate files
   const validFiles = [];
   for (const file of fileArray) {
-    const validation = validateFile(file, maxSize, allowedTypes);
-    
+    const validation = validateFile(file, config);
+
     if (!validation.valid) {
-      showError(dropzone, validation.error);
+      announceError({ status, message: validation.error });
       return;
     }
-    
+
     validFiles.push(file);
   }
-  
-  // All files valid
+
+  // Success
   if (validFiles.length > 0) {
-    showSuccess(dropzone, validFiles);
-    
-    // Dispatch custom event with files
-    dropzone.dispatchEvent(new CustomEvent('files-selected', {
+    announceSuccess({ status, files: validFiles });
+
+    // Dispatch custom event
+    container.dispatchEvent(new CustomEvent('hat:upload-start', {
       detail: { files: validFiles },
       bubbles: true
     }));
@@ -177,92 +208,70 @@ function handleFiles(files, dropzone, input, maxSize, allowedTypes, multiple) {
 /**
  * Validate file
  * @param {File} file - File to validate
- * @param {number} maxSize - Max file size
- * @param {Array<string>} allowedTypes - Allowed MIME types
+ * @param {Object} config - Configuration
  * @returns {Object} Validation result
  */
-function validateFile(file, maxSize, allowedTypes) {
+function validateFile(file, config) {
   // Check size
-  if (file.size > maxSize) {
+  if (file.size > config.maxSize) {
     return {
       valid: false,
-      error: `Fichier trop volumineux (max ${formatBytes(maxSize)})`
+      error: `File too large (max ${formatBytes(config.maxSize)})`
     };
   }
-  
+
   // Check type
-  if (allowedTypes.length > 0 && !allowedTypes.includes(file.type)) {
+  if (config.allowedTypes.length > 0 && !config.allowedTypes.includes(file.type)) {
     return {
       valid: false,
-      error: `Type de fichier non autorisé (${file.type})`
+      error: `File type not allowed (${file.type})`
     };
   }
-  
+
   return { valid: true };
 }
 
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// UI Feedback
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ARIA Announcements
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
- * Show error message
- * @param {HTMLElement} dropzone - Dropzone element
- * @param {string} message - Error message
+ * Announce error to screen readers
+ * @param {Object} options - Announce options
+ * @param {HTMLElement} options.status - Status element
+ * @param {string} options.message - Error message
  * @returns {void}
  */
-function showError(dropzone, message) {
-  dropzone.classList.add(CONFIG.ERROR_CLASS);
-  dropzone.setAttribute('data-error', message);
-  
-  // Create/update error element
-  let errorEl = dropzone.querySelector('.drag-drop-error');
-  if (!errorEl) {
-    errorEl = document.createElement('div');
-    errorEl.className = 'drag-drop-error';
-    errorEl.setAttribute('role', 'alert');
-    dropzone.appendChild(errorEl);
-  }
-  errorEl.textContent = message;
-  
-  // Auto-hide after 3 seconds
+function announceError({ status, message }) {
+  if (!status) return;
+
+  status.textContent = `Error: ${message}`;
+
+  // Auto-clear after 3 seconds
   setTimeout(() => {
-    dropzone.classList.remove(CONFIG.ERROR_CLASS);
-    if (errorEl) errorEl.remove();
+    status.textContent = '';
   }, 3000);
 }
 
 /**
- * Show success state
- * @param {HTMLElement} dropzone - Dropzone element
- * @param {Array<File>} files - Valid files
+ * Announce success to screen readers
+ * @param {Object} options - Announce options
+ * @param {HTMLElement} options.status - Status element
+ * @param {Array<File>} options.files - Valid files
  * @returns {void}
  */
-function showSuccess(dropzone, files) {
-  dropzone.classList.add(CONFIG.SUCCESS_CLASS);
-  
-  // Create/update file list
-  let listEl = dropzone.querySelector('.drag-drop-files');
-  if (!listEl) {
-    listEl = document.createElement('div');
-    listEl.className = 'drag-drop-files';
-    listEl.setAttribute('role', 'status');
-    dropzone.appendChild(listEl);
-  }
-  
-  listEl.innerHTML = files.map(file => 
-    `<div class="file-item">
-      <span class="file-name">${file.name}</span>
-      <span class="file-size">${formatBytes(file.size)}</span>
-    </div>`
-  ).join('');
+function announceSuccess({ status, files }) {
+  if (!status) return;
+
+  const count = files.length;
+  const names = files.map(f => f.name).join(', ');
+
+  status.textContent = `${count} file${count > 1 ? 's' : ''} selected: ${names}`;
 }
 
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Utilities
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
  * Format bytes to human readable
@@ -272,18 +281,17 @@ function showSuccess(dropzone, files) {
  */
 function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) return '0 Bytes';
-  
+
   const k = 1024;
   const dm = decimals < 0 ? 0 : decimals;
   const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-  
+
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  
+
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
 // HAT · 2025
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -70,6 +70,14 @@
       {% set itemsPerPage = options.itemsPerPage | default(10) %}
       {% set totalItems = options.totalItems | default(0) %}
 
+      {# TODO Phase 6: Requires utils/pagination.js
+        - Pagination navigation (prev/next/pages) + keyboard (arrows/home/end)
+        - Items per page selector change event
+        - ARIA live announcements for page changes
+        - Reusable across lists, tables, grids via [data-paginated]
+        Pattern: Universal selector works on any paginated content
+        See: utils/pagination.js (to be created) #}
+
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:

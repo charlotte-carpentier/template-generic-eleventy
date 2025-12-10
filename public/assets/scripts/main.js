@@ -20,9 +20,8 @@ import { initInput } from './components/01-atoms/input.js';
 import { initErrorLinks } from './components/01-atoms/error-link.js';
 
 // Molecules
-import { initTooltips } from './components/02-molecules/caption.js';
 import { initBlockDragAndDrop } from './components/02-molecules/block-drag-and-drop.js';
-import { initPagination } from './components/02-molecules/pagination.js';
+import { initTooltips } from './components/02-molecules/caption.js';
 import { initPanel } from './components/02-molecules/panel.js';
 import { initSegmentedControl } from './components/02-molecules/segmented-control.js';
 import { initSlider } from './components/02-molecules/slider.js';

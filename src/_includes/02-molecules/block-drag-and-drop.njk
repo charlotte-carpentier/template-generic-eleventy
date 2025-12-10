@@ -74,6 +74,7 @@
         3.7 Button Wrapper Classes
         3.8 File Info Classes
         3.9 Error Message Classes
+        3.10 ARIA Live Region Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -142,6 +143,12 @@
         --------------------------#}
       {% set errorMessageClasses = "typography-body-small text-[var(--color-semantic-critical)] mt-[var(--spacing-stack-tight)]" %}
 
+      {# --------------------------
+          3.10 ARIA Live Region Classes
+          Description: Screen reader only
+        --------------------------#}
+      {% set ariaLiveClasses = "sr-only" %}
+
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
@@ -166,8 +173,7 @@
           class="{{ dropzoneClasses }}"
           data-drag-drop-zone="true"
           tabindex="0"
-          role="button"
-          aria-label="Upload file by dropping it here or by clicking"
+          aria-describedby="file-info-{{ blockData.name }}"
           {% if variant == 'loading' %}aria-busy="true"{% endif %}
         >
           {# Icon #}
@@ -198,7 +204,7 @@
         </div>
 
         {# File info #}
-        <div class="{{ fileInfoContainerClasses }}" data-drag-drop-info="true">
+        <div class="{{ fileInfoContainerClasses }}" id="file-info-{{ blockData.name }}" data-drag-drop-info="true">
           <p>
             <span class="{{ fileInfoLabelClasses }}">{{ supportedFormatsLabel }} </span>
             <span class="{{ fileInfoValueClasses }}">{{ supportedFormatsValue }}</span>
@@ -216,15 +222,25 @@
           </p>
         {% endif %}
 
-        {# Hidden file input #}
+        {# ARIA live region for screen readers #}
+        <div
+          class="{{ ariaLiveClasses }}"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          data-drag-drop-status="true"
+        ></div>
+
+        {# Hidden file input with label #}
+        <label for="file-{{ blockData.name }}" class="sr-only">
+          {{ dropzoneText }}
+        </label>
         <input
           type="file"
           id="file-{{ blockData.name }}"
           class="sr-only"
           data-drag-drop-input="true"
           {% if supportedFormatsValue %}accept="{{ supportedFormatsValue | lower | replace(' ', '') }}"{% endif %}
-          aria-hidden="true"
-          tabindex="-1"
         >
       </div>
     {% endif %}
@@ -232,8 +248,8 @@
 {% endmacro %}
 
 {#
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
 HAT · 2025
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}
