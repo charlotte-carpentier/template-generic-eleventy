@@ -146,6 +146,11 @@
             {{ message }}
           </span>
 
+          {# TODO Phase 6: Dismiss functionality requires utils/dismiss.js
+          - Button [data-disclaimer-dismiss] triggers element removal
+          - Focus management after dismiss (WCAG 2.2)
+          - See: utils/dismiss.js (to be created) #}
+
           {# Close button (if present) #}
           {% if closeIconName and options.iconDatas %}
             <button

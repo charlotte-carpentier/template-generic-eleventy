@@ -1125,6 +1125,8 @@
       
 
       
+
+      
       <div
         class="flex flex-col p-[var(--spacing-inset-small)] bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] w-full max-w-xl"
         data-drag-drop-name="demoDragDrop1"
@@ -1187,8 +1189,7 @@
           class="flex flex-col items-start justify-center p-[var(--spacing-inset-large)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-card)] bg-[var(--color-global-white)] min-h-[160px] cursor-pointer transition-colors mb-[var(--spacing-stack-medium)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 hover:bg-[var(--color-global-contrast-light-03)] "
           data-drag-drop-zone="true"
           tabindex="0"
-          role="button"
-          aria-label="Upload file by dropping it here or by clicking"
+          aria-describedby="file-info-demoDragDrop1"
           
         >
           
@@ -1318,7 +1319,7 @@
         </div>
 
         
-        <div class="flex flex-col gap-[var(--spacing-inline-small)] mt-[var(--spacing-stack-tight)]" data-drag-drop-info="true">
+        <div class="flex flex-col gap-[var(--spacing-inline-small)] mt-[var(--spacing-stack-tight)]" id="file-info-demoDragDrop1" data-drag-drop-info="true">
           <p>
             <span class="text-sm text-[var(--color-global-contrast-light-02)]">Supported formats </span>
             <span class="text-sm text-[var(--color-global-default)]">XLS, XLSX</span>
@@ -1333,14 +1334,24 @@
         
 
         
+        <div
+          class="sr-only"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          data-drag-drop-status="true"
+        ></div>
+
+        
+        <label for="file-demoDragDrop1" class="sr-only">
+          Drag and drop file here
+        </label>
         <input
           type="file"
           id="file-demoDragDrop1"
           class="sr-only"
           data-drag-drop-input="true"
           accept="xls,xlsx"
-          aria-hidden="true"
-          tabindex="-1"
         >
       </div>
     
@@ -2700,6 +2711,8 @@
           </span>
 
           
+
+          
           
             <button
               type="button"
@@ -2872,6 +2885,8 @@
           >
             This is the longest label in the world
           </span>
+
+          
 
           
           
@@ -3048,6 +3063,8 @@
           </span>
 
           
+
+          
           
             <button
               type="button"
@@ -3222,6 +3239,8 @@
           </span>
 
           
+
+          
           
             <button
               type="button"
@@ -3297,6 +3316,8 @@
     
 
       
+      
+
       
 
       
@@ -5155,6 +5176,8 @@
       
 
       
+
+      
       
 
       
@@ -5579,6 +5602,8 @@
 
       
       
+      
+
       
 
       
@@ -6965,6 +6990,8 @@
       
       
       
+      
+
       
 
       
@@ -21343,6 +21370,8 @@
       
       
       
+      
+
       
 
       

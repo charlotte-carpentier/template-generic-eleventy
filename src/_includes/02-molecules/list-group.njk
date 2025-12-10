@@ -69,6 +69,10 @@
       {% set listType = listData.type | default('default') %}
       {% set items = listData.items | default([]) %}
 
+      {# TODO Phase 6: Closable items require utils/dismiss.js
+      - Button [data-list-group-close] triggers parent item removal
+      - See: utils/dismiss.js (handles all dismissible elements) #}
+
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
