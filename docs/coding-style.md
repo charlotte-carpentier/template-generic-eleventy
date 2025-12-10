@@ -61,12 +61,62 @@ tags: [coding-style, conventions, guidelines]
 
 ## Abbreviations
 
-| Abbr | Full | Usage | Avoid |
-|------|------|-------|----------|
-| `a11y` | Accessibility | W3C standard | `access`, `acc` |
-| `Btn` | Button | Component refs | `But`, `Bouton` |
-| `Txt` | Text | Content props | `texte`, `content` |
-| `err` | Error | Error handling | `error`, `erreur` |
+### Standard Abbreviations (W3C/Industry)
+
+| Abbr | Full | Source | Usage |
+|------|------|--------|-------|
+| `a11y` | Accessibility | W3C standard | Always use for accessibility features |
+| `i18n` | Internationalization | W3C standard | Multi-language support (if needed) |
+| `l10n` | Localization | W3C standard | Regional adaptation (if needed) |
+
+### Project-Specific Abbreviations
+
+| Abbr | Full | Context | Max Length |
+|------|------|---------|------------|
+| `Btn` | Button | Component references | `buttonName` (10 chars) |
+| `Txt` | Text | Content properties | `textContent` (11 chars) |
+| `err` | Error | Error handling | `errorMsg` (8 chars) |
+
+### Naming Length Guidelines
+
+- **Target**: ≤12 characters when possible
+- **Acceptable**: 13-15 characters if clarity requires
+- **Priority**: Readability > Brevity (per Gov.UK Design System)
+- **JSON keys**: Always plural of filename in camelCase
+
+**Examples:**
+
+```javascript
+// Optimal (≤12 chars)
+navSecondarys    // 12 chars - navigation-secondary.json
+sectA11ys       // 9 chars  - section-accessibility.json
+sectValues      // 10 chars - section-value.json
+
+// Acceptable (13-15 chars)
+breadcrumbs     // 11 chars - no abbreviation needed
+progressBars    // 12 chars - clear without abbreviation
+paginations     // 11 chars - standard term
+
+// Avoid custom abbreviations unless industry-standard
+// Use "DnD" (drag-and-drop) only if context is clear
+// Keep full words if abbreviation creates ambiguity
+```
+
+### Avoid These Patterns
+
+| Don't Use | Use Instead | Reason |
+|-----------|-------------|---------|
+| `access`, `acc` | `a11y` | W3C standard exists |
+| `nav-sec`, `navsec` | `navSecondarys` | Unclear abbreviation |
+| `sect` alone | `section[Context]` | Too generic, needs context |
+| `ctrl` | `control` or `Control` | 7 chars, no need to abbreviate |
+
+### References
+
+- [W3C Abbreviations](https://www.w3.org/TR/WCAG22/)
+- [Gov.UK Design System](https://design-system.service.gov.uk/) (~12 char average)
+- [Google Material Design 3](https://m3.material.io/) (no strict length limit)
+- [IBM Carbon Design System](https://carbondesignsystem.com/) (prioritizes clarity)
 
 ---
 

@@ -21,7 +21,7 @@
         datas: organisms["section-contact"].sectContacts,
         formDatas: molecules["list-form"].listForms,
         inputDatas: atoms.input.inputs,
-        sectionA11yDatas: organisms["section-accessibility"].sectionsA11y,
+        sectionA11yDatas: organisms["section-accessibility"].sectA11ys,
         headingDatas: atoms.heading.headings,
         buttonDatas: atoms.button.buttons
     }) }}
@@ -116,7 +116,7 @@
 
             {% if leftForm %}
               {{ renderListForm({
-                  id: leftForm,
+                  name: leftForm,
                   datas: options.formDatas,
                   inputDatas: options.inputDatas
               }) }}

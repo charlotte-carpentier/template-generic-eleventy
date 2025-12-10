@@ -212,7 +212,7 @@ permalink: "/"
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Block drag and drop</h2>
     {{ renderBlockDragAndDrop({
         name: "demoDragDrop1",
-        datas: molecules["block-drag-and-drop"].blockDragAndDrops,
+        datas: molecules["block-drag-and-drop"].blockDnDs,
         headingDatas: atoms.heading.headings,
         iconDatas: atoms.icon.icons,
         buttonDatas: atoms.button.buttons
@@ -477,7 +477,7 @@ permalink: "/"
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Segmented Control</h2>
     {{ renderSegmentedControl({
         name: "demoSeg1",
-        datas: molecules["segmented-control"].segmentedControls,
+        datas: molecules["segmented-control"].segmentCtrls,
         buttonDatas: atoms.button.buttons
     }) }}
   </section>
@@ -539,7 +539,7 @@ permalink: "/"
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Navigation Secondary</h2>
     {{ renderNavigationSecondary({
         name: "demoNavSec1",
-        datas: organisms["navigation-secondary"].navSecondary,
+        datas: organisms["navigation-secondary"].navSecondarys,
         linkDatas: atoms.link.links,
         iconDatas: atoms.icon.icons
     }) }}
@@ -562,7 +562,7 @@ permalink: "/"
         name: "demoMenu1",
         datas: organisms.menu.menus,
         headingDatas: atoms.heading.headings,
-        navSecondaryDatas: organisms["navigation-secondary"].navSecondary,
+        navSecondaryDatas: organisms["navigation-secondary"].navSecondarys,
         linkDatas: atoms.link.links
     }) }}
   </section>
@@ -583,7 +583,7 @@ permalink: "/"
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Section Hero</h2>
     {{ renderSectionHero({
         name: "demoSectH1",
-        datas: organisms["section-hero"].sectHeroes,
+        datas: organisms["section-hero"].sectHeros,
         headingDatas: atoms.heading.headings,
         imageDatas: atoms.image.images,
         buttonDatas: atoms.button.buttons
@@ -595,7 +595,7 @@ permalink: "/"
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Section Article Hero</h2>
     {{ renderSectionArticleHero({
         name: "demoSectAH1",
-        datas: organisms["section-article-hero"].sectArtHero,
+        datas: organisms["section-article-hero"].sectArtHeros,
         imageDatas: atoms.image.images,
         headingDatas: atoms.heading.headings
     }) }}
@@ -606,7 +606,7 @@ permalink: "/"
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Section Accessibility</h2>
     {{ renderSectionAccessibility({
         name: "demoSectA1",
-        datas: organisms["section-accessibility"].sectionsA11y,
+        datas: organisms["section-accessibility"].sectA11ys,
         headingDatas: atoms.heading.headings
     }) }}
   </section>
@@ -676,7 +676,7 @@ permalink: "/"
         name: "demoSectC1",
         datas: organisms["section-contact"].sectContacts,
         formDatas: molecules["list-form"].listForms,
-        sectionA11yDatas: organisms["section-accessibility"].sectionsA11y,
+        sectionA11yDatas: organisms["section-accessibility"].sectA11ys,
         buttonDatas: atoms.button.buttons,
         headingDatas: atoms.heading.headings,
         inputDatas: atoms.input.inputs
@@ -705,7 +705,7 @@ permalink: "/"
         headingDatas: atoms.heading.headings,
         linkDatas: atoms.link.links,
         vectorDatas: atoms.vector.vectors,
-        navSecondaryDatas: organisms["navigation-secondary"].navSecondary,
+        navSecondaryDatas: organisms["navigation-secondary"].navSecondarys,
         iconDatas: atoms.icon.icons
     }) }}
   </section>

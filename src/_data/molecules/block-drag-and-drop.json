@@ -11,7 +11,7 @@
       "error"
     ]
   },
-  "blockDragAndDrops": [
+  "blockDnDs": [
     {
       "name": "demoDragDrop1",
       "headingName": "demoHeadUp1",
