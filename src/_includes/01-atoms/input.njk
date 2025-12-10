@@ -19,7 +19,7 @@
     }) }}
 
   @created 2025-01-15
-  @updated 2025-10-26
+  @updated 2025-12-10
 #}
 
 {% macro renderInput(options) %}
@@ -57,6 +57,7 @@
         3.4 Help Classes
         3.5 Counter Classes
         3.6 Chip Container Classes
+        3.7 Password Toggle Button Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -95,6 +96,12 @@
       -------------------------- #}
       {% set chipContainerClasses = "flex flex-wrap gap-[var(--spacing-inline-medium)] mt-[var(--spacing-stack-medium)]" %}
 
+      {# --------------------------
+          3.7 Password Toggle Button Classes
+          Description: Position, sizing, spacing, colors
+      -------------------------- #}
+      {% set passwordToggleClasses = "absolute right-3 top-1/2 -translate-y-1/2 min-w-[24px] min-h-[24px] text-[var(--color-global-contrast-light-02)] hover:text-[var(--color-global-default)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] rounded transition-colors" %}
+
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
@@ -107,7 +114,7 @@
         {% endif %}
 
         {# Text Input #}
-        {% if inputType in ['text', 'email', 'tel', 'password'] %}
+        {% if inputType in ['text', 'email', 'tel'] %}
           <input
             type="{{ inputType }}"
             id="{{ inputId }}"
@@ -123,6 +130,33 @@
             {% if isDisabled %}disabled{% endif %}
             aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
           />
+
+        {# Password Input with Toggle #}
+        {% elif inputType == 'password' %}
+          <div class="relative">
+            <input
+              type="password"
+              id="{{ inputId }}"
+              name="{{ inputName }}"
+              class="{{ baseInputClasses }} {{ stateClasses }} pr-12"
+              placeholder="{{ inputPlaceholder }}"
+              data-input-name="{{ inputData.name }}"
+              data-input-type="input"
+              data-error-message="{{ inputData.errorMessage }}"
+              {% if inputData.required %}required{% endif %}
+              {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
+              {% if inputData.pattern %}pattern="{{ inputData.pattern }}"{% endif %}
+              {% if isDisabled %}disabled{% endif %}
+              aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
+            />
+            <button
+              type="button"
+              class="{{ passwordToggleClasses }}"
+              data-password-toggle="{{ inputId }}"
+              aria-pressed="false"
+              aria-label="Show password"
+            ></button>
+          </div>
 
         {# Textarea #}
         {% elif inputType == 'textarea' %}
@@ -143,7 +177,7 @@
 
           {# Character counter #}
           {% if inputData.maxLength %}
-            <div id="{{ inputId }}-count" class="{{ counterClasses }}">
+            <div id="{{ inputId }}-count" class="{{ counterClasses }}" aria-live="polite">
               0/{{ inputData.maxLength }}
             </div>
           {% endif %}
