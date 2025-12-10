@@ -1,0 +1,55 @@
+---
+title: Architecture Decision Records
+description: Index of all architectural decisions for HAT Design System
+type: documentation
+created: 2025-12-10
+tags: [adr, architecture, decisions]
+---
+
+**Version**: 1.0.0  
+**Last Updated**: December 2025  
+**Maintained by**: Charlotte Carpentier
+
+## About ADR
+
+Architecture Decision Records (ADR) document important architectural choices made in the HAT Design System. Each record captures the context, decision, and consequences of a specific choice.
+
+ADR helps maintain clarity on why certain design patterns or technical approaches were chosen, making it easier for current and future team members to understand the system's evolution.
+
+---
+
+## Decision Records
+
+| ID | Title | Status | Date |
+|----|-------|--------|------|
+| [001](./001-multiselect-exclusion.md) | Multiselect Exclusion | Accepted | 2025-12-10 |
+
+---
+
+## Statuses
+
+- **Proposed**: Decision under discussion
+- **Accepted**: Decision validated and implemented
+- **Deprecated**: Decision no longer recommended but still in use
+- **Superseded**: Decision replaced by a newer ADR
+
+---
+
+## Creating New ADR
+
+1. Copy `template.md` to new file: `00X-decision-name.md`
+2. Fill in all sections with relevant information
+3. Update this README with new entry
+4. Commit with message: `docs: Add ADR-00X [decision-name]`
+
+---
+
+## References
+
+- [Michael Nygard - Documenting Architecture Decisions](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
+- [ADR GitHub Organization](https://adr.github.io/)
+- [Gov.UK Design System Decisions](https://design-system.service.gov.uk/)
+
+---
+
+May your bugs be forever exiled to the shadow realm

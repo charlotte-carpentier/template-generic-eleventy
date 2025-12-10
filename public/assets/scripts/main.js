@@ -16,7 +16,6 @@
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 // Atoms
-import { initTooltip } from './components/01-atoms/tooltip.js';
 import { initInput } from './components/01-atoms/input.js';
 import { initErrorLinks } from './components/01-atoms/error-link.js';
 
@@ -47,7 +46,7 @@ const COMPONENT_SELECTORS = {
   TOOLTIP: '[data-tooltip][aria-describedby]',
   INPUT: '[data-input-type="input"]',
   ERROR_LINK: '[data-error-link]',
-  
+
   // Molecules
   CAPTION: '.caption-container',
   MODAL: '[data-modal]',
@@ -57,7 +56,7 @@ const COMPONENT_SELECTORS = {
   SEGMENTED_CONTROL: '[data-segmented-control]',
   SLIDER: '[data-slider]',
   STEPPER: '[data-stepper]',
-  
+
   // Organisms
   TAB_SECTIONS: '.tab-section-item',
   ERROR_FRAGMENTS: '[data-fragment-clickable]',
@@ -77,72 +76,72 @@ const COMPONENT_SELECTORS = {
  * @returns {void}
  */
 function initComponents() {
-  // Atoms  
+  // Atoms
   if (document.querySelector(COMPONENT_SELECTORS.TOOLTIP)) {
     initTooltip();
   }
-  
+
   if (document.querySelector(COMPONENT_SELECTORS.INPUT)) {
     initInput();
   }
-  
+
   if (document.querySelector(COMPONENT_SELECTORS.ERROR_LINK)) {
     initErrorLinks();
   }
-  
+
   // Molecules
   if (document.querySelector(COMPONENT_SELECTORS.CAPTION)) {
     initTooltips();
   }
-  
+
   if (document.querySelector(COMPONENT_SELECTORS.MODAL)) {
     initModal();
   }
-  
+
   if (document.querySelector(COMPONENT_SELECTORS.DRAG_DROP)) {
     initBlockDragAndDrop();
   }
-  
+
   if (document.querySelector(COMPONENT_SELECTORS.PAGINATION)) {
     initPagination();
   }
-  
+
   if (document.querySelector(COMPONENT_SELECTORS.PANEL)) {
     initPanel();
   }
-  
+
   if (document.querySelector(COMPONENT_SELECTORS.SEGMENTED_CONTROL)) {
     initSegmentedControl();
   }
-  
+
   if (document.querySelector(COMPONENT_SELECTORS.SLIDER)) {
     initSlider();
   }
-  
+
   if (document.querySelector(COMPONENT_SELECTORS.STEPPER)) {
     initStepper();
   }
-  
+
   // Toast system (always initialize - can be called programmatically)
   initToast();
-  
+
   // Organisms
   if (document.querySelector(COMPONENT_SELECTORS.MOBILE_MENU)) {
     initMobileMenu();
   }
-  
+
   if (document.querySelector(COMPONENT_SELECTORS.HEADER)) {
     initContactActiveState();
   }
-  
+
   if (document.querySelector(COMPONENT_SELECTORS.TAB_SECTIONS)) {
     initTabBar();
   }
-  
+
   if (document.querySelector(COMPONENT_SELECTORS.ERROR_FRAGMENTS)) {
     initErrorFragmentGroup();
   }
-  
+
   if (document.querySelector(COMPONENT_SELECTORS.ERROR_LAYOUT)) {
     initErrorLayout();
     initAccessibilityToggle();
@@ -161,7 +160,7 @@ function initComponents() {
 function initSite() {
   // Initialize all components conditionally
   initComponents();
-  
+
   // TODO: Add global initialization code here
   // - Feature detection (Intersection Observer, etc.)
   // - Global event delegation patterns

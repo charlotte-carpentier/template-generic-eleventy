@@ -11,13 +11,21 @@
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/tooltip.njk" import renderTooltip %}
 
+    1. Add aria-describedby on trigger element
+    <button aria-describedby="tooltip-demoTooltip1">
+      Help
+    </button>
+
+    2. Render tooltip atom
     {{ renderTooltip({
         name: "demoTooltip1",
         datas: atoms.tooltip.tooltips
     }) }}
 
-  Note: Triggers use data-tooltip-id attribute to reference tooltips.
-  JavaScript handles positioning and display logic.
+  Note:
+    - Triggers MUST have aria-describedby="tooltip-{name}"
+    - JavaScript service (utils/tooltip.js) auto-detects all [aria-describedby^="tooltip-"]
+    - No manual init needed in components
 
   @created 2025-01-15
 #}
@@ -55,7 +63,6 @@
       {# --------------------------
           3.1 Tooltip Container Classes
           Description: Positioning, spacing, typography, colors, effects, borders
-          => TODO = Add "hidden" for js implentation ?
       -------------------------- #}
       {% set tooltipClasses = "hidden absolute p-[var(--spacing-inset-small)] bg-[var(--color-global-white)] text-[var(--color-global-default)] shadow-[var(--elevation-floating)] rounded-[var(--radius-default)] min-w-[280px] max-w-xs z-[var(--z-tooltip)]" %}
 
@@ -84,8 +91,6 @@
         id="{{ tooltipId }}"
         role="tooltip"
         class="{{ tooltipClasses }}"
-        data-tooltip-name="{{ tooltipData.name }}"
-        data-tooltip-type="tooltip"
       >
         {% if tooltipData.title %}
           <div class="{{ titleClasses }}">{{ tooltipData.title }}</div>
@@ -112,8 +117,8 @@
 {% endmacro %}
 
 {#
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
 HAT · 2025
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

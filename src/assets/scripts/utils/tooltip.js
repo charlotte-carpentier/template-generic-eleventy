@@ -1,14 +1,55 @@
 /* ┌─────────────────────────────────────────────────────────┐
-   │ ATOM › Tooltip                                          │
-   │ Simple tooltip with hover/focus interactions            │
-   │ Path: src/assets/scripts/components/01-atoms/           │
+   │ UTILITY › Tooltip Service                               │
+   │ Auto-init tooltip behavior for all triggers             │
+   │ Path: src/assets/scripts/utils/                         │
    └─────────────────────────────────────────────────────────┘ */
 
 /**
- * @fileoverview Basic tooltip functionality for atoms
- * @module atoms/tooltip
+ * TODO - Phase 6 - Modernisation JavaScript
+ *
+ * WCAG 2.2 AA Requirements (1.4.13 Content on Hover or Focus):
+ * 1. Dismissible: Close with Escape key without losing focus
+ * 2. Hoverable: Tooltip stays visible when hovering tooltip itself
+ * 3. Persistent: Doesn't disappear automatically
+ *
+ * Architecture decisions:
+ * - Portal pattern: Move tooltips to document.body (avoids z-index/overflow issues)
+ * - Fixed positioning: JavaScript-driven (vs CSS adjacent sibling)
+ * - Auto-detection: Finds all [aria-describedby^="tooltip-"] triggers
+ * - Global service: Single init, no per-component setup needed
+ *
+ * Implementation checklist:
+ * - [x] Fix selector: TRIGGER_SELECTOR: '[aria-describedby^="tooltip-"]'
+ * - [ ] Portal: appendChild(tooltip) to document.body on show
+ * - [ ] Show/hide with delay (200ms show, 100ms hide)
+ * - [ ] Escape key dismiss without losing focus
+ * - [ ] Hover persistence on tooltip element itself
+ * - [ ] Auto-positioning: top/right/bottom/left based on viewport space
+ * - [ ] Hide on scroll/resize events
+ * - [ ] Collision detection with viewport edges
+ * - [ ] Modern ES6+: const/let, arrow functions, template literals, Map/Set
+ *
+ * Pattern HAT usage:
+ * Trigger component: <button aria-describedby="tooltip-{name}">Help</button>
+ * Tooltip atom: <div id="tooltip-{name}" role="tooltip">Info text</div>
+ *
+ * Service auto-detects all triggers on DOMContentLoaded, no manual init needed.
+ *
+ * Portal pattern rationale:
+ * - Tooltips moved to document.body avoid z-index conflicts with parent stacking contexts
+ * - Prevents overflow:hidden parent containers from clipping tooltip visibility
+ * - Simplifies positioning calculations (always relative to viewport, not parents)
+ * - Best practice 2025: Radix UI, Floating UI, all modern libraries use portals
+ *
+ * References:
+ * - W3C ARIA APG Tooltip Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
+ * - WCAG 2.2 (1.4.13): https://www.w3.org/WAI/WCAG22/Understanding/content-on-hover-or-focus
+ * - MDN aria-describedby: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby
+ * - Radix UI Tooltip (reference implementation): https://www.radix-ui.com/primitives/docs/components/tooltip
+ *
  * @created 2025-01-15
- * @updated 2025-10-30
+ * @fileoverview WCAG 2.2 AA compliant tooltip service with portal pattern
+ * @module utils/tooltip
  */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
