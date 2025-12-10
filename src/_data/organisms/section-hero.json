@@ -6,7 +6,7 @@
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  "sectHeroes": [
+  "sectHeros": [
     {
       "name": "demoSectH1",
       "mainHeadingName": "demoLong1",
