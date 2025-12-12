@@ -28,7 +28,7 @@ import { initToast } from './components/02-molecules/toast.js';
 
 // Organisms
 import { initMobileMenu } from './components/03-organisms/header.js';
-import { initModal } from './components/03-organisms/modal.js';
+import { initModal, openModal } from './components/03-organisms/modal.js';
 import { initErrorFragmentGroup } from './components/03-organisms/error-fragment-group.js';
 import { initErrorLayout, initAccessibilityToggle } from './components/03-organisms/error-layout.js';
 import { initTabBar } from './components/03-organisms/tab-bar.js';
@@ -46,7 +46,7 @@ const COMPONENT_SELECTORS = {
 
   // Molecules
   CAPTION: '.caption-container',
-  MODAL: '[data-modal]',
+  MODAL: '[data-modal-type="modal"]',
   DRAG_DROP: '[data-drag-drop]',
   PAGINATION: '[data-pagination]',
   PANEL: '[data-panel-type]',
@@ -93,6 +93,7 @@ function initComponents() {
 
   if (document.querySelector(COMPONENT_SELECTORS.MODAL)) {
     initModal();
+    initModalTriggers();
   }
 
   if (document.querySelector(COMPONENT_SELECTORS.DRAG_DROP)) {
@@ -143,6 +144,29 @@ function initComponents() {
     initErrorLayout();
     initAccessibilityToggle();
   }
+}
+
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Modal Triggers
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Initialize modal trigger buttons
+ * @returns {void}
+ */
+function initModalTriggers() {
+  const openBtn = document.getElementById('open-modal-btn');
+
+  if (openBtn) {
+    openBtn.addEventListener('click', () => {
+      openModal('demoModal1'); // String ID works now
+    });
+  }
+
+  document.addEventListener('modal-primary-action', (e) => {
+    console.log('Modal primary action:', e.detail.modalName);
+  });
 }
 
 

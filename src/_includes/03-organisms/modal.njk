@@ -1,6 +1,6 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ORGANISM › Modal                                        │
-   │ Dialog modal with backdrop and action buttons           │
+   │ Native HTML5 dialog with backdrop and action buttons    │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
@@ -21,6 +21,7 @@
     }) }}
 
   @created 2025-01-15
+  @updated 2025-12-12 (HTML5 dialog native)
 #}
 
 {% macro renderModal(options) %}
@@ -52,55 +53,45 @@
       {% set content = modalData.content | default('') %}
       {% set primaryButton = modalData.primaryButton | default('') %}
       {% set secondaryButton = modalData.secondaryButton | default('') %}
-      {% set hasBackdrop = modalData.backdrop | default(true) %}
       {% set ariaLabel = modalData.ariaLabel | default('Modal dialog') %}
       {% set ariaDescribedBy = modalData.ariaDescribedBy | default('') %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
-        3.1 Backdrop Classes
-        3.2 Dialog Classes
-        3.3 Wrapper Classes
-        3.4 Header Classes
-        3.5 Content Classes
-        3.6 Footer Classes
+        3.1 Dialog Classes
+        3.2 Wrapper Classes
+        3.3 Header Classes
+        3.4 Content Classes
+        3.5 Footer Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
-          3.1 Backdrop Classes
-          Description: Layout fixed fullscreen, Background semi-transparent, Z-index, States
-          TODO: Remove [div[data-modal-demo]_&] selectors when JS is implemented
+          3.1 Dialog Classes
+          Description: Layout, Background, Shadow, Borders, Sizing, Positioning, Backdrop
         --------------------------#}
-      {% set backdropClasses = "hidden [div[data-modal-demo]_&]:block [div[data-modal-demo]_&]:absolute fixed inset-0 bg-black/50 z-[var(--z-modal-backdrop)]" %}
+      {% set dialogClasses = "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 m-0 w-full max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-modal)] shadow-[var(--elevation-floating)] mx-[var(--spacing-inset-small)] p-0 border-none backdrop:bg-black/50" %}
 
       {# --------------------------
-          3.2 Dialog Classes
-          Description: Layout fixed centered, Background, Shadow, Borders, Z-index, Sizing, States
-          TODO: Remove [div[data-modal-demo]_&] selectors when JS is implemented
-        --------------------------#}
-      {% set dialogClasses = "hidden [div[data-modal-demo]_&]:block [div[data-modal-demo]_&]:absolute fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-modal)] shadow-[var(--elevation-floating)] z-[var(--z-modal)] mx-[var(--spacing-inset-small)]" %}
-
-      {# --------------------------
-          3.3 Wrapper Classes
+          3.2 Wrapper Classes
           Description: Layout, Spacing
         --------------------------#}
       {% set containerClasses = "flex flex-col p-[var(--spacing-inset-large)]" %}
 
       {# --------------------------
-          3.4 Header Classes
+          3.3 Header Classes
           Description: Layout, Spacing bottom
         --------------------------#}
       {% set headerClasses = "flex mb-[var(--spacing-stack-medium)]" %}
 
       {# --------------------------
-          3.5 Content Classes
+          3.4 Content Classes
           Description: Typography, Colors, Spacing bottom
         --------------------------#}
       {% set contentClasses = "typography-body-regular text-[var(--color-global-default)] mb-[var(--spacing-stack-large)]" %}
 
       {# --------------------------
-          3.6 Footer Classes
+          3.5 Footer Classes
           Description: Layout horizontal, Spacing
         --------------------------#}
       {% set footerClasses = "flex gap-[var(--spacing-inline-medium)]" %}
@@ -109,20 +100,10 @@
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-      {# Backdrop overlay #}
-      {% if hasBackdrop %}
-        <div
-          class="{{ backdropClasses }}"
-          data-modal-backdrop
-          aria-hidden="true"
-        ></div>
-      {% endif %}
-
-      {# Modal dialog #}
-      <div
+      {# Native HTML5 dialog element #}
+      <dialog
         class="{{ dialogClasses }}"
-        role="dialog"
-        aria-modal="true"
+        id="{{ modalName }}"
         aria-label="{{ ariaLabel }}"
         {% if ariaDescribedBy %}aria-describedby="{{ ariaDescribedBy }}"{% endif %}
         data-modal-name="{{ modalName }}"
@@ -186,7 +167,7 @@
 
         </div>
 
-      </div>
+      </dialog>
     {% endif %}
   {% endif %}
 {% endmacro %}
