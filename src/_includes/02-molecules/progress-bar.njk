@@ -16,6 +16,10 @@
         datas: molecules["progress-bar"].progressBars
     }) }}
 
+  JavaScript Requirements:
+    - No JavaScript required (static presentation with native HTML5 <progress>)
+    - Optional: animate.js utility for fill animations (reusable across loaders, skill bars)
+
   @created 2025-01-15
 #}
 
@@ -46,8 +50,6 @@
       {% set minValue = progressData.min | default(0) %}
       {% set maxValue = progressData.max | default(100) %}
       {% set showLabels = progressData.showLabels | default(false) %}
-      {% set showPercentage = progressData.showPercentage | default(false) %}
-      {# TODO: showPercentage will be used for dynamic percentage display when JS is implemented #}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes

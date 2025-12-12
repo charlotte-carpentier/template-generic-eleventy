@@ -20,7 +20,13 @@
         iconDatas: atoms.icon.icons
     }) }}
 
+  JavaScript Requirements:
+    - Type "default": TODO dismiss.js utility (click outside, ESC key)
+    - Type "date": panel.js molecule (generates labels, calendars, navigation)
+    - Type "list-item": No JavaScript required (static presentation)
+
   @created 2025-01-15
+  @updated 2025-01-18 (Phase 6 - Dynamic rendering with classes from Nunjucks)
 #}
 
 {% from "01-atoms/checkbox.njk" import renderCheckbox %}
@@ -51,7 +57,6 @@
       {% set panelType = panelData.type | default('default') %}
       {% set variant = panelData.variant | default('simple') %}
       {% set items = panelData.items | default([]) %}
-      {% set dateRange = panelData.dateRange | default({}) %}
       {% set navigation = panelData.navigation | default({}) %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -63,8 +68,9 @@
         3.4 Text Classes
         3.5 Code Classes
         3.6 Date Navigation Classes
-        3.7 Calendar Classes
+        3.7 Calendar Classes (for JS dynamic generation)
         3.8 Month Labels Wrapper Classes
+        3.9 Calendars Wrapper Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -105,30 +111,40 @@
       {% set dateNavClasses = "flex items-center justify-between px-[var(--spacing-inline-medium)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)]" %}
       {% set dateNavButtonBaseClasses = "inline-flex items-center justify-center w-8 h-8 bg-transparent border-0 rounded-[var(--radius-default)] cursor-pointer" %}
       {% set dateNavButtonStateClasses = "text-[var(--color-interactive-default)] transition-colors hover:bg-[var(--color-global-contrast-light-04)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]" %}
-      {% set dateMonthClasses = "typography-body-semibold text-[var(--color-global-default)]" %}
 
       {# --------------------------
           3.7 Calendar Classes
-          Description: Calendar grid layout
+          Description: Passed to panel.js via data-class-* attributes
         --------------------------#}
       {% set calendarClasses = "p-[var(--spacing-inset-small)]" %}
       {% set calendarHeaderClasses = "grid grid-cols-7 gap-1 mb-2" %}
       {% set calendarDayHeaderClasses = "text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2" %}
       {% set calendarGridClasses = "grid grid-cols-7 gap-1" %}
-      {% set calendarDateBaseClasses = "flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer" %}
-      {% set calendarDateStateClasses = "text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]" %}
-      {% set calendarDateSelectedClasses = "bg-[var(--color-interactive-default)] text-[var(--color-global-white)] hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]" %}
+      {% set calendarDateCurrentClasses = "flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]" %}
       {% set calendarDateOutsideClasses = "flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default" %}
+      {% set calendarDateSelectedClasses = "bg-[var(--color-interactive-default)] text-[var(--color-global-white)] hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]" %}
 
       {# --------------------------
-          3.8 Month Labels Wrapper Classes
-          Description: Layout, Spacing
+          3.8 Month Label Classes
+          Description: Typography for month labels
         --------------------------#}
       {% set monthLabelsWrapperClasses = "flex gap-60 flex-1 justify-center" %}
+      {% set monthLabelClasses = "typography-body-semibold text-[var(--color-global-default)]" %}
+
+      {# --------------------------
+          3.9 Calendars Wrapper Classes
+          Description: Single vs double calendar layout
+        --------------------------#}
+      {% if variant == 'double' %}
+        {% set calendarsWrapperClasses = "flex gap-[var(--spacing-inset-small)]" %}
+      {% else %}
+        {% set calendarsWrapperClasses = "" %}
+      {% endif %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {# TODO: Type "default" requires dismiss.js utility (close on click outside, ESC key) #}
       <div
         class="{{ containerClasses }}"
         data-panel-name="{{ panelName }}"
@@ -146,7 +162,7 @@
               role="option"
               tabindex="0"
             >
-              {# Checkbox variant - checkbox gère son propre label #}
+              {# Checkbox handles own label #}
               {% if item.checkboxName and options.checkboxDatas %}
                 {{ renderCheckbox({
                     id: item.checkboxName,
@@ -178,7 +194,7 @@
             </div>
           {% endfor %}
 
-        {# Date type panels #}
+        {# Date type panels - Dynamically rendered by panel.js #}
         {% elif panelType == "date" %}
           {# Navigation #}
           {% if navigation %}
@@ -195,21 +211,12 @@
                 }) }}
               </button>
 
-              {# Month labels centered #}
-              <div class="{{ monthLabelsWrapperClasses }}">
-                {% if dateRange.month %}
-                  <span class="{{ dateMonthClasses }}" data-panel-month="true">
-                    {{ dateRange.month }}
-                  </span>
-                {% elif dateRange.startMonth %}
-                  <span class="{{ dateMonthClasses }}" data-panel-month="true">
-                    {{ dateRange.startMonth }}
-                  </span>
-                  <span class="{{ dateMonthClasses }}" data-panel-month="true">
-                    {{ dateRange.endMonth }}
-                  </span>
-                {% endif %}
-              </div>
+              {# Month labels - Generated dynamically by panel.js #}
+              <div
+                class="{{ monthLabelsWrapperClasses }}"
+                data-panel-month-wrapper="true"
+                data-class-month-label="{{ monthLabelClasses }}"
+              ></div>
 
               <button
                 type="button"
@@ -225,116 +232,20 @@
             </div>
           {% endif %}
 
-          {# Calendar grid(s) #}
-          <div class="{% if variant == 'double' %}flex gap-[var(--spacing-inset-small)]{% endif %}">
-            {# First calendar - November 2025 #}
-            <div
-              class="{{ calendarClasses }}"
-              data-panel-calendar="true"
-            >
-              {# Days header #}
-              <div class="{{ calendarHeaderClasses }}">
-                <div class="{{ calendarDayHeaderClasses }}">SU</div>
-                <div class="{{ calendarDayHeaderClasses }}">MO</div>
-                <div class="{{ calendarDayHeaderClasses }}">TU</div>
-                <div class="{{ calendarDayHeaderClasses }}">WE</div>
-                <div class="{{ calendarDayHeaderClasses }}">TH</div>
-                <div class="{{ calendarDayHeaderClasses }}">FR</div>
-                <div class="{{ calendarDayHeaderClasses }}">SA</div>
-              </div>
+          {# Calendars container - Populated by panel.js #}
+          <div
+            class="{{ calendarsWrapperClasses }}"
+            data-panel-calendars="true"
+            data-class-calendar="{{ calendarClasses }}"
+            data-class-header="{{ calendarHeaderClasses }}"
+            data-class-day-header="{{ calendarDayHeaderClasses }}"
+            data-class-grid="{{ calendarGridClasses }}"
+            data-class-date-current="{{ calendarDateCurrentClasses }}"
+            data-class-date-outside="{{ calendarDateOutsideClasses }}"
+            data-class-date-selected="{{ calendarDateSelectedClasses }}"
+          ></div>
 
-              {# Dates grid - November 2025 starts on Saturday #}
-              <div class="{{ calendarGridClasses }}">
-                {# Previous month days (October 26-31) #}
-                {% for day in range(26, 32) %}
-                  <button
-                    type="button"
-                    class="{{ calendarDateOutsideClasses }}"
-                    data-panel-date="prev-{{ day }}"
-                  >
-                    {{ day }}
-                  </button>
-                {% endfor %}
-
-                {# Current month days (November 1-30) #}
-                {% for day in range(1, 31) %}
-                  <button
-                    type="button"
-                    class="{{ calendarDateBaseClasses }} {{ calendarDateStateClasses }} {% if day == 27 %}{{ calendarDateSelectedClasses }}{% endif %}"
-                    data-panel-date="{{ day }}"
-                  >
-                    {{ day }}
-                  </button>
-                {% endfor %}
-
-                {# Next month days (December 1-6) to complete grid #}
-                {% for day in range(1, 7) %}
-                  <button
-                    type="button"
-                    class="{{ calendarDateOutsideClasses }}"
-                    data-panel-date="next-{{ day }}"
-                  >
-                    {{ day }}
-                  </button>
-                {% endfor %}
-              </div>
-            </div>
-
-            {# Second calendar - December 2025 (only for double variant) #}
-            {% if variant == 'double' %}
-              <div
-                class="{{ calendarClasses }}"
-                data-panel-calendar="true"
-              >
-                {# Days header #}
-                <div class="{{ calendarHeaderClasses }}">
-                  <div class="{{ calendarDayHeaderClasses }}">SU</div>
-                  <div class="{{ calendarDayHeaderClasses }}">MO</div>
-                  <div class="{{ calendarDayHeaderClasses }}">TU</div>
-                  <div class="{{ calendarDayHeaderClasses }}">WE</div>
-                  <div class="{{ calendarDayHeaderClasses }}">TH</div>
-                  <div class="{{ calendarDayHeaderClasses }}">FR</div>
-                  <div class="{{ calendarDayHeaderClasses }}">SA</div>
-                </div>
-
-                {# Dates grid - December 2025 starts on Monday #}
-                <div class="{{ calendarGridClasses }}">
-                  {# Previous month day (November 30) #}
-                  <button
-                    type="button"
-                    class="{{ calendarDateOutsideClasses }}"
-                    data-panel-date="prev-30"
-                  >
-                    30
-                  </button>
-
-                  {# Current month days (December 1-31) #}
-                  {% for day in range(1, 32) %}
-                    <button
-                      type="button"
-                      class="{{ calendarDateBaseClasses }} {{ calendarDateStateClasses }} {% if day == 5 %}{{ calendarDateSelectedClasses }}{% endif %}"
-                      data-panel-date="{{ day }}"
-                    >
-                      {{ day }}
-                    </button>
-                  {% endfor %}
-
-                  {# Next month days (January 1-3) to complete grid #}
-                  {% for day in range(1, 4) %}
-                    <button
-                      type="button"
-                      class="{{ calendarDateOutsideClasses }}"
-                      data-panel-date="next-{{ day }}"
-                    >
-                      {{ day }}
-                    </button>
-                  {% endfor %}
-                </div>
-              </div>
-            {% endif %}
-          </div>
-
-        {# List-item type panels #}
+        {# List-item type panels - No JavaScript required #}
         {% elif panelType == "list-item" %}
           {% for item in items %}
             <div

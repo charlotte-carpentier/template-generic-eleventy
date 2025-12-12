@@ -61,6 +61,8 @@
       {% set hasOverlay = headerData.mobile.overlay | default(false) %}
       {% set ariaLabel = headerData.ariaLabel | default('Site header') %}
 
+      {# TODO: active-link.js utility for tracking one-page navigation active state #}
+
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
@@ -70,11 +72,10 @@
         3.4 Desktop Navigation Classes
         3.5 Mobile Branding Classes
         3.6 Mobile Burger Button Classes
-        3.7 Mobile Burger Icon Classes
-        3.8 Mobile Overlay Classes
-        3.9 Mobile Overlay Content Classes
-        3.10 Mobile Overlay Branding Classes
-        3.11 Mobile Navigation Classes
+        3.7 Mobile Overlay Classes
+        3.8 Mobile Overlay Content Classes
+        3.9 Mobile Overlay Branding Classes
+        3.10 Mobile Navigation Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -114,32 +115,25 @@
       {% set burgerClasses = "flex items-center justify-center p-[var(--spacing-inset-small)] bg-transparent border-none cursor-pointer transition-colors hover:bg-[var(--color-global-contrast-light-04)] focus:outline focus:outline-2 focus:outline-[var(--color-semantic-information-focus)] rounded-[var(--radius-default)] md:hidden" %}
 
       {# --------------------------
-          3.7 Mobile Burger Icon Classes
-          Description: States visibility (open: visible by default / close: hidden by default, visible when expanded)
+          3.7 Mobile Overlay Classes
+          Description: Layout fixed fullscreen, Background, Z-index, Responsive
         --------------------------#}
-      {% set burgerOpenClasses = "flex" %}
-      {% set burgerCloseClasses = "hidden" %}
+      {% set overlayClasses = "hidden fixed inset-0 z-50 bg-[var(--color-global-white)] top-[87px] max-sm:top-[75px] md:hidden" %}
 
       {# --------------------------
-          3.8 Mobile Overlay Classes
-          Description: Layout fixed fullscreen, Background, Z-index, States (hidden by default)
-        --------------------------#}
-      {% set overlayClasses = "hidden fixed inset-0 z-[var(--z-modal)] bg-[var(--color-global-white)] md:hidden" %}
-
-      {# --------------------------
-          3.9 Mobile Overlay Content Classes
+          3.8 Mobile Overlay Content Classes
           Description: Layout, Spacing
         --------------------------#}
       {% set overlayContentClasses = "flex flex-col gap-[var(--spacing-stack-large)] p-[var(--spacing-inset-large)]" %}
 
       {# --------------------------
-          3.10 Mobile Overlay Branding Classes
+          3.9 Mobile Overlay Branding Classes
           Description: Layout
         --------------------------#}
       {% set mobileBrandingOverlayClasses = "flex" %}
 
       {# --------------------------
-          3.11 Mobile Navigation Classes
+          3.10 Mobile Navigation Classes
           Description: Layout vertical override, Tab-bar override for vertical
         --------------------------#}
       {% set mobileNavClasses = "[&_ul]:flex-col [&_li]:w-full" %}
@@ -204,22 +198,16 @@
             aria-controls="mobile-overlay"
             data-header-burger
           >
-            {# Burger open icon #}
-            <span
-              class="{{ burgerOpenClasses }}"
-              data-burger-icon="open"
-            >
+            {# Burger open icon - visible by default #}
+            <span data-burger-icon="open">
               {{ renderIcon({
                   name: burgerOpenIcon,
                   datas: options.iconDatas
               }) }}
             </span>
 
-            {# Burger close icon #}
-            <span
-              class="{{ burgerCloseClasses }}"
-              data-burger-icon="close"
-            >
+            {# Burger close icon - hidden by default #}
+            <span class="hidden" data-burger-icon="close">
               {{ renderIcon({
                   name: burgerCloseIcon,
                   datas: options.iconDatas
@@ -235,7 +223,6 @@
             class="{{ overlayClasses }}"
             id="mobile-overlay"
             data-header-overlay
-            aria-hidden="true"
           >
             <div
               class="{{ overlayContentClasses }}"

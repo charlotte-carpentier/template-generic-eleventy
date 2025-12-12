@@ -6992,7 +6992,7 @@
       
       
 
-      
+   
 
       
 
@@ -7539,7 +7539,6 @@
       
       
       
-      
 
       
 
@@ -7557,7 +7556,6 @@
       
       
       
-      
 
       
       
@@ -7566,10 +7564,15 @@
       
       
       
+
+      
       
 
       
+        
+      
 
+      
       
       <div
         class="flex flex-col bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] shadow-md p-[var(--spacing-inset-tight)]"
@@ -7638,16 +7641,11 @@
               </button>
 
               
-              <div class="flex gap-60 flex-1 justify-center">
-                
-                  <span class="typography-body-semibold text-[var(--color-global-default)]" data-panel-month="true">
-                    November 2025
-                  </span>
-                  <span class="typography-body-semibold text-[var(--color-global-default)]" data-panel-month="true">
-                    December 2025
-                  </span>
-                
-              </div>
+              <div
+                class="flex gap-60 flex-1 justify-center"
+                data-panel-month-wrapper="true"
+                data-class-month-label="typography-body-semibold text-[var(--color-global-default)]"
+              ></div>
 
               <button
                 type="button"
@@ -7705,681 +7703,17 @@
           
 
           
-          <div class="flex gap-[var(--spacing-inset-small)]">
-            
-            <div
-              class="p-[var(--spacing-inset-small)]"
-              data-panel-calendar="true"
-            >
-              
-              <div class="grid grid-cols-7 gap-1 mb-2">
-                <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">SU</div>
-                <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">MO</div>
-                <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">TU</div>
-                <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">WE</div>
-                <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">TH</div>
-                <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">FR</div>
-                <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">SA</div>
-              </div>
-
-              
-              <div class="grid grid-cols-7 gap-1">
-                
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                    data-panel-date="prev-26"
-                  >
-                    26
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                    data-panel-date="prev-27"
-                  >
-                    27
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                    data-panel-date="prev-28"
-                  >
-                    28
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                    data-panel-date="prev-29"
-                  >
-                    29
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                    data-panel-date="prev-30"
-                  >
-                    30
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                    data-panel-date="prev-31"
-                  >
-                    31
-                  </button>
-                
-
-                
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="1"
-                  >
-                    1
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="2"
-                  >
-                    2
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="3"
-                  >
-                    3
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="4"
-                  >
-                    4
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="5"
-                  >
-                    5
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="6"
-                  >
-                    6
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="7"
-                  >
-                    7
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="8"
-                  >
-                    8
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="9"
-                  >
-                    9
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="10"
-                  >
-                    10
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="11"
-                  >
-                    11
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="12"
-                  >
-                    12
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="13"
-                  >
-                    13
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="14"
-                  >
-                    14
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="15"
-                  >
-                    15
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="16"
-                  >
-                    16
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="17"
-                  >
-                    17
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="18"
-                  >
-                    18
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="19"
-                  >
-                    19
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="20"
-                  >
-                    20
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="21"
-                  >
-                    21
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="22"
-                  >
-                    22
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="23"
-                  >
-                    23
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="24"
-                  >
-                    24
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="25"
-                  >
-                    25
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="26"
-                  >
-                    26
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] bg-[var(--color-interactive-default)] text-[var(--color-global-white)] hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]"
-                    data-panel-date="27"
-                  >
-                    27
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="28"
-                  >
-                    28
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="29"
-                  >
-                    29
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                    data-panel-date="30"
-                  >
-                    30
-                  </button>
-                
-
-                
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                    data-panel-date="next-1"
-                  >
-                    1
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                    data-panel-date="next-2"
-                  >
-                    2
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                    data-panel-date="next-3"
-                  >
-                    3
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                    data-panel-date="next-4"
-                  >
-                    4
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                    data-panel-date="next-5"
-                  >
-                    5
-                  </button>
-                
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                    data-panel-date="next-6"
-                  >
-                    6
-                  </button>
-                
-              </div>
-            </div>
-
-            
-            
-              <div
-                class="p-[var(--spacing-inset-small)]"
-                data-panel-calendar="true"
-              >
-                
-                <div class="grid grid-cols-7 gap-1 mb-2">
-                  <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">SU</div>
-                  <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">MO</div>
-                  <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">TU</div>
-                  <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">WE</div>
-                  <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">TH</div>
-                  <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">FR</div>
-                  <div class="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2">SA</div>
-                </div>
-
-                
-                <div class="grid grid-cols-7 gap-1">
-                  
-                  <button
-                    type="button"
-                    class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                    data-panel-date="prev-30"
-                  >
-                    30
-                  </button>
-
-                  
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="1"
-                    >
-                      1
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="2"
-                    >
-                      2
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="3"
-                    >
-                      3
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="4"
-                    >
-                      4
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] bg-[var(--color-interactive-default)] text-[var(--color-global-white)] hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]"
-                      data-panel-date="5"
-                    >
-                      5
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="6"
-                    >
-                      6
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="7"
-                    >
-                      7
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="8"
-                    >
-                      8
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="9"
-                    >
-                      9
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="10"
-                    >
-                      10
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="11"
-                    >
-                      11
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="12"
-                    >
-                      12
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="13"
-                    >
-                      13
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="14"
-                    >
-                      14
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="15"
-                    >
-                      15
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="16"
-                    >
-                      16
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="17"
-                    >
-                      17
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="18"
-                    >
-                      18
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="19"
-                    >
-                      19
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="20"
-                    >
-                      20
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="21"
-                    >
-                      21
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="22"
-                    >
-                      22
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="23"
-                    >
-                      23
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="24"
-                    >
-                      24
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="25"
-                    >
-                      25
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="26"
-                    >
-                      26
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="27"
-                    >
-                      27
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="28"
-                    >
-                      28
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="29"
-                    >
-                      29
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="30"
-                    >
-                      30
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] "
-                      data-panel-date="31"
-                    >
-                      31
-                    </button>
-                  
-
-                  
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                      data-panel-date="next-1"
-                    >
-                      1
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                      data-panel-date="next-2"
-                    >
-                      2
-                    </button>
-                  
-                    <button
-                      type="button"
-                      class="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
-                      data-panel-date="next-3"
-                    >
-                      3
-                    </button>
-                  
-                </div>
-              </div>
-            
-          </div>
+          <div
+            class="flex gap-[var(--spacing-inset-small)]"
+            data-panel-calendars="true"
+            data-class-calendar="p-[var(--spacing-inset-small)]"
+            data-class-header="grid grid-cols-7 gap-1 mb-2"
+            data-class-day-header="text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2"
+            data-class-grid="grid grid-cols-7 gap-1"
+            data-class-date-current="flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]"
+            data-class-date-outside="flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default"
+            data-class-date-selected="bg-[var(--color-interactive-default)] text-[var(--color-global-white)] hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]"
+          ></div>
 
         
         
@@ -8402,8 +7736,6 @@
     
     
 
-      
-      
       
       
       
@@ -10641,16 +9973,10 @@
       
       
       
-      
-      
-      
 
       
       
-      
-      
-
-      
+        
         
       
 
@@ -10681,8 +10007,15 @@
       
       <div
         class="flex flex-col gap-[var(--spacing-stack-tight)]"
-        data-slider-name="demoSlider1"
-        data-slider-type="single"
+        data-slider="true"
+        data-slider-name="demoRange1"
+        data-slider-type="range"
+        data-slider-min="0"
+        data-slider-max="20"
+        data-slider-step="1"
+        
+          data-slider-value-min="0"
+          data-slider-value-max="20"
         
       >
         
@@ -10691,7 +10024,7 @@
             class="typography-body-regular text-[var(--color-global-default)]"
             data-slider-label="true"
           >
-            Experience
+            Range
           </label>
         
 
@@ -10706,37 +10039,60 @@
             role="slider"
             aria-valuemin="0"
             aria-valuemax="20"
-            aria-valuenow="8"
             
           >
             
             <div
               class="absolute top-0 h-full bg-[var(--color-interactive-default)] rounded-full transition-all duration-300"
-              style="left: 0; width: 40%;"
               data-slider-fill="true"
             ></div>
 
             
             <div
-              class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 border-2 rounded-full cursor-pointer shadow-md bg-[var(--color-global-white)] border-[var(--color-interactive-default)] transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
-              style="left: 40%;"
+              class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 border-2 rounded-full cursor-grab active:cursor-grabbing shadow-md bg-[var(--color-global-white)] border-[var(--color-interactive-default)] transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
               data-slider-handle="true"
               data-slider-handle-index="0"
               tabindex="0"
+              role="slider"
+              aria-valuemin="0"
+              aria-valuemax="20"
+              
+                aria-valuenow="0"
+              
             >
               
               
                 <span
-                  class="absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-inline-medium)] py-[var(--spacing-inline-tight)] typography-body-small rounded-[var(--radius-default)] shadow-sm whitespace-nowrap text-[var(--color-global-default)] bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)]"
+                  class="absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-inline-medium)] py-[var(--spacing-inline-tight)] typography-body-small rounded-[var(--radius-default)] shadow-sm whitespace-nowrap text-[var(--color-global-white)] bg-[var(--color-interactive-default)]"
                   data-slider-indicator="true"
-                  data-slider-indicator-variant="outline"
                 >
-                  8
+                  0
                 </span>
               
             </div>
 
             
+            
+              <div
+                class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 border-2 rounded-full cursor-grab active:cursor-grabbing shadow-md bg-[var(--color-global-white)] border-[var(--color-interactive-default)] transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                data-slider-handle="true"
+                data-slider-handle-index="1"
+                tabindex="0"
+                role="slider"
+                aria-valuemin="0"
+                aria-valuemax="20"
+                aria-valuenow="20"
+              >
+                
+                
+                  <span
+                    class="absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-inline-medium)] py-[var(--spacing-inline-tight)] typography-body-small rounded-[var(--radius-default)] shadow-sm whitespace-nowrap text-[var(--color-global-white)] bg-[var(--color-interactive-default)]"
+                    data-slider-indicator="true"
+                  >
+                    20
+                  </span>
+                
+              </div>
             
           </div>
         </div>
@@ -10746,8 +10102,8 @@
           class="flex items-center justify-between"
           data-slider-labels="true"
         >
-          <span class="typography-body-small text-[var(--color-global-contrast-light-01)]" data-slider-min="true">0</span>
-          <span class="typography-body-small text-[var(--color-global-contrast-light-01)]" data-slider-max="true">20</span>
+          <span class="typography-body-small text-[var(--color-global-contrast-light-01)]" data-slider-min-label="true">0</span>
+          <span class="typography-body-small text-[var(--color-global-contrast-light-01)]" data-slider-max-label="true">20</span>
         </div>
       </div>
     
@@ -21372,7 +20728,7 @@
       
       
 
-      
+   
 
       
 
@@ -22499,7 +21855,6 @@
       
 
       
-      
 
       
 
@@ -22885,10 +22240,7 @@
             data-header-burger
           >
             
-            <span
-              class="flex"
-              data-burger-icon="open"
-            >
+            <span data-burger-icon="open">
               
 
   
@@ -22937,10 +22289,7 @@
             </span>
 
             
-            <span
-              class="hidden"
-              data-burger-icon="close"
-            >
+            <span class="hidden" data-burger-icon="close">
               
 
   
@@ -22994,10 +22343,9 @@
         
         
           <div
-            class="hidden fixed inset-0 z-[var(--z-modal)] bg-[var(--color-global-white)] md:hidden"
+            class="hidden fixed inset-0 z-50 bg-[var(--color-global-white)] top-[87px] max-sm:top-[75px] md:hidden"
             id="mobile-overlay"
             data-header-overlay
-            aria-hidden="true"
           >
             <div
               class="flex flex-col gap-[var(--spacing-stack-large)] p-[var(--spacing-inset-large)]"

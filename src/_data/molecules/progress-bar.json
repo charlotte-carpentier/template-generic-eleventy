@@ -1,13 +1,11 @@
 {
   "// Component": "Progress Bar - Visual progress indicators with labels and percentage",
-  
   "_meta": {
     "component": "progress-bar",
     "type": "molecule",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "progressBars": [
     {
       "name": "demoProgr1",
@@ -15,26 +13,23 @@
       "value": 25,
       "min": 0,
       "max": 100,
-      "showLabels": true,
-      "showPercentage": true
+      "showLabels": true
     },
     {
-      "name": "demoProgr2", 
+      "name": "demoProgr2",
       "label": "Label",
       "value": 50,
       "min": 0,
       "max": 100,
-      "showLabels": true,
-      "showPercentage": true
+      "showLabels": true
     },
     {
       "name": "demoProgr3",
-      "label": "Label", 
+      "label": "Label",
       "value": 75,
       "min": 0,
       "max": 100,
-      "showLabels": true,
-      "showPercentage": true
+      "showLabels": true
     },
     {
       "name": "demoProgr4",
@@ -42,8 +37,7 @@
       "value": 100,
       "min": 0,
       "max": 100,
-      "showLabels": true,
-      "showPercentage": true
+      "showLabels": true
     }
   ]
 }

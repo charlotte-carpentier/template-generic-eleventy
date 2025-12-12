@@ -1,213 +1,317 @@
 /* ┌─────────────────────────────────────────────────────────┐
    │ MOLECULE › Slider                                       │
-   │ Range input slider with visual feedback                 │
-   │ Path: src/assets/scripts/components/02-molecules/       │
+   │ Custom range slider with drag handles                   │
    └─────────────────────────────────────────────────────────┘ */
 
-/**
- * @fileoverview Range slider with live value display
- * @module molecules/slider
- * @created 2025-01-15
- */
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Configuration
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const CONFIG = {
-    SLIDER_SELECTOR: '[data-slider]',
-    INPUT_SELECTOR: '[data-slider-input]',
-    VALUE_SELECTOR: '[data-slider-value]',
-    TRACK_SELECTOR: '[data-slider-track]',
-    FILL_SELECTOR: '[data-slider-fill]'
+const SELECTORS = {
+  SLIDER: '[data-slider-name]',
+  TRACK: '[data-slider-track]',
+  FILL: '[data-slider-fill]',
+  HANDLE: '[data-slider-handle]',
+  INDICATOR: '[data-slider-indicator]'
+};
+
+const EVENTS = {
+  CHANGE: 'slider-change'
+};
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Core Functions
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Initialize all sliders
+ * @returns {void}
+ */
+export const initSlider = () => {
+  document.querySelectorAll(SELECTORS.SLIDER).forEach(setupSlider);
+};
+
+/**
+ * Setup single slider
+ * @param {HTMLElement} slider - Slider container
+ * @returns {void}
+ */
+const setupSlider = (slider) => {
+  const { sliderType: type, sliderMin, sliderMax, sliderStep } = slider.dataset;
+  const min = parseFloat(sliderMin);
+  const max = parseFloat(sliderMax);
+  const step = parseFloat(sliderStep);
+
+  // Get initial values from data attributes
+  let initialValues;
+  if (type === 'single') {
+    const valueStr = slider.dataset.sliderValue;
+    initialValues = valueStr ? [parseFloat(valueStr)] : [min];
+  } else {
+    const minStr = slider.dataset.sliderValueMin;
+    const maxStr = slider.dataset.sliderValueMax;
+    initialValues = [
+      minStr ? parseFloat(minStr) : min,
+      maxStr ? parseFloat(maxStr) : max
+    ];
+  }
+
+  const track = slider.querySelector(SELECTORS.TRACK);
+  const fill = slider.querySelector(SELECTORS.FILL);
+  const handles = slider.querySelectorAll(SELECTORS.HANDLE);
+
+  if (!track || !fill || handles.length === 0) return;
+
+  const state = {
+    type,
+    min,
+    max,
+    step,
+    values: initialValues,
+    isDragging: false,
+    activeHandle: null
   };
-  
-  
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // Core Functions
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  
-  /**
-   * Initialize sliders
-   * @returns {void}
-   */
-  export function initSlider() {
-    const sliders = document.querySelectorAll(CONFIG.SLIDER_SELECTOR);
-    sliders.forEach(slider => setupSlider(slider));
+
+  // Attach events to each handle
+  handles.forEach((handle, index) => {
+    handle.addEventListener('mousedown', (e) => startDrag(e, index, slider, track, fill, handles, state));
+    handle.addEventListener('touchstart', (e) => startDrag(e, index, slider, track, fill, handles, state), { passive: false });
+    handle.addEventListener('keydown', (e) => handleKeyboard(e, index, slider, track, fill, handles, state));
+  });
+
+  // Initial render
+  updateSliderUI(slider, track, fill, handles, state);
+};
+
+/**
+ * Start drag operation
+ * @param {Event} e - Mouse/touch event
+ * @param {number} handleIndex - Handle index
+ * @param {HTMLElement} slider - Slider container
+ * @param {HTMLElement} track - Track element
+ * @param {HTMLElement} fill - Fill element
+ * @param {NodeList} handles - Handle elements
+ * @param {Object} state - Slider state
+ * @returns {void}
+ */
+const startDrag = (e, handleIndex, slider, track, fill, handles, state) => {
+  e.preventDefault();
+  state.isDragging = true;
+  state.activeHandle = handleIndex;
+
+  const moveHandler = (moveEvent) => onDrag(moveEvent, handleIndex, slider, track, fill, handles, state);
+  const endHandler = () => {
+    state.isDragging = false;
+    state.activeHandle = null;
+    document.removeEventListener('mousemove', moveHandler);
+    document.removeEventListener('mouseup', endHandler);
+    document.removeEventListener('touchmove', moveHandler);
+    document.removeEventListener('touchend', endHandler);
+  };
+
+  document.addEventListener('mousemove', moveHandler);
+  document.addEventListener('mouseup', endHandler);
+  document.addEventListener('touchmove', moveHandler, { passive: false });
+  document.addEventListener('touchend', endHandler);
+};
+
+/**
+ * Handle drag movement
+ * @param {Event} e - Mouse/touch event
+ * @param {number} handleIndex - Handle index
+ * @param {HTMLElement} slider - Slider container
+ * @param {HTMLElement} track - Track element
+ * @param {HTMLElement} fill - Fill element
+ * @param {NodeList} handles - Handle elements
+ * @param {Object} state - Slider state
+ * @returns {void}
+ */
+const onDrag = (e, handleIndex, slider, track, fill, handles, state) => {
+  const clientX = e.touches?.[0]?.clientX ?? e.clientX;
+  const rect = track.getBoundingClientRect();
+  const percentage = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+
+  let newValue = state.min + (percentage / 100) * (state.max - state.min);
+  newValue = Math.round(newValue / state.step) * state.step;
+
+  // Range constraints
+  if (state.type === 'range') {
+    newValue = handleIndex === 0
+      ? Math.min(newValue, state.values[1])
+      : Math.max(newValue, state.values[0]);
   }
-  
-  /**
-   * Setup slider element
-   * @param {HTMLElement} slider - Slider container
-   * @returns {void}
-   */
-  function setupSlider(slider) {
-    const input = slider.querySelector(CONFIG.INPUT_SELECTOR);
-    if (!input) return;
-    
-    const valueDisplay = slider.querySelector(CONFIG.VALUE_SELECTOR);
-    const fill = slider.querySelector(CONFIG.FILL_SELECTOR);
-    
-    // Get configuration
-    const min = parseFloat(input.min) || 0;
-    const max = parseFloat(input.max) || 100;
-    const step = parseFloat(input.step) || 1;
-    const prefix = slider.getAttribute('data-slider-prefix') || '';
-    const suffix = slider.getAttribute('data-slider-suffix') || '';
-    
-    // Initial update
-    updateSliderUI(input, valueDisplay, fill, min, max, prefix, suffix);
-    
-    // Input event for real-time updates
-    input.addEventListener('input', () => {
-      updateSliderUI(input, valueDisplay, fill, min, max, prefix, suffix);
-      
-      // Dispatch custom event
-      slider.dispatchEvent(new CustomEvent('slider-input', {
-        detail: { value: parseFloat(input.value) },
-        bubbles: true
-      }));
-    });
-    
-    // Change event for final value
-    input.addEventListener('change', () => {
-      slider.dispatchEvent(new CustomEvent('slider-change', {
-        detail: { value: parseFloat(input.value) },
-        bubbles: true
-      }));
-    });
-    
-    // Keyboard enhancements
-    input.addEventListener('keydown', (e) => {
-      handleSliderKeydown(e, input, min, max, step);
-    });
+
+  state.values[handleIndex] = newValue;
+  updateSliderUI(slider, track, fill, handles, state);
+
+  // Dispatch event
+  slider.dispatchEvent(new CustomEvent(EVENTS.CHANGE, {
+    detail: {
+      value: state.type === 'single' ? state.values[0] : state.values,
+      handleIndex
+    },
+    bubbles: true
+  }));
+};
+
+/**
+ * Handle keyboard navigation
+ * @param {KeyboardEvent} e - Keyboard event
+ * @param {number} handleIndex - Handle index
+ * @param {HTMLElement} slider - Slider container
+ * @param {HTMLElement} track - Track element
+ * @param {HTMLElement} fill - Fill element
+ * @param {NodeList} handles - Handle elements
+ * @param {Object} state - Slider state
+ * @returns {void}
+ */
+const handleKeyboard = (e, handleIndex, slider, track, fill, handles, state) => {
+  const currentValue = state.values[handleIndex];
+  let newValue = currentValue;
+
+  switch (e.key) {
+    case 'ArrowLeft':
+    case 'ArrowDown':
+      e.preventDefault();
+      newValue = Math.max(state.min, currentValue - state.step);
+      break;
+    case 'ArrowRight':
+    case 'ArrowUp':
+      e.preventDefault();
+      newValue = Math.min(state.max, currentValue + state.step);
+      break;
+    case 'Home':
+      e.preventDefault();
+      newValue = state.min;
+      break;
+    case 'End':
+      e.preventDefault();
+      newValue = state.max;
+      break;
+    case 'PageUp':
+      e.preventDefault();
+      newValue = Math.min(state.max, currentValue + state.step * 10);
+      break;
+    case 'PageDown':
+      e.preventDefault();
+      newValue = Math.max(state.min, currentValue - state.step * 10);
+      break;
+    default:
+      return;
   }
-  
-  
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // UI Updates
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  
-  /**
-   * Update slider UI
-   * @param {HTMLElement} input - Input element
-   * @param {HTMLElement|null} valueDisplay - Value display element
-   * @param {HTMLElement|null} fill - Fill element
-   * @param {number} min - Min value
-   * @param {number} max - Max value
-   * @param {string} prefix - Value prefix
-   * @param {string} suffix - Value suffix
-   * @returns {void}
-   */
-  function updateSliderUI(input, valueDisplay, fill, min, max, prefix, suffix) {
-    const value = parseFloat(input.value);
-    const percentage = ((value - min) / (max - min)) * 100;
-    
-    // Update value display
-    if (valueDisplay) {
-      valueDisplay.textContent = `${prefix}${formatValue(value)}${suffix}`;
+
+  // Range constraints
+  if (state.type === 'range') {
+    newValue = handleIndex === 0
+      ? Math.min(newValue, state.values[1])
+      : Math.max(newValue, state.values[0]);
+  }
+
+  state.values[handleIndex] = newValue;
+  updateSliderUI(slider, track, fill, handles, state);
+
+  // Dispatch event
+  slider.dispatchEvent(new CustomEvent(EVENTS.CHANGE, {
+    detail: {
+      value: state.type === 'single' ? state.values[0] : state.values,
+      handleIndex
+    },
+    bubbles: true
+  }));
+};
+
+/**
+ * Update slider UI
+ * @param {HTMLElement} slider - Slider container
+ * @param {HTMLElement} track - Track element
+ * @param {HTMLElement} fill - Fill element
+ * @param {NodeList} handles - Handle elements
+ * @param {Object} state - Slider state
+ * @returns {void}
+ */
+const updateSliderUI = (slider, track, fill, handles, state) => {
+  const { min, max, values, type } = state;
+
+  // Calculate percentages
+  const percent1 = ((values[0] - min) / (max - min)) * 100;
+  const percent2 = type === 'range' ? ((values[1] - min) / (max - min)) * 100 : 0;
+
+  // Update fill
+  if (type === 'single') {
+    fill.style.left = '0%';
+    fill.style.width = `${percent1}%`;
+  } else {
+    fill.style.left = `${percent1}%`;
+    fill.style.width = `${percent2 - percent1}%`;
+  }
+
+  // Update handles
+  handles.forEach((handle, index) => {
+    const percent = index === 0 ? percent1 : percent2;
+    const value = values[index];
+
+    // Position
+    handle.style.left = `${percent}%`;
+
+    // ARIA
+    handle.setAttribute('aria-valuenow', value);
+
+    // Indicator text
+    const indicator = handle.querySelector(SELECTORS.INDICATOR);
+    if (indicator) {
+      indicator.textContent = value;
     }
-    
-    // Update fill width
-    if (fill) {
-      fill.style.width = `${percentage}%`;
-    }
-    
-    // Update CSS custom property for advanced styling
-    input.style.setProperty('--slider-value', percentage);
-    
-    // Update ARIA
-    input.setAttribute('aria-valuenow', value);
-    input.setAttribute('aria-valuemin', min);
-    input.setAttribute('aria-valuemax', max);
-    input.setAttribute('aria-valuetext', `${prefix}${formatValue(value)}${suffix}`);
-  }
-  
-  /**
-   * Format value for display
-   * @param {number} value - Value to format
-   * @returns {string} Formatted value
-   */
-  function formatValue(value) {
-    // Round to 2 decimals if needed
-    return value % 1 === 0 ? value.toString() : value.toFixed(2);
-  }
-  
-  
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // Keyboard Navigation
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  
-  /**
-   * Enhanced keyboard navigation
-   * @param {KeyboardEvent} event - Keyboard event
-   * @param {HTMLElement} input - Input element
-   * @param {number} min - Min value
-   * @param {number} max - Max value
-   * @param {number} step - Step value
-   * @returns {void}
-   */
-  function handleSliderKeydown(event, input, min, max, step) {
-    const currentValue = parseFloat(input.value);
-    let newValue = currentValue;
-    
-    switch (event.key) {
-      case 'Home':
-        event.preventDefault();
-        newValue = min;
-        break;
-      case 'End':
-        event.preventDefault();
-        newValue = max;
-        break;
-      case 'PageUp':
-        event.preventDefault();
-        newValue = Math.min(max, currentValue + step * 10);
-        break;
-      case 'PageDown':
-        event.preventDefault();
-        newValue = Math.max(min, currentValue - step * 10);
-        break;
-    }
-    
-    if (newValue !== currentValue) {
-      input.value = newValue;
-      input.dispatchEvent(new Event('input', { bubbles: true }));
-      input.dispatchEvent(new Event('change', { bubbles: true }));
-    }
-  }
-  
-  
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // Public API
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  
-  /**
-   * Set slider value programmatically
-   * @param {HTMLElement} slider - Slider container
-   * @param {number} value - New value
-   * @returns {void}
-   */
-  export function setSliderValue(slider, value) {
-    const input = slider.querySelector(CONFIG.INPUT_SELECTOR);
-    if (!input) return;
-    
-    input.value = value;
-    input.dispatchEvent(new Event('input', { bubbles: true }));
-  }
-  
-  /**
-   * Get slider value
-   * @param {HTMLElement} slider - Slider container
-   * @returns {number|null} Current value
-   */
-  export function getSliderValue(slider) {
-    const input = slider.querySelector(CONFIG.INPUT_SELECTOR);
-    return input ? parseFloat(input.value) : null;
-  }
-  
-  
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // May your bugs be forever exiled to the shadow realm ✦
-  // HAT · 2025
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  });
+};
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Public API
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Set slider value programmatically
+ * @param {HTMLElement} slider - Slider container
+ * @param {number|number[]} value - New value(s)
+ * @returns {void}
+ */
+export const setSliderValue = (slider, value) => {
+  const { sliderType: type, sliderMin, sliderMax, sliderStep } = slider.dataset;
+  const track = slider.querySelector(SELECTORS.TRACK);
+  const fill = slider.querySelector(SELECTORS.FILL);
+  const handles = slider.querySelectorAll(SELECTORS.HANDLE);
+
+  if (!track || !fill || handles.length === 0) return;
+
+  const state = {
+    type,
+    min: parseFloat(sliderMin),
+    max: parseFloat(sliderMax),
+    step: parseFloat(sliderStep),
+    values: Array.isArray(value) ? value : [value]
+  };
+
+  updateSliderUI(slider, track, fill, handles, state);
+};
+
+/**
+ * Get slider value
+ * @param {HTMLElement} slider - Slider container
+ * @returns {number|number[]|null} Current value(s)
+ */
+export const getSliderValue = (slider) => {
+  const { sliderType: type } = slider.dataset;
+  const handles = slider.querySelectorAll(SELECTORS.HANDLE);
+
+  if (handles.length === 0) return null;
+
+  const values = Array.from(handles).map(handle =>
+    parseFloat(handle.getAttribute('aria-valuenow'))
+  );
+
+  return type === 'single' ? values[0] : values;
+};
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
+// May your bugs be forever exiled to the shadow realm ✦
+// HAT · 2025
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━

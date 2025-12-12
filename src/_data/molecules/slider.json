@@ -28,10 +28,8 @@
         8
       ],
       "disabled": false,
-      "handleIndicator": {
-        "show": true,
-        "variant": "outline"
-      }
+      "showIndicator": true,
+      "indicatorVariant": "outline"
     },
     {
       "name": "demoRange1",
@@ -45,10 +43,8 @@
         18
       ],
       "disabled": false,
-      "handleIndicator": {
-        "show": true,
-        "variant": "solid"
-      }
+      "showIndicator": true,
+      "indicatorVariant": "solid"
     }
   ]
 }

@@ -16,12 +16,11 @@
         datas: molecules.slider.sliders
     }) }}
 
-    {{ renderSlider({
-        name: "demoRange1",
-        datas: molecules.slider.sliders
-    }) }}
+  JavaScript Requirements:
+    - slider.js molecule (calculates positions, updates values, handles drag)
 
   @created 2025-01-15
+  @updated 2025-01-18 (Phase 6 - Cleaned hardcoded values, JS-driven)
 #}
 
 {% macro renderSlider(options) %}
@@ -51,23 +50,15 @@
       {% set minValue = sliderData.min | default(0) %}
       {% set maxValue = sliderData.max | default(100) %}
       {% set step = sliderData.step | default(1) %}
-      {% set values = sliderData.values | default([0]) %}
-      {% set disabled = sliderData.disabled | default(false) %}
-      {% set handleIndicator = sliderData.handleIndicator | default({}) %}
-      {% set showIndicator = handleIndicator.show | default(false) %}
-      {% set indicatorVariant = handleIndicator.variant | default('outline') %}
+      {% set showIndicator = sliderData.showIndicator | default(false) %}
+      {% set indicatorVariant = sliderData.indicatorVariant | default('outline') %}
 
-      {# Calculate positions (percentage) #}
-      {% set range = maxValue - minValue %}
-      {% set value1 = values[0] | default(0) %}
-      {% set value1Percent = ((value1 - minValue) / range * 100) | round(2) %}
-
-      {% if sliderType == 'range' %}
-        {% set value2 = values[1] | default(maxValue) %}
-        {% set value2Percent = ((value2 - minValue) / range * 100) | round(2) %}
-        {% set fillWidth = (value2Percent - value1Percent) | round(2) %}
+      {# Initial values (JS will position handles) #}
+      {% if sliderType == 'single' %}
+        {% set value = sliderData.value | default(minValue) %}
       {% else %}
-        {% set fillWidth = value1Percent %}
+        {% set valueMin = sliderData.valueMin | default(minValue) %}
+        {% set valueMax = sliderData.valueMax | default(maxValue) %}
       {% endif %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -110,20 +101,20 @@
 
       {# --------------------------
           3.5 Fill Classes
-          Description: Filled portion, Colors, Position
+          Description: Filled portion, Colors, Position (JS-controlled)
         --------------------------#}
       {% set fillClasses = "absolute top-0 h-full bg-[var(--color-interactive-default)] rounded-full transition-all duration-300" %}
 
       {# --------------------------
           3.6 Handle Classes
-          Description: Draggable handle, Position, Size, Borders
+          Description: Draggable handle, Position (JS-controlled), Size, Borders
         --------------------------#}
-      {% set handleBaseClasses = "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 border-2 rounded-full cursor-pointer shadow-md" %}
+      {% set handleBaseClasses = "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 border-2 rounded-full cursor-grab active:cursor-grabbing shadow-md" %}
       {% set handleStateClasses = "bg-[var(--color-global-white)] border-[var(--color-interactive-default)] transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
 
       {# --------------------------
           3.7 Indicator Classes
-          Description: Handle indicator bubble
+          Description: Handle indicator bubble (JS-controlled value)
         --------------------------#}
       {% set indicatorBaseClasses = "absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-inline-medium)] py-[var(--spacing-inline-tight)] typography-body-small rounded-[var(--radius-default)] shadow-sm whitespace-nowrap" %}
 
@@ -150,11 +141,20 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
         class="{{ containerClasses }}"
+        data-slider="true"
         data-slider-name="{{ sliderName }}"
         data-slider-type="{{ sliderType }}"
-        {% if disabled %}data-slider-disabled="true"{% endif %}
+        data-slider-min="{{ minValue }}"
+        data-slider-max="{{ maxValue }}"
+        data-slider-step="{{ step }}"
+        {% if sliderType == 'single' %}
+          data-slider-value="{{ value }}"
+        {% else %}
+          data-slider-value-min="{{ valueMin }}"
+          data-slider-value-max="{{ valueMax }}"
+        {% endif %}
       >
-        {# Label only #}
+        {# Label #}
         {% if label %}
           <label
             class="{{ labelTextClasses }}"
@@ -175,53 +175,61 @@
             role="slider"
             aria-valuemin="{{ minValue }}"
             aria-valuemax="{{ maxValue }}"
-            aria-valuenow="{{ value1 }}"
-            {% if disabled %}aria-disabled="true"{% endif %}
+            {% if sliderType == 'single' %}
+              aria-valuenow="{{ value }}"
+            {% endif %}
           >
-            {# Fill #}
+            {# Fill (JS sets left + width) #}
             <div
               class="{{ fillClasses }}"
-              style="left: {% if sliderType == 'range' %}{{ value1Percent }}%{% else %}0{% endif %}; width: {{ fillWidth }}%;"
               data-slider-fill="true"
             ></div>
 
-            {# Handle(s) #}
+            {# Handle 1 (JS sets left position) #}
             <div
               class="{{ handleBaseClasses }} {{ handleStateClasses }}"
-              style="left: {{ value1Percent }}%;"
               data-slider-handle="true"
               data-slider-handle-index="0"
               tabindex="0"
+              role="slider"
+              aria-valuemin="{{ minValue }}"
+              aria-valuemax="{{ maxValue }}"
+              {% if sliderType == 'single' %}
+                aria-valuenow="{{ value }}"
+              {% else %}
+                aria-valuenow="{{ valueMin }}"
+              {% endif %}
             >
-              {# Indicator for handle 1 #}
+              {# Indicator for handle 1 (JS updates value) #}
               {% if showIndicator %}
                 <span
                   class="{{ indicatorBaseClasses }} {{ indicatorVariantClasses }}"
                   data-slider-indicator="true"
-                  data-slider-indicator-variant="{{ indicatorVariant }}"
                 >
-                  {{ value1 }}
+                  {% if sliderType == 'single' %}{{ value }}{% else %}{{ valueMin }}{% endif %}
                 </span>
               {% endif %}
             </div>
 
-            {# Second handle for range slider #}
+            {# Handle 2 for range slider (JS sets left position) #}
             {% if sliderType == 'range' %}
               <div
                 class="{{ handleBaseClasses }} {{ handleStateClasses }}"
-                style="left: {{ value2Percent }}%;"
                 data-slider-handle="true"
                 data-slider-handle-index="1"
                 tabindex="0"
+                role="slider"
+                aria-valuemin="{{ minValue }}"
+                aria-valuemax="{{ maxValue }}"
+                aria-valuenow="{{ valueMax }}"
               >
-                {# Indicator for handle 2 #}
+                {# Indicator for handle 2 (JS updates value) #}
                 {% if showIndicator %}
                   <span
                     class="{{ indicatorBaseClasses }} {{ indicatorVariantClasses }}"
                     data-slider-indicator="true"
-                    data-slider-indicator-variant="{{ indicatorVariant }}"
                   >
-                    {{ value2 }}
+                    {{ valueMax }}
                   </span>
                 {% endif %}
               </div>
@@ -234,8 +242,8 @@
           class="{{ minMaxWrapperClasses }}"
           data-slider-labels="true"
         >
-          <span class="{{ minMaxTextClasses }}" data-slider-min="true">{{ minValue }}</span>
-          <span class="{{ minMaxTextClasses }}" data-slider-max="true">{{ maxValue }}</span>
+          <span class="{{ minMaxTextClasses }}" data-slider-min-label="true">{{ minValue }}</span>
+          <span class="{{ minMaxTextClasses }}" data-slider-max-label="true">{{ maxValue }}</span>
         </div>
       </div>
     {% endif %}

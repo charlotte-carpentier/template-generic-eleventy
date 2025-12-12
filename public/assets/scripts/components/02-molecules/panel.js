@@ -1,249 +1,301 @@
 /* ┌─────────────────────────────────────────────────────────┐
-   │ MOLECULE › Panel                                        │
-   │ Accordion/collapsible panel with ARIA support           │
-   │ Path: src/assets/scripts/components/02-molecules/       │
+   │ MOLECULE › Panel (Datepicker)                          │
+   │ Calendar navigation and date selection                  │
    └─────────────────────────────────────────────────────────┘ */
 
-/**
- * @fileoverview Accordion panel functionality
- * @module molecules/panel
- * @created 2025-01-15
- */
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Configuration
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const CONFIG = {
-    PANEL_SELECTOR: '[data-panel]',
-    TRIGGER_SELECTOR: '[data-panel-trigger]',
-    CONTENT_SELECTOR: '[data-panel-content]',
-    GROUP_SELECTOR: '[data-panel-group]',
-    EXPANDED_CLASS: 'panel-expanded',
-    COLLAPSED_CLASS: 'panel-collapsed',
-    TRANSITION_DURATION: 300
+const MONTHS = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+
+const DAY_HEADERS = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Utility Functions
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Get next month/year
+ * @param {number} month - Current month (0-11)
+ * @param {number} year - Current year
+ * @returns {Object} Next month and year
+ */
+const getNextMonth = (month, year) => {
+  const next = month + 1;
+  return next > 11 ? { month: 0, year: year + 1 } : { month: next, year };
+};
+
+/**
+ * Get classes from panel container data attributes
+ * @param {HTMLElement} panel - Panel element
+ * @returns {Object} Classes object
+ */
+const getClasses = (panel) => {
+  const container = panel.querySelector('[data-panel-calendars]');
+  const monthWrapper = panel.querySelector('[data-panel-month-wrapper]');
+
+  if (!container) return {};
+
+  return {
+    calendar: container.dataset.classCalendar || '',
+    header: container.dataset.classHeader || '',
+    dayHeader: container.dataset.classDayHeader || '',
+    grid: container.dataset.classGrid || '',
+    dateCurrent: container.dataset.classDateCurrent || '',
+    dateOutside: container.dataset.classDateOutside || '',
+    dateSelected: container.dataset.classDateSelected || '',
+    monthLabel: monthWrapper?.dataset.classMonthLabel || ''
   };
-  
-  
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // Core Functions
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  
-  /**
-   * Initialize panels
-   * @returns {void}
-   */
-  export function initPanel() {
-    const panels = document.querySelectorAll(CONFIG.PANEL_SELECTOR);
-    panels.forEach(panel => setupPanel(panel));
-  }
-  
-  /**
-   * Setup panel element
-   * @param {HTMLElement} panel - Panel element
-   * @returns {void}
-   */
-  function setupPanel(panel) {
-    const trigger = panel.querySelector(CONFIG.TRIGGER_SELECTOR);
-    const content = panel.querySelector(CONFIG.CONTENT_SELECTOR);
-    
-    if (!trigger || !content) return;
-    
-    // Generate IDs if not present
-    const panelId = panel.id || `panel-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    const contentId = content.id || `${panelId}-content`;
-    
-    panel.id = panelId;
-    content.id = contentId;
-    
-    // Setup ARIA
-    trigger.setAttribute('role', 'button');
-    trigger.setAttribute('aria-controls', contentId);
-    trigger.setAttribute('tabindex', '0');
-    
-    content.setAttribute('role', 'region');
-    content.setAttribute('aria-labelledby', trigger.id || `${panelId}-trigger`);
-    
-    if (!trigger.id) {
-      trigger.id = `${panelId}-trigger`;
-    }
-    
-    // Get initial state
-    const isExpanded = panel.hasAttribute('data-panel-expanded');
-    
-    if (isExpanded) {
-      expandPanel(panel, false);
-    } else {
-      collapsePanel(panel, false);
-    }
-    
-    // Attach events
-    trigger.addEventListener('click', () => togglePanel(panel));
-    
-    trigger.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        togglePanel(panel);
+};
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Core Functions
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Initialize all datepicker panels
+ * @returns {void}
+ */
+export const initPanel = () => {
+  document.querySelectorAll('[data-panel-type="date"]').forEach(setupPanel);
+};
+
+/**
+ * Setup single panel
+ * @param {HTMLElement} panel - Panel element
+ * @returns {void}
+ */
+const setupPanel = (panel) => {
+  const { panelVariant: variant } = panel.dataset;
+  const now = new Date();
+  const currentMonth = now.getMonth();
+  const currentYear = now.getFullYear();
+
+  const classes = getClasses(panel);
+
+  const state = {
+    panel,
+    classes,
+    selectedDates: new Set(),
+    calendars: variant === 'double'
+      ? [
+          { month: currentMonth, year: currentYear },
+          getNextMonth(currentMonth, currentYear)
+        ]
+      : [{ month: currentMonth, year: currentYear }]
+  };
+
+  // Generate initial UI
+  generateLabels(panel, state);
+  generateCalendars(panel, state);
+
+  // Navigation
+  const prevBtn = panel.querySelector('[data-panel-nav-prev]');
+  const nextBtn = panel.querySelector('[data-panel-nav-next]');
+
+  prevBtn?.addEventListener('click', () => navigate(panel, state, -1));
+  nextBtn?.addEventListener('click', () => navigate(panel, state, 1));
+
+  // Date selection - Event delegation on calendars container
+  const calendarsContainer = panel.querySelector('[data-panel-calendars]');
+  if (calendarsContainer) {
+    calendarsContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-panel-date]');
+      if (btn?.dataset.dateKey && !btn.disabled) {
+        toggleDate(btn, state);
       }
     });
   }
-  
-  
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // Expand/Collapse
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  
-  /**
-   * Toggle panel
-   * @param {HTMLElement} panel - Panel element
-   * @returns {void}
-   */
-  export function togglePanel(panel) {
-    const isExpanded = panel.classList.contains(CONFIG.EXPANDED_CLASS);
-    
-    if (isExpanded) {
-      collapsePanel(panel);
-    } else {
-      expandPanel(panel);
+};
+
+/**
+ * Generate month labels
+ * @param {HTMLElement} panel - Panel element
+ * @param {Object} state - Panel state
+ * @returns {void}
+ */
+const generateLabels = (panel, state) => {
+  const wrapper = panel.querySelector('[data-panel-month-wrapper]');
+  if (!wrapper) return;
+
+  const fragment = document.createDocumentFragment();
+
+  state.calendars.forEach(({ month, year }) => {
+    const label = document.createElement('span');
+    label.className = state.classes.monthLabel;
+    label.dataset.panelMonth = 'true';
+    label.textContent = `${MONTHS[month]} ${year}`;
+    fragment.appendChild(label);
+  });
+
+  wrapper.innerHTML = '';
+  wrapper.appendChild(fragment);
+};
+
+/**
+ * Generate calendars
+ * @param {HTMLElement} panel - Panel element
+ * @param {Object} state - Panel state
+ * @returns {void}
+ */
+const generateCalendars = (panel, state) => {
+  const container = panel.querySelector('[data-panel-calendars]');
+  if (!container) return;
+
+  const fragment = document.createDocumentFragment();
+
+  state.calendars.forEach(({ month, year }) => {
+    fragment.appendChild(createCalendar(month, year, state));
+  });
+
+  container.innerHTML = '';
+  container.appendChild(fragment);
+};
+
+/**
+ * Create calendar element
+ * @param {number} month - Month (0-11)
+ * @param {number} year - Year
+ * @param {Object} state - Panel state
+ * @returns {HTMLElement} Calendar element
+ */
+const createCalendar = (month, year, state) => {
+  const { classes } = state;
+  const cal = document.createElement('div');
+  cal.className = classes.calendar;
+  cal.dataset.panelCalendar = 'true';
+
+  // Day headers
+  const headerGrid = document.createElement('div');
+  headerGrid.className = classes.header;
+
+  DAY_HEADERS.forEach(day => {
+    const header = document.createElement('div');
+    header.className = classes.dayHeader;
+    header.textContent = day;
+    headerGrid.appendChild(header);
+  });
+
+  cal.appendChild(headerGrid);
+
+  // Dates grid
+  const grid = document.createElement('div');
+  grid.className = classes.grid;
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const prevMonthDays = new Date(year, month, 0).getDate();
+
+  // Previous month days
+  for (let i = firstDay - 1; i >= 0; i--) {
+    grid.appendChild(createBtn(prevMonthDays - i, 'prev', true, null, state));
+  }
+
+  // Current month days
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const isSelected = state.selectedDates.has(dateKey);
+    grid.appendChild(createBtn(d, 'current', false, dateKey, state, isSelected));
+  }
+
+  // Next month days to complete grid
+  const totalCells = firstDay + daysInMonth;
+  const remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+
+  for (let d = 1; d <= remaining; d++) {
+    grid.appendChild(createBtn(d, 'next', true, null, state));
+  }
+
+  cal.appendChild(grid);
+  return cal;
+};
+
+/**
+ * Create date button
+ * @param {number} day - Day number
+ * @param {string} type - Button type (current/prev/next)
+ * @param {boolean} disabled - Disabled state
+ * @param {string|null} dateKey - Date key (YYYY-MM-DD)
+ * @param {Object} state - Panel state
+ * @param {boolean} isSelected - Selected state
+ * @returns {HTMLElement} Button element
+ */
+const createBtn = (day, type, disabled, dateKey, state, isSelected = false) => {
+  const { classes } = state;
+  const btn = document.createElement('button');
+
+  btn.type = 'button';
+  btn.textContent = day;
+  btn.disabled = disabled;
+  btn.dataset.panelDate = type === 'current' ? day : `${type}-${day}`;
+
+  // Apply classes from Nunjucks
+  btn.className = type === 'current' ? classes.dateCurrent : classes.dateOutside;
+
+  if (type === 'current') {
+    btn.dataset.dateKey = dateKey;
+    if (isSelected) {
+      btn.className += ` ${classes.dateSelected}`;
     }
   }
-  
-  /**
-   * Expand panel
-   * @param {HTMLElement} panel - Panel element
-   * @param {boolean} animated - Enable animation
-   * @returns {void}
-   */
-  export function expandPanel(panel, animated = true) {
-    const trigger = panel.querySelector(CONFIG.TRIGGER_SELECTOR);
-    const content = panel.querySelector(CONFIG.CONTENT_SELECTOR);
-    
-    if (!trigger || !content) return;
-    
-    // Check if part of exclusive group
-    const group = panel.closest(CONFIG.GROUP_SELECTOR);
-    if (group && group.hasAttribute('data-panel-exclusive')) {
-      collapseGroupPanels(group, panel);
+
+  return btn;
+};
+
+/**
+ * Navigate months
+ * @param {HTMLElement} panel - Panel element
+ * @param {Object} state - Panel state
+ * @param {number} dir - Direction (-1 or 1)
+ * @returns {void}
+ */
+const navigate = (panel, state, dir) => {
+  state.calendars.forEach(cal => {
+    cal.month += dir;
+
+    if (cal.month > 11) {
+      cal.month = 0;
+      cal.year++;
+    } else if (cal.month < 0) {
+      cal.month = 11;
+      cal.year--;
     }
-    
-    // Update classes
-    panel.classList.add(CONFIG.EXPANDED_CLASS);
-    panel.classList.remove(CONFIG.COLLAPSED_CLASS);
-    panel.setAttribute('data-panel-expanded', 'true');
-    
-    // Update ARIA
-    trigger.setAttribute('aria-expanded', 'true');
-    content.setAttribute('aria-hidden', 'false');
-    
-    // Animate expansion
-    if (animated) {
-      content.style.height = '0px';
-      content.style.overflow = 'hidden';
-      content.style.display = 'block';
-      
-      requestAnimationFrame(() => {
-        const height = content.scrollHeight;
-        content.style.height = `${height}px`;
-        
-        setTimeout(() => {
-          content.style.height = '';
-          content.style.overflow = '';
-        }, CONFIG.TRANSITION_DURATION);
-      });
-    } else {
-      content.style.display = 'block';
-    }
-    
-    // Dispatch event
-    panel.dispatchEvent(new CustomEvent('panel-expand', { bubbles: true }));
+  });
+
+  generateLabels(panel, state);
+  generateCalendars(panel, state);
+};
+
+/**
+ * Toggle date selection
+ * @param {HTMLElement} btn - Date button element
+ * @param {Object} state - Panel state
+ * @returns {void}
+ */
+const toggleDate = (btn, state) => {
+  const { dateKey } = btn.dataset;
+  const { classes } = state;
+
+  if (!dateKey) return;
+
+  const isSelected = state.selectedDates.has(dateKey);
+
+  if (isSelected) {
+    state.selectedDates.delete(dateKey);
+    // Remove selected classes
+    btn.className = classes.dateCurrent;
+  } else {
+    state.selectedDates.add(dateKey);
+    // Add selected classes
+    btn.className = `${classes.dateCurrent} ${classes.dateSelected}`;
   }
-  
-  /**
-   * Collapse panel
-   * @param {HTMLElement} panel - Panel element
-   * @param {boolean} animated - Enable animation
-   * @returns {void}
-   */
-  export function collapsePanel(panel, animated = true) {
-    const trigger = panel.querySelector(CONFIG.TRIGGER_SELECTOR);
-    const content = panel.querySelector(CONFIG.CONTENT_SELECTOR);
-    
-    if (!trigger || !content) return;
-    
-    // Update classes
-    panel.classList.remove(CONFIG.EXPANDED_CLASS);
-    panel.classList.add(CONFIG.COLLAPSED_CLASS);
-    panel.removeAttribute('data-panel-expanded');
-    
-    // Update ARIA
-    trigger.setAttribute('aria-expanded', 'false');
-    content.setAttribute('aria-hidden', 'true');
-    
-    // Animate collapse
-    if (animated) {
-      const height = content.scrollHeight;
-      content.style.height = `${height}px`;
-      content.style.overflow = 'hidden';
-      
-      requestAnimationFrame(() => {
-        content.style.height = '0px';
-        
-        setTimeout(() => {
-          content.style.display = 'none';
-          content.style.height = '';
-          content.style.overflow = '';
-        }, CONFIG.TRANSITION_DURATION);
-      });
-    } else {
-      content.style.display = 'none';
-    }
-    
-    // Dispatch event
-    panel.dispatchEvent(new CustomEvent('panel-collapse', { bubbles: true }));
-  }
-  
-  
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // Group Management
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  
-  /**
-   * Collapse all panels in group except one
-   * @param {HTMLElement} group - Panel group element
-   * @param {HTMLElement} exceptPanel - Panel to keep expanded
-   * @returns {void}
-   */
-  function collapseGroupPanels(group, exceptPanel) {
-    const panels = group.querySelectorAll(CONFIG.PANEL_SELECTOR);
-    panels.forEach(panel => {
-      if (panel !== exceptPanel) {
-        collapsePanel(panel);
-      }
-    });
-  }
-  
-  /**
-   * Expand all panels in group
-   * @param {HTMLElement} group - Panel group element
-   * @returns {void}
-   */
-  export function expandAllPanels(group) {
-    const panels = group.querySelectorAll(CONFIG.PANEL_SELECTOR);
-    panels.forEach(panel => expandPanel(panel));
-  }
-  
-  /**
-   * Collapse all panels in group
-   * @param {HTMLElement} group - Panel group element
-   * @returns {void}
-   */
-  export function collapseAllPanels(group) {
-    const panels = group.querySelectorAll(CONFIG.PANEL_SELECTOR);
-    panels.forEach(panel => collapsePanel(panel));
-  }
-  
-  
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // May your bugs be forever exiled to the shadow realm ✦
-  // HAT · 2025
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+};
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
+// May your bugs be forever exiled to the shadow realm ✦
+// HAT · 2025
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
