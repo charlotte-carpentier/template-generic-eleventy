@@ -21,18 +21,16 @@ import { initErrorLinks } from './components/01-atoms/error-link.js';
 
 // Molecules
 import { initBlockDragAndDrop } from './components/02-molecules/block-drag-and-drop.js';
-import { initTooltips } from './components/02-molecules/caption.js';
 import { initPanel } from './components/02-molecules/panel.js';
 import { initSegmentedControl } from './components/02-molecules/segmented-control.js';
 import { initSlider } from './components/02-molecules/slider.js';
-import { initStepper } from './components/02-molecules/stepper.js';
 import { initToast } from './components/02-molecules/toast.js';
 
 // Organisms
+import { initMobileMenu } from './components/03-organisms/header.js';
 import { initModal } from './components/03-organisms/modal.js';
 import { initErrorFragmentGroup } from './components/03-organisms/error-fragment-group.js';
 import { initErrorLayout, initAccessibilityToggle } from './components/03-organisms/error-layout.js';
-import { initMobileMenu, initContactActiveState } from './components/03-organisms/header.js';
 import { initTabBar } from './components/03-organisms/tab-bar.js';
 
 
@@ -51,7 +49,7 @@ const COMPONENT_SELECTORS = {
   MODAL: '[data-modal]',
   DRAG_DROP: '[data-drag-drop]',
   PAGINATION: '[data-pagination]',
-  PANEL: '[data-panel]',
+  PANEL: '[data-panel-type]',
   SEGMENTED_CONTROL: '[data-segmented-control]',
   SLIDER: '[data-slider]',
   STEPPER: '[data-stepper]',

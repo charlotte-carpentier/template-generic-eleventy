@@ -136,12 +136,6 @@
       "name": "demoPanel5",
       "type": "date",
       "variant": "simple",
-      "dateRange": {
-        "month": "November 2025",
-        "selectedDates": [
-          "2025-11-27"
-        ]
-      },
       "navigation": {
         "prevIcon": "demoLeft1",
         "nextIcon": "demoRight1"
@@ -151,15 +145,6 @@
       "name": "demoPanel6",
       "type": "date",
       "variant": "double",
-      "dateRange": {
-        "startMonth": "November 2025",
-        "endMonth": "December 2025",
-        "selectedDates": [
-          "2025-11-27",
-          "2025-12-04",
-          "2025-12-05"
-        ]
-      },
       "navigation": {
         "prevIcon": "demoLeft1",
         "nextIcon": "demoRight1"
