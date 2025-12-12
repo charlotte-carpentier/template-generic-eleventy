@@ -613,17 +613,21 @@ permalink: "/"
 
   {# Modal #}
   <section style="border: 1px solid #ccc; padding: 1rem; width: 100%;">
-    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Modal (preview)</h2>
-    <div style="position: relative; height: 300px; overflow: hidden;">
-      <div data-modal-demo>
-        {{ renderModal({
-            name: "demoModal1",
-            datas: organisms.modal.modals,
-            headingDatas: atoms.heading.headings,
-            buttonDatas: atoms.button.buttons
-        }) }}
-      </div>
-    </div>
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Modal</h2>
+
+    <!-- Trigger button -->
+    <button
+      id="open-modal-btn"
+      style="padding: 0.5rem 1rem; margin-bottom: 1rem; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+      Open Modal
+    </button>
+
+    {{ renderModal({
+        name: "demoModal1",
+        datas: organisms.modal.modals,
+        headingDatas: atoms.heading.headings,
+        buttonDatas: atoms.button.buttons
+    }) }}
   </section>
 
   {# Section Value - Type Simple #}

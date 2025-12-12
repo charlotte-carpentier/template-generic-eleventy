@@ -11558,6 +11558,9 @@
       
 
       
+      
+
+      
 
       
 
@@ -16583,10 +16586,16 @@
 
   
   <section style="border: 1px solid #ccc; padding: 1rem; width: 100%;">
-    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Modal (preview)</h2>
-    <div style="position: relative; height: 300px; overflow: hidden;">
-      <div data-modal-demo>
-        
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Modal</h2>
+
+    <!-- Trigger button -->
+    <button
+      id="open-modal-btn"
+      style="padding: 0.5rem 1rem; margin-bottom: 1rem; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+      Open Modal
+    </button>
+
+    
   
   
   
@@ -16607,7 +16616,6 @@
       
       
       
-      
 
       
 
@@ -16624,21 +16632,9 @@
       
 
       
-
-      
-      
-        <div
-          class="hidden [div[data-modal-demo]_&amp;]:block [div[data-modal-demo]_&amp;]:absolute fixed inset-0 bg-black/50 z-[var(--z-modal-backdrop)]"
-          data-modal-backdrop
-          aria-hidden="true"
-        ></div>
-      
-
-      
-      <div
-        class="hidden [div[data-modal-demo]_&amp;]:block [div[data-modal-demo]_&amp;]:absolute fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-modal)] shadow-[var(--elevation-floating)] z-[var(--z-modal)] mx-[var(--spacing-inset-small)]"
-        role="dialog"
-        aria-modal="true"
+      <dialog
+        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 m-0 w-full max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-modal)] shadow-[var(--elevation-floating)] mx-[var(--spacing-inset-small)] p-0 border-none backdrop:bg-black/50"
+        id="demoModal1"
         aria-label="Modal dialog"
         aria-describedby="modal-content"
         data-modal-name="demoModal1"
@@ -16863,12 +16859,10 @@
 
         </div>
 
-      </div>
+      </dialog>
     
   
 
-      </div>
-    </div>
   </section>
 
   
@@ -21960,6 +21954,9 @@
       
 
       
+      
+
+      
 
       
 
@@ -22428,6 +22425,9 @@
 
       
       
+      
+      
+
       
       
 
