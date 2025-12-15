@@ -13,7 +13,7 @@
   "links": [
     {
       "name": "demoLink1",
-      "href": "#",
+      "href": "/",
       "text": "Label",
       "size": "default",
       "iconName": "",
@@ -25,7 +25,7 @@
     },
     {
       "name": "demoLink2",
-      "href": "#",
+      "href": "/",
       "text": "Label",
       "size": "small",
       "iconName": "",
@@ -37,7 +37,7 @@
     },
     {
       "name": "demoLinkTab",
-      "href": "#",
+      "href": "/",
       "text": "Label",
       "size": "default",
       "iconName": "",
@@ -49,7 +49,7 @@
     },
     {
       "name": "demoLinkM1",
-      "href": "#",
+      "href": "/",
       "text": "Label",
       "size": "default",
       "iconName": "",

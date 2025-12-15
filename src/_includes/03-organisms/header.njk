@@ -24,6 +24,11 @@
         linkDatas: atoms.link.links
     }) }}
 
+  JavaScript:
+    - components/03-organisms/header.js
+    - utils/debounce.js
+    - utils/active-link.js
+
   @created 2025-01-15
 #}
 
@@ -60,8 +65,6 @@
       {% set burgerCloseIcon = headerData.mobile.burgerCloseIcon | default('') %}
       {% set hasOverlay = headerData.mobile.overlay | default(false) %}
       {% set ariaLabel = headerData.ariaLabel | default('Site header') %}
-
-      {# TODO: active-link.js utility for tracking one-page navigation active state #}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes

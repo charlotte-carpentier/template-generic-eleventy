@@ -8,7 +8,15 @@
  * @fileoverview Header mobile menu functionality
  * @module organisms/header
  * @created 2025-01-15
+ * @updated 2025-12-15
  */
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Imports
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import { debounce } from '../../utils/debounce.js';
+
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Configuration
@@ -19,25 +27,6 @@ const CONFIG = {
   OVERLAY_ID: 'mobile-overlay',
   MOBILE_BREAKPOINT: 1024,
   RESIZE_DEBOUNCE_DELAY: 150
-};
-
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// Utilities
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-/**
- * Debounce function execution
- * @param {Function} func - Function to debounce
- * @param {number} delay - Delay in milliseconds
- * @returns {Function} Debounced function
- */
-const debounce = (func, delay) => {
-  let timeoutId;
-  return (...args) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func(...args), delay);
-  };
 };
 
 

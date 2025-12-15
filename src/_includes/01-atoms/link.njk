@@ -31,7 +31,6 @@
     }) }}
 
   @created 2025-01-15
-  @updated 2025-01-17 - Added Tailwind CSS styles (Phase 4)
 #}
 
 {% from "01-atoms/icon.njk" import renderIcon %}
@@ -101,7 +100,7 @@
         {% if linkData.onclick %}onclick="{{ linkData.onclick | escape }}"{% endif %}
         {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
         {% if isDisabled %}aria-disabled="true"{% endif %}
-        {% if isActive %}data-link-active="true" aria-current="page"{% endif %}
+        {% if isActive %}data-link-active="true"{% endif %}
         {% if options.role %}role="{{ options.role }}"{% endif %}
         {% if options.ariaSelected is defined %}aria-selected="{{ options.ariaSelected }}"{% endif %}
       >

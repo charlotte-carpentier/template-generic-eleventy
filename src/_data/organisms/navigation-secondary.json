@@ -11,32 +11,25 @@
       "name": "demoNavSec1",
       "items": [
         {
-          "linkName": "demoLink1",
-          "active": true
+          "linkName": "demoLink1"
         },
         {
-          "linkName": "demoLink1",
-          "active": false
+          "linkName": "demoLink1"
         },
         {
-          "linkName": "demoLink1",
-          "active": false
+          "linkName": "demoLink1"
         },
         {
-          "linkName": "demoLink1",
-          "active": false
+          "linkName": "demoLink1"
         },
         {
-          "linkName": "demoLink1",
-          "active": false
+          "linkName": "demoLink1"
         },
         {
-          "linkName": "demoLink1",
-          "active": false
+          "linkName": "demoLink1"
         },
         {
-          "linkName": "demoLink1",
-          "active": false
+          "linkName": "demoLink1"
         }
       ],
       "ariaLabel": "Secondary navigation menu"
