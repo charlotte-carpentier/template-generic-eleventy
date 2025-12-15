@@ -232,6 +232,32 @@ eleventyConfig.addWatchTarget("./src/_data/");
 
 ---
 
+### Dismiss buttons not working
+
+**Problem:** Click on close button (×) doesn't remove element
+
+**Cause:** Individual event listeners attached incorrectly with `forEach()` loop
+
+**Solution:**
+
+Use event delegation pattern in `main.js`:
+
+```javascript
+// Event delegation for dismiss pattern
+document.addEventListener('click', (e) => {
+  if (e.target.closest('[data-dismiss]')) {
+    const target = e.target.closest('[data-dismissible]');
+    if (target) {
+      dismiss(target);
+    }
+  }
+});
+```
+
+**Why:** Single listener on `document` captures all clicks via event bubbling. Works for dynamic elements automatically.
+
+---
+
 ## See Also
 
 - [TailwindCSS Guide](./docs/tailwind.md) - TailwindCSS v4 usage

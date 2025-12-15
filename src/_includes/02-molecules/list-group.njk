@@ -36,6 +36,8 @@
         radioDatas: atoms["radio-button"].radioButtons
     }) }}
 
+  JavaScript: utils/dismiss.js
+
   @created 2025-01-15
 #}
 
@@ -68,10 +70,6 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set listType = listData.type | default('default') %}
       {% set items = listData.items | default([]) %}
-
-      {# TODO Phase 6: Closable items require utils/dismiss.js
-      - Button [data-list-group-close] triggers parent item removal
-      - See: utils/dismiss.js (handles all dismissible elements) #}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
@@ -130,6 +128,7 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
         class="{{ containerClasses }}"
+        data-dismissible
         data-list-group-name="{{ listData.name }}"
         data-list-group-type="{{ listType }}"
       >
@@ -160,7 +159,7 @@
               <button
                 type="button"
                 class="{{ closeButtonClasses }}"
-                data-list-group-close="true"
+                data-dismiss
                 aria-label="Close"
               >
                 {{ renderIcon({

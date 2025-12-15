@@ -2638,6 +2638,7 @@
       
       <div
         class="flex flex-col w-full rounded-[var(--radius-card)] border-2 p-[var(--spacing-inset-small)] bg-[var(--color-semantic-information-contrast-light-02)] border-[var(--color-semantic-information)]"
+        data-dismissible
         data-disclaimer-name="demoDiscla1"
         data-disclaimer-type="disclaimer"
         data-disclaimer-variant="info"
@@ -2711,13 +2712,11 @@
           </span>
 
           
-
-          
           
             <button
               type="button"
               class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
-              data-disclaimer-dismiss="true"
+              data-dismiss
               aria-label="Dismiss button text"
             >
               
@@ -2814,6 +2813,7 @@
       
       <div
         class="flex flex-col w-full rounded-[var(--radius-card)] border-2 p-[var(--spacing-inset-small)] bg-[var(--color-semantic-success-contrast-light-02)] border-[var(--color-semantic-success)]"
+        data-dismissible
         data-disclaimer-name="demoDiscla2"
         data-disclaimer-type="disclaimer"
         data-disclaimer-variant="success"
@@ -2887,13 +2887,11 @@
           </span>
 
           
-
-          
           
             <button
               type="button"
               class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
-              data-disclaimer-dismiss="true"
+              data-dismiss
               aria-label="Dismiss button text"
             >
               
@@ -2990,6 +2988,7 @@
       
       <div
         class="flex flex-col w-full rounded-[var(--radius-card)] border-2 p-[var(--spacing-inset-small)] bg-[var(--color-semantic-warning-contrast-light-02)] border-[var(--color-semantic-warning)]"
+        data-dismissible
         data-disclaimer-name="demoDiscla3"
         data-disclaimer-type="disclaimer"
         data-disclaimer-variant="warning"
@@ -3063,13 +3062,11 @@
           </span>
 
           
-
-          
           
             <button
               type="button"
               class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
-              data-disclaimer-dismiss="true"
+              data-dismiss
               aria-label="Dismiss button text"
             >
               
@@ -3166,6 +3163,7 @@
       
       <div
         class="flex flex-col w-full rounded-[var(--radius-card)] border-2 p-[var(--spacing-inset-small)] bg-[var(--color-semantic-critical-contrast-light-02)] border-[var(--color-semantic-critical)]"
+        data-dismissible
         data-disclaimer-name="demoDiscla4"
         data-disclaimer-type="disclaimer"
         data-disclaimer-variant="error"
@@ -3239,13 +3237,11 @@
           </span>
 
           
-
-          
           
             <button
               type="button"
               class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
-              data-disclaimer-dismiss="true"
+              data-dismiss
               aria-label="Dismiss button text"
             >
               
@@ -5176,8 +5172,6 @@
       
 
       
-
-      
       
 
       
@@ -5191,12 +5185,13 @@
       
       <div
         class="flex flex-col bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] overflow-hidden"
-        data-list-group-name="demoGroup1"
-        data-list-group-type="default"
+        data-dismissible
+        data-list-group-name="demoGroup2"
+        data-list-group-type="closable"
       >
         
           <div
-            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
             data-list-group-item="true"
           >
             
@@ -5257,11 +5252,66 @@
             </span>
 
             
+            
+              
+              <button
+                type="button"
+                class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                data-dismiss
+                aria-label="Close"
+              >
+                
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Close"
+          role="img"
+          data-icon-name="demoClose1"
+          data-icon-type="icon"
+          data-icon-size="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#x"></use>
+        </svg>
+      
+    
+  
+
+              </button>
+
             
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
             data-list-group-item="true"
           >
             
@@ -5322,11 +5372,66 @@
             </span>
 
             
+            
+              
+              <button
+                type="button"
+                class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                data-dismiss
+                aria-label="Close"
+              >
+                
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Close"
+          role="img"
+          data-icon-name="demoClose1"
+          data-icon-type="icon"
+          data-icon-size="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#x"></use>
+        </svg>
+      
+    
+  
+
+              </button>
+
             
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
             data-list-group-item="true"
           >
             
@@ -5387,11 +5492,66 @@
             </span>
 
             
+            
+              
+              <button
+                type="button"
+                class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                data-dismiss
+                aria-label="Close"
+              >
+                
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Close"
+          role="img"
+          data-icon-name="demoClose1"
+          data-icon-type="icon"
+          data-icon-size="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#x"></use>
+        </svg>
+      
+    
+  
+
+              </button>
+
             
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
             data-list-group-item="true"
           >
             
@@ -5452,11 +5612,66 @@
             </span>
 
             
+            
+              
+              <button
+                type="button"
+                class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                data-dismiss
+                aria-label="Close"
+              >
+                
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Close"
+          role="img"
+          data-icon-name="demoClose1"
+          data-icon-type="icon"
+          data-icon-size="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#x"></use>
+        </svg>
+      
+    
+  
+
+              </button>
+
             
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
             data-list-group-item="true"
           >
             
@@ -5517,11 +5732,66 @@
             </span>
 
             
+            
+              
+              <button
+                type="button"
+                class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                data-dismiss
+                aria-label="Close"
+              >
+                
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Close"
+          role="img"
+          data-icon-name="demoClose1"
+          data-icon-type="icon"
+          data-icon-size="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#x"></use>
+        </svg>
+      
+    
+  
+
+              </button>
+
             
           </div>
         
           <div
-            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 "
+            class="flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)] last:border-b-0 transition-colors hover:bg-[var(--color-global-contrast-light-04)] cursor-pointer"
             data-list-group-item="true"
           >
             
@@ -5582,6 +5852,61 @@
             </span>
 
             
+            
+              
+              <button
+                type="button"
+                class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+                data-dismiss
+                aria-label="Close"
+              >
+                
+
+  
+  
+    
+    
+
+    
+    
+
+      
+      
+      
+      
+      
+      
+
+      
+
+      
+      
+      
+
+      
+      
+        
+        
+
+        
+        
+
+        <svg
+          class="inline-block flex-shrink-0 w-5 h-5 fill-current"
+          aria-label="Close"
+          role="img"
+          data-icon-name="demoClose1"
+          data-icon-type="icon"
+          data-icon-size="md"
+        >
+          <use href="/assets/icons/sprites/sprite.svg#x"></use>
+        </svg>
+      
+    
+  
+
+              </button>
+
             
           </div>
         
@@ -5611,8 +5936,6 @@
       
 
       
-
-      
       
 
       
@@ -5626,6 +5949,7 @@
       
       <div
         class="flex flex-col bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] overflow-hidden"
+        data-dismissible
         data-list-group-name="demoGroup3"
         data-list-group-type="link"
       >
@@ -10418,6 +10742,7 @@
       
       <div
         class="flex min-w-80 max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-lg p-[var(--spacing-inset-small)]"
+        data-dismissible
         data-toast-name="demoToast1"
         data-toast-type="toast"
         data-toast-variant="info"
@@ -10496,6 +10821,7 @@
             <button
               type="button"
               class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] bg-transparent border-0 cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+              data-dismiss
               data-toast-dismiss="true"
               aria-label="Dismiss notification"
             >
@@ -10591,6 +10917,7 @@
       
       <div
         class="flex min-w-80 max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-lg p-[var(--spacing-inset-small)]"
+        data-dismissible
         data-toast-name="demoToast2"
         data-toast-type="toast"
         data-toast-variant="success"
@@ -10669,6 +10996,7 @@
             <button
               type="button"
               class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] bg-transparent border-0 cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+              data-dismiss
               data-toast-dismiss="true"
               aria-label="Dismiss notification"
             >
@@ -10764,6 +11092,7 @@
       
       <div
         class="flex min-w-80 max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-lg p-[var(--spacing-inset-small)]"
+        data-dismissible
         data-toast-name="demoToast3"
         data-toast-type="toast"
         data-toast-variant="warning"
@@ -10842,6 +11171,7 @@
             <button
               type="button"
               class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] bg-transparent border-0 cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+              data-dismiss
               data-toast-dismiss="true"
               aria-label="Dismiss notification"
             >
@@ -10937,6 +11267,7 @@
       
       <div
         class="flex min-w-80 max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-lg p-[var(--spacing-inset-small)]"
+        data-dismissible
         data-toast-name="demoToast4"
         data-toast-type="toast"
         data-toast-variant="error"
@@ -11015,6 +11346,7 @@
             <button
               type="button"
               class="flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] bg-transparent border-0 cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]"
+              data-dismiss
               data-toast-dismiss="true"
               aria-label="Dismiss notification"
             >
