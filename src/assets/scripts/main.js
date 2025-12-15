@@ -33,8 +33,8 @@ import { initErrorLayout, initAccessibilityToggle } from './components/03-organi
 import { initTabBar } from './components/03-organisms/tab-bar.js';
 
 // Utils
+import { initActiveLinks } from './utils/active-link.js';
 import { dismiss } from './utils/dismiss.js';
-
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Configuration
@@ -160,6 +160,9 @@ function initComponents() {
     initErrorLayout();
     initAccessibilityToggle();
   }
+
+  // Utils - Active links for navigation
+  initActiveLinks();
 }
 
 
@@ -205,6 +208,12 @@ function initSite() {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 document.addEventListener('DOMContentLoaded', initSite);
+
+// One-page hash navigation support
+// Uncomment if using one-page site with hash anchors (/#section)
+// window.addEventListener('hashchange', () => {
+//   initActiveLinks();
+// });
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

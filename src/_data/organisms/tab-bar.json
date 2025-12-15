@@ -11,24 +11,19 @@
       "name": "demoTabBar1",
       "items": [
         {
-          "linkName": "demoLinkTab",
-          "active": true
+          "linkName": "demoLinkTab"
         },
         {
-          "linkName": "demoLinkTab",
-          "active": false
+          "linkName": "demoLinkTab"
         },
         {
-          "linkName": "demoLinkTab",
-          "active": false
+          "linkName": "demoLinkTab"
         },
         {
-          "linkName": "demoLinkTab",
-          "active": false
+          "linkName": "demoLinkTab"
         },
         {
-          "linkName": "demoLinkTab",
-          "active": false
+          "linkName": "demoLinkTab"
         }
       ],
       "ariaLabel": "Main navigation tabs"
@@ -37,16 +32,13 @@
       "name": "demoTabBar2",
       "items": [
         {
-          "linkName": "demoLinkTab",
-          "active": false
+          "linkName": "demoLinkTab"
         },
         {
-          "linkName": "demoLinkTab",
-          "active": false
+          "linkName": "demoLinkTab"
         },
         {
-          "linkName": "demoLinkTab",
-          "active": false
+          "linkName": "demoLinkTab"
         }
       ],
       "ariaLabel": "Header navigation tabs"

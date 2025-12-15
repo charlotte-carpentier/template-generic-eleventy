@@ -12,7 +12,11 @@
     "build": "cross-env NODE_ENV=production npm run build:css && eleventy && node src/assets/scripts/utils/update-sitemap.js",
     "sprites": "bin/generate-sprite.sh",
     "lint:css": "stylelint 'src/assets/styles/**/*.css'",
-    "lint": "npm run lint:css"
+    "lint": "npm run lint:css",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "eleventy",
@@ -25,15 +29,18 @@
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-upgrade-help": "^3.0.1",
     "@tailwindcss/postcss": "^4.1.13",
+    "@vitest/ui": "^4.0.15",
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.2.1",
     "cross-env": "^10.0.0",
     "cssnano": "^7.1.1",
+    "jsdom": "^25.0.1",
     "nunjucks": "^3.2.4",
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.1",
     "stylelint": "^16.25.0",
     "stylelint-config-standard": "^39.0.1",
-    "tailwindcss": "^4.1.13"
+    "tailwindcss": "^4.1.13",
+    "vitest": "^4.0.15"
   }
 }

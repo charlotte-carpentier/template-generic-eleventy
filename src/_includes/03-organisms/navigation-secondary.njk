@@ -20,6 +20,8 @@
         iconDatas: atoms.icon.icons
     }) }}
 
+  JavaScript: utils/active-link.js
+
   @created 2025-01-15
 #}
 
@@ -110,10 +112,7 @@
             >
               {{ renderLink({
                   name: item.linkName,
-                  datas: options.linkDatas,
-                  iconDatas: options.iconDatas,
-                  active: item.active,
-                  disabled: item.disabled
+                  datas: options.linkDatas
               }) }}
             </li>
           {% endfor %}
