@@ -18,6 +18,8 @@
         iconDatas: atoms.icon.icons
     }) }}
 
+  JavaScript: utils/dismiss.js
+
   @created 2025-01-15
 #}
 
@@ -106,6 +108,7 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
         class="{{ containerClasses }}"
+        data-dismissible
         data-toast-name="{{ toastName }}"
         data-toast-type="toast"
         data-toast-variant="{{ variant }}"
@@ -143,6 +146,7 @@
             <button
               type="button"
               class="{{ closeButtonBaseClasses }} {{ closeButtonStateClasses }}"
+              data-dismiss
               data-toast-dismiss="true"
               aria-label="Dismiss notification"
             >

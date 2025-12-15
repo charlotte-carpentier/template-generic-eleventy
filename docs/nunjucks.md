@@ -138,10 +138,10 @@ eleventyConfig.addFilter("findByName", function(data, name) {
 
 ### Benefits
 
-- ✅ **Performance**: JavaScript `.find()` stops immediately when found
-- ✅ **Zero loop risk**: Native method guarantees return
-- ✅ **Universal**: Works for flat arrays AND nested objects
-- ✅ **DRY**: Single filter for all components
+- **Performance**: JavaScript `.find()` stops immediately when found
+- **Zero loop risk**: Native method guarantees return
+- **Universal**: Works for flat arrays AND nested objects
+- **DRY**: Single filter for all components
 
 ---
 
@@ -189,10 +189,10 @@ data-checkbox-type="checkbox"
 
 ### Key Points
 
-- ✅ Always include `role="alert"` for screen reader announcement
-- ✅ Clear, descriptive text
-- ✅ Component name in message
-- ✅ Uniform pattern across all atoms
+- Always include `role="alert"` for screen reader announcement
+- Clear, descriptive text
+- Component name in message
+- Uniform pattern across all atoms
 
 ---
 
@@ -268,6 +268,47 @@ Avoid non-native filters like `selectattr`.
 ```
 
 Never remove "Summon HAT Components Wisely:" from headers.
+
+---
+
+## HTML Attribute Order
+
+Follow the industry standard order for HTML attributes in templates:
+
+```njk<div
+  class="{{ classes }}"
+  id="unique-id"
+  data-custom-attribute
+  data-component-name="{{ name }}"
+  data-component-type="type"
+  href="{{ url }}"
+  type="button"
+  role="alert"
+  aria-live="polite"
+  aria-label="{{ label }}"
+>
+````
+
+Order convention (Code Guide by @mdo, Idiomatic HTML):
+
+class - Primary CSS/JS interface (always first)
+id - Unique identifier
+data-*- Custom data attributes
+Element-specific - Native attributes (href, src, type, action, etc.)
+ARIA/Accessibility - role, aria-* attributes
+
+Example from disclaimer.njk:
+<div
+  class="{{ containerClasses }}"
+  data-dismissible
+  data-disclaimer-name="{{ disclaimerData.name }}"
+  data-disclaimer-type="disclaimer"
+  data-disclaimer-variant="{{ variant }}"
+  role="alert"
+  aria-live="polite"
+>
+```
+This order improves readability and follows the principle that class names are the primary interface for styling and JavaScript selection.
 
 ---
 

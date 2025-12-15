@@ -8,7 +8,7 @@
  * @fileoverview Main JavaScript entry point for site-wide functionality
  * @module core/main
  * @created 2025-01-15
- * @updated 2025-10-30
+ * @updated 2025-12-15
  */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -24,7 +24,6 @@ import { initBlockDragAndDrop } from './components/02-molecules/block-drag-and-d
 import { initPanel } from './components/02-molecules/panel.js';
 import { initSegmentedControl } from './components/02-molecules/segmented-control.js';
 import { initSlider } from './components/02-molecules/slider.js';
-import { initToast } from './components/02-molecules/toast.js';
 
 // Organisms
 import { initMobileMenu } from './components/03-organisms/header.js';
@@ -32,6 +31,9 @@ import { initModal, openModal } from './components/03-organisms/modal.js';
 import { initErrorFragmentGroup } from './components/03-organisms/error-fragment-group.js';
 import { initErrorLayout, initAccessibilityToggle } from './components/03-organisms/error-layout.js';
 import { initTabBar } from './components/03-organisms/tab-bar.js';
+
+// Utils
+import { dismiss } from './utils/dismiss.js';
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -61,6 +63,27 @@ const COMPONENT_SELECTORS = {
   HEADER: 'header',
   MOBILE_MENU: '#burger-toggle'
 };
+
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Event Delegation
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Global event delegation for dismiss pattern
+ * @returns {void}
+ */
+function initEventDelegation() {
+  // Dismissible components (event delegation pattern)
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('[data-dismiss]')) {
+      const target = e.target.closest('[data-dismissible]');
+      if (target) {
+        dismiss(target);
+      }
+    }
+  });
+}
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -120,16 +143,9 @@ function initComponents() {
     initStepper();
   }
 
-  // Toast system (always initialize - can be called programmatically)
-  initToast();
-
   // Organisms
   if (document.querySelector(COMPONENT_SELECTORS.MOBILE_MENU)) {
     initMobileMenu();
-  }
-
-  if (document.querySelector(COMPONENT_SELECTORS.HEADER)) {
-    initContactActiveState();
   }
 
   if (document.querySelector(COMPONENT_SELECTORS.TAB_SECTIONS)) {
@@ -160,7 +176,7 @@ function initModalTriggers() {
 
   if (openBtn) {
     openBtn.addEventListener('click', () => {
-      openModal('demoModal1'); // String ID works now
+      openModal('demoModal1');
     });
   }
 
@@ -179,14 +195,8 @@ function initModalTriggers() {
  * @returns {void}
  */
 function initSite() {
-  // Initialize all components conditionally
+  initEventDelegation();
   initComponents();
-
-  // TODO: Add global initialization code here
-  // - Feature detection (Intersection Observer, etc.)
-  // - Global event delegation patterns
-  // - Performance monitoring
-  // - Error tracking
 }
 
 

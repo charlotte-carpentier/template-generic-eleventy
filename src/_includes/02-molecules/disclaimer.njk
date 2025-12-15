@@ -18,6 +18,8 @@
         iconDatas: atoms.icon.icons
     }) }}
 
+  JavaScript: utils/dismiss.js
+
   @created 2025-01-15
 #}
 
@@ -115,6 +117,7 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
         class="{{ containerClasses }}"
+        data-dismissible
         data-disclaimer-name="{{ disclaimerData.name }}"
         data-disclaimer-type="disclaimer"
         data-disclaimer-variant="{{ variant }}"
@@ -146,17 +149,12 @@
             {{ message }}
           </span>
 
-          {# TODO Phase 6: Dismiss functionality requires utils/dismiss.js
-          - Button [data-disclaimer-dismiss] triggers element removal
-          - Focus management after dismiss (WCAG 2.2)
-          - See: utils/dismiss.js (to be created) #}
-
           {# Close button (if present) #}
           {% if closeIconName and options.iconDatas %}
             <button
               type="button"
               class="{{ closeButtonClasses }}"
-              data-disclaimer-dismiss="true"
+              data-dismiss
               aria-label="{{ dismissLabel }}"
             >
               {{ renderIcon({
