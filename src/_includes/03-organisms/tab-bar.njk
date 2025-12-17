@@ -86,11 +86,11 @@
 
       {% set linkBaseClasses = "[&_a]:relative [&_a]:px-[var(--spacing-inset-tight)] [&_a]:py-[var(--spacing-inset-tight)] [&_a]:pb-[var(--spacing-inset-tight)] [&_a]:typography-body-regular [&_a]:text-[var(--color-global-default)] [&_a]:no-underline [&_a]:transition-colors" %}
 
-      {% set linkHoverClasses = "[&_a:hover:not([aria-selected='true'])]:text-[var(--color-global-contrast-light-01)] [&_a:hover:not([aria-selected='true'])]:after:content-['•'] [&_a:hover:not([aria-selected='true'])]:after:absolute [&_a:hover:not([aria-selected='true'])]:after:bottom-0 [&_a:hover:not([aria-selected='true'])]:after:translate-y-[8px] [&_a:hover:not([aria-selected='true'])]:after:left-1/2 [&_a:hover:not([aria-selected='true'])]:after:-translate-x-1/2" %}
+      {% set linkHoverClasses = "[&_a:hover:not([aria-current='page'])]:text-[var(--color-global-contrast-light-01)] [&_a:hover:not([aria-current='page'])]:after:content-['•'] [&_a:hover:not([aria-current='page'])]:after:absolute [&_a:hover:not([aria-current='page'])]:after:bottom-0 [&_a:hover:not([aria-current='page'])]:after:translate-y-[8px] [&_a:hover:not([aria-current='page'])]:after:left-1/2 [&_a:hover:not([aria-current='page'])]:after:-translate-x-1/2" %}
 
       {% set linkFocusClasses = "[&_a:focus]:outline [&_a:focus]:outline-2 [&_a:focus]:outline-[var(--color-semantic-information-focus)] [&_a:focus]:rounded-[var(--radius-default)]" %}
 
-      {% set linkActiveClasses = "[&_a[aria-selected='true']]:text-[var(--color-global-contrast-light-02)] [&_a[aria-selected='true']]:cursor-not-allowed [&_a[aria-selected='true']]:after:content-[''] [&_a[aria-selected='true']]:after:absolute [&_a[aria-selected='true']]:after:bottom-[calc(var(--spacing-inline-tight)*-1)] [&_a[aria-selected='true']]:after:left-1/2 [&_a[aria-selected='true']]:after:-translate-x-1/2 [&_a[aria-selected='true']]:after:h-1 [&_a[aria-selected='true']]:after:w-4 [&_a[aria-selected='true']]:after:bg-[var(--color-global-contrast-light-02)] [&_a[aria-selected='true']]:after:rounded-[var(--radius-default)]" %}
+      {% set linkActiveClasses = "[&_a[aria-current='page']]:text-[var(--color-global-contrast-light-02)] [&_a[aria-current='page']]:cursor-not-allowed [&_a[aria-current='page']]:after:content-[''] [&_a[aria-current='page']]:after:absolute [&_a[aria-current='page']]:after:bottom-[calc(var(--spacing-inline-tight)*-1)] [&_a[aria-current='page']]:after:left-1/2 [&_a[aria-current='page']]:after:-translate-x-1/2 [&_a[aria-current='page']]:after:h-1 [&_a[aria-current='page']]:after:w-4 [&_a[aria-current='page']]:after:bg-[var(--color-global-contrast-light-02)] [&_a[aria-current='page']]:after:rounded-[var(--radius-default)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
