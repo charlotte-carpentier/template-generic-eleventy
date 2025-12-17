@@ -2146,37 +2146,37 @@
       }
     }
   }
-  .\[\&_a\:hover\:not\(\[aria-selected\=\'true\'\]\)\]\:text-\[var\(--color-global-contrast-light-01\)\] {
-    & a:hover:not([aria-selected='true']) {
+  .\[\&_a\:hover\:not\(\[aria-current\=\'page\'\]\)\]\:text-\[var\(--color-global-contrast-light-01\)\] {
+    & a:hover:not([aria-current='page']) {
       color: var(--color-global-contrast-light-01);
     }
   }
-  .\[\&_a\:hover\:not\(\[aria-selected\=\'true\'\]\)\]\:after\:absolute {
-    & a:hover:not([aria-selected='true']) {
+  .\[\&_a\:hover\:not\(\[aria-current\=\'page\'\]\)\]\:after\:absolute {
+    & a:hover:not([aria-current='page']) {
       &::after {
         content: var(--tw-content);
         position: absolute;
       }
     }
   }
-  .\[\&_a\:hover\:not\(\[aria-selected\=\'true\'\]\)\]\:after\:bottom-0 {
-    & a:hover:not([aria-selected='true']) {
+  .\[\&_a\:hover\:not\(\[aria-current\=\'page\'\]\)\]\:after\:bottom-0 {
+    & a:hover:not([aria-current='page']) {
       &::after {
         content: var(--tw-content);
         bottom: var(--spacing-0);
       }
     }
   }
-  .\[\&_a\:hover\:not\(\[aria-selected\=\'true\'\]\)\]\:after\:left-1\/2 {
-    & a:hover:not([aria-selected='true']) {
+  .\[\&_a\:hover\:not\(\[aria-current\=\'page\'\]\)\]\:after\:left-1\/2 {
+    & a:hover:not([aria-current='page']) {
       &::after {
         content: var(--tw-content);
         left: calc(1/2 * 100%);
       }
     }
   }
-  .\[\&_a\:hover\:not\(\[aria-selected\=\'true\'\]\)\]\:after\:-translate-x-1\/2 {
-    & a:hover:not([aria-selected='true']) {
+  .\[\&_a\:hover\:not\(\[aria-current\=\'page\'\]\)\]\:after\:-translate-x-1\/2 {
+    & a:hover:not([aria-current='page']) {
       &::after {
         content: var(--tw-content);
         --tw-translate-x: calc(calc(1/2 * 100%) * -1);
@@ -2184,8 +2184,8 @@
       }
     }
   }
-  .\[\&_a\:hover\:not\(\[aria-selected\=\'true\'\]\)\]\:after\:translate-y-\[8px\] {
-    & a:hover:not([aria-selected='true']) {
+  .\[\&_a\:hover\:not\(\[aria-current\=\'page\'\]\)\]\:after\:translate-y-\[8px\] {
+    & a:hover:not([aria-current='page']) {
       &::after {
         content: var(--tw-content);
         --tw-translate-y: 8px;
@@ -2193,8 +2193,8 @@
       }
     }
   }
-  .\[\&_a\:hover\:not\(\[aria-selected\=\'true\'\]\)\]\:after\:content-\[\'•\'\] {
-    & a:hover:not([aria-selected='true']) {
+  .\[\&_a\:hover\:not\(\[aria-current\=\'page\'\]\)\]\:after\:content-\[\'•\'\] {
+    & a:hover:not([aria-current='page']) {
       &::after {
         --tw-content: '•';
         content: var(--tw-content);
@@ -2294,6 +2294,79 @@
       }
     }
   }
+  .\[\&_a\[aria-current\=\'page\'\]\]\:after\:absolute {
+    & a[aria-current='page'] {
+      &::after {
+        content: var(--tw-content);
+        position: absolute;
+      }
+    }
+  }
+  .\[\&_a\[aria-current\=\'page\'\]\]\:after\:bottom-\[calc\(var\(--spacing-inline-tight\)\*-1\)\] {
+    & a[aria-current='page'] {
+      &::after {
+        content: var(--tw-content);
+        bottom: calc(var(--spacing-inline-tight) * -1);
+      }
+    }
+  }
+  .\[\&_a\[aria-current\=\'page\'\]\]\:after\:left-1\/2 {
+    & a[aria-current='page'] {
+      &::after {
+        content: var(--tw-content);
+        left: calc(1/2 * 100%);
+      }
+    }
+  }
+  .\[\&_a\[aria-current\=\'page\'\]\]\:after\:h-1 {
+    & a[aria-current='page'] {
+      &::after {
+        content: var(--tw-content);
+        height: var(--spacing-1);
+      }
+    }
+  }
+  .\[\&_a\[aria-current\=\'page\'\]\]\:after\:w-4 {
+    & a[aria-current='page'] {
+      &::after {
+        content: var(--tw-content);
+        width: var(--spacing-4);
+      }
+    }
+  }
+  .\[\&_a\[aria-current\=\'page\'\]\]\:after\:-translate-x-1\/2 {
+    & a[aria-current='page'] {
+      &::after {
+        content: var(--tw-content);
+        --tw-translate-x: calc(calc(1/2 * 100%) * -1);
+        translate: var(--tw-translate-x) var(--tw-translate-y);
+      }
+    }
+  }
+  .\[\&_a\[aria-current\=\'page\'\]\]\:after\:rounded-\[var\(--radius-default\)\] {
+    & a[aria-current='page'] {
+      &::after {
+        content: var(--tw-content);
+        border-radius: var(--radius-default);
+      }
+    }
+  }
+  .\[\&_a\[aria-current\=\'page\'\]\]\:after\:bg-\[var\(--color-global-contrast-light-02\)\] {
+    & a[aria-current='page'] {
+      &::after {
+        content: var(--tw-content);
+        background-color: var(--color-global-contrast-light-02);
+      }
+    }
+  }
+  .\[\&_a\[aria-current\=\'page\'\]\]\:after\:content-\[\'\'\] {
+    & a[aria-current='page'] {
+      &::after {
+        --tw-content: '';
+        content: var(--tw-content);
+      }
+    }
+  }
   .\[\&_a\[aria-current\]\]\:text-\[var\(--color-global-contrast-light-03\)\] {
     & a[aria-current] {
       color: var(--color-global-contrast-light-03);
@@ -2388,89 +2461,6 @@
   .\[\&_a\[aria-disabled\=\'true\'\]\]\:before\:content-\[\'\'\] {
     & a[aria-disabled='true'] {
       &::before {
-        --tw-content: '';
-        content: var(--tw-content);
-      }
-    }
-  }
-  .\[\&_a\[aria-selected\=\'true\'\]\]\:cursor-not-allowed {
-    & a[aria-selected='true'] {
-      cursor: not-allowed;
-    }
-  }
-  .\[\&_a\[aria-selected\=\'true\'\]\]\:text-\[var\(--color-global-contrast-light-02\)\] {
-    & a[aria-selected='true'] {
-      color: var(--color-global-contrast-light-02);
-    }
-  }
-  .\[\&_a\[aria-selected\=\'true\'\]\]\:after\:absolute {
-    & a[aria-selected='true'] {
-      &::after {
-        content: var(--tw-content);
-        position: absolute;
-      }
-    }
-  }
-  .\[\&_a\[aria-selected\=\'true\'\]\]\:after\:bottom-\[calc\(var\(--spacing-inline-tight\)\*-1\)\] {
-    & a[aria-selected='true'] {
-      &::after {
-        content: var(--tw-content);
-        bottom: calc(var(--spacing-inline-tight) * -1);
-      }
-    }
-  }
-  .\[\&_a\[aria-selected\=\'true\'\]\]\:after\:left-1\/2 {
-    & a[aria-selected='true'] {
-      &::after {
-        content: var(--tw-content);
-        left: calc(1/2 * 100%);
-      }
-    }
-  }
-  .\[\&_a\[aria-selected\=\'true\'\]\]\:after\:h-1 {
-    & a[aria-selected='true'] {
-      &::after {
-        content: var(--tw-content);
-        height: var(--spacing-1);
-      }
-    }
-  }
-  .\[\&_a\[aria-selected\=\'true\'\]\]\:after\:w-4 {
-    & a[aria-selected='true'] {
-      &::after {
-        content: var(--tw-content);
-        width: var(--spacing-4);
-      }
-    }
-  }
-  .\[\&_a\[aria-selected\=\'true\'\]\]\:after\:-translate-x-1\/2 {
-    & a[aria-selected='true'] {
-      &::after {
-        content: var(--tw-content);
-        --tw-translate-x: calc(calc(1/2 * 100%) * -1);
-        translate: var(--tw-translate-x) var(--tw-translate-y);
-      }
-    }
-  }
-  .\[\&_a\[aria-selected\=\'true\'\]\]\:after\:rounded-\[var\(--radius-default\)\] {
-    & a[aria-selected='true'] {
-      &::after {
-        content: var(--tw-content);
-        border-radius: var(--radius-default);
-      }
-    }
-  }
-  .\[\&_a\[aria-selected\=\'true\'\]\]\:after\:bg-\[var\(--color-global-contrast-light-02\)\] {
-    & a[aria-selected='true'] {
-      &::after {
-        content: var(--tw-content);
-        background-color: var(--color-global-contrast-light-02);
-      }
-    }
-  }
-  .\[\&_a\[aria-selected\=\'true\'\]\]\:after\:content-\[\'\'\] {
-    & a[aria-selected='true'] {
-      &::after {
         --tw-content: '';
         content: var(--tw-content);
       }
