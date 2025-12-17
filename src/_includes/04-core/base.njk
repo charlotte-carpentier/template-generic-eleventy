@@ -175,26 +175,43 @@
 
   <body class="min-h-screen flex flex-col">
 
-    {# ----- Header Organism ----- #}
-    {% if not hideHeaderFooter %}
+  {# ----- Header Organism ----- #}
+  {% if not hideHeaderFooter %}
+    {% from "03-organisms/header.njk" import renderHeader %}
+    {{ renderHeader({
+      name: "demoHeader1",
+      datas: organisms.header.headers,
+      vectorDatas: atoms.vector.vectors,
+      iconDatas: atoms.icon.icons,
+      tabBarDatas: organisms["tab-bar"].tabBars,
+      linkDatas: atoms.link.links
+    }) }}
+  {% endif %}
 
+  {# ----- Main content ----- #}
+  <main class="flex-1">
+    {# Add hidden site description on homepage for SEO #}
+    {% if page.url === '/' %}
+      <section class="sr-only">
+        <p>{{ site.description }}</p>
+      </section>
     {% endif %}
+    {{ content | safe }}
+  </main>
 
-    {# ----- Main content ----- #}
-    <main class="flex-1 flex items-center justify-center">
-        {# Add hidden site description on homepage for SEO #}
-        {% if page.url === '/' %}
-          <section class="sr-only">
-            <p>{{ site.description }}</p>
-          </section>
-        {% endif %}
-        {{ content | safe }}
-    </main>
-
-    {# ----- Footer Organism ----- #}
-    {% if not hideHeaderFooter %}
-
-    {% endif %}
+  {# ----- Footer Organism ----- #}
+  {% if not hideHeaderFooter %}
+    {% from "03-organisms/footer.njk" import renderFooter %}
+    {{ renderFooter({
+      name: "demoFooter1",
+      datas: organisms.footer.footers,
+      headingDatas: atoms.heading.headings,
+      linkDatas: atoms.link.links,
+      vectorDatas: atoms.vector.vectors,
+      navSecondaryDatas: organisms["navigation-secondary"].navSecondarys,
+      iconDatas: atoms.icon.icons
+    }) }}
+  {% endif %}
 
     {# ----- JavaScript scripts (optimized loading) ----- #}
     {# Main bundled script with conditional component loading #}

@@ -1,0 +1,68 @@
+---
+title: "Blog"
+description: "Tous nos articles"
+layout: "04-core/base.njk"
+permalink: "/blog/"
+---
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Import Macros
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{# Atoms #}
+{% from "01-atoms/heading.njk" import renderHeading %}
+
+{# Molecules #}
+{% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
+
+{# Organisms #}
+{% from "03-organisms/section-hero.njk" import renderSectionHero %}
+{% from "03-organisms/section-listing.njk" import renderSectionListing %}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Breadcrumb
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderBreadcrumb({
+  name: "breadcrBlog",
+  datas: molecules.breadcrumb.breadcrumbs,
+  linkDatas: atoms.link.links
+}) }}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Heading
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderHeading({
+  name: "demoHead1",
+  datas: atoms.heading.headings
+}) }}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Section Hero
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderSectionHero({
+  name: "demoSectH1",
+  datas: organisms["section-hero"].sectHeros,
+  headingDatas: atoms.heading.headings,
+  imageDatas: atoms.image.images,
+  buttonDatas: atoms.button.buttons
+}) }}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Section Listing
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderSectionListing({
+  name: "demoSectL1",
+  datas: organisms["section-listing"].sectListings,
+  headingDatas: atoms.heading.headings,
+  cardDatas: molecules.card.cards,
+  paginationDatas: molecules.pagination.paginations,
+  selectDatas: atoms.select.selects,
+  buttonDatas: atoms.button.buttons,
+  iconDatas: atoms.icon.icons,
+  lockupDatas: molecules["lock-up"].lockUps,
+  imageDatas: atoms.image.images
+}) }}

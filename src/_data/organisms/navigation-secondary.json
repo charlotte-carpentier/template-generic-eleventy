@@ -38,20 +38,16 @@
       "name": "demoNavSec2",
       "items": [
         {
-          "linkName": "demoLink2",
-          "active": false
+          "linkName": "demoLink2"
         },
         {
-          "linkName": "demoLink2",
-          "active": false
+          "linkName": "demoLink2"
         },
         {
-          "linkName": "demoLink2",
-          "active": false
+          "linkName": "demoLink2"
         },
         {
-          "linkName": "demoLink2",
-          "active": false
+          "linkName": "demoLink2"
         }
       ],
       "ariaLabel": "Footer navigation"
@@ -60,20 +56,16 @@
       "name": "demoNavSocial",
       "items": [
         {
-          "linkName": "demoFacebook",
-          "active": false
+          "linkName": "demoFacebook"
         },
         {
-          "linkName": "demoLinkedin",
-          "active": false
+          "linkName": "demoLinkedin"
         },
         {
-          "linkName": "demoTwitter",
-          "active": false
+          "linkName": "demoTwitter"
         },
         {
-          "linkName": "demoInstagram",
-          "active": false
+          "linkName": "demoInstagram"
         }
       ],
       "ariaLabel": "Social media links"
@@ -82,31 +74,58 @@
       "name": "demoNavMenu1",
       "items": [
         {
-          "linkName": "demoLinkM1",
-          "active": false
+          "linkName": "demoLinkM1"
         },
         {
-          "linkName": "demoLinkM1",
-          "active": false
+          "linkName": "demoLinkM1"
         },
         {
-          "linkName": "demoLinkM1",
-          "active": false
+          "linkName": "demoLinkM1"
         },
         {
-          "linkName": "demoLinkM1",
-          "active": false
+          "linkName": "demoLinkM1"
         },
         {
-          "linkName": "demoLinkM1",
-          "active": false
+          "linkName": "demoLinkM1"
         },
         {
-          "linkName": "demoLinkM1",
-          "active": false
+          "linkName": "demoLinkM1"
         }
       ],
       "ariaLabel": "Menu navigation"
+    },
+    {
+      "name": "navSecMain",
+      "items": [
+        {
+          "linkName": "linkHome"
+        },
+        {
+          "linkName": "linkBlog"
+        },
+        {
+          "linkName": "linkContact"
+        }
+      ],
+      "ariaLabel": "Main secondary navigation"
+    },
+    {
+      "name": "navSecFooter",
+      "items": [
+        {
+          "linkName": "linkHome"
+        },
+        {
+          "linkName": "linkBlog"
+        },
+        {
+          "linkName": "linkContact"
+        },
+        {
+          "linkName": "demoAccess1"
+        }
+      ],
+      "ariaLabel": "Footer navigation"
     }
   ]
 }

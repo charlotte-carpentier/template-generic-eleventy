@@ -95,9 +95,8 @@ template-generic-eleventy/
 │   │   │   ├── 01-atoms/         # Custom styles for atom-level components
 │   │   │   ├── 02-molecules/     # Custom styles for molecule-level components
 │   │   │   └── 03-organisms/     # Custom styles for organism-level components
-│   ├── collections/              # Decap CMS collections (blog, etc.)
-│   ├── pages /                   # Utility pages (error pages, maintenance, redirects)
-│   ├── index.njk                 # Homepage template
+│   ├── content/                  # Decap CMS content (blog, etc.)
+│   ├── pages /                   # Template pages (index, blog, error pages...)
 │   ├── robots.txt
 │   └── sitemap.xml
 ├── .eleventy.js                  # Eleventy configuration
@@ -160,7 +159,7 @@ This template uses Decap CMS for content management. The CMS interface is access
 ### Data Architecture
 
 - **`src/_data/atoms|molecules|organisms/`**: Editable component data (unique instances)
-- **`src/collections/`**: Repeatable collections (blog posts, portfolio items, etc.)
+- **`src/content/`**: Repeatable content (blog posts, portfolio items, etc.)
 
 For detailed Decap CMS configuration and usage, see [`docs/decap-cms.md`](./docs/decap-cms.md).
 

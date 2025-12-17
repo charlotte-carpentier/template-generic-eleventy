@@ -16,7 +16,7 @@ Decap CMS is configured to work with this template's atomic design structure (at
 
 ### Two types of content
 
-#### 1. Unique components (files collections)
+#### 1. Unique components (files content)
 
 **Location:** `src/_data/atoms/`, `src/_data/molecules/`, `src/_data/organisms/`
 
@@ -51,12 +51,12 @@ Then create the files:
 
 ```bash
 echo '{}' > src/_data/molecules/hero.json
-mkdir -p src/collections/blog
+mkdir -p src/content/blog
 ```
 
 ## Example Collection
 
-This template includes a sample blog collection in `src/collections/blog/` to demonstrate the structure of repeatable collections:
+This template includes a sample blog collection in `src/content/blog/` to demonstrate the structure of repeatable content:
 
 **Files:**
 
@@ -75,8 +75,8 @@ This template includes a sample blog collection in `src/collections/blog/` to de
 1. **To create a similar collection:**
 
    ```bash
-   mkdir -p src/collections/your-collection
-   cp src/collections/blog/blog.json src/collections/your-collection/your-collection.json
+   mkdir -p src/content/your-collection
+   cp src/content/blog/blog.json src/content/your-collection/your-collection.json
    # Edit configuration to match your needs
    ```
 
@@ -88,7 +88,7 @@ This template includes a sample blog collection in `src/collections/blog/` to de
 3. **To remove the example:**
 
    ```bash
-   rm -rf src/collections/blog
+   rm -rf src/content/blog
    ```
 
 The example uses the base layout (`04-core/base.njk`) intentionally to keep the template minimal. Most projects will want to create a dedicated blog post layout that extends the base layout.
@@ -98,8 +98,8 @@ The example uses the base layout (`04-core/base.njk`) intentionally to keep the 
 - [Official Decap CMS documentation](https://decapcms.org/docs/)
 - [Available widgets](https://decapcms.org/docs/widgets/)
 - [Configuration options](https://decapcms.org/docs/configuration-options/)
-- [File collections](https://decapcms.org/docs/collection-file/)
-- [Folder collections](https://decapcms.org/docs/collection-folder/)
+- [File content](https://decapcms.org/docs/collection-file/)
+- [Folder content](https://decapcms.org/docs/collection-folder/)
           - {label: "Subtitle", name: "subtitle", widget: "text"}
           - {label: "Image", name: "image", widget: "image"}
 
@@ -110,13 +110,13 @@ The example uses the base layout (`04-core/base.njk`) intentionally to keep the 
 <p>{{ molecules.hero.subtitle }}</p>
 ```
 
-#### 2. Repeatable collections (folder collections)
+#### 2. Repeatable content (folder content)
 
-**Location:** `src/collections/[collection-name]/`
+**Location:** `src/content/[collection-name]/`
 
 **Purpose:** Content with multiple instances (blog posts, products, testimonials, etc.).
 
-**Example:** `src/collections/blog/post-1.md`
+**Example:** `src/content/blog/post-1.md`
 
 **config.yml configuration:**
 
@@ -124,7 +124,7 @@ The example uses the base layout (`04-core/base.njk`) intentionally to keep the 
 collections:
   - name: "blog"
     label: "Blog Posts"
-    folder: "src/collections/blog"
+    folder: "src/content/blog"
     create: true                      # Allow creating new entries
     delete: true                      # Allow deleting entries
     slug: "{{slug}}"
@@ -185,7 +185,7 @@ collections:
 ### 1. Create the folder
 
 ```bash
-mkdir -p src/collections/new-collection
+mkdir -p src/content/new-collection
 ```
 
 ### 2. Configure the collection in config.yml
@@ -196,7 +196,7 @@ Open `src/admin/config.yml` and add your collection configuration:
 collections:
   - name: "new-collection"
     label: "New Collection"
-    folder: "src/collections/new-collection"
+    folder: "src/content/new-collection"
     create: true
     delete: true
     slug: "{{slug}}"
@@ -210,7 +210,7 @@ collections:
 ```js
 // .eleventy.js
 eleventyConfig.addCollection("newCollection", function(collectionApi) {
-  return collectionApi.getFilteredByGlob("src/collections/new-collection/*.md");
+  return collectionApi.getFilteredByGlob("src/content/new-collection/*.md");
 });
 ```
 
@@ -261,7 +261,7 @@ fields:
 
 ### 1. Always initialize JSON files
 
-Files in `files` collections must exist with at minimum `{}`:
+Files in `files` content must exist with at minimum `{}`:
 
 ```bash
 echo '{}' > src/_data/molecules/hero.json
@@ -310,17 +310,17 @@ This template includes a **modular configuration skeleton** at `src/admin/config
 
 - Complete configuration structure with detailed comments
 - Examples for atoms, molecules, and organisms
-- Examples for common repeatable collections (blog, portfolio, testimonials)
+- Examples for common repeatable content (blog, portfolio, testimonials)
 - All sections are **commented out** by default
 
 ### Using the skeleton
 
 1. Open `src/admin/config.yml`
-2. Uncomment the collections you need
+2. Uncomment the content you need
 3. Adapt field names and widgets to your project
 4. Create corresponding data files:
-   - For `files` collections: create JSON files in `src/_data/[atoms|molecules|organisms]/`
-   - For `folder` collections: create folders in `src/collections/[collection-name]/`
+   - For `files` content: create JSON files in `src/_data/[atoms|molecules|organisms]/`
+   - For `folder` content: create folders in `src/content/[collection-name]/`
 5. Remember: JSON files must contain at minimum `{}` to be valid
 
 ### Quick start example
@@ -341,7 +341,7 @@ collections:
 
   - name: "blog"
     label: "Blog Posts"
-    folder: "src/collections/blog"
+    folder: "src/content/blog"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
