@@ -42,6 +42,24 @@
         }
       ],
       "ariaLabel": "Header navigation tabs"
+    },
+    {
+      "name": "tabBarMain",
+      "items": [
+        {
+          "linkName": "linkHome"
+        },
+        {
+          "linkName": "linkBlog"
+        },
+        {
+          "linkName": "linkArticle"
+        },
+        {
+          "linkName": "linkContact"
+        }
+      ],
+      "ariaLabel": "Main navigation tabs"
     }
   ]
 }

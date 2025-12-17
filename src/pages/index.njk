@@ -1,0 +1,96 @@
+---
+title: "Accueil"
+description: "Page d'accueil du site"
+layout: "04-core/base.njk"
+permalink: "/"
+---
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Import Macros
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{# Atoms #}
+{% from "01-atoms/heading.njk" import renderHeading %}
+
+{# Molecules #}
+{% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
+
+{# Organisms #}
+{% from "03-organisms/section-hero.njk" import renderSectionHero %}
+{% from "03-organisms/section-value.njk" import renderSectionValue %}
+{% from "03-organisms/section-listing.njk" import renderSectionListing %}
+{% from "03-organisms/section-about.njk" import renderSectionAbout %}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Breadcrumb
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderBreadcrumb({
+  name: "breadcrHome",
+  datas: molecules.breadcrumb.breadcrumbs,
+  linkDatas: atoms.link.links
+}) }}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Heading
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderHeading({
+  name: "demoHead1",
+  datas: atoms.heading.headings
+}) }}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Section Hero
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderSectionHero({
+  name: "demoSectH1",
+  datas: organisms["section-hero"].sectHeros,
+  headingDatas: atoms.heading.headings,
+  imageDatas: atoms.image.images,
+  buttonDatas: atoms.button.buttons
+}) }}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Section Value
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderSectionValue({
+  name: "demoSectV2",
+  datas: organisms["section-value"].sectValues,
+  headingDatas: atoms.heading.headings,
+  cardDatas: molecules.card.cards,
+  lockupDatas: molecules["lock-up"].lockUps,
+  imageDatas: atoms.image.images,
+  buttonDatas: atoms.button.buttons,
+  iconDatas: atoms.icon.icons
+}) }}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Section Listing
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderSectionListing({
+  name: "demoSectL1",
+  datas: organisms["section-listing"].sectListings,
+  headingDatas: atoms.heading.headings,
+  cardDatas: molecules.card.cards,
+  paginationDatas: molecules.pagination.paginations,
+  selectDatas: atoms.select.selects,
+  buttonDatas: atoms.button.buttons,
+  iconDatas: atoms.icon.icons,
+  lockupDatas: molecules["lock-up"].lockUps,
+  imageDatas: atoms.image.images
+}) }}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Section About
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderSectionAbout({
+  name: "demoSectAb1",
+  datas: organisms["section-about"].sectAbouts,
+  headingDatas: atoms.heading.headings,
+  buttonDatas: atoms.button.buttons
+}) }}

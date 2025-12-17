@@ -27,6 +27,58 @@
           "text": "Label"
         }
       ]
+    },
+    {
+      "name": "breadcrHome",
+      "breadcrumbLinks": [
+        {
+          "type": "current",
+          "text": "Accueil"
+        }
+      ]
+    },
+    {
+      "name": "breadcrBlog",
+      "breadcrumbLinks": [
+        {
+          "type": "link",
+          "linkName": "linkHome"
+        },
+        {
+          "type": "current",
+          "text": "Blog"
+        }
+      ]
+    },
+    {
+      "name": "breadcrArticle",
+      "breadcrumbLinks": [
+        {
+          "type": "link",
+          "linkName": "linkHome"
+        },
+        {
+          "type": "link",
+          "linkName": "linkBlog"
+        },
+        {
+          "type": "current",
+          "text": "Article"
+        }
+      ]
+    },
+    {
+      "name": "breadcrContact",
+      "breadcrumbLinks": [
+        {
+          "type": "link",
+          "linkName": "linkHome"
+        },
+        {
+          "type": "current",
+          "text": "Contact"
+        }
+      ]
     }
   ]
 }

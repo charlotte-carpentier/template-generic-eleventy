@@ -1,0 +1,64 @@
+---
+title: "Article"
+description: "Article de blog"
+layout: "04-core/base.njk"
+permalink: "/article/"
+---
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Import Macros
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{# Atoms #}
+{% from "01-atoms/heading.njk" import renderHeading %}
+
+{# Molecules #}
+{% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
+
+{# Organisms #}
+{% from "03-organisms/section-article-hero.njk" import renderSectionArticleHero %}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Breadcrumb
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderBreadcrumb({
+  name: "breadcrArticle",
+  datas: molecules.breadcrumb.breadcrumbs,
+  linkDatas: atoms.link.links
+}) }}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Heading
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderHeading({
+  name: "demoHead1",
+  datas: atoms.heading.headings
+}) }}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Section Article Hero
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderSectionArticleHero({
+  name: "demoSectAH1",
+  datas: organisms["section-article-hero"].sectArtHeros,
+  imageDatas: atoms.image.images,
+  headingDatas: atoms.heading.headings
+}) }}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Article Content
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{# TODO: Create article content component or use Decap CMS markdown rendering #}
+<article class="prose lg:prose-xl mx-auto px-4 py-8">
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+  <h2>Sous-titre de l'article</h2>
+  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+  <h3>Section détaillée</h3>
+  <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+</article>

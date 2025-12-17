@@ -1,0 +1,52 @@
+---
+title: "Contact"
+description: "Contactez-nous"
+layout: "04-core/base.njk"
+permalink: "/contact/"
+---
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Import Macros
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{# Atoms #}
+{% from "01-atoms/heading.njk" import renderHeading %}
+
+{# Molecules #}
+{% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
+
+{# Organisms #}
+{% from "03-organisms/section-contact.njk" import renderSectionContact %}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Breadcrumb
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderBreadcrumb({
+  name: "breadcrContact",
+  datas: molecules.breadcrumb.breadcrumbs,
+  linkDatas: atoms.link.links
+}) }}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Heading
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderHeading({
+  name: "demoHead1",
+  datas: atoms.heading.headings
+}) }}
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Section Contact
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+{{ renderSectionContact({
+  name: "demoSectC1",
+  datas: organisms["section-contact"].sectContacts,
+  formDatas: molecules["list-form"].listForms,
+  sectionA11yDatas: organisms["section-accessibility"].sectA11ys,
+  buttonDatas: atoms.button.buttons,
+  headingDatas: atoms.heading.headings,
+  inputDatas: atoms.input.inputs
+}) }}

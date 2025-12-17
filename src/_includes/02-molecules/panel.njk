@@ -83,8 +83,7 @@
           3.2 Item Classes
           Description: Layout, Spacing, Borders
         --------------------------#}
-      {% set itemBaseClasses = "flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inset-small)] py-[var(--spacing-stack-tight)] rounded-[var(--radius-default)] cursor-pointer" %}
-      {% set itemStateClasses = "transition-colors hover:[&>span]:text-[var(--color-global-accent)] hover:[&_svg]:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] disabled:bg-[var(--color-global-contrast-light-04)] disabled:text-[var(--color-global-contrast-light-02)] disabled:cursor-not-allowed" %}
+      {% set itemStateClasses = "transition-colors hover:[&>span]:text-[var(--color-global-accent)] hover:[&_svg]:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] [aria-disabled='true']:bg-[var(--color-global-contrast-light-04)] [aria-disabled='true']:text-[var(--color-global-contrast-light-02)] [aria-disabled='true']:cursor-not-allowed [aria-disabled='true']:pointer-events-none" %}
 
       {# --------------------------
           3.3 Icon Wrapper Classes

@@ -30,7 +30,7 @@ public_folder: "/assets/images"       # Public URL path for media files
 # ------------------------------------------------------------------------------
 # COLLECTIONS
 # ------------------------------------------------------------------------------
-# Define your content collections below.
+# Define your content below.
 # Two types: 'files' (unique) and 'folder' (repeatable)
 # ==============================================================================
 
@@ -39,7 +39,7 @@ collections:
   # ATOMS - Unique atomic components
   # ============================================================================
   # Uncomment and adapt for your atomic-level editable content
-  
+
   # - name: "atoms"
   #   label: "Atom Components"
   #   files:
@@ -55,7 +55,7 @@ collections:
   # MOLECULES - Unique molecular components
   # ============================================================================
   # Uncomment and adapt for your molecule-level editable content
-  
+
   # - name: "molecules"
   #   label: "Molecule Components"
   #   files:
@@ -90,7 +90,7 @@ collections:
   # ORGANISMS - Unique organism components
   # ============================================================================
   # Uncomment and adapt for your organism-level editable content
-  
+
   # - name: "organisms"
   #   label: "Organism Components"
   #   files:
@@ -127,13 +127,13 @@ collections:
   #             - {label: "Icon", name: "icon", widget: "string"}
 
   # ============================================================================
-  # REPEATABLE COLLECTIONS - Folder-based collections
+  # REPEATABLE CONTENT - Folder-based content
   # ============================================================================
   # Uncomment and adapt for your repeatable content (blog, portfolio, etc.)
-  
+
   # - name: "blog"
   #   label: "Blog Posts"
-  #   folder: "src/collections/blog"
+  #   folder: "src/content/blog"
   #   create: true                      # Allow creating new entries
   #   delete: true                      # Allow deleting entries
   #   slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
@@ -145,10 +145,10 @@ collections:
   #     - {label: "Excerpt", name: "excerpt", widget: "text"}
   #     - {label: "Body", name: "body", widget: "markdown"}
   #     - {label: "Tags", name: "tags", widget: "list", required: false}
-  
+
   # - name: "portfolio"
   #   label: "Portfolio Projects"
-  #   folder: "src/collections/portfolio"
+  #   folder: "src/content/portfolio"
   #   create: true
   #   delete: true
   #   slug: "{{slug}}"
@@ -163,10 +163,10 @@ collections:
   #       field: {label: "Image", name: "image", widget: "image"}
   #     - {label: "Project URL", name: "url", widget: "string", required: false}
   #     - {label: "Technologies", name: "tags", widget: "list"}
-  
+
   # - name: "testimonials"
   #   label: "Testimonials"
-  #   folder: "src/collections/testimonials"
+  #   folder: "src/content/testimonials"
   #   create: true
   #   delete: true
   #   slug: "{{slug}}"
@@ -180,10 +180,10 @@ collections:
 # ==============================================================================
 # USAGE INSTRUCTIONS
 # ==============================================================================
-# 1. Uncomment the collections you need
+# 1. Uncomment the content you need
 # 2. Adapt field names and widgets to your project
-# 3. Create corresponding JSON files in src/_data/ for 'files' collections
-# 4. Create folders in src/collections/ for 'folder' collections
+# 3. Create corresponding JSON files in src/_data/ for 'files' content
+# 4. Create folders in src/content/ for 'folder' content
 # 5. Remember: JSON files must contain at minimum '{}' to be valid
 #
 # For detailed documentation, see docs/decap-cms.md

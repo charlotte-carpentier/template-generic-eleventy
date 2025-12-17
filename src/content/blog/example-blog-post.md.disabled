@@ -4,7 +4,7 @@ title: "Example Blog Post Title"
 description: "Brief description of this blog post for SEO and social sharing"
 date: 2025-01-15
 author: "Author Name"
-tags: 
+tags:
   - blog
   - example
 ---
@@ -20,7 +20,7 @@ This file demonstrates the basic structure of a markdown file in an Eleventy col
 1. Duplicate this file to create new blog posts
 2. Update the front matter (title, description, date, author)
 3. Write your content in Markdown below the front matter
-4. The layout is inherited from `collections/blog/blog.json`
+4. The layout is inherited from `content/blog/blog.json`
 
 ## Markdown Features
 

@@ -13,26 +13,24 @@
   "links": [
     {
       "name": "demoLink1",
-      "href": "/",
+      "href": "/catalog/",
       "text": "Label",
       "size": "default",
       "iconName": "",
       "target": "_blank",
       "rel": "noopener noreferrer",
       "download": false,
-      "onclick": "",
       "ariaLabel": ""
     },
     {
       "name": "demoLink2",
-      "href": "/",
+      "href": "/catalog/",
       "text": "Label",
       "size": "small",
       "iconName": "",
       "target": "_self",
       "rel": "",
       "download": false,
-      "onclick": "",
       "ariaLabel": ""
     },
     {
@@ -44,7 +42,6 @@
       "target": "_self",
       "rel": "",
       "download": false,
-      "onclick": "",
       "ariaLabel": "Tab navigation link"
     },
     {
@@ -56,7 +53,6 @@
       "target": "_self",
       "rel": "",
       "download": false,
-      "onclick": "",
       "ariaLabel": "Menu navigation link"
     },
     {
@@ -68,7 +64,6 @@
       "target": "_blank",
       "rel": "noopener noreferrer",
       "download": false,
-      "onclick": "",
       "ariaLabel": "Visit our Facebook page"
     },
     {
@@ -80,7 +75,6 @@
       "target": "_blank",
       "rel": "noopener noreferrer",
       "download": false,
-      "onclick": "",
       "ariaLabel": "Visit our LinkedIn page"
     },
     {
@@ -92,7 +86,6 @@
       "target": "_blank",
       "rel": "noopener noreferrer",
       "download": false,
-      "onclick": "",
       "ariaLabel": "Visit our Twitter page"
     },
     {
@@ -104,19 +97,17 @@
       "target": "_blank",
       "rel": "noopener noreferrer",
       "download": false,
-      "onclick": "",
       "ariaLabel": "Visit our Instagram page"
     },
     {
       "name": "demoAccess1",
-      "href": "/accessibilite",
+      "href": "/accessibilite/",
       "text": "Accessibilité",
       "size": "small",
       "iconName": "",
       "target": "_self",
       "rel": "",
       "download": false,
-      "onclick": "",
       "ariaLabel": "Accessibility statement"
     },
     {
@@ -128,8 +119,51 @@
       "target": "_blank",
       "rel": "noopener noreferrer",
       "download": false,
-      "onclick": "",
       "ariaLabel": "Website created by hat"
+    },
+    {
+      "name": "linkHome",
+      "href": "/",
+      "text": "Accueil",
+      "size": "default",
+      "iconName": "",
+      "target": "_self",
+      "rel": "",
+      "download": false,
+      "ariaLabel": ""
+    },
+    {
+      "name": "linkBlog",
+      "href": "/blog/",
+      "text": "Blog",
+      "size": "default",
+      "iconName": "",
+      "target": "_self",
+      "rel": "",
+      "download": false,
+      "ariaLabel": ""
+    },
+    {
+      "name": "linkArticle",
+      "href": "/article/",
+      "text": "Article",
+      "size": "default",
+      "iconName": "",
+      "target": "_self",
+      "rel": "",
+      "download": false,
+      "ariaLabel": ""
+    },
+    {
+      "name": "linkContact",
+      "href": "/contact/",
+      "text": "Contact",
+      "size": "default",
+      "iconName": "",
+      "target": "_self",
+      "rel": "",
+      "download": false,
+      "ariaLabel": ""
     }
   ]
 }
