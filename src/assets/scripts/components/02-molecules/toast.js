@@ -11,6 +11,12 @@
  */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Imports
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+import { dismiss } from '../../utils/dismiss.js';
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Configuration
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -81,15 +87,15 @@ const setupAutoDismiss = (toast, duration) => {
 };
 
 /**
- * Hide toast
+ * Hide toast with animation
  * @param {HTMLElement} toast
- * @returns {void}
+ * @returns {Promise<void>}
  */
-const hideToast = (toast) => {
+const hideToast = async (toast) => {
   if (!toast || !toast.isConnected) return;
 
   activeToasts.delete(toast);
-  toast.style.display = 'none';
+  await dismiss(toast, { duration: 300 });
 };
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━

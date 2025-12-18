@@ -73,6 +73,23 @@ const MAX_TOASTS = 3;
 const DEFAULT_DURATION = 5000;
 ```
 
+**Avoid function-scoped constants:**
+
+```javascript
+// BAD: Constants inside functions (wrong scope)
+function initModal() {
+  const SELECTOR_MODAL = '[data-modal-type="modal"]'; // ← Inaccessible outside
+  const modals = document.querySelectorAll(SELECTOR_MODAL);
+}
+
+// GOOD: Top-level (accessible everywhere in module)
+const SELECTOR_MODAL = '[data-modal-type="modal"]';
+
+function initModal() {
+  const modals = document.querySelectorAll(SELECTOR_MODAL);
+}
+```
+
 **Naming Convention:**
 
 - Selectors: `SELECTOR_*` (e.g., `SELECTOR_BUTTON`)
@@ -140,8 +157,8 @@ const dismiss = (element) => element.remove();
 // Template literals
 const id = `toast-${Date.now()}`;
 
-// Destructuring
-const { duration, variant } = options;
+// Destructuring (with fallbacks for robustness)
+const { duration, variant = 'default' } = options;
 
 // Optional chaining
 config.onDismiss?.(element);
@@ -151,6 +168,16 @@ const delay = duration ?? 300;
 
 // Async/await
 await dismiss(element);
+```
+
+**Destructuring best practices:**
+
+```javascript
+// BAD: No fallback, value can be undefined
+const { panelVariant: variant } = panel.dataset;
+
+// GOOD: Explicit fallback with OR operator
+const variant = panel.dataset.panelVariant || 'simple';
 ```
 
 ---
