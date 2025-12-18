@@ -36,15 +36,24 @@ const activeToasts = new Set();
 
 /**
  * Initialize auto-dismiss for visible toasts
+ * Duration of 0 disables auto-dismiss (persistent toast)
  * @returns {void}
  */
 export const initToast = () => {
   const toasts = document.querySelectorAll(SELECTOR_TOAST);
 
-  toasts.forEach(toast => {
+  Array.from(toasts).forEach((toast, index) => {
+    // Remove excess toasts immediately
+    if (index >= MAX_TOASTS) {
+      toast.remove();
+      return;
+    }
+
+    // Setup visible toasts with auto-dismiss
     const duration = parseInt(toast.dataset.toastDuration ?? DEFAULT_DURATION, 10);
 
     if (duration > 0) {
+      toast.classList.add('is-visible');
       setupAutoDismiss(toast, duration);
     }
   });
@@ -58,11 +67,6 @@ export const initToast = () => {
  */
 const setupAutoDismiss = (toast, duration) => {
   if (activeToasts.has(toast)) return;
-
-  if (activeToasts.size >= MAX_TOASTS) {
-    const oldest = activeToasts.values().next().value;
-    hideToast(oldest);
-  }
 
   activeToasts.add(toast);
 
@@ -92,7 +96,7 @@ const setupAutoDismiss = (toast, duration) => {
  * @returns {Promise<void>}
  */
 const hideToast = async (toast) => {
-  if (!toast || !toast.isConnected) return;
+  if (!toast?.isConnected) return;
 
   activeToasts.delete(toast);
   await dismiss(toast, { duration: 300 });
