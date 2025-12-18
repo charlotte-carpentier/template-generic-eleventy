@@ -42,7 +42,7 @@ export const initToast = () => {
   const toasts = document.querySelectorAll(SELECTOR_TOAST);
 
   toasts.forEach(toast => {
-    const duration = parseInt(toast.dataset.toastDuration) || DEFAULT_DURATION;
+    const duration = parseInt(toast.dataset.toastDuration ?? DEFAULT_DURATION, 10);
 
     if (duration > 0) {
       setupAutoDismiss(toast, duration);
