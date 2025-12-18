@@ -59,6 +59,34 @@ export default initToast;
 import { initToast } from './components/02-molecules/toast.js';
 ```
 
+## Configuration Pattern
+
+### Constants Organization (2025 Standard)
+
+**Always use top-level constants:**
+
+```javascript
+// GOOD: Top-level constants
+const SELECTOR_MODAL = '[data-modal-type="modal"]';
+const SELECTOR_FOOTER = '[data-modal-footer]';
+const MAX_TOASTS = 3;
+const DEFAULT_DURATION = 5000;
+```
+
+**Naming Convention:**
+
+- Selectors: `SELECTOR_*` (e.g., `SELECTOR_BUTTON`)
+- Classes: `CLASS_*` (e.g., `CLASS_ACTIVE`)
+- Events: `EVENT_*` (e.g., `EVENT_CHANGE`)
+- Values: Direct uppercase (e.g., `MAX_ITEMS`, `DEFAULT_DELAY`)
+
+**Usage:**
+
+```javascript
+const modals = document.querySelectorAll(SELECTOR_MODAL);
+element.classList.add(CLASS_ACTIVE);
+```
+
 ---
 
 ## Initialization Pattern

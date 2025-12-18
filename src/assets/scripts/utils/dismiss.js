@@ -5,8 +5,7 @@
    └─────────────────────────────────────────────────────────┘ */
 
 /**
- * @fileoverview Reusable dismiss/close button pattern with animations
- * Handles close button clicks, animations, and DOM cleanup
+ * @fileoverview Reusable dismiss/close button pattern
  * @module utils/dismiss
  */
 
@@ -14,11 +13,9 @@
 // Configuration
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const CONFIG = {
-  CLOSE_SELECTOR: '[data-dismiss]',
-  HIDE_CLASS: 'is-hidden',
-  ANIMATION_DURATION: 300
-};
+const SELECTOR_CLOSE = '[data-dismiss]';
+const CLASS_HIDE = 'is-hidden';
+const ANIMATION_DURATION = 300;
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Core Functions
@@ -26,22 +23,22 @@ const CONFIG = {
 
 /**
  * Attach dismiss handler to element
- * @param {HTMLElement} element - Target element to dismiss
+ * @param {HTMLElement} element - Target element
  * @param {Object} options - Configuration options
- * @param {string} options.closeSelector - Close button selector
- * @param {string} options.hideClass - CSS class for hidden state
- * @param {number} options.duration - Animation duration (ms)
- * @param {boolean} options.remove - Remove from DOM after animation
- * @param {Function} options.onDismiss - Callback before dismiss
  * @returns {Function} Cleanup function
  */
 export const attachDismiss = (element, options = {}) => {
-  const config = { ...CONFIG, remove: true, ...options };
-  const closeBtn = element.querySelector(config.closeSelector);
+  const closeSelector = options.closeSelector || SELECTOR_CLOSE;
+  const hideClass = options.hideClass || CLASS_HIDE;
+  const duration = options.duration || ANIMATION_DURATION;
+  const remove = options.remove !== undefined ? options.remove : true;
+  const onDismiss = options.onDismiss;
+
+  const closeBtn = element.querySelector(closeSelector);
 
   if (!closeBtn) return () => {};
 
-  const handler = () => dismiss(element, config);
+  const handler = () => dismiss(element, { hideClass, duration, remove, onDismiss });
   closeBtn.addEventListener('click', handler);
 
   return () => closeBtn.removeEventListener('click', handler);
@@ -51,20 +48,23 @@ export const attachDismiss = (element, options = {}) => {
  * Dismiss element with animation
  * @param {HTMLElement} element - Element to dismiss
  * @param {Object} options - Dismiss options
- * @returns {Promise<void>} Resolves after animation/removal
+ * @returns {Promise<void>}
  */
 export const dismiss = async (element, options = {}) => {
   if (!element || !element.isConnected) return;
 
-  const config = { ...CONFIG, remove: true, ...options };
+  const hideClass = options.hideClass || CLASS_HIDE;
+  const duration = options.duration || ANIMATION_DURATION;
+  const remove = options.remove !== undefined ? options.remove : true;
+  const onDismiss = options.onDismiss;
 
-  config.onDismiss?.(element);
+  onDismiss?.(element);
 
   element.dispatchEvent(new Event('dismiss', { bubbles: true }));
 
-  await animateOut(element, config.hideClass, config.duration);
+  await animateOut(element, hideClass, duration);
 
-  if (config.remove) {
+  if (remove) {
     element.remove();
   }
 };
@@ -73,7 +73,7 @@ export const dismiss = async (element, options = {}) => {
  * Dismiss multiple elements
  * @param {HTMLElement[]} elements - Elements array
  * @param {Object} options - Dismiss options
- * @returns {Promise<void[]>} Resolves when all dismissed
+ * @returns {Promise<void[]>}
  */
 export const dismissAll = (elements, options = {}) => {
   return Promise.all(
@@ -86,11 +86,11 @@ export const dismissAll = (elements, options = {}) => {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
- * Animate element out with Web Animations API
+ * Animate element out
  * @param {HTMLElement} element - Element to animate
  * @param {string} hideClass - CSS class for hide state
  * @param {number} duration - Animation duration (ms)
- * @returns {Promise<void>} Animation complete
+ * @returns {Promise<void>}
  */
 const animateOut = async (element, hideClass, duration) => {
   element.classList.add(hideClass);

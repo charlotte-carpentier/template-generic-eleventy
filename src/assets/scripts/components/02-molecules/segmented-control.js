@@ -7,12 +7,10 @@
 // Configuration
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const CONFIG = {
-  CONTROL_SELECTOR: '[data-segmented-type="segmented-control"]',
-  SEGMENT_SELECTOR: 'button',
-  ACTIVE_CLASS: 'segment-active',
-  DISABLED_CLASS: 'segment-disabled'
-};
+const SELECTOR_CONTROL = '[data-segmented-type="segmented-control"]';
+const SELECTOR_SEGMENT = 'button';
+const CLASS_ACTIVE = 'segment-active';
+const CLASS_DISABLED = 'segment-disabled';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Core Functions
@@ -23,7 +21,7 @@ const CONFIG = {
  * @returns {void}
  */
 export const initSegmentedControl = () => {
-  document.querySelectorAll(CONFIG.CONTROL_SELECTOR).forEach(setupSegmentedControl);
+  document.querySelectorAll(SELECTOR_CONTROL).forEach(setupSegmentedControl);
 };
 
 /**
@@ -32,9 +30,8 @@ export const initSegmentedControl = () => {
  * @returns {void}
  */
 const setupSegmentedControl = (control) => {
-  const segments = control.querySelectorAll(CONFIG.SEGMENT_SELECTOR);
+  const segments = control.querySelectorAll(SELECTOR_SEGMENT);
 
-  // Setup ARIA
   control.setAttribute('role', 'group');
   control.setAttribute('aria-label', control.getAttribute('aria-label') ?? 'Segmented control');
 
@@ -49,15 +46,13 @@ const setupSegmentedControl = (control) => {
     }
   });
 
-  // Set initial active segment
-  const initialSegment = control.querySelector(`.${CONFIG.ACTIVE_CLASS}`) ||
-                         control.querySelector(`${CONFIG.SEGMENT_SELECTOR}:not(:disabled)`);
+  const initialSegment = control.querySelector(`.${CLASS_ACTIVE}`) ||
+                         control.querySelector(`${SELECTOR_SEGMENT}:not(:disabled)`);
 
   if (initialSegment) {
     selectSegment(control, initialSegment, false);
   }
 
-  // Keyboard navigation
   control.addEventListener('keydown', (e) => handleSegmentKeydown(e, control));
 };
 
@@ -75,20 +70,17 @@ const setupSegmentedControl = (control) => {
 const selectSegment = (control, segment, dispatch = true) => {
   if (segment.disabled) return;
 
-  const segments = control.querySelectorAll(CONFIG.SEGMENT_SELECTOR);
+  const segments = control.querySelectorAll(SELECTOR_SEGMENT);
   const value = segment.dataset.segmentValue ?? segment.textContent.trim();
 
-  // Update all segments
   segments.forEach(seg => {
     const isSelected = seg === segment;
-    seg.classList.toggle(CONFIG.ACTIVE_CLASS, isSelected);
+    seg.classList.toggle(CLASS_ACTIVE, isSelected);
     seg.setAttribute('aria-pressed', isSelected);
   });
 
-  // Focus selected segment
   segment.focus();
 
-  // Dispatch event
   if (dispatch) {
     control.dispatchEvent(new CustomEvent('segment-change', {
       detail: { value, segment },
@@ -108,7 +100,7 @@ const selectSegment = (control, segment, dispatch = true) => {
  * @returns {void}
  */
 const handleSegmentKeydown = (event, control) => {
-  const segments = Array.from(control.querySelectorAll(CONFIG.SEGMENT_SELECTOR));
+  const segments = Array.from(control.querySelectorAll(SELECTOR_SEGMENT));
   const enabledSegments = segments.filter(seg => !seg.disabled);
   const currentIndex = enabledSegments.findIndex(seg => seg === document.activeElement);
 
@@ -158,7 +150,7 @@ const handleSegmentKeydown = (event, control) => {
  * @returns {void}
  */
 export const setActiveSegment = (control, value) => {
-  const segment = control.querySelector(`${CONFIG.SEGMENT_SELECTOR}[data-segment-value="${value}"]`);
+  const segment = control.querySelector(`${SELECTOR_SEGMENT}[data-segment-value="${value}"]`);
   if (segment) {
     selectSegment(control, segment);
   }
@@ -170,7 +162,7 @@ export const setActiveSegment = (control, value) => {
  * @returns {string|null} Active segment value
  */
 export const getActiveSegment = (control) => {
-  const activeSegment = control.querySelector(`.${CONFIG.ACTIVE_CLASS}`);
+  const activeSegment = control.querySelector(`.${CLASS_ACTIVE}`);
   return activeSegment?.dataset.segmentValue ?? activeSegment?.textContent.trim() ?? null;
 };
 

@@ -1,11 +1,18 @@
 /* ┌─────────────────────────────────────────────────────────┐
-   │ MOLECULE › Panel (Datepicker)                          │
+   │ MOLECULE › Panel (Datepicker)                           │
    │ Calendar navigation and date selection                  │
    └─────────────────────────────────────────────────────────┘ */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Configuration
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+const SELECTOR_PANEL = '[data-panel-type="date"]';
+const SELECTOR_CALENDARS = '[data-panel-calendars]';
+const SELECTOR_MONTH_WRAPPER = '[data-panel-month-wrapper]';
+const SELECTOR_NAV_PREV = '[data-panel-nav-prev]';
+const SELECTOR_NAV_NEXT = '[data-panel-nav-next]';
+const SELECTOR_DATE = '[data-panel-date]';
 
 const MONTHS = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -35,8 +42,8 @@ const getNextMonth = (month, year) => {
  * @returns {Object} Classes object
  */
 const getClasses = (panel) => {
-  const container = panel.querySelector('[data-panel-calendars]');
-  const monthWrapper = panel.querySelector('[data-panel-month-wrapper]');
+  const container = panel.querySelector(SELECTOR_CALENDARS);
+  const monthWrapper = panel.querySelector(SELECTOR_MONTH_WRAPPER);
 
   if (!container) return {};
 
@@ -61,7 +68,7 @@ const getClasses = (panel) => {
  * @returns {void}
  */
 export const initPanel = () => {
-  document.querySelectorAll('[data-panel-type="date"]').forEach(setupPanel);
+  document.querySelectorAll(SELECTOR_PANEL).forEach(setupPanel);
 };
 
 /**
@@ -89,22 +96,19 @@ const setupPanel = (panel) => {
       : [{ month: currentMonth, year: currentYear }]
   };
 
-  // Generate initial UI
   generateLabels(panel, state);
   generateCalendars(panel, state);
 
-  // Navigation
-  const prevBtn = panel.querySelector('[data-panel-nav-prev]');
-  const nextBtn = panel.querySelector('[data-panel-nav-next]');
+  const prevBtn = panel.querySelector(SELECTOR_NAV_PREV);
+  const nextBtn = panel.querySelector(SELECTOR_NAV_NEXT);
 
   prevBtn?.addEventListener('click', () => navigate(panel, state, -1));
   nextBtn?.addEventListener('click', () => navigate(panel, state, 1));
 
-  // Date selection - Event delegation on calendars container
-  const calendarsContainer = panel.querySelector('[data-panel-calendars]');
+  const calendarsContainer = panel.querySelector(SELECTOR_CALENDARS);
   if (calendarsContainer) {
     calendarsContainer.addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-panel-date]');
+      const btn = e.target.closest(SELECTOR_DATE);
       if (btn?.dataset.dateKey && !btn.disabled) {
         toggleDate(btn, state);
       }
@@ -119,7 +123,7 @@ const setupPanel = (panel) => {
  * @returns {void}
  */
 const generateLabels = (panel, state) => {
-  const wrapper = panel.querySelector('[data-panel-month-wrapper]');
+  const wrapper = panel.querySelector(SELECTOR_MONTH_WRAPPER);
   if (!wrapper) return;
 
   const fragment = document.createDocumentFragment();
@@ -143,7 +147,7 @@ const generateLabels = (panel, state) => {
  * @returns {void}
  */
 const generateCalendars = (panel, state) => {
-  const container = panel.querySelector('[data-panel-calendars]');
+  const container = panel.querySelector(SELECTOR_CALENDARS);
   if (!container) return;
 
   const fragment = document.createDocumentFragment();
@@ -169,7 +173,6 @@ const createCalendar = (month, year, state) => {
   cal.className = classes.calendar;
   cal.dataset.panelCalendar = 'true';
 
-  // Day headers
   const headerGrid = document.createElement('div');
   headerGrid.className = classes.header;
 
@@ -182,7 +185,6 @@ const createCalendar = (month, year, state) => {
 
   cal.appendChild(headerGrid);
 
-  // Dates grid
   const grid = document.createElement('div');
   grid.className = classes.grid;
 
@@ -190,19 +192,16 @@ const createCalendar = (month, year, state) => {
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const prevMonthDays = new Date(year, month, 0).getDate();
 
-  // Previous month days
   for (let i = firstDay - 1; i >= 0; i--) {
     grid.appendChild(createBtn(prevMonthDays - i, 'prev', true, null, state));
   }
 
-  // Current month days
   for (let d = 1; d <= daysInMonth; d++) {
     const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
     const isSelected = state.selectedDates.has(dateKey);
     grid.appendChild(createBtn(d, 'current', false, dateKey, state, isSelected));
   }
 
-  // Next month days to complete grid
   const totalCells = firstDay + daysInMonth;
   const remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
 
@@ -233,7 +232,6 @@ const createBtn = (day, type, disabled, dateKey, state, isSelected = false) => {
   btn.disabled = disabled;
   btn.dataset.panelDate = type === 'current' ? day : `${type}-${day}`;
 
-  // Apply classes from Nunjucks
   btn.className = type === 'current' ? classes.dateCurrent : classes.dateOutside;
 
   if (type === 'current') {
@@ -286,11 +284,9 @@ const toggleDate = (btn, state) => {
 
   if (isSelected) {
     state.selectedDates.delete(dateKey);
-    // Remove selected classes
     btn.className = classes.dateCurrent;
   } else {
     state.selectedDates.add(dateKey);
-    // Add selected classes
     btn.className = `${classes.dateCurrent} ${classes.dateSelected}`;
   }
 };

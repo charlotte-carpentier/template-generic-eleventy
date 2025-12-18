@@ -8,18 +8,15 @@
  * @fileoverview Native HTML5 dialog functionality
  * @module organisms/modal
  * @created 2025-01-15
- * @updated 2025-12-12 (HTML5 dialog native)
+ * @updated 2025-12-18
  */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Configuration
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const CONFIG = {
-  MODAL_SELECTOR: '[data-modal-type="modal"]',
-  FOOTER_SELECTOR: '[data-modal-footer]'
-};
-
+const SELECTOR_MODAL = '[data-modal-type="modal"]';
+const SELECTOR_FOOTER = '[data-modal-footer]';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Core Functions
@@ -30,7 +27,7 @@ const CONFIG = {
  * @returns {void}
  */
 export const initModal = () => {
-  const modals = document.querySelectorAll(CONFIG.MODAL_SELECTOR);
+  const modals = document.querySelectorAll(SELECTOR_MODAL);
 
   modals.forEach(modal => {
     attachButtonListeners(modal);
@@ -44,16 +41,14 @@ export const initModal = () => {
  * @returns {void}
  */
 const attachButtonListeners = (modal) => {
-  const footer = modal.querySelector(CONFIG.FOOTER_SELECTOR);
+  const footer = modal.querySelector(SELECTOR_FOOTER);
   if (!footer) return;
 
   const buttons = footer.querySelectorAll('button');
   if (buttons.length === 0) return;
 
-  // Primary button (first) = Execute action + close
   const primaryBtn = buttons[0];
   primaryBtn?.addEventListener('click', () => {
-    // Dispatch custom event for app-specific actions
     modal.dispatchEvent(new CustomEvent('modal-primary-action', {
       bubbles: true,
       detail: {
@@ -62,11 +57,9 @@ const attachButtonListeners = (modal) => {
       }
     }));
 
-    // Close modal after action dispatch
     modal.close();
   });
 
-  // Secondary button (last) = Cancel/Close
   const secondaryBtn = buttons[buttons.length - 1];
   secondaryBtn?.addEventListener('click', () => {
     modal.close();
@@ -80,7 +73,6 @@ const attachButtonListeners = (modal) => {
  */
 const attachBackdropListener = (modal) => {
   modal.addEventListener('click', (e) => {
-    // Close if click on backdrop (outside dialog content)
     const dialogDimensions = modal.getBoundingClientRect();
     if (
       e.clientX < dialogDimensions.left ||
@@ -92,7 +84,6 @@ const attachBackdropListener = (modal) => {
     }
   });
 };
-
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Public API
@@ -110,10 +101,8 @@ export const openModal = (modalOrId) => {
 
   if (!modal) return;
 
-  // Native showModal() method
   modal.showModal();
 
-  // Dispatch custom event
   modal.dispatchEvent(new CustomEvent('modal-open', { bubbles: true }));
 };
 
@@ -129,10 +118,8 @@ export const closeModal = (modalOrId) => {
 
   if (!modal) return;
 
-  // Native close() method
   modal.close();
 
-  // Dispatch custom event
   modal.dispatchEvent(new CustomEvent('modal-close', { bubbles: true }));
 };
 
@@ -154,7 +141,6 @@ export const toggleModal = (modalOrId) => {
     openModal(modal);
   }
 };
-
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦

@@ -7,17 +7,13 @@
 // Configuration
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const SELECTORS = {
-  SLIDER: '[data-slider-name]',
-  TRACK: '[data-slider-track]',
-  FILL: '[data-slider-fill]',
-  HANDLE: '[data-slider-handle]',
-  INDICATOR: '[data-slider-indicator]'
-};
+const SELECTOR_SLIDER = '[data-slider-name]';
+const SELECTOR_TRACK = '[data-slider-track]';
+const SELECTOR_FILL = '[data-slider-fill]';
+const SELECTOR_HANDLE = '[data-slider-handle]';
+const SELECTOR_INDICATOR = '[data-slider-indicator]';
 
-const EVENTS = {
-  CHANGE: 'slider-change'
-};
+const EVENT_CHANGE = 'slider-change';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Core Functions
@@ -28,7 +24,7 @@ const EVENTS = {
  * @returns {void}
  */
 export const initSlider = () => {
-  document.querySelectorAll(SELECTORS.SLIDER).forEach(setupSlider);
+  document.querySelectorAll(SELECTOR_SLIDER).forEach(setupSlider);
 };
 
 /**
@@ -42,7 +38,6 @@ const setupSlider = (slider) => {
   const max = parseFloat(sliderMax);
   const step = parseFloat(sliderStep);
 
-  // Get initial values from data attributes
   let initialValues;
   if (type === 'single') {
     const valueStr = slider.dataset.sliderValue;
@@ -56,9 +51,9 @@ const setupSlider = (slider) => {
     ];
   }
 
-  const track = slider.querySelector(SELECTORS.TRACK);
-  const fill = slider.querySelector(SELECTORS.FILL);
-  const handles = slider.querySelectorAll(SELECTORS.HANDLE);
+  const track = slider.querySelector(SELECTOR_TRACK);
+  const fill = slider.querySelector(SELECTOR_FILL);
+  const handles = slider.querySelectorAll(SELECTOR_HANDLE);
 
   if (!track || !fill || handles.length === 0) return;
 
@@ -72,14 +67,12 @@ const setupSlider = (slider) => {
     activeHandle: null
   };
 
-  // Attach events to each handle
   handles.forEach((handle, index) => {
     handle.addEventListener('mousedown', (e) => startDrag(e, index, slider, track, fill, handles, state));
     handle.addEventListener('touchstart', (e) => startDrag(e, index, slider, track, fill, handles, state), { passive: false });
     handle.addEventListener('keydown', (e) => handleKeyboard(e, index, slider, track, fill, handles, state));
   });
 
-  // Initial render
   updateSliderUI(slider, track, fill, handles, state);
 };
 
@@ -134,7 +127,6 @@ const onDrag = (e, handleIndex, slider, track, fill, handles, state) => {
   let newValue = state.min + (percentage / 100) * (state.max - state.min);
   newValue = Math.round(newValue / state.step) * state.step;
 
-  // Range constraints
   if (state.type === 'range') {
     newValue = handleIndex === 0
       ? Math.min(newValue, state.values[1])
@@ -144,8 +136,7 @@ const onDrag = (e, handleIndex, slider, track, fill, handles, state) => {
   state.values[handleIndex] = newValue;
   updateSliderUI(slider, track, fill, handles, state);
 
-  // Dispatch event
-  slider.dispatchEvent(new CustomEvent(EVENTS.CHANGE, {
+  slider.dispatchEvent(new CustomEvent(EVENT_CHANGE, {
     detail: {
       value: state.type === 'single' ? state.values[0] : state.values,
       handleIndex
@@ -200,7 +191,6 @@ const handleKeyboard = (e, handleIndex, slider, track, fill, handles, state) => 
       return;
   }
 
-  // Range constraints
   if (state.type === 'range') {
     newValue = handleIndex === 0
       ? Math.min(newValue, state.values[1])
@@ -210,8 +200,7 @@ const handleKeyboard = (e, handleIndex, slider, track, fill, handles, state) => 
   state.values[handleIndex] = newValue;
   updateSliderUI(slider, track, fill, handles, state);
 
-  // Dispatch event
-  slider.dispatchEvent(new CustomEvent(EVENTS.CHANGE, {
+  slider.dispatchEvent(new CustomEvent(EVENT_CHANGE, {
     detail: {
       value: state.type === 'single' ? state.values[0] : state.values,
       handleIndex
@@ -232,11 +221,9 @@ const handleKeyboard = (e, handleIndex, slider, track, fill, handles, state) => 
 const updateSliderUI = (slider, track, fill, handles, state) => {
   const { min, max, values, type } = state;
 
-  // Calculate percentages
   const percent1 = ((values[0] - min) / (max - min)) * 100;
   const percent2 = type === 'range' ? ((values[1] - min) / (max - min)) * 100 : 0;
 
-  // Update fill
   if (type === 'single') {
     fill.style.left = '0%';
     fill.style.width = `${percent1}%`;
@@ -245,19 +232,14 @@ const updateSliderUI = (slider, track, fill, handles, state) => {
     fill.style.width = `${percent2 - percent1}%`;
   }
 
-  // Update handles
   handles.forEach((handle, index) => {
     const percent = index === 0 ? percent1 : percent2;
     const value = values[index];
 
-    // Position
     handle.style.left = `${percent}%`;
-
-    // ARIA
     handle.setAttribute('aria-valuenow', value);
 
-    // Indicator text
-    const indicator = handle.querySelector(SELECTORS.INDICATOR);
+    const indicator = handle.querySelector(SELECTOR_INDICATOR);
     if (indicator) {
       indicator.textContent = value;
     }
@@ -276,9 +258,9 @@ const updateSliderUI = (slider, track, fill, handles, state) => {
  */
 export const setSliderValue = (slider, value) => {
   const { sliderType: type, sliderMin, sliderMax, sliderStep } = slider.dataset;
-  const track = slider.querySelector(SELECTORS.TRACK);
-  const fill = slider.querySelector(SELECTORS.FILL);
-  const handles = slider.querySelectorAll(SELECTORS.HANDLE);
+  const track = slider.querySelector(SELECTOR_TRACK);
+  const fill = slider.querySelector(SELECTOR_FILL);
+  const handles = slider.querySelectorAll(SELECTOR_HANDLE);
 
   if (!track || !fill || handles.length === 0) return;
 
@@ -300,7 +282,7 @@ export const setSliderValue = (slider, value) => {
  */
 export const getSliderValue = (slider) => {
   const { sliderType: type } = slider.dataset;
-  const handles = slider.querySelectorAll(SELECTORS.HANDLE);
+  const handles = slider.querySelectorAll(SELECTOR_HANDLE);
 
   if (handles.length === 0) return null;
 

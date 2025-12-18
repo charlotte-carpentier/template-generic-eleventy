@@ -8,7 +8,7 @@
  * @fileoverview Header mobile menu functionality
  * @module organisms/header
  * @created 2025-01-15
- * @updated 2025-12-15
+ * @updated 2025-12-18
  */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -17,18 +17,14 @@
 
 import { debounce } from '../../utils/debounce.js';
 
-
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Configuration
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const CONFIG = {
-  BURGER_ID: 'burger-toggle',
-  OVERLAY_ID: 'mobile-overlay',
-  MOBILE_BREAKPOINT: 1024,
-  RESIZE_DEBOUNCE_DELAY: 150
-};
-
+const BURGER_ID = 'burger-toggle';
+const OVERLAY_ID = 'mobile-overlay';
+const MOBILE_BREAKPOINT = 1024;
+const RESIZE_DEBOUNCE_DELAY = 150;
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Mobile Menu
@@ -39,14 +35,13 @@ const CONFIG = {
  * @returns {void}
  */
 export const initMobileMenu = () => {
-  const burgerToggle = document.getElementById(CONFIG.BURGER_ID);
-  const mobileOverlay = document.getElementById(CONFIG.OVERLAY_ID);
+  const burgerToggle = document.getElementById(BURGER_ID);
+  const mobileOverlay = document.getElementById(OVERLAY_ID);
 
   if (!burgerToggle || !mobileOverlay) {
     return;
   }
 
-  // Cache icon elements
   const iconOpen = burgerToggle.querySelector('[data-burger-icon="open"]');
   const iconClose = burgerToggle.querySelector('[data-burger-icon="close"]');
 
@@ -67,29 +62,25 @@ export const initMobileMenu = () => {
     document.body.style.overflow = isOpen ? '' : 'hidden';
   };
 
-  // Toggle menu on burger click
   burgerToggle.addEventListener('click', () => {
     const isOpen = burgerToggle.getAttribute('aria-expanded') === 'true';
     toggleMenu(isOpen);
   });
 
-  // Close menu on ESC key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && burgerToggle.getAttribute('aria-expanded') === 'true') {
       toggleMenu(true);
     }
   });
 
-  // Close menu on desktop resize (debounced)
   const handleResize = debounce(() => {
-    if (window.innerWidth >= CONFIG.MOBILE_BREAKPOINT) {
+    if (window.innerWidth >= MOBILE_BREAKPOINT) {
       toggleMenu(true);
     }
-  }, CONFIG.RESIZE_DEBOUNCE_DELAY);
+  }, RESIZE_DEBOUNCE_DELAY);
 
   window.addEventListener('resize', handleResize);
 };
-
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦

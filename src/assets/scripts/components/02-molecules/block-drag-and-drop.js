@@ -14,24 +14,18 @@
 // Configuration
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-const CONFIG = {
-  SELECTORS: {
-    CONTAINER: '[data-drag-drop="true"]',
-    DROPZONE: '[data-drag-drop-zone]',
-    BUTTON: '[data-drag-drop-button]',
-    INPUT: '[data-drag-drop-input]',
-    STATUS: '[data-drag-drop-status]'
-  },
-  CLASSES: {
-    ACTIVE: 'drag-active',
-    ERROR: 'drag-error',
-    SUCCESS: 'drag-success'
-  },
-  DEFAULTS: {
-    MAX_FILE_SIZE: 10 * 1024 * 1024, // 10MB
-    ALLOWED_TYPES: []
-  }
-};
+const SELECTOR_CONTAINER = '[data-drag-drop="true"]';
+const SELECTOR_DROPZONE = '[data-drag-drop-zone]';
+const SELECTOR_BUTTON = '[data-drag-drop-button]';
+const SELECTOR_INPUT = '[data-drag-drop-input]';
+const SELECTOR_STATUS = '[data-drag-drop-status]';
+
+const CLASS_ACTIVE = 'drag-active';
+const CLASS_ERROR = 'drag-error';
+const CLASS_SUCCESS = 'drag-success';
+
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const ALLOWED_TYPES = [];
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Core Functions
@@ -42,13 +36,11 @@ const CONFIG = {
  * @returns {void}
  */
 export function initBlockDragAndDrop() {
-  const containers = document.querySelectorAll(CONFIG.SELECTORS.CONTAINER);
+  const containers = document.querySelectorAll(SELECTOR_CONTAINER);
 
   if (containers.length === 0) return;
 
-  // Window-level event prevention (MDN 2025 best practice)
   setupWindowEvents();
-
   containers.forEach(container => setupDropzone(container));
 }
 
@@ -57,7 +49,6 @@ export function initBlockDragAndDrop() {
  * @returns {void}
  */
 function setupWindowEvents() {
-  // Prevent default file drop on window
   window.addEventListener('dragover', (e) => {
     if ([...e.dataTransfer.items].some((item) => item.kind === 'file')) {
       e.preventDefault();
@@ -77,45 +68,40 @@ function setupWindowEvents() {
  * @returns {void}
  */
 function setupDropzone(container) {
-  const dropzone = container.querySelector(CONFIG.SELECTORS.DROPZONE);
-  const button = container.querySelector(CONFIG.SELECTORS.BUTTON);
-  const input = container.querySelector(CONFIG.SELECTORS.INPUT);
-  const status = container.querySelector(CONFIG.SELECTORS.STATUS);
+  const dropzone = container.querySelector(SELECTOR_DROPZONE);
+  const button = container.querySelector(SELECTOR_BUTTON);
+  const input = container.querySelector(SELECTOR_INPUT);
+  const status = container.querySelector(SELECTOR_STATUS);
 
   if (!dropzone || !input || !status) return;
 
-  // Get configuration from data attributes
   const config = {
-    maxSize: parseInt(container.getAttribute('data-max-size')) || CONFIG.DEFAULTS.MAX_FILE_SIZE,
-    allowedTypes: container.getAttribute('data-allowed-types')?.split(',') || CONFIG.DEFAULTS.ALLOWED_TYPES,
+    maxSize: parseInt(container.getAttribute('data-max-size')) || MAX_FILE_SIZE,
+    allowedTypes: container.getAttribute('data-allowed-types')?.split(',') || ALLOWED_TYPES,
     multiple: container.hasAttribute('data-multiple')
   };
 
-  // Prevent default on dropzone
   ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
     dropzone.addEventListener(eventName, preventDefaults, false);
   });
 
-  // Visual feedback on drag
   ['dragenter', 'dragover'].forEach(eventName => {
     dropzone.addEventListener(eventName, () => {
-      dropzone.classList.add(CONFIG.CLASSES.ACTIVE);
+      dropzone.classList.add(CLASS_ACTIVE);
     }, false);
   });
 
   ['dragleave', 'drop'].forEach(eventName => {
     dropzone.addEventListener(eventName, () => {
-      dropzone.classList.remove(CONFIG.CLASSES.ACTIVE);
+      dropzone.classList.remove(CLASS_ACTIVE);
     }, false);
   });
 
-  // Handle drop
   dropzone.addEventListener('drop', (e) => {
     const files = e.dataTransfer.files;
     handleFiles({ files, container, input, status, config });
   }, false);
 
-  // Click handlers (WCAG 2.5.7 single-pointer alternative)
   dropzone.addEventListener('click', () => {
     input.click();
   });
@@ -128,12 +114,10 @@ function setupDropzone(container) {
     });
   }
 
-  // File input change
   input.addEventListener('change', (e) => {
     handleFiles({ files: e.target.files, container, input, status, config });
   });
 
-  // Keyboard accessibility (WCAG 2.1.1 Level A)
   dropzone.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -159,28 +143,20 @@ function preventDefaults(e) {
 /**
  * Handle dropped or selected files
  * @param {Object} options - Handler options
- * @param {FileList} options.files - Files to handle
- * @param {HTMLElement} options.container - Container element
- * @param {HTMLElement} options.input - Input element
- * @param {HTMLElement} options.status - Status element
- * @param {Object} options.config - Configuration
  * @returns {void}
  */
 function handleFiles({ files, container, input, status, config }) {
-  const dropzone = container.querySelector(CONFIG.SELECTORS.DROPZONE);
+  const dropzone = container.querySelector(SELECTOR_DROPZONE);
 
-  // Clear previous states
-  dropzone?.classList.remove(CONFIG.CLASSES.ERROR, CONFIG.CLASSES.SUCCESS);
+  dropzone?.classList.remove(CLASS_ERROR, CLASS_SUCCESS);
 
   const fileArray = Array.from(files);
 
-  // Check multiple files
   if (!config.multiple && fileArray.length > 1) {
     announceError({ status, message: 'Only one file allowed' });
     return;
   }
 
-  // Validate files
   const validFiles = [];
   for (const file of fileArray) {
     const validation = validateFile(file, config);
@@ -193,11 +169,9 @@ function handleFiles({ files, container, input, status, config }) {
     validFiles.push(file);
   }
 
-  // Success
   if (validFiles.length > 0) {
     announceSuccess({ status, files: validFiles });
 
-    // Dispatch custom event
     container.dispatchEvent(new CustomEvent('hat:upload-start', {
       detail: { files: validFiles },
       bubbles: true
@@ -212,7 +186,6 @@ function handleFiles({ files, container, input, status, config }) {
  * @returns {Object} Validation result
  */
 function validateFile(file, config) {
-  // Check size
   if (file.size > config.maxSize) {
     return {
       valid: false,
@@ -220,7 +193,6 @@ function validateFile(file, config) {
     };
   }
 
-  // Check type
   if (config.allowedTypes.length > 0 && !config.allowedTypes.includes(file.type)) {
     return {
       valid: false,
@@ -238,8 +210,6 @@ function validateFile(file, config) {
 /**
  * Announce error to screen readers
  * @param {Object} options - Announce options
- * @param {HTMLElement} options.status - Status element
- * @param {string} options.message - Error message
  * @returns {void}
  */
 function announceError({ status, message }) {
@@ -247,7 +217,6 @@ function announceError({ status, message }) {
 
   status.textContent = `Error: ${message}`;
 
-  // Auto-clear after 3 seconds
   setTimeout(() => {
     status.textContent = '';
   }, 3000);
@@ -256,8 +225,6 @@ function announceError({ status, message }) {
 /**
  * Announce success to screen readers
  * @param {Object} options - Announce options
- * @param {HTMLElement} options.status - Status element
- * @param {Array<File>} options.files - Valid files
  * @returns {void}
  */
 function announceSuccess({ status, files }) {

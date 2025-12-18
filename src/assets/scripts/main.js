@@ -8,7 +8,7 @@
  * @fileoverview Main JavaScript entry point for site-wide functionality
  * @module core/main
  * @created 2025-01-15
- * @updated 2025-12-15
+ * @updated 2025-12-18
  */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -24,46 +24,17 @@ import { initBlockDragAndDrop } from './components/02-molecules/block-drag-and-d
 import { initPanel } from './components/02-molecules/panel.js';
 import { initSegmentedControl } from './components/02-molecules/segmented-control.js';
 import { initSlider } from './components/02-molecules/slider.js';
+import { initToast } from './components/02-molecules/toast.js';
 
 // Organisms
 import { initMobileMenu } from './components/03-organisms/header.js';
 import { initModal, openModal } from './components/03-organisms/modal.js';
 import { initErrorFragmentGroup } from './components/03-organisms/error-fragment-group.js';
 import { initErrorLayout, initAccessibilityToggle } from './components/03-organisms/error-layout.js';
-import { initTabBar } from './components/03-organisms/tab-bar.js';
 
 // Utils
 import { initActiveLinks } from './utils/active-link.js';
 import { dismiss } from './utils/dismiss.js';
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// Configuration
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-const COMPONENT_SELECTORS = {
-  // Atoms
-  TOOLTIP: '[data-tooltip][aria-describedby]',
-  INPUT: '[data-input-type="input"]',
-  ERROR_LINK: '[data-error-link]',
-
-  // Molecules
-  CAPTION: '.caption-container',
-  MODAL: '[data-modal-type="modal"]',
-  DRAG_DROP: '[data-drag-drop]',
-  PAGINATION: '[data-pagination]',
-  PANEL: '[data-panel-type]',
-  SEGMENTED_CONTROL: '[data-segmented-control]',
-  SLIDER: '[data-slider]',
-  STEPPER: '[data-stepper]',
-
-  // Organisms
-  TAB_SECTIONS: '.tab-section-item',
-  ERROR_FRAGMENTS: '[data-fragment-clickable]',
-  ERROR_LAYOUT: '[data-error-layout-type="error-layout"]',
-  HEADER: 'header',
-  MOBILE_MENU: '#burger-toggle'
-};
-
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Event Delegation
@@ -74,7 +45,6 @@ const COMPONENT_SELECTORS = {
  * @returns {void}
  */
 function initEventDelegation() {
-  // Dismissible components (event delegation pattern)
   document.addEventListener('click', (e) => {
     if (e.target.closest('[data-dismiss]')) {
       const target = e.target.closest('[data-dismissible]');
@@ -85,78 +55,60 @@ function initEventDelegation() {
   });
 }
 
-
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Conditional Initialization
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
  * Initialize components based on page context
- * Only loads and initializes components that exist on the page
  * @returns {void}
  */
 function initComponents() {
   // Atoms
-  if (document.querySelector(COMPONENT_SELECTORS.TOOLTIP)) {
-    initTooltip();
-  }
-
-  if (document.querySelector(COMPONENT_SELECTORS.INPUT)) {
+  if (document.querySelector('[data-input-type="input"]')) {
     initInput();
   }
 
-  if (document.querySelector(COMPONENT_SELECTORS.ERROR_LINK)) {
+  if (document.querySelector('[data-error-link]')) {
     initErrorLinks();
   }
 
   // Molecules
-  if (document.querySelector(COMPONENT_SELECTORS.CAPTION)) {
-    initTooltips();
-  }
-
-  if (document.querySelector(COMPONENT_SELECTORS.MODAL)) {
+  if (document.querySelector('[data-modal-type="modal"]')) {
     initModal();
     initModalTriggers();
   }
 
-  if (document.querySelector(COMPONENT_SELECTORS.DRAG_DROP)) {
+  if (document.querySelector('[data-drag-drop]')) {
     initBlockDragAndDrop();
   }
 
-  if (document.querySelector(COMPONENT_SELECTORS.PAGINATION)) {
-    initPagination();
-  }
-
-  if (document.querySelector(COMPONENT_SELECTORS.PANEL)) {
+  if (document.querySelector('[data-panel-type]')) {
     initPanel();
   }
 
-  if (document.querySelector(COMPONENT_SELECTORS.SEGMENTED_CONTROL)) {
+  if (document.querySelector('[data-segmented-control]')) {
     initSegmentedControl();
   }
 
-  if (document.querySelector(COMPONENT_SELECTORS.SLIDER)) {
+  if (document.querySelector('[data-slider]')) {
     initSlider();
   }
 
-  if (document.querySelector(COMPONENT_SELECTORS.STEPPER)) {
-    initStepper();
+  if (document.querySelector('[data-toast-type="toast"]')) {
+    initToast();
   }
 
   // Organisms
-  if (document.querySelector(COMPONENT_SELECTORS.MOBILE_MENU)) {
+  if (document.querySelector('#burger-toggle')) {
     initMobileMenu();
   }
 
-  if (document.querySelector(COMPONENT_SELECTORS.TAB_SECTIONS)) {
-    initTabBar();
-  }
-
-  if (document.querySelector(COMPONENT_SELECTORS.ERROR_FRAGMENTS)) {
+  if (document.querySelector('[data-fragment-clickable]')) {
     initErrorFragmentGroup();
   }
 
-  if (document.querySelector(COMPONENT_SELECTORS.ERROR_LAYOUT)) {
+  if (document.querySelector('[data-error-layout-type="error-layout"]')) {
     initErrorLayout();
     initAccessibilityToggle();
   }
@@ -164,7 +116,6 @@ function initComponents() {
   // Utils - Active links for navigation
   initActiveLinks();
 }
-
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Modal Triggers
@@ -188,7 +139,6 @@ function initModalTriggers() {
   });
 }
 
-
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Global Initialization
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -202,19 +152,11 @@ function initSite() {
   initComponents();
 }
 
-
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Bootstrap
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 document.addEventListener('DOMContentLoaded', initSite);
-
-// One-page hash navigation support
-// Uncomment if using one-page site with hash anchors (/#section)
-// window.addEventListener('hashchange', () => {
-//   initActiveLinks();
-// });
-
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
