@@ -68,7 +68,7 @@
           3.1 Wrapper Classes
           Description: Layout, Background, Borders, Shadow
         --------------------------#}
-      {% set containerClasses = "flex min-w-80 max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-lg p-[var(--spacing-inset-small)]" %}
+      {% set containerClasses = "flex min-w-80 max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-lg p-[var(--spacing-inset-small)] transition-opacity duration-300 [&.is-hidden]:opacity-0 [&.is-hidden]:pointer-events-none" %}
 
       {# --------------------------
           3.2 Content Wrapper Classes

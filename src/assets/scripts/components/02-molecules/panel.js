@@ -77,7 +77,7 @@ export const initPanel = () => {
  * @returns {void}
  */
 const setupPanel = (panel) => {
-  const { panelVariant: variant } = panel.dataset;
+  const variant = panel.dataset.panelVariant || 'simple';
   const now = new Date();
   const currentMonth = now.getMonth();
   const currentYear = now.getFullYear();
