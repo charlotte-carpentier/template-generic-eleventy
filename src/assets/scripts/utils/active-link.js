@@ -19,6 +19,28 @@ const SELECTOR_NAV = 'nav, [role="navigation"]';
 const CURRENT_VALUE = 'page';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Helper Functions
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Normalize URL for comparison (handles trailing slashes)
+ * @param {string} url - URL to normalize
+ * @returns {string} Normalized URL without trailing slash
+ */
+const normalizeUrl = (url) => {
+  try {
+    const urlObj = new URL(url);
+    // Remove trailing slash except for root
+    const pathname = urlObj.pathname === '/'
+      ? '/'
+      : urlObj.pathname.replace(/\/$/, '');
+    return `${urlObj.origin}${pathname}`;
+  } catch {
+    return url;
+  }
+};
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Core Functions
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -33,12 +55,13 @@ export const setActiveLink = (container, options = {}) => {
   const { currentValue = CURRENT_VALUE } = options;
 
   const links = container.querySelectorAll(SELECTOR_LINK);
+  const currentUrl = normalizeUrl(window.location.href);
   let activeLink = null;
 
   links.forEach(link => {
     link.removeAttribute('aria-current');
 
-    if (link.href === window.location.href) {
+    if (normalizeUrl(link.href) === currentUrl) {
       link.setAttribute('aria-current', currentValue);
       activeLink = link;
     }
