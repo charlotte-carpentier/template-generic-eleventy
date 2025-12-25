@@ -69,6 +69,8 @@ template-generic-eleventy/
 │   │   ├── 02-molecules/
 │   │   ├── 03-organisms/
 │   │   └── 04-core/              # Layouts and core templates
+│   │       ├── base.njk          # Base layout
+│   │       └── post.njk          # Article layout (for Markdown articles)
 │   ├── admin/                    # Decap CMS configuration
 │   ├── assets/                   # Static assets served as-is
 │   │   ├── downloads/            # Downloadable files (e.g. PDFs, CVs, whitepapers)
@@ -91,12 +93,20 @@ template-generic-eleventy/
 │   │   │   ├── utils/            # Reusable helper scripts
 │   │   │   └── main.js           # Global entry point
 │   │   └── styles/               # Global CSS/Tailwind entrypoint
-│   │   │   ├── input.css         # Main stylesheet (imports all components)
-│   │   │   ├── 01-atoms/         # Custom styles for atom-level components
-│   │   │   ├── 02-molecules/     # Custom styles for molecule-level components
-│   │   │   └── 03-organisms/     # Custom styles for organism-level components
+│   │       ├── input.css         # Main stylesheet (imports all components)
+│   │       ├── 01-atoms/         # Custom styles for atom-level components
+│   │       ├── 02-molecules/     # Custom styles for molecule-level components
+│   │       └── 03-organisms/     # Custom styles for organism-level components
 │   ├── content/                  # Decap CMS content (blog, etc.)
-│   ├── pages /                   # Template pages (index, blog, error pages...)
+│   │   └── articles/             # Blog articles Markdown (uses post.njk layout)
+│   │       ├── article-01.md     # Individual articles (front matter: layout: "04-core/post.njk")
+│   │       ├── article-02.md
+│   │       └── ...
+│   ├── pages/                    # Template pages (index, blog, error pages...)
+│   │   ├── index.njk             # Homepage
+│   │   ├── blog.njk              # Blog listing (will add pagination: native Eleventy)
+│   │   ├── article.njk           # Article template (DEPRECATED - replaced by post.njk layout)
+│   │   └── contact.njk
 │   ├── robots.txt
 │   └── sitemap.xml
 ├── .eleventy.js                  # Eleventy configuration

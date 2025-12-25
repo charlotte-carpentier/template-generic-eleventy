@@ -14,7 +14,7 @@
         "demo"
       ],
       "itemsPerPage": 8,
-      "paginationName": "demoPreview",
+      "paginationName": "blogPagination",
       "ariaLabel": "Listing section"
     }
   ]

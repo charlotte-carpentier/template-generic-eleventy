@@ -15,6 +15,7 @@
     - options.iconDatas (array): Icon atom data (for cards and pagination)
     - options.paginationDatas (array): Pagination molecule data
     - options.selectDatas (array): Select atom data (for pagination)
+    - options.items (array): Paginated articles from Eleventy (NEW)
 
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/section-listing.njk" import renderSectionListing %}
@@ -29,7 +30,8 @@
         buttonDatas: atoms.button.buttons,
         iconDatas: atoms.icon.icons,
         paginationDatas: molecules.pagination.paginations,
-        selectDatas: atoms.select.selects
+        selectDatas: atoms.select.selects,
+        items: paginatedArticles
     }) }}
 
   @created 2025-01-15
@@ -135,15 +137,40 @@
             </div>
           {% endif %}
 
-          {# Cards grid - Filter by tags and repeat to fill itemsPerPage #}
+          {# Cards grid - Loop on paginated items (articles) #}
           <div
             class="{{ cardsGridClasses }}"
             data-section-cards
             data-items-per-page="{{ itemsPerPage }}"
           >
-            {% if cardTags and options.cardDatas %}
+            {% if options.items %}
+              {% for article in options.items %}
+                {{ renderCard({
+                    name: "articleCard",
+                    datas: [{
+                      name: "articleCard",
+                      headingName: article.data.title,
+                      content: article.data.excerpt or (article.templateContent | striptags | truncate(150)),
+                      buttonName: "readMore",
+                      tags: article.data.tags
+                    }],
+                    headingDatas: [{
+                      name: article.data.title,
+                      text: article.data.title,
+                      level: 3
+                    }],
+                    buttonDatas: [{
+                      name: "readMore",
+                      text: "Lire l'article",
+                      url: article.url,
+                      variant: "primary"
+                    }],
+                    iconDatas: options.iconDatas
+                }) }}
+              {% endfor %}
+            {% elif cardTags and options.cardDatas %}
+              {# Fallback: original cardTags logic for demo/non-paginated usage #}
               {% set displayedCards = 0 %}
-              {# Repeat loop to fill the grid with itemsPerPage cards #}
               {% for n in range(0, 4) %}
                 {% for card in options.cardDatas %}
                   {% if card.tags and displayedCards < itemsPerPage %}
@@ -173,17 +200,14 @@
               class="{{ paginationClasses }}"
               data-section-pagination
             >
-              {{ renderPagination({
-                  name: paginationName,
-                  datas: options.paginationDatas,
-                  selectDatas: options.selectDatas,
-                  buttonDatas: options.buttonDatas,
-                  iconDatas: options.iconDatas,
-                  currentPage: 1,
-                  totalPages: 10,
-                  itemsPerPage: itemsPerPage,
-                  totalItems: 98
-              }) }}
+            {{ renderPagination({
+                name: paginationName,
+                datas: options.paginationDatas,
+                pagination: options.pagination,
+                totalItems: options.totalItems,
+                selectDatas: options.selectDatas,
+                iconDatas: options.iconDatas
+            }) }}
             </div>
           {% endif %}
 

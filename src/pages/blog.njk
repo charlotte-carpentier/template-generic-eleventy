@@ -2,7 +2,11 @@
 title: "Blog"
 description: "Tous nos articles"
 layout: "04-core/base.njk"
-permalink: "/blog/"
+pagination:
+  data: collections.articles
+  size: 8
+  alias: paginatedArticles
+permalink: "/blog/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
 ---
 
 {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -51,7 +55,7 @@ permalink: "/blog/"
 }) }}
 
 {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Section Listing
+   Section Listing (Pagination native)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
 {{ renderSectionListing({
@@ -64,5 +68,8 @@ permalink: "/blog/"
   buttonDatas: atoms.button.buttons,
   iconDatas: atoms.icon.icons,
   lockupDatas: molecules["lock-up"].lockUps,
-  imageDatas: atoms.image.images
+  imageDatas: atoms.image.images,
+  pagination: pagination,
+  totalItems: collections.articles | length,
+  items: paginatedArticles
 }) }}

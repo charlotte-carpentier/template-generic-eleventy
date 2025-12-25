@@ -1,40 +1,33 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ MOLECULE › Pagination                                   │
-   │ Complete pagination with navigation and count           │
+   │ Native Eleventy pagination navigation                   │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
   Props:
     - options.name (string): Pagination identifier
     - options.datas (array): Pagination configuration data
-    - options.selectDatas (array): Select atom data (optional)
-    - options.buttonDatas (array): Button atom data (optional)
-    - options.iconDatas (array): Icon atom data (optional)
-    - options.currentPage (number): Current active page
-    - options.totalPages (number): Total number of pages
-    - options.itemsPerPage (number): Items per page
+    - options.pagination (object): Eleventy pagination object
     - options.totalItems (number): Total count of items
+    - options.selectDatas (array): Select atom data (optional)
+    - options.iconDatas (array): Icon atom data (required for nav icons)
 
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/pagination.njk" import renderPagination %}
 
     {{ renderPagination({
-        name: "demoPagination1",
+        name: "blogPagination",
         datas: molecules.pagination.paginations,
+        pagination: pagination,
+        totalItems: collections.articles | length,
         selectDatas: atoms.select.selects,
-        buttonDatas: atoms.button.buttons,
-        iconDatas: atoms.icon.icons,
-        currentPage: 1,
-        totalPages: 10,
-        itemsPerPage: 10,
-        totalItems: 98
+        iconDatas: atoms.icon.icons
     }) }}
 
   @created 2025-01-15
 #}
 
 {% from "01-atoms/select.njk" import renderSelect %}
-{% from "01-atoms/button.njk" import renderButton %}
 {% from "01-atoms/icon.njk" import renderIcon %}
 
 {% macro renderPagination(options) %}
@@ -46,6 +39,8 @@
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
     <span class="error" role="alert">Error: Missing required prop (name)</span>
+  {% elif not options.pagination %}
+    <span class="error" role="alert">Error: Missing required prop (pagination)</span>
   {% else %}
     {# Find pagination using universal filter #}
     {% set paginationData = options.datas | findByName(options.name) %}
@@ -62,27 +57,26 @@
       {% set itemsPerPageData = paginationData.itemsPerPage | default({}) %}
       {% set selectName = itemsPerPageData.selectName | default('') %}
       {% set navigationData = paginationData.navigationPager | default({}) %}
-      {% set pages = paginationData.pages | default([]) %}
+      {% set siblingCount = navigationData.siblingCount | default(2) %}
+      {% set icons = navigationData.icons | default({}) %}
       {% set totalCountData = paginationData.totalCount | default({}) %}
       {% set showCounter = totalCountData.show | default(false) %}
-      {% set currentPage = options.currentPage | default(1) %}
-      {% set totalPages = options.totalPages | default(1) %}
-      {% set itemsPerPage = options.itemsPerPage | default(10) %}
+
+      {# Extract Eleventy pagination data #}
+      {% set currentPageIndex = options.pagination.pageNumber %}
+      {% set currentPageNumber = currentPageIndex + 1 %}
+      {% set totalPages = options.pagination.hrefs | length %}
+      {% set paginationHrefs = options.pagination.hrefs %}
+      {% set paginationHref = options.pagination.href %}
+
+      {# Calculate counter values #}
       {% set totalItems = options.totalItems | default(0) %}
-
-   {# TODO Phase 6: Requires utils/pagination.js
-   - Pagination navigation (prev/next/pages) + keyboard (arrows/home/end)
-   - Items per page selector change event
-   - ARIA live announcements for page changes
-   - Reusable across lists, tables, grids via [data-paginated]
-
-   TODO Phase 6 Refactor NJK:
-   - Move molecules/pagination.js to utils/pagination.js
-   - Clean molecule-specific data-attributes (data-pagination-page, data-pagination-prev, data-pagination-next)
-   - Add universal [data-paginated] attribute on container
-   - Simplify selectors for reusability across components
-
-   See: utils/pagination.js (to be created) #}
+      {% set itemsPerPage = options.pagination.size %}
+      {% set firstItem = (currentPageIndex * itemsPerPage) + 1 %}
+      {% set lastItem = (currentPageIndex + 1) * itemsPerPage %}
+      {% if lastItem > totalItems %}
+        {% set lastItem = totalItems %}
+      {% endif %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
@@ -132,6 +126,7 @@
         --------------------------#}
       {% set navLinkBaseClasses = "inline-flex items-center justify-center min-w-[2rem] h-8 px-[var(--spacing-inline-medium)] typography-body-regular text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
       {% set navLinkActiveClasses = "bg-[var(--color-interactive-default)] text-[var(--color-global-white)]" %}
+      {% set navLinkDisabledClasses = "opacity-50 cursor-not-allowed pointer-events-none" %}
 
       {# --------------------------
           3.7 Counter Classes
@@ -161,7 +156,7 @@
         {% endif %}
 
         {# Navigation #}
-        {% if pages and pages | length > 0 %}
+        {% if totalPages > 1 %}
           <nav
             class="{{ navWrapperClasses }}"
             role="navigation"
@@ -169,48 +164,154 @@
             data-pagination-nav="true"
           >
             <ul class="{{ navListClasses }}">
-              {% for page in pages %}
+
+              {# First page button #}
+              {% if icons.first %}
                 <li class="{{ navItemClasses }}">
-                  {# Icon button (first, prev, next, last) or page number #}
-                  {% if page.iconName %}
 
-                    <a   href="{{ page.url | default('#') }}"
-                      class="{{ navLinkBaseClasses }}"
-                      data-pagination-link="true"
-                      data-pagination-action="{{ page.action }}"
-                      aria-label="{{ page.ariaLabel | default('Navigate') }}"
-                      rel="nofollow"
-                    >
+                  <a href="{{ paginationHref.first }}"
+                    class="{{ navLinkBaseClasses }} {% if not paginationHref.previous %}{{ navLinkDisabledClasses }}{% endif %}"
+                    aria-label="First page"
+                    {% if not paginationHref.previous %}aria-disabled="true"{% endif %}
+                  >
+                    {{ renderIcon({
+                        name: icons.first,
+                        datas: options.iconDatas
+                    }) | safe }}
+                  </a>
+                </li>
+              {% endif %}
+
+              {# Previous page button #}
+              {% if icons.prev %}
+                <li class="{{ navItemClasses }}">
+
+                  <a href="{{ paginationHref.previous or paginationHref.first }}"
+                    class="{{ navLinkBaseClasses }} {% if not paginationHref.previous %}{{ navLinkDisabledClasses }}{% endif %}"
+                    aria-label="Previous page"
+                    {% if not paginationHref.previous %}aria-disabled="true"{% endif %}
+                  >
+                    {{ renderIcon({
+                        name: icons.prev,
+                        datas: options.iconDatas
+                    }) | safe }}
+                  </a>
+                </li>
+              {% endif %}
+
+              {# Page numbers with sibling logic #}
+              {% set startPage = [1, currentPageNumber - siblingCount] | max %}
+              {% set endPage = [totalPages, currentPageNumber + siblingCount] | min %}
+
+              {# First page if not in range #}
+              {% if startPage > 1 %}
+                <li class="{{ navItemClasses }}">
+
+                  <a  href="{{ paginationHrefs[0] }}"
+                    class="{{ navLinkBaseClasses }}"
+                  >
+                    1
+                  </a>
+                </li>
+              {% endif %}
+
+              {# Dots before siblings #}
+              {% if startPage > 2 %}
+                <li class="{{ navItemClasses }}">
+                  <span class="{{ navLinkBaseClasses }} {{ navLinkDisabledClasses }}">
+                    {% if icons.dots %}
                       {{ renderIcon({
-                          name: page.iconName,
+                          name: icons.dots,
                           datas: options.iconDatas
-                      }) }}
-                    </a>
-                  {% else %}
+                      }) | safe }}
+                    {% else %}
+                      ...
+                    {% endif %}
+                  </span>
+                </li>
+              {% endif %}
 
-                    <a href="{{ page.url | default('#') }}"
-                      class="{{ navLinkBaseClasses }} {% if page.current %}{{ navLinkActiveClasses }}{% endif %}"
-                      data-pagination-link="true"
-                      {% if page.current %}data-pagination-current="true" aria-current="page"{% endif %}
-                      rel="nofollow"
-                    >
-                      {{ page.label }}
-                    </a>
-                  {% endif %}
+              {# Sibling pages #}
+              {% for pageNum in range(startPage, endPage + 1) %}
+                <li class="{{ navItemClasses }}">
+
+                  <a  href="{{ paginationHrefs[pageNum - 1] }}"
+                    class="{{ navLinkBaseClasses }} {% if pageNum == currentPageNumber %}{{ navLinkActiveClasses }}{% endif %}"
+                    {% if pageNum == currentPageNumber %}aria-current="page"{% endif %}
+                  >
+                    {{ pageNum }}
+                  </a>
                 </li>
               {% endfor %}
+
+              {# Dots after siblings #}
+              {% if endPage < totalPages - 1 %}
+                <li class="{{ navItemClasses }}">
+                  <span class="{{ navLinkBaseClasses }} {{ navLinkDisabledClasses }}">
+                    {% if icons.dots %}
+                      {{ renderIcon({
+                          name: icons.dots,
+                          datas: options.iconDatas
+                      }) | safe }}
+                    {% else %}
+                      ...
+                    {% endif %}
+                  </span>
+                </li>
+              {% endif %}
+
+              {# Last page if not in range #}
+              {% if endPage < totalPages %}
+                <li class="{{ navItemClasses }}">
+
+                  <a  href="{{ paginationHrefs[totalPages - 1] }}"
+                    class="{{ navLinkBaseClasses }}"
+                  >
+                    {{ totalPages }}
+                  </a>
+                </li>
+              {% endif %}
+
+              {# Next page button #}
+              {% if icons.next %}
+                <li class="{{ navItemClasses }}">
+
+                  <a  href="{{ paginationHref.next or paginationHref.last }}"
+                    class="{{ navLinkBaseClasses }} {% if not paginationHref.next %}{{ navLinkDisabledClasses }}{% endif %}"
+                    aria-label="Next page"
+                    {% if not paginationHref.next %}aria-disabled="true"{% endif %}
+                  >
+                    {{ renderIcon({
+                        name: icons.next,
+                        datas: options.iconDatas
+                    }) | safe }}
+                  </a>
+                </li>
+              {% endif %}
+
+              {# Last page button #}
+              {% if icons.last %}
+                <li class="{{ navItemClasses }}">
+
+                  <a  href="{{ paginationHref.last }}"
+                    class="{{ navLinkBaseClasses }} {% if not paginationHref.next %}{{ navLinkDisabledClasses }}{% endif %}"
+                    aria-label="Last page"
+                    {% if not paginationHref.next %}aria-disabled="true"{% endif %}
+                  >
+                    {{ renderIcon({
+                        name: icons.last,
+                        datas: options.iconDatas
+                    }) | safe }}
+                  </a>
+                </li>
+              {% endif %}
+
             </ul>
           </nav>
         {% endif %}
 
-        {# Items counter (if enabled and data provided) #}
-        {% if showCounter and totalItems > 0 and currentPage and itemsPerPage %}
-          {% set firstItem = (currentPage - 1) * itemsPerPage + 1 %}
-          {% set lastItem = currentPage * itemsPerPage %}
-          {% if lastItem > totalItems %}
-            {% set lastItem = totalItems %}
-          {% endif %}
-
+        {# Items counter (if enabled) #}
+        {% if showCounter and totalItems > 0 %}
           <div
             class="{{ counterClasses }}"
             data-pagination-counter="true"
