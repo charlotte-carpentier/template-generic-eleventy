@@ -6,6 +6,7 @@ pagination:
   data: collections.articles
   size: 8
   alias: paginatedArticles
+  reverse: true
 permalink: "/blog/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
 ---
 
