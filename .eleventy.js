@@ -39,6 +39,10 @@ export default function(eleventyConfig) {
     return str.toString().toLowerCase().endsWith(suffix.toLowerCase());
   });
 
+  // Math filters (NEW)
+  eleventyConfig.addFilter("min", (arr) => Math.min(...arr));
+  eleventyConfig.addFilter("max", (arr) => Math.max(...arr));
+
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   // Universal Filter: Find by Name/ID
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -79,6 +83,8 @@ export default function(eleventyConfig) {
     dir: {
       input: "src",
       output: "public"
-    }
+    },
+
+    markdownTemplateEngine: "njk"
   };
 }

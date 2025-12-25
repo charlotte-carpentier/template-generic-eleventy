@@ -1,8 +1,5 @@
 ---
-title: "Article"
-description: "Article de blog"
 layout: "04-core/base.njk"
-permalink: "/article/"
 ---
 
 {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -49,16 +46,9 @@ permalink: "/article/"
 }) }}
 
 {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Article Content
+   Article Content (Markdown rendered)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-{# TODO: Create article content component or use Decap CMS markdown rendering #}
 <article class="prose lg:prose-xl mx-auto px-4 py-8">
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
-  <h2>Sous-titre de l'article</h2>
-  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-  <h3>Section détaillée</h3>
-  <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+  {{ content | safe }}
 </article>
