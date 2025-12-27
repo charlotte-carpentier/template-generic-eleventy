@@ -8,6 +8,8 @@
     - options.name (string): Tab bar identifier
     - options.datas (array): Tab bar configuration data
     - options.linkDatas (array): Link atom data
+    - options.iconDatas (array): Icon atom data (optional, required if links have icons)
+    - options.tooltipDatas (array): Tooltip atom data (optional, required if links have tooltips)
 
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/tab-bar.njk" import renderTabBar %}
@@ -15,7 +17,9 @@
     {{ renderTabBar({
         name: "demoTabBar1",
         datas: organisms["tab-bar"].tabBars,
-        linkDatas: atoms.link.links
+        linkDatas: atoms.link.links,
+        iconDatas: atoms.icon.icons,
+        tooltipDatas: atoms.tooltip.tooltips
     }) }}
 
   JavaScript: utils/active-link.js
@@ -114,7 +118,9 @@
             >
               {{ renderLink({
                   name: item.linkName,
-                  datas: options.linkDatas
+                  datas: options.linkDatas,
+                  iconDatas: options.iconDatas,
+                  tooltipDatas: options.tooltipDatas
               }) }}
             </li>
           {% endfor %}

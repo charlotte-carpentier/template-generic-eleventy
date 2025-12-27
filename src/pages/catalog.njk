@@ -143,9 +143,15 @@ eleventyExcludeFromCollections: true
   {# Link #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Link</h2>
-    {{ renderLink({
-        name: "demoLink1",
-        datas: atoms.link.links
+    {{ renderFooter({
+        name: "demoFooter1",
+        datas: organisms.footer.footers,
+        headingDatas: atoms.heading.headings,
+        linkDatas: atoms.link.links,
+        vectorDatas: atoms.vector.vectors,
+        navSecondaryDatas: organisms["navigation-secondary"].navSecondarys,
+        iconDatas: atoms.icon.icons,
+        tooltipDatas: atoms.tooltip.tooltips
     }) }}
   </section>
 
@@ -229,7 +235,9 @@ eleventyExcludeFromCollections: true
     {{ renderBreadcrumb({
         name: "demoBreadcrm1",
         datas: molecules.breadcrumb.breadcrumbs,
-        linkDatas: atoms.link.links
+        linkDatas: atoms.link.links,
+        iconDatas: atoms.icon.icons,
+        tooltipDatas: atoms.tooltip.tooltips
     }) }}
   </section>
 
@@ -362,14 +370,17 @@ eleventyExcludeFromCollections: true
     {{ renderListGroup({
         name: "demoGroup2",
         datas: molecules["list-group"].listGroups,
-        iconDatas: atoms.icon.icons
+        iconDatas: atoms.icon.icons,
+        linkDatas: atoms.link.links,
+        tooltipDatas: atoms.tooltip.tooltips
     }) }}
 
     {{ renderListGroup({
         name: "demoGroup3",
         datas: molecules["list-group"].listGroups,
         iconDatas: atoms.icon.icons,
-        linkDatas: atoms.link.links
+        linkDatas: atoms.link.links,
+        tooltipDatas: atoms.tooltip.tooltips
     }) }}
   </section>
 
@@ -545,7 +556,8 @@ eleventyExcludeFromCollections: true
         name: "demoNavSec1",
         datas: organisms["navigation-secondary"].navSecondarys,
         linkDatas: atoms.link.links,
-        iconDatas: atoms.icon.icons
+        iconDatas: atoms.icon.icons,
+        tooltipDatas: atoms.tooltip.tooltips
     }) }}
   </section>
 
@@ -555,7 +567,9 @@ eleventyExcludeFromCollections: true
     {{ renderTabBar({
         name: "demoTabBar1",
         datas: organisms["tab-bar"].tabBars,
-        linkDatas: atoms.link.links
+        linkDatas: atoms.link.links,
+        iconDatas: atoms.icon.icons,
+        tooltipDatas: atoms.tooltip.tooltips
     }) }}
   </section>
 
@@ -714,7 +728,8 @@ eleventyExcludeFromCollections: true
         linkDatas: atoms.link.links,
         vectorDatas: atoms.vector.vectors,
         navSecondaryDatas: organisms["navigation-secondary"].navSecondarys,
-        iconDatas: atoms.icon.icons
+        iconDatas: atoms.icon.icons,
+        tooltipDatas: atoms.tooltip.tooltips
     }) }}
   </section>
 </div>
