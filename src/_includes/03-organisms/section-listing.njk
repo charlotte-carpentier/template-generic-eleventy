@@ -13,6 +13,7 @@
     - options.imageDatas (array): Image atom data (for cards)
     - options.buttonDatas (array): Button atom data (for cards and pagination)
     - options.iconDatas (array): Icon atom data (for cards and pagination)
+    - options.tooltipDatas (array): Tooltip atom data (optional, required if buttons/links have tooltips)
     - options.paginationDatas (array): Pagination molecule data
     - options.selectDatas (array): Select atom data (for pagination)
     - options.items (array): Paginated articles from Eleventy (NEW)
@@ -165,7 +166,8 @@
                       url: article.url,
                       variant: "primary"
                     }],
-                    iconDatas: options.iconDatas
+                    iconDatas: options.iconDatas,
+                    tooltipDatas: options.tooltipDatas
                 }) }}
               {% endfor %}
             {% elif cardTags and options.cardDatas %}
@@ -183,7 +185,8 @@
                             imageDatas: options.imageDatas,
                             headingDatas: options.headingDatas,
                             buttonDatas: options.buttonDatas,
-                            iconDatas: options.iconDatas
+                            iconDatas: options.iconDatas,
+                            tooltipDatas: options.tooltipDatas
                         }) }}
                         {% set displayedCards = displayedCards + 1 %}
                       {% endif %}
@@ -206,7 +209,9 @@
                 pagination: options.pagination,
                 totalItems: options.totalItems,
                 selectDatas: options.selectDatas,
-                iconDatas: options.iconDatas
+                buttonDatas: options.buttonDatas,
+                iconDatas: options.iconDatas,
+                tooltipDatas: options.tooltipDatas
             }) }}
             </div>
           {% endif %}

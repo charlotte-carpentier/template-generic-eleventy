@@ -85,6 +85,7 @@
     {
       "name": "demoSubmit1",
       "text": "Submit",
+      "type": "submit",
       "variant": "primary",
       "ariaLabel": "Submit form"
     },

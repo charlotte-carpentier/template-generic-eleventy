@@ -10,6 +10,8 @@
     - options.headingDatas (array): Heading atom data
     - options.imageDatas (array): Image atom data
     - options.buttonDatas (array): Button atom data
+    - options.iconDatas (array): Icon atom data (optional, required if buttons have icons)
+    - options.tooltipDatas (array): Tooltip atom data (optional, required if buttons have tooltips)
 
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/section-hero.njk" import renderSectionHero %}
@@ -195,7 +197,9 @@
                 {% if primaryButtonName %}
                   {{ renderButton({
                       name: primaryButtonName,
-                      datas: options.buttonDatas
+                      datas: options.buttonDatas,
+                      iconDatas: options.iconDatas,
+                      tooltipDatas: options.tooltipDatas
                   }) }}
                 {% endif %}
 
@@ -203,7 +207,9 @@
                 {% if secondaryButtonName %}
                   {{ renderButton({
                       name: secondaryButtonName,
-                      datas: options.buttonDatas
+                      datas: options.buttonDatas,
+                      iconDatas: options.iconDatas,
+                      tooltipDatas: options.tooltipDatas
                   }) }}
                 {% endif %}
 

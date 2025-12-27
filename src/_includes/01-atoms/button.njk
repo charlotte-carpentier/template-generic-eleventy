@@ -14,7 +14,8 @@
     - options.ariaLabel (string): ARIA label for accessibility
     - options.ariaDescribedby (string): ARIA described-by reference
     - options.isErrorPage (boolean): Apply error-page-specific styling
-    - options.iconDatas (array): Icon atom data (required if button has icons)
+    - options.iconDatas (array): Icon atom data (optional, required if button has icons)
+    - options.tooltipDatas (array): Tooltip atom data (optional, required if button has tooltips)
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/button.njk" import renderButton %}
@@ -23,7 +24,8 @@
     {{ renderButton({
         name: "demoButton1",
         datas: atoms.button.buttons,
-        iconDatas: atoms.icon.icons
+        iconDatas: atoms.icon.icons,
+        tooltipDatas: atoms.tooltip.tooltips
     }) }}
 
     Error page button with specific styling:
@@ -38,6 +40,7 @@
 #}
 
 {% from "01-atoms/icon.njk" import renderIcon %}
+{% from "01-atoms/tooltip.njk" import renderTooltip %}
 
 {% macro renderButton(options) %}
 
@@ -71,6 +74,8 @@
       {# Check if button has icon #}
       {% set hasIcon = buttonData.iconName %}
       {% set iconPosition = buttonData.iconPosition | default('left') %}
+      {% set tooltipName = finalAriaDescribedby | replace('tooltip-', '') if finalAriaDescribedby else '' %}
+      {% set hasTooltip = tooltipName != finalAriaDescribedby and tooltipName != '' %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
@@ -168,6 +173,15 @@
           {% endif %}
         {% endif %}
       </button>
+
+      {# Auto-render tooltip if defined #}
+      {% if hasTooltip and options.tooltipDatas %}
+        {{ renderTooltip({
+            name: tooltipName,
+            datas: options.tooltipDatas
+        }) }}
+      {% endif %}
+
     {% endif %}
   {% endif %}
 {% endmacro %}

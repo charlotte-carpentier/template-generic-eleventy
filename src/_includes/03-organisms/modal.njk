@@ -9,6 +9,8 @@
     - options.datas (array): Modal configuration data
     - options.headingDatas (array): Heading atom data
     - options.buttonDatas (array): Button atom data
+    - options.iconDatas (array): Icon atom data (optional, required if buttons have icons)
+    - options.tooltipDatas (array): Tooltip atom data (optional, required if buttons have tooltips)
 
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/modal.njk" import renderModal %}
@@ -150,7 +152,9 @@
               {% if primaryButton %}
                 {{ renderButton({
                     name: primaryButton,
-                    datas: options.buttonDatas
+                    datas: options.buttonDatas,
+                    iconDatas: options.iconDatas,
+                    tooltipDatas: options.tooltipDatas
                 }) }}
               {% endif %}
 
@@ -158,7 +162,9 @@
               {% if secondaryButton %}
                 {{ renderButton({
                     name: secondaryButton,
-                    datas: options.buttonDatas
+                    datas: options.buttonDatas,
+                    iconDatas: options.iconDatas,
+                    tooltipDatas: options.tooltipDatas
                 }) }}
               {% endif %}
 
