@@ -119,7 +119,8 @@
       "target": "_blank",
       "rel": "noopener noreferrer",
       "download": false,
-      "ariaLabel": "Website created by hat"
+      "ariaLabel": "Website created by hat",
+      "ariaDescribedby": "tooltip-externalSite"
     },
     {
       "name": "linkHome",

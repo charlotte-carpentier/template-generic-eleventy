@@ -27,7 +27,7 @@
     {
       "name": "demoButton1",
       "text": "Label",
-      "iconName": "demoSmile3",
+      "iconName": "demoSmile1",
       "iconPosition": "both",
       "variant": "primary",
       "ariaLabel": "Button description for accessibility"
@@ -37,20 +37,22 @@
       "text": "1",
       "variant": "fixed",
       "size": "small",
-      "ariaLabel": "Button description for accessibility"
+      "ariaLabel": "Navigate to page 1",
+      "ariaDescribedby": "tooltip-pageNumber"
     },
     {
       "name": "demoButton3",
-      "iconName": "demoSmile3",
+      "iconName": "demoSmile1",
       "iconPosition": "center",
       "variant": "icon",
       "size": "small",
-      "ariaLabel": "Button description for accessibility"
+      "ariaLabel": "Show more options",
+      "ariaDescribedby": "tooltip-moreOptions"
     },
     {
       "name": "demoButton4",
       "text": "Label",
-      "iconName": "demoSmile3",
+      "iconName": "demoSmile1",
       "iconPosition": "both",
       "variant": "ghost",
       "size": "small",
@@ -89,7 +91,7 @@
     {
       "name": "demoLabel1",
       "text": "Label",
-      "iconName": "demoSmile3",
+      "iconName": "demoSmile1",
       "iconPosition": "left",
       "variant": "primary",
       "ariaLabel": "Primary label action"
@@ -97,7 +99,7 @@
     {
       "name": "demoLabel2",
       "text": "Label",
-      "iconName": "demoSmile3",
+      "iconName": "demoSmile1",
       "iconPosition": "left",
       "variant": "secondary",
       "ariaLabel": "Secondary label action"

@@ -8,7 +8,7 @@
  * @fileoverview Main JavaScript entry point for site-wide functionality
  * @module core/main
  * @created 2025-01-15
- * @updated 2025-12-18
+ * @updated 2025-12-26
  */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -35,6 +35,7 @@ import { initErrorLayout, initAccessibilityToggle } from './components/03-organi
 // Utils
 import { initActiveLinks } from './utils/active-link.js';
 import { dismiss } from './utils/dismiss.js';
+import { initTooltips } from './utils/tooltip.js';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Event Delegation
@@ -113,8 +114,9 @@ function initComponents() {
     initAccessibilityToggle();
   }
 
-  // Utils - Active links for navigation
+  // Utils - Auto-detection patterns
   initActiveLinks();
+  initTooltips();
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

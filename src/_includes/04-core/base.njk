@@ -203,13 +203,14 @@
   {% if not hideHeaderFooter %}
     {% from "03-organisms/footer.njk" import renderFooter %}
     {{ renderFooter({
-      name: "demoFooter1",
-      datas: organisms.footer.footers,
-      headingDatas: atoms.heading.headings,
-      linkDatas: atoms.link.links,
-      vectorDatas: atoms.vector.vectors,
-      navSecondaryDatas: organisms["navigation-secondary"].navSecondarys,
-      iconDatas: atoms.icon.icons
+        name: "demoFooter1",
+        datas: organisms.footer.footers,
+        headingDatas: atoms.heading.headings,
+        linkDatas: atoms.link.links,
+        vectorDatas: atoms.vector.vectors,
+        navSecondaryDatas: organisms["navigation-secondary"].navSecondarys,
+        iconDatas: atoms.icon.icons,
+        tooltipDatas: atoms.tooltip.tooltips
     }) }}
   {% endif %}
 

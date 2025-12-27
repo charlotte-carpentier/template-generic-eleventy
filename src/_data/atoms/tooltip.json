@@ -13,6 +13,19 @@
       "description": "Tooltip description text",
       "descriptionPart1": "First part of description",
       "descriptionPart2": "Second part of description"
+    },
+    {
+      "name": "moreOptions",
+      "description": "Open additional menu options"
+    },
+    {
+      "name": "pageNumber",
+      "description": "Navigate to page 1 of results"
+    },
+    {
+      "name": "externalSite",
+      "title": "External link",
+      "description": "Opens in new tab"
     }
   ]
 }
