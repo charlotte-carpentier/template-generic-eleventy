@@ -8,6 +8,7 @@
     - options.name (string): Link identifier
     - options.datas (array): Link configuration data
     - options.ariaLabel (string): Override aria-label
+    - options.ariaDescribedby (string): ARIA described-by reference
     - options.disabled (boolean): Override disabled state
     - options.active (boolean): Active state for navigation
     - options.role (string): ARIA role (e.g., "tab" for tab-bar)
@@ -20,20 +21,16 @@
     Basic link:
     {{ renderLink({
         name: "demoLink1",
-        datas: atoms.link.links
-    }) }}
-
-    Social link with icon:
-    {{ renderLink({
-        name: "demoFacebook",
         datas: atoms.link.links,
-        iconDatas: atoms.icon.icons
+        iconDatas: atoms.icon.icons,
+        tooltipDatas: atoms.tooltip.tooltips
     }) }}
 
   @created 2025-01-15
 #}
 
 {% from "01-atoms/icon.njk" import renderIcon %}
+{% from "01-atoms/tooltip.njk" import renderTooltip %}
 
 {% macro renderLink(options) %}
 
@@ -57,10 +54,13 @@
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set finalAriaLabel = options.ariaLabel | default(linkData.ariaLabel) %}
+      {% set finalAriaDescribedby = options.ariaDescribedby | default(linkData.ariaDescribedby) %}
       {% set isDisabled = options.disabled | default(linkData.disabled) | default(false) %}
       {% set isActive = options.active | default(false) %}
       {% set hasIcon = linkData.iconName %}
       {% set linkSize = linkData.size | default('default') %}
+      {% set tooltipName = finalAriaDescribedby | replace('tooltip-', '') if finalAriaDescribedby else '' %}
+      {% set hasTooltip = tooltipName != finalAriaDescribedby and tooltipName != '' %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
@@ -99,6 +99,7 @@
         {% if linkData.download %}download{% endif %}
         {% if linkData.onclick %}onclick="{{ linkData.onclick | escape }}"{% endif %}
         {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
+        {% if finalAriaDescribedby %}aria-describedby="{{ finalAriaDescribedby }}"{% endif %}
         {% if isDisabled %}aria-disabled="true"{% endif %}
         {% if isActive %}data-link-active="true"{% endif %}
         {% if options.role %}role="{{ options.role }}"{% endif %}
@@ -115,6 +116,15 @@
         {# Link text #}
         {{ linkData.text }}
       </a>
+
+      {# Auto-render tooltip if defined #}
+      {% if hasTooltip and options.tooltipDatas %}
+        {{ renderTooltip({
+            name: tooltipName,
+            datas: options.tooltipDatas
+        }) }}
+      {% endif %}
+
     {% endif %}
   {% endif %}
 {% endmacro %}
