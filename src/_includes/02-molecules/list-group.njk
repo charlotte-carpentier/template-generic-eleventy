@@ -9,6 +9,8 @@
     - options.datas (array): List group configuration data
     - options.iconDatas (array): Icon atom data
     - options.linkDatas (array): Link atom data (if type is "link")
+    - options.iconDatas (array): Icon atom data
+    - options.tooltipDatas (array): Tooltip atom data (optional, required if links have tooltips)
     - options.radioDatas (array): Radio button atom data (if type is "radio")
     - options.checkboxDatas (array): Checkbox atom data (if type is "checkbox")
     - options.toggleDatas (array): Toggle atom data (if type is "toggle")
@@ -172,7 +174,9 @@
               {# Link #}
               {{ renderLink({
                   name: item.linkName,
-                  datas: options.linkDatas
+                  datas: options.linkDatas,
+                  iconDatas: options.iconDatas,
+                  tooltipDatas: options.tooltipDatas
               }) }}
 
             {% elif listType == "radio" %}

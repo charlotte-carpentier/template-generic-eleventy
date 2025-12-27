@@ -8,14 +8,18 @@
     - options.name (string): Breadcrumb identifier
     - options.datas (array): Breadcrumb configuration data
     - options.linkDatas (array): Link atom data for breadcrumb items
+    - options.iconDatas (array): Icon atom data (optional, required if links have icons)
+    - options.tooltipDatas (array): Tooltip atom data (optional, required if links have tooltips)
 
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/breadcrumb.njk" import renderBreadcrumb %}
 
-    {{ renderBreadcrumb({
+  {{ renderBreadcrumb({
         name: "demoBreadcrm1",
         datas: molecules.breadcrumb.breadcrumbs,
-        linkDatas: atoms.link.links
+        linkDatas: atoms.link.links,
+        iconDatas: atoms.icon.icons,
+        tooltipDatas: atoms.tooltip.tooltips
     }) }}
 
   JavaScript: utils/active-link.js
@@ -115,7 +119,9 @@
               {% if item.type == "link" %}
                 {{ renderLink({
                     name: item.linkName,
-                    datas: options.linkDatas
+                    datas: options.linkDatas,
+                    iconDatas: options.iconDatas,
+                    tooltipDatas: options.tooltipDatas
                 }) }}
 
               {# Current page (no link) #}

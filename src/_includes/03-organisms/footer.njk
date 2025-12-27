@@ -12,6 +12,7 @@
       - options.vectorDatas (array): Vector atom data
       - options.navSecondaryDatas (array): Navigation secondary organism data
       - options.iconDatas (array): Icon atom data (optional, required if links have icons)
+      - options.tooltipDatas (array): Tooltip atom data (optional, required if links have tooltips)
 
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/footer.njk" import renderFooter %}
@@ -22,7 +23,9 @@
         headingDatas: atoms.heading.headings,
         linkDatas: atoms.link.links,
         vectorDatas: atoms.vector.vectors,
-        navSecondaryDatas: organisms["navigation-secondary"].navSecondarys
+        navSecondaryDatas: organisms["navigation-secondary"].navSecondarys,
+        iconDatas: atoms.icon.icons,
+        tooltipDatas: atoms.tooltip.tooltips
     }) }}
 
   JavaScript: utils/active-link.js
