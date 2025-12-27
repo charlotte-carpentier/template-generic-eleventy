@@ -143,13 +143,9 @@ eleventyExcludeFromCollections: true
   {# Link #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Link</h2>
-    {{ renderFooter({
-        name: "demoFooter1",
-        datas: organisms.footer.footers,
-        headingDatas: atoms.heading.headings,
-        linkDatas: atoms.link.links,
-        vectorDatas: atoms.vector.vectors,
-        navSecondaryDatas: organisms["navigation-secondary"].navSecondarys,
+    {{ renderLink({
+        name: "demoLink1",
+        datas: atoms.link.links,
         iconDatas: atoms.icon.icons,
         tooltipDatas: atoms.tooltip.tooltips
     }) }}
@@ -194,6 +190,11 @@ eleventyExcludeFromCollections: true
   {# Tooltip #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Tooltip</h2>
+
+    <p style="font-size: 0.75rem; color: #666; margin-bottom: 0.5rem;">
+      <strong>Interactive test:</strong> Footer link "Website by hat" (hover desktop only)
+    </p>
+
     {{ renderTooltip({
         name: "demoTooltip1",
         datas: atoms.tooltip.tooltips
@@ -419,17 +420,14 @@ eleventyExcludeFromCollections: true
   {# Pagination #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Pagination</h2>
-    {{ renderPagination({
-        name: "demoPreview",
-        datas: molecules.pagination.paginations,
-        selectDatas: atoms.select.selects,
-        buttonDatas: atoms.button.buttons,
-        iconDatas: atoms.icon.icons,
-        currentPage: 1,
-        totalPages: 10,
-        itemsPerPage: 10,
-        totalItems: 98
-    }) }}
+
+    <p style="font-size: 0.75rem; color: #666; margin-bottom: 0.5rem;">
+      <strong>Native SSG pagination:</strong> See <a href="/blog/" style="text-decoration: underline;">/blog/</a> (page 2+)
+    </p>
+
+    <p style="font-size: 0.75rem; color: #999;">
+      No static preview available - requires Eleventy pagination context
+    </p>
   </section>
 
   {# Panel #}
@@ -677,18 +675,14 @@ eleventyExcludeFromCollections: true
   {# Section Listing #}
   <section style="border: 1px solid #ccc; padding: 1rem; width: 100%;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Section Listing</h2>
-    {{ renderSectionListing({
-        name: "demoSectL1",
-        datas: organisms["section-listing"].sectListings,
-        headingDatas: atoms.heading.headings,
-        cardDatas: molecules.card.cards,
-        paginationDatas: molecules.pagination.paginations,
-        selectDatas: atoms.select.selects,
-        buttonDatas: atoms.button.buttons,
-        iconDatas: atoms.icon.icons,
-        lockupDatas: molecules["lock-up"].lockUps,
-        imageDatas: atoms.image.images
-    }) }}
+
+    <p style="font-size: 0.75rem; color: #666; margin-bottom: 0.5rem;">
+      <strong>Native SSG pagination:</strong> See <a href="/blog/" style="text-decoration: underline;">/blog/</a>
+    </p>
+
+    <p style="font-size: 0.75rem; color: #999;">
+      No static preview available - requires Eleventy pagination context and article collection
+    </p>
   </section>
 
   {# Section Contact #}
