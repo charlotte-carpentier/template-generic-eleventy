@@ -267,7 +267,7 @@ button.json  → "buttons"   → "buttonName"
 
 ---
 
-## References
+## External References
 
 **Official Docs**:
 
