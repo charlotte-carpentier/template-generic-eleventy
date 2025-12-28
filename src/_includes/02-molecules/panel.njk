@@ -21,7 +21,6 @@
     }) }}
 
   JavaScript Requirements:
-    - Type "default": TODO dismiss.js utility (click outside, ESC key)
     - Type "date": panel.js molecule (generates labels, calendars, navigation)
     - Type "list-item": No JavaScript required (static presentation)
 
@@ -143,7 +142,6 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      {# TODO: Type "default" requires dismiss.js utility (close on click outside, ESC key) #}
       <div
         class="{{ containerClasses }}"
         data-panel-name="{{ panelName }}"
@@ -156,7 +154,7 @@
         {% if panelType == "default" %}
           {% for item in items %}
             <div
-              class="{{ itemBaseClasses }} {{ itemStateClasses }}"
+              class="{{ itemStateClasses }}"
               data-panel-item="true"
               role="option"
               tabindex="0"
@@ -248,7 +246,7 @@
         {% elif panelType == "list-item" %}
           {% for item in items %}
             <div
-              class="{{ itemBaseClasses }} {{ itemStateClasses }}"
+              class="{{ itemStateClasses }}"
               data-panel-item="true"
               role="option"
               tabindex="0"

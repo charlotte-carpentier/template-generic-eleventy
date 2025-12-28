@@ -142,13 +142,6 @@
         data-pagination-name="{{ paginationName }}"
         data-pagination-type="pagination"
       >
-        {# Items per page selector (if selectName provided) #}
-        {# TODO Phase 6c: Requires utils/block-grid.js
-        - Select onChange triggers client-side re-render
-        - Fetch all articles data via JSON
-        - Apply new itemsPerPage filter
-        - Update pagination navigation
-        - Progressive enhancement (SSG fallback) #}
         {% if selectName and options.selectDatas %}
           <div
             class="{{ selectWrapperClasses }}"
