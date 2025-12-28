@@ -42,12 +42,7 @@
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set finalTag = options.tag | default(headingData.tag) | default('p') %}
-
-      {# Security: Add rel="noopener noreferrer" to external links with target="_blank" #}
-      {% set secureContent = headingData.text %}
-      {% if 'target="_blank"' in secureContent and 'rel=' not in secureContent %}
-        {% set secureContent = secureContent | replace('target="_blank"', 'target="_blank" rel="noopener noreferrer"') %}
-      {% endif %}
+      {% set variant = headingData.variant | default('sans') %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
@@ -103,63 +98,63 @@
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="h1"
-        >{{ secureContent | safe }}</h1>
+        >{{ headingData.text }}</h1>
       {% elif finalTag == 'h2' %}
         <h2
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="h2"
-        >{{ secureContent | safe }}</h2>
+        >{{ headingData.text }}</h2>
       {% elif finalTag == 'h3' %}
         <h3
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="h3"
-        >{{ secureContent | safe }}</h3>
+        >{{ headingData.text }}</h3>
       {% elif finalTag == 'h4' %}
         <h4
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="h4"
-        >{{ secureContent | safe }}</h4>
+        >{{ headingData.text }}</h4>
       {% elif finalTag == 'h5' %}
         <h5
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="h5"
-        >{{ secureContent | safe }}</h5>
+        >{{ headingData.text }}</h5>
       {% elif finalTag == 'h6' %}
         <h6
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="h6"
-        >{{ secureContent | safe }}</h6>
+        >{{ headingData.text }}</h6>
       {% elif finalTag == 'span' %}
         <span
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="span"
-        >{{ secureContent | safe }}</span>
+        >{{ headingData.text }}</span>
       {% elif finalTag == 'small' %}
         <small
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="small"
-        >{{ secureContent | safe }}</small>
+        >{{ headingData.text }}</small>
       {% else %}
         <p
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="p"
-        >{{ secureContent | safe }}</p>
+        >{{ headingData.text }}</p>
       {% endif %}
     {% endif %}
   {% endif %}
