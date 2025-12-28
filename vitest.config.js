@@ -26,6 +26,10 @@ export default defineConfig({
     },
     include: [
       '**/*.{test,spec}.{js,ts}'
+    ],
+    exclude: [
+      '**/node_modules/**',
+      '**/public/**'
     ]
   }
 });

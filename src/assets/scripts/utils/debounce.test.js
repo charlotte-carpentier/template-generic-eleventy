@@ -1,5 +1,5 @@
 /* ┌─────────────────────────────────────────────────────────┐
-   │ TESTS › Debounce Utility                               │
+   │ TESTS › Debounce Utility                                │
    │ Unit tests for debounce function                        │
    │ Path: src/assets/scripts/utils/                         │
    └─────────────────────────────────────────────────────────┘ */
