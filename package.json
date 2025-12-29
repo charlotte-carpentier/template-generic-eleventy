@@ -25,6 +25,12 @@
     "template"
   ],
   "author": "Charlotte Carpentier",
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "Firefox ESR",
+    "not dead"
+  ],
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-upgrade-help": "^3.0.1",

@@ -113,9 +113,25 @@ Components and features to implement after template finalization (Phase 9 comple
 
 ---
 
+## Phase 13: Post-Production
+
+### Custom Error Pages
+
+**Status**: Postponed - After production deployment  
+**Files**: error-layout organism + custom CSS
+
+**To finalize**:
+
+- `src/_includes/03-organisms/error-layout.njk`
+- `src/assets/styles/03-organisms/error-layout.css`
+- Custom error pages (404, 500, etc.)
+
+---
+
 ## Notes
 
 - Block-grid postponed due to complexity
+- Error pages postponed until after production deployment
 - Focus on template finalization first
 - Components added based on real project needs
 - Follow existing patterns (coding-style.md, data-structure.md)
