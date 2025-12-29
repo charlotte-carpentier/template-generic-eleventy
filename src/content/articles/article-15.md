@@ -1,7 +1,12 @@
 ---
 layout: "04-core/post.njk"
+type: "article"
 title: "Article 15"
-date: 2025-01-15
+description: "SEO description for article 15"
+author: "Charlotte Carpentier"
+date: 2025-01-01
+socialImage: "/assets/images/social-share.jpg"
+socialImageAlt: "Default social sharing image"
 tags: ["articles"]
 ---
 
