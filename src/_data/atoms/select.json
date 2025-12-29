@@ -18,6 +18,7 @@
       "name": "demoSelect1",
       "id": "demoSelect1",
       "size": "default",
+      "ariaLabel": "Select description for accessibility",
       "options": [
         {
           "value": "10",

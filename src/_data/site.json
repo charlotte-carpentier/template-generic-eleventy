@@ -1,31 +1,20 @@
 {
-  "// Component": "Site - Global site configuration for SEO, analytics, and assets",
+  "// Component": "Site - Global site configuration",
   "_meta": {
     "component": "site",
     "type": "config",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "updated": "2025-01-29"
   },
   "title": "Site Title",
   "description": "Site description for SEO and social sharing",
   "url": "https://example.com",
-  "language": "en",
+  "locale": "fr_FR",
   "themeColor": "#ffffff",
+  "author": "Nom auteur",
+  "twitterHandle": "@handle",
   "socialImage": "/assets/images/social-share.jpg",
-  "views": {
-    "/": {
-      "title": "Home Page Title",
-      "description": "Home page description"
-    },
-    "/about/": {
-      "title": "About Page Title",
-      "description": "About page description"
-    },
-    "/contact/": {
-      "title": "Contact Page Title",
-      "description": "Contact page description"
-    }
-  },
   "favicon": {
     "png16": "/assets/icons/favicon/favicon-16x16.png",
     "png32": "/assets/icons/favicon/favicon-32x32.png",

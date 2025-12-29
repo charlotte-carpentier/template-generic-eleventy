@@ -43,6 +43,14 @@ export default function(eleventyConfig) {
   eleventyConfig.addFilter("min", (arr) => Math.min(...arr));
   eleventyConfig.addFilter("max", (arr) => Math.max(...arr));
 
+  // Date filter for ISO 8601 format (JSON-LD structured data)
+  eleventyConfig.addFilter('date', function(date, format) {
+    if (format === 'iso') {
+      return new Date(date).toISOString();
+    }
+    return date;
+  });
+
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   // Universal Filter: Find by Name/ID
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
