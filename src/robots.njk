@@ -1,0 +1,18 @@
+---
+permalink: /robots.txt
+eleventyExcludeFromCollections: true
+---
+
+{# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Search Engine Crawling Rules
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+User-agent: *
+Allow: /
+
+{# Sitemap location (dynamically generated from site.url) #}
+Sitemap: {{ site.url }}/sitemap.xml
+
+{# Block CMS admin and markdown sources #}
+Disallow: /admin/
+Disallow: /content/

@@ -107,8 +107,8 @@ template-generic-eleventy/
 │   │   ├── blog.njk              # Blog listing (will add pagination: native Eleventy)
 │   │   ├── article.njk           # Article template (DEPRECATED - replaced by post.njk layout)
 │   │   └── contact.njk
-│   ├── robots.txt
-│   └── sitemap.xml
+│   ├── robots.njk                # Search engine crawling rules (generates robots.txt)
+│   └── sitemap.njk               # SEO sitemap generator (generates sitemap.xml)
 ├── .eleventy.js                  # Eleventy configuration
 ├── netlify.toml                  # Netlify / Decap deployment configuration
 ├── postcss.config.cjs            # PostCSS configuration

@@ -18,11 +18,6 @@ export default function(eleventyConfig) {
     './src/docs',              // Documentation files
   ].forEach(path => eleventyConfig.addPassthroughCopy(path));
 
-  // Passthrough for single files
-  ['robots.txt', 'sitemap.xml'].forEach(file => {
-    eleventyConfig.addPassthroughCopy(`./src/${file}`);
-  });
-
   // --------------------------
   // Shortcodes
   // --------------------------
