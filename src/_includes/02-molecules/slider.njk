@@ -18,6 +18,8 @@
 
   JavaScript Requirements:
     - slider.js molecule (calculates positions, updates values, handles drag)
+    - JS MUST implement keyboard: Right/Up increment, Left/Down decrement, Home min, End max, Page Up/Down large steps
+    - JS MUST update aria-valuenow and aria-valuetext on change
 
   @created 2025-01-15
   @updated 2025-01-18 (Phase 6 - Cleaned hardcoded values, JS-driven)
@@ -110,7 +112,7 @@
           Description: Draggable handle, Position (JS-controlled), Size, Borders
         --------------------------#}
       {% set handleBaseClasses = "absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 border-2 rounded-full cursor-grab active:cursor-grabbing shadow-md" %}
-      {% set handleStateClasses = "bg-[var(--color-global-white)] border-[var(--color-interactive-default)] transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+      {% set handleStateClasses = "bg-[var(--color-global-white)] border-[var(--color-interactive-default)] transition-all hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
 
       {# --------------------------
           3.7 Indicator Classes
@@ -172,12 +174,6 @@
           <div
             class="{{ trackClasses }}"
             data-slider-track="true"
-            role="slider"
-            aria-valuemin="{{ minValue }}"
-            aria-valuemax="{{ maxValue }}"
-            {% if sliderType == 'single' %}
-              aria-valuenow="{{ value }}"
-            {% endif %}
           >
             {# Fill (JS sets left + width) #}
             <div
@@ -192,12 +188,16 @@
               data-slider-handle-index="0"
               tabindex="0"
               role="slider"
+              aria-label="{% if sliderType == 'single' %}{{ label }}{% else %}{{ label }} minimum{% endif %}"
+              aria-orientation="horizontal"
               aria-valuemin="{{ minValue }}"
               aria-valuemax="{{ maxValue }}"
               {% if sliderType == 'single' %}
                 aria-valuenow="{{ value }}"
+                aria-valuetext="{{ value }}"
               {% else %}
                 aria-valuenow="{{ valueMin }}"
+                aria-valuetext="{{ valueMin }}"
               {% endif %}
             >
               {# Indicator for handle 1 (JS updates value) #}
@@ -219,9 +219,12 @@
                 data-slider-handle-index="1"
                 tabindex="0"
                 role="slider"
+                aria-label="{{ label }} maximum"
+                aria-orientation="horizontal"
                 aria-valuemin="{{ minValue }}"
                 aria-valuemax="{{ maxValue }}"
                 aria-valuenow="{{ valueMax }}"
+                aria-valuetext="{{ valueMax }}"
               >
                 {# Indicator for handle 2 (JS updates value) #}
                 {% if showIndicator %}

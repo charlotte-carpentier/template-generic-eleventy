@@ -186,15 +186,15 @@
   --color-global-default: var(--color-neutral-00);
   --color-global-heading: var(--color-neutral-20);
   --color-global-contrast-light-01: var(--color-neutral-30);
-  --color-global-contrast-light-02: var(--color-neutral-50);
+  --color-global-contrast-light-02: var(--color-neutral-40);
   --color-global-contrast-light-03: var(--color-neutral-85);
   --color-global-contrast-light-04: var(--color-neutral-95);
   --color-global-white: var(--color-neutral-white);
   --color-global-accent: var(--color-brand-primary-20);
 
   /* Button Primary */
-  --color-button-primary: var(--color-brand-primary-40);
-  --color-button-primary-hover: var(--color-brand-primary-30);
+  --color-button-primary: var(--color-brand-primary-30);
+  --color-button-primary-hover: var(--color-brand-primary-20);
   --color-button-primary-contrast-high: var(--color-neutral-white);
 
   /* Button Secondary */
@@ -212,7 +212,7 @@
   --color-form: var(--color-neutral-30);
   --color-form-active: var(--color-neutral-00);
   --color-form-hover: var(--color-neutral-10);
-  --color-form-control-checked: var(--color-brand-primary-40);
+  --color-form-control-checked: var(--color-brand-primary-30);
 
   /* Semantic Critical */
   --color-semantic-critical: var(--color-semantic-critical-40);
