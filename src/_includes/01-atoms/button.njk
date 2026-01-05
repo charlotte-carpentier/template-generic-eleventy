@@ -77,6 +77,11 @@
       {% set tooltipName = finalAriaDescribedby | replace('tooltip-', '') if finalAriaDescribedby else '' %}
       {% set hasTooltip = tooltipName != finalAriaDescribedby and tooltipName != '' %}
 
+      {# A11y validation: Icon-only buttons require aria-label #}
+      {% if iconPosition == 'center' and not finalAriaLabel %}
+        <span class="error" role="alert">Icon-only button requires aria-label: {{ options.name }}</span>
+      {% else %}
+
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
         Index:
@@ -89,15 +94,15 @@
           3.1 Base Classes
           Description: Layout, typography, borders, transition, focus, cursor
         --------------------------#}
-      {% set baseClasses = "inline-flex items-center justify-center font-medium rounded-[var(--radius-default)] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] disabled:cursor-not-allowed" %}
+      {% set baseClasses = "inline-flex items-center justify-center font-medium rounded-[var(--radius-default)] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 disabled:cursor-not-allowed" %}
 
       {# --------------------------
         3.2 Size Classes
-        Description: Padding, text size
+        Description: Padding, text size, minimum target size (WCAG 2.5.8)
         --------------------------#}
       {% set sizeMap = {
-        'small': 'px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] text-sm',
-        'medium': 'px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-small)] text-base'
+        'small': 'min-h-[40px] min-w-[40px] px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] text-sm',
+        'medium': 'min-h-[44px] px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-small)] text-base'
       } %}
       {% set sizeClasses = sizeMap[buttonSize] or sizeMap['medium'] %}
 
@@ -137,13 +142,14 @@
         {% if options.onclick %}onclick="{{ options.onclick | escape }}"{% endif %}
         {% if options.id %}id="{{ options.id }}"{% endif %}
         {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
-        {% if finalAriaDescribedby %}aria-describedby="{{ finalAriaDescribedby }}"{% endif %}>
+        {% if hasTooltip and options.tooltipDatas %}aria-describedby="{{ finalAriaDescribedby }}"{% endif %}>
         {# Icon left position #}
         {% if hasIcon and (iconPosition == 'left' or iconPosition == 'both') %}
           {% if options.iconDatas %}
             {{ renderIcon({
                 name: buttonData.iconName,
-                datas: options.iconDatas
+                datas: options.iconDatas,
+                decorative: true
             }) }}
           {% endif %}
         {% endif %}
@@ -153,7 +159,8 @@
           {% if options.iconDatas %}
             {{ renderIcon({
                 name: buttonData.iconName,
-                datas: options.iconDatas
+                datas: options.iconDatas,
+                decorative: true
             }) }}
           {% endif %}
         {% endif %}
@@ -168,7 +175,8 @@
           {% if options.iconDatas %}
             {{ renderIcon({
                 name: buttonData.iconName,
-                datas: options.iconDatas
+                datas: options.iconDatas,
+                decorative: true
             }) }}
           {% endif %}
         {% endif %}
@@ -182,6 +190,7 @@
         }) }}
       {% endif %}
 
+      {% endif %}
     {% endif %}
   {% endif %}
 {% endmacro %}

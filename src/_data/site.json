@@ -10,6 +10,7 @@
   "title": "Site Title",
   "description": "Site description for SEO and social sharing",
   "url": "https://example.com",
+  "language": "fr",
   "locale": "fr_FR",
   "themeColor": "#ffffff",
   "author": "Nom auteur",

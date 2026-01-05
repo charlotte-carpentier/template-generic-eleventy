@@ -85,41 +85,60 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      <div
-        class="{{ containerClasses }}"
-        data-list-control-name="{{ listData.name }}"
-        data-list-control-type="{{ listType }}"
-      >
-        {% for item in items %}
-          <div
-            class="{{ itemClasses }}"
-            data-list-control-item="true"
-          >
-            {# Render based on list type #}
-            {% if listType == "radio" %}
+      {% if listType == "radio" %}
+        <fieldset
+          role="radiogroup"
+          class="{{ containerClasses }}"
+          data-list-control-name="{{ listData.name }}"
+          data-list-control-type="{{ listType }}"
+        >
+          <legend class="sr-only">{{ listData.name }}</legend>
+          {% for item in items %}
+            <div
+              class="{{ itemClasses }}"
+              data-list-control-item="true"
+            >
               {{ renderRadioButton({
                   id: item.radioName,
                   datas: options.radioDatas,
                   checked: item.checked
               }) }}
+            </div>
+          {% endfor %}
+        </fieldset>
 
-            {% elif listType == "checkbox" %}
-              {{ renderCheckbox({
-                  id: item.checkboxName,
-                  datas: options.checkboxDatas,
-                  checked: item.checked
-              }) }}
+      {% else %}
+        <div
+          class="{{ containerClasses }}"
+          data-list-control-name="{{ listData.name }}"
+          data-list-control-type="{{ listType }}"
+          role="group"
+          aria-label="{{ listData.name }}"
+        >
+          {% for item in items %}
+            <div
+              class="{{ itemClasses }}"
+              data-list-control-item="true"
+            >
+              {# Render based on list type #}
+              {% if listType == "checkbox" %}
+                {{ renderCheckbox({
+                    id: item.checkboxName,
+                    datas: options.checkboxDatas,
+                    checked: item.checked
+                }) }}
 
-            {% elif listType == "toggle" %}
-              {{ renderToggle({
-                  id: item.toggleName,
-                  datas: options.toggleDatas,
-                  checked: item.checked
-              }) }}
-            {% endif %}
-          </div>
-        {% endfor %}
-      </div>
+              {% elif listType == "toggle" %}
+                {{ renderToggle({
+                    id: item.toggleName,
+                    datas: options.toggleDatas,
+                    checked: item.checked
+                }) }}
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
     {% endif %}
   {% endif %}
 {% endmacro %}

@@ -123,86 +123,127 @@
           3.5 Close Button Classes
           Description: Layout, Colors, States
         --------------------------#}
-      {% set closeButtonClasses = "flex-shrink-0 inline-flex items-center justify-center w-6 h-6 text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+      {% set closeButtonClasses = "flex-shrink-0 inline-flex items-center justify-center min-w-[24px] min-h-[24px] w-6 h-6 text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      <div
-        class="{{ containerClasses }}"
-        data-dismissible
-        data-list-group-name="{{ listData.name }}"
-        data-list-group-type="{{ listType }}"
-      >
-        {% for item in items %}
-          <div
-            class="{{ itemClasses }}"
-            data-list-group-item="true"
-          >
-            {# Icon (always present) #}
-            <div class="{{ iconWrapperClasses }}">
-              {{ renderIcon({
-                  name: item.iconName,
-                  datas: options.iconDatas
-              }) }}
-            </div>
-
-            {# Text #}
-            <span
-              class="{{ textClasses }}"
-              data-list-group-text="true"
+      {% if listType == "radio" %}
+        <fieldset
+          role="radiogroup"
+          class="{{ containerClasses }}"
+          data-dismissible
+          data-list-group-name="{{ listData.name }}"
+          data-list-group-type="{{ listType }}"
+        >
+          <legend class="sr-only">{{ listData.name }}</legend>
+          {% for item in items %}
+            <div
+              class="{{ itemClasses }}"
+              data-list-group-item="true"
             >
-              {{ item.text }}
-            </span>
-
-            {# Type-specific elements #}
-            {% if listType == "closable" %}
-              {# Close icon #}
-              <button
-                type="button"
-                class="{{ closeButtonClasses }}"
-                data-dismiss
-                aria-label="Close"
-              >
+              {# Icon (always present) #}
+              <div class="{{ iconWrapperClasses }}">
                 {{ renderIcon({
-                    name: item.iconClose,
-                    datas: options.iconDatas
+                    name: item.iconName,
+                    datas: options.iconDatas,
+                    decorative: true
                 }) }}
-              </button>
+              </div>
 
-            {% elif listType == "link" %}
-              {# Link #}
-              {{ renderLink({
-                  name: item.linkName,
-                  datas: options.linkDatas,
-                  iconDatas: options.iconDatas,
-                  tooltipDatas: options.tooltipDatas
-              }) }}
+              {# Text #}
+              <span
+                class="{{ textClasses }}"
+                data-list-group-text="true"
+              >
+                {{ item.text }}
+              </span>
 
-            {% elif listType == "radio" %}
               {# Radio button #}
               {{ renderRadioButton({
                   id: item.radioName,
                   datas: options.radioDatas
               }) }}
+            </div>
+          {% endfor %}
+        </fieldset>
 
-            {% elif listType == "checkbox" %}
-              {# Checkbox #}
-              {{ renderCheckbox({
-                  id: item.checkboxName,
-                  datas: options.checkboxDatas
-              }) }}
+      {% else %}
+        <div
+          class="{{ containerClasses }}"
+          data-dismissible
+          data-list-group-name="{{ listData.name }}"
+          data-list-group-type="{{ listType }}"
+          {% if listType in ['checkbox', 'toggle'] %}
+            role="group"
+            aria-label="{{ listData.name }}"
+          {% endif %}
+        >
+          {% for item in items %}
+            <div
+              class="{{ itemClasses }}"
+              data-list-group-item="true"
+            >
+              {# Icon (always present) #}
+              <div class="{{ iconWrapperClasses }}">
+                {{ renderIcon({
+                    name: item.iconName,
+                    datas: options.iconDatas,
+                    decorative: true
+                }) }}
+              </div>
 
-            {% elif listType == "toggle" %}
-              {# Toggle #}
-              {{ renderToggle({
-                  id: item.toggleName,
-                  datas: options.toggleDatas
-              }) }}
-            {% endif %}
-          </div>
-        {% endfor %}
-      </div>
+              {# Text #}
+              <span
+                class="{{ textClasses }}"
+                data-list-group-text="true"
+              >
+                {{ item.text }}
+              </span>
+
+              {# Type-specific elements #}
+              {% if listType == "closable" %}
+                {# Close icon #}
+                <button
+                  type="button"
+                  class="{{ closeButtonClasses }}"
+                  data-dismiss
+                  aria-label="Close"
+                >
+                  {{ renderIcon({
+                      name: item.iconClose,
+                      datas: options.iconDatas,
+                      decorative: true
+                  }) }}
+                </button>
+
+              {% elif listType == "link" %}
+                {# Link #}
+                {{ renderLink({
+                    name: item.linkName,
+                    datas: options.linkDatas,
+                    iconDatas: options.iconDatas,
+                    tooltipDatas: options.tooltipDatas
+                }) }}
+
+              {% elif listType == "checkbox" %}
+                {# Checkbox #}
+                {{ renderCheckbox({
+                    id: item.checkboxName,
+                    datas: options.checkboxDatas
+                }) }}
+
+              {% elif listType == "toggle" %}
+                {# Toggle #}
+                {{ renderToggle({
+                    id: item.toggleName,
+                    datas: options.toggleDatas
+                }) }}
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
     {% endif %}
   {% endif %}
 {% endmacro %}

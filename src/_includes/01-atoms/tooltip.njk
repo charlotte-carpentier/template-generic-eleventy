@@ -25,6 +25,7 @@
   Note:
     - Triggers MUST have aria-describedby="tooltip-{name}"
     - JavaScript service (utils/tooltip.js) auto-detects all [aria-describedby^="tooltip-"]
+    - JS MUST implement: show on focus/mouseenter, hide on blur/mouseleave/Esc, aria-hidden toggle
     - No manual init needed in components
 
   @created 2025-01-15
@@ -90,6 +91,7 @@
       <div
         id="{{ tooltipId }}"
         role="tooltip"
+        aria-hidden="true"
         class="{{ tooltipClasses }}"
       >
         {% if tooltipData.title %}

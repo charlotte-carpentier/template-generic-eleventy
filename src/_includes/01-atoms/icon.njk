@@ -9,6 +9,7 @@
     - options.datas (object): Icon configuration data (nested by category)
     - options.class (string): Additional CSS classes (e.g. "icon-duotone" for dual-color styling)
     - options.fillColor (string): Optional fill color class (e.g. "fill-red-500" or "fill-[var(--color-button-primary)]")
+    - options.decorative (boolean): If true, icon is decorative (aria-hidden="true")
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/icon.njk" import renderIcon %}
@@ -22,6 +23,13 @@
         name: "demoFileUp1",
         datas: atoms.icon.icons,
         class: "icon-duotone"
+    }) }}
+
+    Decorative icon (in button with text):
+    {{ renderIcon({
+        name: "demoIcon1",
+        datas: atoms.icon.icons,
+        decorative: true
     }) }}
 
   Country Flags:
@@ -58,6 +66,7 @@
       {% set iconSize = iconData.size | default('md') %}
       {% set isCountryFlag = spriteId | length == 2 %}
       {% set fillColorClass = options.fillColor | default("fill-current") %}
+      {% set isDecorative = options.decorative | default(false) %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
@@ -94,8 +103,12 @@
 
         <span
           class="{{ flagClasses }}"
+          {% if isDecorative %}
+          aria-hidden="true"
+          {% else %}
           role="img"
           aria-label="{{ iconAlt }}"
+          {% endif %}
           title="{{ iconAlt }}"
           data-icon-name="{{ iconData.name }}"
           data-icon-type="flag"
@@ -116,8 +129,14 @@
 
         <svg
           class="{{ finalClasses }}"
+          {% if isDecorative %}
+          aria-hidden="true"
+          focusable="false"
+          {% else %}
           aria-label="{{ iconAlt }}"
           role="img"
+          focusable="false"
+          {% endif %}
           data-icon-name="{{ iconData.name }}"
           data-icon-type="icon"
           {% if iconData.size %}data-icon-size="{{ iconData.size }}"{% endif %}

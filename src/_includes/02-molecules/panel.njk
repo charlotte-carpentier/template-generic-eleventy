@@ -82,7 +82,7 @@
           3.2 Item Classes
           Description: Layout, Spacing, Borders
         --------------------------#}
-      {% set itemStateClasses = "transition-colors hover:[&>span]:text-[var(--color-global-accent)] hover:[&_svg]:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)] [aria-disabled='true']:bg-[var(--color-global-contrast-light-04)] [aria-disabled='true']:text-[var(--color-global-contrast-light-02)] [aria-disabled='true']:cursor-not-allowed [aria-disabled='true']:pointer-events-none" %}
+      {% set itemStateClasses = "transition-colors hover:[&>span]:text-[var(--color-global-accent)] hover:[&_svg]:text-[var(--color-global-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 [aria-disabled='true']:bg-[var(--color-global-contrast-light-04)] [aria-disabled='true']:text-[var(--color-global-contrast-light-02)] [aria-disabled='true']:cursor-not-allowed [aria-disabled='true']:pointer-events-none" %}
 
       {# --------------------------
           3.3 Icon Wrapper Classes
@@ -107,8 +107,8 @@
           Description: Layout, Spacing, Alignment
         --------------------------#}
       {% set dateNavClasses = "flex items-center justify-between px-[var(--spacing-inline-medium)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)]" %}
-      {% set dateNavButtonBaseClasses = "inline-flex items-center justify-center w-8 h-8 bg-transparent border-0 rounded-[var(--radius-default)] cursor-pointer" %}
-      {% set dateNavButtonStateClasses = "text-[var(--color-interactive-default)] transition-colors hover:bg-[var(--color-global-contrast-light-04)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]" %}
+      {% set dateNavButtonBaseClasses = "inline-flex items-center justify-center min-w-[24px] min-h-[24px] w-8 h-8 bg-transparent border-0 rounded-[var(--radius-default)] cursor-pointer" %}
+      {% set dateNavButtonStateClasses = "text-[var(--color-interactive-default)] transition-colors hover:bg-[var(--color-global-contrast-light-04)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
 
       {# --------------------------
           3.7 Calendar Classes
@@ -118,7 +118,7 @@
       {% set calendarHeaderClasses = "grid grid-cols-7 gap-1 mb-2" %}
       {% set calendarDayHeaderClasses = "text-center typography-body-small text-[var(--color-global-contrast-light-01)] py-2" %}
       {% set calendarGridClasses = "grid grid-cols-7 gap-1" %}
-      {% set calendarDateCurrentClasses = "flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:border-2 focus:border-[var(--color-semantic-information-focus)]" %}
+      {% set calendarDateCurrentClasses = "flex items-center justify-center w-10 h-10 typography-body-regular rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
       {% set calendarDateOutsideClasses = "flex items-center justify-center w-10 h-10 typography-body-regular text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default" %}
       {% set calendarDateSelectedClasses = "bg-[var(--color-interactive-default)] text-[var(--color-global-white)] hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]" %}
 
@@ -147,7 +147,7 @@
         data-panel-name="{{ panelName }}"
         data-panel-type="{{ panelType }}"
         data-panel-variant="{{ variant }}"
-        role="listbox"
+        role="group"
         aria-label="Panel {{ panelName }}"
       >
         {# Default type panels #}
@@ -156,7 +156,6 @@
             <div
               class="{{ itemStateClasses }}"
               data-panel-item="true"
-              role="option"
               tabindex="0"
             >
               {# Checkbox handles own label #}
@@ -171,7 +170,8 @@
                 <div class="{{ iconWrapperClasses }}">
                   {{ renderIcon({
                       name: item.iconName,
-                      datas: options.iconDatas
+                      datas: options.iconDatas,
+                      decorative: true
                   }) }}
                 </div>
                 <span class="{{ textClasses }}">{{ item.text }}</span>
@@ -204,7 +204,8 @@
               >
                 {{ renderIcon({
                     name: navigation.prevIcon,
-                    datas: options.iconDatas
+                    datas: options.iconDatas,
+                    decorative: true
                 }) }}
               </button>
 
@@ -223,7 +224,8 @@
               >
                 {{ renderIcon({
                     name: navigation.nextIcon,
-                    datas: options.iconDatas
+                    datas: options.iconDatas,
+                    decorative: true
                 }) }}
               </button>
             </div>
@@ -248,7 +250,6 @@
             <div
               class="{{ itemStateClasses }}"
               data-panel-item="true"
-              role="option"
               tabindex="0"
             >
               {# Checkbox variant #}
@@ -263,7 +264,8 @@
                 <div class="{{ iconWrapperClasses }}">
                   {{ renderIcon({
                       name: item.iconName,
-                      datas: options.iconDatas
+                      datas: options.iconDatas,
+                      decorative: true
                   }) }}
                 </div>
                 <span class="{{ textClasses }}">{{ item.text }}</span>
