@@ -23,6 +23,11 @@
         buttonDatas: atoms.button.buttons
     }) }}
 
+  JavaScript Requirements:
+    - JS MUST trigger file input on Enter/Space key
+    - JS MUST announce file selected via aria-live region
+    - JS MUST announce errors via aria-live region
+
   @created 2025-01-15
 #}
 
@@ -173,15 +178,18 @@
         <div
           class="{{ dropzoneClasses }}"
           data-drag-drop-zone="true"
+          role="button"
           tabindex="0"
+          aria-label="Drag and drop file or press Enter to browse"
           aria-describedby="file-info-{{ blockData.name }}"
-          {% if variant == 'loading' %}aria-busy="true"{% endif %}
+          {% if variant == 'loading' %}aria-busy="true" aria-disabled="true"{% endif %}
         >
           {# Icon #}
           <div class="{{ iconContainerClasses }}">
             {{ renderIcon({
                 name: iconName,
-                datas: options.iconDatas
+                datas: options.iconDatas,
+                decorative: true
             }) }}
           </div>
 
