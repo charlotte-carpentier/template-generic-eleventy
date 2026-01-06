@@ -25,6 +25,7 @@
     }) }}
 
   @created 2025-01-15
+  @updated 2026-01-06 (WCAG 2.2 AA compliance)
 #}
 
 {% from "01-atoms/select.njk" import renderSelect %}
@@ -159,7 +160,7 @@
           <nav
             class="{{ navWrapperClasses }}"
             role="navigation"
-            aria-label="Pagination"
+            aria-label="Page navigation"
             data-pagination-nav="true"
           >
             <ul class="{{ navListClasses }}">
@@ -167,34 +168,58 @@
               {# First page button #}
               {% if icons.first %}
                 <li class="{{ navItemClasses }}">
-                  <a href="{{ paginationHref.first }}"
-                    class="{{ navLinkBaseClasses }} {% if not paginationHref.previous %}{{ navLinkDisabledClasses }}{% endif %}"
-                    aria-label="First page"
-                    {% if not paginationHref.previous %}aria-disabled="true" tabindex="-1"{% endif %}
-                  >
-                    {{ renderIcon({
-                        name: icons.first,
-                        datas: options.iconDatas,
-                        decorative: true
-                    }) | safe }}
-                  </a>
+                  {% if paginationHref.previous %}
+                    <a href="{{ paginationHref.first }}"
+                      class="{{ navLinkBaseClasses }}"
+                      aria-label="First page"
+                    >
+                      {{ renderIcon({
+                          name: icons.first,
+                          datas: options.iconDatas,
+                          decorative: true
+                      }) | safe }}
+                    </a>
+                  {% else %}
+                    <span
+                      class="{{ navLinkBaseClasses }} {{ navLinkDisabledClasses }}"
+                      aria-hidden="true"
+                    >
+                      {{ renderIcon({
+                          name: icons.first,
+                          datas: options.iconDatas,
+                          decorative: true
+                      }) | safe }}
+                    </span>
+                  {% endif %}
                 </li>
               {% endif %}
 
               {# Previous page button #}
               {% if icons.prev %}
                 <li class="{{ navItemClasses }}">
-                  <a href="{{ paginationHref.previous or paginationHref.first }}"
-                    class="{{ navLinkBaseClasses }} {% if not paginationHref.previous %}{{ navLinkDisabledClasses }}{% endif %}"
-                    aria-label="Previous page"
-                    {% if not paginationHref.previous %}aria-disabled="true" tabindex="-1"{% endif %}
-                  >
-                    {{ renderIcon({
-                        name: icons.prev,
-                        datas: options.iconDatas,
-                        decorative: true
-                    }) | safe }}
-                  </a>
+                  {% if paginationHref.previous %}
+                    <a href="{{ paginationHref.previous }}"
+                      class="{{ navLinkBaseClasses }}"
+                      aria-label="Previous page"
+                    >
+                      {{ renderIcon({
+                          name: icons.prev,
+                          datas: options.iconDatas,
+                          decorative: true
+                      }) | safe }}
+                    </a>
+                  {% else %}
+                    <span
+                      class="{{ navLinkBaseClasses }} {{ navLinkDisabledClasses }}"
+                      aria-hidden="true"
+                    >
+                      {{ renderIcon({
+                          name: icons.prev,
+                          datas: options.iconDatas,
+                          decorative: true
+                      }) | safe }}
+                    </span>
+                  {% endif %}
                 </li>
               {% endif %}
 
@@ -215,8 +240,8 @@
 
               {# Dots before siblings #}
               {% if startPage > 2 %}
-                <li class="{{ navItemClasses }}">
-                  <span class="{{ navLinkBaseClasses }} {{ navLinkDisabledClasses }}">
+                <li class="{{ navItemClasses }}" aria-hidden="true">
+                  <span class="typography-body-regular text-[var(--color-global-contrast-light-02)] px-[var(--spacing-inline-medium)]">
                     {% if icons.dots %}
                       {{ renderIcon({
                           name: icons.dots,
@@ -244,8 +269,8 @@
 
               {# Dots after siblings #}
               {% if endPage < totalPages - 1 %}
-                <li class="{{ navItemClasses }}">
-                  <span class="{{ navLinkBaseClasses }} {{ navLinkDisabledClasses }}">
+                <li class="{{ navItemClasses }}" aria-hidden="true">
+                  <span class="typography-body-regular text-[var(--color-global-contrast-light-02)] px-[var(--spacing-inline-medium)]">
                     {% if icons.dots %}
                       {{ renderIcon({
                           name: icons.dots,
@@ -273,34 +298,58 @@
               {# Next page button #}
               {% if icons.next %}
                 <li class="{{ navItemClasses }}">
-                  <a  href="{{ paginationHref.next or paginationHref.last }}"
-                    class="{{ navLinkBaseClasses }} {% if not paginationHref.next %}{{ navLinkDisabledClasses }}{% endif %}"
-                    aria-label="Next page"
-                    {% if not paginationHref.next %}aria-disabled="true" tabindex="-1"{% endif %}
-                  >
-                    {{ renderIcon({
-                        name: icons.next,
-                        datas: options.iconDatas,
-                        decorative: true
-                    }) | safe }}
-                  </a>
+                  {% if paginationHref.next %}
+                    <a  href="{{ paginationHref.next }}"
+                      class="{{ navLinkBaseClasses }}"
+                      aria-label="Next page"
+                    >
+                      {{ renderIcon({
+                          name: icons.next,
+                          datas: options.iconDatas,
+                          decorative: true
+                      }) | safe }}
+                    </a>
+                  {% else %}
+                    <span
+                      class="{{ navLinkBaseClasses }} {{ navLinkDisabledClasses }}"
+                      aria-hidden="true"
+                    >
+                      {{ renderIcon({
+                          name: icons.next,
+                          datas: options.iconDatas,
+                          decorative: true
+                      }) | safe }}
+                    </span>
+                  {% endif %}
                 </li>
               {% endif %}
 
               {# Last page button #}
               {% if icons.last %}
                 <li class="{{ navItemClasses }}">
-                  <a  href="{{ paginationHref.last }}"
-                    class="{{ navLinkBaseClasses }} {% if not paginationHref.next %}{{ navLinkDisabledClasses }}{% endif %}"
-                    aria-label="Last page"
-                    {% if not paginationHref.next %}aria-disabled="true" tabindex="-1"{% endif %}
-                  >
-                    {{ renderIcon({
-                        name: icons.last,
-                        datas: options.iconDatas,
-                        decorative: true
-                    }) | safe }}
-                  </a>
+                  {% if paginationHref.next %}
+                    <a  href="{{ paginationHref.last }}"
+                      class="{{ navLinkBaseClasses }}"
+                      aria-label="Last page"
+                    >
+                      {{ renderIcon({
+                          name: icons.last,
+                          datas: options.iconDatas,
+                          decorative: true
+                      }) | safe }}
+                    </a>
+                  {% else %}
+                    <span
+                      class="{{ navLinkBaseClasses }} {{ navLinkDisabledClasses }}"
+                      aria-hidden="true"
+                    >
+                      {{ renderIcon({
+                          name: icons.last,
+                          datas: options.iconDatas,
+                          decorative: true
+                      }) | safe }}
+                    </span>
+                  {% endif %}
                 </li>
               {% endif %}
 

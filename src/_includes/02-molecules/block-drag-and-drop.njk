@@ -29,6 +29,7 @@
     - JS MUST announce errors via aria-live region
 
   @created 2025-01-15
+  @updated 2026-01-06 (WCAG 2.2 AA compliance)
 #}
 
 {% from "01-atoms/heading.njk" import renderHeading %}
@@ -99,7 +100,7 @@
           3.3 Dropzone Classes (by variant: default, loading, error)
           Description: Layout, Spacing, Colors, Borders, Effects, States
         --------------------------#}
-      {% set dropzoneBaseClasses = "flex flex-col items-start justify-center p-[var(--spacing-inset-large)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-card)] bg-[var(--color-global-white)] min-h-[160px] cursor-pointer transition-colors mb-[var(--spacing-stack-medium)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
+      {% set dropzoneBaseClasses = "flex flex-col items-start justify-center p-[var(--spacing-inset-large)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-card)] bg-[var(--color-global-white)] min-h-[160px] w-full cursor-pointer transition-colors mb-[var(--spacing-stack-medium)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
       {% set dropzoneHoverClasses = "hover:bg-[var(--color-global-contrast-light-03)]" %}
 
       {% set variantMap = {
@@ -163,6 +164,7 @@
         data-drag-drop-name="{{ blockData.name }}"
         data-drag-drop-type="block-drag-and-drop"
         data-drag-drop="true"
+        aria-dropeffect="copy"
         {% if supportedFormatsValue %}data-allowed-types="{{ supportedFormatsValue | lower | replace(' ', '') }}"{% endif %}
         {% if maxFileSizeValue %}data-max-size="{{ maxFileSizeValue | lower | replace(' ', '') }}"{% endif %}
       >
@@ -174,15 +176,14 @@
           }) }}
         </div>
 
-        {# Dropzone #}
-        <div
+        {# Dropzone - Native button for keyboard access #}
+        <button
+          type="button"
           class="{{ dropzoneClasses }}"
           data-drag-drop-zone="true"
-          role="button"
-          tabindex="0"
-          aria-label="Drag and drop file or press Enter to browse"
+          aria-label="{{ dropzoneText }}"
           aria-describedby="file-info-{{ blockData.name }}"
-          {% if variant == 'loading' %}aria-busy="true" aria-disabled="true"{% endif %}
+          {% if variant == 'loading' %}aria-busy="true" disabled{% endif %}
         >
           {# Icon #}
           <div class="{{ iconContainerClasses }}">
@@ -194,10 +195,10 @@
           </div>
 
           {# Dropzone text #}
-          <p class="{{ dropzoneTextClasses }}" data-drag-drop-text="true">
+          <span class="{{ dropzoneTextClasses }}" data-drag-drop-text="true">
             {{ dropzoneText }}
-          </p>
-        </div>
+          </span>
+        </button>
 
         {# Separator #}
         <span class="{{ separatorClasses }}">{{ separator }}</span>
@@ -241,15 +242,16 @@
           data-drag-drop-status="true"
         ></div>
 
-        {# Hidden file input with label #}
+        {# Hidden file input with proper label #}
         <label for="file-{{ blockData.name }}" class="sr-only">
-          {{ dropzoneText }}
+          Choose file or drag and drop
         </label>
         <input
           type="file"
           id="file-{{ blockData.name }}"
           class="sr-only"
           data-drag-drop-input="true"
+          aria-describedby="file-info-{{ blockData.name }}"
           {% if supportedFormatsValue %}accept="{{ supportedFormatsValue | lower | replace(' ', '') }}"{% endif %}
         >
       </div>

@@ -100,8 +100,8 @@
           3.5 Close Button Classes
           Description: Layout, Size, Borders
         --------------------------#}
-      {% set closeButtonBaseClasses = "flex-shrink-0 inline-flex items-center justify-center w-6 h-6 ml-[var(--spacing-inline-large)] bg-transparent border-0 cursor-pointer" %}
-      {% set closeButtonStateClasses = "text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)]" %}
+      {% set closeButtonBaseClasses = "flex-shrink-0 inline-flex items-center justify-center min-w-[24px] min-h-[24px] w-6 h-6 ml-[var(--spacing-inline-large)] bg-transparent border-0 cursor-pointer" %}
+      {% set closeButtonStateClasses = "text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
@@ -113,8 +113,13 @@
         data-toast-type="toast"
         data-toast-variant="{{ variant }}"
         {% if duration %}data-toast-duration="{{ duration }}"{% endif %}
-        aria-live="polite"
-        role="status"
+        {% if variant in ['error', 'warning'] %}
+          role="alert"
+          aria-live="assertive"
+        {% else %}
+          role="status"
+          aria-live="polite"
+        {% endif %}
       >
         <div
           class="{{ contentWrapperClasses }}"
@@ -128,7 +133,8 @@
             >
               {{ renderIcon({
                   name: iconName,
-                  datas: options.iconDatas
+                  datas: options.iconDatas,
+                  decorative: true
               }) }}
             </div>
           {% endif %}
@@ -153,7 +159,8 @@
               {% if closeIconName and options.iconDatas %}
                 {{ renderIcon({
                     name: closeIconName,
-                    datas: options.iconDatas
+                    datas: options.iconDatas,
+                    decorative: true
                 }) }}
               {% else %}
                 &times;

@@ -198,7 +198,7 @@
   --color-button-primary-contrast-high: var(--color-neutral-white);
 
   /* Button Secondary */
-  --color-button-secondary: var(--color-brand-primary-40);
+  --color-button-secondary: var(--color-brand-primary-30);
   --color-button-secondary-hover: var(--color-brand-primary-30);
   --color-button-secondary-active: var(--color-brand-primary-40);
   --color-button-secondary-hover-light: var(--color-neutral-95);
@@ -237,8 +237,8 @@
   --color-semantic-information-contrast-light-02: var(--color-semantic-information-100);
 
   /* Interactive */
-  --color-interactive-default: var(--color-brand-primary-40);
-  --color-interactive-hover: var(--color-brand-primary-30);
+  --color-interactive-default: var(--color-brand-primary-30);
+  --color-interactive-hover: var(--color-brand-primary-20);
 
   /* ─────────────────────────────
      Gradients - Tokens

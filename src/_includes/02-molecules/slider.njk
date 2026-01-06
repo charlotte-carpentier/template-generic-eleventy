@@ -20,9 +20,10 @@
     - slider.js molecule (calculates positions, updates values, handles drag)
     - JS MUST implement keyboard: Right/Up increment, Left/Down decrement, Home min, End max, Page Up/Down large steps
     - JS MUST update aria-valuenow and aria-valuetext on change
+    - JS MUST update aria-valuetext with unit if provided
 
   @created 2025-01-15
-  @updated 2025-01-18 (Phase 6 - Cleaned hardcoded values, JS-driven)
+  @updated 2026-01-06 (WCAG 2.2 AA compliance)
 #}
 
 {% macro renderSlider(options) %}
@@ -52,6 +53,7 @@
       {% set minValue = sliderData.min | default(0) %}
       {% set maxValue = sliderData.max | default(100) %}
       {% set step = sliderData.step | default(1) %}
+      {% set unit = sliderData.unit | default('') %}
       {% set showIndicator = sliderData.showIndicator | default(false) %}
       {% set indicatorVariant = sliderData.indicatorVariant | default('outline') %}
 
@@ -75,6 +77,7 @@
         3.7 Indicator Classes
         3.8 Min/Max Wrapper Classes
         3.9 Min/Max Text Classes
+        3.10 Instructions Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -138,6 +141,12 @@
         --------------------------#}
       {% set minMaxTextClasses = "typography-body-small text-[var(--color-global-contrast-light-01)]" %}
 
+      {# --------------------------
+          3.10 Instructions Classes
+          Description: Screen reader only
+        --------------------------#}
+      {% set instructionsClasses = "sr-only" %}
+
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
@@ -149,6 +158,7 @@
         data-slider-min="{{ minValue }}"
         data-slider-max="{{ maxValue }}"
         data-slider-step="{{ step }}"
+        {% if unit %}data-slider-unit="{{ unit }}"{% endif %}
         {% if sliderType == 'single' %}
           data-slider-value="{{ value }}"
         {% else %}
@@ -165,6 +175,11 @@
             {{ label }}
           </label>
         {% endif %}
+
+        {# Keyboard instructions for screen readers #}
+        <div class="{{ instructionsClasses }}" id="slider-instructions-{{ sliderName }}">
+          Use arrow keys to adjust. Home and End keys for minimum and maximum values. Page Up and Page Down for larger steps.
+        </div>
 
         {# Track with handles #}
         <div
@@ -186,27 +201,33 @@
               class="{{ handleBaseClasses }} {{ handleStateClasses }}"
               data-slider-handle="true"
               data-slider-handle-index="0"
+              {% if sliderType == 'range' %}id="slider-{{ sliderName }}-min"{% endif %}
               tabindex="0"
               role="slider"
-              aria-label="{% if sliderType == 'single' %}{{ label }}{% else %}{{ label }} minimum{% endif %}"
+              aria-label="{% if sliderType == 'single' %}{{ label | default('Slider') }}{% else %}{{ label | default('Slider') }} minimum{% endif %}"
               aria-orientation="horizontal"
               aria-valuemin="{{ minValue }}"
               aria-valuemax="{{ maxValue }}"
               {% if sliderType == 'single' %}
                 aria-valuenow="{{ value }}"
-                aria-valuetext="{{ value }}"
+                aria-valuetext="{{ value }}{% if unit %} {{ unit }}{% endif %}"
               {% else %}
                 aria-valuenow="{{ valueMin }}"
-                aria-valuetext="{{ valueMin }}"
+                aria-valuetext="{{ valueMin }}{% if unit %} {{ unit }}{% endif %}"
+                aria-controls="slider-{{ sliderName }}-max"
               {% endif %}
+              aria-describedby="slider-instructions-{{ sliderName }}"
             >
               {# Indicator for handle 1 (JS updates value) #}
               {% if showIndicator %}
                 <span
                   class="{{ indicatorBaseClasses }} {{ indicatorVariantClasses }}"
                   data-slider-indicator="true"
+                  role="status"
+                  aria-live="polite"
+                  aria-atomic="true"
                 >
-                  {% if sliderType == 'single' %}{{ value }}{% else %}{{ valueMin }}{% endif %}
+                  {% if sliderType == 'single' %}{{ value }}{% else %}{{ valueMin }}{% endif %}{% if unit %} {{ unit }}{% endif %}
                 </span>
               {% endif %}
             </div>
@@ -217,22 +238,28 @@
                 class="{{ handleBaseClasses }} {{ handleStateClasses }}"
                 data-slider-handle="true"
                 data-slider-handle-index="1"
+                id="slider-{{ sliderName }}-max"
                 tabindex="0"
                 role="slider"
-                aria-label="{{ label }} maximum"
+                aria-label="{{ label | default('Slider') }} maximum"
                 aria-orientation="horizontal"
                 aria-valuemin="{{ minValue }}"
                 aria-valuemax="{{ maxValue }}"
                 aria-valuenow="{{ valueMax }}"
-                aria-valuetext="{{ valueMax }}"
+                aria-valuetext="{{ valueMax }}{% if unit %} {{ unit }}{% endif %}"
+                aria-controls="slider-{{ sliderName }}-min"
+                aria-describedby="slider-instructions-{{ sliderName }}"
               >
                 {# Indicator for handle 2 (JS updates value) #}
                 {% if showIndicator %}
                   <span
                     class="{{ indicatorBaseClasses }} {{ indicatorVariantClasses }}"
                     data-slider-indicator="true"
+                    role="status"
+                    aria-live="polite"
+                    aria-atomic="true"
                   >
-                    {{ valueMax }}
+                    {{ valueMax }}{% if unit %} {{ unit }}{% endif %}
                   </span>
                 {% endif %}
               </div>
@@ -245,8 +272,8 @@
           class="{{ minMaxWrapperClasses }}"
           data-slider-labels="true"
         >
-          <span class="{{ minMaxTextClasses }}" data-slider-min-label="true">{{ minValue }}</span>
-          <span class="{{ minMaxTextClasses }}" data-slider-max-label="true">{{ maxValue }}</span>
+          <span class="{{ minMaxTextClasses }}" data-slider-min-label="true">{{ minValue }}{% if unit %} {{ unit }}{% endif %}</span>
+          <span class="{{ minMaxTextClasses }}" data-slider-max-label="true">{{ maxValue }}{% if unit %} {{ unit }}{% endif %}</span>
         </div>
       </div>
     {% endif %}
