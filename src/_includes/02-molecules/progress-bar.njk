@@ -19,6 +19,7 @@
   JavaScript Requirements:
     - No JavaScript required (static presentation with native HTML5 <progress>)
     - Optional: animate.js utility for fill animations (reusable across loaders, skill bars)
+    - If value changes dynamically, JS MUST update aria-valuenow attribute
 
   @created 2025-01-15
 #}
@@ -136,7 +137,8 @@
           aria-valuenow="{{ value }}"
           aria-valuemin="{{ minValue }}"
           aria-valuemax="{{ maxValue }}"
-          aria-label="Progress: {{ value }}%"
+          aria-valuetext="{{ value }} percent complete"
+          {% if label %}aria-label="{{ label }}"{% endif %}
         >
           <div
             class="{{ fillClasses }}"
