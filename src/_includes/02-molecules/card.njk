@@ -89,9 +89,9 @@
 
       {# --------------------------
           3.3 Content Wrapper Classes
-          Description: Layout, Spacing
-        --------------------------#}
-      {% set contentClasses = "flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-inset-small)]" %}
+          Description: Layout, Spacing, Typography override h4-serif
+      --------------------------#}
+      {% set contentClasses = "flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-inset-small)] [&_h2]:typography-h4-serif" %}
 
       {# --------------------------
           3.4 Text Classes

@@ -78,9 +78,9 @@
 
       {# --------------------------
           3.3 Column Classes
-          Description: Layout, Spacing
-        --------------------------#}
-      {% set columnClasses = "flex flex-col gap-[var(--spacing-stack-small)] px-[var(--spacing-inset-large)] [&_[data-column-heading]]:pl-[var(--spacing-inset-small)]" %}
+          Description: Layout, Spacing, Typography override h6
+      --------------------------#}
+      {% set columnClasses = "flex flex-col gap-[var(--spacing-stack-small)] px-[var(--spacing-inset-large)] [&_[data-column-heading]]:pl-[var(--spacing-inset-small)] [&_[data-column-heading]_h2]:typography-h6" %}
 
       {# --------------------------
           3.4 Link Classes
