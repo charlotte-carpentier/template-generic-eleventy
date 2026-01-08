@@ -14,8 +14,8 @@
     {
       "name": "demoSectV1",
       "type": "simple",
-      "superHeadingName": "demoHead3",
-      "mainHeadingName": "demoLong1",
+      "headingName": "demoHead2",
+      "subheadingName": "demoLong2",
       "content": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
       "primaryButtonName": "demoLabel1",
       "secondaryButtonName": "demoLabel2",
@@ -24,8 +24,8 @@
     {
       "name": "demoSectV2",
       "type": "cards",
-      "superHeadingName": "demoHead3",
-      "mainHeadingName": "demoLong1",
+      "headingName": "demoHead2",
+      "subheadingName": "demoLong2",
       "cardTags": [
         "value"
       ],

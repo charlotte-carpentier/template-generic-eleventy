@@ -53,8 +53,8 @@
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set sectionName = sectionData.name | default(options.name) %}
-      {% set mainHeadingName = sectionData.mainHeadingName | default('') %}
-      {% set superHeadingName = sectionData.superHeadingName | default('') %}
+      {% set headingName = sectionData.headingName | default('') %}
+      {% set subheadingName = sectionData.subheadingName | default('') %}
       {% set content = sectionData.content | default('') %}
       {% set imageName = sectionData.imageName | default('') %}
       {% set primaryButtonName = sectionData.primaryButtonName | default('') %}
@@ -68,8 +68,8 @@
         3.2 Layout Classes
         3.3 Left Column Classes
         3.4 Right Column Classes
-        3.5 Main Heading Wrapper Classes
-        3.6 Super Heading Wrapper Classes
+        3.5 Heading Wrapper Classes
+        3.6 Subheading Wrapper Classes
         3.7 Content Wrapper Classes
         3.8 Buttons Wrapper Classes
         3.9 Image Wrapper Classes
@@ -100,16 +100,16 @@
       {% set rightColClasses = "flex self-stretch md:mt-[calc(var(--spacing-stack-medium)+2rem)]" %}
 
       {# --------------------------
-          3.5 Main Heading Wrapper Classes
-          Description: Layout, Typography override serif
-      --------------------------#}
-      {% set mainHeadingClasses = "flex [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif" %}
-
-      {# --------------------------
-          3.6 Super Heading Wrapper Classes
+          3.5 Heading Wrapper Classes
           Description: Layout
         --------------------------#}
-      {% set superHeadingClasses = "flex" %}
+      {% set headingClasses = "flex" %}
+
+      {# --------------------------
+          3.6 Subheading Wrapper Classes
+          Description: Layout, Typography override serif
+      --------------------------#}
+      {% set subheadingClasses = "flex [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif" %}
 
       {# --------------------------
           3.7 Content Wrapper Classes
@@ -150,27 +150,27 @@
             data-section-column="left"
           >
 
-            {# Super heading #}
-            {% if superHeadingName %}
+            {# Heading #}
+            {% if headingName %}
               <div
-                class="{{ superHeadingClasses }}"
-                data-section-super-heading
+                class="{{ headingClasses }}"
+                data-section-heading
               >
                 {{ renderHeading({
-                    name: superHeadingName,
+                    name: headingName,
                     datas: options.headingDatas
                 }) }}
               </div>
             {% endif %}
 
-            {# Main heading #}
-            {% if mainHeadingName %}
+            {# Subheading #}
+            {% if subheadingName %}
               <div
-                class="{{ mainHeadingClasses }}"
-                data-section-main-heading
+                class="{{ subheadingClasses }}"
+                data-section-subheading
               >
                 {{ renderHeading({
-                    name: mainHeadingName,
+                    name: subheadingName,
                     datas: options.headingDatas
                 }) }}
               </div>

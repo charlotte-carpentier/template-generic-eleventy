@@ -9,8 +9,8 @@
   "sectHeros": [
     {
       "name": "demoSectH1",
-      "mainHeadingName": "demoLong1",
-      "superHeadingName": "demoHead3",
+      "headingName": "demoHead2",
+      "subheadingName": "demoLong2",
       "content": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
       "imageName": "demoImage2",
       "primaryButtonName": "demoLabel1",

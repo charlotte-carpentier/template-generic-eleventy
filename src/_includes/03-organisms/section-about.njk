@@ -50,8 +50,8 @@
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set sectionName = sectionData.name | default(options.name) %}
-      {% set superHeadingName = sectionData.superHeadingName | default('') %}
       {% set headingName = sectionData.headingName | default('') %}
+      {% set subheadingName = sectionData.subheadingName | default('') %}
       {% set content = sectionData.content | default('') %}
       {% set primaryButtonName = sectionData.primaryButtonName | default('') %}
       {% set secondaryButtonName = sectionData.secondaryButtonName | default('') %}
@@ -64,7 +64,7 @@
         3.2 Layout Classes
         3.3 Left Column Classes
         3.4 Right Column Classes
-        3.5 Super Heading Wrapper Classes
+        3.5 Heading Wrapper Classes
         3.6 Main Heading Wrapper Classes
         3.7 Content Wrapper Classes
         3.8 Buttons Wrapper Classes
@@ -95,16 +95,16 @@
       {% set rightColClasses = "flex order-1 md:order-2" %}
 
       {# --------------------------
-          3.5 Super Heading Wrapper Classes
+          3.5 Heading Wrapper Classes
           Description: Layout
         --------------------------#}
-      {% set superHeadingClasses = "flex" %}
+      {% set headingClasses = "flex" %}
 
       {# --------------------------
-          3.6 Main Heading Wrapper Classes
+          3.6 Subheading Wrapper Classes
           Description: Layout, Typography override serif
       --------------------------#}
-      {% set mainHeadingClasses = "flex [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif" %}
+      {% set subheadingClasses = "flex [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif" %}
 
       {# --------------------------
           3.7 Content Wrapper Classes
@@ -133,20 +133,20 @@
           data-section-container
         >
 
-          {# Left column - Super heading, content, buttons #}
+          {# Left column - Heading, content, buttons #}
           <div
             class="{{ leftColClasses }}"
             data-section-left-column
           >
 
-            {# Super heading #}
-            {% if superHeadingName %}
+            {# Heading #}
+            {% if headingName %}
               <div
-                class="{{ superHeadingClasses }}"
-                data-section-super-heading
+                class="{{ headingClasses }}"
+                data-section-heading
               >
                 {{ renderHeading({
-                    name: superHeadingName,
+                    name: headingName,
                     datas: options.headingDatas
                 }) }}
               </div>
@@ -194,20 +194,20 @@
 
           </div>
 
-          {# Right column - Main heading #}
+          {# Right column - Subheading #}
           <div
             class="{{ rightColClasses }}"
             data-section-right-column
           >
 
-            {# Main heading #}
-            {% if headingName %}
+            {# Subheading #}
+            {% if subheadingName %}
               <div
-                class="{{ mainHeadingClasses }}"
-                data-section-heading
+                class="{{ subheadingClasses }}"
+                data-section-subheading
               >
                 {{ renderHeading({
-                    name: headingName,
+                    name: subheadingName,
                     datas: options.headingDatas
                 }) }}
               </div>
