@@ -122,8 +122,8 @@
           Description: Layout, Alignment
         --------------------------#}
       {% set headingMap = {
-        'simple': 'flex flex-col items-center',
-        'cards': 'flex flex-col items-start md:items-center'
+        'simple': 'flex flex-col items-center [&_h2]:typography-h3-serif',
+        'cards': 'flex flex-col items-start md:items-center [&_h2]:typography-h3-serif'
       } %}
       {% set headingClasses = headingMap[sectionType] or headingMap['simple'] %}
 
@@ -132,8 +132,8 @@
           Description: Layout, Typography override serif, Alignment, Spacing bottom
         --------------------------#}
       {% set subheadingMap = {
-        'simple': 'flex flex-col items-center mt-[var(--spacing-stack-large)] [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif',
-        'cards': 'flex flex-col items-start mt-[var(--spacing-stack-large)] md:items-center [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h3-serif'
+        'simple': 'flex flex-col items-center mt-[var(--spacing-stack-large)] [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h2-serif',
+        'cards': 'flex flex-col items-start mt-[var(--spacing-stack-large)] md:items-center [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h2-serif'
       } %}
       {% set subheadingClasses = subheadingMap[sectionType] or subheadingMap['simple'] %}
 
