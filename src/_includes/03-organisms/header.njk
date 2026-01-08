@@ -9,7 +9,7 @@
     - options.datas (array): Header configuration data
     - options.vectorDatas (array): Vector atom data
     - options.iconDatas (array): Icon atom data
-    - options.tabBarDatas (array): Tab bar organism data
+    - options.navigationDatas (array): Navigation organism data
     - options.linkDatas (array): Link atom data
 
   Usage — Summon HAT Components Wisely:
@@ -20,7 +20,7 @@
         datas: organisms.header.headers,
         vectorDatas: atoms.vector.vectors,
         iconDatas: atoms.icon.icons,
-        tabBarDatas: organisms["tab-bar"].tabBars,
+        navigationDatas: organisms.navigation.navigations,
         linkDatas: atoms.link.links
     }) }}
 
@@ -30,13 +30,14 @@
     - utils/active-link.js
 
   @created 2025-01-15
+  @updated 2025-01-06 (WCAG 2.2 AA compliant)
 #}
 
 {% macro renderHeader(options) %}
   {# Import sub-components #}
   {% from "01-atoms/vector.njk" import renderVector %}
   {% from "01-atoms/icon.njk" import renderIcon %}
-  {% from "03-organisms/tab-bar.njk" import renderTabBar %}
+  {% from "03-organisms/navigation.njk" import renderNavigation %}
 
   {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
     1. Validate Props
@@ -59,7 +60,7 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set headerName = headerData.name | default(options.name) %}
       {% set desktopVectorName = headerData.desktop.vectorName | default('') %}
-      {% set desktopTabBarName = headerData.desktop.tabBarName | default('') %}
+      {% set desktopNavigationName = headerData.desktop.navigationName | default('') %}
       {% set mobileVectorName = headerData.mobile.vectorName | default('') %}
       {% set burgerOpenIcon = headerData.mobile.burgerOpenIcon | default('') %}
       {% set burgerCloseIcon = headerData.mobile.burgerCloseIcon | default('') %}
@@ -121,7 +122,7 @@
           3.7 Mobile Overlay Classes
           Description: Layout fixed fullscreen, Background, Z-index, Responsive
         --------------------------#}
-      {% set overlayClasses = "hidden fixed inset-0 z-50 bg-[var(--color-global-white)] top-[87px] max-sm:top-[75px] md:hidden" %}
+      {% set overlayClasses = "fixed inset-0 z-50 bg-[var(--color-global-white)] top-[87px] max-sm:top-[75px] md:hidden" %}
 
       {# --------------------------
           3.8 Mobile Overlay Content Classes
@@ -137,7 +138,7 @@
 
       {# --------------------------
           3.10 Mobile Navigation Classes
-          Description: Layout vertical override, Tab-bar override for vertical
+          Description: Layout vertical override, Navigation override for vertical
         --------------------------#}
       {% set mobileNavClasses = "[&_ul]:flex-col [&_li]:w-full" %}
 
@@ -168,14 +169,14 @@
             }) }}
           </div>
 
-          {# Desktop navigation - Tab bar #}
+          {# Desktop navigation #}
           <div
             class="{{ desktopNavClasses }}"
             data-header-section="desktop-navigation"
           >
-            {{ renderTabBar({
-                name: desktopTabBarName,
-                datas: options.tabBarDatas,
+            {{ renderNavigation({
+                name: desktopNavigationName,
+                datas: options.navigationDatas,
                 linkDatas: options.linkDatas
             }) }}
           </div>
@@ -202,7 +203,7 @@
             data-header-burger
           >
             {# Burger open icon - visible by default #}
-            <span data-burger-icon="open">
+            <span data-burger-icon="open" aria-hidden="true">
               {{ renderIcon({
                   name: burgerOpenIcon,
                   datas: options.iconDatas
@@ -210,7 +211,7 @@
             </span>
 
             {# Burger close icon - hidden by default #}
-            <span class="hidden" data-burger-icon="close">
+            <span class="hidden" data-burger-icon="close" aria-hidden="true">
               {{ renderIcon({
                   name: burgerCloseIcon,
                   datas: options.iconDatas
@@ -225,6 +226,9 @@
           <div
             class="{{ overlayClasses }}"
             id="mobile-overlay"
+            role="region"
+            aria-label="Main menu"
+            hidden
             data-header-overlay
           >
             <div
@@ -248,9 +252,9 @@
                 class="{{ mobileNavClasses }}"
                 data-overlay-section="navigation"
               >
-                {{ renderTabBar({
-                    name: desktopTabBarName,
-                    datas: options.tabBarDatas,
+                {{ renderNavigation({
+                    name: desktopNavigationName,
+                    datas: options.navigationDatas,
                     linkDatas: options.linkDatas
                 }) }}
               </div>

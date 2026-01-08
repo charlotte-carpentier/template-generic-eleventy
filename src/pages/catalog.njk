@@ -57,7 +57,7 @@ eleventyExcludeFromCollections: true
 {% from "03-organisms/header.njk" import renderHeader %}
 {% from "03-organisms/menu.njk" import renderMenu %}
 {% from "03-organisms/navigation-secondary.njk" import renderNavigationSecondary %}
-{% from "03-organisms/tab-bar.njk" import renderTabBar %}
+{% from "03-organisms/navigation.njk" import renderNavigation %}
 {% from "03-organisms/section-about.njk" import renderSectionAbout %}
 {% from "03-organisms/section-article-hero.njk" import renderSectionArticleHero %}
 {% from "03-organisms/section-contact.njk" import renderSectionContact %}
@@ -560,12 +560,12 @@ eleventyExcludeFromCollections: true
     }) }}
   </section>
 
-  {# Tab Bar #}
+  {# Navigation #}
   <section style="border: 1px solid #ccc; padding: 1rem; min-width: 300px;">
-    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Tab Bar</h2>
-    {{ renderTabBar({
-        name: "demoTabBar1",
-        datas: organisms["tab-bar"].tabBars,
+    <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Navigation</h2>
+    {{ renderNavigation({
+        name: "demoNav1",
+        datas: organisms.navigation.navigations,
         linkDatas: atoms.link.links,
         iconDatas: atoms.icon.icons,
         tooltipDatas: atoms.tooltip.tooltips
@@ -635,7 +635,7 @@ eleventyExcludeFromCollections: true
     <!-- Trigger button -->
     <button
       id="open-modal-btn"
-      style="padding: 0.5rem 1rem; margin-bottom: 1rem; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+      style="padding: 0.5rem 1rem; margin-bottom: 1rem; background: var(--color-button-primary); color: white; border: none; border-radius: 4px; cursor: pointer;">
       Open Modal
     </button>
 
@@ -708,7 +708,7 @@ eleventyExcludeFromCollections: true
         datas: organisms.header.headers,
         vectorDatas: atoms.vector.vectors,
         iconDatas: atoms.icon.icons,
-        tabBarDatas: organisms["tab-bar"].tabBars,
+        navigationDatas: organisms.navigation.navigations,
         linkDatas: atoms.link.links
     }) }}
   </section>

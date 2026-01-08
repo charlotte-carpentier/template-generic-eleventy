@@ -12,15 +12,15 @@
       "vectorName": "demoVector1",
       "items": [
         {
-          "headingName": "demoHead5",
+          "headingName": "demoFooterT1",
           "navSecondaryName": "navSecFooter"
         },
         {
-          "headingName": "demoHead5",
+          "headingName": "demoFooterT1",
           "navSecondaryName": "demoNavSec2"
         },
         {
-          "headingName": "demoHead5",
+          "headingName": "demoFooterT1",
           "navSecondaryName": "demoNavSec2"
         },
         {

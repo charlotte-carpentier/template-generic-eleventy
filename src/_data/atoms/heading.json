@@ -71,16 +71,28 @@
       "variant": "sans"
     },
     {
+      "name": "demoFooterT1",
+      "text": "Heading",
+      "tag": "h2",
+      "variant": "serif"
+    },
+    {
       "name": "demoSocial1",
       "text": "Socials",
-      "tag": "h5",
+      "tag": "h2",
       "variant": "serif"
     },
     {
       "name": "demoListT1",
       "text": "List title",
-      "tag": "h6",
+      "tag": "h2",
       "variant": "sans"
+    },
+    {
+      "name": "demoCardT1",
+      "text": "Heading",
+      "tag": "h2",
+      "variant": "serif"
     }
   ]
 }

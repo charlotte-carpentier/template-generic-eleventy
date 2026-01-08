@@ -11,7 +11,7 @@
       "name": "demoHeader1",
       "desktop": {
         "vectorName": "demoVector1",
-        "tabBarName": "tabBarMain"
+        "navigationName": "navMain"
       },
       "mobile": {
         "vectorName": "demoVector2",
