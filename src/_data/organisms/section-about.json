@@ -1,18 +1,16 @@
 {
   "// Component": "Section About - About section with heading hierarchy and call-to-action buttons",
-  
   "_meta": {
     "component": "section-about",
     "type": "organism",
     "version": "1.0.0",
     "created": "2025-01-15"
   },
-  
   "sectAbouts": [
     {
       "name": "demoSectAb1",
-      "superHeadingName": "demoHead3",
-      "headingName": "demoLong1",  
+      "headingName": "demoHead2",
+      "subheadingName": "demoLong2",
       "content": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
       "primaryButtonName": "demoLabel1",
       "secondaryButtonName": "demoLabel2",

@@ -71,6 +71,12 @@
       "variant": "sans"
     },
     {
+      "name": "demoLong2",
+      "text": "This is the longest label in the world",
+      "tag": "h3",
+      "variant": "sans"
+    },
+    {
       "name": "demoFooterT1",
       "text": "Heading",
       "tag": "h2",
