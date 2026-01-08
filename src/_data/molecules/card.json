@@ -27,7 +27,7 @@
     },
     {
       "name": "demoCard3",
-      "headingName": "demoHead4",
+      "headingName": "demoCardT1",
       "content": "Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
       "buttonName": "demoCard",
       "tags": [

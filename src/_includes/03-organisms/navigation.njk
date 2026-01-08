@@ -1,22 +1,22 @@
 {# ┌─────────────────────────────────────────────────────────┐
-   │ ORGANISM › Tab Bar                                      │
-   │ Navigation tab bar with active state management         │
+   │ ORGANISM › Navigation                                   │
+   │ Primary navigation bar with active state management     │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
   Props:
-    - options.name (string): Tab bar identifier
-    - options.datas (array): Tab bar configuration data
+    - options.name (string): Navigation identifier
+    - options.datas (array): Navigation configuration data
     - options.linkDatas (array): Link atom data
     - options.iconDatas (array): Icon atom data (optional, required if links have icons)
     - options.tooltipDatas (array): Tooltip atom data (optional, required if links have tooltips)
 
   Usage — Summon HAT Components Wisely:
-    {% from "03-organisms/tab-bar.njk" import renderTabBar %}
+    {% from "03-organisms/navigation.njk" import renderNavigation %}
 
-    {{ renderTabBar({
-        name: "demoTabBar1",
-        datas: organisms["tab-bar"].tabBars,
+    {{ renderNavigation({
+        name: "demoNav1",
+        datas: organisms.navigation.navigations,
         linkDatas: atoms.link.links,
         iconDatas: atoms.icon.icons,
         tooltipDatas: atoms.tooltip.tooltips
@@ -25,9 +25,10 @@
   JavaScript: utils/active-link.js
 
   @created 2025-01-15
+  @updated 2025-01-06 (Renamed from navigation.njk, WCAG 2.2 AA compliant)
 #}
 
-{% macro renderTabBar(options) %}
+{% macro renderNavigation(options) %}
   {# Import sub-component #}
   {% from "01-atoms/link.njk" import renderLink %}
 
@@ -39,20 +40,20 @@
   {% elif not options.name %}
     <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Find tab bar using universal filter #}
-    {% set tabBarData = options.datas | findByName(options.name) %}
+    {# Find navigation using universal filter #}
+    {% set navData = options.datas | findByName(options.name) %}
 
-    {# Render tab bar or error message #}
-    {% if not tabBarData %}
-      <span class="error" role="alert">Tab bar not found: {{ options.name }}</span>
+    {# Render navigation or error message #}
+    {% if not navData %}
+      <span class="error" role="alert">Navigation not found: {{ options.name }}</span>
     {% else %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      {% set tabBarName = tabBarData.name | default(options.name) %}
-      {% set items = tabBarData.items | default([]) %}
-      {% set ariaLabel = tabBarData.ariaLabel | default('Navigation tabs') %}
+      {% set navName = navData.name | default(options.name) %}
+      {% set items = navData.items | default([]) %}
+      {% set ariaLabel = navData.ariaLabel | default('Primary navigation') %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
@@ -60,7 +61,10 @@
         3.1 Wrapper Classes
         3.2 List Classes
         3.3 Item Classes
-        3.4 Link Classes (by state)
+        3.4 Link Base Classes
+        3.5 Link Hover Classes
+        3.6 Link Focus Classes
+        3.7 Link Active Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -82,16 +86,27 @@
       {% set listItemClasses = "flex" %}
 
       {# --------------------------
-          3.4 Link Classes (by state)
-          Description: Colors, States, Pseudo-elements for tabs
+          3.4 Link Base Classes
+          Description: Layout, Typography, Spacing, Positioning, Transitions
         --------------------------#}
-
       {% set linkBaseClasses = "[&_a]:relative [&_a]:px-[var(--spacing-inset-tight)] [&_a]:py-[var(--spacing-inset-tight)] [&_a]:pb-[var(--spacing-inset-tight)] [&_a]:typography-body-regular [&_a]:text-[var(--color-global-default)] [&_a]:no-underline [&_a]:transition-colors" %}
 
+      {# --------------------------
+          3.5 Link Hover Classes
+          Description: Colors, Pseudo-elements for hover indicator
+        --------------------------#}
       {% set linkHoverClasses = "[&_a:hover:not([aria-current])]:text-[var(--color-global-contrast-light-01)] [&_a:hover:not([aria-current])]:after:content-['•'] [&_a:hover:not([aria-current])]:after:absolute [&_a:hover:not([aria-current])]:after:bottom-0 [&_a:hover:not([aria-current])]:after:translate-y-[8px] [&_a:hover:not([aria-current])]:after:left-1/2 [&_a:hover:not([aria-current])]:after:-translate-x-1/2" %}
 
+      {# --------------------------
+          3.6 Link Focus Classes
+          Description: Outline for keyboard navigation
+        --------------------------#}
       {% set linkFocusClasses = "[&_a:focus]:outline [&_a:focus]:outline-2 [&_a:focus]:outline-[var(--color-semantic-information-focus)] [&_a:focus]:rounded-[var(--radius-default)]" %}
 
+      {# --------------------------
+          3.7 Link Active Classes
+          Description: Colors, Pseudo-elements for active indicator bar
+        --------------------------#}
       {% set linkActiveClasses = "[&_a[aria-current='page']]:text-[var(--color-global-contrast-light-02)] [&_a[aria-current='page']]:cursor-default [&_a[aria-current='page']]:after:content-[''] [&_a[aria-current='page']]:after:absolute [&_a[aria-current='page']]:after:bottom-[calc(var(--spacing-inline-tight)*-1)] [&_a[aria-current='page']]:after:left-1/2 [&_a[aria-current='page']]:after:-translate-x-1/2 [&_a[aria-current='page']]:after:h-1 [&_a[aria-current='page']]:after:w-4 [&_a[aria-current='page']]:after:bg-[var(--color-global-contrast-light-02)] [&_a[aria-current='page']]:after:rounded-[var(--radius-default)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -99,20 +114,18 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <nav
         class="{{ navClasses }}"
-        role="navigation"
         aria-label="{{ ariaLabel }}"
-        data-tabbar-name="{{ tabBarName }}"
-        data-tabbar-type="tab-bar"
+        data-nav-name="{{ navName }}"
+        data-nav-type="navigation"
       >
         <ul
           class="{{ listClasses }} {{ linkBaseClasses }} {{ linkHoverClasses }} {{ linkFocusClasses }} {{ linkActiveClasses }}"
-          data-tabbar-list
+          data-nav-list
         >
           {% for item in items %}
             <li
               class="{{ listItemClasses }}"
-              role="presentation"
-              data-tabbar-item
+              data-nav-item
             >
               {{ renderLink({
                   name: item.linkName,

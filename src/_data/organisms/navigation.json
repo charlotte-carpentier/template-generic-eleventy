@@ -1,14 +1,15 @@
 {
-  "// Component": "Tab Bar - Navigation tab bars with active state management",
+  "// Component": "Navigation - Primary navigation bars with active state management",
   "_meta": {
-    "component": "tab-bar",
+    "component": "navigation",
     "type": "organism",
-    "version": "1.0.0",
-    "created": "2025-01-15"
+    "version": "2.0.0",
+    "created": "2025-01-15",
+    "updated": "2025-01-06"
   },
-  "tabBars": [
+  "navigations": [
     {
-      "name": "demoTabBar1",
+      "name": "demoNav1",
       "items": [
         {
           "linkName": "demoLinkTab"
@@ -26,10 +27,10 @@
           "linkName": "demoLinkTab"
         }
       ],
-      "ariaLabel": "Main navigation tabs"
+      "ariaLabel": "Primary navigation"
     },
     {
-      "name": "demoTabBar2",
+      "name": "demoNav2",
       "items": [
         {
           "linkName": "demoLinkTab"
@@ -41,10 +42,10 @@
           "linkName": "demoLinkTab"
         }
       ],
-      "ariaLabel": "Header navigation tabs"
+      "ariaLabel": "Header navigation"
     },
     {
-      "name": "tabBarMain",
+      "name": "navMain",
       "items": [
         {
           "linkName": "linkHome"
@@ -59,7 +60,7 @@
           "linkName": "linkContact"
         }
       ],
-      "ariaLabel": "Main navigation tabs"
+      "ariaLabel": "Main navigation"
     }
   ]
 }
