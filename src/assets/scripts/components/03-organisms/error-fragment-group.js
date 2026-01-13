@@ -34,7 +34,7 @@ const CONFIG = {
  */
 export function initErrorFragmentGroup() {
   const clickableFragments = document.querySelectorAll(CONFIG.SELECTOR);
-  
+
   clickableFragments.forEach(fragment => {
     makeFragmentInteractive(fragment);
   });
@@ -47,10 +47,10 @@ export function initErrorFragmentGroup() {
  */
 function makeFragmentInteractive(fragment) {
   fragment.style.cursor = 'pointer';
-  
+
   // Click navigation
   fragment.addEventListener('click', handleFragmentNavigation);
-  
+
   // Keyboard navigation
   fragment.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -58,13 +58,13 @@ function makeFragmentInteractive(fragment) {
       handleFragmentNavigation(e);
     }
   });
-  
+
   // Focus styles
   fragment.addEventListener('focus', () => {
     fragment.style.outline = CONFIG.FOCUS_OUTLINE;
     fragment.style.outlineOffset = CONFIG.FOCUS_OFFSET;
   });
-  
+
   fragment.addEventListener('blur', () => {
     fragment.style.outline = '';
     fragment.style.outlineOffset = '';
@@ -89,5 +89,5 @@ function handleFragmentNavigation(event) {
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
-// HAT · 2025
+// HAT · 2026
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

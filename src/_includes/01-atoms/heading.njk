@@ -42,7 +42,6 @@
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set finalTag = options.tag | default(headingData.tag) | default('p') %}
-      {% set variant = headingData.variant | default('sans') %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
@@ -64,21 +63,21 @@
       {% set variant = headingData.variant | default('sans') %}
 
       {% set typographyMap = {
-        'h1-serif': 'typography-h1-serif',
-        'h1-sans': 'typography-h1',
-        'h2-serif': 'typography-h2-serif',
-        'h2-sans': 'typography-h2',
-        'h3-serif': 'typography-h3-serif',
-        'h3-sans': 'typography-h3',
-        'h4-serif': 'typography-h4-serif',
-        'h4-sans': 'typography-h4',
-        'h5-serif': 'typography-h5-serif',
-        'h5-sans': 'typography-h5',
-        'h6-serif': 'typography-h6-serif',
-        'h6-sans': 'typography-h6',
-        'small': 'typography-body-small',
-        'span': 'typography-body-regular',
-        'p': 'typography-body-regular'
+        'h1-serif': 'font-heading-bold-serif text-fluid-h1',
+        'h1-sans': 'font-heading-bold text-fluid-h1',
+        'h2-serif': 'font-heading-serif text-fluid-h2',
+        'h2-sans': 'font-heading text-fluid-h2',
+        'h3-serif': 'font-heading-serif text-fluid-h3',
+        'h3-sans': 'font-heading text-fluid-h3',
+        'h4-serif': 'font-heading-serif text-h4',
+        'h4-sans': 'font-heading text-h4',
+        'h5-serif': 'font-heading-serif text-h5',
+        'h5-sans': 'font-heading text-h5',
+        'h6-serif': 'font-heading-serif text-h6',
+        'h6-sans': 'font-heading text-h6',
+        'small': 'font-body text-sm',
+        'span': 'font-body text-body',
+        'p': 'font-body text-lg'
       } %}
 
       {% if finalTag in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] %}
@@ -163,6 +162,6 @@
 {#
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 May your bugs be forever exiled to the shadow realm ✦
-HAT · 2025
+HAT · 2026
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 #}

@@ -104,5 +104,5 @@ const hideToast = async (toast) => {
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
-// HAT · 2025
+// HAT · 2026
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━

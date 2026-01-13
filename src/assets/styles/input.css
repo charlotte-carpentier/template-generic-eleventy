@@ -27,6 +27,7 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 @theme {
+
   /* ─────────────────────────────
      Typography - Primitives
   ───────────────────────────── */
@@ -36,17 +37,17 @@
   --font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
   --font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
-  /* Font sizes */
+  /* Font sizes - Static primitives */
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-lg: 1.125rem;
   --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
-  --font-size-4xl: 2.25rem;
-  --font-size-5xl: 3rem;
-  --font-size-6xl: 3.75rem;
+  --font-size-2xl: 1.375rem;
+  --font-size-3xl: 1.5rem;
+  --font-size-4xl: 1.75rem;
+  --font-size-5xl: 2.25rem;
+  --font-size-6xl: 3rem;
 
   /* Font weights */
   --font-weight-light: 300;
@@ -74,26 +75,22 @@
      Typography - Tokens
   ───────────────────────────── */
 
-  /* Sans variants (default) */
-  --typography-heading-h1: var(--font-weight-bold) var(--font-size-4xl) / var(--line-height-tight) var(--font-family-sans);
-  --typography-heading-h2: var(--font-weight-semibold) var(--font-size-3xl) / var(--line-height-snug) var(--font-family-sans);
-  --typography-heading-h3: var(--font-weight-semibold) var(--font-size-2xl) / var(--line-height-snug) var(--font-family-sans);
-  --typography-heading-h4: var(--font-weight-medium) var(--font-size-xl) / var(--line-height-normal) var(--font-family-sans);
-  --typography-heading-h5: var(--font-weight-medium) var(--font-size-lg) / var(--line-height-normal) var(--font-family-sans);
-  --typography-heading-h6: var(--font-weight-medium) var(--font-size-base) / var(--line-height-normal) var(--font-family-sans);
+  /* Font sizes - Fluid
+  Formula: clamp(min, intercept + slope×100vw, max)
+  Viewport range: 320px (20rem) → 1440px (90rem)
+  slope = (max - min) / (maxVw - minVw)
+  intercept = min - (slope × minVw)
 
-  /* Serif variants */
-  --typography-heading-h1-serif: var(--font-weight-bold) var(--font-size-4xl) / var(--line-height-tight) var(--font-family-serif);
-  --typography-heading-h2-serif: var(--font-weight-semibold) var(--font-size-3xl) / var(--line-height-snug) var(--font-family-serif);
-  --typography-heading-h3-serif: var(--font-weight-semibold) var(--font-size-2xl) / var(--line-height-snug) var(--font-family-serif);
-  --typography-heading-h4-serif: var(--font-weight-medium) var(--font-size-xl) / var(--line-height-normal) var(--font-family-serif);
-  --typography-heading-h5-serif: var(--font-weight-medium) var(--font-size-lg) / var(--line-height-normal) var(--font-family-serif);
-  --typography-heading-h6-serif: var(--font-weight-medium) var(--font-size-base) / var(--line-height-normal) var(--font-family-serif);
+  WARNING: If primitives change, recalculate middle value manually */
+  --font-size-fluid-h1: clamp(var(--font-size-5xl), 1.607rem + 2.009vw, var(--font-size-6xl));
+  --font-size-fluid-h2: clamp(var(--font-size-4xl), 1.321rem + 1.339vw, var(--font-size-5xl));
+  --font-size-fluid-h3: clamp(var(--font-size-2xl), 1.286rem + 0.279vw, var(--font-size-3xl));
 
-  /* Body variants */
-  --typography-body-small: var(--font-weight-normal) var(--font-size-sm) / var(--line-height-normal) var(--font-family-sans);
-  --typography-body-regular: var(--font-weight-normal) var(--font-size-base) / var(--line-height-normal) var(--font-family-sans);
-  --typography-body-large: var(--font-weight-normal) var(--font-size-lg) / var(--line-height-normal) var(--font-family-sans);
+  /* Font sizes - Static */
+  --font-size-h4: var(--font-size-xl);
+  --font-size-h5: var(--font-size-lg);
+  --font-size-h6: var(--font-size-base);
+  --font-size-body: var(--font-size-base);
 
   /* ─────────────────────────────
      Colors - Primitives
@@ -378,68 +375,51 @@
    Custom Utilities
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
-/* Typography utilities - Sans (default) */
-@utility typography-h1 {
-  font: var(--typography-heading-h1);
+/* Typography utilities - Families (no size) */
+@utility font-heading {
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  font-family: var(--font-family-sans);
 }
 
-@utility typography-h2 {
-  font: var(--typography-heading-h2);
+@utility font-heading-serif {
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  font-family: var(--font-family-serif);
 }
 
-@utility typography-h3 {
-  font: var(--typography-heading-h3);
+@utility font-heading-bold {
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  font-family: var(--font-family-sans);
 }
 
-@utility typography-h4 {
-  font: var(--typography-heading-h4);
+@utility font-heading-bold-serif {
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  font-family: var(--font-family-serif);
 }
 
-@utility typography-h5 {
-  font: var(--typography-heading-h5);
+@utility font-body {
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  font-family: var(--font-family-sans);
 }
 
-@utility typography-h6 {
-  font: var(--typography-heading-h6);
-}
+/* Typography utilities - Sizes (fluid & static) */
+@utility text-fluid-h1 { font-size: var(--font-size-fluid-h1); }
 
-/* Typography utilities - Serif variants */
-@utility typography-h1-serif {
-  font: var(--typography-heading-h1-serif);
-}
+@utility text-fluid-h2 { font-size: var(--font-size-fluid-h2); }
 
-@utility typography-h2-serif {
-  font: var(--typography-heading-h2-serif);
-}
+@utility text-fluid-h3 { font-size: var(--font-size-fluid-h3); }
 
-@utility typography-h3-serif {
-  font: var(--typography-heading-h3-serif);
-}
+@utility text-h4 { font-size: var(--font-size-h4); }
 
-@utility typography-h4-serif {
-  font: var(--typography-heading-h4-serif);
-}
+@utility text-h5 { font-size: var(--font-size-h5); }
 
-@utility typography-h5-serif {
-  font: var(--typography-heading-h5-serif);
-}
+@utility text-h6 { font-size: var(--font-size-h6); }
 
-@utility typography-h6-serif {
-  font: var(--typography-heading-h6-serif);
-}
-
-/* Body variants */
-@utility typography-body-small {
-  font: var(--typography-body-small);
-}
-
-@utility typography-body-regular {
-  font: var(--typography-body-regular);
-}
-
-@utility typography-body-large {
-  font: var(--typography-body-large);
-}
+@utility text-body { font-size: var(--font-size-body); }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Reset
@@ -484,5 +464,5 @@ body {
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    May your bugs be forever exiled to the shadow realm ✦
-   HAT · 2025
+   HAT · 2026
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */

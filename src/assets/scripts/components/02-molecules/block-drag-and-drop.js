@@ -260,5 +260,5 @@ function formatBytes(bytes, decimals = 2) {
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
-// HAT · 2025
+// HAT · 2026
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
