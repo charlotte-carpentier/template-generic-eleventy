@@ -42,13 +42,13 @@ export function initErrorLinks() {
  */
 function handleErrorLinkClick(event) {
   const errorLink = event.target.closest(CONFIG.SELECTOR);
-  
+
   if (!errorLink) return;
-  
+
   event.preventDefault();
-  
+
   const action = errorLink.getAttribute(CONFIG.ACTION_ATTRIBUTE);
-  
+
   if (action === 'back-or-home') {
     goToPreviousPageOrHome();
   }
@@ -57,5 +57,5 @@ function handleErrorLinkClick(event) {
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
-// HAT · 2025
+// HAT · 2026
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

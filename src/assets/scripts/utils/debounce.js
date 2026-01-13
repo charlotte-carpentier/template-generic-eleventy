@@ -40,5 +40,5 @@ export const debounce = (fn, delay = DEFAULT_DELAY) => {
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
-// HAT · 2025
+// HAT · 2026
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━

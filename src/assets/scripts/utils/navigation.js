@@ -29,15 +29,15 @@ const HOME_PATH = '/';
 export function canGoToPreviousPage() {
   // No referrer available
   if (!document.referrer) return false;
-  
+
   // Avoid navigation loops
   if (document.referrer === window.location.href) return false;
-  
+
   // Avoid going back to error pages
   try {
     const referrerUrl = new URL(document.referrer);
     const referrerPath = referrerUrl.pathname;
-    
+
     return !ERROR_PAGES.some(errorPage => referrerPath.includes(errorPage));
   } catch (error) {
     console.warn('Navigation: Invalid referrer URL', error);
@@ -88,5 +88,5 @@ export function goToPreviousPageOrHome() {
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
-// HAT · 2025
+// HAT · 2026
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

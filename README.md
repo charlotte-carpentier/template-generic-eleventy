@@ -90,6 +90,7 @@ template-generic-eleventy/
 │   │   │   │   ├── 01-atoms/     # Atomic-level scripts
 │   │   │   │   ├── 02-molecules/ # Molecule-level scripts
 │   │   │   │   └── 03-organisms/ # Organism-level scripts
+│   │   │   ├── tests/            # Integration tests (system-level validation)
 │   │   │   ├── utils/            # Reusable helper scripts
 │   │   │   └── main.js           # Global entry point
 │   │   └── styles/               # Global CSS/Tailwind entrypoint
