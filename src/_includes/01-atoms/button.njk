@@ -94,15 +94,15 @@
           3.1 Base Classes
           Description: Layout, typography, borders, transition, focus, cursor
         --------------------------#}
-      {% set baseClasses = "inline-flex items-center justify-center font-medium rounded-[var(--radius-default)] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 disabled:cursor-not-allowed" %}
+      {% set baseClasses = "touch-target inline-flex items-center justify-center font-medium rounded-[var(--radius-default)] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 disabled:cursor-not-allowed" %}
 
       {# --------------------------
         3.2 Size Classes
         Description: Padding, text size, minimum target size (WCAG 2.5.8)
         --------------------------#}
       {% set sizeMap = {
-        'small': 'min-h-[40px] min-w-[40px] px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] text-sm',
-        'medium': 'min-h-[44px] px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-small)] text-base'
+        'small': 'px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] text-sm',
+        'medium': 'px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-small)] text-base'
       } %}
       {% set sizeClasses = sizeMap[buttonSize] or sizeMap['medium'] %}
 

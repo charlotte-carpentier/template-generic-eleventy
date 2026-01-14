@@ -378,6 +378,13 @@
   --column-width-192: 192px;
   --column-width-80: 80px;
 
+  /* ─────────────────────────────
+     Accessibility - Tokens
+  ───────────────────────────── */
+
+  /* Touch targets (44x44px minimum) */
+  --touch-target-min: 44px;
+
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -430,6 +437,12 @@
 
 @utility text-body { font-size: var(--font-size-body); }
 
+/* Accessibility utilities */
+@utility touch-target {
+  min-width: var(--touch-target-min);
+  min-height: var(--touch-target-min);
+}
+
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Reset
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -441,7 +454,7 @@
   box-sizing: border-box;
 }
 
-/* Custom focus outlines for accessibility */
+/* Custom focus outlines - Accessibility */
 :focus {
   outline: none;
 }
@@ -455,6 +468,17 @@
 body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+/* Reduced motion support - Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
