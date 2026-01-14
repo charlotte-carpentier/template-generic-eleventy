@@ -105,7 +105,7 @@
           3.4 Column Classes
           Description: Layout, Spacing, Typography override h5-serif
       --------------------------#}
-      {% set columnClasses = "flex flex-col gap-[var(--spacing-stack-medium)] [&_[data-column-heading]]:pl-[var(--spacing-inset-small)] [&_[data-column-heading]_h2]:typography-h5-serif" %}
+      {% set columnClasses = "flex flex-col gap-[var(--spacing-stack-medium)] [&_[data-column-heading]]:pl-[var(--spacing-inset-small)] [&_[data-column-heading]_h2]:font-heading-serif [&_[data-column-heading]_h2]:text-h5" %}
 
       {# --------------------------
           3.5 Legal Section Classes
@@ -130,19 +130,19 @@
           3.8 Copyright Text Classes
           Description: Typography, Colors
         --------------------------#}
-      {% set copyrightClasses = "typography-body-small text-[var(--color-global-contrast-light-01)]" %}
+      {% set copyrightClasses = "font-body text-sm text-[var(--color-global-contrast-light-01)]" %}
 
       {# --------------------------
           3.9 Version Text Classes
           Description: Typography, Colors, Responsive visibility
         --------------------------#}
-      {% set versionClasses = "typography-body-small text-[var(--color-global-contrast-light-02)] hidden md:inline" %}
+      {% set versionClasses = "font-body text-sm text-[var(--color-global-contrast-light-02)] hidden md:inline" %}
 
       {# --------------------------
           3.10 Separator Classes
           Description: Typography, Colors, Responsive visibility
         --------------------------#}
-      {% set separatorClasses = "typography-body-small text-[var(--color-global-contrast-light-02)] hidden md:inline" %}
+      {% set separatorClasses = "font-body text-sm text-[var(--color-global-contrast-light-02)] hidden md:inline" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML

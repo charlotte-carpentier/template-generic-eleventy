@@ -91,13 +91,13 @@
           3.3 Content Wrapper Classes
           Description: Layout, Spacing, Typography override h4-serif
       --------------------------#}
-      {% set contentClasses = "flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-inset-small)] [&_h2]:typography-h4-serif" %}
+      {% set contentClasses = "flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-inset-small)] [&_h2]:font-heading-serif [&_h2]:text-h4" %}
 
       {# --------------------------
           3.4 Text Classes
           Description: Typography, Colors, Text truncation (2 lines)
         --------------------------#}
-      {% set textClasses = "typography-body-regular text-[var(--color-global-default)] line-clamp-2" %}
+      {% set textClasses = "font-body text-body text-[var(--color-global-default)] line-clamp-2" %}
 
       {# --------------------------
           3.5 Button Wrapper Classes
