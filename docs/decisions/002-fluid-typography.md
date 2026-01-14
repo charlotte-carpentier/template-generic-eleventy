@@ -88,6 +88,26 @@ Atomic separation: W3C Design Tokens spec (stable 2025), composition `<h1 class=
 
 ---
 
+### Formula
+
+Viewport: 320px (20rem) → 1440px (90rem)
+
+**Change viewport:**
+
+1. Convert new bounds to rem (divide by 16)
+2. Calculate new range (maxRem - minRem)
+3. Replace `20rem` and `70rem` in `input.css`
+
+**Example - Change to 375px → 1920px:**
+
+- Min: 375px ÷ 16 = 23.44rem → Replace `20rem`
+- Max: 1920px ÷ 16 = 120rem (not used in formula)
+- Range: (1920 - 375) ÷ 16 = 96.56rem → Replace `70rem`
+
+Sources: [Smashing Magazine](https://www.smashingmagazine.com/2022/01/modern-fluid-typography-css-clamp/), [Utopia](https://utopia.fyi/type/calculator/)
+
+---
+
 ## Consequences
 
 **Positive**:
