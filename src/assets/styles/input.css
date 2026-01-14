@@ -75,16 +75,25 @@
      Typography - Tokens
   ───────────────────────────── */
 
-  /* Font sizes - Fluid
-  Formula: clamp(min, intercept + slope×100vw, max)
-  Viewport range: 320px (20rem) → 1440px (90rem)
-  slope = (max - min) / (maxVw - minVw)
-  intercept = min - (slope × minVw)
+  /* Font sizes - Fluid (320px → 1440px) */
 
-  WARNING: If primitives change, recalculate middle value manually */
-  --font-size-fluid-h1: clamp(var(--font-size-5xl), 1.607rem + 2.009vw, var(--font-size-6xl));
-  --font-size-fluid-h2: clamp(var(--font-size-4xl), 1.321rem + 1.339vw, var(--font-size-5xl));
-  --font-size-fluid-h3: clamp(var(--font-size-2xl), 1.286rem + 0.279vw, var(--font-size-3xl));
+  --font-size-fluid-h1: clamp(
+    var(--font-size-5xl),
+    calc(var(--font-size-5xl) + (var(--font-size-6xl) - var(--font-size-5xl)) * ((100vw - 20rem) / 70rem)),
+    var(--font-size-6xl)
+  );
+
+  --font-size-fluid-h2: clamp(
+    var(--font-size-4xl),
+    calc(var(--font-size-4xl) + (var(--font-size-5xl) - var(--font-size-4xl)) * ((100vw - 20rem) / 70rem)),
+    var(--font-size-5xl)
+  );
+
+  --font-size-fluid-h3: clamp(
+    var(--font-size-2xl),
+    calc(var(--font-size-2xl) + (var(--font-size-3xl) - var(--font-size-2xl)) * ((100vw - 20rem) / 70rem)),
+    var(--font-size-3xl)
+  );
 
   /* Font sizes - Static */
   --font-size-h4: var(--font-size-xl);

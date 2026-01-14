@@ -23,6 +23,8 @@ ADR helps maintain clarity on why certain design patterns or technical approache
 | ID | Title | Status | Date |
 |----|-------|--------|------|
 | [001](./001-multiselect-exclusion.md) | Multiselect Exclusion | Accepted | 2025-12-10 |
+| [002](./002-fluid-typography.md) | Fluid Typography Strategy | Accepted | 2026-01-09 |
+| [003](./003-touch-target-strategy.md) | Touch Target Accessibility | Accepted | 2026-01-14 |
 
 ---
 
