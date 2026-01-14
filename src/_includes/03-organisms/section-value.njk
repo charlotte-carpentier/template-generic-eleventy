@@ -122,8 +122,8 @@
           Description: Layout, Alignment
         --------------------------#}
       {% set headingMap = {
-        'simple': 'flex flex-col items-center [&_h2]:typography-h3-serif',
-        'cards': 'flex flex-col items-start md:items-center [&_h2]:typography-h3-serif'
+        'simple': 'flex flex-col items-center [&_h2]:font-heading-serif [&_h2]:text-fluid-h2',
+        'cards': 'flex flex-col items-start md:items-center [&_h2]:font-heading-serif [&_h2]:text-fluid-h2'
       } %}
       {% set headingClasses = headingMap[sectionType] or headingMap['simple'] %}
 
@@ -132,8 +132,8 @@
           Description: Layout, Typography override serif, Alignment, Spacing bottom
         --------------------------#}
       {% set subheadingMap = {
-        'simple': 'flex flex-col items-center mt-[var(--spacing-stack-large)] [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h2-serif',
-        'cards': 'flex flex-col items-start mt-[var(--spacing-stack-large)] md:items-center [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h2-serif'
+        'simple': 'flex flex-col items-center mt-[var(--spacing-stack-large)] [&_h3]:font-heading-bold-serif [&_h3]:text-fluid-h1',
+        'cards': 'flex flex-col items-start mt-[var(--spacing-stack-large)] md:items-center [&_h3]:font-heading-bold-serif [&_h3]:text-fluid-h1'
       } %}
       {% set subheadingClasses = subheadingMap[sectionType] or subheadingMap['simple'] %}
 
@@ -141,7 +141,7 @@
           3.6 Text Wrapper Classes
           Description: Typography, Colors, Alignment centered
         --------------------------#}
-      {% set textClasses = "typography-body-regular text-[var(--color-global-default)] text-center" %}
+      {% set textClasses = "font-body text-body text-[var(--color-global-default)] text-center" %}
 
       {# --------------------------
           3.7 Buttons Wrapper Classes

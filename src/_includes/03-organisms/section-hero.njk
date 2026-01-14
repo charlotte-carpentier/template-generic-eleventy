@@ -103,19 +103,19 @@
           3.5 Heading Wrapper Classes
           Description: Layout
         --------------------------#}
-      {% set headingClasses = "flex [&_h2]:typography-h3-serif" %}
+      {% set headingClasses = "flex [&_h2]:font-heading-serif [&_h2]:text-fluid-h2" %}
 
       {# --------------------------
           3.6 Subheading Wrapper Classes
           Description: Layout, Typography override serif
       --------------------------#}
-      {% set subheadingClasses = "flex [&_h1]:typography-h1-serif [&_h2]:typography-h2-serif [&_h3]:typography-h2-serif" %}
+      {% set subheadingClasses = "flex [&_h3]:font-heading-bold-serif [&_h3]:text-fluid-h1" %}
 
       {# --------------------------
           3.7 Content Wrapper Classes
           Description: Typography, Colors
         --------------------------#}
-      {% set contentClasses = "typography-body-regular text-[var(--color-global-default)]" %}
+      {% set contentClasses = "font-body text-body text-[var(--color-global-default)]" %}
 
       {# --------------------------
           3.8 Buttons Wrapper Classes

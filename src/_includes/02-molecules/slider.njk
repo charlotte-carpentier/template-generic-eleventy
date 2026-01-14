@@ -90,7 +90,7 @@
           3.2 Label Classes
           Description: Typography, Colors
         --------------------------#}
-      {% set labelTextClasses = "typography-body-regular text-[var(--color-global-default)]" %}
+      {% set labelTextClasses = "font-body text-body text-[var(--color-global-default)]" %}
 
       {# --------------------------
           3.3 Track Wrapper Classes
@@ -121,7 +121,7 @@
           3.7 Indicator Classes
           Description: Handle indicator bubble (JS-controlled value)
         --------------------------#}
-      {% set indicatorBaseClasses = "absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-inline-medium)] py-[var(--spacing-inline-tight)] typography-body-small rounded-[var(--radius-default)] shadow-sm whitespace-nowrap" %}
+      {% set indicatorBaseClasses = "absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-inline-medium)] py-[var(--spacing-inline-tight)] font-body text-sm rounded-[var(--radius-default)] shadow-sm whitespace-nowrap" %}
 
       {% set indicatorVariantMap = {
         'outline': 'text-[var(--color-global-default)] bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)]',
@@ -139,7 +139,7 @@
           3.9 Min/Max Text Classes
           Description: Typography, Colors
         --------------------------#}
-      {% set minMaxTextClasses = "typography-body-small text-[var(--color-global-contrast-light-01)]" %}
+      {% set minMaxTextClasses = "font-body text-sm text-[var(--color-global-contrast-light-01)]" %}
 
       {# --------------------------
           3.10 Instructions Classes

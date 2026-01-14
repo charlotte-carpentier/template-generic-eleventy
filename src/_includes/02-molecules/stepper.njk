@@ -115,16 +115,16 @@
           3.7 Number Fallback Classes
           Description: Fallback number when no chip
         --------------------------#}
-      {% set numberFallbackClasses = "flex items-center justify-center w-8 h-8 typography-body-semibold text-[var(--color-global-default)] bg-[var(--color-global-contrast-light-03)] rounded-full" %}
+      {% set numberFallbackClasses = "flex items-center justify-center w-8 h-8 font-body text-lg text-[var(--color-global-default)] bg-[var(--color-global-contrast-light-03)] rounded-full" %}
 
       {# --------------------------
           3.8 Label Classes
           Description: Typography, Colors by status
         --------------------------#}
       {% set labelStatusMap = {
-        'active': 'typography-body-regular text-[var(--color-global-default)]',
-        'upcoming': 'typography-body-regular text-[var(--color-global-contrast-light-02)]',
-        'done': 'typography-body-regular text-[var(--color-semantic-success)]'
+        'active': 'font-body text-body text-[var(--color-global-default)]',
+        'upcoming': 'font-body text-body text-[var(--color-global-contrast-light-02)]',
+        'done': 'font-body text-body text-[var(--color-semantic-success)]'
       } %}
 
       {# --------------------------
