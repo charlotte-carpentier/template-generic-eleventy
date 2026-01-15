@@ -69,8 +69,8 @@
       {% set variantMap = {
         'avatar': 'w-11 h-11 rounded-[var(--radius-default)]',
         'square': 'w-full max-w-2xl aspect-square',
-        'landscape': 'w-80',
-        'wide': 'w-64'
+        'landscape': 'w-full max-w-[320px] md:max-w-[400px] lg:max-w-[480px]',
+        'wide': 'w-full max-w-[256px] md:max-w-[320px] lg:max-w-[400px]'
       } %}
       {% set variantClasses = variantMap[imageVariant] or 'w-full' %}
 

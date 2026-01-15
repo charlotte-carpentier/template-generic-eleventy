@@ -70,7 +70,7 @@
       3.1 Label Wrapper Classes
       Description: Layout, spacing, positioning, cursor
   -------------------------- #}
-  {% set labelWrapperClasses = "inline-flex items-start gap-[var(--spacing-inline-large)] cursor-pointer relative group" %}
+  {% set labelWrapperClasses = "inline-flex items-start gap-[var(--spacing-inline-large)] py-[var(--spacing-inset-small)] cursor-pointer relative group" %}
 
   {# --------------------------
       3.2 Input Wrapper Classes
@@ -112,13 +112,13 @@
       3.8 Label Classes
       Description: Typography, colors, states
   -------------------------- #}
-  {% set labelTextClasses = "text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors" %}
+  {% set labelTextClasses = "text-body text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors" %}
 
   {# --------------------------
       3.9 Description Classes
       Description: Spacing, typography, colors
   -------------------------- #}
-  {% set descriptionClasses = "mt-[var(--spacing-stack-tight)] text-sm text-[var(--color-global-contrast-light-02)]" %}
+  {% set descriptionClasses = "mt-[var(--spacing-stack-tight)] text-helper text-[var(--color-global-contrast-light-02)]" %}
 
   {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
     4. Render HTML

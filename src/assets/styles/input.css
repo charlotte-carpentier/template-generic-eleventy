@@ -100,6 +100,8 @@
   --font-size-h5: var(--font-size-lg);
   --font-size-h6: var(--font-size-base);
   --font-size-body: var(--font-size-base);
+  --font-size-helper: var(--font-size-sm);
+  --font-size-caption: var(--font-size-xs);
 
   /* ─────────────────────────────
      Colors - Primitives
@@ -436,6 +438,10 @@
 @utility text-h6 { font-size: var(--font-size-h6); }
 
 @utility text-body { font-size: var(--font-size-body); }
+
+@utility text-helper { font-size: var(--font-size-helper); }
+
+@utility text-caption { font-size: var(--font-size-caption); }
 
 /* Accessibility utilities */
 @utility touch-target {

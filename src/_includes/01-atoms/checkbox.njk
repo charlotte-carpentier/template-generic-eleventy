@@ -71,8 +71,7 @@
       3.1 Label Wrapper Classes
       Description: Layout, spacing, cursor
   -------------------------- #}
-  {% set labelClasses = "inline-flex items-start gap-[var(--spacing-inline-medium)] cursor-pointer group" %}
-
+  {% set labelClasses = "inline-flex items-start gap-[var(--spacing-inline-medium)] py-[var(--spacing-inset-small)] cursor-pointer group" %}
   {# --------------------------
       3.2 Input Wrapper Classes
       Description: Layout, positioning
@@ -82,7 +81,6 @@
   {# --------------------------
       3.3 Base Input Classes
       Description: Sizing, borders, appearance, cursor, focus
-      Note: Size increased to 24x24px for WCAG 2.5.8 target size
   -------------------------- #}
   {% set baseInputClasses = "peer h-6 w-6 min-h-[24px] min-w-[24px] cursor-pointer appearance-none rounded border-2 transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
 
@@ -108,13 +106,13 @@
       3.7 Label Classes
       Description: Typography, colors, states
   -------------------------- #}
-  {% set labelTextClasses = "text-base text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors" %}
+  {% set labelTextClasses = "text-body text-[var(--color-form)] group-hover:text-[var(--color-form-hover)] select-none transition-colors" %}
 
   {# --------------------------
       3.8 Description Classes
       Description: Typography, colors
   -------------------------- #}
-  {% set descriptionClasses = "mt-[var(--spacing-stack-tight)] text-sm text-[var(--color-global-contrast-light-02)]" %}
+  {% set descriptionClasses = "mt-[var(--spacing-stack-tight)] text-helper text-[var(--color-global-contrast-light-02)]" %}
 
   {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
     4. Render HTML

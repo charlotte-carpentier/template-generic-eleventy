@@ -101,8 +101,8 @@
         Description: Padding, text size, minimum target size (WCAG 2.5.8)
         --------------------------#}
       {% set sizeMap = {
-        'small': 'px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] text-sm',
-        'medium': 'px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-small)] text-base'
+        'small': 'px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] text-body',
+        'medium': 'px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-small)] text-body'
       } %}
       {% set sizeClasses = sizeMap[buttonSize] or sizeMap['medium'] %}
 
