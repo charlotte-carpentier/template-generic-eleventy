@@ -1,6 +1,6 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ATOM › Image                                            │
-   │ Responsive images with variant styling                  │
+   │ Responsive images with automated metadata generation    │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
@@ -18,7 +18,10 @@
         iconDatas: atoms.icon.icons
     }) }}
 
+  Note: Metadata (width, height, srcset, sizes) auto-generated via bin/generate-image-metadata.js
+
   @created 2025-01-15
+  @updated 2026-01-15
 #}
 
 {% from "01-atoms/icon.njk" import renderIcon %}
@@ -46,7 +49,11 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set imageSrc = imageData.src | default('') %}
       {% set imageAlt = imageData.alt | default('') %}
-      {% set imageVariant = imageData.variant | default('') %}
+      {% set imageVariant = imageData.variant | default('default') %}
+      {% set imageWidth = imageData.width %}
+      {% set imageHeight = imageData.height %}
+      {% set imageSrcset = imageData.srcset | default('') %}
+      {% set imageSizes = imageData.sizes | default('(max-width: 768px) 100vw, 800px') %}
       {% set hasIcon = imageData.iconName %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -58,27 +65,26 @@
 
       {# --------------------------
           3.1 Base Classes
-          Description: Layout, sizing
+          Description: Responsive by default (MDN standard)
       -------------------------- #}
       {% set baseClasses = "block max-w-full h-auto object-cover" %}
 
       {# --------------------------
           3.2 Variant Classes
-          Description: Sizing, aspect ratio, borders per variant
+          Description: Avatar (fixed UI element) or Default (fluid responsive)
       --------------------------- #}
       {% set variantMap = {
         'avatar': 'w-11 h-11 rounded-[var(--radius-default)]',
-        'square': 'w-full max-w-2xl aspect-square',
-        'landscape': 'w-full max-w-[320px] md:max-w-[400px] lg:max-w-[480px]',
-        'wide': 'w-full max-w-[256px] md:max-w-[320px] lg:max-w-[400px]'
+        'default': 'w-full'
       } %}
-      {% set variantClasses = variantMap[imageVariant] or 'w-full' %}
+      {% set variantClasses = variantMap[imageVariant] or variantMap['default'] %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% if imageVariant == 'avatar' %}
         {% if hasIcon %}
+          {# Avatar with icon #}
           <div
             class="inline-flex items-center justify-center w-11 h-11 rounded-[var(--radius-default)] bg-[var(--color-global-contrast-light-04)]"
             data-image-name="{{ imageData.name }}"
@@ -94,9 +100,12 @@
             {% endif %}
           </div>
         {% else %}
+          {# Avatar photo (fixed 44x44px) #}
           <img
             src="{{ imageSrc }}"
             alt="{{ imageAlt }}"
+            width="44"
+            height="44"
             class="{{ baseClasses }} {{ variantClasses }}"
             loading="lazy"
             decoding="async"
@@ -105,14 +114,19 @@
           />
         {% endif %}
       {% else %}
+        {# Default responsive image - Native HTML with auto-generated metadata #}
         <img
           src="{{ imageSrc }}"
           alt="{{ imageAlt }}"
+          {% if imageWidth %}width="{{ imageWidth }}"{% endif %}
+          {% if imageHeight %}height="{{ imageHeight }}"{% endif %}
+          {% if imageSrcset %}srcset="{{ imageSrcset }}"{% endif %}
+          sizes="{{ imageSizes }}"
           class="{{ baseClasses }} {{ variantClasses }}"
           loading="lazy"
           decoding="async"
           data-image-name="{{ imageData.name }}"
-          data-image-type="image"
+          data-image-type="default"
         />
       {% endif %}
     {% endif %}
