@@ -1,35 +1,47 @@
 {
-  "// Component": "Image - Responsive images with variant styling",
+  "// Component": "Image - Responsive images with Eleventy Image Plugin integration",
+  "// Note": "Plugin automatically generates srcset for default variant images",
   "_meta": {
     "component": "image",
     "type": "atom",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "created": "2025-01-15",
+    "updated": "2026-01-15",
     "availableVariants": [
-      "square",
-      "landscape",
-      "wide",
-      "avatar"
+      "avatar",
+      "default"
     ]
   },
   "images": [
     {
       "name": "demoImage1",
-      "src": "/assets/images/placeholders/placeholder-square.png",
+      "src": "./src/assets/images/placeholders/placeholder-square.png",
       "alt": "Square placeholder image",
-      "variant": "square"
+      "variant": "default",
+      "width": 608,
+      "height": 608,
+      "srcset": "/img/placeholder-square-400.webp 400w, /img/placeholder-square-608.webp 608w",
+      "sizes": "(max-width: 768px) 100vw, 608px"
     },
     {
       "name": "demoImage2",
-      "src": "/assets/images/placeholders/placeholder-landscape.png",
+      "src": "./src/assets/images/placeholders/placeholder-landscape.png",
       "alt": "Landscape placeholder image",
-      "variant": "landscape"
+      "variant": "default",
+      "width": 608,
+      "height": 456,
+      "srcset": "/img/placeholder-landscape-400.webp 400w, /img/placeholder-landscape-608.webp 608w",
+      "sizes": "(max-width: 768px) 100vw, 608px"
     },
     {
       "name": "demoImage3",
-      "src": "/assets/images/placeholders/placeholder-wide.png",
+      "src": "./src/assets/images/placeholders/placeholder-wide.png",
       "alt": "Wide placeholder image",
-      "variant": "wide"
+      "variant": "default",
+      "width": 608,
+      "height": 342,
+      "srcset": "/img/placeholder-wide-400.webp 400w, /img/placeholder-wide-608.webp 608w",
+      "sizes": "(max-width: 768px) 100vw, 608px"
     },
     {
       "name": "demoAvatar1",

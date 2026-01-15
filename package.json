@@ -6,17 +6,18 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "build:css": "postcss src/assets/styles/input.css -o public/output.css",
-    "watch:css": "postcss src/assets/styles/input.css -o public/output.css -w",
     "start": "npx concurrently \"npm run watch:css\" \"eleventy --serve --watch\"",
-    "build": "cross-env NODE_ENV=production npm run test:run && npm run build:css && eleventy",
-    "sprites": "bin/generate-sprite.sh",
-    "lint:css": "stylelint 'src/assets/styles/**/*.css'",
-    "lint": "npm run lint:css",
+    "build": "cross-env NODE_ENV=production npm run test:run && npm run build:images && npm run build:css && eleventy",
     "test": "vitest",
-    "test:ui": "vitest --ui",
+    "lint": "npm run lint:css",
+    "build:css": "postcss src/assets/styles/input.css -o public/output.css",
+    "build:images": "node bin/generate-image-metadata.js",
+    "watch:css": "postcss src/assets/styles/input.css -o public/output.css -w",
+    "test:coverage": "vitest run --coverage",
     "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:ui": "vitest --ui",
+    "lint:css": "stylelint 'src/assets/styles/**/*.css'",
+    "sprites": "bin/generate-sprite.sh"
   },
   "keywords": [
     "eleventy",
@@ -33,6 +34,7 @@
   ],
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
+    "@11ty/eleventy-img": "^6.0.4",
     "@11ty/eleventy-upgrade-help": "^3.0.1",
     "@tailwindcss/postcss": "^4.1.13",
     "@vitest/ui": "^4.0.15",

@@ -26,6 +26,7 @@ ADR helps maintain clarity on why certain design patterns or technical approache
 | [002](./002-fluid-typography.md) | Fluid Typography Strategy | Accepted | 2026-01-09 |
 | [003](./003-touch-target-strategy.md) | Touch Target Accessibility | Accepted | 2026-01-14 |
 | [004](./004-breakpoints-strategy.md) | Breakpoints Strategy | Accepted | 2026-01-15 |
+| [005](./005-image-responsive-strategy.md) | Image Responsive Strategy | Accepted | 2026-01-15 |
 
 ---
 
