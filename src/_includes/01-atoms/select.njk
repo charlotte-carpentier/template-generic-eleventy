@@ -49,7 +49,6 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set isDisabled = options.disabled | default(selectData.disabled) | default(false) %}
       {% set finalAriaLabel = options.ariaLabel | default(selectData.ariaLabel) %}
-      {% set selectSize = selectData.size | default('default') %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
@@ -83,11 +82,7 @@
           3.4 Size Classes
           Description: Height, spacing, typography
       -------------------------- #}
-      {% set sizeMap = {
-        'small': 'h-10 px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] pr-[var(--spacing-inset-large)] text-sm leading-5',
-        'default': 'h-12 px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] pr-[var(--spacing-inset-large)] text-base leading-5'
-      } %}
-      {% set sizeClasses = sizeMap[selectSize] or sizeMap['default'] %}
+      {% set sizeClasses = 'h-12 px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] pr-[var(--spacing-inset-large)] text-body leading-5' %}
 
       {# --------------------------
           3.5 Icon Wrapper Classes
@@ -105,7 +100,7 @@
           class="{{ baseSelectClasses }} {{ stateClasses }} {{ sizeClasses }}"
           data-select-name="{{ selectData.name }}"
           data-select-type="select"
-          data-select-size="{{ selectData.size }}"
+          data-select-size="default"
           {% if isDisabled %}disabled{% endif %}
           {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
         >

@@ -23,10 +23,12 @@ ADR helps maintain clarity on why certain design patterns or technical approache
 | ID | Title | Status | Date |
 |----|-------|--------|------|
 | [001](./001-multiselect-exclusion.md) | Multiselect Exclusion | Accepted | 2025-12-10 |
-| [002](./002-fluid-typography.md) | Fluid Typography Strategy | Accepted | 2026-01-09 |
-| [003](./003-touch-target-strategy.md) | Touch Target Accessibility | Accepted | 2026-01-14 |
-| [004](./004-breakpoints-strategy.md) | Breakpoints Strategy | Accepted | 2026-01-15 |
-| [005](./005-image-responsive-strategy.md) | Image Responsive Strategy | Accepted | 2026-01-15 |
+| [002](./002-fluid-typography.md) | Fluid Typography | Accepted | 2026-01-09 |
+| [003](./003-touch-target.md) | Touch Target Accessibility | Accepted | 2026-01-14 |
+| [004](./004-breakpoints.md) | Breakpoints | Accepted | 2026-01-15 |
+| [005](./005-image-responsive.md) | Image Responsive | Accepted | 2026-01-15 |
+| [006](./006-link-typography.md) | Link Typography | Accepted | 2026-01-16 |
+| [007](./007-form-controls-sizing.md) | Form Controls Sizing Strategy | Accepted | 2026-01-16 |
 
 ---
 

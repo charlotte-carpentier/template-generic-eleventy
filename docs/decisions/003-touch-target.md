@@ -96,7 +96,7 @@ HAT targets showcase sites with 65% mobile traffic. Need guaranteed tap accuracy
 
 **Related ADR:**
 
-- ADR-002: Fluid Typography Strategy
+- ADR-002: Fluid Typography
 
 ---
 

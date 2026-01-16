@@ -132,7 +132,7 @@ Test method: Resize browser slowly → identify where layout breaks → add brea
 **Related ADR:**
 
 - [ADR-002: Fluid Typography Strategy](./002-fluid-typography.md)
-- [ADR-003: Touch Target Accessibility](./003-touch-target-strategy.md)
+- [ADR-003: Touch Target Accessibility](./003-touch-target.md)
 
 ---
 
