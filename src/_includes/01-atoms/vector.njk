@@ -65,9 +65,9 @@
           Description: Spacing per variant
       -------------------------- #}
       {% set containerGapMap = {
-        'horizontal': 'gap-[var(--spacing-inline-large)]',
-        'logo-only': ''
-      } %}
+      'horizontal': 'gap-[var(--spacing-inline-medium)] md:gap-[var(--spacing-inline-large)]',
+      'logo-only': ''
+    } %}
       {% set containerGap = containerGapMap[vectorVariant] or '' %}
 
       {# --------------------------
@@ -75,8 +75,8 @@
           Description: Sizing per variant
       -------------------------- #}
       {% set logoSizeMap = {
-        'logo-only': 'w-10 h-10 flex-shrink-0',
-        'horizontal': 'w-6 h-6 flex-shrink-0'
+          'logo-only': 'logo-size-large flex-shrink-0',
+          'horizontal': 'logo-size-small flex-shrink-0'
       } %}
       {% set logoClasses = logoSizeMap[vectorVariant] or logoSizeMap['horizontal'] %}
 
@@ -84,16 +84,18 @@
           3.4 Label Classes
           Description: Typography, colors
       -------------------------- #}
-      {% set textClasses = "text-[var(--color-global-contrast-light-01)] text-2xl leading-6 font-bold" %}
+      {% set textClasses = "text-[var(--color-global-contrast-light-01)] text-label leading-6 font-bold" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      <div
-        class="{{ baseContainerClasses }} {{ containerGap }} {{ customClasses }}"
+      <a
+        href="/"
+        class="touch-target {{ baseContainerClasses }} {{ containerGap }} {{ customClasses }}"
         data-vector-name="{{ vectorData.name }}"
         data-vector-type="vector"
         data-vector-variant="{{ vectorData.variant }}"
+        aria-label="Retour à l'accueil"
       >
         <img
           class="{{ logoClasses }}"
@@ -105,7 +107,7 @@
         {% if hasText %}
           <span class="{{ textClasses }}" data-vector-text>{{ vectorData.text }}</span>
         {% endif %}
-      </div>
+      </a>
     {% endif %}
   {% endif %}
 {% endmacro %}

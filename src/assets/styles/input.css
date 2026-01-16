@@ -99,6 +99,8 @@
   --font-size-h4: var(--font-size-xl);
   --font-size-h5: var(--font-size-lg);
   --font-size-h6: var(--font-size-base);
+
+  --font-size-label: var(--font-size-4xl);
   --font-size-body: var(--font-size-base);
   --font-size-helper: var(--font-size-sm);
   --font-size-caption: var(--font-size-xs);
@@ -437,6 +439,8 @@
 
 @utility text-h6 { font-size: var(--font-size-h6); }
 
+@utility text-label { font-size: var(--font-size-label); }
+
 @utility text-body { font-size: var(--font-size-body); }
 
 @utility text-helper { font-size: var(--font-size-helper); }
@@ -447,6 +451,17 @@
 @utility touch-target {
   min-width: var(--touch-target-min);
   min-height: var(--touch-target-min);
+}
+
+/* Logo sizing utilities - Fluid */
+@utility logo-size-small {
+  width: clamp(1.25rem, 1.071rem + 0.558vw, 1.5rem);   /* 20px → 24px */
+  height: clamp(1.25rem, 1.071rem + 0.558vw, 1.5rem);
+}
+
+@utility logo-size-large {
+  width: clamp(2rem, 1.714rem + 0.893vw, 2.5rem);      /* 32px → 40px */
+  height: clamp(2rem, 1.714rem + 0.893vw, 2.5rem);
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
