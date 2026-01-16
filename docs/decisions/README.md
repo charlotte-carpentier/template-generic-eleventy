@@ -28,6 +28,7 @@ ADR helps maintain clarity on why certain design patterns or technical approache
 | [004](./004-breakpoints.md) | Breakpoints | Accepted | 2026-01-15 |
 | [005](./005-image-responsive.md) | Image Responsive | Accepted | 2026-01-15 |
 | [006](./006-link-typography.md) | Link Typography | Accepted | 2026-01-16 |
+| [007](./007-form-controls-sizing.md) | Form Controls Sizing Strategy | Accepted | 2026-01-16 |
 
 ---
 
