@@ -23,6 +23,9 @@
     }) }}
 
   Note:
+    - Desktop only (≥1024px) - disabled mobile via tooltip.js BREAKPOINT
+    - Tooltip content MUST be supplementary (not critical for task completion)
+    - Critical info MUST be in aria-label or visible UI
     - Triggers MUST have aria-describedby="tooltip-{name}"
     - JavaScript service (utils/tooltip.js) auto-detects all [aria-describedby^="tooltip-"]
     - JS MUST implement: show on focus/mouseenter, hide on blur/mouseleave/Esc, aria-hidden toggle
@@ -71,13 +74,13 @@
           3.2 Title Classes
           Description: Typography, colors
       -------------------------- #}
-      {% set titleClasses = "text-[var(--color-global-contrast-light-01)] text-base font-medium" %}
+      {% set titleClasses = "text-[var(--color-global-contrast-light-01)] text-body font-medium" %}
 
       {# --------------------------
           3.3 Description Classes
           Description: Typography, colors, spacing
       -------------------------- #}
-      {% set descriptionClasses = "text-sm text-[var(--color-global-contrast-light-01)] mt-[var(--spacing-stack-small)]" %}
+      {% set descriptionClasses = "text-helper text-[var(--color-global-contrast-light-01)] mt-[var(--spacing-stack-small)]" %}
 
       {# --------------------------
           3.4 Multi-part Wrapper Classes
