@@ -29,12 +29,12 @@
 @theme {
 
   /* ─────────────────────────────
-     Viewport Configuration - 320px => 1440px
+    Viewport Configuration - 320px => 1440px
   ───────────────────────────── */
 
   --viewport-min: 20rem;
   --viewport-max: 90rem;
-  --viewport-range: 70rem;
+  --viewport-range: calc(var(--viewport-max) - var(--viewport-min));
 
   /* ─────────────────────────────
      Typography - Primitives
@@ -262,8 +262,8 @@
      Gradients - Tokens
   ───────────────────────────── */
 
-  --gradient-header: linear-gradient(0deg, var(--color-brand-primary-30), var(--color-brand-primary-10));
-  --gradient-delete-cell: linear-gradient(-90deg, var(--color-semantic-critical-100), rgba(255,240,241,0));
+  --gradient-header: linear-gradient(0deg, var(--color-global-accent), var(--color-brand-primary-10));
+  --gradient-delete-cell: linear-gradient(-90deg, var(--color-semantic-critical-contrast-light-02), transparent);
 
   /* ─────────────────────────────
      Elevation - Primitives
@@ -365,31 +365,26 @@
     calc(var(--spacing-4) + (var(--spacing-5) - var(--spacing-4)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
     var(--spacing-5)
   );
-
   --spacing-fluid-sm: clamp(
     var(--spacing-6),
     calc(var(--spacing-6) + (var(--spacing-7) - var(--spacing-6)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
     var(--spacing-7)
   );
-
   --spacing-fluid-md: clamp(
     var(--spacing-8),
     calc(var(--spacing-8) + (var(--spacing-10) - var(--spacing-8)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
     var(--spacing-10)
   );
-
   --spacing-fluid-lg: clamp(
     var(--spacing-12),
     calc(var(--spacing-12) + (var(--spacing-14) - var(--spacing-12)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
     var(--spacing-14)
   );
-
   --spacing-fluid-xl: clamp(
     var(--spacing-16),
     calc(var(--spacing-16) + (var(--spacing-20) - var(--spacing-16)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
     var(--spacing-20)
   );
-
   --spacing-fluid-2xl: clamp(
     var(--spacing-24),
     calc(var(--spacing-24) + (var(--spacing-30) - var(--spacing-24)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
@@ -402,25 +397,21 @@
     calc(var(--spacing-16) + (var(--spacing-20) - var(--spacing-16)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
     var(--spacing-20)
   );
-
   --size-fluid-sm: clamp(
     var(--spacing-24),
     calc(var(--spacing-24) + (var(--spacing-30) - var(--spacing-24)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
     var(--spacing-30)
   );
-
   --size-fluid-md: clamp(
     var(--spacing-30),
     calc(var(--spacing-30) + (var(--spacing-40) - var(--spacing-30)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
     var(--spacing-40)
   );
-
   --size-fluid-lg: clamp(
     var(--spacing-40),
     calc(var(--spacing-40) + (var(--spacing-50) - var(--spacing-40)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
     var(--spacing-50)
   );
-
   --size-fluid-xl: clamp(
     var(--spacing-50),
     calc(var(--spacing-50) + (var(--spacing-62) - var(--spacing-50)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
@@ -428,42 +419,76 @@
   );
 
   /* ─────────────────────────────
-     Z-Index - Tokens
+    Z-Index - Primitives
   ───────────────────────────── */
 
-  --z-base: 0;
-  --z-dropdown: 1000;
-  --z-sticky: 1020;
-  --z-fixed: 1030;
-  --z-modal-backdrop: 1040;
-  --z-modal: 1050;
-  --z-popover: 1060;
-  --z-tooltip: 1070;
-  --z-notification: 1080;
+  --z-0: 0;
+  --z-1000: 1000;
+  --z-1020: 1020;
+  --z-1030: 1030;
+  --z-1040: 1040;
+  --z-1050: 1050;
+  --z-1060: 1060;
+  --z-1070: 1070;
+  --z-1080: 1080;
 
   /* ─────────────────────────────
-     Layout - Tokens
+    Z-Index - Tokens
   ───────────────────────────── */
 
-  --container-desktop: 1440px;
-  --container-mobile: 320px;
-
-  --grid-columns-12: 12;
-  --grid-columns-6: 6;
-  --grid-columns-4: 4;
-  --grid-columns-3: 3;
-  --grid-columns-2: 2;
-  --grid-columns-1: 1;
-
-  --column-width-840: 840px;
-  --column-width-640: 640px;
-  --column-width-416: 416px;
-  --column-width-304: 304px;
-  --column-width-192: 192px;
-  --column-width-80: 80px;
+  --z-base: var(--z-0);
+  --z-dropdown: var(--z-1000);
+  --z-sticky: var(--z-1020);
+  --z-fixed: var(--z-1030);
+  --z-modal-backdrop: var(--z-1040);
+  --z-modal: var(--z-1050);
+  --z-popover: var(--z-1060);
+  --z-tooltip: var(--z-1070);
+  --z-notification: var(--z-1080);
 
   /* ─────────────────────────────
-     Accessibility - Tokens
+    Layout - Primitives
+  ───────────────────────────── */
+
+  --size-1440: 1440px;
+  --size-840: 840px;
+  --size-640: 640px;
+  --size-416: 416px;
+  --size-320: 320px;
+  --size-304: 304px;
+  --size-192: 192px;
+  --size-80: 80px;
+
+  --count-12: 12;
+  --count-6: 6;
+  --count-4: 4;
+  --count-3: 3;
+  --count-2: 2;
+  --count-1: 1;
+
+  /* ─────────────────────────────
+    Layout - Tokens
+  ───────────────────────────── */
+
+  --container-desktop: var(--size-1440);
+  --container-mobile: var(--size-320);
+
+  --grid-columns-12: var(--count-12);
+  --grid-columns-6: var(--count-6);
+  --grid-columns-4: var(--count-4);
+  --grid-columns-3: var(--count-3);
+  --grid-columns-2: var(--count-2);
+  --grid-columns-1: var(--count-1);
+
+  --column-width-840: var(--size-840);
+  --column-width-640: var(--size-640);
+  --column-width-416: var(--size-416);
+  --column-width-304: var(--size-304);
+  --column-width-192: var(--size-192);
+  --column-width-80: var(--size-80);
+
+  /* ─────────────────────────────
+     Accessibility - Primitives
   ───────────────────────────── */
 
   /* Touch targets (44x44px minimum) */
