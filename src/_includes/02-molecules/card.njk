@@ -85,7 +85,7 @@
           3.2 Lockup Wrapper Classes
           Description: Layout override for full-width image, text truncation
         --------------------------#}
-      {% set lockupClasses = "[&>div]:flex-col [&>div]:gap-[var(--spacing-stack-tight)] [&_[data-lockup-image]]:w-full [&_[data-lockup-image]]:h-40 [&_img]:w-full [&_img]:h-auto [&_img]:rounded-t-[var(--radius-card)] [&_img]:rounded-b-none [&_[data-lockup-content]]:p-[var(--spacing-stack-large)] [&_[data-lockup-text]]:line-clamp-2" %}
+      {% set lockupClasses = "[&>div]:flex-col [&>div]:gap-[var(--spacing-stack-tight)] [&_[data-lockup-image]]:w-full [&_[data-lockup-image]]:aspect-video [&_[data-lockup-image]]:min-h-[180px] [&_img]:w-full [&_img]:h-full [&_img]:object-cover [&_img]:rounded-t-[var(--radius-card)] [&_img]:rounded-b-none [&_[data-lockup-content]]:p-[var(--spacing-stack-large)] [&_[data-lockup-text]]:line-clamp-2" %}
 
       {# --------------------------
           3.3 Content Wrapper Classes
