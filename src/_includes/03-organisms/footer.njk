@@ -87,7 +87,7 @@
           3.1 Wrapper Classes
           Description: Layout, Spacing, Background, Responsive
         --------------------------#}
-      {% set footerClasses = "flex flex-col gap-[var(--spacing-stack-large)] p-[var(--spacing-inset-large)] bg-[var(--color-global-contrast-light-04)] md:p-[var(--spacing-inset-large)]" %}
+      {% set footerClasses = "flex flex-col gap-[var(--spacing-fluid-sm)] p-[var(--spacing-inset-large)] md:p-[var(--spacing-fluid-lg)] bg-[var(--color-global-contrast-light-04)]" %}
 
       {# --------------------------
           3.2 Branding Section Classes
@@ -99,8 +99,7 @@
           3.3 Navigation Section Classes
           Description: Layout grid responsive, Gap
         --------------------------#}
-      {% set navigationClasses = "grid grid-cols-1 gap-[var(--spacing-stack-large)] md:grid-cols-2 lg:grid-cols-4" %}
-
+      {% set navigationClasses = "grid grid-cols-1 gap-[var(--spacing-fluid-sm)] md:grid-cols-2 lg:grid-cols-4" %}
       {# --------------------------
           3.4 Column Classes
           Description: Layout, Spacing, Typography override h5-serif
