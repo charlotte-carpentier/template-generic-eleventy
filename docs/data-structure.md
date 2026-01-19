@@ -26,12 +26,12 @@ When designing component data structures, choose the appropriate pattern based o
 
 **Question**: "Does the variant change ONLY the visual presentation (CSS/layout)?"
 
-**YES** → Use `variants: ["style1", "style2"]` array
+**YES** => Use `variants: ["style1", "style2"]` array
 - Same data structure across all variants
 - Only CSS classes or layout changes
 - Single object with variant options array
 
-**NO** → Use separate objects with `variant: "type"` property
+**NO** => Use separate objects with `variant: "type"` property
 - Different data for each variant
 - Different structure or behavior
 - Multiple objects in the main array
