@@ -82,7 +82,7 @@
           3.2 Item Classes
           Description: Layout, Spacing, Borders
         --------------------------#}
-      {% set itemStateClasses = "transition-colors hover:[&>span]:text-[var(--color-global-accent)] hover:[&_svg]:text-[var(--color-global-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 [aria-disabled='true']:bg-[var(--color-global-contrast-light-04)] [aria-disabled='true']:text-[var(--color-global-contrast-light-02)] [aria-disabled='true']:cursor-not-allowed [aria-disabled='true']:pointer-events-none" %}
+      {% set itemStateClasses = "touch-target w-full flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inline-medium)] py-[var(--spacing-stack-small)] bg-transparent border-0 cursor-pointer text-left transition-colors hover:bg-[var(--color-global-contrast-light-04)] hover:[&>span]:text-[var(--color-global-accent)] hover:[&_svg]:text-[var(--color-global-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none" %}
 
       {# --------------------------
           3.3 Icon Wrapper Classes
@@ -118,15 +118,19 @@
       {% set calendarHeaderClasses = "grid grid-cols-7 gap-1 mb-2" %}
       {% set calendarDayHeaderClasses = "text-center font-body text-sm text-[var(--color-global-contrast-light-01)] py-2" %}
       {% set calendarGridClasses = "grid grid-cols-7 gap-1" %}
-      {% set calendarDateCurrentClasses = "flex items-center justify-center w-10 h-10 font-body text-body rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
-      {% set calendarDateOutsideClasses = "flex items-center justify-center w-10 h-10 font-body text-body text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default" %}
+      {% set calendarDateCurrentClasses = "touch-target flex items-center justify-center font-body text-body rounded-[var(--radius-default)] cursor-pointer text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
+      {% set calendarDateOutsideClasses = "touch-target flex items-center justify-center font-body text-body text-[var(--color-global-contrast-light-01)] rounded-[var(--radius-default)] cursor-default" %}
       {% set calendarDateSelectedClasses = "bg-[var(--color-interactive-default)] text-[var(--color-global-white)] hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)]" %}
 
       {# --------------------------
           3.8 Month Label Classes
           Description: Typography for month labels
         --------------------------#}
-      {% set monthLabelsWrapperClasses = "flex gap-60 flex-1 justify-center" %}
+      {% if variant == 'double' %}
+        {% set monthLabelsWrapperClasses = "flex flex-col md:flex-row md:gap-60 gap-2 flex-1 justify-center" %}
+      {% else %}
+        {% set monthLabelsWrapperClasses = "flex flex-1 justify-center" %}
+      {% endif %}
       {% set monthLabelClasses = "font-body text-lg text-[var(--color-global-default)]" %}
 
       {# --------------------------
@@ -134,7 +138,7 @@
           Description: Single vs double calendar layout
         --------------------------#}
       {% if variant == 'double' %}
-        {% set calendarsWrapperClasses = "flex gap-[var(--spacing-inset-small)]" %}
+        {% set calendarsWrapperClasses = "flex flex-col md:flex-row gap-[var(--spacing-inset-small)]" %}
       {% else %}
         {% set calendarsWrapperClasses = "" %}
       {% endif %}
@@ -153,42 +157,48 @@
         {# Default type panels #}
         {% if panelType == "default" %}
           {% for item in items %}
-            <div
-              class="{{ itemStateClasses }}"
-              data-panel-item="true"
-              tabindex="0"
-            >
-              {# Checkbox handles own label #}
-              {% if item.checkboxName and options.checkboxDatas %}
+            {# Checkbox variant uses div (checkbox is interactive element) #}
+            {% if item.checkboxName and options.checkboxDatas %}
+              <div
+                class="touch-target flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inline-medium)] py-[var(--spacing-stack-small)]"
+                data-panel-item="true"
+              >
                 {{ renderCheckbox({
                     id: item.checkboxName,
                     datas: options.checkboxDatas
                 }) }}
+              </div>
 
-              {# Icon variant #}
-              {% elif item.iconName and options.iconDatas %}
-                <div class="{{ iconWrapperClasses }}">
-                  {{ renderIcon({
-                      name: item.iconName,
-                      datas: options.iconDatas,
-                      decorative: true
-                  }) }}
-                </div>
-                <span class="{{ textClasses }}">{{ item.text }}</span>
-                {% if item.code %}
-                  <span
-                    class="{{ codeClasses }}"
-                    data-panel-code="true"
-                  >
-                    {{ item.code }}
-                  </span>
+            {# Icon and text variants use button #}
+            {% else %}
+              <button
+                type="button"
+                class="{{ itemStateClasses }}"
+                data-panel-item="true"
+                data-value="{{ item.value | default(item.text) }}"
+              >
+                {% if item.iconName and options.iconDatas %}
+                  <div class="{{ iconWrapperClasses }}">
+                    {{ renderIcon({
+                        name: item.iconName,
+                        datas: options.iconDatas,
+                        decorative: true
+                    }) }}
+                  </div>
+                  <span class="{{ textClasses }}">{{ item.text }}</span>
+                  {% if item.code %}
+                    <span
+                      class="{{ codeClasses }}"
+                      data-panel-code="true"
+                    >
+                      {{ item.code }}
+                    </span>
+                  {% endif %}
+                {% else %}
+                  <span class="{{ textClasses }}">{{ item.text }}</span>
                 {% endif %}
-
-              {# Simple text variant #}
-              {% else %}
-                <span class="{{ textClasses }}">{{ item.text }}</span>
-              {% endif %}
-            </div>
+              </button>
+            {% endif %}
           {% endfor %}
 
         {# Date type panels - Dynamically rendered by panel.js #}
@@ -247,34 +257,40 @@
         {# List-item type panels - No JavaScript required #}
         {% elif panelType == "list-item" %}
           {% for item in items %}
-            <div
-              class="{{ itemStateClasses }}"
-              data-panel-item="true"
-              tabindex="0"
-            >
-              {# Checkbox variant #}
-              {% if variant == "checkbox" and item.checkboxName and options.checkboxDatas %}
+            {# Checkbox variant uses div (checkbox is interactive element) #}
+            {% if variant == "checkbox" and item.checkboxName and options.checkboxDatas %}
+              <div
+                class="touch-target flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inline-medium)] py-[var(--spacing-stack-small)]"
+                data-panel-item="true"
+              >
                 {{ renderCheckbox({
                     id: item.checkboxName,
                     datas: options.checkboxDatas
                 }) }}
+              </div>
 
-              {# Label-icon variant #}
-              {% elif variant == "label-icon" and item.iconName and options.iconDatas %}
-                <div class="{{ iconWrapperClasses }}">
-                  {{ renderIcon({
-                      name: item.iconName,
-                      datas: options.iconDatas,
-                      decorative: true
-                  }) }}
-                </div>
-                <span class="{{ textClasses }}">{{ item.text }}</span>
-
-              {# Label variant #}
-              {% elif variant == "label" %}
-                <span class="{{ textClasses }}">{{ item.text }}</span>
-              {% endif %}
-            </div>
+            {# Label-icon and label variants use button #}
+            {% else %}
+              <button
+                type="button"
+                class="{{ itemStateClasses }}"
+                data-panel-item="true"
+                data-value="{{ item.value | default(item.text) }}"
+              >
+                {% if variant == "label-icon" and item.iconName and options.iconDatas %}
+                  <div class="{{ iconWrapperClasses }}">
+                    {{ renderIcon({
+                        name: item.iconName,
+                        datas: options.iconDatas,
+                        decorative: true
+                    }) }}
+                  </div>
+                  <span class="{{ textClasses }}">{{ item.text }}</span>
+                {% elif variant == "label" %}
+                  <span class="{{ textClasses }}">{{ item.text }}</span>
+                {% endif %}
+              </button>
+            {% endif %}
           {% endfor %}
         {% endif %}
       </div>
