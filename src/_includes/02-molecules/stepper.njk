@@ -75,7 +75,7 @@
         --------------------------#}
       {% set listVariantMap = {
         'vertical': 'flex flex-col gap-[var(--spacing-stack-tight)]',
-        'default': 'flex flex-row items-center gap-[var(--spacing-inline-medium)]'
+        'default': 'flex flex-col gap-[var(--spacing-stack-tight)] md:flex-row md:items-center md:gap-[var(--spacing-inline-medium)]'
       } %}
       {% set listClasses = listVariantMap[variant] or listVariantMap['default'] %}
 
@@ -85,7 +85,7 @@
         --------------------------#}
       {% set connectorVariantMap = {
         'vertical': 'mt-[var(--spacing-stack-tight)] w-px h-6 bg-[var(--color-global-contrast-light-02)]',
-        'default': 'flex-shrink-0 h-px w-12 bg-[var(--color-global-contrast-light-02)]'
+        'default': 'mt-[var(--spacing-stack-tight)] w-px h-6 bg-[var(--color-global-contrast-light-02)] md:mt-0 md:h-px md:w-12 md:flex-shrink-0'
       } %}
       {% set connectorClasses = connectorVariantMap[variant] or connectorVariantMap['default'] %}
 

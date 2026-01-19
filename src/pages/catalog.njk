@@ -218,7 +218,7 @@ eleventyExcludeFromCollections: true
 
 <h1>Molecules</h1>
 
-<div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start;">
+<div style="display: block; margin-bottom: 3rem;">
   {# Block drag and drop #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Block drag and drop</h2>
@@ -273,7 +273,6 @@ eleventyExcludeFromCollections: true
   {# Card #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Card</h2>
-    <div class="flex gap-[var(--spacing-4)]">
       {{ renderCard({
           name: "demoCard1",
           datas: molecules.card.cards,
@@ -283,7 +282,6 @@ eleventyExcludeFromCollections: true
           buttonDatas: atoms.button.buttons,
           iconDatas: atoms.icon.icons
       }) }}
-    </div>
   </section>
 
   {# Disclaimer #}
@@ -327,7 +325,6 @@ eleventyExcludeFromCollections: true
 {# List Control #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Control</h2>
-    <div class="flex gap-[var(--spacing-8)]">
     {{ renderListControl({
         name: "demoList1",
         datas: molecules["list-control"].listControls,
@@ -343,7 +340,6 @@ eleventyExcludeFromCollections: true
         datas: molecules["list-control"].listControls,
         toggleDatas: atoms.toggle.toggles
     }) }}
-    </div>
   </section>
 
   {# List Form #}
@@ -359,7 +355,6 @@ eleventyExcludeFromCollections: true
   {# List Group #}
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">List Group</h2>
-    <div style="display: flex; gap: 1rem;">
     {{ renderListGroup({
         name: "demoGroup2",
         datas: molecules["list-group"].listGroups,
@@ -367,7 +362,6 @@ eleventyExcludeFromCollections: true
         linkDatas: atoms.link.links,
         tooltipDatas: atoms.tooltip.tooltips
     }) }}
-
     {{ renderListGroup({
         name: "demoGroup3",
         datas: molecules["list-group"].listGroups,
