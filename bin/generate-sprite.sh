@@ -14,7 +14,7 @@
 # - Adds stroke="none" to path elements without stroke attribute
 # - Wraps icons in <symbol> tags with unique IDs
 # - PRESERVES original viewBox from source SVGs
-# - CONVERTS xlink:href to href (SVG 1.1 → SVG 2.0)
+# - CONVERTS xlink:href to href (SVG 1.1 => SVG 2.0)
 # - REMOVES xmlns:xlink namespace declarations
 # - Validates output with symbol and path counts
 #
@@ -37,7 +37,7 @@ echo "Generating SVG sprite..."
 normalize_svg_colors() {
     local file="$1"
     local temp_file=$(mktemp)
-    
+
     # Replace colors with currentColor and add stroke="none" only where missing
     sed -e 's/fill="#[0-9a-fA-F]\{6\}"/fill="currentColor"/g' \
         -e 's/fill="#[0-9a-fA-F]\{3\}"/fill="currentColor"/g' \
@@ -53,7 +53,7 @@ normalize_svg_colors() {
         -e 's/xlink:href=/href=/g' \
         -e 's/xmlns:xlink="[^"]*"//g' \
         "$file" > "$temp_file"
-    
+
     echo "$temp_file"
 }
 
@@ -61,7 +61,7 @@ normalize_svg_colors() {
 extract_viewbox() {
     local file="$1"
     local viewbox=$(grep -oP 'viewBox="\K[^"]+' "$file" | head -1)
-    
+
     # Fallback to default if no viewBox found
     if [ -z "$viewbox" ]; then
         echo "0 0 24 24"
@@ -74,25 +74,25 @@ extract_viewbox() {
 process_svg() {
     local file="$1"
     local id="$2"
-    
+
     # Normalize colors first
     local normalized_file=$(normalize_svg_colors "$file")
-    
+
     # Extract original viewBox
     local viewbox=$(extract_viewbox "$file")
-    
+
     # Wrap in symbol with original viewBox
     echo "    <symbol id=\"$id\" viewBox=\"$viewbox\">"
-    
+
     # Extract content between <svg> tags, remove wrapper, indent properly
     sed -n '/<svg/,/<\/svg>/p' "$normalized_file" | \
     sed '1s/<svg[^>]*>//' | \
     sed '$s/<\/svg>//' | \
     sed '/^$/d' | \
     sed 's/^/      /'
-    
+
     echo "    </symbol>"
-    
+
     # Clean up temp file
     rm "$normalized_file"
 }

@@ -24,8 +24,8 @@ tags: [coding-style, conventions, guidelines]
 
 ## Quick Start
 
-1. **File names**: `kebab-case` → `section-hero.json`
-2. **JSON keys**: `camelCase` → `sectionHeros`
+1. **File names**: `kebab-case` => `section-hero.json`
+2. **JSON keys**: `camelCase` => `sectionHeros`
 3. **Identifiers**: ≤12 characters when possible
 4. **Indentation**: 2 spaces
 5. **Quotes**: Single (JS/CSS), Double (JSON/HTML)
@@ -246,7 +246,7 @@ FILES          JSON KEYS      REFERENCES
 ────────────────────────────────────────────
 kebab-case     camelCase      [name]Name
 ────────────────────────────────────────────
-button.json  → "buttons"   → "buttonName"
+button.json  => "buttons"   => "buttonName"
 ```
 
 ### Component Prefixes

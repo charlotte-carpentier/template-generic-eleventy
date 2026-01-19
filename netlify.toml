@@ -3,8 +3,8 @@
 # ==========================
 
 [build]
-  publish = "public"          # TODO → Update if your output folder is different
-  command = "npm run build"   # TODO → Update if your build command changes
+  publish = "public"          # TODO => Update if your output folder is different
+  command = "npm run build"   # TODO => Update if your build command changes
 
 # --------------------------
 # Plugins
@@ -12,4 +12,4 @@
 
 # Example plugin (commented out by default)
 # [[plugins]]
-#   package = "netlify-plugin-image-optim"  # TODO → Enable if you use image optimization
+#   package = "netlify-plugin-image-optim"  # TODO => Enable if you use image optimization

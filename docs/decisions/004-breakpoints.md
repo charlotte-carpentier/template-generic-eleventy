@@ -50,7 +50,7 @@ Mobile-first reduces code. Content-driven breakpoints ensure layout adapts where
 
 **Add breakpoints where content breaks, not where devices exist.**
 
-Test method: Resize browser slowly → identify where layout breaks → add breakpoint at that width.
+Test method: Resize browser slowly => identify where layout breaks => add breakpoint at that width.
 
 ```html
 <div class="flex-col md:flex-row lg:grid lg:grid-cols-3">

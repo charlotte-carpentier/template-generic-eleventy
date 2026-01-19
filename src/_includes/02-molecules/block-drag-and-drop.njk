@@ -100,7 +100,7 @@
           3.3 Dropzone Classes (by variant: default, loading, error)
           Description: Layout, Spacing, Colors, Borders, Effects, States
         --------------------------#}
-      {% set dropzoneBaseClasses = "touch-target flex flex-col items-start justify-center p-[var(--spacing-inset-large)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-card)] bg-[var(--color-global-white)] min-h-[160px] w-full cursor-pointer transition-colors mb-[var(--spacing-stack-medium)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
+      {% set dropzoneBaseClasses = "touch-target flex flex-col items-start justify-center p-[var(--spacing-inset-large)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-card)] bg-[var(--color-global-white)] size-fluid-md w-full cursor-pointer transition-colors mb-[var(--spacing-stack-medium)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
       {% set dropzoneHoverClasses = "hover:bg-[var(--color-global-contrast-light-03)]" %}
 
       {% set variantMap = {
@@ -141,14 +141,14 @@
           Description: Layout, Spacing, Typography, Colors
         --------------------------#}
       {% set fileInfoContainerClasses = "flex flex-col gap-[var(--spacing-inline-small)] mt-[var(--spacing-stack-tight)]" %}
-      {% set fileInfoLabelClasses = "text-sm text-[var(--color-global-contrast-light-02)]" %}
-      {% set fileInfoValueClasses = "text-sm text-[var(--color-global-default)]" %}
+      {% set fileInfoLabelClasses = "text-helper text-[var(--color-global-contrast-light-02)]" %}
+      {% set fileInfoValueClasses = "text-helper text-[var(--color-global-default)]" %}
 
       {# --------------------------
           3.9 Error Message Classes
           Description: Typography, Colors, Spacing
         --------------------------#}
-      {% set errorMessageClasses = "font-body text-sm text-[var(--color-semantic-critical)] mt-[var(--spacing-stack-tight)]" %}
+      {% set errorMessageClasses = "font-body text-helper text-[var(--color-semantic-critical)] mt-[var(--spacing-stack-tight)]" %}
 
       {# --------------------------
           3.10 ARIA Live Region Classes

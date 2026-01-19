@@ -117,10 +117,10 @@ For more examples, see [`examples.md`](./examples.md).
 
 ### Decision Tree
 
-- Can I do this with Tailwind utilities? → **Use Tailwind**
-- Needs `@keyframes` animations? → **Custom CSS**
-- Needs CSS `:target`? → **Custom CSS**
-- Needs `::-webkit-scrollbar`? → **Custom CSS**
+- Can I do this with Tailwind utilities? => **Use Tailwind**
+- Needs `@keyframes` animations? => **Custom CSS**
+- Needs CSS `:target`? => **Custom CSS**
+- Needs `::-webkit-scrollbar`? => **Custom CSS**
 
 ### BEM Naming Convention
 
