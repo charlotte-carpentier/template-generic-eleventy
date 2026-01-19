@@ -90,7 +90,7 @@
       {% set containerTypeMap = {
         'default': containerDefaultMap[lockupVariant] | default(containerDefaultMap['vertical']),
         'value-legend': 'flex flex-col gap-[var(--spacing-stack-tight)]',
-        'block-content': 'flex gap-[var(--spacing-inline-large)]'
+        'block-content': 'flex flex-col md:flex-row gap-[var(--spacing-stack-medium)] md:gap-[var(--spacing-inline-large)]'
       } %}
       {% set containerClasses = containerTypeMap[lockupType] | default(containerTypeMap['default']) %}
 
@@ -116,7 +116,7 @@
           3.5 Image Wrapper Classes
           Description: Sizing, Layout, Child image styling override
         --------------------------#}
-      {% set imageWrapperClasses = "flex-shrink-0 w-20 h-20 [&_img]:w-full [&_img]:h-full [&_img]:object-cover" %}
+      {% set imageWrapperClasses = "flex-shrink-0 w-full md:w-20 h-auto md:h-20 [&_img]:w-full [&_img]:h-full [&_img]:object-cover" %}
 
       {# --------------------------
           3.6 Content Wrapper Classes
