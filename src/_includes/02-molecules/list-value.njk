@@ -68,7 +68,7 @@
         --------------------------#}
       {% set containerMap = {
         'default': 'flex flex-col gap-[var(--spacing-stack-medium)]',
-        'horizontal': 'flex flex-row gap-[var(--spacing-inline-large)]'
+        'horizontal': 'flex flex-col md:flex-row gap-[var(--spacing-stack-medium)] md:gap-[var(--spacing-inline-large)]'
       } %}
       {% set containerClasses = containerMap[variant] | default(containerMap['default']) %}
 
