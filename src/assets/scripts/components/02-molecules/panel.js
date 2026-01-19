@@ -14,16 +14,36 @@ const SELECTOR_NAV_PREV = '[data-panel-nav-prev]';
 const SELECTOR_NAV_NEXT = '[data-panel-nav-next]';
 const SELECTOR_DATE = '[data-panel-date]';
 
-const MONTHS = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-];
-
-const DAY_HEADERS = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+// Use Intl API for localized month/day names
+const LOCALE = 'en-US';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Utility Functions
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Get formatted month and year
+ * @param {number} month - Month (0-11)
+ * @param {number} year - Year
+ * @returns {string} Formatted month year
+ */
+const getMonthYear = (month, year) => {
+  return new Intl.DateTimeFormat(LOCALE, { month: 'long', year: 'numeric' })
+    .format(new Date(year, month, 1));
+};
+
+/**
+ * Get day headers
+ * @returns {string[]} Array of day abbreviations
+ */
+const getDayHeaders = () => {
+  return [...Array(7)].map((_, i) => {
+    const date = new Date(2024, 0, i); // Week starting Sunday 2024-01-01
+    return new Intl.DateTimeFormat(LOCALE, { weekday: 'short' })
+      .format(date)
+      .toUpperCase();
+  });
+};
 
 /**
  * Get next month/year
@@ -132,7 +152,7 @@ const generateLabels = (panel, state) => {
     const label = document.createElement('span');
     label.className = state.classes.monthLabel;
     label.dataset.panelMonth = 'true';
-    label.textContent = `${MONTHS[month]} ${year}`;
+    label.textContent = getMonthYear(month, year);
     fragment.appendChild(label);
   });
 
@@ -176,7 +196,8 @@ const createCalendar = (month, year, state) => {
   const headerGrid = document.createElement('div');
   headerGrid.className = classes.header;
 
-  DAY_HEADERS.forEach(day => {
+  const dayHeaders = getDayHeaders();
+  dayHeaders.forEach(day => {
     const header = document.createElement('div');
     header.className = classes.dayHeader;
     header.textContent = day;

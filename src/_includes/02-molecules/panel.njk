@@ -76,7 +76,8 @@
           3.1 Container Classes
           Description: Layout, Background, Borders, Shadow
         --------------------------#}
-      {% set containerClasses = "flex flex-col bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] shadow-md p-[var(--spacing-inset-tight)]" %}
+      {% set containerBaseClasses = "flex flex-col bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] shadow-md p-[var(--spacing-inset-tight)]" %}
+      {% set containerClasses = containerBaseClasses ~ (" max-w-2xl" if (panelType == "date" and variant == "double") else "") %}
 
       {# --------------------------
           3.2 Item Classes
@@ -126,22 +127,14 @@
           3.8 Month Label Classes
           Description: Typography for month labels
         --------------------------#}
-      {% if variant == 'double' %}
-        {% set monthLabelsWrapperClasses = "flex flex-col md:flex-row md:gap-60 gap-2 flex-1 justify-center" %}
-      {% else %}
-        {% set monthLabelsWrapperClasses = "flex flex-1 justify-center" %}
-      {% endif %}
-      {% set monthLabelClasses = "font-body text-lg text-[var(--color-global-default)]" %}
+      {% set monthLabelsWrapperClasses = ("flex gap-2 flex-1 justify-center [&>*:nth-child(2)]:hidden md:[&>*:nth-child(2)]:inline md:gap-60" if variant == 'double' else "flex flex-1 justify-center") %}
+      {% set monthLabelClasses = "font-body text-body text-[var(--color-global-default)]" %}
 
       {# --------------------------
           3.9 Calendars Wrapper Classes
           Description: Single vs double calendar layout
         --------------------------#}
-      {% if variant == 'double' %}
-        {% set calendarsWrapperClasses = "flex flex-col md:flex-row gap-[var(--spacing-inset-small)]" %}
-      {% else %}
-        {% set calendarsWrapperClasses = "" %}
-      {% endif %}
+      {% set calendarsWrapperClasses = ("flex flex-col md:flex-row gap-[var(--spacing-inset-small)] [&>*:nth-child(2)]:hidden md:[&>*:nth-child(2)]:block" if variant == 'double' else "") %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
