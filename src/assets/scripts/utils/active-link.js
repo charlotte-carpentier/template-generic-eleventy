@@ -60,9 +60,11 @@ export const setActiveLink = (container, options = {}) => {
 
   links.forEach(link => {
     link.removeAttribute('aria-current');
+    link.removeAttribute('tabindex');
 
     if (normalizeUrl(link.href) === currentUrl) {
       link.setAttribute('aria-current', currentValue);
+      link.setAttribute('tabindex', '-1');
       activeLink = link;
     }
   });

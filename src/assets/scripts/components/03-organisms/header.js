@@ -23,7 +23,8 @@ import { debounce } from '../../utils/debounce.js';
 
 const BURGER_ID = 'burger-toggle';
 const OVERLAY_ID = 'mobile-overlay';
-const MOBILE_BREAKPOINT = 1024;
+const BACKDROP_ID = 'mobile-backdrop';
+const MOBILE_BREAKPOINT = 768;
 const RESIZE_DEBOUNCE_DELAY = 150;
 const FOCUSABLE_ELEMENTS = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
@@ -32,14 +33,28 @@ const FOCUSABLE_ELEMENTS = 'a[href], button:not([disabled]), [tabindex]:not([tab
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
+ * Update overlay position below header (dynamic height)
+ * @returns {void}
+ */
+const updateOverlayPosition = () => {
+  const header = document.getElementById('main-header');
+  const overlay = document.getElementById(OVERLAY_ID);
+
+  if (!header || !overlay) return;
+
+  overlay.style.top = `${header.offsetHeight}px`;
+};
+
+/**
  * Initialize mobile menu functionality
  * @returns {void}
  */
 export const initMobileMenu = () => {
   const burgerToggle = document.getElementById(BURGER_ID);
   const mobileOverlay = document.getElementById(OVERLAY_ID);
+  const mobileBackdrop = document.getElementById(BACKDROP_ID);
 
-  if (!burgerToggle || !mobileOverlay) {
+  if (!burgerToggle || !mobileOverlay || !mobileBackdrop) {
     return;
   }
 
@@ -50,13 +65,16 @@ export const initMobileMenu = () => {
     return;
   }
 
+  // Update overlay position on mount
+  updateOverlayPosition();
+
   // Get all focusable elements in overlay for focus trap
   const getFocusableElements = () => {
     return Array.from(mobileOverlay.querySelectorAll(FOCUSABLE_ELEMENTS));
   };
 
   /**
-   * Toggle menu state with focus management
+   * Toggle menu state
    * @param {boolean} isOpen - Current open state
    * @returns {void}
    */
@@ -66,25 +84,19 @@ export const initMobileMenu = () => {
     // Update ARIA states
     burgerToggle.setAttribute('aria-expanded', String(shouldOpen));
 
-    // Toggle visibility
+    // Toggle visibility (backdrop + drawer)
+    mobileBackdrop.classList.toggle('hidden', isOpen);
     mobileOverlay.classList.toggle('hidden', isOpen);
+
+    // Slide animation (remove translate when open)
+    mobileOverlay.classList.toggle('-translate-x-full', isOpen);
+
+    // Toggle burger icons
     iconOpen.classList.toggle('hidden', !isOpen);
     iconClose.classList.toggle('hidden', isOpen);
 
     // Lock body scroll
     document.body.style.overflow = isOpen ? '' : 'hidden';
-
-    // Focus management (WCAG 2.4.3 Focus Order)
-    if (shouldOpen) {
-      // Move focus to first focusable element in overlay
-      const focusableElements = getFocusableElements();
-      if (focusableElements.length > 0) {
-        focusableElements[0].focus();
-      }
-    } else {
-      // Return focus to burger button
-      burgerToggle.focus();
-    }
   };
 
   /**
@@ -118,6 +130,14 @@ export const initMobileMenu = () => {
     toggleMenu(isOpen);
   });
 
+  // Backdrop click handler
+  mobileBackdrop.addEventListener('click', () => {
+    const isOpen = burgerToggle.getAttribute('aria-expanded') === 'true';
+    if (isOpen) {
+      toggleMenu(true);
+    }
+  });
+
   // Escape key handler (WCAG 2.1.1 Keyboard)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && burgerToggle.getAttribute('aria-expanded') === 'true') {
@@ -133,6 +153,8 @@ export const initMobileMenu = () => {
     if (window.innerWidth >= MOBILE_BREAKPOINT) {
       toggleMenu(true);
     }
+    // Update overlay position on resize
+    updateOverlayPosition();
   }, RESIZE_DEBOUNCE_DELAY);
 
   window.addEventListener('resize', handleResize);

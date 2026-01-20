@@ -75,9 +75,9 @@
 
       {# --------------------------
           3.2 List Classes
-          Description: Layout horizontal, Spacing
+          Description: Layout responsive, Spacing responsive
         --------------------------#}
-      {% set listClasses = "flex gap-[var(--spacing-inline-large)]" %}
+      {% set listClasses = "flex flex-col gap-[var(--spacing-stack-medium)] md:flex-row md:gap-[var(--spacing-inline-large)]" %}
 
       {# --------------------------
           3.3 Item Classes
@@ -87,15 +87,15 @@
 
       {# --------------------------
           3.4 Link Base Classes
-          Description: Layout, Typography, Spacing, Positioning, Transitions
+          Description: Layout, Typography, Spacing responsive, Positioning, Transitions
         --------------------------#}
-      {% set linkBaseClasses = "[&_a]:relative [&_a]:px-[var(--spacing-inset-tight)] [&_a]:py-[var(--spacing-inset-tight)] [&_a]:pb-[var(--spacing-inset-tight)] [&_a]:font-body text-body [&_a]:text-[var(--color-global-default)] [&_a]:no-underline [&_a]:transition-colors" %}
+      {% set linkBaseClasses = "[&_a]:relative [&_a]:px-[var(--spacing-inset-small)] [&_a]:py-[var(--spacing-inset-small)] md:[&_a]:px-[var(--spacing-inset-tight)] md:[&_a]:py-[var(--spacing-inset-tight)] [&_a]:font-body text-body [&_a]:text-[var(--color-global-default)] [&_a]:no-underline [&_a]:transition-colors" %}
 
       {# --------------------------
           3.5 Link Hover Classes
           Description: Colors, Pseudo-elements for hover indicator
         --------------------------#}
-      {% set linkHoverClasses = "[&_a:hover:not([aria-current])]:text-[var(--color-global-contrast-light-01)] [&_a:hover:not([aria-current])]:after:content-['•'] [&_a:hover:not([aria-current])]:after:absolute [&_a:hover:not([aria-current])]:after:bottom-0 [&_a:hover:not([aria-current])]:after:translate-y-[8px] [&_a:hover:not([aria-current])]:after:left-1/2 [&_a:hover:not([aria-current])]:after:-translate-x-1/2" %}
+      {% set linkHoverClasses = "[&_a:hover:not([aria-current])]:text-[var(--color-global-contrast-light-01)] md:[&_a:hover:not([aria-current])]:after:content-['•'] md:[&_a:hover:not([aria-current])]:after:absolute md:[&_a:hover:not([aria-current])]:after:bottom-0 md:[&_a:hover:not([aria-current])]:after:translate-y-[8px] md:[&_a:hover:not([aria-current])]:after:left-1/2 md:[&_a:hover:not([aria-current])]:after:-translate-x-1/2" %}
 
       {# --------------------------
           3.6 Link Focus Classes
@@ -107,7 +107,7 @@
           3.7 Link Active Classes
           Description: Colors, Pseudo-elements for active indicator bar
         --------------------------#}
-      {% set linkActiveClasses = "[&_a[aria-current='page']]:text-[var(--color-global-contrast-light-02)] [&_a[aria-current='page']]:cursor-default [&_a[aria-current='page']]:after:content-[''] [&_a[aria-current='page']]:after:absolute [&_a[aria-current='page']]:after:bottom-[calc(var(--spacing-inline-tight)*-1)] [&_a[aria-current='page']]:after:left-1/2 [&_a[aria-current='page']]:after:-translate-x-1/2 [&_a[aria-current='page']]:after:h-1 [&_a[aria-current='page']]:after:w-4 [&_a[aria-current='page']]:after:bg-[var(--color-global-contrast-light-02)] [&_a[aria-current='page']]:after:rounded-[var(--radius-default)]" %}
+      {% set linkActiveClasses = "[&_a[aria-current='page']]:text-[var(--color-global-contrast-light-02)] [&_a[aria-current='page']]:cursor-default [&_a[aria-current='page']]:pointer-events-none md:[&_a[aria-current='page']]:after:content-[''] md:[&_a[aria-current='page']]:after:absolute md:[&_a[aria-current='page']]:after:bottom-[calc(var(--spacing-inline-tight)*-1)] md:[&_a[aria-current='page']]:after:left-1/2 md:[&_a[aria-current='page']]:after:-translate-x-1/2 md:[&_a[aria-current='page']]:after:h-1 md:[&_a[aria-current='page']]:after:w-4 md:[&_a[aria-current='page']]:after:bg-[var(--color-global-contrast-light-02)] md:[&_a[aria-current='page']]:after:rounded-[var(--radius-default)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
