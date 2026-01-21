@@ -74,13 +74,13 @@
           3.2 Grid Classes
           Description: Layout grid responsive, Gap
         --------------------------#}
-      {% set columnsClasses = "grid grid-cols-1 gap-y-[var(--spacing-stack-large)] gap-x-[var(--spacing-inline-large)] w-full md:grid-cols-2 lg:grid-cols-4" %}
+      {% set columnsClasses = "grid grid-cols-1 gap-y-[var(--spacing-fluid-md)] gap-x-[var(--spacing-fluid-sm)] w-full md:grid-cols-2 lg:grid-cols-4" %}
 
       {# --------------------------
           3.3 Column Classes
           Description: Layout, Spacing, Typography override h6
       --------------------------#}
-      {% set columnClasses = "flex flex-col gap-[var(--spacing-stack-small)] px-[var(--spacing-inset-large)] [&_[data-column-heading]]:pl-[var(--spacing-inset-small)] [&_[data-column-heading]_h2]:font-heading [&_[data-column-heading]_h2]:text-h6" %}
+      {% set columnClasses = "flex flex-col gap-[var(--spacing-stack-small)] px-[var(--spacing-inset-small)] md:px-[var(--spacing-inset-large)] [&_[data-column-heading]]:pl-[var(--spacing-inset-small)] [&_[data-column-heading]_h2]:font-heading [&_[data-column-heading]_h2]:text-h6" %}
 
       {# --------------------------
           3.4 Link Classes
