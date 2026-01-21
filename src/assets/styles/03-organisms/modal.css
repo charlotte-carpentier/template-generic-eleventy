@@ -1,0 +1,31 @@
+/* ┌─────────────────────────────────────────────────────────┐
+   │ ORGANISM › Modal                                        │
+   │ Native HTML5 dialog positioning and states              │
+   └─────────────────────────────────────────────────────────┘ */
+
+/*
+ * @fileoverview Dialog mobile positioning
+ * @usage Applied via data-modal-type="modal" selector
+ * @created 2025-01-21
+ */
+
+/* Mobile bottom-aligned: recommended Material Design for visibility & scroll */
+@media (width <= 767px) {
+  dialog[data-modal-type="modal"] {
+    inset: auto 0 0;
+    transform: none;
+    margin: 0;
+    max-height: calc(100dvh - 2rem);
+  }
+}
+
+/* Page scroll lock */
+html:has(dialog[data-modal-type="modal"][open]) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   May your bugs be forever exiled to the shadow realm ✦
+   HAT · 2026
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */

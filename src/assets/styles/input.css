@@ -643,7 +643,7 @@ body {
 @import "./01-atoms/icon.css";
 
 /* Organisms */
-@import "./03-organisms/error-layout.css";
+@import "./03-organisms/modal.css";
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    May your bugs be forever exiled to the shadow realm ✦
