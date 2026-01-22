@@ -53,7 +53,7 @@
       {% set imageWidth = imageData.width %}
       {% set imageHeight = imageData.height %}
       {% set imageSrcset = imageData.srcset | default('') %}
-      {% set imageSizes = imageData.sizes | default('(max-width: 768px) 100vw, 800px') %}
+      {% set imageSizes = imageData.sizes | default('(max-width: 767px) 100vw, 800px') %}
       {% set hasIcon = imageData.iconName %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━

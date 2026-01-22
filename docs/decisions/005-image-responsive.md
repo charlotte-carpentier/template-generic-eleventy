@@ -66,7 +66,7 @@ const metadata = await Image(src, {
 image.width = largestImage.width;
 image.height = largestImage.height;
 image.srcset = '...';
-image.sizes = '(max-width: 768px) 100vw, 1200px';
+image.sizes = '(max-width: 767px) 100vw, 1200px';
 delete image.sources; // Clean obsolete
 ```
 
@@ -83,7 +83,7 @@ delete image.sources; // Clean obsolete
   "width": 1200,
   "height": 800,
   "srcset": "/img/hero-400.webp 400w, /img/hero-800.webp 800w, /img/hero-1200.webp 1200w",
-  "sizes": "(max-width: 768px) 100vw, 1200px"
+  "sizes": "(max-width: 767px) 100vw, 1200px"
 }
 ```
 
