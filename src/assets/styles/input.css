@@ -471,7 +471,6 @@
   ───────────────────────────── */
 
   --container-desktop: var(--size-1440);
-  --container-mobile: var(--size-320);
 
   --grid-columns-12: var(--count-12);
   --grid-columns-6: var(--count-6);
