@@ -359,6 +359,15 @@
   --spacing-inline-xlarge: var(--spacing-6);
   --spacing-inline-xxlarge: var(--spacing-8);
 
+  /* Section */
+  --section-margin-x-mobile: var(--spacing-4);
+  --section-margin-x-tablet: var(--spacing-8);
+  --section-margin-x-desktop: var(--spacing-20);
+
+  --section-padding-y-mobile: var(--spacing-8);
+  --section-padding-y-tablet: var(--spacing-12);
+  --section-padding-y-desktop: var(--spacing-16);
+
   /* Spacing - Fluid */
   --spacing-fluid-xs: clamp(
     var(--spacing-4),
@@ -389,33 +398,6 @@
     var(--spacing-24),
     calc(var(--spacing-24) + (var(--spacing-30) - var(--spacing-24)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
     var(--spacing-30)
-  );
-
-  /* Sizing - Fluid (height) */
-  --size-fluid-xs: clamp(
-    var(--spacing-16),
-    calc(var(--spacing-16) + (var(--spacing-20) - var(--spacing-16)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-20)
-  );
-  --size-fluid-sm: clamp(
-    var(--spacing-24),
-    calc(var(--spacing-24) + (var(--spacing-30) - var(--spacing-24)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-30)
-  );
-  --size-fluid-md: clamp(
-    var(--spacing-30),
-    calc(var(--spacing-30) + (var(--spacing-40) - var(--spacing-30)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-40)
-  );
-  --size-fluid-lg: clamp(
-    var(--spacing-40),
-    calc(var(--spacing-40) + (var(--spacing-50) - var(--spacing-40)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-50)
-  );
-  --size-fluid-xl: clamp(
-    var(--spacing-50),
-    calc(var(--spacing-50) + (var(--spacing-62) - var(--spacing-50)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-62)
   );
 
   /* ─────────────────────────────
@@ -471,7 +453,6 @@
   ───────────────────────────── */
 
   --container-desktop: var(--size-1440);
-  --container-mobile: var(--size-320);
 
   --grid-columns-12: var(--count-12);
   --grid-columns-6: var(--count-6);
@@ -558,6 +539,8 @@
   min-height: var(--touch-target-min);
 }
 
+@utility prose-content { max-width: 65ch; }
+
 /* Logo sizing (fluid) */
 @utility logo-size-small {
   width: clamp(1.25rem, 1.071rem + 0.558vw, 1.5rem);
@@ -581,17 +564,6 @@
 @utility spacing-fluid-xl { margin-block: var(--spacing-fluid-xl); }
 
 @utility spacing-fluid-2xl { margin-block: var(--spacing-fluid-2xl); }
-
-/* Sizing - Height (fluid) */
-@utility size-fluid-xs { min-height: var(--size-fluid-xs); }
-
-@utility size-fluid-sm { min-height: var(--size-fluid-sm); }
-
-@utility size-fluid-md { min-height: var(--size-fluid-md); }
-
-@utility size-fluid-lg { min-height: var(--size-fluid-lg); }
-
-@utility size-fluid-xl { min-height: var(--size-fluid-xl); }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Reset
