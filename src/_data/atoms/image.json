@@ -21,7 +21,7 @@
       "width": 608,
       "height": 608,
       "srcset": "/img/placeholder-square-400.webp 400w, /img/placeholder-square-608.webp 608w",
-      "sizes": "(max-width: 768px) 100vw, 608px"
+      "sizes": "(max-width: 767px) 100vw, 608px"
     },
     {
       "name": "demoImage2",
@@ -31,7 +31,7 @@
       "width": 608,
       "height": 456,
       "srcset": "/img/placeholder-landscape-400.webp 400w, /img/placeholder-landscape-608.webp 608w",
-      "sizes": "(max-width: 768px) 100vw, 608px"
+      "sizes": "(max-width: 767px) 100vw, 608px"
     },
     {
       "name": "demoImage3",
@@ -41,7 +41,7 @@
       "width": 608,
       "height": 342,
       "srcset": "/img/placeholder-wide-400.webp 400w, /img/placeholder-wide-608.webp 608w",
-      "sizes": "(max-width: 768px) 100vw, 608px"
+      "sizes": "(max-width: 767px) 100vw, 608px"
     },
     {
       "name": "demoAvatar1",

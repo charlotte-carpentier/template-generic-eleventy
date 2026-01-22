@@ -120,7 +120,7 @@ async function processImage(image) {
       .join(', ');
 
     const maxWidth = largestImage.width;
-    const sizes = `(max-width: 768px) 100vw, ${maxWidth}px`;
+    const sizes = `(max-width: 767px) 100vw, ${maxWidth}px`;
 
     // Clean obsolete properties
     delete image.sources;
