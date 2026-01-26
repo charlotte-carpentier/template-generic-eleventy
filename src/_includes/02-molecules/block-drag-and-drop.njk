@@ -88,19 +88,19 @@
           3.1 Wrapper Classes
           Description: Layout, Composition, Spacing
         --------------------------#}
-      {% set containerClasses = "flex flex-col p-[var(--spacing-inset-small)] bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] w-full max-w-xl" %}
+      {% set containerClasses = "flex flex-col p-[var(--spacing-ui-default)] bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-[var(--elevation-surface)] w-full max-w-xl" %}
 
       {# --------------------------
           3.2 Heading Wrapper Classes
           Description: Spacing, Layout
         --------------------------#}
-      {% set headingContainerClasses = "mb-[var(--spacing-stack-large)]" %}
+      {% set headingContainerClasses = "mb-[var(--spacing-ui-comfortable)]" %}
 
       {# --------------------------
           3.3 Dropzone Classes (by variant: default, loading, error)
           Description: Layout, Spacing, Colors, Borders, Effects, States
         --------------------------#}
-      {% set dropzoneBaseClasses = "touch-target flex flex-col items-start justify-center p-[var(--spacing-inset-large)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-card)] bg-[var(--color-global-white)] min-h-40 w-full cursor-pointer transition-colors mb-[var(--spacing-stack-medium)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
+      {% set dropzoneBaseClasses = "touch-target flex flex-col items-start justify-center p-[var(--spacing-ui-maximal)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-card)] bg-[var(--color-global-white)] min-h-40 w-full cursor-pointer transition-colors mb-[var(--spacing-ui-default)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
       {% set dropzoneHoverClasses = "hover:bg-[var(--color-global-contrast-light-03)]" %}
 
       {% set variantMap = {
@@ -116,7 +116,7 @@
           3.4 Icon Wrapper Classes
           Description: Spacing, Colors
         --------------------------#}
-      {% set iconContainerClasses = "mb-[var(--spacing-stack-small)] text-[var(--color-global-contrast-light-02)]" %}
+      {% set iconContainerClasses = "mb-[var(--spacing-ui-compact)] text-[var(--color-global-contrast-light-02)]" %}
 
       {# --------------------------
           3.5 Dropzone Text Classes
@@ -128,19 +128,19 @@
           3.6 Separator Classes
           Description: Spacing, Typography, Colors
         --------------------------#}
-      {% set separatorClasses = "block my-[var(--spacing-stack-medium)] font-body text-body text-[var(--color-global-default)]" %}
+      {% set separatorClasses = "block my-[var(--spacing-ui-default)] font-body text-body text-[var(--color-global-default)]" %}
 
       {# --------------------------
           3.7 Button Wrapper Classes
           Description: Spacing, Layout
         --------------------------#}
-      {% set buttonContainerClasses = "flex mb-[var(--spacing-stack-medium)]" %}
+      {% set buttonContainerClasses = "flex mb-[var(--spacing-ui-default)]" %}
 
       {# --------------------------
           3.8 File Info Classes
           Description: Layout, Spacing, Typography, Colors
         --------------------------#}
-      {% set fileInfoContainerClasses = "flex flex-col gap-[var(--spacing-inline-small)] mt-[var(--spacing-stack-tight)]" %}
+      {% set fileInfoContainerClasses = "flex flex-col gap-[var(--spacing-micro-default)] mt-[var(--spacing-ui-minimal)]" %}
       {% set fileInfoLabelClasses = "text-helper text-[var(--color-global-contrast-light-02)]" %}
       {% set fileInfoValueClasses = "text-helper text-[var(--color-global-default)]" %}
 
@@ -148,7 +148,7 @@
           3.9 Error Message Classes
           Description: Typography, Colors, Spacing
         --------------------------#}
-      {% set errorMessageClasses = "font-body text-helper text-[var(--color-semantic-critical)] mt-[var(--spacing-stack-tight)]" %}
+      {% set errorMessageClasses = "font-body text-helper text-[var(--color-semantic-critical)] mt-[var(--spacing-ui-minimal)]" %}
 
       {# --------------------------
           3.10 ARIA Live Region Classes

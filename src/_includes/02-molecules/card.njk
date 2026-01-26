@@ -85,13 +85,13 @@
           3.2 Lockup Wrapper Classes
           Description: Layout override for full-width image, text truncation
         --------------------------#}
-      {% set lockupClasses = "[&>div]:flex-col [&>div]:gap-[var(--spacing-stack-tight)] [&_[data-lockup-image]]:w-full [&_[data-lockup-image]]:aspect-video [&_[data-lockup-image]]:min-h-[180px] [&_img]:w-full [&_img]:h-full [&_img]:object-cover [&_img]:rounded-t-[var(--radius-card)] [&_img]:rounded-b-none [&_[data-lockup-content]]:p-[var(--spacing-stack-large)] [&_[data-lockup-text]]:line-clamp-2" %}
+      {% set lockupClasses = "[&>div]:flex-col [&>div]:gap-[var(--spacing-ui-minimal)] [&_[data-lockup-image]]:w-full [&_[data-lockup-image]]:aspect-video [&_[data-lockup-image]]:min-h-[180px] [&_img]:w-full [&_img]:h-full [&_img]:object-cover [&_img]:rounded-t-[var(--radius-card)] [&_img]:rounded-b-none [&_[data-lockup-content]]:p-[var(--spacing-ui-comfortable)] [&_[data-lockup-text]]:line-clamp-2" %}
 
       {# --------------------------
           3.3 Content Wrapper Classes
           Description: Layout, Spacing, Typography override h4-serif
       --------------------------#}
-      {% set contentClasses = "flex flex-col gap-[var(--spacing-stack-tight)] p-[var(--spacing-inset-small)] [&_h2]:font-heading-serif [&_h2]:text-h4" %}
+      {% set contentClasses = "flex flex-col gap-[var(--spacing-ui-minimal)] p-[var(--spacing-ui-default)] [&_h2]:font-heading-serif [&_h2]:text-h4" %}
 
       {# --------------------------
           3.4 Text Classes
@@ -109,7 +109,7 @@
           3.6 Tags Wrapper Classes
           Description: Layout, Spacing
         --------------------------#}
-      {% set tagsClasses = "flex flex-wrap gap-[var(--spacing-inline-small)] mt-[var(--spacing-stack-tight)]" %}
+      {% set tagsClasses = "flex flex-wrap gap-[var(--spacing-micro-default)] mt-[var(--spacing-ui-minimal)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML

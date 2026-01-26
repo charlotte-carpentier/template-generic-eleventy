@@ -74,7 +74,7 @@
           3.1 Base Input Classes
           Description: Layout, sizing, spacing, typography, borders, focus
       -------------------------- #}
-      {% set baseInputClasses = "block w-full px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] text-body placeholder:italic rounded-[var(--radius-default)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-2" %}
+      {% set baseInputClasses = "block w-full px-[var(--spacing-ui-default)] py-[var(--spacing-ui-minimal)] text-body placeholder:italic rounded-[var(--radius-default)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-2" %}
 
       {# --------------------------
           3.2 State Classes
@@ -86,31 +86,31 @@
           3.3 Label Classes
           Description: Layout, spacing, typography, colors
       -------------------------- #}
-      {% set labelClasses = "block mb-[var(--spacing-stack-small)] text-helper font-medium text-[var(--color-global-default)]" %}
+      {% set labelClasses = "block mb-[var(--spacing-ui-compact)] text-helper font-medium text-[var(--color-global-default)]" %}
 
       {# --------------------------
           3.4 Help Classes
           Description: Spacing, typography, colors
       -------------------------- #}
-      {% set helpClasses = "mt-[var(--spacing-stack-small)] text-helper text-[var(--color-global-contrast-light-02)]" %}
+      {% set helpClasses = "mt-[var(--spacing-ui-compact)] text-helper text-[var(--color-global-contrast-light-02)]" %}
 
       {# --------------------------
           3.5 Counter Classes
           Description: Spacing, typography, colors
       -------------------------- #}
-      {% set counterClasses = "mt-[var(--spacing-stack-small)] text-helper text-right text-[var(--color-global-contrast-light-02)]" %}
+      {% set counterClasses = "mt-[var(--spacing-ui-compact)] text-helper text-right text-[var(--color-global-contrast-light-02)]" %}
 
       {# --------------------------
           3.6 Chip Container Classes
           Description: Layout, spacing
       -------------------------- #}
-      {% set chipContainerClasses = "flex flex-wrap gap-[var(--spacing-inline-medium)] mt-[var(--spacing-stack-medium)]" %}
+      {% set chipContainerClasses = "flex flex-wrap gap-[var(--spacing-ui-minimal)] mt-[var(--spacing-ui-default)]" %}
 
       {# --------------------------
           3.7 Password Toggle Button Classes
           Description: Position, sizing, spacing, colors, focus, target size (WCAG 2.5.8)
       -------------------------- #}
-      {% set passwordToggleClasses = "touch-target absolute right-[var(--spacing-3)] top-1/2 -translate-y-1/2 text-[var(--color-global-contrast-light-02)] hover:text-[var(--color-global-default)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-2 rounded transition-colors" %}
+      {% set passwordToggleClasses = "touch-target absolute right-[var(--spacing-ui-compact)] top-1/2 -translate-y-1/2 text-[var(--color-global-contrast-light-02)] hover:text-[var(--color-global-default)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-2 rounded transition-colors" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
@@ -328,7 +328,7 @@
         {% endif %}
 
         {# Error container (hidden by default, JS shows on validation error) #}
-        <div id="{{ inputId }}-error" class="hidden mt-[var(--spacing-stack-small)] text-sm text-[var(--color-semantic-critical)]" role="alert"></div>
+        <div id="{{ inputId }}-error" class="hidden mt-[var(--spacing-ui-compact)] text-sm text-[var(--color-semantic-critical)]" role="alert"></div>
       </div>
 
       {% endif %}

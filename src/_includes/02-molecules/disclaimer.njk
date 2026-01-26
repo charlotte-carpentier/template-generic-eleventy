@@ -66,7 +66,7 @@
           3.1 Wrapper Classes
           Description: Layout, Background, Borders
         --------------------------#}
-      {% set containerBaseClasses = "flex flex-col w-full rounded-[var(--radius-card)] border-2 p-[var(--spacing-inset-small)]" %}
+      {% set containerBaseClasses = "flex flex-col w-full rounded-[var(--radius-card)] border-2 p-[var(--spacing-ui-default)]" %}
 
       {% set containerVariantMap = {
         'info': 'bg-[var(--color-semantic-information-contrast-light-02)] border-[var(--color-semantic-information)]',
@@ -82,7 +82,7 @@
           3.2 Content Wrapper Classes
           Description: Layout horizontal, Spacing, Alignment
         --------------------------#}
-      {% set contentWrapperClasses = "flex items-center gap-[var(--spacing-inline-medium)]" %}
+      {% set contentWrapperClasses = "flex items-center gap-[var(--spacing-ui-minimal)]" %}
 
       {# --------------------------
           3.3 Icon Wrapper Classes
@@ -110,7 +110,7 @@
           3.5 Close Button Classes
           Description: Layout, Colors, States, Spacing
         --------------------------#}
-      {% set closeButtonClasses = "touch-target flex-shrink-0 inline-flex items-center justify-center ml-[var(--spacing-inline-large)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
+      {% set closeButtonClasses = "touch-target flex-shrink-0 inline-flex items-center justify-center ml-[var(--spacing-ui-default)] text-[var(--color-global-default)] bg-transparent border-0 cursor-pointer transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML

@@ -349,28 +349,18 @@
   --spacing-layout-comfortable: var(--spacing-20);
   --spacing-layout-maximal: var(--spacing-24)
 
-  /* UI - Fluid (Internal) */;
+  /* UI - Fluid (Padding organisms) */;
   --spacing-ui-fluid-default: clamp(
-    var(--spacing-ui-default),
-    calc(var(--spacing-ui-default) + (var(--spacing-ui-comfortable) - var(--spacing-ui-default)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-ui-comfortable)
-  );
-  --spacing-ui-fluid-comfortable: clamp(
     var(--spacing-ui-comfortable),
     calc(var(--spacing-ui-comfortable) + (var(--spacing-ui-maximal) - var(--spacing-ui-comfortable)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
     var(--spacing-ui-maximal)
   );
 
-  /* Layout - Fluid (External) */
+  /* Layout - Fluid (Marges sections) */
   --spacing-layout-fluid-default: clamp(
-    var(--spacing-layout-default),
-    calc(var(--spacing-layout-default) + (var(--spacing-layout-comfortable) - var(--spacing-layout-default)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-layout-comfortable)
-  );
-  --spacing-layout-fluid-comfortable: clamp(
-    var(--spacing-layout-comfortable),
-    calc(var(--spacing-layout-comfortable) + (var(--spacing-layout-maximal) - var(--spacing-layout-comfortable)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-layout-maximal)
+    var(--spacing-layout-compact),
+    calc(var(--spacing-layout-compact) + (var(--spacing-layout-default) - var(--spacing-layout-compact)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
+    var(--spacing-layout-default)
   );
 
   /* Anciens token à modifier dans les composants, puis à supprimer */
