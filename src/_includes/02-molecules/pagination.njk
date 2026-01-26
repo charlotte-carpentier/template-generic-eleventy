@@ -95,7 +95,7 @@
           3.1 Container Classes
           Description: Layout horizontal, Spacing, Alignment
         --------------------------#}
-      {% set containerClasses = "flex items-center justify-between gap-[var(--spacing-inline-large)] w-full" %}
+      {% set containerClasses = "flex items-center justify-between gap-[var(--spacing-ui-default)] w-full" %}
 
       {# --------------------------
           3.2 Select Wrapper Classes
@@ -113,7 +113,7 @@
           3.4 Nav List Classes
           Description: Layout horizontal, Spacing
         --------------------------#}
-      {% set navListClasses = "flex items-center gap-[var(--spacing-inline-tight)]" %}
+      {% set navListClasses = "flex items-center gap-[var(--spacing-micro-minimal)]" %}
 
       {# --------------------------
           3.5 Nav Item Classes
@@ -125,7 +125,7 @@
           3.6 Nav Link Classes
           Description: Layout, Typography, Colors, Borders, States
         --------------------------#}
-      {% set navLinkBaseClasses = "touch-target inline-flex items-center justify-center px-[var(--spacing-inline-medium)] font-body text-body text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
+      {% set navLinkBaseClasses = "touch-target inline-flex items-center justify-center px-[var(--spacing-ui-minimal)] font-body text-body text-[var(--color-interactive-default)] bg-transparent border border-transparent rounded-[var(--radius-default)] transition-colors hover:bg-[var(--color-interactive-hover)] hover:text-[var(--color-global-white)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
       {% set navLinkActiveClasses = "bg-[var(--color-interactive-default)] text-[var(--color-global-white)]" %}
       {% set navLinkDisabledClasses = "opacity-50 cursor-not-allowed pointer-events-none" %}
 
@@ -241,7 +241,7 @@
               {# Dots before siblings #}
               {% if startPage > 2 %}
                 <li class="{{ navItemClasses }}" aria-hidden="true">
-                  <span class="font-body text-body text-[var(--color-global-contrast-light-02)] px-[var(--spacing-inline-medium)]">
+                  <span class="font-body text-body text-[var(--color-global-contrast-light-02)] px-[var(--spacing-ui-minimal)]">
                     {% if icons.dots %}
                       {{ renderIcon({
                           name: icons.dots,
@@ -270,7 +270,7 @@
               {# Dots after siblings #}
               {% if endPage < totalPages - 1 %}
                 <li class="{{ navItemClasses }}" aria-hidden="true">
-                  <span class="font-body text-body text-[var(--color-global-contrast-light-02)] px-[var(--spacing-inline-medium)]">
+                  <span class="font-body text-body text-[var(--color-global-contrast-light-02)] px-[var(--spacing-ui-minimal)]">
                     {% if icons.dots %}
                       {{ renderIcon({
                           name: icons.dots,

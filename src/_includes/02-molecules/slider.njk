@@ -84,7 +84,7 @@
           3.1 Wrapper Classes
           Description: Layout vertical, Spacing
         --------------------------#}
-      {% set containerClasses = "flex flex-col gap-[var(--spacing-stack-tight)]" %}
+      {% set containerClasses = "flex flex-col gap-[var(--spacing-ui-minimal)]" %}
 
       {# --------------------------
           3.2 Label Classes
@@ -96,7 +96,7 @@
           3.3 Track Wrapper Classes
           Description: Relative positioning for handles
         --------------------------#}
-      {% set trackWrapperClasses = "relative w-full py-[var(--spacing-stack-tight)]" %}
+      {% set trackWrapperClasses = "relative w-full py-[var(--spacing-ui-minimal)]" %}
 
       {# --------------------------
           3.4 Track Classes
@@ -121,7 +121,7 @@
           3.7 Indicator Classes
           Description: Handle indicator bubble (JS-controlled value)
         --------------------------#}
-      {% set indicatorBaseClasses = "absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-inline-medium)] py-[var(--spacing-inline-tight)] font-body text-sm rounded-[var(--radius-default)] shadow-sm whitespace-nowrap" %}
+      {% set indicatorBaseClasses = "absolute -top-10 left-1/2 -translate-x-1/2 px-[var(--spacing-ui-minimal)] py-[var(--spacing-micro-minimal)] font-body text-sm rounded-[var(--radius-default)] shadow-sm whitespace-nowrap" %}
 
       {% set indicatorVariantMap = {
         'outline': 'text-[var(--color-global-default)] bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)]',
