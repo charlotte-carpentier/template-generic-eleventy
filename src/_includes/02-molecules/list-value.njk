@@ -67,8 +67,8 @@
           Description: Layout, Spacing
         --------------------------#}
       {% set containerMap = {
-        'default': 'flex flex-col gap-[var(--spacing-stack-medium)]',
-        'horizontal': 'flex flex-col md:flex-row gap-[var(--spacing-stack-medium)] md:gap-[var(--spacing-inline-large)]'
+        'default': 'flex flex-col gap-[var(--spacing-ui-default)]',
+        'horizontal': 'flex flex-col md:flex-row gap-[var(--spacing-ui-default)] md:gap-[var(--spacing-ui-default)]'
       } %}
       {% set containerClasses = containerMap[variant] | default(containerMap['default']) %}
 
