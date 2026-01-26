@@ -70,7 +70,7 @@
           3.2 Base Select Classes
           Description: Layout, sizing, appearance, borders, cursor, focus
       -------------------------- #}
-      {% set baseSelectClasses = "block w-full appearance-none rounded-[var(--radius-default)] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-0" %}
+      {% set baseSelectClasses = "block w-full appearance-none rounded-[var(--radius-default)] transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-2" %}
 
       {# --------------------------
           3.3 State Classes
@@ -82,13 +82,13 @@
           3.4 Size Classes
           Description: Height, spacing, typography
       -------------------------- #}
-      {% set sizeClasses = 'h-12 px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] pr-[var(--spacing-inset-large)] text-body leading-5' %}
+      {% set sizeClasses = 'h-12 px-[var(--spacing-ui-default)] py-[var(--spacing-ui-minimal)] pr-[var(--spacing-ui-maximal)] text-body leading-5' %}
 
       {# --------------------------
           3.5 Icon Wrapper Classes
           Description: Positioning, colors
       -------------------------- #}
-      {% set iconWrapperClasses = "absolute top-1/2 right-[var(--spacing-inset-small)] -translate-y-1/2 pointer-events-none text-[var(--color-global-default)]" %}
+      {% set iconWrapperClasses = "absolute top-1/2 right-[var(--spacing-ui-default)] -translate-y-1/2 pointer-events-none text-[var(--color-global-default)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML

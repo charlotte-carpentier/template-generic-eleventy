@@ -101,8 +101,8 @@
         Description: Padding, text size, minimum target size (WCAG 2.5.8)
         --------------------------#}
       {% set sizeMap = {
-        'small': 'px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] text-body',
-        'medium': 'px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-small)] text-body'
+        'small': 'px-[var(--spacing-ui-default)] py-[var(--spacing-ui-minimal)] text-body',
+        'medium': 'px-[var(--spacing-ui-comfortable)] py-[var(--spacing-ui-default)] text-body'
       } %}
       {% set sizeClasses = sizeMap[buttonSize] or sizeMap['medium'] %}
 
@@ -124,7 +124,7 @@
         Description: Gap between icon and text
         --------------------------#}
       {% if hasIcon and iconPosition != 'center' %}
-        {% set iconClasses = 'gap-[var(--spacing-inline-medium)]' %}
+        {% set iconClasses = 'gap-[var(--spacing-ui-minimal)]' %}
       {% else %}
         {% set iconClasses = '' %}
       {% endif %}
