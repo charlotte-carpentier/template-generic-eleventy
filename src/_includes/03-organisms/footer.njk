@@ -87,7 +87,7 @@
           3.1 Wrapper Classes
           Description: Layout, Spacing, Background, Responsive
         --------------------------#}
-      {% set footerClasses = "flex flex-col gap-[var(--spacing-fluid-sm)] p-[var(--spacing-inset-large)] md:p-[var(--spacing-fluid-lg)] bg-[var(--color-global-contrast-light-04)]" %}
+      {% set footerClasses = "flex flex-col gap-[var(--spacing-ui-minimal)] px-[var(--spacing-ui-comfortable)] md:px-[var(--spacing-ui-maximal)] py-[var(--spacing-ui-default)] md:py-[var(--spacing-ui-comfortable)] bg-[var(--color-global-contrast-light-04)]" %}
 
       {# --------------------------
           3.2 Branding Section Classes
@@ -99,31 +99,31 @@
           3.3 Navigation Section Classes
           Description: Layout grid responsive, Gap
         --------------------------#}
-      {% set navigationClasses = "grid grid-cols-1 gap-[var(--spacing-fluid-sm)] md:grid-cols-2 lg:grid-cols-4" %}
+      {% set navigationClasses = "grid grid-cols-1 gap-[var(--spacing-ui-minimal)] md:grid-cols-2 lg:grid-cols-4" %}
       {# --------------------------
           3.4 Column Classes
           Description: Layout, Spacing, Typography override h5-serif
       --------------------------#}
-      {% set columnClasses = "flex flex-col gap-[var(--spacing-stack-medium)] [&_[data-column-heading]]:pl-[var(--spacing-inset-small)] [&_[data-column-heading]_h2]:font-heading-serif [&_[data-column-heading]_h2]:text-h5" %}
+      {% set columnClasses = "flex flex-col gap-[var(--spacing-ui-default)] [&_[data-column-heading]]:pl-[var(--spacing-ui-default)] [&_[data-column-heading]_h2]:font-heading-serif [&_[data-column-heading]_h2]:text-h5" %}
 
       {# --------------------------
           3.5 Legal Section Classes
           Description: Layout responsive, Spacing, Borders
         --------------------------#}
-      {% set legalClasses = "flex flex-col gap-[var(--spacing-stack-medium)] pt-[var(--spacing-stack-large)] md:flex-row md:items-center" %}
+      {% set legalClasses = "flex flex-col gap-[var(--spacing-ui-default)] pt-[var(--spacing-ui-comfortable)] md:flex-row md:items-center" %}
 
       {# --------------------------
           3.6 Legal List Classes
           Description: Layout responsive, Spacing, Responsive order
         --------------------------#}
       {% set legalNavClasses = "flex order-first md:order-last" %}
-      {% set legalListClasses = "flex flex-col gap-[var(--spacing-stack-tight)] md:flex-row md:gap-[var(--spacing-inline-medium)]" %}
+      {% set legalListClasses = "flex flex-col gap-[var(--spacing-ui-minimal)] md:flex-row md:gap-[var(--spacing-ui-minimal)]" %}
 
       {# --------------------------
           3.7 Copyright Wrapper Classes
           Description: Layout responsive, Spacing
         --------------------------#}
-      {% set copyrightVersionWrapperClasses = "flex flex-wrap items-center gap-[var(--spacing-inline-medium)]" %}
+      {% set copyrightVersionWrapperClasses = "flex flex-wrap items-center gap-[var(--spacing-ui-minimal)]" %}
 
       {# --------------------------
           3.8 Copyright Text Classes
