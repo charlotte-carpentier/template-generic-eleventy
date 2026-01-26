@@ -74,13 +74,13 @@
           3.1 Wrapper Classes
           Description: Layout, Spacing
         --------------------------#}
-      {% set sectionClasses = "flex flex-col px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-large)] md:px-[var(--spacing-inset-xlarge)] md:py-[var(--spacing-inset-xxlarge)]" %}
+      {% set sectionClasses = "flex flex-col px-[var(--section-margin-x-mobile)] py-[var(--section-padding-y-mobile)] md:px-[var(--section-margin-x-tablet)] md:py-[var(--section-padding-y-tablet)] lg:px-[var(--section-margin-x-desktop)] lg:py-[var(--section-padding-y-desktop)]" %}
 
       {# --------------------------
           3.2 Layout Classes
           Description: Layout responsive grid, Spacing
         --------------------------#}
-      {% set gridClasses = "flex flex-col gap-[var(--spacing-stack-large)] md:grid md:grid-cols-2 md:gap-[var(--spacing-inline-xxlarge)]" %}
+      {% set gridClasses = "flex flex-col gap-[var(--spacing-stack-large)] md:grid md:grid-cols-2 md:gap-[var(--spacing-inline-xxlarge)] lg:gap-[var(--spacing-fluid-md)]" %}
 
       {# --------------------------
           3.3 Left Column Classes
@@ -110,13 +110,13 @@
           3.7 Content Wrapper Classes
           Description: Typography, Colors, Spacing bottom override
       --------------------------#}
-      {% set contentClasses = "font-body text-body text-[var(--color-global-default)] mb-[var(--spacing-stack-large)]" %}
+      {% set contentClasses = "font-body text-body text-[var(--color-global-default)] prose-content" %}
 
       {# --------------------------
           3.8 Buttons Wrapper Classes
           Description: Layout horizontal, Spacing
         --------------------------#}
-      {% set buttonsClasses = "flex gap-[var(--spacing-inline-large)]" %}
+      {% set buttonsClasses = "flex gap-4 md:gap-6" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
