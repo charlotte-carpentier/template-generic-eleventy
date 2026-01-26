@@ -76,14 +76,14 @@
           3.1 Container Classes
           Description: Layout, Background, Borders, Shadow
         --------------------------#}
-      {% set containerBaseClasses = "flex flex-col bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] shadow-md p-[var(--spacing-inset-tight)]" %}
+      {% set containerBaseClasses = "flex flex-col bg-[var(--color-global-white)] border border-[var(--color-global-contrast-light-03)] rounded-[var(--radius-default)] shadow-md p-[var(--spacing-ui-minimal)]" %}
       {% set containerClasses = containerBaseClasses ~ (" max-w-2xl" if (panelType == "date" and variant == "double") else "") %}
 
       {# --------------------------
           3.2 Item Classes
           Description: Layout, Spacing, Borders
         --------------------------#}
-      {% set itemStateClasses = "touch-target w-full flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inline-medium)] py-[var(--spacing-stack-small)] bg-transparent border-0 cursor-pointer text-left transition-colors hover:bg-[var(--color-global-contrast-light-04)] hover:[&>span]:text-[var(--color-global-accent)] hover:[&_svg]:text-[var(--color-global-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none" %}
+      {% set itemStateClasses = "touch-target w-full flex items-center gap-[var(--spacing-ui-minimal)] px-[var(--spacing-ui-minimal)] py-[var(--spacing-ui-compact)] bg-transparent border-0 cursor-pointer text-left transition-colors hover:bg-[var(--color-global-contrast-light-04)] hover:[&>span]:text-[var(--color-global-accent)] hover:[&_svg]:text-[var(--color-global-accent)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none" %}
 
       {# --------------------------
           3.3 Icon Wrapper Classes
@@ -107,7 +107,7 @@
           3.6 Date Navigation Classes
           Description: Layout, Spacing, Alignment
         --------------------------#}
-      {% set dateNavClasses = "flex items-center justify-between px-[var(--spacing-inline-medium)] py-[var(--spacing-stack-small)] border-b border-[var(--color-global-contrast-light-03)]" %}
+      {% set dateNavClasses = "flex items-center justify-between px-[var(--spacing-ui-minimal)] py-[var(--spacing-ui-compact)] border-b border-[var(--color-global-contrast-light-03)]" %}
       {% set dateNavButtonBaseClasses = "touch-target inline-flex items-center justify-center bg-transparent border-0 rounded-[var(--radius-default)] cursor-pointer" %}
       {% set dateNavButtonStateClasses = "text-[var(--color-interactive-default)] transition-colors hover:bg-[var(--color-global-contrast-light-04)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
 
@@ -115,7 +115,7 @@
           3.7 Calendar Classes
           Description: Passed to panel.js via data-class-* attributes
         --------------------------#}
-      {% set calendarClasses = "p-[var(--spacing-inset-small)]" %}
+      {% set calendarClasses = "p-[var(--spacing-ui-default)]" %}
       {% set calendarHeaderClasses = "grid grid-cols-7 gap-1 mb-2" %}
       {% set calendarDayHeaderClasses = "text-center font-body text-sm text-[var(--color-global-contrast-light-01)] py-2" %}
       {% set calendarGridClasses = "grid grid-cols-7 gap-1" %}
@@ -134,7 +134,7 @@
           3.9 Calendars Wrapper Classes
           Description: Single vs double calendar layout
         --------------------------#}
-      {% set calendarsWrapperClasses = ("flex flex-col md:flex-row gap-[var(--spacing-inset-small)] [&>*:nth-child(2)]:hidden md:[&>*:nth-child(2)]:block" if variant == 'double' else "") %}
+      {% set calendarsWrapperClasses = ("flex flex-col md:flex-row gap-[var(--spacing-ui-default)] [&>*:nth-child(2)]:hidden md:[&>*:nth-child(2)]:block" if variant == 'double' else "") %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
@@ -153,7 +153,7 @@
             {# Checkbox variant uses div (checkbox is interactive element) #}
             {% if item.checkboxName and options.checkboxDatas %}
               <div
-                class="touch-target flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inline-medium)] py-[var(--spacing-stack-small)]"
+                class="touch-target flex items-center gap-[var(--spacing-ui-minimal)] px-[var(--spacing-ui-minimal)] py-[var(--spacing-ui-compact)]"
                 data-panel-item="true"
               >
                 {{ renderCheckbox({
@@ -253,7 +253,7 @@
             {# Checkbox variant uses div (checkbox is interactive element) #}
             {% if variant == "checkbox" and item.checkboxName and options.checkboxDatas %}
               <div
-                class="touch-target flex items-center gap-[var(--spacing-inline-medium)] px-[var(--spacing-inline-medium)] py-[var(--spacing-stack-small)]"
+                class="touch-target flex items-center gap-[var(--spacing-ui-minimal)] px-[var(--spacing-ui-minimal)] py-[var(--spacing-ui-compact)]"
                 data-panel-item="true"
               >
                 {{ renderCheckbox({

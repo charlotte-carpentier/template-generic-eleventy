@@ -74,8 +74,8 @@
           Description: Layout by variant
         --------------------------#}
       {% set listVariantMap = {
-        'vertical': 'flex flex-col gap-[var(--spacing-stack-tight)]',
-        'default': 'flex flex-col gap-[var(--spacing-stack-tight)] md:flex-row md:items-center md:gap-[var(--spacing-inline-medium)]'
+        'vertical': 'flex flex-col gap-[var(--spacing-ui-minimal)]',
+        'default': 'flex flex-col gap-[var(--spacing-ui-minimal)] md:flex-row md:items-center md:gap-[var(--spacing-ui-minimal)]'
       } %}
       {% set listClasses = listVariantMap[variant] or listVariantMap['default'] %}
 
@@ -84,8 +84,8 @@
           Description: Line between steps
         --------------------------#}
       {% set connectorVariantMap = {
-        'vertical': 'mt-[var(--spacing-stack-tight)] w-px h-6 bg-[var(--color-global-contrast-light-02)]',
-        'default': 'mt-[var(--spacing-stack-tight)] w-px h-6 bg-[var(--color-global-contrast-light-02)] md:mt-0 md:h-px md:w-12 md:flex-shrink-0'
+        'vertical': 'mt-[var(--spacing-ui-minimal)] w-px h-6 bg-[var(--color-global-contrast-light-02)]',
+        'default': 'mt-[var(--spacing-ui-minimal)] w-px h-6 bg-[var(--color-global-contrast-light-02)] md:mt-0 md:h-px md:w-12 md:flex-shrink-0'
       } %}
       {% set connectorClasses = connectorVariantMap[variant] or connectorVariantMap['default'] %}
 
@@ -93,7 +93,7 @@
           3.4 Block Step Classes
           Description: Layout horizontal (chip + label)
         --------------------------#}
-      {% set blockStepClasses = "flex items-center gap-[var(--spacing-stack-small)]" %}
+      {% set blockStepClasses = "flex items-center gap-[var(--spacing-ui-compact)]" %}
 
       {# --------------------------
           3.5 Chip Wrapper Classes
@@ -131,7 +131,7 @@
           3.9 Vertical Wrapper Classes
           Description: Wrapper for vertical layout (chip column + label)
         --------------------------#}
-      {% set verticalWrapperClasses = "flex gap-[var(--spacing-stack-small)]" %}
+      {% set verticalWrapperClasses = "flex gap-[var(--spacing-ui-compact)]" %}
 
       {# --------------------------
           3.10 Chip Column Classes

@@ -68,13 +68,13 @@
           3.1 Wrapper Classes
           Description: Layout, Background, Borders, Shadow, Initial hidden state
         --------------------------#}
-      {% set containerClasses = "opacity-0 flex min-w-80 max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-lg p-[var(--spacing-inset-small)] transition-opacity duration-300 [&.is-visible]:opacity-100 [&.is-hidden]:opacity-0 [&.is-hidden]:pointer-events-none" %}
+      {% set containerClasses = "opacity-0 flex min-w-80 max-w-md bg-[var(--color-global-white)] rounded-[var(--radius-card)] shadow-lg p-[var(--spacing-ui-defaul)] transition-opacity duration-300 [&.is-visible]:opacity-100 [&.is-hidden]:opacity-0 [&.is-hidden]:pointer-events-none" %}
 
       {# --------------------------
           3.2 Content Wrapper Classes
           Description: Layout horizontal, Spacing, Alignment
         --------------------------#}
-      {% set contentWrapperClasses = "flex items-center gap-[var(--spacing-inline-medium)] w-full" %}
+      {% set contentWrapperClasses = "flex items-center gap-[var(--spacing-ui-minimal)] w-full" %}
 
       {# --------------------------
           3.3 Icon Wrapper Classes
@@ -100,7 +100,7 @@
           3.5 Close Button Classes
           Description: Layout, Size, Borders
         --------------------------#}
-      {% set closeButtonBaseClasses = "touch-target flex-shrink-0 inline-flex items-center justify-center ml-[var(--spacing-inline-large)] bg-transparent border-0 cursor-pointer" %}
+      {% set closeButtonBaseClasses = "touch-target flex-shrink-0 inline-flex items-center justify-center ml-[var(--spacing-ui-default)] bg-transparent border-0 cursor-pointer" %}
       {% set closeButtonStateClasses = "text-[var(--color-global-default)] transition-colors hover:text-[var(--color-global-contrast-light-01)] focus:outline-none focus:ring-2 focus:ring-[var(--color-semantic-information-focus)] focus:ring-offset-2" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
