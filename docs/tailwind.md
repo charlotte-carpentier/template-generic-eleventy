@@ -72,16 +72,16 @@ Use Tailwind's arbitrary value syntax:
 
 ```html
 <!-- Colors -->
-<div class="bg-[var(--color-brand-primary-40)]">
+<div class="bg-(--color-brand-primary-40)">
 
 <!-- Typography -->
-<h1 class="text-[var(--font-size-4xl)] font-[var(--font-weight-bold)]">
+<h1 class="text-(--font-size-4xl) font-bold">
 
 <!-- Spacing & Layout -->
-<div class="p-[var(--spacing-component-padding)] rounded-[var(--radius-card)]">
+<div class="p-(--spacing-component-padding) rounded-(--radius-card)">
 
 <!-- Elevation -->
-<div class="shadow-[var(--elevation-card)]">
+<div class="shadow-(--elevation-card)">
 ```
 
 ### Available Tokens
@@ -91,6 +91,13 @@ Use Tailwind's arbitrary value syntax:
 **Colors:** `--color-brand-*`, `--color-neutral-*`, `--color-semantic-*`, `--color-global-*`, `--color-button-*`
 
 **Layout:** `--spacing-*`, `--radius-*`, `--elevation-*`, `--z-*`
+
+**Spacing:**
+
+- Micro: `--spacing-micro-minimal`, `--spacing-micro-default`
+- UI (internal): `--spacing-ui-minimal` → `--spacing-ui-maximal` 
+- Layout (external): `--spacing-layout-minimal` → `--spacing-layout-maximal`
+- Fluid: `--spacing-ui-fluid-*`, `--spacing-layout-fluid-*`
 
 See `input.css` for complete list.
 
@@ -102,8 +109,8 @@ See `input.css` for complete list.
 
 ```html
 <button class="inline-flex items-center px-6 py-3 font-semibold rounded-lg 
-               bg-[var(--color-button-primary)] 
-               hover:bg-[var(--color-button-primary-hover)] 
+               bg-(--color-button-primary) 
+               hover:bg-(--color-button-primary-hover) 
                text-white transition-colors">
   Click me
 </button>

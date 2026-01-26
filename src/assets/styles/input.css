@@ -307,7 +307,6 @@
      Spacing - Primitives
   ───────────────────────────── */
 
-  --spacing-0: 0;
   --spacing-0-5: 2px;
   --spacing-1: 4px;
   --spacing-1-5: 6px;
@@ -327,14 +326,54 @@
   --spacing-20: 80px;
   --spacing-24: 96px;
   --spacing-30: 120px;
-  --spacing-40: 160px;
-  --spacing-50: 200px;
-  --spacing-62: 250px;
 
   /* ─────────────────────────────
     Spacing - Tokens
   ───────────────────────────── */
 
+  /* UI - Micro (Internal) */
+  --spacing-micro-minimal: var(--spacing-0-5);
+  --spacing-micro-default: var(--spacing-1);
+
+  /* UI - Static (Internal) */
+  --spacing-ui-minimal: var(--spacing-2);
+  --spacing-ui-compact: var(--spacing-3);
+  --spacing-ui-default: var(--spacing-4);
+  --spacing-ui-comfortable: var(--spacing-6);
+  --spacing-ui-maximal: var(--spacing-8);
+
+  /* Layout - Static (External) */
+  --spacing-layout-minimal: var(--spacing-10);
+  --spacing-layout-compact: var(--spacing-12);
+  --spacing-layout-default: var(--spacing-16);
+  --spacing-layout-comfortable: var(--spacing-20);
+  --spacing-layout-maximal: var(--spacing-24)
+
+  /* UI - Fluid (Internal) */;
+  --spacing-ui-fluid-default: clamp(
+    var(--spacing-ui-default),
+    calc(var(--spacing-ui-default) + (var(--spacing-ui-comfortable) - var(--spacing-ui-default)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
+    var(--spacing-ui-comfortable)
+  );
+  --spacing-ui-fluid-comfortable: clamp(
+    var(--spacing-ui-comfortable),
+    calc(var(--spacing-ui-comfortable) + (var(--spacing-ui-maximal) - var(--spacing-ui-comfortable)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
+    var(--spacing-ui-maximal)
+  );
+
+  /* Layout - Fluid (External) */
+  --spacing-layout-fluid-default: clamp(
+    var(--spacing-layout-default),
+    calc(var(--spacing-layout-default) + (var(--spacing-layout-comfortable) - var(--spacing-layout-default)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
+    var(--spacing-layout-comfortable)
+  );
+  --spacing-layout-fluid-comfortable: clamp(
+    var(--spacing-layout-comfortable),
+    calc(var(--spacing-layout-comfortable) + (var(--spacing-layout-maximal) - var(--spacing-layout-comfortable)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
+    var(--spacing-layout-maximal)
+  );
+
+  /* Anciens token à modifier dans les composants, puis à supprimer */
   /* Padding (inset) */
   --spacing-inset-tight: var(--spacing-2);
   --spacing-inset-small: var(--spacing-4);
@@ -349,7 +388,6 @@
   --spacing-stack-medium: var(--spacing-4);
   --spacing-stack-large: var(--spacing-6);
   --spacing-stack-xlarge: var(--spacing-8);
-  --spacing-stack-xxlarge: var(--spacing-10);
 
   /* Horizontal (inline) */
   --spacing-inline-tight: var(--spacing-0-5);
@@ -552,6 +590,17 @@
   height: clamp(2rem, 1.714rem + 0.893vw, 2.5rem);
 }
 
+/* Spacing (UI - Fluid) */
+@utility spacing-ui-fluid-default { padding-block: var(--spacing-ui-fluid-default); }
+
+@utility spacing-ui-fluid-comfortable { padding-block: var(--spacing-ui-fluid-comfortable); }
+
+/* Spacing (Layout - Fluid) */
+@utility spacing-layout-fluid-default { margin-block: var(--spacing-layout-fluid-default); }
+
+@utility spacing-layout-fluid-comfortable { margin-block: var(--spacing-layout-fluid-comfortable); }
+
+/* Anciens utilities à modifier dans les composants, puis à supprimer */
 /* Spacing (fluid) */
 @utility spacing-fluid-xs { margin-block: var(--spacing-fluid-xs); }
 
