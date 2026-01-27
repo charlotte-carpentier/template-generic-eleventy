@@ -349,18 +349,16 @@
   --spacing-section-comfortable: var(--spacing-20);
   --spacing-section-maximal: var(--spacing-24)
 
-  /* UI - Fluid (Padding organisms) */;
-  --spacing-ui-fluid-default: clamp(
-    var(--spacing-ui-comfortable),
-    calc(var(--spacing-ui-comfortable) + (var(--spacing-ui-maximal) - var(--spacing-ui-comfortable)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
+  /* Section - Fluid (Padding sections) */;
+  --spacing-section-fluid-x: clamp(
+    var(--spacing-ui-default),
+    calc(var(--spacing-ui-default) + (var(--spacing-ui-maximal) - var(--spacing-ui-default)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
     var(--spacing-ui-maximal)
   );
-
-  /* Section - Fluid (Padding sections) */
-  --spacing-section-fluid-default: clamp(
+  --spacing-section-fluid-y: clamp(
     var(--spacing-section-compact),
-    calc(var(--spacing-section-compact) + (var(--spacing-section-default) - var(--spacing-section-compact)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-section-default)
+    calc(var(--spacing-section-compact) + (var(--spacing-section-comfortable) - var(--spacing-section-compact)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
+    var(--spacing-section-comfortable)
   );
 
   /* Anciens token à modifier dans les composants, puis à supprimer */
@@ -386,47 +384,6 @@
   --spacing-inline-large: var(--spacing-4);
   --spacing-inline-xlarge: var(--spacing-6);
   --spacing-inline-xxlarge: var(--spacing-8);
-
-  /* Section */
-  --section-margin-x-mobile: var(--spacing-4);
-  --section-margin-x-tablet: var(--spacing-8);
-  --section-margin-x-desktop: var(--spacing-20);
-
-  --section-padding-y-mobile: var(--spacing-8);
-  --section-padding-y-tablet: var(--spacing-12);
-  --section-padding-y-desktop: var(--spacing-16);
-
-  /* Spacing - Fluid */
-  --spacing-fluid-xs: clamp(
-    var(--spacing-4),
-    calc(var(--spacing-4) + (var(--spacing-5) - var(--spacing-4)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-5)
-  );
-  --spacing-fluid-sm: clamp(
-    var(--spacing-6),
-    calc(var(--spacing-6) + (var(--spacing-7) - var(--spacing-6)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-7)
-  );
-  --spacing-fluid-md: clamp(
-    var(--spacing-8),
-    calc(var(--spacing-8) + (var(--spacing-10) - var(--spacing-8)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-10)
-  );
-  --spacing-fluid-lg: clamp(
-    var(--spacing-12),
-    calc(var(--spacing-12) + (var(--spacing-14) - var(--spacing-12)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-14)
-  );
-  --spacing-fluid-xl: clamp(
-    var(--spacing-16),
-    calc(var(--spacing-16) + (var(--spacing-20) - var(--spacing-16)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-20)
-  );
-  --spacing-fluid-2xl: clamp(
-    var(--spacing-24),
-    calc(var(--spacing-24) + (var(--spacing-30) - var(--spacing-24)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-30)
-  );
 
   /* ─────────────────────────────
     Z-Index - Primitives
@@ -580,29 +537,10 @@
   height: clamp(2rem, 1.714rem + 0.893vw, 2.5rem);
 }
 
-/* Spacing (UI - Fluid) */
-@utility spacing-ui-fluid-default { padding-block: var(--spacing-ui-fluid-default); }
+/* Spacing (Section - Fluid) */
+@utility spacing-section-fluid-x { padding-inline: var(--spacing-section-fluid-x); }
 
-@utility spacing-ui-fluid-comfortable { padding-block: var(--spacing-ui-fluid-comfortable); }
-
-/* Spacing (Layout - Fluid) */
-@utility spacing-section-fluid-default { margin-block: var(--spacing-section-fluid-default); }
-
-@utility spacing-section-fluid-comfortable { margin-block: var(--spacing-section-fluid-comfortable); }
-
-/* Anciens utilities à modifier dans les composants, puis à supprimer */
-/* Spacing (fluid) */
-@utility spacing-fluid-xs { margin-block: var(--spacing-fluid-xs); }
-
-@utility spacing-fluid-sm { margin-block: var(--spacing-fluid-sm); }
-
-@utility spacing-fluid-md { margin-block: var(--spacing-fluid-md); }
-
-@utility spacing-fluid-lg { margin-block: var(--spacing-fluid-lg); }
-
-@utility spacing-fluid-xl { margin-block: var(--spacing-fluid-xl); }
-
-@utility spacing-fluid-2xl { margin-block: var(--spacing-fluid-2xl); }
+@utility spacing-section-fluid-y { padding-block: var(--spacing-section-fluid-y); }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Reset

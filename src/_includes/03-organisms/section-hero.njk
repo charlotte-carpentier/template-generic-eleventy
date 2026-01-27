@@ -79,25 +79,25 @@
           3.1 Wrapper Classes
           Description: Layout, Spacing, Background
         --------------------------#}
-      {% set sectionClasses = "flex flex-col px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-large)] bg-[var(--color-global-white)] md:px-[var(--spacing-inset-xlarge)] md:py-[var(--spacing-inset-xxlarge)]" %}
+      {% set sectionClasses = "flex flex-col spacing-section-fluid-x spacing-section-fluid-y" %}
 
       {# --------------------------
           3.2 Layout Classes
           Description: Layout responsive grid 2 columns, Spacing
         --------------------------#}
-      {% set gridClasses = "flex flex-col gap-[var(--spacing-stack-xlarge)] md:grid md:grid-cols-2 md:gap-[var(--spacing-inline-xxlarge)] md:items-start" %}
+      {% set gridClasses = "flex flex-col gap-[var(--spacing-ui-maximal)] md:grid md:grid-cols-2 md:items-start" %}
 
       {# --------------------------
           3.3 Left Column Classes
           Description: Layout vertical, Spacing
         --------------------------#}
-      {% set leftColClasses = "flex flex-col gap-[var(--spacing-stack-medium)]" %}
+      {% set leftColClasses = "flex flex-col gap-[var(--spacing-ui-default)]" %}
 
       {# --------------------------
           3.4 Right Column Classes
           Description: Layout, Self-stretch, Offset top to align with main heading
       --------------------------#}
-      {% set rightColClasses = "flex self-stretch md:mt-[calc(var(--spacing-stack-medium)+2rem)]" %}
+      {% set rightColClasses = "flex self-stretch md:mt-[var(--spacing-section-compact)]" %}
 
       {# --------------------------
           3.5 Heading Wrapper Classes
@@ -121,7 +121,7 @@
           3.8 Buttons Wrapper Classes
           Description: Layout horizontal, Spacing, Alignment centered mobile
       --------------------------#}
-      {% set buttonsClasses = "flex gap-[var(--spacing-inline-large)] justify-center md:justify-start" %}
+      {% set buttonsClasses = "flex gap-[var(--spacing-ui-default)] justify-center md:justify-start" %}
 
       {# --------------------------
           3.9 Image Wrapper Classes
