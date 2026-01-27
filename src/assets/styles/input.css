@@ -331,7 +331,7 @@
     Spacing - Tokens
   ───────────────────────────── */
 
-  /* UI - Micro (Internal) */
+  /* Micro - Static (Internal) */
   --spacing-micro-minimal: var(--spacing-0-5);
   --spacing-micro-default: var(--spacing-1);
 
@@ -342,12 +342,12 @@
   --spacing-ui-comfortable: var(--spacing-6);
   --spacing-ui-maximal: var(--spacing-8);
 
-  /* Layout - Static (External) */
-  --spacing-layout-minimal: var(--spacing-10);
-  --spacing-layout-compact: var(--spacing-12);
-  --spacing-layout-default: var(--spacing-16);
-  --spacing-layout-comfortable: var(--spacing-20);
-  --spacing-layout-maximal: var(--spacing-24)
+  /* Section - Static (Internal) */
+  --spacing-section-minimal: var(--spacing-10);
+  --spacing-section-compact: var(--spacing-12);
+  --spacing-section-default: var(--spacing-16);
+  --spacing-section-comfortable: var(--spacing-20);
+  --spacing-section-maximal: var(--spacing-24)
 
   /* UI - Fluid (Padding organisms) */;
   --spacing-ui-fluid-default: clamp(
@@ -356,11 +356,11 @@
     var(--spacing-ui-maximal)
   );
 
-  /* Layout - Fluid (Marges sections) */
-  --spacing-layout-fluid-default: clamp(
-    var(--spacing-layout-compact),
-    calc(var(--spacing-layout-compact) + (var(--spacing-layout-default) - var(--spacing-layout-compact)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-layout-default)
+  /* Section - Fluid (Padding sections) */
+  --spacing-section-fluid-default: clamp(
+    var(--spacing-section-compact),
+    calc(var(--spacing-section-compact) + (var(--spacing-section-default) - var(--spacing-section-compact)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
+    var(--spacing-section-default)
   );
 
   /* Anciens token à modifier dans les composants, puis à supprimer */
@@ -586,9 +586,9 @@
 @utility spacing-ui-fluid-comfortable { padding-block: var(--spacing-ui-fluid-comfortable); }
 
 /* Spacing (Layout - Fluid) */
-@utility spacing-layout-fluid-default { margin-block: var(--spacing-layout-fluid-default); }
+@utility spacing-section-fluid-default { margin-block: var(--spacing-section-fluid-default); }
 
-@utility spacing-layout-fluid-comfortable { margin-block: var(--spacing-layout-fluid-comfortable); }
+@utility spacing-section-fluid-comfortable { margin-block: var(--spacing-section-fluid-comfortable); }
 
 /* Anciens utilities à modifier dans les composants, puis à supprimer */
 /* Spacing (fluid) */
