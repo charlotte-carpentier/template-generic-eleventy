@@ -95,15 +95,15 @@
           3.1 Wrapper Classes
           Description: Layout, Spacing, Background
         --------------------------#}
-      {% set sectionClasses = "flex flex-col px-[var(--spacing-inset-medium)] py-[var(--spacing-inset-large)] bg-[var(--color-global-white)] md:px-[var(--spacing-inset-xlarge)] md:py-[var(--spacing-inset-xxlarge)]" %}
+      {% set sectionClasses = "flex flex-col spacing-section-fluid-x spacing-section-fluid-y" %}
 
       {# --------------------------
           3.2 Layout Classes (by type)
           Description: Layout vertical, Spacing, Max-width for simple type
         --------------------------#}
       {% set containerMap = {
-        'simple': 'flex flex-col gap-[var(--spacing-stack-xlarge)] mx-auto max-w-[800px]',
-        'cards': 'flex flex-col gap-[var(--spacing-stack-xlarge)]'
+        'simple': 'flex flex-col gap-[var(--spacing-ui-maximal)] mx-auto max-w-[800px]',
+        'cards': 'flex flex-col gap-[var(--spacing-ui-maximal)]'
       } %}
       {% set containerClasses = containerMap[sectionType] or containerMap['simple'] %}
 
@@ -112,8 +112,8 @@
           Description: Layout vertical, Spacing between headings
         --------------------------#}
       {% set headerMap = {
-        'simple': 'flex flex-col gap-[var(--spacing-stack-tight)]',
-        'cards': 'flex flex-col gap-[var(--spacing-stack-medium)]'
+        'simple': 'flex flex-col gap-[var(--spacing-ui-maximal)]',
+        'cards': 'flex flex-col gap-[var(--spacing-section-minimal)]'
       } %}
       {% set headerClasses = headerMap[sectionType] or headerMap['simple'] %}
 
@@ -132,8 +132,8 @@
           Description: Layout, Typography override serif, Alignment, Spacing bottom
         --------------------------#}
       {% set subheadingMap = {
-        'simple': 'flex flex-col items-center mt-[var(--spacing-stack-large)] [&_h3]:font-heading-bold-serif [&_h3]:text-fluid-h1',
-        'cards': 'flex flex-col items-start mt-[var(--spacing-stack-large)] md:items-center [&_h3]:font-heading-bold-serif [&_h3]:text-fluid-h1'
+        'simple': 'flex flex-col items-center [&_h3]:font-heading-bold-serif [&_h3]:text-fluid-h1',
+        'cards': 'flex flex-col items-start md:items-center [&_h3]:font-heading-bold-serif [&_h3]:text-fluid-h1'
       } %}
       {% set subheadingClasses = subheadingMap[sectionType] or subheadingMap['simple'] %}
 
@@ -147,19 +147,19 @@
           3.7 Buttons Wrapper Classes
           Description: Layout horizontal, Spacing, Alignment centered
         --------------------------#}
-      {% set buttonsClasses = "flex gap-[var(--spacing-inline-large)] justify-center" %}
+      {% set buttonsClasses = "flex gap-[var(--spacing-ui-default)] justify-center" %}
 
       {# --------------------------
           3.8 Content Wrapper Classes (simple type)
           Description: Layout vertical, Spacing
         --------------------------#}
-      {% set contentWrapperClasses = "flex flex-col gap-[var(--spacing-stack-large)]" %}
+      {% set contentWrapperClasses = "flex flex-col gap-[var(--spacing-ui-comfortable)]" %}
 
       {# --------------------------
           3.9 Cards Grid Classes
           Description: Layout responsive grid, Spacing, Override card gaps, text, button wrapper and button style
       --------------------------#}
-      {% set cardsGridClasses = "grid grid-cols-1 gap-[var(--spacing-stack-large)] md:grid-cols-3 md:gap-[var(--spacing-stack-xlarge)] [&>*]:w-full [&>*]:max-w-none [&_[data-card-text]]:line-clamp-none [&_[data-card-content]]:gap-[var(--spacing-stack-medium)] [&_div[class*='mt-0']]:mt-0 [&_div[class*='mt-0']_button]:w-auto [&_div[class*='mt-0']_button]:max-w-fit [&_button]:bg-[var(--color-button-primary)] [&_button]:text-white [&_button]:border-0 [&_button:hover]:bg-[var(--color-button-primary-hover)]" %}
+      {% set cardsGridClasses = "grid grid-cols-1 gap-[var(--spacing-ui-comfortable)] md:grid-cols-3 md:gap-[var(--spacing-ui-maximal)] [&>*]:w-full [&>*]:max-w-none [&_[data-card-text]]:line-clamp-none [&_[data-card-content]]:gap-[var(--spacing-ui-default)] [&_div[class*='mt-0']]:mt-0 [&_div[class*='mt-0']_button]:w-auto [&_div[class*='mt-0']_button]:max-w-fit [&_button]:bg-[var(--color-button-primary)] [&_button]:text-white [&_button]:border-0 [&_button:hover]:bg-[var(--color-button-primary-hover)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
