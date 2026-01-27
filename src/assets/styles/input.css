@@ -412,9 +412,6 @@
   /* ─────────────────────────────
     Layout - Tokens
   ───────────────────────────── */
-
-  --container-desktop: var(--size-1440);
-
   --grid-columns-12: var(--count-12);
   --grid-columns-6: var(--count-6);
   --grid-columns-4: var(--count-4);
