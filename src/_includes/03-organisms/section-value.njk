@@ -102,7 +102,7 @@
           Description: Layout vertical, Spacing, Max-width for simple type
         --------------------------#}
       {% set containerMap = {
-        'simple': 'flex flex-col gap-[var(--spacing-ui-maximal)] mx-auto max-w-[800px]',
+        'simple': 'flex flex-col gap-[var(--spacing-ui-maximal)] mx-auto max-w-[var(--column-width-840)]',
         'cards': 'flex flex-col gap-[var(--spacing-ui-maximal)]'
       } %}
       {% set containerClasses = containerMap[sectionType] or containerMap['simple'] %}
@@ -159,7 +159,7 @@
           3.9 Cards Grid Classes
           Description: Layout responsive grid, Spacing, Override card gaps, text, button wrapper and button style
       --------------------------#}
-      {% set cardsGridClasses = "grid grid-cols-1 gap-[var(--spacing-ui-comfortable)] md:grid-cols-3 md:gap-[var(--spacing-ui-maximal)] [&>*]:w-full [&>*]:max-w-none [&_[data-card-text]]:line-clamp-none [&_[data-card-content]]:gap-[var(--spacing-ui-default)] [&_div[class*='mt-0']]:mt-0 [&_div[class*='mt-0']_button]:w-auto [&_div[class*='mt-0']_button]:max-w-fit [&_button]:bg-[var(--color-button-primary)] [&_button]:text-white [&_button]:border-0 [&_button:hover]:bg-[var(--color-button-primary-hover)]" %}
+      {% set cardsGridClasses = "grid grid-cols-1 gap-[var(--spacing-ui-comfortable)] sm:grid-cols-2 md:grid-cols-3 md:gap-[var(--spacing-ui-maximal)] [&_[data-card-text]]:line-clamp-none [&_[data-card-content]]:gap-[var(--spacing-ui-default)] [&_div[class*='mt-0']]:mt-0 [&_div[class*='mt-0']_button]:w-auto [&_div[class*='mt-0']_button]:max-w-fit [&_button]:bg-[var(--color-button-primary)] [&_button]:text-white [&_button]:border-0 [&_button:hover]:bg-[var(--color-button-primary-hover)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
