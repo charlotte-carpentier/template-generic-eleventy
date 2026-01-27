@@ -361,30 +361,6 @@
     var(--spacing-section-comfortable)
   );
 
-  /* Anciens token à modifier dans les composants, puis à supprimer */
-  /* Padding (inset) */
-  --spacing-inset-tight: var(--spacing-2);
-  --spacing-inset-small: var(--spacing-4);
-  --spacing-inset-medium: var(--spacing-6);
-  --spacing-inset-large: var(--spacing-8);
-  --spacing-inset-xlarge: var(--spacing-10);
-  --spacing-inset-xxlarge: var(--spacing-12);
-
-  /* Vertical (stack) */
-  --spacing-stack-tight: var(--spacing-2);
-  --spacing-stack-small: var(--spacing-3);
-  --spacing-stack-medium: var(--spacing-4);
-  --spacing-stack-large: var(--spacing-6);
-  --spacing-stack-xlarge: var(--spacing-8);
-
-  /* Horizontal (inline) */
-  --spacing-inline-tight: var(--spacing-0-5);
-  --spacing-inline-small: var(--spacing-1);
-  --spacing-inline-medium: var(--spacing-2);
-  --spacing-inline-large: var(--spacing-4);
-  --spacing-inline-xlarge: var(--spacing-6);
-  --spacing-inline-xxlarge: var(--spacing-8);
-
   /* ─────────────────────────────
     Z-Index - Primitives
   ───────────────────────────── */

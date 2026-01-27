@@ -42,7 +42,7 @@ Applies to: `select.njk`, `input.njk` (min-height)
 
 ```nunjucks
 {# select.njk - Remove sizeMap, use static height #}
-{% set baseClasses = "h-12 px-[var(--spacing-inset-small)] py-[var(--spacing-inset-tight)] pr-[var(--spacing-inset-large)] text-body ..." %}
+{% set baseClasses = "h-12 px-[var(--spacing-ui-default)] py-[var(--spacing-ui-minimal)] pr-[var(--spacing-ui-comfortable)] text-body ..." %}
 ```
 
 ```json
