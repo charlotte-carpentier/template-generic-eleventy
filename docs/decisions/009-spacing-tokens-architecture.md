@@ -48,17 +48,17 @@ Implement `namespace-scope-size` pattern with 3 scopes:
 --spacing-ui-maximal: 32px
 
 /* Layout (component external: 40-96px) */
---spacing-layout-minimal: 40px
---spacing-layout-compact: 48px
---spacing-layout-default: 64px
---spacing-layout-comfortable: 80px
---spacing-layout-maximal: 96px
+--spacing-section-minimal: 40px
+--spacing-section-compact: 48px
+--spacing-section-default: 64px
+--spacing-section-comfortable: 80px
+--spacing-section-maximal: 96px
 
 /* Fluid responsive variants */
 --spacing-ui-fluid-default: clamp(16px, ..., 24px)
 --spacing-ui-fluid-comfortable: clamp(24px, ..., 32px)
---spacing-layout-fluid-default: clamp(64px, ..., 80px)
---spacing-layout-fluid-comfortable: clamp(80px, ..., 96px)
+--spacing-section-fluid-default: clamp(64px, ..., 80px)
+--spacing-section-fluid-comfortable: clamp(80px, ..., 96px)
 ```
 
 **Rationale:**

@@ -77,7 +77,7 @@
           3.2 List Classes
           Description: Layout responsive, Spacing responsive
         --------------------------#}
-      {% set listClasses = "flex flex-col gap-[var(--spacing-stack-medium)] md:flex-row md:gap-[var(--spacing-inline-large)]" %}
+      {% set listClasses = "flex flex-col gap-[var(--spacing-ui-default)] md:flex-row" %}
 
       {# --------------------------
           3.3 Item Classes
@@ -89,7 +89,7 @@
           3.4 Link Base Classes
           Description: Layout, Typography, Spacing responsive, Positioning, Transitions
         --------------------------#}
-      {% set linkBaseClasses = "[&_a]:relative [&_a]:px-[var(--spacing-inset-small)] [&_a]:py-[var(--spacing-inset-small)] md:[&_a]:px-[var(--spacing-inset-tight)] md:[&_a]:py-[var(--spacing-inset-tight)] [&_a]:font-body text-body [&_a]:text-[var(--color-global-default)] [&_a]:no-underline [&_a]:transition-colors" %}
+      {% set linkBaseClasses = "[&_a]:relative [&_a]:p-[var(--spacing-ui-default)] [&_a]:font-body text-body [&_a]:text-[var(--color-global-default)] [&_a]:no-underline [&_a]:transition-colors" %}
 
       {# --------------------------
           3.5 Link Hover Classes
@@ -107,7 +107,7 @@
           3.7 Link Active Classes
           Description: Colors, Pseudo-elements for active indicator bar
         --------------------------#}
-      {% set linkActiveClasses = "[&_a[aria-current='page']]:text-[var(--color-global-contrast-light-02)] [&_a[aria-current='page']]:cursor-default [&_a[aria-current='page']]:pointer-events-none md:[&_a[aria-current='page']]:after:content-[''] md:[&_a[aria-current='page']]:after:absolute md:[&_a[aria-current='page']]:after:bottom-[calc(var(--spacing-inline-tight)*-1)] md:[&_a[aria-current='page']]:after:left-1/2 md:[&_a[aria-current='page']]:after:-translate-x-1/2 md:[&_a[aria-current='page']]:after:h-1 md:[&_a[aria-current='page']]:after:w-4 md:[&_a[aria-current='page']]:after:bg-[var(--color-global-contrast-light-02)] md:[&_a[aria-current='page']]:after:rounded-[var(--radius-default)]" %}
+      {% set linkActiveClasses = "[&_a[aria-current='page']]:text-[var(--color-global-contrast-light-02)] [&_a[aria-current='page']]:cursor-default [&_a[aria-current='page']]:pointer-events-none md:[&_a[aria-current='page']]:after:content-[''] md:[&_a[aria-current='page']]:after:absolute md:[&_a[aria-current='page']]:after:bottom-[calc(var(--spacing-micro-minimal)*-1)] md:[&_a[aria-current='page']]:after:left-1/2 md:[&_a[aria-current='page']]:after:-translate-x-1/2 md:[&_a[aria-current='page']]:after:h-1 md:[&_a[aria-current='page']]:after:w-4 md:[&_a[aria-current='page']]:after:bg-[var(--color-global-contrast-light-02)] md:[&_a[aria-current='page']]:after:rounded-[var(--radius-default)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML

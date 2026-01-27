@@ -96,8 +96,8 @@ Use Tailwind's arbitrary value syntax:
 
 - Micro: `--spacing-micro-minimal`, `--spacing-micro-default`
 - UI (internal): `--spacing-ui-minimal` → `--spacing-ui-maximal` 
-- Layout (external): `--spacing-layout-minimal` → `--spacing-layout-maximal`
-- Fluid: `--spacing-ui-fluid-*`, `--spacing-layout-fluid-*`
+- Layout (external): `--spacing-section-minimal` → `--spacing-section-maximal`
+- Fluid: `--spacing-ui-fluid-*`, `--spacing-section-fluid-*`
 
 See `input.css` for complete list.
 
