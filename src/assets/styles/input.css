@@ -390,37 +390,32 @@
   --z-notification: var(--z-1080);
 
   /* ─────────────────────────────
-    Layout - Primitives
+    Layout grid - Primitives
   ───────────────────────────── */
 
-  --size-1440: 1440px;
-  --size-840: 840px;
-  --size-640: 640px;
-  --size-416: 416px;
-  --size-320: 320px;
-  --size-304: 304px;
-  --size-192: 192px;
-  --size-80: 80px;
-
-  --count-12: 12;
-  --count-6: 6;
-  --count-4: 4;
-  --count-3: 3;
-  --count-2: 2;
-  --count-1: 1;
+  --grid-margin-mobile: 16px;
+  --grid-margin-desktop: 64px;
+  --grid-gutter: 32px;
 
   /* ─────────────────────────────
-    Layout - Tokens
+    Layout grid - Tokens
   ───────────────────────────── */
 
-  /* Container */
-  --container-desktop: var(--size-1440);
+  /* Workzones */
+  --grid-workzone-mobile: calc((var(--viewport-min) * 16) - (2 * var(--grid-margin-mobile)));
+  --grid-workzone-desktop: calc((var(--viewport-max) * 16) - (2 * var(--grid-margin-desktop)));
 
-  /* Grid System - Column Gap */
-  --grid-gutter: var(--spacing-8);
+  /* Column Widths - Desktop (12-col system) */
+  --grid-col-12: calc((var(--grid-workzone-desktop) - (11 * var(--grid-gutter))) / 12);
+  --grid-col-6: calc((var(--grid-workzone-desktop) - (5 * var(--grid-gutter))) / 6);
+  --grid-col-4: calc((var(--grid-workzone-desktop) - (3 * var(--grid-gutter))) / 4);
+  --grid-col-3: calc((var(--grid-workzone-desktop) - (2 * var(--grid-gutter))) / 3);
+  --grid-col-2: calc((var(--grid-workzone-desktop) - (1 * var(--grid-gutter))) / 2);
+  --grid-col-1: var(--grid-workzone-desktop);
 
-  /* Grid System - Lateral Container Margin */
-  --grid-margin: var(--spacing-16);
+  /* Column Widths - Mobile (2-col system) */
+  --grid-col-mobile-2: calc((var(--grid-workzone-mobile) - (1 * var(--grid-gutter))) / 2);
+  --grid-col-mobile-1: var(--grid-workzone-mobile);
 
   /* ─────────────────────────────
      Accessibility - Primitives
