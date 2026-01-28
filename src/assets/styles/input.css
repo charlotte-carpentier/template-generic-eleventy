@@ -412,6 +412,17 @@
   /* ─────────────────────────────
     Layout - Tokens
   ───────────────────────────── */
+
+  /* Container */
+  --container-desktop: var(--size-1440);
+
+  /* Grid System - Column Gap */
+  --grid-gutter: var(--spacing-8);
+
+  /* Grid System - Lateral Container Margin */
+  --grid-margin: var(--spacing-16);
+
+  /* Grid Columns Count */
   --grid-columns-12: var(--count-12);
   --grid-columns-6: var(--count-6);
   --grid-columns-4: var(--count-4);
@@ -496,8 +507,6 @@
   min-width: var(--touch-target-min);
   min-height: var(--touch-target-min);
 }
-
-@utility prose-content { max-width: 65ch; }
 
 /* Logo sizing (fluid) */
 @utility logo-size-small {
