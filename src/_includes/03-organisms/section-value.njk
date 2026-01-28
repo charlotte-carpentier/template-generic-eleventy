@@ -102,7 +102,7 @@
           Description: Layout vertical, Spacing, Max-width for simple type
         --------------------------#}
       {% set containerMap = {
-        'simple': 'flex flex-col gap-[var(--spacing-ui-maximal)] mx-auto max-w-[var(--column-width-840)]',
+        'simple': 'flex flex-col gap-[var(--spacing-ui-maximal)] mx-auto max-w-3xl',
         'cards': 'flex flex-col gap-[var(--spacing-ui-maximal)]'
       } %}
       {% set containerClasses = containerMap[sectionType] or containerMap['simple'] %}
