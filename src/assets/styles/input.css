@@ -398,23 +398,23 @@
   --grid-gutter: 32px;
 
   /* ─────────────────────────────
-    Layout - Tokens
+    Layout grid - Tokens
   ───────────────────────────── */
 
   /* Workzones */
-  --grid-workzone-mobile: calc((var(--viewport-min) * 16) - (2 * var(--grid-margin-mobile)));    /* 320px - 32px = 288px */
-  --grid-workzone-desktop: calc((var(--viewport-max) * 16) - (2 * var(--grid-margin-desktop)));  /* 1440px - 128px = 1312px */
+  --grid-workzone-mobile: calc((var(--viewport-min) * 16) - (2 * var(--grid-margin-mobile)));
+  --grid-workzone-desktop: calc((var(--viewport-max) * 16) - (2 * var(--grid-margin-desktop)));
 
-  /* Desktop Column Widths (12-col system) */
-  --grid-col-12: calc((var(--grid-workzone-desktop) - (11 * var(--grid-gutter))) / 12);  /* 80px */
-  --grid-col-6: calc((var(--grid-workzone-desktop) - (5 * var(--grid-gutter))) / 6);     /* 192px */
-  --grid-col-4: calc((var(--grid-workzone-desktop) - (3 * var(--grid-gutter))) / 4);     /* 304px */
-  --grid-col-3: calc((var(--grid-workzone-desktop) - (2 * var(--grid-gutter))) / 3);     /* 416px */
-  --grid-col-2: calc((var(--grid-workzone-desktop) - (1 * var(--grid-gutter))) / 2);     /* 640px */
+  /* Column Widths - Desktop (12-col system) */
+  --grid-col-12: calc((var(--grid-workzone-desktop) - (11 * var(--grid-gutter))) / 12);
+  --grid-col-6: calc((var(--grid-workzone-desktop) - (5 * var(--grid-gutter))) / 6);
+  --grid-col-4: calc((var(--grid-workzone-desktop) - (3 * var(--grid-gutter))) / 4);
+  --grid-col-3: calc((var(--grid-workzone-desktop) - (2 * var(--grid-gutter))) / 3);
+  --grid-col-2: calc((var(--grid-workzone-desktop) - (1 * var(--grid-gutter))) / 2);
   --grid-col-1: var(--grid-workzone-desktop);
 
-  /* Mobile Column Widths (2-col system) */
-  --grid-col-mobile-2: calc((var(--grid-workzone-mobile) - (1 * var(--grid-gutter))) / 2); /* 128px */
+  /* Column Widths - Mobile (2-col system) */
+  --grid-col-mobile-2: calc((var(--grid-workzone-mobile) - (1 * var(--grid-gutter))) / 2);
   --grid-col-mobile-1: var(--grid-workzone-mobile);
 
   /* ─────────────────────────────
