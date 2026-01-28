@@ -422,21 +422,6 @@
   /* Grid System - Lateral Container Margin */
   --grid-margin: var(--spacing-16);
 
-  /* Grid Columns Count */
-  --grid-columns-12: var(--count-12);
-  --grid-columns-6: var(--count-6);
-  --grid-columns-4: var(--count-4);
-  --grid-columns-3: var(--count-3);
-  --grid-columns-2: var(--count-2);
-  --grid-columns-1: var(--count-1);
-
-  --column-width-840: var(--size-840);
-  --column-width-640: var(--size-640);
-  --column-width-416: var(--size-416);
-  --column-width-304: var(--size-304);
-  --column-width-192: var(--size-192);
-  --column-width-80: var(--size-80);
-
   /* ─────────────────────────────
      Accessibility - Primitives
   ───────────────────────────── */
