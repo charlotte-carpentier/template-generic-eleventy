@@ -95,17 +95,18 @@
           3.1 Wrapper Classes
           Description: Layout, Spacing, Background
         --------------------------#}
-      {% set sectionClasses = "flex flex-col spacing-section-fluid-x spacing-section-fluid-y" %}
+      {% set sectionClasses = "px-[var(--grid-margin-mobile)] md:px-[var(--grid-margin-desktop)] spacing-section-fluid-y" %}
 
       {# --------------------------
           3.2 Layout Classes (by type)
           Description: Layout vertical, Spacing, Max-width for simple type
         --------------------------#}
-      {% set containerMap = {
-        'simple': 'flex flex-col gap-[var(--spacing-ui-maximal)] mx-auto max-w-3xl',
+      {% set containerClasses = "w-full max-w-[var(--grid-workzone-mobile)] md:max-w-[var(--grid-workzone-desktop)] mx-auto" %}
+      {% set gridMap = {
+        'simple': 'flex flex-col gap-[var(--spacing-ui-maximal)]',
         'cards': 'flex flex-col gap-[var(--spacing-ui-maximal)]'
       } %}
-      {% set containerClasses = containerMap[sectionType] or containerMap['simple'] %}
+      {% set gridClasses = gridMap[sectionType] or gridMap['simple'] %}
 
       {# --------------------------
           3.3 Header Wrapper Classes (by type)
@@ -153,13 +154,13 @@
           3.8 Content Wrapper Classes (simple type)
           Description: Layout vertical, Spacing
         --------------------------#}
-      {% set contentWrapperClasses = "flex flex-col gap-[var(--spacing-ui-comfortable)]" %}
+      {% set contentWrapperClasses = "flex flex-col gap-[var(--spacing-ui-comfortable)] max-w-prose mx-auto" %}
 
       {# --------------------------
           3.9 Cards Grid Classes
           Description: Layout responsive grid, Spacing, Override card gaps, text, button wrapper and button style
       --------------------------#}
-      {% set cardsGridClasses = "grid grid-cols-1 gap-[var(--spacing-ui-comfortable)] sm:grid-cols-2 md:grid-cols-3 md:gap-[var(--spacing-ui-maximal)] [&_[data-card-text]]:line-clamp-none [&_[data-card-content]]:gap-[var(--spacing-ui-default)] [&_div[class*='mt-0']]:mt-0 [&_div[class*='mt-0']_button]:w-auto [&_div[class*='mt-0']_button]:max-w-fit [&_button]:bg-[var(--color-button-primary)] [&_button]:text-white [&_button]:border-0 [&_button:hover]:bg-[var(--color-button-primary-hover)]" %}
+      {% set cardsGridClasses = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[var(--grid-gutter)] [&_[data-card-text]]:line-clamp-none [&_[data-card-content]]:gap-[var(--spacing-ui-default)] [&_div[class*='mt-0']]:mt-0 [&_div[class*='mt-0']_button]:w-auto [&_div[class*='mt-0']_button]:max-w-fit [&_button]:bg-[var(--color-button-primary)] [&_button]:text-white [&_button]:border-0 [&_button:hover]:bg-[var(--color-button-primary-hover)] [&>*]:max-w-[var(--grid-col-4)] [&>*]:mx-auto" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
@@ -177,126 +178,133 @@
           data-section-container
         >
 
-          {# Header area - Common to both types #}
           <div
-            class="{{ headerClasses }}"
-            data-section-header
+            class="{{ gridClasses }}"
+            data-section-grid
           >
 
-            {# Heading - Small title #}
-            {% if headingName %}
-              <div
-                class="{{ headingClasses }}"
-                data-section-heading
-              >
-                {{ renderHeading({
-                    name: headingName,
-                    datas: options.headingDatas
-                }) }}
-              </div>
-            {% endif %}
+            {# Header area - Common to both types #}
+            <div
+              class="{{ headerClasses }}"
+              data-section-header
+            >
 
-            {# Subheading - Large serif title #}
-            {% if subheadingName %}
+              {# Heading - Small title #}
+              {% if headingName %}
+                <div
+                  class="{{ headingClasses }}"
+                  data-section-heading
+                >
+                  {{ renderHeading({
+                      name: headingName,
+                      datas: options.headingDatas
+                  }) }}
+                </div>
+              {% endif %}
+
+              {# Subheading - Large serif title #}
+              {% if subheadingName %}
+                <div
+                  class="{{ subheadingClasses }}"
+                  data-section-subheading
+                >
+                  {{ renderHeading({
+                      name: subheadingName,
+                      datas: options.headingDatas
+                  }) }}
+                </div>
+              {% endif %}
+
+            </div>
+
+            {# Content area - Depends on type #}
+            {% if sectionType == "simple" %}
+
+              {# Simple type: content + buttons centered #}
               <div
-                class="{{ subheadingClasses }}"
-                data-section-subheading
+                class="{{ contentWrapperClasses }}"
+                data-section-content
               >
-                {{ renderHeading({
-                    name: subheadingName,
-                    datas: options.headingDatas
-                }) }}
+
+                {# Content text #}
+                {% if content %}
+                  <div
+                    class="{{ textClasses }}"
+                    data-section-text
+                  >
+                    <p>{{ content }}</p>
+                  </div>
+                {% endif %}
+
+                {# Call-to-action buttons #}
+                {% if primaryButtonName or secondaryButtonName %}
+                  <div
+                    class="{{ buttonsClasses }}"
+                    data-section-buttons
+                  >
+
+                    {# Primary button #}
+                    {% if primaryButtonName %}
+                      {{ renderButton({
+                          name: primaryButtonName,
+                          datas: options.buttonDatas,
+                          iconDatas: options.iconDatas,
+                          tooltipDatas: options.tooltipDatas
+                      }) }}
+                    {% endif %}
+
+                    {# Secondary button #}
+                    {% if secondaryButtonName %}
+                      {{ renderButton({
+                          name: secondaryButtonName,
+                          datas: options.buttonDatas,
+                          iconDatas: options.iconDatas,
+                          tooltipDatas: options.tooltipDatas
+                      }) }}
+                    {% endif %}
+
+                  </div>
+                {% endif %}
+
               </div>
+
+            {% elif sectionType == "cards" %}
+
+              {# Cards type: grid of 3 cards #}
+              <div
+                class="{{ cardsGridClasses }}"
+                data-section-cards
+              >
+                {% if cardTags and options.cardDatas %}
+                  {# Display 3 cards for demo - Repeat cards to fill grid #}
+                  {% set displayedCards = 0 %}
+                  {% for n in range(0, 3) %}
+                    {% for card in options.cardDatas %}
+                      {% if card.tags and displayedCards < 3 %}
+                        {% for tag in cardTags %}
+                          {% if tag in card.tags and displayedCards < 3 %}
+                            {{ renderCard({
+                                name: card.name,
+                                datas: options.cardDatas,
+                                lockupDatas: options.lockupDatas,
+                                imageDatas: options.imageDatas,
+                                headingDatas: options.headingDatas,
+                                buttonDatas: options.buttonDatas,
+                                iconDatas: options.iconDatas,
+                                tooltipDatas: options.tooltipDatas
+                            }) }}
+                            {% set displayedCards = displayedCards + 1 %}
+                          {% endif %}
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                {% endif %}
+              </div>
+
             {% endif %}
 
           </div>
-
-          {# Content area - Depends on type #}
-          {% if sectionType == "simple" %}
-
-            {# Simple type: content + buttons centered #}
-            <div
-              class="{{ contentWrapperClasses }}"
-              data-section-content
-            >
-
-              {# Content text #}
-              {% if content %}
-                <div
-                  class="{{ textClasses }}"
-                  data-section-text
-                >
-                  <p>{{ content }}</p>
-                </div>
-              {% endif %}
-
-              {# Call-to-action buttons #}
-              {% if primaryButtonName or secondaryButtonName %}
-                <div
-                  class="{{ buttonsClasses }}"
-                  data-section-buttons
-                >
-
-                  {# Primary button #}
-                  {% if primaryButtonName %}
-                    {{ renderButton({
-                        name: primaryButtonName,
-                        datas: options.buttonDatas,
-                        iconDatas: options.iconDatas,
-                        tooltipDatas: options.tooltipDatas
-                    }) }}
-                  {% endif %}
-
-                  {# Secondary button #}
-                  {% if secondaryButtonName %}
-                    {{ renderButton({
-                        name: secondaryButtonName,
-                        datas: options.buttonDatas,
-                        iconDatas: options.iconDatas,
-                        tooltipDatas: options.tooltipDatas
-                    }) }}
-                  {% endif %}
-
-                </div>
-              {% endif %}
-
-            </div>
-
-          {% elif sectionType == "cards" %}
-
-            {# Cards type: grid of 3 cards #}
-            <div
-              class="{{ cardsGridClasses }}"
-              data-section-cards
-            >
-              {% if cardTags and options.cardDatas %}
-                {# Display 3 cards for demo - Repeat cards to fill grid #}
-                {% set displayedCards = 0 %}
-                {% for n in range(0, 3) %}
-                  {% for card in options.cardDatas %}
-                    {% if card.tags and displayedCards < 3 %}
-                      {% for tag in cardTags %}
-                        {% if tag in card.tags and displayedCards < 3 %}
-                          {{ renderCard({
-                              name: card.name,
-                              datas: options.cardDatas,
-                              lockupDatas: options.lockupDatas,
-                              imageDatas: options.imageDatas,
-                              headingDatas: options.headingDatas,
-                              buttonDatas: options.buttonDatas,
-                              iconDatas: options.iconDatas,
-                              tooltipDatas: options.tooltipDatas
-                          }) }}
-                          {% set displayedCards = displayedCards + 1 %}
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
-                  {% endfor %}
-                {% endfor %}
-              {% endif %}
-            </div>
-
-          {% endif %}
 
         </div>
 

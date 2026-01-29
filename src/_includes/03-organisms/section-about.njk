@@ -74,13 +74,14 @@
           3.1 Wrapper Classes
           Description: Layout, Spacing
         --------------------------#}
-      {% set sectionClasses = "flex flex-col spacing-section-fluid-x spacing-section-fluid-y" %}
+      {% set sectionClasses = "px-[var(--grid-margin-mobile)] md:px-[var(--grid-margin-desktop)] spacing-section-fluid-y" %}
 
       {# --------------------------
           3.2 Layout Classes
           Description: Layout responsive grid, Spacing
         --------------------------#}
-      {% set gridClasses = "flex flex-col gap-[var(--spacing-ui-comfortable)] md:grid md:grid-cols-2 md:gap-[var(--spacing-ui-maximal)] lg:gap-[var(--spacing-section-minimal)]" %}
+      {% set containerClasses = "w-full max-w-[var(--grid-workzone-mobile)] md:max-w-[var(--grid-workzone-desktop)] mx-auto" %}
+      {% set gridClasses = "flex flex-col md:grid md:grid-cols-2 gap-[var(--grid-gutter)]" %}
 
       {# --------------------------
           3.3 Left Column Classes
@@ -129,89 +130,96 @@
       >
 
         <div
-          class="{{ gridClasses }}"
+          class="{{ containerClasses }}"
           data-section-container
         >
 
-          {# Left column - Heading, content, buttons #}
           <div
-            class="{{ leftColClasses }}"
-            data-section-left-column
+            class="{{ gridClasses }}"
+            data-section-grid
           >
 
-            {# Heading #}
-            {% if headingName %}
-              <div
-                class="{{ headingClasses }}"
-                data-section-heading
-              >
-                {{ renderHeading({
-                    name: headingName,
-                    datas: options.headingDatas
-                }) }}
-              </div>
-            {% endif %}
+            {# Left column - Heading, content, buttons #}
+            <div
+              class="{{ leftColClasses }}"
+              data-section-left-column
+            >
 
-            {# Content text #}
-            {% if content %}
-              <div
-                class="{{ contentClasses }}"
-                data-section-content
-              >
-                <p>{{ content }}</p>
-              </div>
-            {% endif %}
-
-            {# Call-to-action buttons #}
-            {% if primaryButtonName or secondaryButtonName %}
-              <div
-                class="{{ buttonsClasses }}"
-                data-section-buttons
-              >
-
-                {# Primary button #}
-                {% if primaryButtonName %}
-                  {{ renderButton({
-                      name: primaryButtonName,
-                      datas: options.buttonDatas,
-                      iconDatas: options.iconDatas,
-                      tooltipDatas: options.tooltipDatas
+              {# Heading #}
+              {% if headingName %}
+                <div
+                  class="{{ headingClasses }}"
+                  data-section-heading
+                >
+                  {{ renderHeading({
+                      name: headingName,
+                      datas: options.headingDatas
                   }) }}
-                {% endif %}
+                </div>
+              {% endif %}
 
-                {# Secondary button #}
-                {% if secondaryButtonName %}
-                  {{ renderButton({
-                      name: secondaryButtonName,
-                      datas: options.buttonDatas,
-                      iconDatas: options.iconDatas,
-                      tooltipDatas: options.tooltipDatas
+              {# Content text #}
+              {% if content %}
+                <div
+                  class="{{ contentClasses }}"
+                  data-section-content
+                >
+                  <p>{{ content }}</p>
+                </div>
+              {% endif %}
+
+              {# Call-to-action buttons #}
+              {% if primaryButtonName or secondaryButtonName %}
+                <div
+                  class="{{ buttonsClasses }}"
+                  data-section-buttons
+                >
+
+                  {# Primary button #}
+                  {% if primaryButtonName %}
+                    {{ renderButton({
+                        name: primaryButtonName,
+                        datas: options.buttonDatas,
+                        iconDatas: options.iconDatas,
+                        tooltipDatas: options.tooltipDatas
+                    }) }}
+                  {% endif %}
+
+                  {# Secondary button #}
+                  {% if secondaryButtonName %}
+                    {{ renderButton({
+                        name: secondaryButtonName,
+                        datas: options.buttonDatas,
+                        iconDatas: options.iconDatas,
+                        tooltipDatas: options.tooltipDatas
+                    }) }}
+                  {% endif %}
+
+                </div>
+              {% endif %}
+
+            </div>
+
+            {# Right column - Subheading #}
+            <div
+              class="{{ rightColClasses }}"
+              data-section-right-column
+            >
+
+              {# Subheading #}
+              {% if subheadingName %}
+                <div
+                  class="{{ subheadingClasses }}"
+                  data-section-subheading
+                >
+                  {{ renderHeading({
+                      name: subheadingName,
+                      datas: options.headingDatas
                   }) }}
-                {% endif %}
+                </div>
+              {% endif %}
 
-              </div>
-            {% endif %}
-
-          </div>
-
-          {# Right column - Subheading #}
-          <div
-            class="{{ rightColClasses }}"
-            data-section-right-column
-          >
-
-            {# Subheading #}
-            {% if subheadingName %}
-              <div
-                class="{{ subheadingClasses }}"
-                data-section-subheading
-              >
-                {{ renderHeading({
-                    name: subheadingName,
-                    datas: options.headingDatas
-                }) }}
-              </div>
-            {% endif %}
+            </div>
 
           </div>
 

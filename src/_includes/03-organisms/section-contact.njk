@@ -75,13 +75,14 @@
           3.1 Wrapper Classes
           Description: Layout, Spacing
         --------------------------#}
-      {% set sectionClasses = "flex flex-col spacing-section-fluid-x spacing-section-fluid-y" %}
+      {% set sectionClasses = "px-[var(--grid-margin-mobile)] md:px-[var(--grid-margin-desktop)] spacing-section-fluid-y" %}
 
       {# --------------------------
           3.2 Layout Classes
           Description: Layout responsive grid 2 columns, Spacing, Alignment top
       --------------------------#}
-      {% set gridClasses = "flex flex-col gap-[var(--spacing-ui-maximal)] md:grid md:grid-cols-2 md:items-start" %}
+      {% set containerClasses = "w-full max-w-[var(--grid-workzone-mobile)] md:max-w-[var(--grid-workzone-desktop)] mx-auto" %}
+      {% set gridClasses = "flex flex-col md:grid md:grid-cols-2 md:items-start gap-[var(--grid-gutter)]" %}
 
       {# --------------------------
           3.3 Left Column Classes
@@ -106,48 +107,55 @@
       >
 
         <div
-          class="{{ gridClasses }}"
-          data-section-container
+        class="{{ containerClasses }}"
+        data-section-container
         >
 
-          {# Left column - Contact form #}
           <div
-            class="{{ leftColClasses }}"
-            data-section-column="left"
+            class="{{ gridClasses }}"
+            data-section-grid
           >
 
-            {% if leftForm %}
-              {{ renderListForm({
-                  name: leftForm,
-                  datas: options.formDatas,
-                  inputDatas: options.inputDatas
-              }) }}
+            {# Left column - Contact form #}
+            <div
+              class="{{ leftColClasses }}"
+              data-section-column="left"
+            >
 
-              <div class="self-start">
-                {{ renderButton({
-                    name: buttonName,
-                    datas: options.buttonDatas,
-                    iconDatas: options.iconDatas,
-                    tooltipDatas: options.tooltipDatas
+              {% if leftForm %}
+                {{ renderListForm({
+                    name: leftForm,
+                    datas: options.formDatas,
+                    inputDatas: options.inputDatas
                 }) }}
-              </div>
-            {% endif %}
 
-          </div>
+                <div class="self-start">
+                  {{ renderButton({
+                      name: buttonName,
+                      datas: options.buttonDatas,
+                      iconDatas: options.iconDatas,
+                      tooltipDatas: options.tooltipDatas
+                  }) }}
+                </div>
+              {% endif %}
 
-          {# Right column - Nested section-accessibility organism #}
-          <div
-            class="{{ rightColClasses }}"
-            data-section-column="right"
-          >
+            </div>
 
-            {% if rightSection %}
-              {{ renderSectionAccessibility({
-                  name: rightSection,
-                  datas: options.sectionA11yDatas,
-                  headingDatas: options.headingDatas
-              }) }}
-            {% endif %}
+            {# Right column - Nested section-accessibility organism #}
+            <div
+              class="{{ rightColClasses }}"
+              data-section-column="right"
+            >
+
+              {% if rightSection %}
+                {{ renderSectionAccessibility({
+                    name: rightSection,
+                    datas: options.sectionA11yDatas,
+                    headingDatas: options.headingDatas
+                }) }}
+              {% endif %}
+
+            </div>
 
           </div>
 
