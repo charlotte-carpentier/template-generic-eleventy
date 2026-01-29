@@ -347,9 +347,9 @@
   --spacing-section-compact: var(--spacing-12);
   --spacing-section-default: var(--spacing-16);
   --spacing-section-comfortable: var(--spacing-20);
-  --spacing-section-maximal: var(--spacing-24)
+  --spacing-section-maximal: var(--spacing-24);
 
-  /* Section - Fluid (Padding sections) */;
+  /* Section - Fluid (Padding sections) */
   --spacing-section-fluid-y: clamp(
     var(--spacing-section-compact),
     calc(var(--spacing-section-compact) + (var(--spacing-section-comfortable) - var(--spacing-section-compact)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
