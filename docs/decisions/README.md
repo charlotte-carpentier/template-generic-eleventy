@@ -30,7 +30,9 @@ ADR helps maintain clarity on why certain design patterns or technical approache
 | [006](./006-link-typography.md) | Link Typography | Accepted | 2026-01-16 |
 | [007](./007-form-controls-sizing.md) | Form Controls Sizing Strategy | Accepted | 2026-01-16 |
 | [008](./008-modal-overlay.md) | Modal Overlay Strategy | Accepted | 2026-01-22 |
+| [009](./009-spacing-tokens.md) | Spacing Tokens Architecture | Accepted | 2026-01-27 |
 | [010](./010-css-units.md) | CSS Units Strategy | Accepted | 2026-01-28 |
+| [011](./011-grid-tokens.md) | Grid Tokens Architecture | Accepted | 2026-01-29 |
 
 ---
 
