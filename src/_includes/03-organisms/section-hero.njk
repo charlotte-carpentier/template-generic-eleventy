@@ -79,13 +79,14 @@
           3.1 Wrapper Classes
           Description: Layout, Spacing, Background
         --------------------------#}
-      {% set sectionClasses = "flex flex-col spacing-section-fluid-x spacing-section-fluid-y" %}
+      {% set sectionClasses = "px-[var(--grid-margin-mobile)] md:px-[var(--grid-margin-desktop)] spacing-section-fluid-y" %}
 
       {# --------------------------
           3.2 Layout Classes
           Description: Layout responsive grid 2 columns, Spacing
         --------------------------#}
-      {% set gridClasses = "flex flex-col gap-[var(--spacing-ui-maximal)] md:grid md:grid-cols-2 md:items-start" %}
+      {% set containerClasses = "w-full max-w-[var(--grid-workzone-mobile)] md:max-w-[var(--grid-workzone-desktop)] mx-auto" %}
+      {% set gridClasses = "flex flex-col md:grid md:grid-cols-2 md:items-start gap-[var(--grid-gutter)]" %}
 
       {# --------------------------
           3.3 Left Column Classes
@@ -140,101 +141,108 @@
       >
 
         <div
-          class="{{ gridClasses }}"
+          class="{{ containerClasses }}"
           data-section-container
         >
 
-          {# Left column - Content #}
           <div
-            class="{{ leftColClasses }}"
-            data-section-column="left"
+            class="{{ gridClasses }}"
+            data-section-grid
           >
 
-            {# Heading #}
-            {% if headingName %}
-              <div
-                class="{{ headingClasses }}"
-                data-section-heading
-              >
-                {{ renderHeading({
-                    name: headingName,
-                    datas: options.headingDatas
-                }) }}
-              </div>
-            {% endif %}
+            {# Left column - Content #}
+            <div
+              class="{{ leftColClasses }}"
+              data-section-column="left"
+            >
 
-            {# Subheading #}
-            {% if subheadingName %}
-              <div
-                class="{{ subheadingClasses }}"
-                data-section-subheading
-              >
-                {{ renderHeading({
-                    name: subheadingName,
-                    datas: options.headingDatas
-                }) }}
-              </div>
-            {% endif %}
-
-            {# Content text #}
-            {% if content %}
-              <div
-                class="{{ contentClasses }}"
-                data-section-content
-              >
-                <p>{{ content }}</p>
-              </div>
-            {% endif %}
-
-            {# Call-to-action buttons #}
-            {% if primaryButtonName or secondaryButtonName %}
-              <div
-                class="{{ buttonsClasses }}"
-                data-section-buttons
-              >
-
-                {# Primary button #}
-                {% if primaryButtonName %}
-                  {{ renderButton({
-                      name: primaryButtonName,
-                      datas: options.buttonDatas,
-                      iconDatas: options.iconDatas,
-                      tooltipDatas: options.tooltipDatas
+              {# Heading #}
+              {% if headingName %}
+                <div
+                  class="{{ headingClasses }}"
+                  data-section-heading
+                >
+                  {{ renderHeading({
+                      name: headingName,
+                      datas: options.headingDatas
                   }) }}
-                {% endif %}
+                </div>
+              {% endif %}
 
-                {# Secondary button #}
-                {% if secondaryButtonName %}
-                  {{ renderButton({
-                      name: secondaryButtonName,
-                      datas: options.buttonDatas,
-                      iconDatas: options.iconDatas,
-                      tooltipDatas: options.tooltipDatas
+              {# Subheading #}
+              {% if subheadingName %}
+                <div
+                  class="{{ subheadingClasses }}"
+                  data-section-subheading
+                >
+                  {{ renderHeading({
+                      name: subheadingName,
+                      datas: options.headingDatas
                   }) }}
-                {% endif %}
+                </div>
+              {% endif %}
 
-              </div>
-            {% endif %}
+              {# Content text #}
+              {% if content %}
+                <div
+                  class="{{ contentClasses }}"
+                  data-section-content
+                >
+                  <p>{{ content }}</p>
+                </div>
+              {% endif %}
 
-          </div>
+              {# Call-to-action buttons #}
+              {% if primaryButtonName or secondaryButtonName %}
+                <div
+                  class="{{ buttonsClasses }}"
+                  data-section-buttons
+                >
 
-          {# Right column - Image #}
-          <div
-            class="{{ rightColClasses }}"
-            data-section-column="right"
-          >
+                  {# Primary button #}
+                  {% if primaryButtonName %}
+                    {{ renderButton({
+                        name: primaryButtonName,
+                        datas: options.buttonDatas,
+                        iconDatas: options.iconDatas,
+                        tooltipDatas: options.tooltipDatas
+                    }) }}
+                  {% endif %}
 
-            {% if imageName %}
-              <div
-                class="{{ imageClasses }}"
-                data-section-image
-              >
-                {{ renderImage({
-                    name: imageName,
-                    datas: options.imageDatas
-                }) }}
-              </div>
-            {% endif %}
+                  {# Secondary button #}
+                  {% if secondaryButtonName %}
+                    {{ renderButton({
+                        name: secondaryButtonName,
+                        datas: options.buttonDatas,
+                        iconDatas: options.iconDatas,
+                        tooltipDatas: options.tooltipDatas
+                    }) }}
+                  {% endif %}
+
+                </div>
+              {% endif %}
+
+            </div>
+
+            {# Right column - Image #}
+            <div
+              class="{{ rightColClasses }}"
+              data-section-column="right"
+            >
+
+              {% if imageName %}
+                <div
+                  class="{{ imageClasses }}"
+                  data-section-image
+                >
+                  {{ renderImage({
+                      name: imageName,
+                      datas: options.imageDatas
+                  }) }}
+                </div>
+              {% endif %}
+
+            </div>
 
           </div>
 

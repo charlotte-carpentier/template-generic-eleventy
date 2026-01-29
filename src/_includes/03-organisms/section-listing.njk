@@ -84,13 +84,14 @@
           3.1 Wrapper Classes
           Description: Layout, Spacing, Background
         --------------------------#}
-      {% set sectionClasses = "flex flex-col spacing-section-fluid-x spacing-section-fluid-y" %}
+      {% set sectionClasses = "px-[var(--grid-margin-mobile)] md:px-[var(--grid-margin-desktop)] spacing-section-fluid-y" %}
 
       {# --------------------------
           3.2 Layout Classes
           Description: Layout vertical, Spacing between sections
         --------------------------#}
-      {% set containerClasses = "flex flex-col gap-[var(--spacing-ui-maximal)]" %}
+      {% set containerClasses = "w-full max-w-[var(--grid-workzone-mobile)] md:max-w-[var(--grid-workzone-desktop)] mx-auto" %}
+      {% set gridClasses = "flex flex-col gap-[var(--spacing-ui-maximal)]" %}
 
       {# --------------------------
           3.3 Heading Wrapper Classes
@@ -102,7 +103,7 @@
           3.4 Cards Grid Classes
           Description: Layout responsive grid with breakpoints, Spacing, Override card width
       --------------------------#}
-      {% set cardsGridClasses = "grid grid-cols-1 gap-[var(--spacing-ui-comfortable)] sm:grid-cols-2 lg:grid-cols-4 md:gap-[var(--spacing-ui-maximal)]" %}
+      {% set cardsGridClasses = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[var(--grid-gutter)] [&>*]:max-w-[var(--grid-col-4)] [&>*]:mx-auto" %}
 
       {# --------------------------
           3.5 Pagination Wrapper Classes
@@ -125,96 +126,103 @@
           data-section-container
         >
 
-          {# Section heading #}
-          {% if headingName %}
-            <div
-              class="{{ headingClasses }}"
-              data-section-heading
-            >
-              {{ renderHeading({
-                  name: headingName,
-                  datas: options.headingDatas
-              }) }}
-            </div>
-          {% endif %}
-
-          {# Cards grid - Loop on paginated items (articles) #}
           <div
-            class="{{ cardsGridClasses }}"
-            data-section-cards
-            data-items-per-page="{{ itemsPerPage }}"
+            class="{{ gridClasses }}"
+            data-section-grid
           >
-            {% if options.items %}
-              {% for article in options.items %}
-                {{ renderCard({
-                    name: "articleCard",
-                    datas: [{
-                      name: "articleCard",
-                      headingName: article.data.title,
-                      content: article.data.excerpt or (article.templateContent | striptags | truncate(150)),
-                      buttonName: "readMore",
-                      tags: article.data.tags
-                    }],
-                    headingDatas: [{
-                      name: article.data.title,
-                      text: article.data.title,
-                      level: 3
-                    }],
-                    buttonDatas: [{
-                      name: "readMore",
-                      text: "Lire l'article",
-                      url: article.url,
-                      variant: "primary"
-                    }],
-                    iconDatas: options.iconDatas,
-                    tooltipDatas: options.tooltipDatas
-                }) }}
-              {% endfor %}
-            {% elif cardTags and options.cardDatas %}
-              {# Fallback: original cardTags logic for demo/non-paginated usage #}
-              {% set displayedCards = 0 %}
-              {% for n in range(0, 4) %}
-                {% for card in options.cardDatas %}
-                  {% if card.tags and displayedCards < itemsPerPage %}
-                    {% for tag in cardTags %}
-                      {% if tag in card.tags and displayedCards < itemsPerPage %}
-                        {{ renderCard({
-                            name: card.name,
-                            datas: options.cardDatas,
-                            lockupDatas: options.lockupDatas,
-                            imageDatas: options.imageDatas,
-                            headingDatas: options.headingDatas,
-                            buttonDatas: options.buttonDatas,
-                            iconDatas: options.iconDatas,
-                            tooltipDatas: options.tooltipDatas
-                        }) }}
-                        {% set displayedCards = displayedCards + 1 %}
-                      {% endif %}
-                    {% endfor %}
-                  {% endif %}
-                {% endfor %}
-              {% endfor %}
-            {% endif %}
-          </div>
 
-          {# Pagination - Optional #}
-          {% if paginationName %}
+            {# Section heading #}
+            {% if headingName %}
+              <div
+                class="{{ headingClasses }}"
+                data-section-heading
+              >
+                {{ renderHeading({
+                    name: headingName,
+                    datas: options.headingDatas
+                }) }}
+              </div>
+            {% endif %}
+
+            {# Cards grid - Loop on paginated items (articles) #}
             <div
-              class="{{ paginationClasses }}"
-              data-section-pagination
+              class="{{ cardsGridClasses }}"
+              data-section-cards
+              data-items-per-page="{{ itemsPerPage }}"
             >
-            {{ renderPagination({
-                name: paginationName,
-                datas: options.paginationDatas,
-                pagination: options.pagination,
-                totalItems: options.totalItems,
-                selectDatas: options.selectDatas,
-                buttonDatas: options.buttonDatas,
-                iconDatas: options.iconDatas,
-                tooltipDatas: options.tooltipDatas
-            }) }}
+              {% if options.items %}
+                {% for article in options.items %}
+                  {{ renderCard({
+                      name: "articleCard",
+                      datas: [{
+                        name: "articleCard",
+                        headingName: article.data.title,
+                        content: article.data.excerpt or (article.templateContent | striptags | truncate(150)),
+                        buttonName: "readMore",
+                        tags: article.data.tags
+                      }],
+                      headingDatas: [{
+                        name: article.data.title,
+                        text: article.data.title,
+                        level: 3
+                      }],
+                      buttonDatas: [{
+                        name: "readMore",
+                        text: "Lire l'article",
+                        url: article.url,
+                        variant: "primary"
+                      }],
+                      iconDatas: options.iconDatas,
+                      tooltipDatas: options.tooltipDatas
+                  }) }}
+                {% endfor %}
+              {% elif cardTags and options.cardDatas %}
+                {# Fallback: original cardTags logic for demo/non-paginated usage #}
+                {% set displayedCards = 0 %}
+                {% for n in range(0, 4) %}
+                  {% for card in options.cardDatas %}
+                    {% if card.tags and displayedCards < itemsPerPage %}
+                      {% for tag in cardTags %}
+                        {% if tag in card.tags and displayedCards < itemsPerPage %}
+                          {{ renderCard({
+                              name: card.name,
+                              datas: options.cardDatas,
+                              lockupDatas: options.lockupDatas,
+                              imageDatas: options.imageDatas,
+                              headingDatas: options.headingDatas,
+                              buttonDatas: options.buttonDatas,
+                              iconDatas: options.iconDatas,
+                              tooltipDatas: options.tooltipDatas
+                          }) }}
+                          {% set displayedCards = displayedCards + 1 %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                  {% endfor %}
+                {% endfor %}
+              {% endif %}
             </div>
-          {% endif %}
+
+            {# Pagination - Optional #}
+            {% if paginationName %}
+              <div
+                class="{{ paginationClasses }}"
+                data-section-pagination
+              >
+              {{ renderPagination({
+                  name: paginationName,
+                  datas: options.paginationDatas,
+                  pagination: options.pagination,
+                  totalItems: options.totalItems,
+                  selectDatas: options.selectDatas,
+                  buttonDatas: options.buttonDatas,
+                  iconDatas: options.iconDatas,
+                  tooltipDatas: options.tooltipDatas
+              }) }}
+              </div>
+            {% endif %}
+
+          </div>
 
         </div>
 

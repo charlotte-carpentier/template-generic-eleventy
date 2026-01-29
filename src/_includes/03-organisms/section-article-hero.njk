@@ -65,13 +65,13 @@
           3.1 Wrapper Classes
           Description: Layout, Spacing, Background
         --------------------------#}
-      {% set sectionClasses = "flex flex-col spacing-section-fluid-x spacing-section-fluid-y" %}
+      {% set sectionClasses = "px-[var(--grid-margin-mobile)] md:px-[var(--grid-margin-desktop)] spacing-section-fluid-y" %}
 
       {# --------------------------
           3.2 Layout Classes
           Description: Layout, Sizing max-width centered desktop, Spacing
         --------------------------#}
-      {% set containerClasses = "flex flex-col gap-[var(--spacing-ui-comfortable)] w-full md:max-w-3xl md:mx-auto" %}
+      {% set containerClasses = "flex flex-col gap-[var(--spacing-ui-comfortable)] w-full max-w-[var(--grid-workzone-mobile)] md:max-w-[var(--grid-workzone-desktop)] mx-auto" %}
 
       {# --------------------------
           3.3 Image Wrapper Classes

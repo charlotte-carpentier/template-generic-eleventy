@@ -350,11 +350,6 @@
   --spacing-section-maximal: var(--spacing-24)
 
   /* Section - Fluid (Padding sections) */;
-  --spacing-section-fluid-x: clamp(
-    var(--spacing-ui-default),
-    calc(var(--spacing-ui-default) + (var(--spacing-ui-maximal) - var(--spacing-ui-default)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
-    var(--spacing-ui-maximal)
-  );
   --spacing-section-fluid-y: clamp(
     var(--spacing-section-compact),
     calc(var(--spacing-section-compact) + (var(--spacing-section-comfortable) - var(--spacing-section-compact)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
@@ -500,8 +495,6 @@
 }
 
 /* Spacing (Section - Fluid) */
-@utility spacing-section-fluid-x { padding-inline: var(--spacing-section-fluid-x); }
-
 @utility spacing-section-fluid-y { padding-block: var(--spacing-section-fluid-y); }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
