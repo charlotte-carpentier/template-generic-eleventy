@@ -34,7 +34,7 @@ export default function(eleventyConfig) {
     return str.toString().toLowerCase().endsWith(suffix.toLowerCase());
   });
 
-  // Math filters (NEW)
+  // Math filters
   eleventyConfig.addFilter("min", (arr) => Math.min(...arr));
   eleventyConfig.addFilter("max", (arr) => Math.max(...arr));
 
@@ -75,6 +75,26 @@ export default function(eleventyConfig) {
     }
 
     return null;
+  });
+
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  // Filter: Cards by Tags
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  /**
+   * Filter cards by tags with limit
+   * @param {Array} cards - Cards array
+   * @param {Array} tags - Tags to filter by
+   * @param {number} limit - Maximum results (default: Infinity, returns all matches)
+   * @returns {Array} Filtered cards
+   */
+  eleventyConfig.addFilter("filterCardsByTags", function(cards, tags, limit = Infinity) {
+    if (!cards || !Array.isArray(cards)) return [];
+    if (!tags || !Array.isArray(tags)) return [];
+
+    return cards
+      .filter(card => Array.isArray(card.tags) && card.tags.some(tag => tags.includes(tag)))
+      .slice(0, limit);
   });
 
   // --------------------------
