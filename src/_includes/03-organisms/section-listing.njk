@@ -177,28 +177,19 @@
                   }) }}
                 {% endfor %}
               {% elif cardTags and options.cardDatas %}
-                {# Fallback: original cardTags logic for demo/non-paginated usage #}
-                {% set displayedCards = 0 %}
-                {% for n in range(0, 4) %}
-                  {% for card in options.cardDatas %}
-                    {% if card.tags and displayedCards < itemsPerPage %}
-                      {% for tag in cardTags %}
-                        {% if tag in card.tags and displayedCards < itemsPerPage %}
-                          {{ renderCard({
-                              name: card.name,
-                              datas: options.cardDatas,
-                              lockupDatas: options.lockupDatas,
-                              imageDatas: options.imageDatas,
-                              headingDatas: options.headingDatas,
-                              buttonDatas: options.buttonDatas,
-                              iconDatas: options.iconDatas,
-                              tooltipDatas: options.tooltipDatas
-                          }) }}
-                          {% set displayedCards = displayedCards + 1 %}
-                        {% endif %}
-                      {% endfor %}
-                    {% endif %}
-                  {% endfor %}
+                {# Fallback: filter cards by tags for demo/non-paginated usage #}
+                {% set filteredCards = options.cardDatas | filterCardsByTags(cardTags, itemsPerPage) %}
+                {% for card in filteredCards %}
+                  {{ renderCard({
+                      name: card.name,
+                      datas: options.cardDatas,
+                      lockupDatas: options.lockupDatas,
+                      imageDatas: options.imageDatas,
+                      headingDatas: options.headingDatas,
+                      buttonDatas: options.buttonDatas,
+                      iconDatas: options.iconDatas,
+                      tooltipDatas: options.tooltipDatas
+                  }) }}
                 {% endfor %}
               {% endif %}
             </div>

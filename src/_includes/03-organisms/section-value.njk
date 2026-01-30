@@ -276,30 +276,22 @@
                 data-section-cards
               >
                 {% if cardTags and options.cardDatas %}
-                  {# Display 3 cards for demo - Repeat cards to fill grid #}
-                  {% set displayedCards = 0 %}
-                  {% for n in range(0, 3) %}
-                    {% for card in options.cardDatas %}
-                      {% if card.tags and displayedCards < 3 %}
-                        {% for tag in cardTags %}
-                          {% if tag in card.tags and displayedCards < 3 %}
-                            {{ renderCard({
-                                name: card.name,
-                                datas: options.cardDatas,
-                                lockupDatas: options.lockupDatas,
-                                imageDatas: options.imageDatas,
-                                headingDatas: options.headingDatas,
-                                buttonDatas: options.buttonDatas,
-                                iconDatas: options.iconDatas,
-                                tooltipDatas: options.tooltipDatas
-                            }) }}
-                            {% set displayedCards = displayedCards + 1 %}
-                          {% endif %}
-                        {% endfor %}
-                      {% endif %}
-                    {% endfor %}
+                  {# Filter cards by tags #}
+                  {% set filteredCards = options.cardDatas | filterCardsByTags(cardTags, 3) %}
+                  {% for card in filteredCards %}
+                    {{ renderCard({
+                        name: card.name,
+                        datas: options.cardDatas,
+                        lockupDatas: options.lockupDatas,
+                        imageDatas: options.imageDatas,
+                        headingDatas: options.headingDatas,
+                        buttonDatas: options.buttonDatas,
+                        iconDatas: options.iconDatas,
+                        tooltipDatas: options.tooltipDatas
+                    }) }}
                   {% endfor %}
                 {% endif %}
+
               </div>
 
             {% endif %}
