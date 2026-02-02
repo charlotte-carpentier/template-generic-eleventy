@@ -13,16 +13,14 @@ export default function(eleventyConfig) {
     './src/assets/icons',      // Favicons, UI icons, sprites
     './src/assets/images',     // Images (raw)
     './src/assets/downloads',  // PDFs, CVs, other downloadable files
-    './src/assets/scripts',    // JS files (no bundler yet)
     './src/admin',             // Netlify CMS admin files
     './src/docs',              // Documentation files
   ].forEach(path => eleventyConfig.addPassthroughCopy(path));
 
-  // --------------------------
-  // Shortcodes
-  // --------------------------
-  // Example: {% year %} outputs the current year
-  eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
+  // JS files (no tests)
+  eleventyConfig.addPassthroughCopy('./src/assets/scripts', {
+    filter: path => !path.endsWith('.test.js')
+  });
 
   // --------------------------
   // Filters

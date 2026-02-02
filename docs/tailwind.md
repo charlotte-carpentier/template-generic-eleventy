@@ -179,7 +179,7 @@ Output: `public/output.css` (auto-included in `base.njk`)
 ## Best Practices
 
 1. **Utility-first mindset** - Use Tailwind classes directly in templates
-2. **Use design tokens** - `bg-[var(--color-*)]` instead of hex colors
+2. **Use design tokens** - `bg-[var(--color-)]` instead of hex colors
 3. **Minimize custom CSS** - Only when Tailwind truly insufficient
 4. **Follow BEM** - For custom classes (`.block__element--modifier`)
 5. **Comment why** - Explain why custom CSS was necessary
