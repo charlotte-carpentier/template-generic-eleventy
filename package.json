@@ -13,7 +13,7 @@
     "build": "npm run clean && cross-env NODE_ENV=production npm run test:run && npm run build:images && npm run build:css && eleventy",
     "test": "vitest",
     "lint": "npm run lint:css",
-    "build:css": "postcss src/assets/styles/input.css -o public/output.css",
+    "build:css": "cross-env NODE_ENV=production postcss src/assets/styles/input.css -o public/output.css",
     "build:images": "node bin/generate-image-metadata.js",
     "watch:css": "postcss src/assets/styles/input.css -o public/output.css -w",
     "test:coverage": "vitest run --coverage",
