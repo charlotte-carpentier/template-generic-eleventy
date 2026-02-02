@@ -20,8 +20,17 @@
       "variant": "default",
       "width": 608,
       "height": 608,
-      "srcset": "/img/placeholder-square-400.webp 400w, /img/placeholder-square-608.webp 608w",
-      "sizes": "(max-width: 767px) 100vw, 608px"
+      "sizes": "(max-width: 767px) 100vw, 608px",
+      "sources": [
+        {
+          "type": "image/avif",
+          "srcset": "/img/placeholder-square-400.avif 400w, /img/placeholder-square-608.avif 608w"
+        },
+        {
+          "type": "image/webp",
+          "srcset": "/img/placeholder-square-400.webp 400w, /img/placeholder-square-608.webp 608w"
+        }
+      ]
     },
     {
       "name": "demoImage2",
@@ -30,8 +39,17 @@
       "variant": "default",
       "width": 608,
       "height": 456,
-      "srcset": "/img/placeholder-landscape-400.webp 400w, /img/placeholder-landscape-608.webp 608w",
-      "sizes": "(max-width: 767px) 100vw, 608px"
+      "sizes": "(max-width: 767px) 100vw, 608px",
+      "sources": [
+        {
+          "type": "image/avif",
+          "srcset": "/img/placeholder-landscape-400.avif 400w, /img/placeholder-landscape-608.avif 608w"
+        },
+        {
+          "type": "image/webp",
+          "srcset": "/img/placeholder-landscape-400.webp 400w, /img/placeholder-landscape-608.webp 608w"
+        }
+      ]
     },
     {
       "name": "demoImage3",
@@ -40,8 +58,17 @@
       "variant": "default",
       "width": 608,
       "height": 342,
-      "srcset": "/img/placeholder-wide-400.webp 400w, /img/placeholder-wide-608.webp 608w",
-      "sizes": "(max-width: 767px) 100vw, 608px"
+      "sizes": "(max-width: 767px) 100vw, 608px",
+      "sources": [
+        {
+          "type": "image/avif",
+          "srcset": "/img/placeholder-wide-400.avif 400w, /img/placeholder-wide-608.avif 608w"
+        },
+        {
+          "type": "image/webp",
+          "srcset": "/img/placeholder-wide-400.webp 400w, /img/placeholder-wide-608.webp 608w"
+        }
+      ]
     },
     {
       "name": "demoAvatar1",

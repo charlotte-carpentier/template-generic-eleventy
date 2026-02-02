@@ -5,7 +5,7 @@
 
 /**
  * @fileoverview Generates responsive image metadata using Eleventy Image Plugin
- * Enriches image.json with width, height, srcset, and sizes automatically
+ * Enriches image.json with width, height, sources (AVIF + WebP) automatically
  * Preserves source filenames and cleans obsolete properties
  * Runs during build process before Eleventy compilation
  * @module bin/generate-image-metadata
@@ -31,7 +31,7 @@ const OUTPUT_DIR = './public/img/';
 const URL_PATH = '/img/';
 
 const WIDTHS = [400, 800, 1200];
-const FORMATS = ['webp'];
+const FORMATS = ['avif', 'webp'];
 
 const VARIANT_DEFAULT = 'default';
 const VARIANT_AVATAR = 'avatar';
@@ -83,7 +83,7 @@ async function generateImageMetadata() {
 
 /**
  * Process single image and enrich with metadata
- * Cleans obsolete properties and preserves source filename
+ * Generates AVIF + WebP sources for <picture> element
  * @param {Object} image - Image object from JSON (mutated in place)
  */
 async function processImage(image) {
@@ -107,31 +107,47 @@ async function processImage(image) {
       },
     });
 
-    const webpImages = metadata.webp;
-
-    if (!webpImages || webpImages.length === 0) {
-      throw new Error(`No WebP images generated for ${image.name}`);
-    }
-
+    // Get largest image for dimensions
+    const webpImages = metadata.webp || [];
     const largestImage = webpImages[webpImages.length - 1];
 
-    const srcset = webpImages
-      .map(img => `${img.url} ${img.width}w`)
-      .join(', ');
+    if (!largestImage) {
+      throw new Error(`No images generated for ${image.name}`);
+    }
 
-    const maxWidth = largestImage.width;
-    const sizes = `(max-width: 767px) 100vw, ${maxWidth}px`;
+    // Build sources array for <picture> element
+    const sources = [];
 
-    // Clean obsolete properties
-    delete image.sources;
+    // AVIF source
+    if (metadata.avif) {
+      sources.push({
+        type: 'image/avif',
+        srcset: metadata.avif
+          .map(img => `${img.url} ${img.width}w`)
+          .join(', ')
+      });
+    }
+
+    // WebP source
+    if (metadata.webp) {
+      sources.push({
+        type: 'image/webp',
+        srcset: metadata.webp
+          .map(img => `${img.url} ${img.width}w`)
+          .join(', ')
+      });
+    }
 
     // Update metadata
     image.width = largestImage.width;
     image.height = largestImage.height;
-    image.srcset = srcset;
-    image.sizes = sizes;
+    image.sources = sources;
+    image.sizes = `(max-width: 767px) 100vw, ${largestImage.width}px`;
 
-    console.log(`[Image Metadata] Processed ${image.name} (${image.width}x${image.height})`);
+    // Clean obsolete properties
+    delete image.srcset;
+
+    console.log(`[Image Metadata] Processed ${image.name} (${image.width}x${image.height}) - AVIF + WebP`);
 
   } catch (error) {
     console.error(`[Image Metadata] Failed to process ${image.name}:`, error.message);
