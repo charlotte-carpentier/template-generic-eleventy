@@ -11,6 +11,8 @@ Built on JavaScript, HTML5, and CSS3.
 - Generate static sites using Eleventy
 - Modular templates with Nunjucks (atoms, molecules, organisms)
 - Utility-first responsive CSS with TailwindCSS v4
+- Accessibility-first (WCAG 2.2 AA compliant, Lighthouse 100/100)
+- Eco-designed & performance-optimized (EcoIndex Grade A, RGESN 2024 compliant)
 - Headless CMS integration via Decap CMS
 - Optional integrations: Google Analytics, Axeptio, Font Awesome
 - Automated asset scripts using Bash scripts
