@@ -57,7 +57,7 @@
     - site.analytics.ga4: GA4 measurement ID
 
   @created 2025-01-15
-  @updated 2025-01-24 - Added flag-icons CDN for country flags
+  @updated 2026-02-03 - Migrated inline scripts to external files (CSP security)
 #}
 
 <!DOCTYPE html>
@@ -178,7 +178,10 @@
     <link rel="stylesheet" href="/output.css"/>
 
     {# ----- Flag Icons Library (CDN) ----- #}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"/>
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"
+      integrity="sha384-8olrmTcwXL3OYMeB+2ok8jx9/U/FZxeLnoRWdu1Pyi+lakrkqoI7hfysfQF5Q1Xx"
+      crossorigin="anonymous"/>
 
     {% if site.iconLibrary.fontAwesome %}
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
@@ -190,43 +193,17 @@
 
     {# ----- Cookie Consent (Axeptio) ----- #}
     {% if site.cookieConsent.provider === "axeptio" and site.cookieConsent.clientId %}
-      <script>
-        window.axeptioSettings = {
-          clientId: "{{ site.cookieConsent.clientId }}",
-          cookiesVersion: "{{ site.cookieConsent.cookiesVersion }}",
-          googleConsentMode: {
-            default: {
-              analytics_storage: "denied",
-              ad_storage: "denied",
-              ad_user_data: "denied",
-              ad_personalization: "denied",
-              wait_for_update: 500
-            }
-          }
-        };
-
-        (function (d, s) {
-          var t = d.getElementsByTagName(s)[0],
-            e = d.createElement(s);
-          e.async = true;
-          e.src = "//static.axept.io/sdk.js";
-          t.parentNode.insertBefore(e, t);
-        })(document, "script");
+      <script src="/assets/scripts/core/axeptio.js"
+        data-client-id="{{ site.cookieConsent.clientId }}"
+        data-cookies-version="{{ site.cookieConsent.cookiesVersion }}">
       </script>
     {% endif %}
 
     {# ----- Google Analytics 4 ----- #}
     {% if site.analytics.ga4 %}
       <script async="async" src="https://www.googletagmanager.com/gtag/js?id={{ site.analytics.ga4 }}"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-
-        gtag('js', new Date());
-        gtag('config', '{{ site.analytics.ga4 }}', {
-          anonymize_ip: true,
-          cookie_flags: 'SameSite=None;Secure'
-        });
+      <script src="/assets/scripts/core/analytics.js"
+        data-measurement-id="{{ site.analytics.ga4 }}">
       </script>
     {% endif %}
   </head>
@@ -234,8 +211,8 @@
   <body class="min-h-screen flex flex-col">
 
   {# Skip link - WCAG 2.4.1 Bypass Blocks #}
-  <a
-    href="#main-content"
+
+  <a href="#main-content"
     class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-[var(--spacing-ui-default)] focus:py-[var(--spacing-ui-minimal)] focus:bg-[var(--color-global-white)] focus:text-[var(--color-global-default)] focus:rounded-[var(--radius-default)] focus:shadow-[var(--elevation-floating)]"
   >
     Passer au contenu principal
@@ -285,17 +262,7 @@
     <script src="/assets/scripts/main.js" type="module" defer></script>
 
     {# ----- Netlify Identity redirect (for Decap CMS login) ----- #}
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", (user) => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-    </script>
+    <script src="/assets/scripts/core/netlify-identity.js"></script>
 
   </body>
 </html>
