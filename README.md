@@ -111,6 +111,7 @@ template-generic-eleventy/
 │   │   ├── article.njk           # Article template (DEPRECATED - replaced by post.njk layout)
 │   │   └── contact.njk
 │   ├── robots.njk                # Search engine crawling rules (generates robots.txt)
+│   ├── security.njk              # Security contact (RFC 9116, generates /.well-known/security.txt)
 │   └── sitemap.njk               # SEO sitemap generator (generates sitemap.xml)
 ├── .eleventy.js                  # Eleventy configuration
 ├── netlify.toml                  # Netlify / Decap deployment configuration

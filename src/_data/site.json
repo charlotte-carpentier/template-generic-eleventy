@@ -10,10 +10,11 @@
   "title": "Site Title",
   "description": "Site description for SEO and social sharing",
   "url": "https://example.com",
+  "domain": "example.com",
   "language": "fr",
   "locale": "fr_FR",
   "themeColor": "#ffffff",
-  "author": "Nom auteur",
+  "author": "Author name",
   "twitterHandle": "@handle",
   "socialImage": "/assets/images/social-share.jpg",
   "favicon": {
