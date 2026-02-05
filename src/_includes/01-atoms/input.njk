@@ -24,7 +24,7 @@
     - Character counter: Auto-update on input event
 
   @created 2025-01-15
-  @updated 2025-01-06
+  @updated 2026-02-03 (Security Phase: autocomplete + patterns WCAG 1.3.5)
 #}
 
 {% macro renderInput(options) %}
@@ -138,6 +138,7 @@
             {% if inputData.required %}required{% endif %}
             {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
             {% if inputData.pattern %}pattern="{{ inputData.pattern }}"{% endif %}
+            {% if inputData.autocomplete %}autocomplete="{{ inputData.autocomplete }}"{% endif %}
             {% if isDisabled %}disabled{% endif %}
             {% if inputData.ariaLabel %}aria-label="{{ inputData.ariaLabel }}"{% endif %}
             aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
@@ -159,6 +160,7 @@
               {% if inputData.required %}required{% endif %}
               {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
               {% if inputData.pattern %}pattern="{{ inputData.pattern }}"{% endif %}
+              {% if inputData.autocomplete %}autocomplete="{{ inputData.autocomplete }}"{% endif %}
               {% if isDisabled %}disabled{% endif %}
               {% if inputData.ariaLabel %}aria-label="{{ inputData.ariaLabel }}"{% endif %}
               aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
@@ -186,6 +188,7 @@
             aria-invalid="false"
             {% if inputData.required %}required{% endif %}
             {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
+            {% if inputData.autocomplete %}autocomplete="{{ inputData.autocomplete }}"{% endif %}
             {% if isDisabled %}disabled{% endif %}
             {% if inputData.ariaLabel %}aria-label="{{ inputData.ariaLabel }}"{% endif %}
             aria-describedby="{% if inputData.maxLength %}{{ inputId }}-count {% endif %}{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
@@ -212,6 +215,7 @@
                 data-error-message="{{ inputData.errorMessage }}"
                 aria-invalid="false"
                 {% if inputData.required %}required{% endif %}
+                {% if inputData.autocomplete %}autocomplete="{{ inputData.autocomplete }}"{% endif %}
                 {% if isDisabled %}disabled{% endif %}
                 {% if inputData.ariaLabel %}aria-label="{{ inputData.ariaLabel }}"{% endif %}
                 aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
@@ -274,6 +278,7 @@
             data-error-message="{{ inputData.errorMessage }}"
             aria-invalid="false"
             {% if inputData.required %}required{% endif %}
+            {% if inputData.autocomplete %}autocomplete="{{ inputData.autocomplete }}"{% endif %}
             {% if isDisabled %}disabled{% endif %}
             {% if inputData.ariaLabel %}aria-label="{{ inputData.ariaLabel }}"{% endif %}
             aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
@@ -293,6 +298,7 @@
             aria-invalid="false"
             {% if inputData.required %}required{% endif %}
             {% if inputData.maxLength %}maxlength="{{ inputData.maxLength }}"{% endif %}
+            {% if inputData.autocomplete %}autocomplete="{{ inputData.autocomplete }}"{% endif %}
             {% if isDisabled %}disabled{% endif %}
             {% if inputData.ariaLabel %}aria-label="{{ inputData.ariaLabel }}"{% endif %}
             aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
@@ -311,6 +317,7 @@
             data-error-message="{{ inputData.errorMessage }}"
             aria-invalid="false"
             {% if inputData.required %}required{% endif %}
+            {% if inputData.autocomplete %}autocomplete="{{ inputData.autocomplete }}"{% endif %}
             {% if isDisabled %}disabled{% endif %}
             {% if inputData.ariaLabel %}aria-label="{{ inputData.ariaLabel }}"{% endif %}
             aria-describedby="{% if inputData.patternMessage %}{{ inputId }}-help {% endif %}{{ inputId }}-error"
