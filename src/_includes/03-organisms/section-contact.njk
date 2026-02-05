@@ -29,6 +29,7 @@
     }) }}
 
   @created 2025-01-15
+  @updated 2026-02-03 (Security Phase: Netlify Forms + WCAG 2.2 AA)
 #}
 
 {% macro renderSectionContact(options) %}
@@ -123,20 +124,34 @@
             >
 
               {% if leftForm %}
-                {{ renderListForm({
-                    name: leftForm,
-                    datas: options.formDatas,
-                    inputDatas: options.inputDatas
-                }) }}
+                {# Netlify Forms wrapper for security + accessibility #}
+                <form
+                  method="POST"
+                  name="contact"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  class="flex flex-col gap-[var(--spacing-ui-default)]"
+                >
+                  {# Netlify Forms required hidden inputs #}
+                  <input type="hidden" name="form-name" value="contact" />
+                  <input type="hidden" name="bot-field" style="display:none" aria-hidden="true" />
 
-                <div class="self-start">
-                  {{ renderButton({
-                      name: buttonName,
-                      datas: options.buttonDatas,
-                      iconDatas: options.iconDatas,
-                      tooltipDatas: options.tooltipDatas
+                  {{ renderListForm({
+                      name: leftForm,
+                      datas: options.formDatas,
+                      inputDatas: options.inputDatas
                   }) }}
-                </div>
+
+                  <div class="self-start">
+                    {{ renderButton({
+                        name: buttonName,
+                        datas: options.buttonDatas,
+                        iconDatas: options.iconDatas,
+                        tooltipDatas: options.tooltipDatas
+                    }) }}
+                  </div>
+                </form>
+
               {% endif %}
 
             </div>

@@ -8,6 +8,7 @@
  * @fileoverview File upload with drag and drop - WCAG 2.2 AA compliant
  * @module molecules/block-drag-and-drop
  * @created 2025-01-15
+ * @updated 2026-02-03 (Security Phase: magic numbers validation + filename sanitization)
  */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -26,6 +27,20 @@ const CLASS_SUCCESS = 'drag-success';
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const ALLOWED_TYPES = [];
+
+// Magic numbers for file type validation (OWASP File Upload Security)
+const MAGIC_NUMBERS = {
+  'jpg': [0xFF, 0xD8, 0xFF],
+  'jpeg': [0xFF, 0xD8, 0xFF],
+  'png': [0x89, 0x50, 0x4E, 0x47],
+  'pdf': [0x25, 0x50, 0x44, 0x46],
+  'gif': [0x47, 0x49, 0x46, 0x38],
+  'webp': [0x52, 0x49, 0x46, 0x46],
+  'xlsx': [0x50, 0x4B, 0x03, 0x04],
+  'xls': [0xD0, 0xCF, 0x11, 0xE0],
+  'docx': [0x50, 0x4B, 0x03, 0x04],
+  'doc': [0xD0, 0xCF, 0x11, 0xE0]
+};
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Core Functions
@@ -145,7 +160,7 @@ function preventDefaults(e) {
  * @param {Object} options - Handler options
  * @returns {void}
  */
-function handleFiles({ files, container, input, status, config }) {
+async function handleFiles({ files, container, input, status, config }) {
   const dropzone = container.querySelector(SELECTOR_DROPZONE);
 
   dropzone?.classList.remove(CLASS_ERROR, CLASS_SUCCESS);
@@ -159,7 +174,8 @@ function handleFiles({ files, container, input, status, config }) {
 
   const validFiles = [];
   for (const file of fileArray) {
-    const validation = validateFile(file, config);
+    // Await async validation with magic numbers
+    const validation = await validateFile(file, config);
 
     if (!validation.valid) {
       announceError({ status, message: validation.error });
@@ -180,12 +196,13 @@ function handleFiles({ files, container, input, status, config }) {
 }
 
 /**
- * Validate file
+ * Validate file with extension + magic numbers (OWASP best practice)
  * @param {File} file - File to validate
  * @param {Object} config - Configuration
- * @returns {Object} Validation result
+ * @returns {Promise<Object>} Validation result
  */
-function validateFile(file, config) {
+async function validateFile(file, config) {
+  // 1. Check file size
   if (file.size > config.maxSize) {
     return {
       valid: false,
@@ -193,11 +210,41 @@ function validateFile(file, config) {
     };
   }
 
-  if (config.allowedTypes.length > 0 && !config.allowedTypes.includes(file.type)) {
+  // 2. Extract file extension
+  const ext = file.name.split('.').pop().toLowerCase();
+
+  // 3. Check allowed extensions (from data-allowed-types or default list)
+  const allowedExts = config.allowedTypes.length > 0
+    ? config.allowedTypes.map(t => t.toLowerCase().replace('.', ''))
+    : ['jpg', 'jpeg', 'png', 'pdf', 'doc', 'docx', 'xls', 'xlsx'];
+
+  if (!allowedExts.includes(ext)) {
     return {
       valid: false,
-      error: `File type not allowed (${file.type})`
+      error: `File type not allowed (${ext})`
     };
+  }
+
+  // 4. Validate magic numbers (first bytes of file)
+  const expectedMagic = MAGIC_NUMBERS[ext];
+
+  if (expectedMagic) {
+    try {
+      const bytes = await file.slice(0, 4).arrayBuffer();
+      const header = new Uint8Array(bytes);
+
+      const matches = expectedMagic.every((byte, i) => byte === header[i]);
+
+      if (!matches) {
+        return {
+          valid: false,
+          error: 'File content does not match extension (possible spoofing)'
+        };
+      }
+    } catch (error) {
+      console.error('Magic number validation error:', error);
+      // Allow file if validation fails (fallback to extension check)
+    }
   }
 
   return { valid: true };
@@ -223,7 +270,7 @@ function announceError({ status, message }) {
 }
 
 /**
- * Announce success to screen readers
+ * Announce success with sanitized filenames (OWASP Path Traversal prevention)
  * @param {Object} options - Announce options
  * @returns {void}
  */
@@ -231,14 +278,27 @@ function announceSuccess({ status, files }) {
   if (!status) return;
 
   const count = files.length;
-  const names = files.map(f => f.name).join(', ');
+  const sanitizedNames = files.map(f => sanitizeFilename(f.name));
 
-  status.textContent = `${count} file${count > 1 ? 's' : ''} selected: ${names}`;
+  status.textContent = `${count} file${count > 1 ? 's' : ''} selected: ${sanitizedNames.join(', ')}`;
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Utilities
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/**
+ * Sanitize filename to prevent path traversal attacks
+ * @param {string} filename - Original filename
+ * @returns {string} Sanitized filename
+ */
+function sanitizeFilename(filename) {
+  return filename
+    .replace(/[^a-zA-Z0-9._-]/g, '_')
+    .replace(/\.{2,}/g, '.')
+    .replace(/^\.+/, '')
+    .slice(0, 255);
+}
 
 /**
  * Format bytes to human readable
