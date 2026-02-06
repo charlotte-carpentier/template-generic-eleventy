@@ -128,6 +128,92 @@ Components and features to implement after template finalization (Phase 9 comple
 
 ---
 
+## Phase 14: Accessibility & Performance Audit
+
+### Contrast Testing
+
+**Status**: Not started  
+**Priority**: Critical (WCAG 2.2 AA mandatory)  
+**Tool**: [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
+
+**To test**:
+
+- [ ] All text/background pairs in `input.css` (primitives + tokens)
+- [ ] Button states (default, hover, active, disabled)
+- [ ] Form controls (input, select, checkbox, radio)
+- [ ] Links (default, hover, visited, focus)
+- [ ] Semantic colors (success, warning, error, info)
+
+**Target ratios**:
+
+- Normal text: ≥4.5:1
+- Large text / UI: ≥3:1
+
+---
+
+### Dark Mode Support
+
+**Status**: Not started  
+**Priority**: High (client demand 2026)  
+**Standard**: [prefers-color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
+
+**Implementation**:
+
+```css
+@media (prefers-color-scheme: dark) {
+  @theme {
+    /* Invert color tokens */
+    --color-global-default: var(--color-neutral-white);
+    --color-global-heading: var(--color-neutral-95);
+    /* ... */
+  }
+}
+```
+
+**To do**:
+
+- [ ] Define dark palette (inverse neutral scale)
+- [ ] Test all components dark mode
+- [ ] Document toggle implementation (optional user switch)
+
+---
+
+### High Contrast Mode
+
+**Status**: Not started  
+**Priority**: Medium (accessibility niche)  
+**Standard**: [prefers-contrast](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-contrast)
+
+**Implementation**:
+
+```css
+@media (prefers-contrast: high) {
+  @theme {
+    /* Increase contrast ratios */
+    --color-button-primary: var(--color-neutral-black);
+    /* ... */
+  }
+}
+```
+
+---
+
+### Grid Workzone Zoom Review
+
+**Status**: Not started  
+**Priority**: Low (design choice vs strict WCAG)  
+**Issue**: Current `--grid-workzone-*` fixed in px, doesn't scale with zoom 200%
+
+**Options**:
+
+1. Keep fixed (showcase sites = acceptable trade-off)
+2. Switch to `calc(100vw - ...)` for zoom-friendly
+3. Hybrid: max-width in px, padding in rem
+
+**Decision needed**: Discuss with client per project
+
+---
+
 ## Notes
 
 - Block-grid postponed due to complexity
