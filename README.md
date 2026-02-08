@@ -2,8 +2,12 @@
 
 ![Preview](./preview.png)
 
-Generic Eleventy template with TailwindCSS v4, Nunjucks, and Decap CMS.  
-Designed for modularity, maintainability, and reusability across projects.
+HAT is a handmade, artisanal design system for premium showcase websites and blogs.
+Built as an alternative to no-code solutions, it combines guaranteed performance metrics
+(Lighthouse 100/100, WCAG 2.2 AA, EcoIndex A) with full customization control.
+
+Starting from a modular skeleton, teams can rapidly build client projects while maintaining
+technical excellence in accessibility, UX, security, and eco-design.
 
 ## Quick Start
 
@@ -55,12 +59,12 @@ See [Project Structure](./docs/02-using/project-structure.md) for complete organ
 
 HAT documentation is organized in 3 sections:
 
-### 📚 Getting Started
+### Getting Started
 
 - [Site Configuration](./docs/01-starting/site-configuration.md)
 - [Accessibility Standards](./docs/01-starting/accessibility-standards.md)
 
-### 🛠️ Daily Usage
+### Daily Usage
 
 - [Building Components](./docs/02-using/building-components.md)
 - [Styling Components](./docs/02-using/styling-components.md)
@@ -73,7 +77,7 @@ HAT documentation is organized in 3 sections:
 - [Testing](./docs/02-using/testing.md)
 - [Troubleshooting](./docs/02-using/troubleshooting.md)
 
-### 🔧 Maintenance
+### Maintenance
 
 - [Deployment](./docs/03-maintaining/deployment.md)
 - [Maintenance](./docs/03-maintaining/maintenance.md)
