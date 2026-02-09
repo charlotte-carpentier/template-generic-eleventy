@@ -87,7 +87,7 @@ HAT uses 12-column grid from HAT Figma Design (1440px viewport, 64px margins, 32
 
 **Rationale:**
 
-1. **Resilience:** Change 1-3 primitives → all tokens recalculate automatically
+1. **Resilience:** Change 1-3 primitives => all tokens recalculate automatically
 2. **Clarity:** Namespace system = clear usage intent
 3. **Standards:** "Grid margins" = industry term (Material Design, USWDS)
 4. **Flexibility:** Tailwind `grid-cols-X` for simple layouts, `--grid-col-*` for max-width constraints
@@ -142,7 +142,7 @@ HAT uses 12-column grid from HAT Figma Design (1440px viewport, 64px margins, 32
 - Cons: Decoupled from grid, values become inconsistent if grid changes
 - Rejected: Breaks single source of truth
 
-**Option C - Rename `margin` → `padding`:**
+**Option C - Rename `margin` => `padding`:**
 
 - Pros: Technical accuracy
 - Cons: Breaks design vocabulary (Figma uses "margins")

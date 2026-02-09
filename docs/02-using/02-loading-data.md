@@ -1,20 +1,14 @@
 ---
-title: Eleventy Guide
-description: Guide for working with Eleventy static site generator
-type: documentation
+title: Loading Data
+description: How Eleventy loads and accesses data files
 created: 2025-01-15
-tags: [eleventy, ssg, build]
 ---
 
-## Version
-
-**Eleventy 3.0.0** (December 2024)
+Eleventy loads data from JSON files in `src/_data/` and makes it globally accessible in templates.
 
 ---
 
-## Data Loading
-
-### File Structure
+## File Structure
 
 ```text
 src/_data/
@@ -25,16 +19,18 @@ src/_data/
 └── site.json
 ```
 
-### Accessing Data
+---
 
-**Without hyphens:**
+## Accessing Data
+
+**Files without hyphens:**
 
 ```njk
 {{ atoms.button.buttons }}
 {{ molecules.card.cards }}
 ```
 
-**With hyphens (use bracket notation):**
+**Files with hyphens (use bracket notation):**
 
 ```njk
 {{ atoms["chip-notification"].chipNotifs }}
@@ -45,15 +41,17 @@ src/_data/
 
 ## Data Priority
 
-1. Computed data (highest)
+When multiple sources define the same key, Eleventy uses this order (highest to lowest):
+
+1. Computed data
 2. Front matter
 3. Template data
 4. Directory data
-5. Global data (lowest)
+5. Global data
+
+See [Eleventy Data Cascade](https://www.11ty.dev/docs/data-cascade/) for detailed examples.
 
 ---
 
-## References
-
-- [Official Documentation](https://www.11ty.dev/docs/)
-- [Data Cascade](https://www.11ty.dev/docs/data-cascade/)
+May your bugs be forever exiled to the shadow realm ✦  
+HAT · 2026
