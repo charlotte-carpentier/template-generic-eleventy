@@ -197,7 +197,7 @@ Output: `public/output.css` (auto-included in `base.njk`)
 
 Each component follows the OMA pattern:
 
-```txt
+```text
 Component Example: button
 â”œâ”€â”€ src/_data/atoms/button.json          # Content data
 â”œâ”€â”€ src/_includes/01-atoms/button.njk    # Presentation (macro with Tailwind classes)
@@ -286,7 +286,7 @@ Only create custom CSS when Tailwind utilities are insufficient:
 
 **File structure:**
 
-```txt
+```text
 src/assets/styles/
 â”œâ”€â”€ input.css                           # Main entry (imports components)
 â”œâ”€â”€ 01-atoms/

@@ -10,7 +10,7 @@ Guide for personalizing HAT visual style for new projects.
 
 ## File Structure
 
-```txt
+```text
 src/assets/styles/
 ├── 01-atoms/              # Custom CSS when needed
 ├── 02-molecules/

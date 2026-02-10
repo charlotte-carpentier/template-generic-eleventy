@@ -151,6 +151,25 @@ Components and features to implement after template finalization (Phase 9 comple
 
 ---
 
+### Automated Accessibility Tests
+
+**Status**: In progress (scaffolding complete)  
+**Priority**: High (WCAG 2.2 AA validation)  
+**File**: `src/assets/scripts/tests/accessibility.test.js`
+
+**To implement**:
+
+- [ ] Axe-core integration for component validation
+- [ ] Programmatic color contrast testing
+- [ ] Focus visible indicators validation
+- [ ] ARIA landmarks structure testing
+- [ ] Touch targets measurement (44×44px)
+
+**Dependencies**: vitest, jsdom, axe-core  
+**Launch**: `npm run test:run` (automatic in build)
+
+---
+
 ### Dark Mode Support
 
 **Status**: Not started  
@@ -221,6 +240,30 @@ Components and features to implement after template finalization (Phase 9 comple
 - Focus on template finalization first
 - Components added based on real project needs
 - Follow existing patterns (coding-style.md, data-structure.md)
+
+---
+
+## Phase 15: Developer Documentation
+
+### Contributing & Development Guide
+
+**Status**: Not started  
+**Priority**: Medium  
+**Target**: Q2 2026
+
+**Objective**: Create comprehensive documentation for HAT contributors and developers (creating/modifying components, not using them).
+
+**To create**:
+
+- [ ] Component Development Guide (Nunjucks patterns, macro structure, validation)
+- [ ] JavaScript Development Guide (module patterns, event system, utilities creation)
+- [ ] CSS Development Guide (TailwindCSS integration, custom CSS guidelines, BEM)
+- [ ] Testing Guide (writing tests, running tests, coverage requirements)
+- [ ] Architecture Decisions Records (ADR updates)
+
+**Source**: Refactor "archived" MD files (old building-components.md, styling-components.md, adding-interactions.md) following current documentation principles: simple, readable, functional.
+
+**Format**: Same structure as user documentation (`docs/04-contributing/` folder)
 
 ---
 

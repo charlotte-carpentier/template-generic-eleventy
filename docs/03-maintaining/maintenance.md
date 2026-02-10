@@ -133,7 +133,7 @@ Update `src/_includes/04-core/base.njk`
 
 ### CDN compromise (SRI mismatch)
 
-```txt
+```text
 Failed to find a valid digest in 'integrity' attribute
 ```
 

@@ -12,7 +12,7 @@ Guide for personalizing HAT component data for new projects.
 
 Component data is organized by Atomic Design level:
 
-```txt
+```text
 src/_data/
 ├── atoms/          # button.json, icon.json, input.json
 ├── molecules/      # card.json, breadcrumb.json

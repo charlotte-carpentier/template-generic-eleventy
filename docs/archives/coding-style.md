@@ -204,7 +204,7 @@ paginations     // 11 chars - standard term
 
 **Structure (one line only):**
 
-```txt
+```text
 [emoji] [type]: [Subject starting with verb and capital letter]
 ```
 

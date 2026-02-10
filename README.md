@@ -67,14 +67,12 @@ HAT documentation is organized in 3 sections:
 - [Site Configuration Reference](./docs/02-using/01-site-configuration-reference.md)
 - [Loading Data](./docs/02-using/02-loading-data.md)
 - [Structuring Data](./docs/02-using/03-structuring-data.md)
-- [Building Components](./docs/02-using/04-building-components.md)
-- [Styling Components](./docs/02-using/05-styling-components.md)
-- [Adding Interactions](./docs/02-using/06-adding-interactions.md)
+- [Styling Components](./docs/02-using/04-styling-components.md)
+- [Using Scripts](./docs/02-using/05-using-scripts.md)
+- [Using Components](./docs/02-using/06-using-components.md)
 - [Managing Content](./docs/02-using/07-managing-content.md)
-- [Code Conventions](./docs/02-using/08-code-conventions.md)
-- [Code Templates](./docs/02-using/09-code-templates.md)
-- [Testing](./docs/02-using/10-testing.md)
-- [Troubleshooting](./docs/02-using/11-troubleshooting.md)
+- [Quick Reference](./docs/02-using/08-quick-reference.md)
+- [Troubleshooting](./docs/02-using/09-troubleshooting.md)
 
 ### Maintenance
 
@@ -87,7 +85,7 @@ HAT documentation is organized in 3 sections:
 
 ## Contributing
 
-Contributions are welcome! Please follow the [code conventions](./docs/02-using/08-code-conventions.md) and test locally before submitting.
+Contributions are welcome! See contributing guidelines and test locally before submitting.
 
 ## License
 

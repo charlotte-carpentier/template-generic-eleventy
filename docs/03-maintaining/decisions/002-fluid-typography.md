@@ -34,7 +34,7 @@ HAT targets showcase sites and blogs. Need modern 2026 typography standards with
 
 **Architecture**: Atomic token separation (family vs size)
 
-```txt
+```text
 Family/style tokens (no size)
 ├── --typo-heading
 ├── --typo-heading-bold
