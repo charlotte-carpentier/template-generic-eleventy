@@ -35,7 +35,7 @@ HAT targets Lighthouse 100/100 and WCAG 2.2 AA. Native `<select multiple>` confl
 
 HAT excludes `<select multiple>` from atoms layer.
 
-```txt
+```text
 atoms/select.njk => Single select only (native)
 molecules/multiselect.njk => Custom UI + JS (future)
 ```

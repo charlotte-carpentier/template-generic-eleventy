@@ -33,7 +33,7 @@ HAT targets Lighthouse 100/100. Images = 50%+ page weight, impact Core Web Vital
 
 Build script generates metadata, component consumes enriched JSON.
 
-```txt
+```text
 bin/generate-image-metadata.js => enriches image.json => image.njk renders
 ```
 

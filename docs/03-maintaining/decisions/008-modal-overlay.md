@@ -57,7 +57,7 @@ html:has(dialog[open]) {
   overflow: hidden;
   scrollbar-gutter: stable;       /* Prevent layout shift */
 }
-```txt
+```text
 ```nunjucks
 {# Desktop centered via Tailwind #}
 md:fixed md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2

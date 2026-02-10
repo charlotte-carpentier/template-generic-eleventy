@@ -249,7 +249,7 @@ Expected: 100/100 Best Practices + Accessibility
 
 ### CSP Violation Errors
 
-```txt
+```text
 Refused to load script from 'https://example.com/script.js'
 ```
 
@@ -257,7 +257,7 @@ Refused to load script from 'https://example.com/script.js'
 
 ### SRI Hash Mismatch
 
-```txt
+```text
 Failed to find a valid digest in 'integrity' attribute
 ```
 

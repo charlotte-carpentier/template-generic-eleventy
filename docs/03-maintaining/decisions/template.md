@@ -46,7 +46,7 @@ What did we decide to do? Be specific and clear.
 
 **Implementation:**
 
-```txt
+```text
 [Code structure or architectural pattern if relevant]
 ```
 
