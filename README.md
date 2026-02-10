@@ -2,7 +2,7 @@
 
 ![Preview](./preview.png)
 
-HAT is a handmade, artisanal design system for premium showcase websites and blogs.
+A handmade, artisanal design system for premium showcase websites and blogs.
 Built as an alternative to no-code solutions, it combines guaranteed performance metrics
 (Lighthouse 100/100, WCAG 2.2 AA, EcoIndex A) with full customization control.
 
@@ -22,7 +22,7 @@ npm install
 ### 2. Configure your site
 
 Edit `src/_data/site.json` to customize site title, description, and URL.  
-See [Site Configuration](./docs/01-starting/site-configuration.md) for details.
+See [Configuring Site](./docs/01-starting/01-configuring-site.md) for details.
 
 ### 3. Start developing
 
@@ -53,29 +53,28 @@ template-generic-eleventy/
 └── public/        # Build output
 ```
 
-See [Project Structure](./docs/02-using/project-structure.md) for complete organization.
-
 ## Documentation
 
 HAT documentation is organized in 3 sections:
 
 ### Getting Started
 
-- [Site Configuration](./docs/01-starting/site-configuration.md)
-- [Accessibility Standards](./docs/01-starting/accessibility-standards.md)
+- [Configuring Site](./docs/01-starting/01-configuring-site.md)
+- [Accessibility Standards](./docs/01-starting/02-accessibility-standards.md)
 
 ### Daily Usage
 
-- [Building Components](./docs/02-using/building-components.md)
-- [Styling Components](./docs/02-using/styling-components.md)
-- [Adding Interactions](./docs/02-using/adding-interactions.md)
-- [Loading Data](./docs/02-using/loading-data.md)
-- [Structuring Data](./docs/02-using/structuring-data.md)
-- [Managing Content](./docs/02-using/managing-content.md)
-- [Code Conventions](./docs/02-using/code-conventions.md)
-- [Code Templates](./docs/02-using/code-templates.md)
-- [Testing](./docs/02-using/testing.md)
-- [Troubleshooting](./docs/02-using/troubleshooting.md)
+- [Site Configuration Reference](./docs/02-using/01-site-configuration-reference.md)
+- [Loading Data](./docs/02-using/02-loading-data.md)
+- [Structuring Data](./docs/02-using/03-structuring-data.md)
+- [Building Components](./docs/02-using/04-building-components.md)
+- [Styling Components](./docs/02-using/05-styling-components.md)
+- [Adding Interactions](./docs/02-using/06-adding-interactions.md)
+- [Managing Content](./docs/02-using/07-managing-content.md)
+- [Code Conventions](./docs/02-using/08-code-conventions.md)
+- [Code Templates](./docs/02-using/09-code-templates.md)
+- [Testing](./docs/02-using/10-testing.md)
+- [Troubleshooting](./docs/02-using/11-troubleshooting.md)
 
 ### Maintenance
 
@@ -83,11 +82,12 @@ HAT documentation is organized in 3 sections:
 - [Maintenance](./docs/03-maintaining/maintenance.md)
 - [Security](./docs/03-maintaining/security.md)
 - [Roadmap](./docs/03-maintaining/roadmap.md)
-- [ADR](./docs/03-maintaining/adr/)
+- [Contributors](./docs/03-maintaining/contributors.md)
+- [Architecture Decisions](./docs/03-maintaining/decisions/)
 
 ## Contributing
 
-Contributions are welcome! Please follow the [code conventions](./docs/02-using/code-conventions.md) and test locally before submitting.
+Contributions are welcome! Please follow the [code conventions](./docs/02-using/08-code-conventions.md) and test locally before submitting.
 
 ## License
 

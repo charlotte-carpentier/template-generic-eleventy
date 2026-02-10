@@ -55,14 +55,14 @@ tags: [nunjucks, templates, templating]
 ### Pattern
 
 ```njk
-{# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+{# â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”
   3. Tailwind Classes
   Index:
   3.1 Base Classes
   3.2 Size Classes
   3.3 Variant Classes
   3.4 Icon Classes
-━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â” #}
 
 {# --------------------------
     3.1 Base Classes
@@ -259,7 +259,7 @@ Avoid non-native filters like `selectattr`.
     - options.name (string): Component identifier
     - options.datas (array): Component configuration
 
-  Usage — Summon HAT Components Wisely:
+  Usage â€” Summon HAT Components Wisely:
     {% from "01-atoms/component.njk" import renderComponent %}
     {{ renderComponent({ name: "demo", datas: atoms.component.items }) }}
 

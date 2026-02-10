@@ -1,7 +1,6 @@
 ---
 title: Troubleshooting
 description: Common issues and solutions for Template Generic Eleventy
-type: documentation
 created: 2025-01-15
 tags: [troubleshooting, issues, solutions]
 ---
@@ -19,7 +18,6 @@ This document tracks common issues and their solutions.
 **Cause:** Incorrect folder alias in `.eleventy.js`
 
 **Solution:**
-
 ```javascript
 // Verify in .eleventy.js
 return {
@@ -62,7 +60,6 @@ Color not applied.
 **Cause:** File not imported in `input.css`
 
 **Solution:**
-
 ```css
 /* In input.css, add import */
 @import "./03-organisms/error-layout.css";
@@ -79,7 +76,6 @@ Then rebuild: `npm run build:css`
 **Cause:** Templates not included in `@source` directive
 
 **Solution:**
-
 ```css
 /* In input.css, verify @source includes all templates */
 @source "./src/**/*.njk";
@@ -94,7 +90,6 @@ Ensure all template directories are covered by the glob pattern.
 **Problem:** Console warning about `-webkit-` prefix
 
 **Example:**
-
 ```text
 'mask-position' is not supported by Chrome < 120
 Add '-webkit-mask-position' to support older browsers
@@ -102,7 +97,6 @@ Add '-webkit-mask-position' to support older browsers
 
 **Solution:**
 Always include vendor prefixes for cutting-edge CSS properties:
-
 ```css
 @keyframes halo-reveal {
   from {
@@ -111,6 +105,69 @@ Always include vendor prefixes for cutting-edge CSS properties:
   }
 }
 ```
+
+---
+
+## Configuration (site.json)
+
+### Fonts not loading
+
+**Problem:** Google Fonts not appearing on site
+
+**Cause:** Incomplete configuration or invalid URL
+
+**Solution:**
+
+1. Verify both fields set together in `site.json`:
+```json
+   {
+     "fonts": {
+       "preconnect": true,
+       "google": "https://fonts.googleapis.com/css2?family=..."
+     }
+   }
+```
+2. Test URL in browser (should return CSS)
+3. Clear browser cache (Ctrl+Shift+R)
+
+---
+
+### Analytics not tracking
+
+**Problem:** Google Analytics not receiving data
+
+**Cause:** Invalid Measurement ID or consent issues
+
+**Solution:**
+
+1. Verify format in `site.json`: `"ga4": "G-XXXXXXXXXX"`
+2. Check browser console for errors
+3. Use [Google Tag Assistant](https://tagassistant.google.com/)
+4. If using Axeptio: ensure cookie consent granted
+
+---
+
+### Cookie consent not appearing
+
+**Problem:** Axeptio widget not showing
+
+**Cause:** Incomplete configuration or unpublished project
+
+**Solution:**
+
+1. Verify all three fields in `site.json`:
+```json
+   {
+     "cookieConsent": {
+       "provider": "axeptio",
+       "clientId": "your-client-id",
+       "cookiesVersion": "domain-REGION"
+     }
+   }
+```
+2. Check browser console for errors
+3. Ensure Axeptio project is published
+4. Test in incognito mode
 
 ---
 
@@ -125,7 +182,6 @@ Always include vendor prefixes for cutting-edge CSS properties:
 **Solution:**
 
 Configure `netlify.toml`:
-
 ```toml
 [build]
   command = "npm run build"
@@ -146,7 +202,6 @@ Configure `netlify.toml`:
 **Solution:**
 
 In `.eleventy.js`:
-
 ```javascript
 eleventyConfig.addPassthroughCopy("src/assets");
 ```
@@ -164,7 +219,6 @@ Rebuild and redeploy.
 **Cause:** Admin files not in output directory
 
 **Solution:**
-
 ```javascript
 // In .eleventy.js
 eleventyConfig.addPassthroughCopy("src/admin");
@@ -197,7 +251,6 @@ eleventyConfig.addPassthroughCopy("src/admin");
 **Solution:**
 
 **Option A:** Kill existing process
-
 ```bash
 # macOS/Linux
 lsof -ti:8080 | xargs kill -9
@@ -208,7 +261,6 @@ taskkill /PID <PID> /F
 ```
 
 **Option B:** Change port in `package.json`
-
 ```json
 "start": "eleventy --serve --port=8081"
 ```
@@ -224,7 +276,6 @@ taskkill /PID <PID> /F
 **Solution:**
 
 In `.eleventy.js`:
-
 ```javascript
 eleventyConfig.addWatchTarget("./src/assets/styles/");
 eleventyConfig.addWatchTarget("./src/_data/");
@@ -241,7 +292,6 @@ eleventyConfig.addWatchTarget("./src/_data/");
 **Solution:**
 
 Use event delegation pattern in `main.js`:
-
 ```javascript
 // Event delegation for dismiss pattern
 document.addEventListener('click', (e) => {
@@ -258,8 +308,27 @@ document.addEventListener('click', (e) => {
 
 ---
 
-## See Also
+## References
 
-- [TailwindCSS Guide](./docs/tailwind.md) - TailwindCSS v4 usage
-- [Configuration Guide](./docs/configuration.md) - Site configuration
-- [Eleventy Setup](./docs/eleventy.md) - Eleventy configuration details
+- [Site Configuration Reference](./01-site-configuration-reference.md)
+- [Styling Components](./05-styling-components.md)
+- [Managing Content](./07-managing-content.md)
+
+---
+
+May your bugs be forever exiled to the shadow realm ✦  
+HAT · 2026
+
+## Template Error: Filter Not Found
+
+**Symptom**: `Error: filter not found: selectattr`
+
+**Cause**: Using non-native Nunjucks filters.
+
+**Solution**: Use only native Nunjucks filters:
+- `default('value')` - Fallback value
+- `safe` - Render HTML without escaping
+- `escape` - Escape HTML
+- `length` - Array/string length
+
+Avoid filters like `selectattr`, `map`, `reject` unless explicitly added to `.eleventy.js`.

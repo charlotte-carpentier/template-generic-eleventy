@@ -45,11 +45,11 @@ Define clear boundaries for styling at each component level:
 
 ---
 src/assets/styles/
-├── input.css                    # Entry point + @theme design tokens
-├── 01-atoms/                    # Empty (use Tailwind)
-├── 02-molecules/                # Empty (use Tailwind)
-└── 03-organisms/
-    └── error-layout.css         # Custom CSS (only when necessary)
+â”œâ”€â”€ input.css                    # Entry point + @theme design tokens
+â”œâ”€â”€ 01-atoms/                    # Empty (use Tailwind)
+â”œâ”€â”€ 02-molecules/                # Empty (use Tailwind)
+â””â”€â”€ 03-organisms/
+    â””â”€â”€ error-layout.css         # Custom CSS (only when necessary)
 ```
 
 **input.css** contains:
@@ -95,8 +95,8 @@ Use Tailwind's arbitrary value syntax:
 **Spacing:**
 
 - Micro: `--spacing-micro-minimal`, `--spacing-micro-default`
-- UI (internal): `--spacing-ui-minimal` → `--spacing-ui-maximal` 
-- Layout (external): `--spacing-section-minimal` → `--spacing-section-maximal`
+- UI (internal): `--spacing-ui-minimal` â†’ `--spacing-ui-maximal` 
+- Layout (external): `--spacing-section-minimal` â†’ `--spacing-section-maximal`
 - Fluid: `--spacing-ui-fluid-*`, `--spacing-section-fluid-*`
 
 See `input.css` for complete list.
@@ -199,10 +199,10 @@ Each component follows the OMA pattern:
 
 ```txt
 Component Example: button
-├── src/_data/atoms/button.json          # Content data
-├── src/_includes/01-atoms/button.njk    # Presentation (macro with Tailwind classes)
-├── src/assets/scripts/components/01-atoms/button.js    # Interactions (optional)
-└── src/assets/styles/01-atoms/button.css               # Custom CSS (rare, only if needed)
+â”œâ”€â”€ src/_data/atoms/button.json          # Content data
+â”œâ”€â”€ src/_includes/01-atoms/button.njk    # Presentation (macro with Tailwind classes)
+â”œâ”€â”€ src/assets/scripts/components/01-atoms/button.js    # Interactions (optional)
+â””â”€â”€ src/assets/styles/01-atoms/button.css               # Custom CSS (rare, only if needed)
 ```
 
 ### Class Organization in Templates
@@ -288,13 +288,13 @@ Only create custom CSS when Tailwind utilities are insufficient:
 
 ```txt
 src/assets/styles/
-├── input.css                           # Main entry (imports components)
-├── 01-atoms/
-│   └── custom-scrollbar.css           # Only if needed
-├── 02-molecules/
-│   └── card-animation.css             # Only if needed
-└── 03-organisms/
-    └── error-layout.css               # Only if needed
+â”œâ”€â”€ input.css                           # Main entry (imports components)
+â”œâ”€â”€ 01-atoms/
+â”‚   â””â”€â”€ custom-scrollbar.css           # Only if needed
+â”œâ”€â”€ 02-molecules/
+â”‚   â””â”€â”€ card-animation.css             # Only if needed
+â””â”€â”€ 03-organisms/
+    â””â”€â”€ error-layout.css               # Only if needed
 ```
 
 **Import in `input.css`:**
