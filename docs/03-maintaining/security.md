@@ -1,17 +1,16 @@
 ---
-title: Security Guide
-description: Security configuration and testing procedures for HAT
-type: documentation
+title: Security Architecture
+description: Security features and design decisions in HAT
 created: 2026-02-03
-updated: 2026-02-05
-tags: [security, csp, headers, sri, https, forms, owasp]
 ---
 
-## Security Architecture
+Security architecture and design decisions for HAT core features.
 
-HAT implements defense-in-depth security following OWASP 2026 and MDN best practices.
+---
 
-**Key principles:**
+## Security Principles
+
+HAT implements defense-in-depth security following OWASP 2026 and MDN best practices:
 
 - Content Security Policy (CSP) strict mode for scripts
 - Subresource Integrity (SRI) for external resources
@@ -21,11 +20,9 @@ HAT implements defense-in-depth security following OWASP 2026 and MDN best pract
 
 ---
 
-## Configuration Files
+## CSP Configuration
 
-### netlify.toml
-
-Security headers configured in `[[headers]]` sections:
+**Location**: `netlify.toml` in `[[headers]]` sections
 
 ```toml
 Content-Security-Policy: "script-src 'self' [CDN whitelist]"
@@ -34,15 +31,13 @@ X-Content-Type-Options: "nosniff"
 X-Frame-Options: "DENY"
 ```
 
-**CSP directives:**
+**Key directives**:
 
 - `script-src 'self'` - No inline scripts (externalized to `core/`)
 - `style-src 'unsafe-inline'` - Required for TailwindCSS utilities
 - `frame-ancestors 'none'` - Prevent clickjacking
 
-### Core Scripts (base.njk)
-
-External scripts with data attributes:
+**Core scripts pattern** (`base.njk`):
 
 ```html
 <script src="/assets/scripts/core/axeptio.js"
@@ -50,26 +45,18 @@ External scripts with data attributes:
 </script>
 ```
 
-**Benefits:**
-
-- CSP strict mode without `unsafe-inline`
-- Separation of code and configuration
-- Cacheable JavaScript files
+Benefits: CSP strict mode without `unsafe-inline`, separation of code/config, cacheable files.
 
 ---
 
-## Subresource Integrity (SRI)
+## SRI Maintenance
 
-### Current CDN Resources
+**Current CDN resources**:
 
-| Resource | Integrity | Status |
-|----------|-----------|--------|
-| Font Awesome 6.7.2 | `sha512-Kc323...` | Configured |
-| Flag Icons 7.3.2 | `sha384-8olrm...` | Configured |
+- Font Awesome 6.7.2: `sha512-Kc323...`
+- Flag Icons 7.3.2: `sha384-8olrm...`
 
-### Update Procedure
-
-When updating CDN version:
+**Update procedure when upgrading CDN version**:
 
 ```bash
 # Generate new hash
@@ -81,214 +68,56 @@ curl -s https://cdn.example.com/file.css | \
 integrity="sha384-NEW_HASH_HERE"
 ```
 
-**Sources:**
-
-- [MDN SRI](https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity)
-- [W3C SRI Spec](https://w3c.github.io/webappsec-subresource-integrity/)
+Reference: [MDN SRI](https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Subresource_Integrity)
 
 ---
 
-## Form Security
+## Architecture Decisions
 
-### Netlify Forms Protection
+### Style CSP Compromise
 
-**Configuration** (`section-contact.njk`):
+**Decision**: `style-src 'unsafe-inline'` required for TailwindCSS utilities
 
-```html
-<form method="POST" name="contact" 
-  data-netlify="true" 
-  data-netlify-honeypot="bot-field">
-  <input type="hidden" name="form-name" value="contact" />
-  <input type="hidden" name="bot-field" />
-</form>
-```
+**Rationale**:
 
-**Built-in security:**
+- OWASP: "unsafe-inline for styles is lower priority than scripts"
+- Google: "Acceptable for utility-first CSS frameworks"
+- Major design systems (Material Design, IBM Carbon, Gov.UK) use same approach
+
+**Risk**: Low (no user input, static generation)
+
+**Mitigation**: Strict `script-src` compensates
+
+**Optional hardening**: Extract inline styles to external CSS, generate hashes (~10-15h refactoring)
+
+### Form Security Strategy
+
+**Netlify Forms protection**:
 
 - Honeypot spam filtering
 - Rate limiting (10 req/min per IP)
 - Akismet spam detection
 
-### HTML5 Validation (WCAG 1.3.5)
+**Client-side validation**:
 
-**Pattern validation** (`input.json`):
+- HTML5 pattern validation (RFC 5322 email, E.164 phone)
+- Magic numbers file validation (`block-drag-and-drop.js`)
+- Filename sanitization, extension whitelist, size limits
 
-- Email: RFC 5322 format
-- Phone: E.164 international format
-- Text: Unicode-safe patterns
-
-**Autocomplete attributes:**
-
-```json
-{
-  "autocomplete": "email",     // email fields
-  "autocomplete": "tel",        // phone fields
-  "autocomplete": "name",       // name fields
-  "autocomplete": "organization" // company fields
-}
-```
-
-### File Upload Security (OWASP)
-
-**Magic numbers validation** (`block-drag-and-drop.js`):
-
-```javascript
-// Validates first bytes to prevent MIME spoofing
-const MAGIC_NUMBERS = {
-  'jpg': [0xFF, 0xD8, 0xFF],
-  'png': [0x89, 0x50, 0x4E, 0x47],
-  'pdf': [0x25, 0x50, 0x44, 0x46]
-};
-```
-
-**Additional protections:**
-
-- Filename sanitization (path traversal prevention)
-- Extension whitelist + size limits
-- Browser-side validation only (Netlify handles server-side)
-
----
-
-## Security Contact (RFC 9116)
-
-HAT includes `/.well-known/security.txt` for vulnerability disclosure.
-
-**File:** `src/security.njk`
-
-**Annual maintenance:** Update expiration date (see `MAINTENANCE.md`)
-
----
-
-## Deployment Testing
-
-### 1. Build Validation
-
-```bash
-npm run build
-grep "integrity" public/index.html  # Verify SRI
-cat public/.well-known/security.txt # Verify generation
-```
-
-### 2. Online Scanners (post-deployment)
-
-**Headers Check:**
-
-- [Mozilla Observatory](https://observatory.mozilla.org/) - Expected: A-/B+
-- [SecurityHeaders.com](https://securityheaders.com/) - Expected: A
-
-**CSP Evaluation:**
-
-- [Google CSP Evaluator](https://csp-evaluator.withgoogle.com/) - Expected: Medium risk (style-src)
-
-**Lighthouse:**
-
-```bash
-npx lighthouse https://your-site.netlify.app --view
-```
-
-Expected: 100/100 Best Practices + Accessibility
-
-### 3. Browser DevTools
-
-```javascript
-// Console: check CSP violations (should be 0)
-// Network tab: verify SRI validation (no errors)
-```
-
----
-
-## Client Project Checklist
-
-### Before Deployment
-
-- [ ] Configure `site.json` (title, url, domain, analytics)
-- [ ] Test Axeptio with client account
-- [ ] Verify GA4 tracking
-- [ ] Enable Netlify Identity if using Decap CMS
-- [ ] Test form submission (Netlify Forms)
-
-### After Deployment
-
-- [ ] Run Mozilla Observatory scan
-- [ ] Verify HTTPS certificate valid
-- [ ] Test CSP: no console violations
-- [ ] Check Netlify Forms inbox (spam filter working)
-
-### Production Hardening (optional)
-
-**Remove `style-src 'unsafe-inline'`:**
-
-1. Extract inline styles to external CSS
-2. Generate style hashes: `openssl dgst -sha384`
-3. Update CSP with hashes
-
-**Cost:** 10-15h refactoring
-
-**Note:** Material Design, IBM Carbon, Gov.UK all use `unsafe-inline` for styles.
-
----
-
-## Known Limitations
-
-### Style CSP Compromise
-
-**Issue:** `style-src 'unsafe-inline'` required for TailwindCSS utilities
-
-**Risk:** Low (no user input, static generation)
-
-**Justification:**
-
-- OWASP: "unsafe-inline for styles is lower priority than scripts"
-- Google: "Acceptable for utility-first CSS frameworks"
-
-**Mitigation:** Strict `script-src` compensates
-
----
-
-## Troubleshooting
-
-### CSP Violation Errors
-
-```text
-Refused to load script from 'https://example.com/script.js'
-```
-
-**Solution:** Add domain to `script-src` in `netlify.toml`
-
-### SRI Hash Mismatch
-
-```text
-Failed to find a valid digest in 'integrity' attribute
-```
-
-**Solution:** Regenerate hash with updated file version
-
-### HSTS Preload Issues
-
-**Validation:** [HSTS Preload List](https://hstspreload.org/)
-
-**Requirement:** Valid HTTPS + correct max-age
+**Browser-only**: Netlify handles server-side validation.
 
 ---
 
 ## Standards Compliance
 
-| Standard | Status | Reference |
-|----------|--------|-----------|
-| WCAG 2.2 AA | Done | W3C TR/WCAG22 |
-| OWASP 2026 | Done | OWASP Cheat Sheets |
-| CSP Level 3 | Done | W3C CSP Spec |
-| RFC 5322 (Email) | Done | IETF RFC 5322 |
-| RFC 9116 (security.txt) | Done | IETF RFC 9116 |
-| E.164 (Phone) | Done | ITU-T E.164 |
+| Standard | Status |
+| -------- | ------ |
+| WCAG 2.2 AA | ✓ |
+| OWASP 2026 | ✓ |
+| CSP Level 3 | ✓ |
+| RFC 9116 (security.txt) | ✓ |
 
 ---
 
-## References
-
-- [MDN CSP Guide](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
-- [OWASP CSP Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html)
-- [OWASP File Upload Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html)
-- [Netlify Forms Documentation](https://docs.netlify.com/forms/setup/)
-- [W3C SRI Specification](https://w3c.github.io/webappsec-subresource-integrity/)
-- [WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+May your bugs be forever exiled to the shadow realm ✦  
+HAT · 2026
