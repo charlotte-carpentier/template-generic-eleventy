@@ -1,8 +1,9 @@
-# Template Generic Eleventy
+# HAT Design System
+
+**HAT** - A handmade, artisanal design system for premium showcase websites and blogs.
 
 ![Preview](./preview.png)
 
-A handmade, artisanal design system for premium showcase websites and blogs.
 Built as an alternative to no-code solutions, it combines guaranteed performance metrics
 (Lighthouse 100/100, WCAG 2.2 AA, EcoIndex A) with full customization control.
 

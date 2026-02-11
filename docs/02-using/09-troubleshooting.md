@@ -18,6 +18,9 @@ Common issues and solutions for HAT project development.
 - [Cookie consent widget not showing](#cookie-consent-widget-not-showing)
 - [Cannot start development server](#cannot-start-development-server)
 - [Changes not reflected in browser](#changes-not-reflected-in-browser)
+- [CSP violation errors](#csp-violation-errors)
+- [SRI hash mismatch](#sri-hash-mismatch)
+- [HSTS preload issues](#hsts-preload-issues)
 
 ---
 
@@ -198,6 +201,80 @@ Code changes not appearing automatically in browser.
 3. Clear browser cache (Ctrl+Shift+R)
 4. Check browser console for errors
 5. Manually refresh (Ctrl+R or F5)
+
+---
+
+## CSP violation errors
+
+Browser console shows: `Refused to load script from 'https://example.com/script.js'`
+
+**Causes**:
+
+- Script domain not whitelisted in CSP
+- Inline script without hash
+- Missing `'self'` for local scripts
+
+**Solution**:
+
+1. Add domain to `script-src` in `netlify.toml`:
+
+    ```toml
+      Content-Security-Policy = "script-src 'self' https://example.com"
+    ```
+
+2. Rebuild and redeploy
+3. Clear browser cache
+4. Verify in browser console (no errors)
+
+---
+
+## SRI hash mismatch
+
+Browser console shows: `Failed to find a valid digest in 'integrity' attribute`
+
+**Causes**:
+
+- CDN file updated but hash not regenerated
+- Typo in integrity attribute
+- CDN serving different version
+
+**Solution**:
+
+1. Regenerate hash with current CDN file:
+
+    ```bash
+      curl -s https://cdn.example.com/file.css | \
+        openssl dgst -sha384 -binary | \
+        openssl base64 -A
+    ```
+
+2. Update `base.njk` with new integrity value
+3. Rebuild: `npm run build`
+4. Verify in browser Network tab (resource loads successfully)
+
+---
+
+## HSTS preload issues
+
+Site not appearing in HSTS preload list or browser warnings about HSTS.
+
+**Causes**:
+
+- HTTPS certificate invalid
+- Incorrect `max-age` value
+- Missing `includeSubDomains` or `preload`
+
+**Solution**:
+
+1. Verify HTTPS certificate valid in browser
+2. Check `netlify.toml` header:
+
+    ```toml
+      Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    ```
+
+3. Test with [HSTS Preload List](https://hstspreload.org/)
+4. Ensure `max-age` ≥ 31536000 (1 year minimum)
 
 ---
 
