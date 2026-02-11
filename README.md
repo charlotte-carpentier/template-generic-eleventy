@@ -74,19 +74,19 @@ HAT documentation is organized in 3 sections:
 - [Managing Content](./docs/02-using/07-managing-content.md)
 - [Quick Reference](./docs/02-using/08-quick-reference.md)
 - [Troubleshooting](./docs/02-using/09-troubleshooting.md)
+- [Deploying Projects](./docs/02-using/10-deploying-projects.md)
 
 ### Maintenance
 
-- [Deployment](./docs/03-maintaining/deployment.md)
-- [Maintenance](./docs/03-maintaining/maintenance.md)
-- [Security](./docs/03-maintaining/security.md)
-- [Roadmap](./docs/03-maintaining/roadmap.md)
-- [Contributors](./docs/03-maintaining/contributors.md)
 - [Architecture Decisions](./docs/03-maintaining/decisions/)
+- [Contributing](./docs/03-maintaining/contributing.md)
+- [Maintenance](./docs/03-maintaining/maintenance.md)
+- [Roadmap](./docs/03-maintaining/roadmap.md)
+- [Security](./docs/03-maintaining/security.md)
 
 ## Contributing
 
-Contributions are welcome! See contributing guidelines and test locally before submitting.
+Contributions are welcome! See [contributing guidelines](./docs/03-maintaining/contributing.md) and test locally before submitting.
 
 ## License
 

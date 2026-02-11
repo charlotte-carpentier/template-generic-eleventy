@@ -1,105 +1,50 @@
 ---
 title: ADR-007 - Form Controls Sizing Strategy
 description: Static 48px height for all form inputs (select, text, textarea)
-type: architecture-decision
 created: 2026-01-16
-status: accepted
-tags: [adr, forms, accessibility, responsive, wcag]
 ---
 
-**ADR**: 007  
-**Title**: Form Controls Sizing Strategy  
-**Date**: January 16, 2026  
-**Status**: Accepted
+Decision record for form controls sizing strategy.
 
 ---
 
 ## Context
 
-HAT targets showcase sites with WCAG 2.2 AA compliance. Form controls initially planned with `small` (40px) / `default` (48px) variants.
-
----
-
-## Problem
+HAT targets WCAG 2.2 AA compliance. Form controls initially planned with `small` (40px) and `default` (48px) variants. Key questions:
 
 - Should form controls vary size or stay static like body text (ADR-002)?
 - Does `small` variant provide value or add complexity?
 - What do industry leaders recommend in 2026?
 
----
-
 ## Decision
 
-All form controls = 48px height (all viewports)
+All form controls use 48px height across all viewports.
 
-Applies to: `select.njk`, `input.njk` (min-height)
+- Applies to select, text input, textarea (min-height)
+- Single size for all contexts
+- Remove size property from component JSON
 
-**Rationale:**
+## Rationale
 
-48px = Material Design 3 standard, exceeds WCAG 2.5.5 minimum (44px), aligns Apple HIG (44pt). Single size reduces cognitive load (Gov.UK research), simplifies maintenance, guarantees accessibility.
+48px is Material Design 3 standard, exceeds WCAG 2.5.5 minimum (44px), and aligns with Apple HIG (44pt). Single size reduces cognitive load (Gov.UK research) and simplifies maintenance while guaranteeing accessibility.
 
-**Implementation:**
-
-```nunjucks
-{# select.njk - Remove sizeMap, use static height #}
-{% set baseClasses = "h-12 px-[var(--spacing-ui-default)] py-[var(--spacing-ui-minimal)] pr-[var(--spacing-ui-comfortable)] text-body ..." %}
-```
-
-```json
-// select.json - Remove size property
-{
-  "_meta": { "availableSizes": ["default"] },
-  "selects": [{ "name": "demo", "id": "demo1" }]
-}
-```
-
----
+Alternatives rejected: responsive breakpoints (40px mobile, 48px desktop) contradicts WCAG 2.5.5 as mobile needs larger targets. Keep `small` variant (40px) fails WCAG 2.5.5 minimum (44px). 44px compromise valid but 48px provides clearer industry standard alignment.
 
 ## Consequences
 
-**Positive:**
+**Positive**:
 
 - WCAG 2.5.5 AA automatic compliance
-- Aligned Material Design 3, Gov.UK, Apple HIG
-- Consistent with ADR-002 (body static), ADR-006 (links static)
+- Aligned with Material Design 3, Gov.UK, Apple HIG
+- Consistent with ADR-002 and ADR-006 static strategies
 - Simplified testing (1 size vs 2)
 - Better mobile UX (48px > 40px finger target)
 
-**Negative:**
+**Negative**:
 
 - Less vertical density on desktop
 - No `small` variant for dense layouts
-
-**Mitigation:**
-
-- Spacing tokens control vertical rhythm
-- Dense UIs (data tables) = custom organisms if needed (outside HAT core scope)
-
----
-
-## Alternatives Considered
-
-**Responsive breakpoints (40px mobile, 48px desktop):** Mobile needs larger targets, not smaller. Rejected: contradicts WCAG 2.5.5.
-
-**Keep `small` variant (40px):** Below WCAG 2.5.5 minimum (44px). Rejected: accessibility fail.
-
-**44px compromise:** Valid but Material Design 3 uses 48px. Rejected: 48px = clearer standard.
-
----
-
-## References
-
-- [Material Design 3 - Text Fields](https://m3.material.io/components/text-fields/specs) - 48px standard
-- [Carbon Design System - Select](https://carbondesignsystem.com/components/select/usage/) - Default 40px, compact = data tables only
-- [Gov.UK - Form Elements](https://design-system.service.gov.uk/components/) - 44px minimum, no variations
-- [Apple HIG - Controls](https://developer.apple.com/design/human-interface-guidelines/controls) - 44pt minimum
-- [WCAG 2.5.5 Target Size](https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html)
-
-**Related ADR:**
-
-- [ADR-002: Fluid Typography Strategy](./002-fluid-typography.md)
-- [ADR-003: Touch Target Accessibility](./003-touch-target-strategy.md)
-- [ADR-006: Link Typography Strategy](./006-link-typography.md)
+- Dense UIs like data tables require custom organisms (outside HAT core scope)
 
 ---
 
