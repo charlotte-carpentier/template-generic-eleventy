@@ -232,7 +232,7 @@
   {% endif %}
 
   {# ----- Main content ----- #}
-  <main id="main-content" class="flex-1">
+  <main id="main-content" class="flex-1 px-[var(--grid-margin-mobile)] md:px-[var(--grid-margin-desktop)]">
     {# Add hidden site description on homepage for SEO #}
     {% if page.url === '/' %}
       <section class="sr-only">
