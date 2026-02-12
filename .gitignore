@@ -50,3 +50,9 @@ npm-debug.log*
 .env
 .env.local
 .env.*.local
+
+# --------------------------
+# Performance/accessibility reports
+# --------------------------
+*.report.html
+lighthouse-report*.html
