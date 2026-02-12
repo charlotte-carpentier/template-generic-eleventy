@@ -24,7 +24,7 @@ Complete code examples following the coding style guide.
 /**
  * @fileoverview Tooltip system for desktop (lg: 1024px+)
  * @module molecules/caption
- * @created 2025-01-15
+ * @created 2025-09-15
  */
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -80,7 +80,7 @@ export { initTooltips };
     {% from "01-atoms/button.njk" import renderButton %}
     {{ renderButton({ name: "demo", datas: atoms.button.buttons }) }}
   
-  @created 2025-01-15
+  @created 2025-09-15
 #}
 
 {% macro renderButton(option) %}
@@ -113,7 +113,7 @@ export { initTooltips };
  * Component: button
  * Type: atom
  * Dependencies: TailwindCSS v4.x
- * @created 2025-01-15
+ * @created 2025-09-15
  */
 
 .btn {

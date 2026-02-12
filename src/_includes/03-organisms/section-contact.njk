@@ -28,7 +28,7 @@
         buttonDatas: atoms.button.buttons
     }) }}
 
-  @created 2025-01-15
+  @created 2025-09-15
   @updated 2026-02-03 (Security Phase: Netlify Forms + WCAG 2.2 AA)
 #}
 
@@ -97,6 +97,24 @@
       --------------------------#}
       {% set rightColClasses = "flex [&_section]:p-0 [&_section]:bg-transparent [&_section]:items-start [&_section>div]:mx-0 [&_section>div]:max-w-none [&_section>div]:w-full" %}
 
+      {# --------------------------
+          3.5 Form Wrapper Classes
+          Description: Layout, Spacing
+        --------------------------#}
+      {% set formClasses = "flex flex-col gap-[var(--spacing-ui-default)]" %}
+
+      {# --------------------------
+          3.6 Honeypot Input Classes
+          Description: Hidden field for spam protection
+        --------------------------#}
+      {% set honeypotClasses = "hidden" %}
+
+      {# --------------------------
+          3.7 Button Wrapper Classes
+          Description: Alignment
+        --------------------------#}
+      {% set buttonWrapperClasses = "self-start" %}
+
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
@@ -130,11 +148,11 @@
                   name="contact"
                   data-netlify="true"
                   data-netlify-honeypot="bot-field"
-                  class="flex flex-col gap-[var(--spacing-ui-default)]"
+                  class="{{ formClasses }}"
                 >
                   {# Netlify Forms required hidden inputs #}
                   <input type="hidden" name="form-name" value="contact" />
-                  <input type="hidden" name="bot-field" style="display:none" aria-hidden="true" />
+                  <input type="hidden" name="bot-field" class="{{ honeypotClasses }}" aria-hidden="true" />
 
                   {{ renderListForm({
                       name: leftForm,
@@ -142,7 +160,7 @@
                       inputDatas: options.inputDatas
                   }) }}
 
-                  <div class="self-start">
+                  <div class="{{ buttonWrapperClasses }}">
                     {{ renderButton({
                         name: buttonName,
                         datas: options.buttonDatas,

@@ -7,7 +7,7 @@
 /**
  * @fileoverview Main JavaScript entry point for site-wide functionality
  * @module core/main
- * @created 2025-01-15
+ * @created 2025-09-15
  * @updated 2025-12-26
  */
 

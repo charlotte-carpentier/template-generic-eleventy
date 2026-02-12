@@ -7,7 +7,7 @@
 /**
  * @fileoverview Intelligent routing for error page navigation
  * @module atoms/error-link
- * @created 2025-01-15
+ * @created 2025-09-15
  */
 
 import { goToPreviousPageOrHome } from '../../utils/navigation.js';

@@ -7,7 +7,7 @@
 /**
  * @fileoverview Header mobile menu functionality
  * @module organisms/header
- * @created 2025-01-15
+ * @created 2025-09-15
  * @updated 2025-01-06 (WCAG 2.2 AA compliant)
  */
 

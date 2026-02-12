@@ -24,7 +24,7 @@
     - Type "date": panel.js molecule (generates labels, calendars, navigation)
     - Type "list-item": No JavaScript required (static presentation)
 
-  @created 2025-01-15
+  @created 2025-09-15
   @updated 2025-01-18 (Phase 6 - Dynamic rendering with classes from Nunjucks)
 #}
 
@@ -136,6 +136,12 @@
         --------------------------#}
       {% set calendarsWrapperClasses = ("flex flex-col md:flex-row gap-[var(--spacing-ui-default)] [&>*:nth-child(2)]:hidden md:[&>*:nth-child(2)]:block" if variant == 'double' else "") %}
 
+      {# --------------------------
+          3.10 Checkbox Wrapper Classes
+          Description: Layout, Spacing, Alignment
+        --------------------------#}
+      {% set checkboxWrapperClasses = "touch-target flex items-center gap-[var(--spacing-ui-minimal)] px-[var(--spacing-ui-minimal)] py-[var(--spacing-ui-compact)]" %}
+
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
@@ -153,7 +159,7 @@
             {# Checkbox variant uses div (checkbox is interactive element) #}
             {% if item.checkboxName and options.checkboxDatas %}
               <div
-                class="touch-target flex items-center gap-[var(--spacing-ui-minimal)] px-[var(--spacing-ui-minimal)] py-[var(--spacing-ui-compact)]"
+                class="{{ checkboxWrapperClasses }}"
                 data-panel-item="true"
               >
                 {{ renderCheckbox({
@@ -253,7 +259,7 @@
             {# Checkbox variant uses div (checkbox is interactive element) #}
             {% if variant == "checkbox" and item.checkboxName and options.checkboxDatas %}
               <div
-                class="touch-target flex items-center gap-[var(--spacing-ui-minimal)] px-[var(--spacing-ui-minimal)] py-[var(--spacing-ui-compact)]"
+                class="{{ checkboxWrapperClasses }}"
                 data-panel-item="true"
               >
                 {{ renderCheckbox({
