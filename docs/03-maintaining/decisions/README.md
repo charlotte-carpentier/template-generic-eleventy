@@ -23,6 +23,7 @@ Complete list of architectural choices documenting context, decision, and conseq
 | [009](./009-spacing-tokens.md) | Spacing Tokens Architecture | 2026-01-27 |
 | [010](./010-css-units.md) | CSS Units Strategy | 2026-01-28 |
 | [011](./011-grid-tokens.md) | Grid Tokens Architecture | 2026-01-29 |
+| [012](./012-cms-content-scope.md) | CMS Content Scope Strategy | 2026-02-12 |
 
 ## Creating New ADR
 

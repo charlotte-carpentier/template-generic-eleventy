@@ -59,6 +59,33 @@ Both methods write to same repository.
 
 ---
 
+## Content Field Hints
+
+When editing content via Decap CMS, some fields have strict requirements to preserve SEO, accessibility, or responsive design.
+
+Pre-written hint messages for `config.yml`:
+
+**SEO**:
+
+- `"Important pour le référencement : affiché dans les résultats de recherche Google."`
+- `"Important pour le référencement : respectez les limites de caractères indiquées."`
+
+**Accessibility**:
+
+- `"Obligatoire : permet aux personnes malvoyantes de comprendre l'image."`
+- `"Obligatoire : décrivez le contenu de l'image en quelques mots."`
+
+**Design**:
+
+- `"Attention : un texte trop long peut casser la mise en page sur mobile."`
+- `"Attention : image trop lourde = site lent. Respectez la limite de taille."`
+
+**Combined**:
+
+- `"Important pour le référencement et l'accessibilité : titre unique de la page."`
+
+---
+
 ## Customizing CMS
 
 Make additional content editable by configuring `src/admin/config.yml`.

@@ -49,7 +49,9 @@ template-generic-eleventy/
 ├── src/
 │   ├── _data/     # Component data (JSON)
 │   ├── _includes/ # Nunjucks templates
+│   ├── admin/     # Decap CMS configuration
 │   ├── assets/    # Styles, scripts, images
+│   ├── content/   # CMS-managed content (blog, collections, etc.)
 │   └── pages/     # Site pages
 └── public/        # Build output
 ```
