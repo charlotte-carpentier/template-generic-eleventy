@@ -20,7 +20,7 @@
         iconDatas: atoms.icon.icons
     }) }}
 
-  @created 2025-01-15
+  @created 2025-09-15
   @updated 2025-10-26
 #}
 
@@ -90,6 +90,12 @@
       -------------------------- #}
       {% set iconWrapperClasses = "absolute top-1/2 right-[var(--spacing-ui-default)] -translate-y-1/2 pointer-events-none text-[var(--color-global-default)]" %}
 
+      {# --------------------------
+          3.6 Fallback Icon Classes
+          Description: Sizing, fill
+      --------------------------- #}
+      {% set fallbackIconClasses = "w-3 h-3 fill-current" %}
+
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
@@ -124,7 +130,7 @@
                 datas: options.iconDatas
             }) }}
           {% else %}
-            <svg class="w-3 h-3 fill-current" viewBox="0 0 12 12" aria-hidden="true">
+            <svg class="{{ fallbackIconClasses }}" viewBox="0 0 12 12" aria-hidden="true">
               <path d="M6 9L1.5 3h9L6 9z"/>
             </svg>
           {% endif %}

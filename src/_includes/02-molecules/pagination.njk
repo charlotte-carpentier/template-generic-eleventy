@@ -24,7 +24,7 @@
         iconDatas: atoms.icon.icons
     }) }}
 
-  @created 2025-01-15
+  @created 2025-09-15
   @updated 2026-01-06 (WCAG 2.2 AA compliance)
 #}
 
@@ -135,6 +135,12 @@
         --------------------------#}
       {% set counterClasses = "hidden md:flex flex-shrink-0 font-body text-body text-[var(--color-interactive-default)]" %}
 
+      {# --------------------------
+          3.8 Dots Ellipsis Classes
+          Description: Typography, Colors, Spacing
+        --------------------------#}
+      {% set dotsClasses = "font-body text-body text-[var(--color-global-contrast-light-02)] px-[var(--spacing-ui-minimal)]" %}
+
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
@@ -241,7 +247,7 @@
               {# Dots before siblings #}
               {% if startPage > 2 %}
                 <li class="{{ navItemClasses }}" aria-hidden="true">
-                  <span class="font-body text-body text-[var(--color-global-contrast-light-02)] px-[var(--spacing-ui-minimal)]">
+                  <span class="{{ dotsClasses }}">
                     {% if icons.dots %}
                       {{ renderIcon({
                           name: icons.dots,
@@ -270,7 +276,7 @@
               {# Dots after siblings #}
               {% if endPage < totalPages - 1 %}
                 <li class="{{ navItemClasses }}" aria-hidden="true">
-                  <span class="font-body text-body text-[var(--color-global-contrast-light-02)] px-[var(--spacing-ui-minimal)]">
+                  <span class="{{ dotsClasses }}">
                     {% if icons.dots %}
                       {{ renderIcon({
                           name: icons.dots,

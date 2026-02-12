@@ -263,7 +263,7 @@ Avoid non-native filters like `selectattr`.
     {% from "01-atoms/component.njk" import renderComponent %}
     {{ renderComponent({ name: "demo", datas: atoms.component.items }) }}
 
-  @created 2025-01-15
+  @created 2025-09-15
 #}
 ```
 

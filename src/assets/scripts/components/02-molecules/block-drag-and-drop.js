@@ -7,7 +7,7 @@
 /**
  * @fileoverview File upload with drag and drop - WCAG 2.2 AA compliant
  * @module molecules/block-drag-and-drop
- * @created 2025-01-15
+ * @created 2025-09-15
  * @updated 2026-02-03 (Security Phase: magic numbers validation + filename sanitization)
  */
 

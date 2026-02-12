@@ -7,7 +7,7 @@
 /**
  * @fileoverview Native HTML5 dialog functionality
  * @module organisms/modal
- * @created 2025-01-15
+ * @created 2025-09-15
  * @updated 2025-12-18
  */
 

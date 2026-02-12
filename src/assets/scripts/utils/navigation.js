@@ -6,7 +6,7 @@
 /**
  * @fileoverview Centralized navigation utilities for error pages
  * @module utils/navigation
- * @created 2025-01-15
+ * @created 2025-09-15
  * @updated 2025-10-17
  */
 

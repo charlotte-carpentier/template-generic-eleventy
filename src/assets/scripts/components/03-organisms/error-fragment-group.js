@@ -7,7 +7,7 @@
 /**
  * @fileoverview Interactive fragment navigation with accessibility
  * @module organisms/error-fragment-group
- * @created 2025-01-15
+ * @created 2025-09-15
  */
 
 import { goToPreviousPageOrHome } from '../../utils/navigation.js';
