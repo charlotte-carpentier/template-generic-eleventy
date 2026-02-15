@@ -20,7 +20,7 @@ HAT targets Lighthouse 100/100. Images represent 50%+ page weight and impact Cor
 
 Build script generates metadata, component consumes enriched JSON.
 
-- Workflow: `build:images` generates metadata → enriches JSON → Nunjucks renders
+- Workflow: `build:images` generates metadata => enriches JSON => Nunjucks renders
 - Widths: 400w, 800w, 1200w (mobile, tablet, desktop)
 - Format: WebP only (97%+ browser support)
 - Auto-enrichment adds `width`, `height`, `srcset`, `sizes` to JSON

@@ -24,6 +24,8 @@ Complete list of architectural choices documenting context, decision, and conseq
 | [010](./010-css-units.md) | CSS Units Strategy | 2026-01-28 |
 | [011](./011-grid-tokens.md) | Grid Tokens Architecture | 2026-01-29 |
 | [012](./012-cms-content-scope.md) | CMS Content Scope Strategy | 2026-02-12 |
+| [013](./013-data-architecture.md) | Data Architecture (_data vs content) | 2026-02-13 |
+| [014](./014-data-render-pattern.md) | Data Render Pattern | 2026-02-15 |
 
 ## Creating New ADR
 

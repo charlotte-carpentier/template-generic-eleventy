@@ -110,6 +110,12 @@
       "text": "Label",
       "variant": "secondary",
       "ariaLabel": "Button description for accessibility"
+    },
+    {
+      "name": "readMore",
+      "text": "Lire l'article",
+      "variant": "primary",
+      "url": "#"
     }
   ]
 }

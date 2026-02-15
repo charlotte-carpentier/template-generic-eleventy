@@ -129,16 +129,6 @@
       "ariaLabel": "Link description for accessibility"
     },
     {
-      "name": "linkArticle",
-      "href": "/article/",
-      "text": "Article",
-      "iconName": "",
-      "target": "_self",
-      "rel": "",
-      "download": false,
-      "ariaLabel": "Link description for accessibility"
-    },
-    {
       "name": "linkContact",
       "href": "/contact/",
       "text": "Contact",
