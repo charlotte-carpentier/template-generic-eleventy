@@ -31,10 +31,9 @@ template-generic-eleventy/
 │   │   │   ├── favicon/          # Favicons and app icons (per MDN spec)
 │   │   │   └── sprites/          # Icon spritesheets (SVG/PNG)
 │   │   ├── images/               # Raster and vector images (not icons)
-│   │   │   ├── backgrounds/      # Background images
-│   │   │   ├── illustrations/    # Illustrations
 │   │   │   ├── logos/            # Logos
-│   │   │   └── placeholders/     # Template demo images only
+│   │   │   ├── system/           # Design system images
+│   │   │   └── uploads/          # CMS-managed images
 │   │   ├── scripts/              # JavaScript
 │   │   │   ├── components/       # Component-specific JS (organized by OMA)
 │   │   │   │   ├── 01-atoms/     # Atomic-level scripts

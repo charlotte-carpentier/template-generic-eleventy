@@ -7,15 +7,10 @@
   Props:
     - options.name (string): Button identifier
     - options.datas (array): Button configuration data
-    - options.type (string): Button type override
-    - options.disabled (boolean): Override disabled state
-    - options.onclick (string): Inline click handler
-    - options.id (string): Button ID attribute
-    - options.ariaLabel (string): ARIA label for accessibility
-    - options.ariaDescribedby (string): ARIA described-by reference
-    - options.isErrorPage (boolean): Apply error-page-specific styling
+    - options.url (string): Runtime URL override (optional)
     - options.iconDatas (array): Icon atom data (optional, required if button has icons)
     - options.tooltipDatas (array): Tooltip atom data (optional, required if button has tooltips)
+    - options.isErrorPage (boolean): Apply error-page-specific styling
 
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/button.njk" import renderButton %}
@@ -24,6 +19,7 @@
     {{ renderButton({
         name: "demoButton1",
         datas: atoms.button.buttons,
+        url: dynamicUrl,
         iconDatas: atoms.icon.icons,
         tooltipDatas: atoms.tooltip.tooltips
     }) }}
@@ -31,8 +27,10 @@
     Error page button with specific styling:
     {{ renderButton({
         name: "button-reveal-all",
-        datas: option.buttonDatas,
-        iconDatas: option.iconDatas,
+        datas: atoms.button.buttons,
+        url: buttonUrl,
+        iconDatas: atoms.icon.icons,
+        tooltipDatas: atoms.tooltip.tooltips,
         isErrorPage: true
     }) }}
 

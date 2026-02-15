@@ -172,7 +172,8 @@
         <div class="{{ headingContainerClasses }}">
           {{ renderHeading({
               name: headingName,
-              datas: options.headingDatas
+              datas: options.headingDatas,
+              text: options.headingText
           }) }}
         </div>
 
@@ -208,6 +209,7 @@
           {{ renderButton({
               name: buttonName,
               datas: options.buttonDatas,
+              url: options.buttonUrl,
               iconDatas: options.iconDatas,
               tooltipDatas: options.tooltipDatas,
               disabled: variant == 'loading'

@@ -82,6 +82,7 @@ eleventyExcludeFromCollections: true
     {{ renderButton({
         name: "demoButton1",
         datas: atoms.button.buttons,
+        url: options.buttonUrl,
         iconDatas: atoms.icon.icons,
         tooltipDatas: atoms.tooltip.tooltips
     }) }}
@@ -110,7 +111,8 @@ eleventyExcludeFromCollections: true
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Heading</h2>
     {{ renderHeading({
         name: "demoHead1",
-        datas: atoms.heading.headings
+        datas: atoms.heading.headings,
+        text: dynamicText
     }) }}
   </section>
 
@@ -127,8 +129,11 @@ eleventyExcludeFromCollections: true
   <section style="border: 1px solid #ccc; padding: 1rem;">
     <h2 style="margin: 0 0 0.5rem 0; font-size: 0.875rem;">Image</h2>
     {{ renderImage({
-        name: "demoImage2",
-        datas: atoms.image.images
+        name: "demoImage1",
+        datas: atoms.image.images,
+        src: dynamicImageSrc,
+        alt: dynamicImageAlt,
+        iconDatas: atoms.icon.icons
     }) }}
   </section>
 

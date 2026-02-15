@@ -7,7 +7,13 @@
   Props:
     - options.name (string): Card identifier
     - options.datas (array): Card configuration data
-    - options.lockupDatas (array): Lockup atom data (optional)
+    - options.imageSrc (string): Runtime image override (optional)
+    - options.imageAlt (string): Runtime alt text override (optional)
+    - options.headingText (string): Runtime heading text override (optional)
+    - options.content (string): Runtime content text override (optional)
+    - options.buttonName (string): Runtime button name override (optional)
+    - options.buttonUrl (string): Runtime button URL override (optional)
+    - options.lockupDatas (array): Lockup molecule data (optional)
     - options.imageDatas (array): Image atom data (optional)
     - options.headingDatas (array): Heading atom data (optional)
     - options.buttonDatas (array): Button atom data (optional)
@@ -18,14 +24,20 @@
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/card.njk" import renderCard %}
 
+    Usage — Summon HAT Components Wisely:
+    {% from "02-molecules/card.njk" import renderCard %}
+
     {{ renderCard({
         name: "demoCard1",
         datas: molecules.card.cards,
+        imageSrc: article.data.image,
+        imageAlt: article.data.imageAlt,
+        headingText: article.data.title,
+        buttonUrl: article.url,
         lockupDatas: molecules["lock-up"].lockUps,
         imageDatas: atoms.image.images,
         headingDatas: atoms.heading.headings,
         buttonDatas: atoms.button.buttons,
-        tagDatas: atoms.tag.tags,
         iconDatas: atoms.icon.icons
     }) }}
 
@@ -60,8 +72,8 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set lockupName = cardData.lockupName | default('') %}
       {% set headingName = cardData.headingName | default('') %}
-      {% set content = cardData.content | default('') %}
-      {% set buttonName = cardData.buttonName | default('') %}
+      {% set content = options.content or cardData.content or '' %}
+      {% set buttonName = options.buttonName or cardData.buttonName or '' %}
       {% set tags = cardData.tags | default([]) %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -127,6 +139,10 @@
           >
             {{ renderLockup({
                 name: lockupName,
+                imageSrc: options.imageSrc,
+                imageAlt: options.imageAlt,
+                headingText: options.headingText,
+                contentText: options.content,
                 datas: options.lockupDatas,
                 imageDatas: options.imageDatas,
                 headingDatas: options.headingDatas,
@@ -144,18 +160,9 @@
           {% if headingName and options.headingDatas %}
             {{ renderHeading({
                 name: headingName,
-                datas: options.headingDatas
+                datas: options.headingDatas,
+                text: options.headingText
             }) }}
-          {% endif %}
-
-          {# Content text (if present) #}
-          {% if content %}
-            <p
-              class="{{ textClasses }}"
-              data-card-text="true"
-            >
-              {{ content }}
-            </p>
           {% endif %}
 
           {# Button (if present) #}
@@ -163,8 +170,8 @@
             <div class="{{ buttonWrapperClasses }}">
               {{ renderButton({
                   name: buttonName,
-                  url: options.buttonUrl,
                   datas: options.buttonDatas,
+                  url: options.buttonUrl,
                   iconDatas: options.iconDatas,
                   tooltipDatas: options.tooltipDatas
               }) }}

@@ -108,7 +108,10 @@
             >
               {{ renderImage({
                   name: imageName,
-                  datas: options.imageDatas
+                  datas: options.imageDatas,
+                  src: options.imageSrc,
+                  alt: options.imageAlt,
+                  iconDatas: options.iconDatas
               }) }}
             </div>
           {% endif %}
@@ -121,7 +124,8 @@
             >
               {{ renderHeading({
                   name: headingName,
-                  datas: options.headingDatas
+                  datas: options.headingDatas,
+                  text: options.headingText
               }) }}
             </div>
           {% endif %}

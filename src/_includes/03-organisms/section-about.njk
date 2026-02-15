@@ -153,7 +153,8 @@
                 >
                   {{ renderHeading({
                       name: headingName,
-                      datas: options.headingDatas
+                      datas: options.headingDatas,
+                      text: options.headingText
                   }) }}
                 </div>
               {% endif %}
@@ -180,6 +181,7 @@
                     {{ renderButton({
                         name: primaryButtonName,
                         datas: options.buttonDatas,
+                        url: options.buttonUrl,
                         iconDatas: options.iconDatas,
                         tooltipDatas: options.tooltipDatas
                     }) }}
@@ -190,6 +192,7 @@
                     {{ renderButton({
                         name: secondaryButtonName,
                         datas: options.buttonDatas,
+                        url: options.buttonUrl,
                         iconDatas: options.iconDatas,
                         tooltipDatas: options.tooltipDatas
                     }) }}
@@ -214,7 +217,8 @@
                 >
                   {{ renderHeading({
                       name: subheadingName,
-                      datas: options.headingDatas
+                      datas: options.headingDatas,
+                      text: options.headingText
                   }) }}
                 </div>
               {% endif %}
