@@ -103,7 +103,7 @@
           3.5 Button Wrapper Classes
           Description: Layout (full-width button)
         --------------------------#}
-      {% set buttonWrapperClasses = "mt-0 [&_button]:w-full" %}
+      {% set buttonWrapperClasses = "mt-0 [&_button]:w-full [&_a]:w-full" %}
 
       {# --------------------------
           3.6 Tags Wrapper Classes
@@ -163,6 +163,7 @@
             <div class="{{ buttonWrapperClasses }}">
               {{ renderButton({
                   name: buttonName,
+                  url: options.buttonUrl,
                   datas: options.buttonDatas,
                   iconDatas: options.iconDatas,
                   tooltipDatas: options.tooltipDatas
