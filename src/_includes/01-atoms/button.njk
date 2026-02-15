@@ -64,6 +64,8 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set buttonUrl = options.url or buttonData.url or '' %}
+      {% set isLink = buttonUrl != '' %}
       {% set buttonType = options.type | default(buttonData.type) | default('button') %}
       {% set buttonSize = buttonData.size | default('medium') %}
       {% set buttonVariant = buttonData.variant | default('primary') %}
@@ -132,17 +134,31 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      <button
-        type="{{ buttonType }}"
-        class="{{ baseClasses }} {{ sizeClasses }} {{ variantClasses }} {{ iconClasses }}"
-        data-button-name="{{ buttonData.name }}"
-        data-button-type="button"
-        {% if hasIcon %}data-button-icon-position="{{ iconPosition }}"{% endif %}
-        {% if isDisabled %}disabled{% endif %}
-        {% if options.onclick %}onclick="{{ options.onclick | escape }}"{% endif %}
-        {% if options.id %}id="{{ options.id }}"{% endif %}
-        {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
-        {% if hasTooltip and options.tooltipDatas %}aria-describedby="{{ finalAriaDescribedby }}"{% endif %}>
+      {# Conditional rendering: <a> for navigation, <button> for actions #}
+      {% if isLink %}
+
+        <a href="{{ buttonUrl }}"
+          class="{{ baseClasses }} {{ sizeClasses }} {{ variantClasses }} {{ iconClasses }}"
+          data-button-name="{{ buttonData.name }}"
+          data-button-type="link"
+          {% if hasIcon %}data-button-icon-position="{{ iconPosition }}"{% endif %}
+          {% if options.id %}id="{{ options.id }}"{% endif %}
+          {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
+          {% if hasTooltip and options.tooltipDatas %}aria-describedby="{{ finalAriaDescribedby }}"{% endif %}>
+      {% else %}
+        <button
+          type="{{ buttonType }}"
+          class="{{ baseClasses }} {{ sizeClasses }} {{ variantClasses }} {{ iconClasses }}"
+          data-button-name="{{ buttonData.name }}"
+          data-button-type="button"
+          {% if hasIcon %}data-button-icon-position="{{ iconPosition }}"{% endif %}
+          {% if isDisabled %}disabled{% endif %}
+          {% if options.onclick %}onclick="{{ options.onclick | escape }}"{% endif %}
+          {% if options.id %}id="{{ options.id }}"{% endif %}
+          {% if finalAriaLabel %}aria-label="{{ finalAriaLabel }}"{% endif %}
+          {% if hasTooltip and options.tooltipDatas %}aria-describedby="{{ finalAriaDescribedby }}"{% endif %}>
+      {% endif %}
+
         {# Icon left position #}
         {% if hasIcon and (iconPosition == 'left' or iconPosition == 'both') %}
           {% if options.iconDatas %}
@@ -180,7 +196,13 @@
             }) }}
           {% endif %}
         {% endif %}
-      </button>
+
+      {# Close tag matches opening tag #}
+      {% if isLink %}
+        </a>
+      {% else %}
+        </button>
+      {% endif %}
 
       {# Auto-render tooltip if defined #}
       {% if hasTooltip and options.tooltipDatas %}

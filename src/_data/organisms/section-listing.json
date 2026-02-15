@@ -10,6 +10,7 @@
     {
       "name": "demoSectL1",
       "headingName": "demoHead2",
+      "cardButtonName": "readMore",
       "cardTags": [
         "demo"
       ],

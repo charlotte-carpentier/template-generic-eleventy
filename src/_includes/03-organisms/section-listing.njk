@@ -65,6 +65,7 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set sectionName = sectionData.name | default(options.name) %}
       {% set headingName = sectionData.headingName | default('') %}
+      {% set cardButtonName = sectionData.cardButtonName | default('readMore') %}
       {% set cardTags = sectionData.cardTags | default([]) %}
       {% set itemsPerPage = sectionData.itemsPerPage | default(8) %}
       {% set paginationName = sectionData.paginationName | default('') %}
@@ -157,8 +158,8 @@
                       datas: [{
                         name: "articleCard",
                         headingName: article.data.title,
-                        content: article.data.excerpt or (article.templateContent | striptags | truncate(150)),
-                        buttonName: "readMore",
+                        content: article.data.description or (article.templateContent | striptags | truncate(150)),
+                        buttonName: cardButtonName,
                         tags: article.data.tags
                       }],
                       headingDatas: [{
@@ -166,12 +167,8 @@
                         text: article.data.title,
                         level: 3
                       }],
-                      buttonDatas: [{
-                        name: "readMore",
-                        text: "Lire l'article",
-                        url: article.url,
-                        variant: "primary"
-                      }],
+                      buttonDatas: options.buttonDatas,
+                      buttonUrl: article.url,
                       iconDatas: options.iconDatas,
                       tooltipDatas: options.tooltipDatas
                   }) }}
