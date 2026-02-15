@@ -72,8 +72,8 @@
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set lockupName = cardData.lockupName | default('') %}
       {% set headingName = cardData.headingName | default('') %}
-      {% set content = options.content or cardData.content or '' %}
-      {% set buttonName = options.buttonName or cardData.buttonName or '' %}
+      {% set content = options.content | default(cardData.content) | default('') %}
+      {% set buttonName = options.buttonName | default(cardData.buttonName) | default('') %}
       {% set tags = cardData.tags | default([]) %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━

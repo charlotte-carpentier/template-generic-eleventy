@@ -62,7 +62,7 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      {% set buttonUrl = options.url or buttonData.url or '' %}
+      {% set buttonUrl = options.url | default(buttonData.url) | default('') %}
       {% set isLink = buttonUrl != '' %}
       {% set buttonType = options.type | default(buttonData.type) | default('button') %}
       {% set buttonSize = buttonData.size | default('medium') %}
