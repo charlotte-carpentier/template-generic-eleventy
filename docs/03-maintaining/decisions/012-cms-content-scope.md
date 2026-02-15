@@ -23,10 +23,23 @@ HAT template must balance client autonomy (edit content without dev) vs design/S
 CMS content scope follows 3-tier risk hierarchy:
 
 **Tier 1 - Safe (IN CMS, no validation)**  
-Editorial content: articles, FAQ, testimonials, about text, contact info.
+Editorial long-form content:
+
+- Articles body (Markdown)
+- About section text (Markdown)
+- Service descriptions (Markdown)
+- FAQ answers (Markdown)
+- Testimonials quotes (max 300 char)
+- Contact info (email, phone, address)
 
 **Tier 2 - Controlled (IN CMS, with validation)**  
-SEO/accessibility-sensitive: hero titles, meta descriptions, page titles, images (with character limits, format validation, required alt text).
+SEO/accessibility-sensitive content requiring validation:
+
+- Hero titles (H1, max 80 char)
+- Hero subtitles (max 120 char)
+- Page titles/meta descriptions (50-60 / 50-160 char)
+- Section titles (H2-H6, max 60 char)
+- Images (max 2MB, required alt text max 150 char)
 
 **Tier 3 - Restricted (OUT of CMS)**  
 Structural elements: CTA text, forms, navigation, interactive components, layout config, design tokens.

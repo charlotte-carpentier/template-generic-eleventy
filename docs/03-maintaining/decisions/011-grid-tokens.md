@@ -25,7 +25,7 @@ Hybrid architecture using Figma grid tokens for structure and Tailwind native fo
 - Grid margins (design term, CSS padding): 16px mobile, 64px desktop
 - Workzone: calculated from viewport minus margins
 - Column widths: 12-col desktop, 2-col mobile with gutter spacing
-- Pattern: Section uses grid margins → Container uses workzone max-width → Layout uses Tailwind native grid
+- Pattern: Section uses grid margins => Container uses workzone max-width => Layout uses Tailwind native grid
 
 ## Rationale
 

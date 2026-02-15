@@ -59,6 +59,29 @@ Both methods write to same repository.
 
 ---
 
+## What Content is Editable?
+
+**Client can edit via CMS**:
+
+- Article titles, body text, metadata (with character limits)
+- Hero titles and subtitles (with validation)
+- About/Services section text
+- Testimonials, FAQ
+- Contact info, social links
+- Images (with alt text required)
+
+**Developer controls (hardcoded)**:
+
+- CTA button text ("Prendre rendez-vous", "En savoir plus")
+- Form labels ("Votre nom", "Votre email")
+- Navigation menu items
+- Error messages, tooltips
+- Component configuration
+
+**Why?** Editorial content (optimizable for SEO) belongs in CMS. Interface text (tested for UX/conversion) stays in code.
+
+---
+
 ## Content Field Hints
 
 When editing content via Decap CMS, some fields have strict requirements to preserve SEO, accessibility, or responsive design.
