@@ -164,7 +164,8 @@
                 >
                   {{ renderHeading({
                       name: headingName,
-                      datas: options.headingDatas
+                      datas: options.headingDatas,
+                      text: options.headingText
                   }) }}
                 </div>
               {% endif %}
@@ -177,7 +178,8 @@
                 >
                   {{ renderHeading({
                       name: subheadingName,
-                      datas: options.headingDatas
+                      datas: options.headingDatas,
+                      text: options.headingText
                   }) }}
                 </div>
               {% endif %}
@@ -204,6 +206,7 @@
                     {{ renderButton({
                         name: primaryButtonName,
                         datas: options.buttonDatas,
+                        url: options.buttonUrl,
                         iconDatas: options.iconDatas,
                         tooltipDatas: options.tooltipDatas
                     }) }}
@@ -214,6 +217,7 @@
                     {{ renderButton({
                         name: secondaryButtonName,
                         datas: options.buttonDatas,
+                        url: options.buttonUrl,
                         iconDatas: options.iconDatas,
                         tooltipDatas: options.tooltipDatas
                     }) }}
@@ -237,7 +241,10 @@
                 >
                   {{ renderImage({
                       name: imageName,
-                      datas: options.imageDatas
+                      datas: options.imageDatas,
+                      src: options.imageSrc,
+                      alt: options.imageAlt,
+                      iconDatas: options.iconDatas
                   }) }}
                 </div>
               {% endif %}

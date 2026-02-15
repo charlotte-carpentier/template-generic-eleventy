@@ -7,6 +7,7 @@
   Props:
     - options.name (string): Heading identifier
     - options.datas (array): Heading configuration data
+    - options.text (string): Runtime text override (optional)
     - options.tag (string): Override HTML tag (h1-h6, p, span, small)
 
   Usage — Summon HAT Components Wisely:
@@ -14,7 +15,8 @@
 
     {{ renderHeading({
         name: "demoHead1",
-        datas: atoms.heading.headings
+        datas: atoms.heading.headings,
+        text: dynamicText
     }) }}
 
   @created 2025-09-15
@@ -41,6 +43,7 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set headingText = options.text or headingData.text or '' %}
       {% set finalTag = options.tag | default(headingData.tag) | default('p') %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -97,63 +100,63 @@
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="h1"
-        >{{ headingData.text }}</h1>
+        >{{ headingText }}</h1>
       {% elif finalTag == 'h2' %}
         <h2
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="h2"
-        >{{ headingData.text }}</h2>
+        >{{ headingText }}</h2>
       {% elif finalTag == 'h3' %}
         <h3
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="h3"
-        >{{ headingData.text }}</h3>
+        >{{ headingText }}</h3>
       {% elif finalTag == 'h4' %}
         <h4
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="h4"
-        >{{ headingData.text }}</h4>
+        >{{ headingText }}</h4>
       {% elif finalTag == 'h5' %}
         <h5
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="h5"
-        >{{ headingData.text }}</h5>
+        >{{ headingText }}</h5>
       {% elif finalTag == 'h6' %}
         <h6
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="h6"
-        >{{ headingData.text }}</h6>
+        >{{ headingText }}</h6>
       {% elif finalTag == 'span' %}
         <span
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="span"
-        >{{ headingData.text }}</span>
+        >{{ headingText }}</span>
       {% elif finalTag == 'small' %}
         <small
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="small"
-        >{{ headingData.text }}</small>
+        >{{ headingText }}</small>
       {% else %}
         <p
           class="{{ baseClasses }} {{ typographyClasses }}"
           data-heading-name="{{ headingData.name }}"
           data-heading-type="heading"
           data-heading-tag="p"
-        >{{ headingData.text }}</p>
+        >{{ headingText }}</p>
       {% endif %}
     {% endif %}
   {% endif %}

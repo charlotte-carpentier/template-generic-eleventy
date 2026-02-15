@@ -125,7 +125,8 @@
             >
               {{ renderHeading({
                   name: headingName,
-                  datas: options.headingDatas
+                  datas: options.headingDatas,
+                  text: options.headingText
               }) }}
             </div>
           {% endif %}
@@ -155,6 +156,7 @@
                 {{ renderButton({
                     name: primaryButton,
                     datas: options.buttonDatas,
+                    url: options.buttonUrl,
                     iconDatas: options.iconDatas,
                     tooltipDatas: options.tooltipDatas
                 }) }}
@@ -165,6 +167,7 @@
                 {{ renderButton({
                     name: secondaryButton,
                     datas: options.buttonDatas,
+                    url: options.buttonUrl,
                     iconDatas: options.iconDatas,
                     tooltipDatas: options.tooltipDatas
                 }) }}

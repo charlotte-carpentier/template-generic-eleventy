@@ -61,8 +61,10 @@
 
       {# Block-content type values #}
       {% set imageName = lockupData.imageName | default('') %}
+      {% set imageSrc = options.imageSrc or '' %}
+      {% set imageAlt = options.imageAlt or '' %}
       {% set headingName = lockupData.headingName | default('') %}
-      {% set contentText = lockupData.content.text | default('') if lockupData.content else '' %}
+      {% set contentText = options.contentText or (lockupData.content.text | default('') if lockupData.content else '') %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
@@ -187,6 +189,8 @@
               {{ renderImage({
                   name: imageName,
                   datas: options.imageDatas,
+                  src: options.imageSrc,
+                  alt: options.imageAlt,
                   iconDatas: options.iconDatas
               }) }}
             </div>
@@ -201,7 +205,8 @@
             {% if headingName and options.headingDatas %}
               {{ renderHeading({
                   name: headingName,
-                  datas: options.headingDatas
+                  datas: options.headingDatas,
+                  text: options.headingText
               }) }}
             {% endif %}
 

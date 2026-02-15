@@ -18,8 +18,8 @@ backend:
 # MEDIA CONFIGURATION
 # ------------------------------------------------------------------------------
 # Define where uploaded media files will be stored
-media_folder: "src/assets/images"     # Repository path for media files
-public_folder: "/assets/images"       # Public URL path for media files
+media_folder: "src/assets/images/uploads"     # Repository path for media files
+public_folder: "/assets/images/uploads"       # Public URL path for media files
 
 # ------------------------------------------------------------------------------
 # OPTIONAL: PUBLISH MODE

@@ -15,7 +15,7 @@
   "images": [
     {
       "name": "demoImage1",
-      "src": "./src/assets/images/placeholders/placeholder-square.png",
+      "src": "./src/assets/images/system/placeholder-square.png",
       "alt": "Square placeholder image",
       "variant": "default",
       "width": 608,
@@ -34,7 +34,7 @@
     },
     {
       "name": "demoImage2",
-      "src": "./src/assets/images/placeholders/placeholder-landscape.png",
+      "src": "./src/assets/images/system/placeholder-landscape.png",
       "alt": "Landscape placeholder image",
       "variant": "default",
       "width": 608,
@@ -53,7 +53,7 @@
     },
     {
       "name": "demoImage3",
-      "src": "./src/assets/images/placeholders/placeholder-wide.png",
+      "src": "./src/assets/images/system/placeholder-wide.png",
       "alt": "Wide placeholder image",
       "variant": "default",
       "width": 608,
@@ -78,7 +78,7 @@
     },
     {
       "name": "demoAvatar2",
-      "src": "/assets/images/placeholders/avatar-photo.png",
+      "src": "/assets/images/system/avatar-photo.png",
       "alt": "Avatar photo",
       "variant": "avatar"
     }

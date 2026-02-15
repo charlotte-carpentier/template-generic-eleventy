@@ -104,7 +104,7 @@
           3.4 Cards Grid Classes
           Description: Layout responsive grid with breakpoints, Spacing, Override card width
       --------------------------#}
-      {% set cardsGridClasses = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[var(--grid-gutter)] [&>*]:max-w-[var(--grid-col-4)] [&>*]:mx-auto" %}
+      {% set cardsGridClasses = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[var(--grid-gutter)]" %}
 
       {# --------------------------
           3.5 Pagination Wrapper Classes
@@ -140,7 +140,8 @@
               >
                 {{ renderHeading({
                     name: headingName,
-                    datas: options.headingDatas
+                    datas: options.headingDatas,
+                    text: options.headingText
                 }) }}
               </div>
             {% endif %}
@@ -154,21 +155,18 @@
               {% if options.items %}
                 {% for article in options.items %}
                   {{ renderCard({
-                      name: "articleCard",
-                      datas: [{
-                        name: "articleCard",
-                        headingName: article.data.title,
-                        content: article.data.description or (article.templateContent | striptags | truncate(150)),
-                        buttonName: cardButtonName,
-                        tags: article.data.tags
-                      }],
-                      headingDatas: [{
-                        name: article.data.title,
-                        text: article.data.title,
-                        level: 3
-                      }],
-                      buttonDatas: options.buttonDatas,
+                      name: "demoCard1",
+                      datas: options.cardDatas,
+                      imageSrc: article.data.image or '/assets/images/system/placeholder-square.png',
+                      imageAlt: article.data.imageAlt or article.data.title,
+                      headingText: article.data.title,
+                      content: article.data.description or (article.templateContent | striptags | truncate(150)),
+                      buttonName: cardButtonName,
                       buttonUrl: article.url,
+                      lockupDatas: options.lockupDatas,
+                      imageDatas: options.imageDatas,
+                      headingDatas: options.headingDatas,
+                      buttonDatas: options.buttonDatas,
                       iconDatas: options.iconDatas,
                       tooltipDatas: options.tooltipDatas
                   }) }}
