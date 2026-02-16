@@ -148,6 +148,13 @@
             }) }}
           {% endif %}
 
+          {# Content text (if no lockup) #}
+          {% if content and not lockupName %}
+            <p class="{{ textClasses }}" data-card-text="true">
+              {{ content }}
+            </p>
+          {% endif %}
+
           {# Button (if present) #}
           {% if buttonName and options.buttonDatas %}
             <div class="{{ buttonWrapperClasses }}">
