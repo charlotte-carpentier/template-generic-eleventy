@@ -16,7 +16,9 @@
       ],
       "itemsPerPage": 8,
       "paginationName": "blogPagination",
-      "ariaLabel": "Listing section"
+      "ariaLabel": "Listing section",
+      "placeholderImage": "/assets/images/system/placeholder-square.png",
+      "excerptLength": 150
     }
   ]
 }
