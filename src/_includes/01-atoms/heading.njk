@@ -4,12 +4,6 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Heading identifier
-    - options.datas (array): Heading configuration data
-    - options.text (string): Runtime text override (optional)
-    - options.tag (string): Override HTML tag (h1-h6, p, span, small)
-
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/heading.njk" import renderHeading %}
 
@@ -43,7 +37,7 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      {% set headingText = options.text or headingData.text or '' %}
+      {% set headingText = options.text | default(headingData.text) | default('') %}
       {% set finalTag = options.tag | default(headingData.tag) | default('p') %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━

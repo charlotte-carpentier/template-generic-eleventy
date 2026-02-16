@@ -4,13 +4,6 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Image identifier
-    - options.datas (array): Image configuration data
-    - options.src (string): Runtime image source override (optional)
-    - options.alt (string): Runtime alt text override (optional)
-    - options.iconDatas (array): Icon data (for avatar variants with icons)
-
   Usage — Summon HAT Components Wisely:
     {% from "01-atoms/image.njk" import renderImage %}
 
@@ -51,8 +44,8 @@
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
-      {% set imageSrc = options.src or imageData.src or '' %}
-      {% set imageAlt = options.alt or imageData.alt or '' %}
+      {% set imageSrc = options.src | default(imageData.src) | default('') %}
+      {% set imageAlt = options.alt | default(imageData.alt) | default('') %}
       {% set imageVariant = imageData.variant | default('default') %}
       {% set imageWidth = imageData.width %}
       {% set imageHeight = imageData.height %}

@@ -4,13 +4,6 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Lockup identifier
-    - options.datas (array): Lockup configuration data
-    - options.imageDatas (array): Image atom data (for block-content type)
-    - options.headingDatas (array): Heading atom data (for block-content type)
-    - options.iconDatas (array): Icon atom data (for avatar images with icons)
-
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/lock-up.njk" import renderLockup %}
 
@@ -61,10 +54,10 @@
 
       {# Block-content type values #}
       {% set imageName = lockupData.imageName | default('') %}
-      {% set imageSrc = options.imageSrc or '' %}
-      {% set imageAlt = options.imageAlt or '' %}
+      {% set imageSrc = options.imageSrc | default('') %}
+      {% set imageAlt = options.imageAlt | default('') %}
       {% set headingName = lockupData.headingName | default('') %}
-      {% set contentText = options.contentText or (lockupData.content.text | default('') if lockupData.content else '') %}
+      {% set contentText = options.contentText | default(lockupData.content.text | default('') if lockupData.content else '') %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes

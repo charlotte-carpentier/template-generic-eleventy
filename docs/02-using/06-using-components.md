@@ -100,22 +100,5 @@ This renders a complete hero section with heading, image, and CTA buttons.
 
 ---
 
-## Finding Component Props
-
-Each `.njk` file has a header comment listing all props:
-
-```njk
-{#
-  Props:
-    - options.name (string): Component identifier
-    - options.datas (array): Component configuration data
-    - options.buttonDatas (array): Button atom data (optional)
-#}
-```
-
-Check the component file to see which `*Datas` props are required.
-
----
-
 May your bugs be forever exiled to the shadow realm ✦  
 HAT · 2026

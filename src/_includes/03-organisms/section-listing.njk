@@ -4,20 +4,6 @@
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
-  Props:
-    - options.name (string): Section identifier
-    - options.datas (array): Section configuration data
-    - options.headingDatas (array): Heading atom data
-    - options.cardDatas (array): Card molecule data
-    - options.lockupDatas (array): Lockup molecule data (for cards)
-    - options.imageDatas (array): Image atom data (for cards)
-    - options.buttonDatas (array): Button atom data (for cards and pagination)
-    - options.iconDatas (array): Icon atom data (for cards and pagination)
-    - options.tooltipDatas (array): Tooltip atom data (optional, required if buttons/links have tooltips)
-    - options.paginationDatas (array): Pagination molecule data
-    - options.selectDatas (array): Select atom data (for pagination)
-    - options.items (array): Paginated articles from Eleventy (NEW)
-
   Usage — Summon HAT Components Wisely:
     {% from "03-organisms/section-listing.njk" import renderSectionListing %}
 
@@ -70,6 +56,8 @@
       {% set itemsPerPage = sectionData.itemsPerPage | default(8) %}
       {% set paginationName = sectionData.paginationName | default('') %}
       {% set ariaLabel = sectionData.ariaLabel | default('Listing section') %}
+      {% set placeholderImage = sectionData.placeholderImage | default('/assets/images/system/placeholder-square.png') %}
+      {% set excerptLength = sectionData.excerptLength | default(150) %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
@@ -157,10 +145,10 @@
                   {{ renderCard({
                       name: "demoCard1",
                       datas: options.cardDatas,
-                      imageSrc: article.data.image or '/assets/images/system/placeholder-square.png',
+                      imageSrc: article.data.image or placeholderImage,
                       imageAlt: article.data.imageAlt or article.data.title,
                       headingText: article.data.title,
-                      content: article.data.description or (article.templateContent | striptags | truncate(150)),
+                      content: article.data.description or (article.templateContent | striptags | truncate(excerptLength)),
                       buttonName: cardButtonName,
                       buttonUrl: article.url,
                       lockupDatas: options.lockupDatas,
