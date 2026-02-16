@@ -46,18 +46,18 @@
       {% set lockupVariant = lockupData.variant | default('vertical') %}
 
       {# Default type values #}
-      {% set labelText = lockupData.label.text | default('') if lockupData.label else '' %}
-      {% set valueText = lockupData.value.text | default('') if lockupData.value else '' %}
+      {% set labelText = (lockupData.label.text if lockupData.label) | default('') %}
+      {% set valueText = (lockupData.value.text if lockupData.value) | default('') %}
 
       {# Value-legend type values #}
-      {% set legendText = lockupData.legend.text | default('') if lockupData.legend else '' %}
+      {% set legendText = (lockupData.legend.text if lockupData.legend) | default('') %}
 
       {# Block-content type values #}
       {% set imageName = lockupData.imageName | default('') %}
       {% set imageSrc = options.imageSrc | default('') %}
       {% set imageAlt = options.imageAlt | default('') %}
       {% set headingName = lockupData.headingName | default('') %}
-      {% set contentText = options.contentText | default(lockupData.content.text | default('') if lockupData.content else '') %}
+      {% set contentText = options.contentText | default((lockupData.content.text if lockupData.content) | default('')) %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
