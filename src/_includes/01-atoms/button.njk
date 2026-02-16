@@ -59,7 +59,7 @@
       {% set buttonType = options.type | default(buttonData.type) | default('button') %}
       {% set buttonSize = buttonData.size | default('medium') %}
       {% set buttonVariant = buttonData.variant | default('primary') %}
-      {% set isDisabled = options.disabled or buttonData.disabled %}
+      {% set isDisabled = options.disabled | default(buttonData.disabled) | default(false) %}
       {% set finalAriaLabel = options.ariaLabel | default(buttonData.ariaLabel) %}
       {% set finalAriaDescribedby = options.ariaDescribedby | default(buttonData.ariaDescribedby) %}
 
@@ -127,7 +127,7 @@
       {# Conditional rendering: <a> for navigation, <button> for actions #}
       {% if isLink %}
 
-        <a href="{{ buttonUrl }}"
+        <a href="{{ buttonUrl | safeUrl }}"
           class="{{ baseClasses }} {{ sizeClasses }} {{ variantClasses }} {{ iconClasses }}"
           data-button-name="{{ buttonData.name }}"
           data-button-type="link"

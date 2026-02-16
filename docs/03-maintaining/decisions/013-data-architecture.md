@@ -33,7 +33,7 @@ Need clear rules for where to store data. Without rules, risk of duplication acr
 **Macro pattern**:
 
 ```njk
-{% set url = options.url or cardData.url or '#' %}
+{% set url = options.url | default(cardData.url) | default('#') %}
 ```
 
 Runtime props override _data defaults.

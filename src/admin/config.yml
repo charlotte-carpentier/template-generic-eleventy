@@ -1,190 +1,140 @@
 # ==============================================================================
 # DECAP CMS CONFIGURATION
 # ==============================================================================
-# This is a skeleton configuration file for Decap CMS.
-# Uncomment and adapt sections based on your project needs.
-# See docs/decap-cms.md for detailed documentation.
-# ==============================================================================
 
 # ------------------------------------------------------------------------------
-# BACKEND CONFIGURATION
+# Backend & Media
 # ------------------------------------------------------------------------------
-# Configure your Git backend (GitHub, GitLab, Bitbucket, etc.)
 backend:
   name: git-gateway
-  branch: main                        # Branch to update (default: main)
+  branch: main
 
-# ------------------------------------------------------------------------------
-# MEDIA CONFIGURATION
-# ------------------------------------------------------------------------------
-# Define where uploaded media files will be stored
-media_folder: "src/assets/images/uploads"     # Repository path for media files
-public_folder: "/assets/images/uploads"       # Public URL path for media files
+media_folder: "src/assets/images/uploads"
+public_folder: "/assets/images/uploads"
 
-# ------------------------------------------------------------------------------
-# OPTIONAL: PUBLISH MODE
-# ------------------------------------------------------------------------------
-# Uncomment to enable editorial workflow (draft/review/published)
+# Editorial workflow: uncomment to enable draft/review/publish
 # publish_mode: editorial_workflow
 
 # ------------------------------------------------------------------------------
-# COLLECTIONS
+# Collections
 # ------------------------------------------------------------------------------
-# Define your content below.
-# Two types: 'files' (unique) and 'folder' (repeatable)
-# ==============================================================================
 
 collections:
   # ============================================================================
-  # ATOMS - Unique atomic components
+  # ARTICLES
   # ============================================================================
-  # Uncomment and adapt for your atomic-level editable content
+  - name: "articles"
+    label: "Articles"
+    label_singular: "Article"
+    folder: "src/content/articles"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    preview_path: "articles/{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - label: "Titre"
+        name: "title"
+        widget: "string"
+        hint: "Important pour le référencement : titre unique de la page (max 60 caractères)."
+        pattern: ['^.{1,60}$', "Le titre doit contenir entre 1 et 60 caractères"]
 
-  # - name: "atoms"
-  #   label: "Atom Components"
+      - label: "Description SEO"
+        name: "description"
+        widget: "text"
+        hint: "Important pour le référencement : affichée dans les résultats de recherche Google (50-160 caractères)."
+        pattern: ['^.{20,160}$', "La description doit contenir entre 50 et 160 caractères"]
+
+      - label: "Auteur"
+        name: "author"
+        widget: "string"
+        default: "Charlotte Carpentier"
+
+      - label: "Date de publication"
+        name: "date"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        format: "YYYY-MM-DD"
+
+      - label: "Image mise en avant"
+        name: "image"
+        widget: "image"
+        hint: "Attention : image trop lourde = site lent. Max 2 Mo recommandé."
+        media_library:
+          config:
+            max_file_size: 2097152
+
+      - label: "Description de l'image (Alt)"
+        name: "imageAlt"
+        widget: "string"
+        hint: "Obligatoire : permet aux personnes malvoyantes de comprendre l'image (max 150 caractères)."
+        pattern: ['^.{1,150}$', "Le texte alternatif doit contenir entre 1 et 150 caractères"]
+
+      - label: "Contenu"
+        name: "body"
+        widget: "markdown"
+
+  # ============================================================================
+  # FUTURE COLLECTIONS - Reference
+  # ============================================================================
+  # Uncomment and adapt for your project needs.
+  # ADR-012: Only Tier 1 (editorial) and Tier 2 (validated) content in CMS.
+  # Navigation, CTA text, forms stay in code.
+  # ============================================================================
+
+  # - name: "site-info"
+  #   label: "Informations du site"
   #   files:
-  #     - label: "Button CTA"
-  #       name: "button-cta"
-  #       file: "src/_data/atoms/button-cta.json"
+  #     - label: "Contact & Réseaux sociaux"
+  #       name: "site-info"
+  #       file: "src/_data/site-info.json"
   #       fields:
-  #         - {label: "Text", name: "text", widget: "string"}
-  #         - {label: "URL", name: "url", widget: "string"}
-  #         - {label: "Style", name: "style", widget: "select", options: ["primary", "secondary"]}
-
-  # ============================================================================
-  # MOLECULES - Unique molecular components
-  # ============================================================================
-  # Uncomment and adapt for your molecule-level editable content
-
-  # - name: "molecules"
-  #   label: "Molecule Components"
-  #   files:
-  #     - label: "Hero Section"
-  #       name: "hero"
-  #       file: "src/_data/molecules/hero.json"
-  #       fields:
-  #         - {label: "Title", name: "title", widget: "string"}
-  #         - {label: "Subtitle", name: "subtitle", widget: "text"}
-  #         - {label: "Background Image", name: "image", widget: "image"}
-  #         - label: "CTA Button"
-  #           name: "cta"
+  #         - label: "Contact"
+  #           name: "contact"
   #           widget: "object"
   #           fields:
-  #             - {label: "Text", name: "text", widget: "string"}
-  #             - {label: "URL", name: "url", widget: "string"}
+  #             - {label: "Téléphone", name: "phone", widget: "string", required: false}
+  #             - {label: "Email", name: "email", widget: "string", required: false}
+  #             - {label: "Adresse", name: "address", widget: "text", required: false}
   #
-  #     - label: "Features Section"
-  #       name: "features"
-  #       file: "src/_data/molecules/features.json"
-  #       fields:
-  #         - {label: "Section Title", name: "title", widget: "string"}
-  #         - label: "Feature Items"
-  #           name: "items"
-  #           widget: "list"
-  #           fields:
-  #             - {label: "Title", name: "title", widget: "string"}
-  #             - {label: "Description", name: "description", widget: "text"}
-  #             - {label: "Icon", name: "icon", widget: "string"}
-
-  # ============================================================================
-  # ORGANISMS - Unique organism components
-  # ============================================================================
-  # Uncomment and adapt for your organism-level editable content
-
-  # - name: "organisms"
-  #   label: "Organism Components"
-  #   files:
-  #     - label: "Header / Navigation"
-  #       name: "header"
-  #       file: "src/_data/organisms/header.json"
-  #       fields:
-  #         - {label: "Site Logo", name: "logo", widget: "image"}
-  #         - {label: "Site Title", name: "site_title", widget: "string"}
-  #         - label: "Navigation Menu"
-  #           name: "nav"
-  #           widget: "list"
-  #           fields:
-  #             - {label: "Label", name: "label", widget: "string"}
-  #             - {label: "URL", name: "url", widget: "string"}
-  #
-  #     - label: "Footer"
-  #       name: "footer"
-  #       file: "src/_data/organisms/footer.json"
-  #       fields:
-  #         - {label: "Copyright Text", name: "copyright", widget: "string"}
-  #         - label: "Footer Links"
-  #           name: "links"
-  #           widget: "list"
-  #           fields:
-  #             - {label: "Label", name: "label", widget: "string"}
-  #             - {label: "URL", name: "url", widget: "string"}
-  #         - label: "Social Media"
+  #         - label: "Réseaux sociaux"
   #           name: "social"
-  #           widget: "list"
+  #           widget: "object"
+  #           hint: "Liens affichés dans le footer. Laisser vide pour masquer."
   #           fields:
-  #             - {label: "Platform", name: "platform", widget: "string"}
-  #             - {label: "URL", name: "url", widget: "string"}
-  #             - {label: "Icon", name: "icon", widget: "string"}
+  #             - {label: "Facebook", name: "facebook", widget: "string", required: false}
+  #             - {label: "Instagram", name: "instagram", widget: "string", required: false}
+  #             - {label: "LinkedIn", name: "linkedin", widget: "string", required: false}
+  #             - {label: "Twitter/X", name: "twitter", widget: "string", required: false}
 
-  # ============================================================================
-  # REPEATABLE CONTENT - Folder-based content
-  # ============================================================================
-  # Uncomment and adapt for your repeatable content (blog, portfolio, etc.)
-
-  # - name: "blog"
-  #   label: "Blog Posts"
-  #   folder: "src/content/blog"
-  #   create: true                      # Allow creating new entries
-  #   delete: true                      # Allow deleting entries
-  #   slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-  #   fields:
-  #     - {label: "Title", name: "title", widget: "string"}
-  #     - {label: "Date", name: "date", widget: "datetime"}
-  #     - {label: "Author", name: "author", widget: "string"}
-  #     - {label: "Featured Image", name: "image", widget: "image", required: false}
-  #     - {label: "Excerpt", name: "excerpt", widget: "text"}
-  #     - {label: "Body", name: "body", widget: "markdown"}
-  #     - {label: "Tags", name: "tags", widget: "list", required: false}
-
-  # - name: "portfolio"
-  #   label: "Portfolio Projects"
-  #   folder: "src/content/portfolio"
+  # - name: "services"
+  #   label: "Services"
+  #   folder: "src/content/services"
   #   create: true
   #   delete: true
   #   slug: "{{slug}}"
   #   fields:
-  #     - {label: "Project Name", name: "title", widget: "string"}
-  #     - {label: "Date", name: "date", widget: "datetime"}
-  #     - {label: "Client", name: "client", widget: "string"}
-  #     - {label: "Description", name: "description", widget: "text"}
-  #     - label: "Images"
-  #       name: "images"
-  #       widget: "list"
-  #       field: {label: "Image", name: "image", widget: "image"}
-  #     - {label: "Project URL", name: "url", widget: "string", required: false}
-  #     - {label: "Technologies", name: "tags", widget: "list"}
+  #     - {label: "Nom du service", name: "title", widget: "string"}
+  #     - {label: "Description courte", name: "excerpt", widget: "text", pattern: ['^.{1,300}$', "Max 300 caractères"]}
+  #     - {label: "Description complète", name: "body", widget: "markdown"}
+  #     - {label: "Icône", name: "icon", widget: "string", hint: "Nom de l'icône"}
 
-  # - name: "testimonials"
-  #   label: "Testimonials"
-  #   folder: "src/content/testimonials"
-  #   create: true
-  #   delete: true
-  #   slug: "{{slug}}"
-  #   fields:
-  #     - {label: "Client Name", name: "name", widget: "string"}
-  #     - {label: "Company/Position", name: "position", widget: "string"}
-  #     - {label: "Testimonial", name: "quote", widget: "text"}
-  #     - {label: "Photo", name: "photo", widget: "image", required: false}
-  #     - {label: "Rating", name: "rating", widget: "number", min: 1, max: 5, required: false}
+  # - name: "about"
+  #   label: "À propos"
+  #   files:
+  #     - label: "Page À propos"
+  #       name: "about"
+  #       file: "src/content/about.md"
+  #       fields:
+  #         - {label: "Titre", name: "title", widget: "string", pattern: ['^.{1,60}$', "Max 60 caractères"]}
+  #         - {label: "Contenu", name: "body", widget: "markdown"}
 
 # ==============================================================================
-# USAGE INSTRUCTIONS
+# Notes
 # ==============================================================================
-# 1. Uncomment the content you need
-# 2. Adapt field names and widgets to your project
-# 3. Create corresponding JSON files in src/_data/ for 'files' content
-# 4. Create folders in src/content/ for 'folder' content
-# 5. Remember: JSON files must contain at minimum '{}' to be valid
-#
-# For detailed documentation, see docs/decap-cms.md
+# - Permalink NOT editable (defined in articles.json for security)
+# - Use Google Reviews widget for testimonials
+# - Manual curation in _data/ for specific service pages
 # ==============================================================================

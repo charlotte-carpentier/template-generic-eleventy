@@ -44,6 +44,20 @@ export default function(eleventyConfig) {
     return date;
   });
 
+  // Validate URLs to block XSS/injection attacks
+  eleventyConfig.addFilter("safeUrl", function(url) {
+    if (!url || url === '') return '#';
+
+    // Block dangerous protocols: javascript:, data:, vbscript:
+    const dangerousProtocols = /^(javascript|data|vbscript):/i;
+    if (dangerousProtocols.test(url)) {
+      console.warn('Blocked dangerous URL:', url);
+      return '#';
+    }
+
+    return url;
+  });
+
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   // Universal Filter: Find by Name/ID
   // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -4,19 +4,28 @@
   "_meta": {
     "component": "image",
     "type": "atom",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "created": "2025-01-15",
-    "updated": "2026-01-15",
+    "updated": "2026-02-16",
     "availableVariants": [
       "avatar",
       "default"
-    ]
+    ],
+    "availableLoading": [
+      "eager",
+      "lazy"
+    ],
+    "notes": {
+      "loading": "Use 'eager' only for hero image (LCP). Use 'lazy' for everything else.",
+      "alt": "Required for informative images. Empty string for decorative only."
+    }
   },
   "images": [
     {
       "name": "demoImage1",
       "src": "./src/assets/images/system/placeholder-square.png",
       "alt": "Square placeholder image",
+      "loading": "eager",
       "variant": "default",
       "width": 608,
       "height": 608,
@@ -36,6 +45,7 @@
       "name": "demoImage2",
       "src": "./src/assets/images/system/placeholder-landscape.png",
       "alt": "Landscape placeholder image",
+      "loading": "lazy",
       "variant": "default",
       "width": 608,
       "height": 456,
@@ -55,6 +65,7 @@
       "name": "demoImage3",
       "src": "./src/assets/images/system/placeholder-wide.png",
       "alt": "Wide placeholder image",
+      "loading": "lazy",
       "variant": "default",
       "width": 608,
       "height": 342,
@@ -74,12 +85,14 @@
       "name": "demoAvatar1",
       "iconName": "demoSmile1",
       "alt": "Avatar with smile icon",
+      "loading": "lazy",
       "variant": "avatar"
     },
     {
       "name": "demoAvatar2",
       "src": "/assets/images/system/avatar-photo.png",
       "alt": "Avatar photo",
+      "loading": "lazy",
       "variant": "avatar"
     }
   ]

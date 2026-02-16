@@ -45,13 +45,19 @@
         2. Compute Final Values
       ━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       {% set imageSrc = options.src | default(imageData.src) | default('') %}
-      {% set imageAlt = options.alt | default(imageData.alt) | default('') %}
+      {% set imageAlt = options.alt | default(imageData.alt) %}
       {% set imageVariant = imageData.variant | default('default') %}
       {% set imageWidth = imageData.width %}
       {% set imageHeight = imageData.height %}
       {% set imageSrcset = imageData.srcset | default('') %}
       {% set imageSizes = imageData.sizes | default('(max-width: 767px) 100vw, 800px') %}
       {% set hasIcon = imageData.iconName %}
+      {% set imageLoading = imageData.loading | default('lazy') %}
+
+      {# Validate alt text for informative images #}
+      {% if not imageAlt and imageVariant == 'default' %}
+        <span class="error" role="alert">Missing required alt text: {{ imageData.name }}</span>
+      {% else %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         3. Tailwind Classes
@@ -107,7 +113,7 @@
             width="44"
             height="44"
             class="{{ baseClasses }} {{ variantClasses }}"
-            loading="lazy"
+            loading="{{ imageLoading }}"
             decoding="async"
             data-image-name="{{ imageData.name }}"
             data-image-type="avatar-photo"
@@ -130,7 +136,7 @@
               {% if imageWidth %}width="{{ imageWidth }}"{% endif %}
               {% if imageHeight %}height="{{ imageHeight }}"{% endif %}
               class="{{ baseClasses }} {{ variantClasses }}"
-              loading="lazy"
+              loading="{{ imageLoading }}"
               decoding="async"
             />
           </picture>
@@ -142,13 +148,15 @@
             {% if imageWidth %}width="{{ imageWidth }}"{% endif %}
             {% if imageHeight %}height="{{ imageHeight }}"{% endif %}
             class="{{ baseClasses }} {{ variantClasses }}"
-            loading="lazy"
+            loading="{{ imageLoading }}"
             decoding="async"
             data-image-name="{{ imageData.name }}"
             data-image-type="default-fallback"
           />
         {% endif %}
       {% endif %}
+
+      {% endif %} {# Close alt validation #}
     {% endif %}
   {% endif %}
 {% endmacro %}
