@@ -6,8 +6,10 @@
 # Backend & Media
 # ------------------------------------------------------------------------------
 backend:
-  name: git-gateway
+  name: github
+  repo: charlotte-carpentier/template-generic-eleventy
   branch: main
+  base_url: https://api.netlify.com
 
 media_folder: "src/assets/images/uploads"
 public_folder: "/assets/images/uploads"
