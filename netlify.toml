@@ -7,19 +7,21 @@
   command = "npm run build"
 
 # ==============================================================================
-# SECURITY HEADERS (2026 Best Practices + Decap CMS Requirements)
+# SECURITY HEADERS
 # ==============================================================================
 # CSP includes 'unsafe-eval' (REQUIRED by Decap CMS)
+# CSP includes 'unsafe-inline' (REQUIRED by TailwindCSS v4)
 # Sources: MDN CSP Guide, OWASP CSP Cheat Sheet, Decap CMS Issue #2138
+# Validator: https://csp-evaluator.withgoogle.com/
 # ==============================================================================
 
 [[headers]]
   for = "/*"
   [headers.values]
-    # Content Security Policy - Decap CMS compatible
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' https://static.axept.io https://www.googletagmanager.com https://identity.netlify.com https://*.netlify-identity-widget.netlify.app https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://www.google-analytics.com https://*.netlify.com https://identity.netlify.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    # Content Security Policy - Decap CMS + TailwindCSS compatible
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-eval' https://static.axept.io https://www.googletagmanager.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://www.google-analytics.com https://*.netlify.com https://api.github.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
 
-    # HSTS - Force HTTPS with preload
+    # Force HTTPS
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
 
     # Prevent MIME type sniffing
@@ -52,12 +54,3 @@
   for = "/*.js"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
-
-# ==============================================================================
-# NOTES
-# ==============================================================================
-# - 'unsafe-eval' REQUIRED for Decap CMS (GitHub issue #2138)
-# - 'unsafe-inline' still required for style-src (TailwindCSS utilities)
-# - unpkg.com REQUIRED for Decap CMS script loading
-# - Test CSP with: https://csp-evaluator.withgoogle.com/
-# ==============================================================================
