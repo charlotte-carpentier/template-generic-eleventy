@@ -62,15 +62,15 @@ Planned features and improvements for HAT v2.
 
 ## System Evolution
 
-**CMS integration** (High priority)
+**CMS integration** (Done)
 
-- Migrate from Decap CMS to Sveltia CMS + DecapBridge
-- Validate setup on first real client project
-- Document final config in `10-deploying-projects.md`
+- Decision: Decap CMS + GitHub backend
+- Client auth: GitHub account created with the technical email address
+- Document final config in `10-deploying-projects.md` ← TODO
 
 **Custom CMS System** (Future)
 
-- Replace Decap/Sveltia CMS dependency entirely
+- Replace Decap CMS dependency entirely
 - Modular business interface
 - Full backend control
 

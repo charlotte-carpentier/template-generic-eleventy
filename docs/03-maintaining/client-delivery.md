@@ -10,7 +10,7 @@ Standards for delivering HAT-based projects to clients: infrastructure setup, in
 
 ## Intellectual Property
 
-**HAT template** belongs to the developer under the MIT license.  
+**HAT template** belongs to the developer (Charlie Carpentier) under the MIT license.  
 Reusing HAT across multiple client projects is legal and intentional.
 
 **Delivered site** — the client receives an exploitation license, not ownership of the underlying template.
@@ -31,9 +31,8 @@ Use this address to create and own all service accounts:
 
 | Service | Purpose |
 | --- | --- |
-| GitHub | Source code repository |
+| GitHub | Source code repository + CMS authentication (OAuth) — connect as repo collaborator |
 | Netlify | Build and hosting |
-| DecapBridge | CMS authentication |
 | Google Analytics | Traffic tracking |
 | Axeptio | Cookie consent |
 
@@ -43,15 +42,13 @@ This keeps infrastructure ownership clearly tied to the client's domain, not the
 
 ## CMS Access
 
-Client CMS access is handled separately from infrastructure accounts.
+The CMS interface is Decap CMS, accessible at `/admin` on the deployed site. It uses the GitHub account created in Infrastructure Setup for authentication — no separate CMS account needed.
 
-1. Create all service accounts with `technique@client-domain.fr`
-2. Deploy the site
-3. Invite the client's **personal email** in DecapBridge
-4. Client receives an email invite, creates their password, accesses the CMS
-5. Client never needs a GitHub or Netlify account
+1. Deploy the site with Decap CMS configured on the `github` backend
+2. At delivery, hand over the GitHub credentials with the other accounts
+3. Client opens `/admin`, clicks "Sign in with GitHub", logs in with those credentials
 
-The client edits content through the CMS only. They have no direct access to the repository or hosting configuration.
+The client edits content through `/admin` only. They have no direct access to the repository or hosting configuration.
 
 ---
 
@@ -72,7 +69,6 @@ At delivery, provide the client with a credentials document containing:
 - [ ] Technical email address + temporary password (ask client to change immediately)
 - [ ] GitHub repository URL
 - [ ] Netlify project URL + dashboard link
-- [ ] DecapBridge login URL
 - [ ] Analytics access
 - [ ] Axeptio access
 - [ ] DNS configuration (registrar login if managed)
