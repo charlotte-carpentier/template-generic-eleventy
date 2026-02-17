@@ -15,6 +15,7 @@ Planned features and improvements for HAT v2.
 - [Accessibility](#accessibility)
 - [System Evolution](#system-evolution)
 - [Performance](#performance)
+- [Documentation](#documentation)
 
 ---
 
@@ -61,9 +62,15 @@ Planned features and improvements for HAT v2.
 
 ## System Evolution
 
+**CMS integration** (High priority)
+
+- Migrate from Decap CMS to Sveltia CMS + DecapBridge
+- Validate setup on first real client project
+- Document final config in `10-deploying-projects.md`
+
 **Custom CMS System** (Future)
 
-- Replace Decap CMS dependency
+- Replace Decap/Sveltia CMS dependency entirely
 - Modular business interface
 - Full backend control
 
@@ -82,7 +89,19 @@ Planned features and improvements for HAT v2.
 
 - Evaluate workzone scaling at 200% zoom
 - Options: fixed px vs calc() vs hybrid approach
-- Project-specific decision based on client needs
+- Project-specific decision based on project needs
+
+---
+
+## Documentation
+
+**Client delivery process** (High priority)
+
+- `03-maintaining/client-delivery.md` exists as a v1 draft
+- Needs review by a legal professional before use in production
+- Missing: contract template (French version of the IP clause)
+- Missing: credentials handoff document template
+- Missing: link from `10-deploying-projects.md` to this file
 
 ---
 
