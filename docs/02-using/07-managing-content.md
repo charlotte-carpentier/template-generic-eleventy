@@ -1,125 +1,108 @@
 ---
 title: Managing Content
-description: Editing content with admin interface
+description: Content architecture, CMS configuration, and editing workflows
 created: 2025-01-15
+updated: 2026-02-18
 ---
 
 HAT uses Decap CMS for content editing via browser interface.
 
 ---
 
-## Admin Interface
+## Content Architecture
 
-Access content editor:
+**CMS-editable content** → `src/content/`
+
+- Blog posts (Markdown)
+- Portfolio items (Markdown)
+- Collection data (JSON if configured)
+
+**HAT component data** → `src/_data/components/`
+
+- Design system structure (atoms, molecules, organisms)
+- Edited directly in code only
+
+**Why this separation?** Editorial content belongs in CMS for client editing. Design system configuration stays in code for version control and consistency.
+
+---
+
+## Customizing CMS
+
+Configure editable collections in `src/admin/config.yml`.
+
+**Example**: Add a services collection
+
+```yaml
+collections:
+  - name: "services"
+    label: "Services"
+    folder: "src/content/services"
+    create: true
+    delete: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "body", widget: "markdown"}
+```
+
+**Field validation hints** (SEO/A11y):
+
+- SEO: `"Important pour le référencement : affiché dans les résultats de recherche Google."`
+- A11y: `"Obligatoire : permet aux personnes malvoyantes de comprendre l'image."`
+- Design: `"Attention : un texte trop long peut casser la mise en page sur mobile."`
+
+See [Decap CMS configuration docs](https://decapcms.org/docs/configuration-options/).
+
+---
+
+## Accessing the CMS
+
+**URLs**:
 
 - Local: `http://localhost:8080/admin`
 - Production: `https://yoursite.com/admin`
 
-Your edits commit automatically to Git.
+**Authentication**: Click "Login with GitHub" and authorize with GitHub credentials.
 
-**First-time setup**: Requires authentication configuration. See Decap CMS [authentication docs](https://decapcms.org/docs/choosing-a-backend/).
+Edits commit automatically to Git.
 
----
-
-## Content Location
-
-**CMS-editable content** => `src/content/`
-
-- Blog posts (markdown)
-- Portfolio items (markdown)
-- Collection data (JSON if configured)
-
-Edit via admin interface at `/admin` or directly in code editor.
-
-**HAT component data** => `src/_data/components/`
-
-NOT content data - this is edited directly in code only.
-Separates design system structure from project content.
+**First-time setup**: OAuth configuration required. See [Client Delivery](../03-maintaining/client-delivery.md) for setup instructions.
 
 ---
 
-## Editing Workflows
+## Editing Content
 
 **Via admin interface**:
 
 ```bash
 npm start
 # Navigate to http://localhost:8080/admin
-# Edit content, save => auto-commits to Git
+# Edit → Save → Auto-commit to Git
 ```
 
 **Direct file editing**:
 
 ```bash
 # Edit files in src/content/ with code editor
-# Commit via Git as normal
+# Commit via Git
 ```
 
-Both methods write to same repository.
+Both methods write to the same repository.
 
----
+**What clients can edit**:
 
-## What Content is Editable?
-
-**Client can edit via CMS**:
-
-- Article titles, body text, metadata (with character limits)
-- Hero titles and subtitles (with validation)
-- About/Services section text
-- Testimonials, FAQ
+- Article text, metadata, images (with validation)
+- Hero titles/subtitles
+- About/Services sections
 - Contact info, social links
-- Images (with alt text required)
 
-**Developer controls (hardcoded)**:
+**What stays in code** (developer-controlled):
 
-- CTA button text ("Prendre rendez-vous", "En savoir plus")
-- Form labels ("Votre nom", "Votre email")
+- CTA button text
+- Form labels, error messages
 - Navigation menu items
-- Error messages, tooltips
 - Component configuration
 
-**Why?** Editorial content (optimizable for SEO) belongs in CMS. Interface text (tested for UX/conversion) stays in code.
-
----
-
-## Content Field Hints
-
-When editing content via Decap CMS, some fields have strict requirements to preserve SEO, accessibility, or responsive design.
-
-Pre-written hint messages for `config.yml`:
-
-**SEO**:
-
-- `"Important pour le référencement : affiché dans les résultats de recherche Google."`
-- `"Important pour le référencement : respectez les limites de caractères indiquées."`
-
-**Accessibility**:
-
-- `"Obligatoire : permet aux personnes malvoyantes de comprendre l'image."`
-- `"Obligatoire : décrivez le contenu de l'image en quelques mots."`
-
-**Design**:
-
-- `"Attention : un texte trop long peut casser la mise en page sur mobile."`
-- `"Attention : image trop lourde = site lent. Respectez la limite de taille."`
-
-**Combined**:
-
-- `"Important pour le référencement et l'accessibilité : titre unique de la page."`
-
----
-
-## Customizing CMS
-
-Make additional content editable by configuring `src/admin/config.yml`.
-
-**Example**: Add boats listing or carousel data
-
-1. Create `src/content/boats.json`
-2. Configure collection in `config.yml`
-3. Edit via admin interface
-
-See Decap CMS [configuration docs](https://decapcms.org/docs/configuration-options/).
+**Why?** Editorial content (SEO-optimized) belongs in CMS. Interface text (UX-tested) stays in code.
 
 ---
 

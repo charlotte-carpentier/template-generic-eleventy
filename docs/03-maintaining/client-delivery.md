@@ -2,6 +2,7 @@
 title: Client Delivery
 description: Legal framework, account setup, and handoff process for client projects
 created: 2026-02-17
+updated: 2026-02-18
 ---
 
 Standards for delivering HAT-based projects to clients: infrastructure setup, intellectual property, and access handoff.
@@ -40,13 +41,52 @@ This keeps infrastructure ownership clearly tied to the client's domain, not the
 
 ---
 
+## CMS Setup
+
+Configure Decap CMS authentication for the client project.
+
+1. Create GitHub OAuth App
+
+Using the client's GitHub account (`technique@client-domain.fr`):
+
+- Go to **GitHub → Settings → Developer settings → OAuth Apps → New OAuth App**
+- Fill in:
+  - Application name: `[Client Project] CMS`
+  - Homepage URL: `https://client-site.netlify.app`
+  - Authorization callback URL: `https://api.netlify.com/auth/done`
+- Click **Register application**
+- Click **Generate a new client secret**
+- Keep the page open (you need Client ID + Secret for next step)
+
+2. Add credentials to Netlify
+
+- Go to **Netlify → Site → Site configuration → Access & security → OAuth**
+- Click **Install provider** → Choose **GitHub**
+- Paste Client ID and Client Secret
+- Save
+
+3. Update config.yml
+
+In `src/admin/config.yml`, update the repo name:
+
+```yaml
+backend:
+  name: github
+  repo: charlotte-carpentier/client-project-name
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+```
+
+Deploy. CMS is now accessible at `/admin`.
+
+---
+
 ## CMS Access
 
-The CMS interface is Decap CMS, accessible at `/admin` on the deployed site. It uses the GitHub account created in Infrastructure Setup for authentication — no separate CMS account needed.
+The CMS interface is Decap CMS, accessible at `/admin` on the deployed site.
 
-1. Deploy the site with Decap CMS configured on the `github` backend
-2. At delivery, hand over the GitHub credentials with the other accounts
-3. Client opens `/admin`, clicks "Sign in with GitHub", logs in with those credentials
+At delivery, hand over the GitHub credentials with the other accounts. The client opens `/admin`, clicks "Login with GitHub", and logs in with those credentials.
 
 The client edits content through `/admin` only. They have no direct access to the repository or hosting configuration.
 
