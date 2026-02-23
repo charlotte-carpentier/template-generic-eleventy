@@ -254,20 +254,46 @@ Avoid non-native filters like `selectattr`.
 ## Header Format
 
 ```njk
-{#
-  Props:
-    - options.name (string): Component identifier
-    - options.datas (array): Component configuration
+{# ┌─────────────────────────────────────────────────────────┐
+   │ [LEVEL] › [ComponentName]                               │
+   │ [Short description]                                     │
+   └─────────────────────────────────────────────────────────┘ #}
 
-  Usage â€” Summon HAT Components Wisely:
+{#
+  Usage — Summon HAT Components Wisely:
     {% from "01-atoms/component.njk" import renderComponent %}
-    {{ renderComponent({ name: "demo", datas: atoms.component.items }) }}
+
+    {{ renderComponent({
+        name: "demoComponent1",
+        datas: atoms.component.components,
+        contentProp: article.data.property,
+        contentUrl: article.url,
+        subComponentDatas: atoms.subcomponent.subcomponents
+    }) }}
 
   @created 2025-09-15
+  @updated 2026-02-23 - [description if API/behavior change]
 #}
 ```
 
-Never remove "Summon HAT Components Wisely:" from headers.
+### Props order
+
+1. `name`
+2. `datas`
+3. Content props (data from collection)
+4. Sub-component datas
+
+### Content props naming
+
+- Atom → single property: `src`, `alt`, `text`, `url`
+- Molecule/Organism → `[component][Property]`: `imageSrc`, `headingText`
+- Eleventy URL → `[component]Url`: `buttonUrl`
+
+### Rules
+
+- Use first real template usage as example, never placeholders
+- `@updated` only if API or behavior change
+- Never remove "Summon HAT Components Wisely:"
 
 ---
 
