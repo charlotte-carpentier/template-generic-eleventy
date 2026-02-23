@@ -61,19 +61,28 @@ Note: Use bracket notation for hyphenated names.
 
 ## Components with Dependencies
 
-Molecules and organisms need sub-component data:
+Replace `name` with your component name. For collection pages, replace `page` with your collection item (`article`, `service`...):
 
 ```njk
 {{ renderCard({
-    name: "serviceCard1",
+    name: "demoCard1",
     datas: molecules.card.cards,
+    imageSrc: page.data.image,
+    imageAlt: page.data.imageAlt,
+    headingText: page.data.title,
+    buttonUrl: page.url,
+    content: page.data.description,
+    lockupDatas: molecules["lock-up"].lockUps,
+    imageDatas: atoms.image.images,
     headingDatas: atoms.heading.headings,
     buttonDatas: atoms.button.buttons,
     iconDatas: atoms.icon.icons
 }) }}
 ```
 
-**Required dependencies** are listed in each component's header under "Props".
+Available content props are listed in each component's Usage example.
+
+Note: Molecules and organisms need sub-component data (`*Datas` props).
 
 ---
 

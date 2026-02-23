@@ -7,13 +7,17 @@
   Usage — Summon HAT Components Wisely:
     {% from "02-molecules/lock-up.njk" import renderLockup %}
 
-    {{ renderLockup({
-        name: "demoLock1",
-        datas: molecules["lock-up"].lockUps,
-        imageDatas: atoms.image.images,
-        headingDatas: atoms.heading.headings,
-        iconDatas: atoms.icon.icons
-    }) }}
+  {{ renderLockup({
+      name: "demoLock1",
+      datas: molecules["lock-up"].lockUps,
+      imageSrc: article.data.image,
+      imageAlt: article.data.imageAlt,
+      headingText: article.data.title,
+      contentText: article.data.description,
+      imageDatas: atoms.image.images,
+      headingDatas: atoms.heading.headings,
+      iconDatas: atoms.icon.icons
+  }) }}
 
   @created 2025-09-15
 #}
