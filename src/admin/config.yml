@@ -32,7 +32,6 @@ collections:
     create: true
     delete: true
     slug: "{{slug}}"
-    preview_path: "articles/{{slug}}"
     editor:
       preview: false
     fields:

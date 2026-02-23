@@ -13,7 +13,7 @@ export default function(eleventyConfig) {
     './src/assets/icons',      // Favicons, UI icons, sprites
     './src/assets/images',     // Images (raw)
     './src/assets/downloads',  // PDFs, CVs, other downloadable files
-    './src/admin',             // Netlify CMS admin files
+    './src/admin/config.yml',  // Netlify CMS config file
     './src/docs',              // Documentation files
   ].forEach(path => eleventyConfig.addPassthroughCopy(path));
 
