@@ -31,8 +31,7 @@ layout: "04-core/base.njk"
 
 {{ renderHeading({
   name: "demoHead1",
-  datas: atoms.heading.headings,
-  text: options.headingText
+  datas: atoms.heading.headings
 }) }}
 
 {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -42,6 +41,9 @@ layout: "04-core/base.njk"
 {{ renderSectionArticleHero({
   name: "demoSectAH1",
   datas: organisms["section-article-hero"].sectArtHeros,
+  imageSrc: image,
+  imageAlt: imageAlt,
+  headingText: title,
   imageDatas: atoms.image.images,
   headingDatas: atoms.heading.headings
 }) }}
