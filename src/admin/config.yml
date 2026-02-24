@@ -44,13 +44,14 @@ collections:
       - label: "Description SEO"
         name: "description"
         widget: "text"
-        hint: "Important pour le référencement : affichée dans les résultats de recherche Google (20-160 caractères)."
-        pattern: ['^.{20,160}$', "La description doit contenir entre 50 et 160 caractères"]
+        hint: "Important pour le référencement : affichée dans les résultats de recherche Google (120-160 caractères)."
+        pattern: ['^.{120,160}$', "La description doit contenir entre 120 et 160 caractères"]
 
       - label: "Auteur"
         name: "author"
         widget: "string"
         default: "Charlotte Carpentier"
+        pattern: ['^.{1,100}$', "Le nom de l'auteur doit contenir entre 1 et 100 caractères"]
 
       - label: "Date de publication"
         name: "date"
