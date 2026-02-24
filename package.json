@@ -14,7 +14,7 @@
     "test": "vitest",
     "lint": "npm run lint:css",
     "build:css": "cross-env NODE_ENV=production postcss src/assets/styles/input.css -o public/output.css",
-    "build:images": "node bin/generate-image-metadata.js",
+    "build:images": "node bin/sync-image-sizes.js",
     "watch:css": "postcss src/assets/styles/input.css -o public/output.css -w",
     "test:coverage": "vitest run --coverage",
     "test:run": "vitest run",

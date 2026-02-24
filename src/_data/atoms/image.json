@@ -23,63 +23,30 @@
   "images": [
     {
       "name": "demoImage1",
-      "src": "./src/assets/images/system/placeholder-square.png",
+      "src": "/assets/images/system/placeholder-square.png",
       "alt": "Square placeholder image",
       "loading": "eager",
       "variant": "default",
       "width": 608,
-      "height": 608,
-      "sizes": "(max-width: 767px) 100vw, 608px",
-      "sources": [
-        {
-          "type": "image/avif",
-          "srcset": "/img/placeholder-square-400.avif 400w, /img/placeholder-square-608.avif 608w"
-        },
-        {
-          "type": "image/webp",
-          "srcset": "/img/placeholder-square-400.webp 400w, /img/placeholder-square-608.webp 608w"
-        }
-      ]
+      "height": 608
     },
     {
       "name": "demoImage2",
-      "src": "./src/assets/images/system/placeholder-landscape.png",
+      "src": "/assets/images/system/placeholder-landscape.png",
       "alt": "Landscape placeholder image",
       "loading": "lazy",
       "variant": "default",
       "width": 608,
-      "height": 456,
-      "sizes": "(max-width: 767px) 100vw, 608px",
-      "sources": [
-        {
-          "type": "image/avif",
-          "srcset": "/img/placeholder-landscape-400.avif 400w, /img/placeholder-landscape-608.avif 608w"
-        },
-        {
-          "type": "image/webp",
-          "srcset": "/img/placeholder-landscape-400.webp 400w, /img/placeholder-landscape-608.webp 608w"
-        }
-      ]
+      "height": 456
     },
     {
       "name": "demoImage3",
-      "src": "./src/assets/images/system/placeholder-wide.png",
+      "src": "/assets/images/system/placeholder-wide.png",
       "alt": "Wide placeholder image",
       "loading": "lazy",
       "variant": "default",
       "width": 608,
-      "height": 342,
-      "sizes": "(max-width: 767px) 100vw, 608px",
-      "sources": [
-        {
-          "type": "image/avif",
-          "srcset": "/img/placeholder-wide-400.avif 400w, /img/placeholder-wide-608.avif 608w"
-        },
-        {
-          "type": "image/webp",
-          "srcset": "/img/placeholder-wide-400.webp 400w, /img/placeholder-wide-608.webp 608w"
-        }
-      ]
+      "height": 342
     },
     {
       "name": "demoAvatar1",
