@@ -6,7 +6,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf public/ .cache",
+    "clean": "rimraf public/",
     "dev": "npx concurrently \"npm run watch:css\" \"eleventy --serve --watch\"",
     "dev:fresh": "npm run clean && npm run dev",
     "start": "npm run dev",
