@@ -2,16 +2,19 @@
 // Eleventy Configuration
 // ==========================
 
+import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+
 export default function(eleventyConfig) {
 
-  // --------------------------
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   // Passthrough copy (static assets)
-  // --------------------------
-  // Anything here is copied as-is to the output folder
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  // Copied as-is to the output folder
   [
     './src/assets/fonts',      // Project and vendor fonts
     './src/assets/icons',      // Favicons, UI icons, sprites
-    './src/assets/images',     // Images (raw)
+    './src/assets/images',     // Images (raw) — optimized at build by eleventyImageTransformPlugin
     './src/assets/downloads',  // PDFs, CVs, other downloadable files
     './src/admin/config.yml',  // Netlify CMS config file
     './src/docs',              // Documentation files
@@ -22,9 +25,26 @@ export default function(eleventyConfig) {
     filter: path => !path.endsWith('.test.js')
   });
 
-  // --------------------------
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  // Image optimization
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  // Transforms every <img> into <picture> (AVIF + WebP) — HAT components and CMS content
+  eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+    formats: ["avif", "webp"],
+    widths: [400, 800, 1200],
+    htmlOptions: {
+      imgAttributes: {
+        loading: "lazy",
+        decoding: "async",
+        sizes: "(max-width: 767px) 100vw, 800px",
+      },
+    },
+  });
+
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   // Filters
-  // --------------------------
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   // Check if a string ends with a specific suffix
   eleventyConfig.addFilter("endsWith", (str, suffix) => {
@@ -58,11 +78,8 @@ export default function(eleventyConfig) {
     return url;
   });
 
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // Universal Filter: Find by Name/ID
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
   /**
+   * Universal Filter: Find by Name/ID
    * Find an item in array or nested object by name or id
    * @param {Array|Object} data - Data to search (flat array or nested object)
    * @param {string} name - Name or id to find
@@ -89,11 +106,8 @@ export default function(eleventyConfig) {
     return null;
   });
 
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // Filter: Cards by Tags
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
   /**
+   * Filter: Cards by Tags
    * Filter cards by tags with limit
    * @param {Array} cards - Cards array
    * @param {Array} tags - Tags to filter by
@@ -109,11 +123,11 @@ export default function(eleventyConfig) {
       .slice(0, limit);
   });
 
-  // --------------------------
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   // Directory structure
-  // --------------------------
-  // input: source files
-  // output: build folder
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  // input: source files — output: build folder
   return {
     dir: {
       input: "src",

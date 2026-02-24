@@ -178,7 +178,7 @@
         {# Block-Content type #}
         {% elif lockupType == "block-content" %}
           {# Image column #}
-          {% if imageName and options.imageDatas %}
+          {% if imageName and options.imageDatas and options.imageSrc %}
             <div
               class="{{ imageWrapperClasses }}"
               data-lockup-image="true"
