@@ -77,6 +77,17 @@ collections:
       - label: "Contenu"
         name: "body"
         widget: "markdown"
+        buttons:
+          - bold
+          - italic
+          - code
+          - link
+          - heading-two
+          - heading-three
+          - quote
+          - bulleted-list
+          - numbered-list
+        editor_components: []  # Disable image insertion in body
 
   # ============================================================================
   # FUTURE COLLECTIONS - Reference
