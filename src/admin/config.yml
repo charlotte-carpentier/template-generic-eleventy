@@ -80,9 +80,7 @@ collections:
         buttons:
           - bold
           - italic
-          - code
           - link
-          - heading-two
           - heading-three
           - quote
           - bulleted-list
