@@ -28,7 +28,7 @@ Output: `public/` folder (upload this to Netlify).
 - [ ] Configure analytics if needed (GA4)
 - [ ] Configure cookie consent if needed (Axeptio)
 - [ ] Test Axeptio with client account
-- [ ] Enable Netlify Identity if using Decap CMS
+- [ ] Configure GitHub OAuth for Decap CMS => See [Client Delivery](../03-maintaining/client-delivery.md)
 
 ### Testing
 

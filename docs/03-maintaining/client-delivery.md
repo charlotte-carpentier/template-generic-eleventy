@@ -49,7 +49,7 @@ Configure Decap CMS authentication for the client project.
 
 Using the client's GitHub account (`technique@client-domain.fr`):
 
-- Go to **GitHub → Settings → Developer settings → OAuth Apps → New OAuth App**
+- Go to **GitHub => Settings => Developer settings => OAuth Apps => New OAuth App**
 - Fill in:
   - Application name: `[Client Project] CMS`
   - Homepage URL: `https://client-site.netlify.app`
@@ -60,8 +60,8 @@ Using the client's GitHub account (`technique@client-domain.fr`):
 
 2. Add credentials to Netlify
 
-- Go to **Netlify → Site → Site configuration → Access & security → OAuth**
-- Click **Install provider** → Choose **GitHub**
+- Go to **Netlify => Site => Site configuration => Access & security => OAuth**
+- Click **Install provider** => Choose **GitHub**
 - Paste Client ID and Client Secret
 - Save
 

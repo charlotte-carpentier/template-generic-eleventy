@@ -11,13 +11,13 @@ HAT uses Decap CMS for content editing via browser interface.
 
 ## Content Architecture
 
-**CMS-editable content** → `src/content/`
+**CMS-editable content** => `src/content/`
 
 - Blog posts (Markdown)
 - Portfolio items (Markdown)
 - Collection data (JSON if configured)
 
-**HAT component data** → `src/_data/components/`
+**HAT component data** => `src/_data/components/`
 
 - Design system structure (atoms, molecules, organisms)
 - Edited directly in code only
@@ -76,7 +76,7 @@ Edits commit automatically to Git.
 ```bash
 npm start
 # Navigate to http://localhost:8080/admin
-# Edit → Save → Auto-commit to Git
+# Edit => Save => Auto-commit to Git
 ```
 
 **Direct file editing**:
