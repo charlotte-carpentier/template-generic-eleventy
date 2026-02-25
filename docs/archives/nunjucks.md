@@ -285,9 +285,9 @@ Avoid non-native filters like `selectattr`.
 
 ### Content props naming
 
-- Atom → single property: `src`, `alt`, `text`, `url`
-- Molecule/Organism → `[component][Property]`: `imageSrc`, `headingText`
-- Eleventy URL → `[component]Url`: `buttonUrl`
+- Atom => single property: `src`, `alt`, `text`, `url`
+- Molecule/Organism => `[component][Property]`: `imageSrc`, `headingText`
+- Eleventy URL => `[component]Url`: `buttonUrl`
 
 ### Rules
 
