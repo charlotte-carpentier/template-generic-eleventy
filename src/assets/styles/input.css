@@ -549,6 +549,9 @@ body {
 /* Organisms */
 @import "./03-organisms/modal.css";
 
+/* Core */
+@import "./04-core/hat-content.css";
+
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    May your bugs be forever exiled to the shadow realm ✦
    HAT · 2026
