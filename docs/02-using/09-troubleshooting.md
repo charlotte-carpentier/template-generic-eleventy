@@ -4,7 +4,7 @@ description: Common issues and solutions when using HAT
 created: 2025-01-15
 ---
 
-Common issues and solutions for HAT project development.
+Read this to find solutions to common issues.
 
 ---
 

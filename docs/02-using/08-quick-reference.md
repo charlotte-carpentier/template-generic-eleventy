@@ -4,7 +4,7 @@ description: Essential conventions and commands cheat sheet
 created: 2025-01-15
 ---
 
-Quick reference for common HAT conventions and workflows.
+Read this to quickly find naming conventions, commands, and commit format.
 
 ---
 

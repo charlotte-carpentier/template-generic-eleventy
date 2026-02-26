@@ -1,6 +1,6 @@
-# HAT Design System
+# HAT Design System Starter
 
-**HAT** - A handmade, artisanal design system for premium showcase websites and blogs.
+**HAT Design System Starter** - A handmade, artisanal design system for premium showcase websites and blogs.
 
 ![Preview](./preview.png)
 
@@ -23,7 +23,7 @@ npm install
 ### 2. Configure your site
 
 Edit `src/_data/site.json` to customize site title, description, and URL.  
-See [Configuring Site](./docs/01-starting/01-configuring-site.md) for details.
+See [Configuring Site](./docs/01-starting/02-configuring-site.md) for details.
 
 ### 3. Start developing
 
@@ -62,8 +62,9 @@ HAT documentation is organized in 3 sections:
 
 ### Getting Started
 
-- [Configuring Site](./docs/01-starting/01-configuring-site.md)
-- [Accessibility Standards](./docs/01-starting/02-accessibility-standards.md)
+- [Introduction](./docs/01-starting/01-introduction.md)
+- [Configuring Site](./docs/01-starting/02-configuring-site.md)
+- [Accessibility Standards](./docs/01-starting/03-accessibility-standards.md)
 
 ### Daily Usage
 

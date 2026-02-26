@@ -4,7 +4,7 @@ description: Complete reference for all site.json configuration fields
 created: 2025-01-15
 ---
 
-Complete field reference for `src/_data/site.json`.
+Read this to find the complete field reference for src/_data/site.json.
 
 ---
 

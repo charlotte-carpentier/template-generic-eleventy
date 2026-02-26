@@ -4,7 +4,7 @@ description: Security features and design decisions in HAT
 created: 2026-02-03
 ---
 
-Security architecture and design decisions for HAT core features.
+Read this to understand the security architecture and how to maintain it.
 
 ---
 

@@ -4,7 +4,7 @@ description: HAT v2 planned improvements
 created: 2026-02-08
 ---
 
-Planned features and improvements for HAT v2.
+Read this to know what is planned for v2.
 
 ---
 

@@ -4,7 +4,7 @@ description: How Eleventy loads and accesses data files
 created: 2025-01-15
 ---
 
-Eleventy loads data from JSON files in `src/_data/` and makes it globally accessible in templates.
+Read this to understand how Eleventy makes JSON data available in your templates.
 
 ---
 

@@ -5,7 +5,7 @@ created: 2025-01-15
 updated: 2026-02-18
 ---
 
-HAT uses Decap CMS for content editing via browser interface.
+Read this to understand how content is structured between the CMS and the design system.
 
 ---
 
