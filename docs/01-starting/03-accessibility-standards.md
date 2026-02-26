@@ -4,7 +4,7 @@ description: WCAG 2.2 AA requirements for HAT projects
 created: 2026-02-05
 ---
 
-HAT follows WCAG 2.2 Level AA standards for all projects.
+Read this to know which accessibility rules apply to every HAT project before you start designing or coding.
 
 ---
 

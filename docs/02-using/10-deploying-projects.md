@@ -4,7 +4,7 @@ description: Build and deploy HAT-based projects
 created: 2025-01-09
 ---
 
-Guide for deploying HAT-based projects to production.
+Read this to build and deploy a HAT project to Netlify.
 
 ---
 

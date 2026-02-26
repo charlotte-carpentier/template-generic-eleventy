@@ -4,7 +4,7 @@ description: HAT JavaScript organization and usage
 created: 2025-01-15
 ---
 
-Guide for understanding HAT JavaScript structure and running quality tests.
+Read this to understand how JavaScript is organized and how to run accessibility tests.
 
 ---
 

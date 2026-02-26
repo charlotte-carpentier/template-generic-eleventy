@@ -4,7 +4,7 @@ description: How to contribute to HAT Design System
 created: 2026-02-08
 ---
 
-Guide for contributing to HAT Design System development.
+Read this to know how to contribute to HAT Design System Starter.
 
 ---
 

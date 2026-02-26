@@ -4,7 +4,7 @@ description: Customizing design tokens for client projects
 created: 2025-01-15
 ---
 
-Guide for personalizing HAT visual style for new projects.
+Read this to know how to customize the visual style of a client project — from design tokens to component templates.
 
 ---
 
@@ -24,7 +24,7 @@ Most components have no CSS file - styling done with Tailwind in `.njk` template
 
 ## Component Styling Rules
 
-**CRITICAL**: When modifying component styles (primitives, tokens, or templates), verify compliance with [Accessibility Standards](../01-starting/02-accessibility-standards.md) - contrast ratios, touch targets, and text readability.
+**CRITICAL**: When modifying component styles (primitives, tokens, or templates), verify compliance with [Accessibility Standards](../01-starting/03-accessibility-standards.md) - contrast ratios, touch targets, and text readability.
 
 | Level | Handles | Does NOT Handle |
 | ----- | ------- | --------------- |

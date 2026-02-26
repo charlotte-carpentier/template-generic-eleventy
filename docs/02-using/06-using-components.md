@@ -4,7 +4,7 @@ description: How to use HAT components in your pages
 created: 2025-01-15
 ---
 
-Guide for using HAT components to build pages.
+Read this to know how to import and use HAT components in your pages.
 
 ---
 

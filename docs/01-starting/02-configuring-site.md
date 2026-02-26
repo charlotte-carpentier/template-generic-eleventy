@@ -4,7 +4,7 @@ description: Quick configuration guide for site.json
 created: 2025-01-15
 ---
 
-Configure your site by editing `src/_data/site.json`.
+Read this to configure your site by editing src/_data/site.json.
 
 ---
 

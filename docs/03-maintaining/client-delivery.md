@@ -5,7 +5,7 @@ created: 2026-02-17
 updated: 2026-02-18
 ---
 
-Standards for delivering HAT-based projects to clients: infrastructure setup, intellectual property, and access handoff.
+Read this to know how to set up infrastructure, handle IP rights, and hand off a project to a client.
 
 ---
 
@@ -47,23 +47,23 @@ Configure Decap CMS authentication for the client project.
 
 1. Create GitHub OAuth App
 
-Using the client's GitHub account (`technique@client-domain.fr`):
+    Using the client's GitHub account (`technique@client-domain.fr`):
 
-- Go to **GitHub => Settings => Developer settings => OAuth Apps => New OAuth App**
-- Fill in:
-  - Application name: `[Client Project] CMS`
-  - Homepage URL: `https://client-site.netlify.app`
-  - Authorization callback URL: `https://api.netlify.com/auth/done`
-- Click **Register application**
-- Click **Generate a new client secret**
-- Keep the page open (you need Client ID + Secret for next step)
+    - Go to **GitHub => Settings => Developer settings => OAuth Apps => New OAuth App**
+    - Fill in:
+      - Application name: `[Client Project] CMS`
+      - Homepage URL: `https://client-site.netlify.app`
+      - Authorization callback URL: `https://api.netlify.com/auth/done`
+    - Click **Register application**
+    - Click **Generate a new client secret**
+    - Keep the page open (you need Client ID + Secret for next step)
 
 2. Add credentials to Netlify
 
-- Go to **Netlify => Site => Site configuration => Access & security => OAuth**
-- Click **Install provider** => Choose **GitHub**
-- Paste Client ID and Client Secret
-- Save
+   - Go to **Netlify => Site => Site configuration => Access & security => OAuth**
+   - Click **Install provider** => Choose **GitHub**
+   - Paste Client ID and Client Secret
+   - Save
 
 3. Update config.yml
 

@@ -4,7 +4,7 @@ description: How to customize JSON files for client projects
 created: 2025-10-11
 ---
 
-Guide for personalizing HAT component data for new projects.
+Read this to know how to customize component JSON files for a new client project.
 
 ---
 

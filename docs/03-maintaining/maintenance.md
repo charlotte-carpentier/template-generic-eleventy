@@ -4,7 +4,7 @@ description: Essential checklist for HAT-based projects
 created: 2026-02-05
 ---
 
-Essential maintenance tasks for HAT-based projects.
+Read this to know what to check before and after deploying a client project.
 
 ---
 
