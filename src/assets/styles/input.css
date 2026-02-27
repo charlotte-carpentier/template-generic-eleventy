@@ -56,6 +56,7 @@
   --font-size-4xl: 1.75rem;
   --font-size-5xl: 2.25rem;
   --font-size-6xl: 3rem;
+  --font-size-7xl: 5rem;
 
   /* Font weights */
   --font-weight-light: 300;
@@ -84,6 +85,12 @@
   ───────────────────────────── */
 
   /* Font sizes - Fluid */
+
+  --font-size-fluid-display: clamp(
+    var(--font-size-6xl),
+    calc(var(--font-size-6xl) + (var(--font-size-7xl) - var(--font-size-6xl)) * ((100vw - var(--viewport-min)) / var(--viewport-range))),
+    var(--font-size-7xl)
+  );
 
   --font-size-fluid-h1: clamp(
     var(--font-size-5xl),
@@ -426,6 +433,12 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 /* Typography - Families (no size) */
+@utility font-display {
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-none);
+  font-family: var(--font-family-serif);
+}
+
 @utility font-heading {
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-snug);
@@ -457,6 +470,8 @@
 }
 
 /* Typography - Sizes (fluid & static) */
+@utility text-fluid-display { font-size: var(--font-size-fluid-display); }
+
 @utility text-fluid-h1 { font-size: var(--font-size-fluid-h1); }
 
 @utility text-fluid-h2 { font-size: var(--font-size-fluid-h2); }

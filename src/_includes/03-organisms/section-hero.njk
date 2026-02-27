@@ -12,7 +12,8 @@
         datas: organisms["section-hero"].sectHeros,
         headingDatas: atoms.heading.headings,
         imageDatas: atoms.image.images,
-        buttonDatas: atoms.button.buttons
+        buttonDatas: atoms.button.buttons,
+        iconDatas: atoms.icon.icons
     }) }}
 
   @created 2025-09-15
@@ -76,7 +77,7 @@
           3.2 Layout Classes
           Description: Layout responsive grid 2 columns, Spacing
         --------------------------#}
-      {% set containerClasses = "w-full max-w-[var(--grid-workzone-mobile)] md:max-w-[var(--grid-workzone-desktop)] mx-auto" %}
+      {% set containerClasses = "flex flex-col gap-[var(--spacing-ui-default)] w-full max-w-[var(--grid-workzone-mobile)] md:max-w-[var(--grid-workzone-desktop)] mx-auto" %}
       {% set gridClasses = "flex flex-col md:grid md:grid-cols-2 md:items-start gap-[var(--grid-gutter)]" %}
 
       {# --------------------------
@@ -89,31 +90,31 @@
           3.4 Right Column Classes
           Description: Layout, Self-stretch, Offset top to align with main heading
       --------------------------#}
-      {% set rightColClasses = "flex self-stretch md:mt-[var(--spacing-section-compact)]" %}
+      {% set rightColClasses = "flex" %}
 
       {# --------------------------
           3.5 Heading Wrapper Classes
           Description: Layout
         --------------------------#}
-      {% set headingClasses = "flex [&_h2]:font-heading-serif [&_h2]:text-fluid-h2" %}
+      {% set headingClasses = "flex [&_h2]:font-heading-serif [&_h2]:text-fluid-h2 mb-[var(--spacing-ui-default)]" %}
 
       {# --------------------------
           3.6 Subheading Wrapper Classes
           Description: Layout, Typography override serif
       --------------------------#}
-      {% set subheadingClasses = "flex [&_h3]:font-heading-bold-serif [&_h3]:text-fluid-h1" %}
+      {% set subheadingClasses = "flex [&_h3]:font-display [&_h3]:text-fluid-display" %}
 
       {# --------------------------
           3.7 Content Wrapper Classes
           Description: Typography, Colors
         --------------------------#}
-      {% set contentClasses = "font-body text-body text-[var(--color-global-default)] max-w-prose" %}
+      {% set contentClasses = "font-body text-body text-[var(--color-global-default)] max-w-[45ch]" %}
 
       {# --------------------------
           3.8 Buttons Wrapper Classes
           Description: Layout horizontal, Spacing, Alignment centered mobile
       --------------------------#}
-      {% set buttonsClasses = "flex gap-[var(--spacing-ui-default)] justify-center md:justify-start" %}
+      {% set buttonsClasses = "flex gap-[var(--spacing-ui-default)] justify-center md:justify-start mt-[var(--spacing-ui-maximal)]" %}
 
       {# --------------------------
           3.9 Image Wrapper Classes
@@ -136,30 +137,30 @@
           data-section-container
         >
 
+          {# Heading - Above grid #}
+          {% if headingName %}
+            <div
+              class="{{ headingClasses }}"
+              data-section-heading
+            >
+              {{ renderHeading({
+                  name: headingName,
+                  datas: options.headingDatas,
+                  text: options.headingText
+              }) }}
+            </div>
+          {% endif %}
+
           <div
             class="{{ gridClasses }}"
             data-section-grid
           >
 
-            {# Left column - Content #}
+            {# Left column - Subheading, content, buttons #}
             <div
               class="{{ leftColClasses }}"
               data-section-column="left"
             >
-
-              {# Heading #}
-              {% if headingName %}
-                <div
-                  class="{{ headingClasses }}"
-                  data-section-heading
-                >
-                  {{ renderHeading({
-                      name: headingName,
-                      datas: options.headingDatas,
-                      text: options.headingText
-                  }) }}
-                </div>
-              {% endif %}
 
               {# Subheading #}
               {% if subheadingName %}
@@ -181,7 +182,7 @@
                   class="{{ contentClasses }}"
                   data-section-content
                 >
-                  <p>{{ content }}</p>
+                  <div>{{ content | safe }}</div>
                 </div>
               {% endif %}
 
