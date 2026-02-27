@@ -111,7 +111,7 @@
           Description: Layout, Alignment
         --------------------------#}
       {% set headingMap = {
-        'simple': 'flex flex-col items-center [&_h2]:font-heading-serif [&_h2]:text-fluid-h2',
+        'simple': 'flex flex-col items-center [&_h2]:font-heading-serif [&_h2]:text-fluid-h2 mb-[var(--spacing-ui-default)]',
         'cards': 'flex flex-col items-start md:items-center [&_h2]:font-heading-serif [&_h2]:text-fluid-h2'
       } %}
       {% set headingClasses = headingMap[sectionType] or headingMap['simple'] %}
@@ -121,7 +121,7 @@
           Description: Layout, Typography override serif, Alignment, Spacing bottom
         --------------------------#}
       {% set subheadingMap = {
-        'simple': 'flex flex-col items-center [&_h3]:font-heading-bold-serif [&_h3]:text-fluid-h1',
+        'simple': 'flex flex-col items-center max-w-prose mx-auto w-full text-center [&_h3]:font-heading-bold-serif [&_h3]:text-fluid-h1',
         'cards': 'flex flex-col items-start md:items-center [&_h3]:font-heading-bold-serif [&_h3]:text-fluid-h1'
       } %}
       {% set subheadingClasses = subheadingMap[sectionType] or subheadingMap['simple'] %}
@@ -130,13 +130,13 @@
           3.6 Text Wrapper Classes
           Description: Typography, Colors, Alignment centered
         --------------------------#}
-      {% set textClasses = "font-body text-body text-[var(--color-global-default)] text-center max-w-prose" %}
+      {% set textClasses = "font-body text-body text-[var(--color-global-default)] text-center max-w-[45ch]" %}
 
       {# --------------------------
           3.7 Buttons Wrapper Classes
           Description: Layout horizontal, Spacing, Alignment centered
         --------------------------#}
-      {% set buttonsClasses = "flex gap-[var(--spacing-ui-default)] justify-center" %}
+      {% set buttonsClasses = "flex gap-[var(--spacing-ui-default)] justify-center mt-[var(--spacing-ui-maximal)]" %}
 
       {# --------------------------
           3.8 Content Wrapper Classes (simple type)
@@ -222,7 +222,7 @@
                     class="{{ textClasses }}"
                     data-section-text
                   >
-                    <div>{{ content | safe }}</div>
+                    <p>{{ content }}</p>
                   </div>
                 {% endif %}
 

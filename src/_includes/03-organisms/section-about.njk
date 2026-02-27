@@ -11,7 +11,8 @@
         name: "demoSectAb1",
         datas: organisms["section-about"].sectAbouts,
         headingDatas: atoms.heading.headings,
-        buttonDatas: atoms.button.buttons
+        buttonDatas: atoms.button.buttons,
+        iconDatas: atoms.icon.icons
     }) }}
 
   @created 2025-09-15
@@ -91,7 +92,7 @@
           3.5 Heading Wrapper Classes
           Description: Layout
         --------------------------#}
-      {% set headingClasses = "flex [&_h2]:font-heading-serif" %}
+      {% set headingClasses = "flex [&_h2]:font-heading-serif mb-[var(--spacing-ui-default)]" %}
 
       {# --------------------------
           3.6 Subheading Wrapper Classes
@@ -103,13 +104,13 @@
           3.7 Content Wrapper Classes
           Description: Typography, Colors, Spacing bottom override
       --------------------------#}
-      {% set contentClasses = "font-body text-body text-[var(--color-global-default)] max-w-prose" %}
+      {% set contentClasses = "font-body text-body text-[var(--color-global-default)] max-w-[45ch]" %}
 
       {# --------------------------
           3.8 Buttons Wrapper Classes
           Description: Layout horizontal, Spacing
         --------------------------#}
-      {% set buttonsClasses = "flex gap-[var(--spacing-ui-default)] md:gap-[var(--spacing-ui-comfortable)]" %}
+      {% set buttonsClasses = "flex gap-[var(--spacing-ui-default)] md:gap-[var(--spacing-ui-comfortable)] mt-[var(--spacing-ui-maximal)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
