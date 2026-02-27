@@ -70,7 +70,7 @@
           3.1 Base Input Classes
           Description: Layout, sizing, spacing, typography, borders, focus
       -------------------------- #}
-      {% set baseInputClasses = "block w-full px-[var(--spacing-ui-default)] py-[var(--spacing-ui-minimal)] text-body placeholder:italic rounded-[var(--radius-default)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-2" %}
+      {% set baseInputClasses = "block w-full px-[var(--spacing-ui-default)] py-[var(--spacing-ui-minimal)] text-body placeholder:italic rounded-[var(--radius-default)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-form-active)] focus-visible:ring-offset-2" %}
 
       {# --------------------------
           3.2 State Classes
@@ -106,7 +106,7 @@
           3.7 Password Toggle Button Classes
           Description: Position, sizing, spacing, colors, focus, target size (WCAG 2.5.8)
       -------------------------- #}
-      {% set passwordToggleClasses = "touch-target absolute right-[var(--spacing-ui-compact)] top-1/2 -translate-y-1/2 text-[var(--color-global-contrast-light-02)] hover:text-[var(--color-global-default)] focus:outline-none focus:ring-2 focus:ring-[var(--color-form-active)] focus:ring-offset-2 rounded transition-colors" %}
+      {% set passwordToggleClasses = "touch-target absolute right-[var(--spacing-ui-compact)] top-1/2 -translate-y-1/2 text-[var(--color-global-contrast-light-02)] hover:text-[var(--color-global-default)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-form-active)] focus-visible:ring-offset-2 rounded transition-colors" %}
 
       {# --------------------------
           3.8 Error Classes

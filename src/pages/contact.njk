@@ -32,11 +32,13 @@ permalink: "/contact/"
    Heading
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
-{{ renderHeading({
-  name: "demoHead1",
-  datas: atoms.heading.headings,
-  text: options.headingText
-}) }}
+<div class="pt-[var(--spacing-ui-maximal)] md:pt-[var(--spacing-section-compact)]">
+  {{ renderHeading({
+    name: "demoHead1",
+    datas: atoms.heading.headings,
+    text: options.headingText
+  }) }}
+</div>
 
 {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    Section Contact
