@@ -14,7 +14,8 @@
       imageAlt: imageAlt,
       headingText: title,
       imageDatas: atoms.image.images,
-      headingDatas: atoms.heading.headings
+      headingDatas: atoms.heading.headings,
+      iconDatas: atoms.icon.icons
     }) }}
 
   @created 2025-09-15
@@ -62,7 +63,7 @@
           3.1 Wrapper Classes
           Description: Layout, Spacing, Background
         --------------------------#}
-      {% set sectionClasses = "spacing-section-fluid-y" %}
+      {% set sectionClasses = "py-[var(--spacing-ui-default)]" %}
 
       {# --------------------------
           3.2 Layout Classes
@@ -74,13 +75,13 @@
           3.3 Image Wrapper Classes
           Description: Layout, Image override aspect-ratio 16:9 with object-cover
       --------------------------#}
-      {% set imageClasses = "flex [&_img]:w-full [&_img]:aspect-video [&_img]:object-cover" %}
+      {% set imageClasses = "w-full aspect-video overflow-hidden [&_img]:w-full [&_img]:h-full [&_img]:object-cover" %}
 
       {# --------------------------
           3.4 Heading Wrapper Classes
           Description: Layout, Typography override serif
         --------------------------#}
-      {% set headingClasses = "flex [&_h2]:font-heading-bold-serif [&_h2]:text-fluid-h1" %}
+      {% set headingClasses = "flex [&_h2]:font-heading-bold-serif [&_h2]:text-fluid-display" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML

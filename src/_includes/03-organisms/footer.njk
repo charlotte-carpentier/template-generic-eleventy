@@ -89,11 +89,12 @@
           Description: Layout grid responsive, Gap
         --------------------------#}
       {% set navigationClasses = "grid grid-cols-1 gap-[var(--spacing-ui-minimal)] md:grid-cols-2 lg:grid-cols-4" %}
+
       {# --------------------------
           3.4 Column Classes
           Description: Layout, Spacing, Typography override h5-serif
       --------------------------#}
-      {% set columnClasses = "flex flex-col gap-[var(--spacing-ui-default)] [&_[data-column-heading]]:pl-[var(--spacing-ui-default)] [&_[data-column-heading]_h2]:font-heading-serif [&_[data-column-heading]_h2]:text-h5" %}
+      {% set columnClasses = "flex flex-col gap-[var(--spacing-ui-minimal)] pt-[var(--spacing-ui-comfortable)] [&_[data-column-heading]]:pl-[var(--spacing-ui-default)] [&_[data-column-heading]_h2]:font-heading-serif [&_[data-column-heading]_h2]:text-h4" %}
 
       {# --------------------------
           3.5 Legal Section Classes
