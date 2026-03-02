@@ -64,6 +64,9 @@ export default function(eleventyConfig) {
     return date;
   });
 
+  // Current year for copyright
+  eleventyConfig.addFilter("currentYear", () => new Date().getFullYear());
+
   // Validate URLs to block XSS/injection attacks
   eleventyConfig.addFilter("safeUrl", function(url) {
     if (!url || url === '') return '#';

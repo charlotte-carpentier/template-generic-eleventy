@@ -53,8 +53,8 @@
       {% set vectorName = footerData.vectorName | default('') %}
       {% set items = footerData.items | default([]) %}
       {% set copyright = footerData.copyright | default({}) %}
-      {% set copyrightText = copyright.text | default('') %}
-      {% set copyrightVersion = copyright.version | default('') %}
+      {% set copyrightText = "© " + ("" | currentYear) + " " + copyright.owner %}
+      {% set copyrightVersion = "v" + copyright.version %}
       {% set copyrightLinks = copyright.links | default([]) %}
       {% set ariaLabel = footerData.ariaLabel | default('Site footer') %}
 
@@ -70,7 +70,6 @@
         3.7 Copyright Wrapper Classes
         3.8 Copyright Text Classes
         3.9 Version Text Classes
-        3.10 Separator Classes
       ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
       {# --------------------------
@@ -100,20 +99,20 @@
           3.5 Legal Section Classes
           Description: Layout responsive, Spacing, Borders
         --------------------------#}
-      {% set legalClasses = "flex flex-col gap-[var(--spacing-ui-default)] pt-[var(--spacing-ui-comfortable)] md:flex-row md:items-center" %}
+      {% set legalClasses = "flex flex-col pt-[var(--spacing-ui-comfortable)] md:flex-row md:items-center" %}
 
       {# --------------------------
           3.6 Legal List Classes
           Description: Layout responsive, Spacing, Responsive order
         --------------------------#}
       {% set legalNavClasses = "flex order-first md:order-last" %}
-      {% set legalListClasses = "flex flex-col gap-[var(--spacing-ui-minimal)] md:flex-row md:gap-[var(--spacing-ui-minimal)]" %}
+      {% set legalListClasses = "list-separated flex flex-col gap-[var(--spacing-ui-minimal)] md:flex-row md:gap-[var(--spacing-ui-minimal)]" %}
 
       {# --------------------------
           3.7 Copyright Wrapper Classes
-          Description: Layout responsive, Spacing
+          Description: Layout responsive, Spacing, Separator pattern
         --------------------------#}
-      {% set copyrightVersionWrapperClasses = "flex flex-wrap items-center gap-[var(--spacing-ui-minimal)]" %}
+      {% set copyrightVersionWrapperClasses = "list-separated flex flex-wrap items-center" %}
 
       {# --------------------------
           3.8 Copyright Text Classes
@@ -126,12 +125,6 @@
           Description: Typography, Colors, Responsive visibility
         --------------------------#}
       {% set versionClasses = "font-body text-sm text-[var(--color-global-contrast-light-02)] hidden md:inline" %}
-
-      {# --------------------------
-          3.10 Separator Classes
-          Description: Typography, Colors, Responsive visibility
-        --------------------------#}
-      {% set separatorClasses = "font-body text-sm text-[var(--color-global-contrast-light-02)] hidden md:inline" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
@@ -188,69 +181,40 @@
         </div>
 
         {# Copyright and legal section #}
-        <div
-          class="{{ legalClasses }}"
+        <ul
+          class="{{ legalClasses }} list-separated"
           data-footer-section="legal"
         >
 
-          {# Legal links navigation - First on mobile, last on desktop #}
-          <nav
-            class="{{ legalNavClasses }}"
-            aria-label="Legal links"
+          {# Copyright text #}
+          <li
+            class="{{ copyrightClasses }}"
+            data-footer-copyright
           >
-            <ul class="{{ legalListClasses }}">
-              {% for linkName in copyrightLinks %}
-                <li>
-                  {{ renderLink({
-                      name: linkName,
-                      datas: options.linkDatas,
-                      iconDatas: options.iconDatas,
-                      tooltipDatas: options.tooltipDatas
-                  }) }}
-                </li>
-              {% endfor %}
-            </ul>
-          </nav>
+            {{ copyrightText }}
+          </li>
 
-          {# Copyright and version wrapper #}
-          <div
-            class="{{ copyrightVersionWrapperClasses }}"
-            data-footer-info
+          {# Version info (desktop only) #}
+          <li
+            class="{{ versionClasses }}"
+            data-footer-version
           >
-            {# Copyright text #}
-            <p
-              class="{{ copyrightClasses }}"
-              data-footer-copyright
-            >
-              {{ copyrightText }}
-            </p>
+            {{ copyrightVersion }}
+          </li>
 
-            {# Separator (desktop only) #}
-            <span
-              class="{{ separatorClasses }}"
-              aria-hidden="true"
-            >
-              •
-            </span>
+          {# Legal links #}
+          {% for linkName in copyrightLinks %}
+            <li>
+              {{ renderLink({
+                  name: linkName,
+                  datas: options.linkDatas,
+                  iconDatas: options.iconDatas,
+                  tooltipDatas: options.tooltipDatas
+              }) }}
+            </li>
+          {% endfor %}
 
-            {# Version info (desktop only) #}
-            <p
-              class="{{ versionClasses }}"
-              data-footer-version
-            >
-              {{ copyrightVersion }}
-            </p>
-
-            {# Separator (desktop only) #}
-            <span
-              class="{{ separatorClasses }}"
-              aria-hidden="true"
-            >
-              •
-            </span>
-          </div>
-
-        </div>
+        </ul>
 
       </footer>
     {% endif %}
