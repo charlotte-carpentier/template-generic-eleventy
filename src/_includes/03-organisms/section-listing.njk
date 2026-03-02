@@ -8,17 +8,15 @@
     {% from "03-organisms/section-listing.njk" import renderSectionListing %}
 
     {{ renderSectionListing({
-        name: "demoSectL1",
-        datas: organisms["section-listing"].sectListings,
-        headingDatas: atoms.heading.headings,
-        cardDatas: molecules.card.cards,
-        lockupDatas: molecules["lock-up"].lockUps,
-        imageDatas: atoms.image.images,
-        buttonDatas: atoms.button.buttons,
-        iconDatas: atoms.icon.icons,
-        paginationDatas: molecules.pagination.paginations,
-        selectDatas: atoms.select.selects,
-        items: paginatedArticles
+      name: "demoSectLHome",
+      datas: organisms["section-listing"].sectListings,
+      listingItems: collections.articles | reverse | limit(4),
+      headingDatas: atoms.heading.headings,
+      cardDatas: molecules.card.cards,
+      lockupDatas: molecules["lock-up"].lockUps,
+      imageDatas: atoms.image.images,
+      buttonDatas: atoms.button.buttons,
+      iconDatas: atoms.icon.icons
     }) }}
 
   @created 2025-09-15
@@ -53,7 +51,6 @@
       {% set headingName = sectionData.headingName | default('') %}
       {% set cardButtonName = sectionData.cardButtonName | default('readMore') %}
       {% set cardTags = sectionData.cardTags | default([]) %}
-      {% set itemsPerPage = sectionData.itemsPerPage | default(8) %}
       {% set paginationName = sectionData.paginationName | default('') %}
       {% set ariaLabel = sectionData.ariaLabel | default('Listing section') %}
       {% set placeholderImage = sectionData.placeholderImage | default('/assets/images/system/placeholder-square.png') %}
@@ -134,14 +131,13 @@
               </div>
             {% endif %}
 
-            {# Cards grid - Loop on paginated items (articles) #}
+            {# Cards grid - Loop on paginated listingItems (articles) #}
             <div
               class="{{ cardsGridClasses }}"
               data-section-cards
-              data-items-per-page="{{ itemsPerPage }}"
             >
-              {% if options.items %}
-                {% for article in options.items %}
+              {% if options.listingItems %}
+                {% for article in options.listingItems %}
                   {{ renderCard({
                       name: "demoCard1",
                       datas: options.cardDatas,

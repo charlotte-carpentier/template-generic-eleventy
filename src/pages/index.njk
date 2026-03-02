@@ -77,16 +77,15 @@ permalink: "/"
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ #}
 
 {{ renderSectionListing({
-  name: "demoSectL1",
+  name: "demoSectLHome",
   datas: organisms["section-listing"].sectListings,
+  listingItems: collections.articles | reverse | limit(4),
   headingDatas: atoms.heading.headings,
   cardDatas: molecules.card.cards,
-  paginationDatas: molecules.pagination.paginations,
-  selectDatas: atoms.select.selects,
-  buttonDatas: atoms.button.buttons,
-  iconDatas: atoms.icon.icons,
   lockupDatas: molecules["lock-up"].lockUps,
-  imageDatas: atoms.image.images
+  imageDatas: atoms.image.images,
+  buttonDatas: atoms.button.buttons,
+  iconDatas: atoms.icon.icons
 }) }}
 
 {# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

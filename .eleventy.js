@@ -56,6 +56,9 @@ export default function(eleventyConfig) {
   eleventyConfig.addFilter("min", (arr) => Math.min(...arr));
   eleventyConfig.addFilter("max", (arr) => Math.max(...arr));
 
+  // Limit an array to n items
+  eleventyConfig.addFilter("limit", (arr, n) => Array.isArray(arr) ? arr.slice(0, n) : []);
+
   // Date filter for ISO 8601 format (JSON-LD structured data)
   eleventyConfig.addFilter('date', function(date, format) {
     if (format === 'iso') {

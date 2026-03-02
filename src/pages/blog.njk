@@ -65,15 +65,15 @@ pagination:
 {{ renderSectionListing({
   name: "demoSectL1",
   datas: organisms["section-listing"].sectListings,
-  headingDatas: atoms.heading.headings,
-  cardDatas: molecules.card.cards,
-  paginationDatas: molecules.pagination.paginations,
-  selectDatas: atoms.select.selects,
-  buttonDatas: atoms.button.buttons,
-  iconDatas: atoms.icon.icons,
-  lockupDatas: molecules["lock-up"].lockUps,
-  imageDatas: atoms.image.images,
+  listingItems: paginatedArticles,
   pagination: pagination,
   totalItems: collections.articles | length,
-  items: paginatedArticles
+  headingDatas: atoms.heading.headings,
+  cardDatas: molecules.card.cards,
+  lockupDatas: molecules["lock-up"].lockUps,
+  imageDatas: atoms.image.images,
+  buttonDatas: atoms.button.buttons,
+  iconDatas: atoms.icon.icons,
+  paginationDatas: molecules.pagination.paginations,
+  selectDatas: atoms.select.selects
 }) }}
