@@ -22,7 +22,7 @@
   padding-block: var(--spacing-ui-maximal);
 }
 
-@media (width >= 768px) {
+@media (width >= theme(--breakpoint-md)) {
   .hat-content {
     max-width: 65ch;
   }

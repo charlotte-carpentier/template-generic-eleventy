@@ -1,29 +1,28 @@
 /* ┌─────────────────────────────────────────────────────────┐
-   │ ORGANISM › Modal                                        │
-   │ Native HTML5 dialog positioning and states              │
+   │ UTILS › Separators                                      │
+   │ Decorative separators styles                            │
    └─────────────────────────────────────────────────────────┘ */
 
 /*
- * @fileoverview Dialog mobile positioning
- * @usage Applied via data-modal-type="modal" selector
- * @created 2025-01-21
+ * @fileoverview Separator styles for inline list contexts
+ * @usage Add class="list-separated" to <ul> or <ol> in templates
+ * @created 2026-03-02
  */
 
-/* Mobile bottom-aligned: recommended Material Design for visibility & scroll */
-@media (width < theme(--breakpoint-md)) {
-  dialog[data-modal-type="modal"] {
-    inset: auto 0 0;
-    transform: none;
-    margin: 0;
-    max-height: calc(100dvh - 2rem);
-    overflow-y: auto;
-  }
+/* Decorative bullet */
+.list-separated li + li::before {
+  content: "•";
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-global-contrast-light-02);
+  display: none;
 }
 
-/* Page scroll lock */
-html:has(dialog[data-modal-type="modal"][open]) {
-  overflow: hidden;
-  scrollbar-gutter: stable;
+@media (width >= theme(--breakpoint-md)) {
+  .list-separated li + li::before {
+    display: inline;
+    padding-inline: var(--spacing-ui-minimal);
+  }
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

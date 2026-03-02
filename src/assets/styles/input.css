@@ -567,6 +567,9 @@ body {
 /* Core */
 @import "./04-core/hat-content.css";
 
+/* Utils */
+@import "./utils/separators.css";
+
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    May your bugs be forever exiled to the shadow realm ✦
    HAT · 2026

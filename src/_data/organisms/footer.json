@@ -29,8 +29,8 @@
         }
       ],
       "copyright": {
-        "text": "© 2025 Starter kit tous droits réservés",
-        "version": "v1.0.0",
+        "owner": "Starter kit tous droits réservés",
+        "version": "1.0.0",
         "links": [
           "demoAccess1",
           "demoWebsite1"
