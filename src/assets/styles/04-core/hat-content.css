@@ -19,12 +19,14 @@
   flex-direction: column;
   gap: var(--spacing-ui-default);
   max-width: var(--grid-workzone-mobile);
-  padding-block: var(--spacing-ui-maximal);
+  padding-top: var(--spacing-micro-default);
+  padding-bottom: var(--spacing-section-comfortable);
 }
 
 @media (width >= theme(--breakpoint-md)) {
   .hat-content {
     max-width: 65ch;
+    padding-block: var(--spacing-section-default);
   }
 }
 
