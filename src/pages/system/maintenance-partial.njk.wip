@@ -5,11 +5,12 @@ layout: "04-core/base.njk"
 permalink: "/maintenance-page/"
 tags: ["maintenance", "partial"]
 hideHeaderFooter: true
+hideMainPadding: true
 ---
 
 {% from "03-organisms/error-layout.njk" import renderErrorLayout %}
 
-{{ renderErrorLayout({ 
+{{ renderErrorLayout({
     name: "error_layout_maintenance_partial",
     datas: organisms["error-layout"]["error-layouts"],
     groupDatas: organisms["error-fragment-group"]["error-fragment-groups"],
