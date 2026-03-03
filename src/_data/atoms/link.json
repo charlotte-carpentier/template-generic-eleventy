@@ -4,7 +4,10 @@
     "component": "link",
     "type": "atom",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "warnings": [
+      "Do not delete 'err' prefixed entries — required by error and maintenance pages."
+    ]
   },
   "links": [
     {
@@ -137,6 +140,26 @@
       "rel": "",
       "download": false,
       "ariaLabel": "Link description for accessibility"
+    },
+    {
+      "name": "errCtaPart",
+      "href": "/",
+      "text": "Aller vers les pages disponibles",
+      "iconName": "",
+      "target": "_self",
+      "rel": "",
+      "download": false,
+      "ariaLabel": "Retourner vers les pages disponibles du site"
+    },
+    {
+      "name": "errCtaTot",
+      "href": "/contact/",
+      "text": "Laisser un message",
+      "iconName": "",
+      "target": "_self",
+      "rel": "",
+      "download": false,
+      "ariaLabel": "Laisser un message via le formulaire de contact"
     }
   ]
 }

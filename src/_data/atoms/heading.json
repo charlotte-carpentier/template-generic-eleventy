@@ -5,6 +5,9 @@
     "type": "atom",
     "version": "1.0.0",
     "created": "2025-01-15",
+    "warnings": [
+      "Do not delete 'err' prefixed entries — required by error and maintenance pages."
+    ],
     "availableVariants": [
       "serif",
       "sans"
@@ -99,6 +102,108 @@
       "text": "Heading",
       "tag": "h2",
       "variant": "serif"
+    },
+    {
+      "name": "err404Title",
+      "text": "L'élément recherché est inexistant ou retiré.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "err500Title",
+      "text": "L'élément recherché est bloqué par un problème technique.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "errMaintTitle",
+      "text": "L'élément recherché fait l'objet d'une intervention nécessaire.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "errSubPart",
+      "text": "L'accès au reste du site est préservé.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "errSubTot",
+      "text": "Un lien vers l'extérieur est préservé.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "err404Text1",
+      "text": "Données absentes.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "err404Text2",
+      "text": "Domaine vide.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "err404Text3",
+      "text": "Impasse.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "err500Text1",
+      "text": "Chemin interrompu.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "err500Text2",
+      "text": "Erreur interne.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "err500Text3",
+      "text": "Domaine fermé.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "errMaintText1",
+      "text": "Chemin interrompu.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "errMaintText2",
+      "text": "Travaux en cours.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "errMaintText3",
+      "text": "Domaine fermé.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "errMaintText4",
+      "text": "Nous reviendrons.",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "errA11yShowTxt",
+      "text": "Pour rendre visibles les contenus cachés :",
+      "tag": "p",
+      "variant": "sans"
+    },
+    {
+      "name": "errA11yHideTxt",
+      "text": "Pour invisibiliser les contenus révélés :",
+      "tag": "p",
+      "variant": "sans"
     }
   ]
 }
