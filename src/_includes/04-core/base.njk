@@ -226,7 +226,7 @@
   {% endif %}
 
   {# ----- Main content ----- #}
-  <main id="main-content" class="flex-1 px-[var(--grid-margin-mobile)] md:px-[var(--grid-margin-desktop)]">
+  <main id="main-content" class="flex-1 {% if not hideMainPadding %}px-[var(--grid-margin-mobile)] md:px-[var(--grid-margin-desktop)]{% endif %}">
     {# Add hidden site description on homepage for SEO #}
     {% if page.url === '/' %}
       <section class="sr-only">

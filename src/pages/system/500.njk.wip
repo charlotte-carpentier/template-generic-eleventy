@@ -5,12 +5,13 @@ layout: "04-core/base.njk"
 permalink: "/500/"
 tags: ["error", "500"]
 hideHeaderFooter: true
+hideMainPadding: true
 ---
 
 
 {% from "03-organisms/error-layout.njk" import renderErrorLayout %}
 
-{{ renderErrorLayout({ 
+{{ renderErrorLayout({
     name: "error_layout_500",
     datas: organisms["error-layout"]["error-layouts"],
     groupDatas: organisms["error-fragment-group"]["error-fragment-groups"],
