@@ -5,7 +5,9 @@
     "type": "atom",
     "version": "1.0.0",
     "created": "2025-01-15",
-    "updated": "2025-10-30",
+    "warnings": [
+      "Do not delete 'err' prefixed entries — required by error and maintenance pages."
+    ],
     "availableSizes": [
       "xs",
       "sm",
@@ -197,6 +199,62 @@
         "name": "demoIconIG",
         "spriteId": "instagram",
         "alt": "Instagram icon",
+        "size": "md"
+      }
+    ],
+    "error": [
+      {
+        "name": "err404Icon1",
+        "spriteId": "err-magnifying-glass",
+        "alt": "Loupe",
+        "size": "md"
+      },
+      {
+        "name": "err404Icon2",
+        "spriteId": "err-eye-slash",
+        "alt": "Œil barré",
+        "size": "md"
+      },
+      {
+        "name": "err404Icon3",
+        "spriteId": "err-person-simple-run",
+        "alt": "Personne qui court",
+        "size": "md"
+      },
+      {
+        "name": "err500Icon1",
+        "spriteId": "err-magnifying-glass",
+        "alt": "Loupe",
+        "size": "md"
+      },
+      {
+        "name": "err500Icon2",
+        "spriteId": "err-bug",
+        "alt": "Icône bug",
+        "size": "md"
+      },
+      {
+        "name": "err500Icon3",
+        "spriteId": "err-person-simple-run",
+        "alt": "Personne qui court",
+        "size": "md"
+      },
+      {
+        "name": "errMaintIcon1",
+        "spriteId": "err-magnifying-glass",
+        "alt": "Loupe",
+        "size": "md"
+      },
+      {
+        "name": "errMaintIcon2",
+        "spriteId": "err-barricade",
+        "alt": "Barricade",
+        "size": "md"
+      },
+      {
+        "name": "errMaintIcon3",
+        "spriteId": "err-person-simple-run",
+        "alt": "Personne qui court",
         "size": "md"
       }
     ]

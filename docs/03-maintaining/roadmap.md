@@ -31,6 +31,13 @@ Read this to know what is planned for v2.
 
 - Expandable list sections
 
+**Multiselect** (Medium priority)
+
+- Molecule: dropdown with checkboxes + dismissible tags (×)
+- Requires JS — justifies molecule scope over atom
+- WCAG 2.2 AA: role="combobox", aria-multiselectable, keyboard nav (Enter / Backspace / Escape)
+- Replaces native <select multiple> (see ADR-001)
+
 **Drawer** (Medium priority)
 
 - Slide-in panel component

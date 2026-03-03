@@ -5,6 +5,9 @@
     "type": "atom",
     "version": "1.0.0",
     "created": "2025-01-15",
+    "warnings": [
+      "Do not delete 'err' prefixed entries — required by error and maintenance pages."
+    ],
     "availableVariants": [
       "primary",
       "secondary",
@@ -116,6 +119,18 @@
       "text": "Lire l'article",
       "variant": "secondary",
       "url": "#"
+    },
+    {
+      "name": "errA11yShowBtn",
+      "text": "Afficher tout",
+      "variant": "secondary",
+      "ariaLabel": "Afficher tous les contenus cachés"
+    },
+    {
+      "name": "errA11yHideBtn",
+      "text": "Masquer tout",
+      "variant": "secondary",
+      "ariaLabel": "Masquer tous les contenus révélés"
     }
   ]
 }
