@@ -17,10 +17,9 @@
 
 // Atoms
 import { initInput } from './components/01-atoms/input.js';
-import { initErrorLinks } from './components/01-atoms/error-link.js';
-
 // Molecules
 import { initBlockDragAndDrop } from './components/02-molecules/block-drag-and-drop.js';
+import { initErrorFragmentGroup } from './components/02-molecules/error-fragment-group.js';
 import { initPanel } from './components/02-molecules/panel.js';
 import { initSegmentedControl } from './components/02-molecules/segmented-control.js';
 import { initSlider } from './components/02-molecules/slider.js';
@@ -29,7 +28,6 @@ import { initToast } from './components/02-molecules/toast.js';
 // Organisms
 import { initMobileMenu } from './components/03-organisms/header.js';
 import { initModal, openModal } from './components/03-organisms/modal.js';
-import { initErrorFragmentGroup } from './components/03-organisms/error-fragment-group.js';
 import { initErrorLayout, initAccessibilityToggle } from './components/03-organisms/error-layout.js';
 
 // Utils
@@ -70,11 +68,12 @@ function initComponents() {
     initInput();
   }
 
-  if (document.querySelector('[data-error-link]')) {
-    initErrorLinks();
+  // Molecules
+
+  if (document.querySelector('[data-fragment-clickable]')) {
+    initErrorFragmentGroup();
   }
 
-  // Molecules
   if (document.querySelector('[data-modal-type="modal"]')) {
     initModal();
     initModalTriggers();
@@ -103,10 +102,6 @@ function initComponents() {
   // Organisms
   if (document.querySelector('#burger-toggle')) {
     initMobileMenu();
-  }
-
-  if (document.querySelector('[data-fragment-clickable]')) {
-    initErrorFragmentGroup();
   }
 
   if (document.querySelector('[data-error-layout-type="error-layout"]')) {

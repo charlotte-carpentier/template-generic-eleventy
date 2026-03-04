@@ -1,53 +1,50 @@
 {
   "// Component": "Error Layout - Complete error page layout with fragments and accessibility",
-  
   "_meta": {
     "component": "error-layout",
     "type": "organism",
     "version": "1.0.0",
-    "created": "2025-01-15"
+    "created": "2025-01-15",
+    "warnings": [
+      "Do not delete 'err' prefixed entries — required by error and maintenance pages."
+    ]
   },
-  
   "errorLayouts": [
     {
-      "name": "layout404",
-      "variant": "crossLayout",
-      "titleTypographyName": "title404",
-      "subtitleTypographyName": "subtitlePart",
-      "linkName": "ctaPartial",
+      "name": "errLayout404",
+      "titleHeadingName": "err404Title",
+      "subtitleHeadingName": "errSubPart",
+      "linkName": "errCtaPart",
       "groupName": "errGroup404",
-      "a11yTextName": "a11yShowTxt",
-      "a11yBtnName": "a11yShowBtn"
+      "a11yHeadingName": "errA11yShowTxt",
+      "a11yBtnName": "errA11yShowBtn"
     },
     {
-      "name": "layout500",
-      "variant": "crossLayout",
-      "titleTypographyName": "title500",
-      "subtitleTypographyName": "subtitlePart",
-      "linkName": "ctaPartial",
+      "name": "errLayout500",
+      "titleHeadingName": "err500Title",
+      "subtitleHeadingName": "errSubPart",
+      "linkName": "errCtaPart",
       "groupName": "errGroup500",
-      "a11yTextName": "a11yShowTxt",
-      "a11yBtnName": "a11yShowBtn"
+      "a11yHeadingName": "errA11yShowTxt",
+      "a11yBtnName": "errA11yShowBtn"
     },
     {
-      "name": "layoutMntT",
-      "variant": "crossLayout",
-      "titleTypographyName": "titleMaint",
-      "subtitleTypographyName": "subtitleTot",
-      "linkName": "ctaTotal",
+      "name": "errLayoutMntT",
+      "titleHeadingName": "errMaintTitle",
+      "subtitleHeadingName": "errSubTot",
+      "linkName": "errCtaTot",
       "groupName": "errGroupMntT",
-      "a11yTextName": "a11yShowTxt",
-      "a11yBtnName": "a11yShowBtn"
+      "a11yHeadingName": "errA11yShowTxt",
+      "a11yBtnName": "errA11yShowBtn"
     },
     {
-      "name": "layoutMntP",
-      "variant": "crossLayout",
-      "titleTypographyName": "titleMaint",
-      "subtitleTypographyName": "subtitlePart",
-      "linkName": "ctaPartial",
+      "name": "errLayoutMntP",
+      "titleHeadingName": "errMaintTitle",
+      "subtitleHeadingName": "errSubPart",
+      "linkName": "errCtaPart",
       "groupName": "errGroupMntP",
-      "a11yTextName": "a11yShowTxt",
-      "a11yBtnName": "a11yShowBtn"
+      "a11yHeadingName": "errA11yShowTxt",
+      "a11yBtnName": "errA11yShowBtn"
     }
   ]
 }

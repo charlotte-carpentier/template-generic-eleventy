@@ -1,0 +1,142 @@
+{# ┌─────────────────────────────────────────────────────────┐
+   │ MOLECULE › Error Fragment Group                         │
+   │ Error page animated fragments for 404, 500 and maintenance │
+   └─────────────────────────────────────────────────────────┘ #}
+
+{#
+  Usage — Summon HAT Components Wisely:
+    {% from "02-molecules/error-fragment-group.njk" import renderErrorFragmentGroup %}
+
+    {{ renderErrorFragmentGroup({
+        name: "errGroup404",
+        datas: molecules["error-fragment-group"].errorFragmentGroups,
+        iconDatas: atoms.icon.icons,
+        headingDatas: atoms.heading.headings
+    }) }}
+
+  @created 2025-01-15
+  @updated 2026-03-04 - Merged error-fragment molecule, promoted to molecule level
+#}
+
+{% from "01-atoms/icon.njk" import renderIcon %}
+{% from "01-atoms/heading.njk" import renderHeading %}
+
+{% macro renderErrorFragmentGroup(options) %}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+  {% if not options.datas %}
+    <span class="error" role="alert">Error: Missing required prop (datas)</span>
+  {% elif not options.name %}
+    <span class="error" role="alert">Error: Missing required prop (name)</span>
+  {% else %}
+    {# Find group using universal filter #}
+    {% set groupData = options.datas | findByName(options.name) %}
+
+    {% if not groupData %}
+      <span class="error" role="alert">Error fragment group not found: {{ options.name }}</span>
+    {% else %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set fragments = groupData.fragments | default([]) %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Grid Classes
+        3.2 Fragment Item Classes
+        3.3 Clickable Fragment Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Grid Classes
+          Description: 2-column grid layout (desktop only)
+        --------------------------#}
+      {% set gridClasses = "grid grid-cols-2 gap-[var(--spacing-ui-default)]" %}
+
+      {# --------------------------
+          3.2 Fragment Item Classes
+          Description: Centered content within each grid cell
+        --------------------------#}
+      {% set fragmentItemClasses = "flex items-center justify-center" %}
+
+      {# --------------------------
+          3.3 Clickable Fragment Classes
+          Description: Cursor, focus ring for interactive fragment 6
+        --------------------------#}
+      {% set clickableClasses = "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--color-semantic-information-focus)] rounded-[var(--radius-default)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      <div
+        class="{{ gridClasses }}"
+        data-error-group-name="{{ groupData.name }}"
+        data-error-group-type="error-fragment-group"
+      >
+
+        {% for fragment in fragments %}
+          {% set isFragment6 = loop.index == 6 %}
+          {% set isClickable = isFragment6 and not groupData.disableFragment6Click %}
+
+          <div
+            class="{{ fragmentItemClasses }}"
+            data-fragment-item
+            data-fragment-index="{{ loop.index }}"
+          >
+
+            {# Fragment 6 - Clickable (back or home navigation) #}
+            {% if isClickable %}
+              <div
+                class="{{ clickableClasses }}"
+                tabindex="0"
+                role="button"
+                aria-label="Retourner à la page précédente ou à l'accueil"
+                data-fragment-clickable
+              >
+            {% endif %}
+
+            {# Icon variant #}
+            {% if fragment.variant == "icon" and fragment.iconName and options.iconDatas %}
+              <div data-fragment-content="icon">
+                {{ renderIcon({
+                    name: fragment.iconName,
+                    datas: options.iconDatas
+                }) }}
+              </div>
+
+            {# Text variant #}
+            {% elif fragment.variant == "text" and fragment.textHeadingName and options.headingDatas %}
+              <div data-fragment-content="text">
+                {{ renderHeading({
+                    name: fragment.textHeadingName,
+                    datas: options.headingDatas
+                }) }}
+              </div>
+
+            {# Unsupported variant #}
+            {% else %}
+              <span class="error" role="alert">Unsupported fragment variant: {{ fragment.variant }}</span>
+            {% endif %}
+
+            {% if isClickable %}
+              </div>
+            {% endif %}
+
+          </div>
+        {% endfor %}
+
+      </div>
+    {% endif %}
+  {% endif %}
+{% endmacro %}
+
+{#
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+May your bugs be forever exiled to the shadow realm ✦
+HAT · 2026
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#}
