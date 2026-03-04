@@ -1,6 +1,6 @@
 {# ┌─────────────────────────────────────────────────────────┐
    │ ORGANISM › Error Layout                                 │
-   │ Complete error page layout with fragments and triptych  │
+   │ Complete error page layout with halo reveal system      │
    └─────────────────────────────────────────────────────────┘ #}
 
 {#
@@ -8,28 +8,30 @@
     {% from "03-organisms/error-layout.njk" import renderErrorLayout %}
 
     {{ renderErrorLayout({
-        name: "layout404",
+        name: "errLayout404",
         datas: organisms["error-layout"].errorLayouts,
-        groupDatas: organisms["error-fragment-group"].errorFragmentGroups,
-        fragmentDatas: molecules["error-fragment"]["error-fragments"],
+        fragmentGroupDatas: molecules["error-fragment-group"].errorFragmentGroups,
         headingDatas: atoms.heading.headings,
         buttonDatas: atoms.button.buttons,
         linkDatas: atoms.link.links,
         iconDatas: atoms.icon.icons
     }) }}
 
-  @created 2025-09-15
+  @created 2025-01-15
+  @updated 2026-03-04 - Migrated to HAT v1 patterns
 #}
 
-{% macro renderErrorLayout(options) %}
-  {# Import sub-components #}
-  {% from "03-organisms/error-fragment-group.njk" import renderErrorFragmentGroup %}
-  {% from "02-molecules/error-fragment.njk" import renderErrorFragment %}
-  {% from "01-atoms/heading.njk" import renderHeading %}
-  {% from "01-atoms/button.njk" import renderButton %}
-  {% from "01-atoms/link.njk" import renderLink %}
+{% from "02-molecules/error-fragment-group.njk" import renderErrorFragmentGroup %}
+{% from "01-atoms/heading.njk" import renderHeading %}
+{% from "01-atoms/button.njk" import renderButton %}
+{% from "01-atoms/link.njk" import renderLink %}
+{% from "01-atoms/icon.njk" import renderIcon %}
 
-  {# Validate required props #}
+{% macro renderErrorLayout(options) %}
+
+  {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+    1. Validate Props
+  ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
   {% if not options.datas %}
     <span class="error" role="alert">Error: Missing required prop (datas)</span>
   {% elif not options.name %}
@@ -38,189 +40,270 @@
     {# Find layout using universal filter #}
     {% set layoutData = options.datas | findByName(options.name) %}
 
-    {# Render layout or error message #}
     {% if not layoutData %}
       <span class="error" role="alert">Error layout not found: {{ options.name }}</span>
     {% else %}
-      {# Main error layout container - Full screen absolute positioning #}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        2. Compute Final Values
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+      {% set titleHeadingName = layoutData.titleHeadingName | default('') %}
+      {% set subtitleHeadingName = layoutData.subtitleHeadingName | default('') %}
+      {% set linkName = layoutData.linkName | default('') %}
+      {% set groupName = layoutData.groupName | default('') %}
+      {% set a11yHeadingName = layoutData.a11yHeadingName | default('') %}
+      {% set a11yBtnName = layoutData.a11yBtnName | default('') %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        3. Tailwind Classes
+        Index:
+        3.1 Wrapper Classes
+        3.2 Desktop Layout Classes
+        3.3 Desktop Fragments Classes
+        3.4 Triptych Classes
+        3.5 Mobile Layout Classes
+        3.6 Mobile Fragments Classes
+        3.7 Accessibility Classes
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
+
+      {# --------------------------
+          3.1 Wrapper Classes
+          Description: Full screen, black background host, halo system applied via CSS
+        --------------------------#}
+      {% set wrapperClasses = "relative w-full min-h-screen overflow-hidden" %}
+
+      {# --------------------------
+          3.2 Desktop Layout Classes
+          Description: Hidden on mobile, 3x3 grid for cross formation
+        --------------------------#}
+      {% set desktopClasses = "hidden lg:grid lg:grid-cols-3 lg:grid-rows-3 w-full h-screen" %}
+
+      {# --------------------------
+          3.3 Desktop Fragments Classes
+          Description: Fragments cover the full grid area
+        --------------------------#}
+      {% set fragmentsDesktopClasses = "contents" %}
+
+      {# --------------------------
+          3.4 Triptych Classes
+          Description: Centered overlay — title, subtitle, CTA, a11y controls
+        --------------------------#}
+      {% set triptychClasses = "absolute inset-0 flex flex-col items-center justify-center gap-[var(--spacing-ui-default)] z-[var(--z-modal)] px-[var(--spacing-ui-comfortable)]" %}
+      {% set triptychMobileClasses = "flex flex-col items-center gap-[var(--spacing-ui-default)] px-[var(--grid-margin-mobile)] py-[var(--spacing-section-minimal)]" %}
+      {% set triptychTitleClasses = "text-center" %}
+      {% set triptychSubtitleClasses = "text-center" %}
+      {% set triptychCtaClasses = "flex justify-center" %}
+      {% set triptychA11yClasses = "flex flex-col items-center gap-[var(--spacing-ui-minimal)] mt-[var(--spacing-ui-maximal)]" %}
+
+      {# --------------------------
+          3.5 Mobile Layout Classes
+          Description: Visible on mobile only, vertical stack
+        --------------------------#}
+      {% set mobileClasses = "flex flex-col lg:hidden overflow-y-auto" %}
+
+      {# --------------------------
+          3.6 Mobile Fragments Classes
+          Description: Stacked fragments below triptych on mobile
+        --------------------------#}
+      {% set fragmentsMobileClasses = "flex flex-col gap-[var(--spacing-ui-default)] px-[var(--grid-margin-mobile)] py-[var(--spacing-section-minimal)]" %}
+      {% set fragmentMobileItemClasses = "flex items-center justify-center min-h-[120px]" %}
+
+      {# --------------------------
+          3.7 Accessibility Classes
+          Description: Reduced contrast for a11y toggle section
+        --------------------------#}
+      {% set a11yClasses = "flex flex-col items-center gap-[var(--spacing-ui-minimal)]" %}
+
+      {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
+        4. Render HTML
+      ━━━━━━━━━━━━━━━━━━━━━━━━━ #}
       <div
+        class="{{ wrapperClasses }}"
         data-error-layout-name="{{ layoutData.name }}"
         data-error-layout-type="error-layout"
-        data-error-layout-variant="{{ layoutData.variant }}"
       >
 
-        {# Desktop Layout - Cross formation with centered triptych #}
-        <div data-error-layout-desktop>
+        {# ── Desktop ── #}
+        <div
+          class="{{ desktopClasses }}"
+          data-error-layout-desktop
+        >
 
-          {# Fragment group - Covers entire space in cross formation #}
-          <div data-error-layout-fragments>
+          {# Fragment group — fills the grid #}
+          <div
+            class="{{ fragmentsDesktopClasses }}"
+            data-error-layout-fragments
+          >
             {{ renderErrorFragmentGroup({
-                name: layoutData.groupName,
-                datas: options.groupDatas,
-                fragmentDatas: options.fragmentDatas,
+                name: groupName,
+                datas: options.fragmentGroupDatas,
                 iconDatas: options.iconDatas,
                 headingDatas: options.headingDatas
             }) }}
           </div>
 
-          {# Triptych - Centered overlay (title + subtitle + CTA) #}
-          <div data-error-layout-triptych>
+          {# Triptych — centered overlay #}
+          <div
+            class="{{ triptychClasses }}"
+            data-error-layout-triptych
+          >
 
-            {# Title #}
-            <div data-triptych-title>
-              {{ renderHeading({
-                  name: layoutData.titleTypographyName,
-                  datas: options.headingDatas,
-                  text: options.headingText
-              }) }}
-            </div>
+            {% if titleHeadingName %}
+              <div class="{{ triptychTitleClasses }}" data-triptych-title>
+                {{ renderHeading({
+                    name: titleHeadingName,
+                    datas: options.headingDatas
+                }) }}
+              </div>
+            {% endif %}
 
-            {# Subtitle #}
-            <div data-triptych-subtitle>
-              {{ renderHeading({
-                  name: layoutData.subtitleTypographyName,
-                  datas: options.headingDatas,
-                  text: options.headingText
-              }) }}
-            </div>
+            {% if subtitleHeadingName %}
+              <div class="{{ triptychSubtitleClasses }}" data-triptych-subtitle>
+                {{ renderHeading({
+                    name: subtitleHeadingName,
+                    datas: options.headingDatas
+                }) }}
+              </div>
+            {% endif %}
 
-            {# CTA - Link or Button #}
-            <div data-triptych-cta>
-              {% if layoutData.linkName %}
+            {% if linkName %}
+              <div class="{{ triptychCtaClasses }}" data-triptych-cta>
                 {{ renderLink({
-                    name: layoutData.linkName,
+                    name: linkName,
                     datas: options.linkDatas
                 }) }}
-              {% elif layoutData.buttonName %}
-                {{ renderButton({
-                    name: layoutData.buttonName,
-                    datas: options.buttonDatas
-                }) }}
-              {% endif %}
-            </div>
-
-            {# Accessibility controls #}
-            <div data-triptych-accessibility>
-
-              {# Accessibility text #}
-              <div data-a11y-text>
-                {{ renderHeading({
-                    name: layoutData.a11yTextName,
-                    datas: options.headingDatas,
-                    text: options.headingText
-                }) }}
               </div>
+            {% endif %}
 
-              {# Accessibility toggle button #}
-              <div data-a11y-button>
-                {{ renderButton({
-                    name: layoutData.a11yBtnName,
-                    datas: options.buttonDatas
-                }) }}
+            {# Accessibility toggle #}
+            {% if a11yHeadingName and a11yBtnName %}
+              <div class="{{ triptychA11yClasses }}" data-triptych-a11y>
+                <div class="{{ a11yClasses }}" data-a11y-controls>
+                  <div data-a11y-text>
+                    {{ renderHeading({
+                        name: a11yHeadingName,
+                        datas: options.headingDatas
+                    }) }}
+                  </div>
+                  <div data-a11y-button>
+                    {{ renderButton({
+                        name: a11yBtnName,
+                        datas: options.buttonDatas
+                    }) }}
+                  </div>
+                </div>
               </div>
-
-            </div>
+            {% endif %}
 
           </div>
 
         </div>
 
-        {# Mobile Layout - Vertical scrollable stack #}
-        <div data-error-layout-mobile>
+        {# ── Mobile ── #}
+        <div
+          class="{{ mobileClasses }}"
+          data-error-layout-mobile
+        >
 
-          {# Triptych first - Always visible at top #}
-          <div data-error-layout-triptych-mobile>
+          {# Triptych first on mobile #}
+          <div
+            class="{{ triptychMobileClasses }}"
+            data-error-layout-triptych-mobile
+          >
 
-            {# Title #}
-            <div data-triptych-title>
-              {{ renderHeading({
-                  name: layoutData.titleTypographyName,
-                  datas: options.headingDatas
-              }) }}
-            </div>
+            {% if titleHeadingName %}
+              <div class="{{ triptychTitleClasses }}" data-triptych-title>
+                {{ renderHeading({
+                    name: titleHeadingName,
+                    datas: options.headingDatas
+                }) }}
+              </div>
+            {% endif %}
 
-            {# Subtitle #}
-            <div data-triptych-subtitle>
-              {{ renderHeading({
-                  name: layoutData.subtitleTypographyName,
-                  datas: options.headingDatas,
-                  text: options.headingText
-              }) }}
-            </div>
+            {% if subtitleHeadingName %}
+              <div class="{{ triptychSubtitleClasses }}" data-triptych-subtitle>
+                {{ renderHeading({
+                    name: subtitleHeadingName,
+                    datas: options.headingDatas
+                }) }}
+              </div>
+            {% endif %}
 
-            {# CTA #}
-            <div data-triptych-cta>
-              {% if layoutData.linkName %}
+            {% if linkName %}
+              <div class="{{ triptychCtaClasses }}" data-triptych-cta>
                 {{ renderLink({
-                    name: layoutData.linkName,
+                    name: linkName,
                     datas: options.linkDatas
                 }) }}
-              {% elif layoutData.buttonName %}
-                {{ renderButton({
-                    name: layoutData.buttonName,
-                    datas: options.buttonDatas
-                }) }}
-              {% endif %}
-            </div>
+              </div>
+            {% endif %}
 
-            {# Accessibility controls #}
-            <div data-triptych-accessibility>
-              <div data-a11y-text>
-                {{ renderHeading({
-                    name: layoutData.a11yTextName,
-                    datas: options.headingDatas,
-                    text: options.headingText
-                }) }}
+            {% if a11yHeadingName and a11yBtnName %}
+              <div class="{{ triptychA11yClasses }}" data-triptych-a11y>
+                <div class="{{ a11yClasses }}" data-a11y-controls>
+                  <div data-a11y-text>
+                    {{ renderHeading({
+                        name: a11yHeadingName,
+                        datas: options.headingDatas
+                    }) }}
+                  </div>
+                  <div data-a11y-button>
+                    {{ renderButton({
+                        name: a11yBtnName,
+                        datas: options.buttonDatas
+                    }) }}
+                  </div>
+                </div>
               </div>
-              <div data-a11y-button>
-                {{ renderButton({
-                    name: layoutData.a11yBtnName,
-                    datas: options.buttonDatas
-                }) }}
-              </div>
-            </div>
+            {% endif %}
 
           </div>
 
-          {# Fragments - Stacked vertically below triptych #}
-          <div data-error-layout-fragments-mobile>
-            {# Find fragment group to get fragment names #}
-            {% set groupData = options.groupDatas | findByName(layoutData.groupName) %}
+          {# Fragments stacked below triptych on mobile #}
+          {% set groupData = options.fragmentGroupDatas | findByName(groupName) %}
+          {% if groupData and groupData.fragments %}
+            <div
+              class="{{ fragmentsMobileClasses }}"
+              data-error-layout-fragments-mobile
+            >
+              {% for fragment in groupData.fragments %}
+                {% set isFragment6 = loop.index == 6 %}
+                {% set isClickable = isFragment6 and not groupData.disableFragment6Click %}
 
-            {% if groupData and groupData.fragmentNames %}
-              {% for fragmentName in groupData.fragmentNames %}
                 <div
+                  class="{{ fragmentMobileItemClasses }}"
                   data-fragment-mobile-item
                   data-fragment-index="{{ loop.index }}"
                 >
-                  {# Fragment 6 clickable logic #}
-                  {% set isFragment6 = loop.index == 6 %}
-                  {% if isFragment6 and not groupData.disableFragment6Click %}
+                  {% if isClickable %}
                     <div
                       tabindex="0"
                       role="button"
-                      aria-label="Return to previous page or home"
+                      aria-label="Retourner à la page précédente ou à l'accueil"
                       data-fragment-clickable
                     >
-                      {{ renderErrorFragment({
-                          name: fragmentName,
-                          datas: options.fragmentDatas,
-                          iconDatas: options.iconDatas,
-                          headingDatas: options.headingDatas
-                      }) }}
-                    </div>
-                  {% else %}
-                    {{ renderErrorFragment({
-                        name: fragmentName,
-                        datas: options.fragmentDatas,
-                        iconDatas: options.iconDatas,
-                        headingDatas: options.headingDatas
+                  {% endif %}
+
+                  {% if fragment.variant == "icon" and fragment.iconName and options.iconDatas %}
+                    {{ renderIcon({
+                        name: fragment.iconName,
+                        datas: options.iconDatas
+                    }) }}
+                  {% elif fragment.variant == "text" and fragment.textHeadingName and options.headingDatas %}
+                    {{ renderHeading({
+                        name: fragment.textHeadingName,
+                        datas: options.headingDatas
                     }) }}
                   {% endif %}
+
+                  {% if isClickable %}
+                    </div>
+                  {% endif %}
+
                 </div>
               {% endfor %}
-            {% endif %}
-          </div>
+            </div>
+          {% endif %}
 
         </div>
 

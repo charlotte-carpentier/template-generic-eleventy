@@ -1,23 +1,21 @@
+
 ---
 title: "Données absentes."
 description: "La page que vous recherchez est introuvable."
 layout: "04-core/base.njk"
-permalink: "/404/"
-tags: ["error", "404"]
+permalink: "404.html"
 hideHeaderFooter: true
 hideMainPadding: true
 ---
 
-
 {% from "03-organisms/error-layout.njk" import renderErrorLayout %}
 
 {{ renderErrorLayout({
-    name: "error_layout_404",
-    datas: organisms["error-layout"]["error-layouts"],
-    groupDatas: organisms["error-fragment-group"]["error-fragment-groups"],
-    fragmentDatas: molecules["error-fragment"]["error-fragments"],
-    iconDatas: atoms.icon.icons,
+    name: "errLayout404",
+    datas: organisms["error-layout"].errorLayouts,
+    fragmentGroupDatas: molecules["error-fragment-group"].errorFragmentGroups,
     headingDatas: atoms.heading.headings,
     buttonDatas: atoms.button.buttons,
-    linkDatas: atoms.link.links
+    linkDatas: atoms.link.links,
+    iconDatas: atoms.icon.icons
 }) }}

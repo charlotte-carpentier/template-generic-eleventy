@@ -1,0 +1,155 @@
+{
+  "// Component": "Error Fragment Group - Grouped error page fragments (404, 500, maintenance)",
+  "_meta": {
+    "component": "error-fragment-group",
+    "type": "molecule",
+    "version": "1.0.0",
+    "created": "2025-01-15",
+    "warnings": [
+      "Do not delete 'err' prefixed entries — required by error and maintenance pages."
+    ]
+  },
+  "errorFragmentGroups": [
+    {
+      "name": "errGroup404",
+      "fragments": [
+        {
+          "name": "err404Frag1",
+          "variant": "icon",
+          "iconName": "err404Icon1"
+        },
+        {
+          "name": "err404Frag2",
+          "variant": "text",
+          "textHeadingName": "err404Text1"
+        },
+        {
+          "name": "err404Frag3",
+          "variant": "text",
+          "textHeadingName": "err404Text2"
+        },
+        {
+          "name": "err404Frag4",
+          "variant": "icon",
+          "iconName": "err404Icon2"
+        },
+        {
+          "name": "err404Frag5",
+          "variant": "text",
+          "textHeadingName": "err404Text3"
+        },
+        {
+          "name": "err404Frag6",
+          "variant": "icon",
+          "iconName": "err404Icon3"
+        }
+      ]
+    },
+    {
+      "name": "errGroup500",
+      "fragments": [
+        {
+          "name": "err500Frag1",
+          "variant": "icon",
+          "iconName": "err500Icon1"
+        },
+        {
+          "name": "err500Frag2",
+          "variant": "text",
+          "textHeadingName": "err500Text1"
+        },
+        {
+          "name": "err500Frag3",
+          "variant": "text",
+          "textHeadingName": "err500Text2"
+        },
+        {
+          "name": "err500Frag4",
+          "variant": "icon",
+          "iconName": "err500Icon2"
+        },
+        {
+          "name": "err500Frag5",
+          "variant": "text",
+          "textHeadingName": "err500Text3"
+        },
+        {
+          "name": "err500Frag6",
+          "variant": "icon",
+          "iconName": "err500Icon3"
+        }
+      ]
+    },
+    {
+      "name": "errGroupMntT",
+      "disableFragment6Click": true,
+      "fragments": [
+        {
+          "name": "errMaintTFrag1",
+          "variant": "icon",
+          "iconName": "errMaintIcon1"
+        },
+        {
+          "name": "errMaintTFrag2",
+          "variant": "text",
+          "textHeadingName": "errMaintText1"
+        },
+        {
+          "name": "errMaintTFrag3",
+          "variant": "text",
+          "textHeadingName": "errMaintText2"
+        },
+        {
+          "name": "errMaintTFrag4",
+          "variant": "icon",
+          "iconName": "errMaintIcon2"
+        },
+        {
+          "name": "errMaintTFrag5",
+          "variant": "text",
+          "textHeadingName": "errMaintText3"
+        },
+        {
+          "name": "errMaintTFrag6",
+          "variant": "text",
+          "textHeadingName": "errMaintText4"
+        }
+      ]
+    },
+    {
+      "name": "errGroupMntP",
+      "fragments": [
+        {
+          "name": "errMaintPFrag1",
+          "variant": "icon",
+          "iconName": "errMaintIcon1"
+        },
+        {
+          "name": "errMaintPFrag2",
+          "variant": "text",
+          "textHeadingName": "errMaintText1"
+        },
+        {
+          "name": "errMaintPFrag3",
+          "variant": "text",
+          "textHeadingName": "errMaintText2"
+        },
+        {
+          "name": "errMaintPFrag4",
+          "variant": "icon",
+          "iconName": "errMaintIcon2"
+        },
+        {
+          "name": "errMaintPFrag5",
+          "variant": "text",
+          "textHeadingName": "errMaintText3"
+        },
+        {
+          "name": "errMaintPFrag6",
+          "variant": "icon",
+          "iconName": "errMaintIcon3"
+        }
+      ]
+    }
+  ]
+}
