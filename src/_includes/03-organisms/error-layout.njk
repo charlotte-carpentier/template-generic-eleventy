@@ -37,7 +37,6 @@
   {% elif not options.name %}
     <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Find layout using universal filter #}
     {% set layoutData = options.datas | findByName(options.name) %}
 
     {% if not layoutData %}
@@ -68,7 +67,7 @@
 
       {# --------------------------
           3.1 Wrapper Classes
-          Description: Full screen, black background host, halo system applied via CSS
+          Description: Full screen host, halo system applied via CSS
         --------------------------#}
       {% set wrapperClasses = "relative w-full min-h-screen overflow-hidden" %}
 
@@ -110,7 +109,7 @@
 
       {# --------------------------
           3.7 Accessibility Classes
-          Description: Reduced contrast for a11y toggle section
+          Description: Controls for a11y toggle section
         --------------------------#}
       {% set a11yClasses = "flex flex-col items-center gap-[var(--spacing-ui-minimal)]" %}
 
@@ -129,7 +128,6 @@
           data-error-layout-desktop
         >
 
-          {# Fragment group — fills the grid #}
           <div
             class="{{ fragmentsDesktopClasses }}"
             data-error-layout-fragments
@@ -142,7 +140,6 @@
             }) }}
           </div>
 
-          {# Triptych — centered overlay #}
           <div
             class="{{ triptychClasses }}"
             data-error-layout-triptych
@@ -150,46 +147,30 @@
 
             {% if titleHeadingName %}
               <div class="{{ triptychTitleClasses }}" data-triptych-title>
-                {{ renderHeading({
-                    name: titleHeadingName,
-                    datas: options.headingDatas
-                }) }}
+                {{ renderHeading({ name: titleHeadingName, datas: options.headingDatas }) }}
               </div>
             {% endif %}
 
             {% if subtitleHeadingName %}
               <div class="{{ triptychSubtitleClasses }}" data-triptych-subtitle>
-                {{ renderHeading({
-                    name: subtitleHeadingName,
-                    datas: options.headingDatas
-                }) }}
+                {{ renderHeading({ name: subtitleHeadingName, datas: options.headingDatas }) }}
               </div>
             {% endif %}
 
             {% if linkName %}
               <div class="{{ triptychCtaClasses }}" data-triptych-cta>
-                {{ renderLink({
-                    name: linkName,
-                    datas: options.linkDatas
-                }) }}
+                {{ renderLink({ name: linkName, datas: options.linkDatas }) }}
               </div>
             {% endif %}
 
-            {# Accessibility toggle #}
             {% if a11yHeadingName and a11yBtnName %}
               <div class="{{ triptychA11yClasses }}" data-triptych-a11y>
                 <div class="{{ a11yClasses }}" data-a11y-controls>
                   <div data-a11y-text>
-                    {{ renderHeading({
-                        name: a11yHeadingName,
-                        datas: options.headingDatas
-                    }) }}
+                    {{ renderHeading({ name: a11yHeadingName, datas: options.headingDatas }) }}
                   </div>
                   <div data-a11y-button>
-                    {{ renderButton({
-                        name: a11yBtnName,
-                        datas: options.buttonDatas
-                    }) }}
+                    {{ renderButton({ name: a11yBtnName, datas: options.buttonDatas }) }}
                   </div>
                 </div>
               </div>
@@ -205,7 +186,6 @@
           data-error-layout-mobile
         >
 
-          {# Triptych first on mobile #}
           <div
             class="{{ triptychMobileClasses }}"
             data-error-layout-triptych-mobile
@@ -213,28 +193,19 @@
 
             {% if titleHeadingName %}
               <div class="{{ triptychTitleClasses }}" data-triptych-title>
-                {{ renderHeading({
-                    name: titleHeadingName,
-                    datas: options.headingDatas
-                }) }}
+                {{ renderHeading({ name: titleHeadingName, datas: options.headingDatas }) }}
               </div>
             {% endif %}
 
             {% if subtitleHeadingName %}
               <div class="{{ triptychSubtitleClasses }}" data-triptych-subtitle>
-                {{ renderHeading({
-                    name: subtitleHeadingName,
-                    datas: options.headingDatas
-                }) }}
+                {{ renderHeading({ name: subtitleHeadingName, datas: options.headingDatas }) }}
               </div>
             {% endif %}
 
             {% if linkName %}
               <div class="{{ triptychCtaClasses }}" data-triptych-cta>
-                {{ renderLink({
-                    name: linkName,
-                    datas: options.linkDatas
-                }) }}
+                {{ renderLink({ name: linkName, datas: options.linkDatas }) }}
               </div>
             {% endif %}
 
@@ -242,16 +213,10 @@
               <div class="{{ triptychA11yClasses }}" data-triptych-a11y>
                 <div class="{{ a11yClasses }}" data-a11y-controls>
                   <div data-a11y-text>
-                    {{ renderHeading({
-                        name: a11yHeadingName,
-                        datas: options.headingDatas
-                    }) }}
+                    {{ renderHeading({ name: a11yHeadingName, datas: options.headingDatas }) }}
                   </div>
                   <div data-a11y-button>
-                    {{ renderButton({
-                        name: a11yBtnName,
-                        datas: options.buttonDatas
-                    }) }}
+                    {{ renderButton({ name: a11yBtnName, datas: options.buttonDatas }) }}
                   </div>
                 </div>
               </div>
@@ -259,7 +224,6 @@
 
           </div>
 
-          {# Fragments stacked below triptych on mobile #}
           {% set groupData = options.fragmentGroupDatas | findByName(groupName) %}
           {% if groupData and groupData.fragments %}
             <div
@@ -275,29 +239,24 @@
                   data-fragment-mobile-item
                   data-fragment-index="{{ loop.index }}"
                 >
+
                   {% if isClickable %}
-                    <div
-                      tabindex="0"
-                      role="button"
+                    <button
+                      type="button"
+                      class="bg-transparent border-0 p-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--color-semantic-information-focus)] rounded-[var(--radius-default)]"
                       aria-label="Retourner à la page précédente ou à l'accueil"
                       data-fragment-clickable
                     >
                   {% endif %}
 
                   {% if fragment.variant == "icon" and fragment.iconName and options.iconDatas %}
-                    {{ renderIcon({
-                        name: fragment.iconName,
-                        datas: options.iconDatas
-                    }) }}
+                    {{ renderIcon({ name: fragment.iconName, datas: options.iconDatas }) }}
                   {% elif fragment.variant == "text" and fragment.textHeadingName and options.headingDatas %}
-                    {{ renderHeading({
-                        name: fragment.textHeadingName,
-                        datas: options.headingDatas
-                    }) }}
+                    {{ renderHeading({ name: fragment.textHeadingName, datas: options.headingDatas }) }}
                   {% endif %}
 
                   {% if isClickable %}
-                    </div>
+                    </button>
                   {% endif %}
 
                 </div>

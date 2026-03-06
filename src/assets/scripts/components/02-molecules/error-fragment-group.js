@@ -1,12 +1,12 @@
 /* ┌─────────────────────────────────────────────────────────┐
-   │ ORGANISM › Error Fragment Group                         │
+   │ MOLECULE › Error Fragment Group                         │
    │ Clickable fragment navigation for error pages           │
-   │ Path: src/assets/scripts/components/03-organisms/       │
+   │ Path: src/assets/scripts/components/02-molecules/       │
    └─────────────────────────────────────────────────────────┘ */
 
 /**
  * @fileoverview Interactive fragment navigation with accessibility
- * @module organisms/error-fragment-group
+ * @module molecules/error-fragment-group
  * @created 2025-09-15
  */
 
@@ -18,9 +18,7 @@ import { goToPreviousPageOrHome } from '../../utils/navigation.js';
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const CONFIG = {
-  SELECTOR: '[data-fragment-clickable]',
-  FOCUS_OUTLINE: '2px solid var(--cc-green-dark)',
-  FOCUS_OFFSET: '2px'
+  SELECTOR: '[data-fragment-clickable]'
 };
 
 
@@ -41,34 +39,12 @@ export function initErrorFragmentGroup() {
 }
 
 /**
- * Make a fragment clickable and accessible
+ * Make a fragment clickable and keyboard accessible
  * @param {HTMLElement} fragment - Fragment element to make interactive
  * @returns {void}
  */
 function makeFragmentInteractive(fragment) {
-  fragment.style.cursor = 'pointer';
-
-  // Click navigation
   fragment.addEventListener('click', handleFragmentNavigation);
-
-  // Keyboard navigation
-  fragment.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handleFragmentNavigation(e);
-    }
-  });
-
-  // Focus styles
-  fragment.addEventListener('focus', () => {
-    fragment.style.outline = CONFIG.FOCUS_OUTLINE;
-    fragment.style.outlineOffset = CONFIG.FOCUS_OFFSET;
-  });
-
-  fragment.addEventListener('blur', () => {
-    fragment.style.outline = '';
-    fragment.style.outlineOffset = '';
-  });
 }
 
 
@@ -77,7 +53,7 @@ function makeFragmentInteractive(fragment) {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 /**
- * Handle navigation when fragment is clicked
+ * Handle navigation when fragment is clicked or activated by keyboard
  * @param {Event} event - Click or keyboard event
  * @returns {void}
  */

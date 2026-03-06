@@ -3,10 +3,10 @@
 
 ---
 
-## ACTE 1 — Pourquoi HAT existe (5 min)
+## PARTIE 1 — Pourquoi HAT existe (5 min)
 *Objectif : poser le problème avant de montrer la solution*
 
-### Phrase d'accroche
+### Introduction
 > "Livrer des sites cousus main, sans dette technique, à un prix qui concurrence le no-code — sans brader notre expertise, ni nos valeurs."
 
 ### Le problème
@@ -37,14 +37,14 @@
 
 ---
 
-## ACTE 2 — Comment ça fonctionne (8 min)
+## PARTIE 2 — Comment ça fonctionne (8 min)
 *Objectif : expliquer la logique sans noyer dans le code*
 
 ### 2.1 — L'Atomic Design : construire comme des Lego
 
 Expliquer visuellement (montrer le preview wireframe) :
 
-```
+```txt
 Atomes => Molécules => Organismes => Pages
 bouton     carte         hero          home
 label      nav item      footer        blog
@@ -83,8 +83,8 @@ image      form field    gallery       contact
 
 ---
 
-## ACTE 3 — La démo live (7 min)
-*Objectif : montrer, pas expliquer*
+## PARTIE 3 — La démo live (7 min)
+*Objectif : montrer le squelette*
 
 ### Ordre de navigation recommandé
 
