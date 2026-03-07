@@ -67,25 +67,21 @@
 
       {# --------------------------
           3.1 Wrapper Classes
-          Description: Full screen host, halo system applied via CSS
         --------------------------#}
       {% set wrapperClasses = "relative w-full min-h-screen overflow-hidden" %}
 
       {# --------------------------
           3.2 Desktop Layout Classes
-          Description: Hidden on mobile, 3x3 grid for cross formation
         --------------------------#}
       {% set desktopClasses = "hidden lg:grid lg:grid-cols-3 lg:grid-rows-3 w-full h-screen" %}
 
       {# --------------------------
           3.3 Desktop Fragments Classes
-          Description: Fragments cover the full grid area
         --------------------------#}
       {% set fragmentsDesktopClasses = "contents" %}
 
       {# --------------------------
           3.4 Triptych Classes
-          Description: Centered overlay — title, subtitle, CTA, a11y controls
         --------------------------#}
       {% set triptychClasses = "absolute inset-0 flex flex-col items-center justify-center gap-[var(--spacing-ui-default)] z-[var(--z-modal)] px-[var(--spacing-ui-comfortable)]" %}
       {% set triptychMobileClasses = "flex flex-col items-center gap-[var(--spacing-ui-default)] px-[var(--grid-margin-mobile)] py-[var(--spacing-section-minimal)]" %}
@@ -96,20 +92,18 @@
 
       {# --------------------------
           3.5 Mobile Layout Classes
-          Description: Visible on mobile only, vertical stack
         --------------------------#}
       {% set mobileClasses = "flex flex-col lg:hidden overflow-y-auto" %}
 
       {# --------------------------
           3.6 Mobile Fragments Classes
-          Description: Stacked fragments below triptych on mobile
         --------------------------#}
       {% set fragmentsMobileClasses = "flex flex-col gap-[var(--spacing-ui-default)] px-[var(--grid-margin-mobile)] py-[var(--spacing-section-minimal)]" %}
       {% set fragmentMobileItemClasses = "flex items-center justify-center min-h-[120px]" %}
+      {% set clickableMobileClasses = "bg-transparent border-0 p-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--color-semantic-information-focus)] rounded-[var(--radius-default)]" %}
 
       {# --------------------------
           3.7 Accessibility Classes
-          Description: Controls for a11y toggle section
         --------------------------#}
       {% set a11yClasses = "flex flex-col items-center gap-[var(--spacing-ui-minimal)]" %}
 
@@ -241,11 +235,10 @@
                 >
 
                   {% if isClickable %}
-                    <button
-                      type="button"
-                      class="bg-transparent border-0 p-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--color-semantic-information-focus)] rounded-[var(--radius-default)]"
-                      aria-label="Retourner à la page précédente ou à l'accueil"
-                      data-fragment-clickable
+                    <a
+                      href="/"
+                      class="{{ clickableMobileClasses }}"
+                      aria-label="Retourner à l'accueil"
                     >
                   {% endif %}
 
@@ -256,7 +249,7 @@
                   {% endif %}
 
                   {% if isClickable %}
-                    </button>
+                    </a>
                   {% endif %}
 
                 </div>

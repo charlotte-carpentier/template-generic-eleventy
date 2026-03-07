@@ -88,11 +88,10 @@
           >
 
             {% if isClickable %}
-              <button
-                type="button"
+              <a
+                href="/"
                 class="{{ clickableClasses }}"
-                aria-label="Retourner à la page précédente ou à l'accueil"
-                data-fragment-clickable
+                aria-label="Retourner à l'accueil"
               >
             {% endif %}
 
@@ -117,7 +116,7 @@
             {% endif %}
 
             {% if isClickable %}
-              </button>
+              </a>
             {% endif %}
 
           </div>
