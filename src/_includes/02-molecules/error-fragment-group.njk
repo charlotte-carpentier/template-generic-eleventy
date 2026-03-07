@@ -31,7 +31,6 @@
   {% elif not options.name %}
     <span class="error" role="alert">Error: Missing required prop (name)</span>
   {% else %}
-    {# Find group using universal filter #}
     {% set groupData = options.datas | findByName(options.name) %}
 
     {% if not groupData %}
@@ -65,9 +64,9 @@
 
       {# --------------------------
           3.3 Clickable Fragment Classes
-          Description: Cursor, focus ring for interactive fragment 6
+          Description: Reset button styles, focus ring for interactive fragment 6
         --------------------------#}
-      {% set clickableClasses = "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--color-semantic-information-focus)] rounded-[var(--radius-default)]" %}
+      {% set clickableClasses = "bg-transparent border-0 p-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--color-semantic-information-focus)] rounded-[var(--radius-default)]" %}
 
       {# ━━━━━━━━━━━━━━━━━━━━━━━━━━
         4. Render HTML
@@ -88,18 +87,14 @@
             data-fragment-index="{{ loop.index }}"
           >
 
-            {# Fragment 6 - Clickable (back or home navigation) #}
             {% if isClickable %}
-              <div
+              <a
+                href="/"
                 class="{{ clickableClasses }}"
-                tabindex="0"
-                role="button"
-                aria-label="Retourner à la page précédente ou à l'accueil"
-                data-fragment-clickable
+                aria-label="Retourner à l'accueil"
               >
             {% endif %}
 
-            {# Icon variant #}
             {% if fragment.variant == "icon" and fragment.iconName and options.iconDatas %}
               <div data-fragment-content="icon">
                 {{ renderIcon({
@@ -108,7 +103,6 @@
                 }) }}
               </div>
 
-            {# Text variant #}
             {% elif fragment.variant == "text" and fragment.textHeadingName and options.headingDatas %}
               <div data-fragment-content="text">
                 {{ renderHeading({
@@ -117,13 +111,12 @@
                 }) }}
               </div>
 
-            {# Unsupported variant #}
             {% else %}
               <span class="error" role="alert">Unsupported fragment variant: {{ fragment.variant }}</span>
             {% endif %}
 
             {% if isClickable %}
-              </div>
+              </a>
             {% endif %}
 
           </div>

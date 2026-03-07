@@ -19,7 +19,6 @@
 import { initInput } from './components/01-atoms/input.js';
 // Molecules
 import { initBlockDragAndDrop } from './components/02-molecules/block-drag-and-drop.js';
-import { initErrorFragmentGroup } from './components/02-molecules/error-fragment-group.js';
 import { initPanel } from './components/02-molecules/panel.js';
 import { initSegmentedControl } from './components/02-molecules/segmented-control.js';
 import { initSlider } from './components/02-molecules/slider.js';
@@ -69,11 +68,6 @@ function initComponents() {
   }
 
   // Molecules
-
-  if (document.querySelector('[data-fragment-clickable]')) {
-    initErrorFragmentGroup();
-  }
-
   if (document.querySelector('[data-modal-type="modal"]')) {
     initModal();
     initModalTriggers();

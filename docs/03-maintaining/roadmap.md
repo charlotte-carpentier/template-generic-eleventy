@@ -56,6 +56,21 @@ Read this to know what is planned for v2.
 
 ## Accessibility
 
+**WCAG 2.2 AA compliance audit** (High priority)
+
+- Full manual audit against RGAA criteria (axe DevTools + keyboard navigation + screen reader)
+- Lighthouse covers ~30% of criteria only — manual audit required for full conformance
+- Produce an accessibility declaration (`déclaration d'accessibilité`) once conformance is validated
+- Publish declaration on each delivered site (footer link)
+
+**Automated accessibility tests** (High priority)
+
+- axe-core integration
+- Programmatic color contrast testing
+- Focus indicators validation
+- ARIA landmarks testing
+- Touch targets measurement (44×44px)
+
 **Dark mode support** (Medium priority)
 
 - `prefers-color-scheme` implementation
@@ -74,14 +89,6 @@ Read this to know what is planned for v2.
 - Visual size unchanged — only interaction zone is expanded
 - Element dimensions defined in `_data` JSON tokens
 - Implementation TBD: Eleventy-generated CSS custom properties vs. JS injection
-
-**Automated accessibility tests** (High priority)
-
-- axe-core integration
-- Programmatic color contrast testing
-- Focus indicators validation
-- ARIA landmarks testing
-- Touch targets measurement (44×44px)
 
 ---
 

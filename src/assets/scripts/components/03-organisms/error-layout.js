@@ -8,7 +8,9 @@
  * @fileoverview Interactive halo reveal system for error pages
  * @module organisms/error-layout
  * @created 2025-09-15
+ * @updated 2026-03-04 - Migrated selectors to data-* attributes
  */
+
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Configuration
@@ -20,35 +22,12 @@ const CONFIG = {
   INITIAL_SCROLL_POSITION: '20%',
   SCROLL_Y_BASE: 20,
   SCROLL_Y_RANGE: 60,
-  REVEAL_START_THRESHOLD: 0.1,
-  REVEAL_END_THRESHOLD: 0.7,
-  RESIZE_DEBOUNCE: 150,
-  CONTAINER_SELECTOR: '.error-layout--cross-layout',
-  MOBILE_CONTAINER_SELECTOR: '.error-layout-mobile',
-  FRAGMENT_SELECTOR: '.error-layout-fragment-placeholder',
-  TEXT_SELECTOR: '.error-layout-accessibility-text p',
-  BUTTON_SELECTOR: '.error-layout-accessibility-button button',
-  NO_MASK_CLASS: 'error-layout--no-mask'
+  CONTAINER_SELECTOR: '[data-error-layout-type="error-layout"]',
+  MOBILE_CONTAINER_SELECTOR: '[data-error-layout-mobile]',
+  TEXT_SELECTOR: '[data-a11y-text] :first-child',
+  BUTTON_SELECTOR: '[data-a11y-button] button',
+  NO_MASK_ATTR: 'data-error-layout-no-mask'
 };
-
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// Utilities
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-/**
- * Debounce function calls
- * @param {Function} fn - Function to debounce
- * @param {number} delay - Delay in milliseconds
- * @returns {Function} Debounced function
- */
-function debounce(fn, delay) {
-  let timeout;
-  return function (...args) {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => fn.apply(this, args), delay);
-  };
-}
 
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -92,7 +71,7 @@ function initDesktopHalo(container) {
 }
 
 /**
- * Initialize mobile halo (scroll tracking with IntersectionObserver)
+ * Initialize mobile halo (scroll tracking)
  * @param {HTMLElement} container - Error layout container
  * @returns {void}
  */
@@ -102,7 +81,6 @@ function initMobileHalo(container) {
 
   container.style.setProperty('--scroll-y', CONFIG.INITIAL_SCROLL_POSITION);
 
-  // Scroll position tracking
   mobileContainer.addEventListener('scroll', () => {
     const scrollTop = mobileContainer.scrollTop;
     const scrollHeight = mobileContainer.scrollHeight - mobileContainer.clientHeight;
@@ -111,37 +89,6 @@ function initMobileHalo(container) {
 
     container.style.setProperty('--scroll-y', `${scrollY}%`);
   }, { passive: true });
-
-  // Progressive reveal with IntersectionObserver
-  initFragmentReveal(mobileContainer);
-}
-
-/**
- * Initialize fragment reveal with IntersectionObserver
- * @param {HTMLElement} mobileContainer - Mobile container element
- * @returns {void}
- */
-function initFragmentReveal(mobileContainer) {
-  const fragments = mobileContainer.querySelectorAll(CONFIG.FRAGMENT_SELECTOR);
-
-  const observerOptions = {
-    root: mobileContainer,
-    threshold: [0, 0.25, 0.5, 0.75, 1]
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-      }
-    });
-  }, observerOptions);
-
-  fragments.forEach(fragment => {
-    fragment.style.opacity = '0';
-    fragment.style.transition = 'opacity 0.3s ease';
-    observer.observe(fragment);
-  });
 }
 
 
@@ -157,10 +104,10 @@ export function initAccessibilityToggle() {
   const container = document.querySelector(CONFIG.CONTAINER_SELECTOR);
   if (!container) return;
 
-  const buttons = container.querySelectorAll('[data-button="button-reveal-all"], [data-button="button-hide-all"]');
+  const buttons = container.querySelectorAll(CONFIG.BUTTON_SELECTOR);
 
   buttons.forEach(button => {
-    button.addEventListener('click', () => toggleMaskVisibility(container, button));
+    button.addEventListener('click', () => toggleMaskVisibility(container));
   });
 }
 
@@ -170,22 +117,10 @@ export function initAccessibilityToggle() {
  * @param {HTMLElement} button - Button that was clicked
  * @returns {void}
  */
-function toggleMaskVisibility(container, button) {
-  const isRevealing = button.getAttribute('data-button') === 'button-reveal-all';
-
-  if (isRevealing) {
-    container.classList.add(CONFIG.NO_MASK_CLASS);
-    updateAccessibilityContent(container, 'hidden');
-
-    if (window.innerWidth < CONFIG.DESKTOP_BREAKPOINT) {
-      container.querySelectorAll(CONFIG.FRAGMENT_SELECTOR).forEach(f => {
-        f.style.opacity = '1';
-      });
-    }
-  } else {
-    container.classList.remove(CONFIG.NO_MASK_CLASS);
-    updateAccessibilityContent(container, 'visible');
-  }
+function toggleMaskVisibility(container) {
+  const isRevealed = container.hasAttribute(CONFIG.NO_MASK_ATTR);
+  container.toggleAttribute(CONFIG.NO_MASK_ATTR, !isRevealed);
+  updateAccessibilityContent(container, isRevealed ? 'visible' : 'hidden');
 }
 
 /**
@@ -198,49 +133,18 @@ function updateAccessibilityContent(container, state) {
   const textElements = container.querySelectorAll(CONFIG.TEXT_SELECTOR);
   const buttons = container.querySelectorAll(CONFIG.BUTTON_SELECTOR);
 
-  if (state === 'hidden') {
-    textElements.forEach(text => {
-      text.textContent = 'Pour invisibiliser les contenus révélés :';
-    });
-    buttons.forEach(btn => {
-      btn.textContent = 'Masquer tout';
-      btn.setAttribute('data-button', 'button-hide-all');
-      btn.setAttribute('aria-label', 'Masquer tous les contenus révélés');
-    });
-  } else {
-    textElements.forEach(text => {
-      text.textContent = 'Pour rendre visibles les contenus cachés :';
-    });
-    buttons.forEach(btn => {
-      btn.textContent = 'Afficher tout';
-      btn.setAttribute('data-button', 'button-reveal-all');
-      btn.setAttribute('aria-label', 'Afficher tous les contenus cachés');
-    });
-  }
+  const content = state === 'hidden'
+    ? { text: 'Pour invisibiliser les contenus révélés :', label: 'Masquer tout', ariaLabel: 'Masquer tous les contenus révélés', btnAttr: 'button-hide-all' }
+    : { text: 'Pour rendre visibles les contenus cachés :', label: 'Afficher tout', ariaLabel: 'Afficher tous les contenus cachés', btnAttr: 'button-reveal-all' };
+
+  textElements.forEach(el => { el.textContent = content.text; });
+  buttons.forEach(btn => {
+    btn.textContent = content.label;
+    btn.setAttribute('data-button', content.btnAttr);
+    btn.setAttribute('aria-label', content.ariaLabel);
+  });
 }
 
-
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-// Resize Handler
-// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-/**
- * Handle window resize to reinitialize if needed
- * @returns {void}
- */
-function handleResize() {
-  const container = document.querySelector(CONFIG.CONTAINER_SELECTOR);
-  if (!container) return;
-
-  container.style.removeProperty('--mouse-x');
-  container.style.removeProperty('--mouse-y');
-  container.style.removeProperty('--scroll-y');
-
-  initErrorLayout();
-
-
-  window.addEventListener('resize', debounce(handleResize, CONFIG.RESIZE_DEBOUNCE));
-}
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // May your bugs be forever exiled to the shadow realm ✦
